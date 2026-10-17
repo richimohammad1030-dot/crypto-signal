@@ -1,0 +1,141 @@
+{
+ "coins": {
+  "BTC": {
+   "pend": [
+    -1,
+    79800.0,
+    81755.53075567205
+   ],
+   "pos": null
+  },
+  "ETH": {
+   "pend": [
+    -1,
+    2318.0,
+    2414.046037692359
+   ],
+   "pos": null
+  },
+  "BNB": {
+   "pend": [
+    -1,
+    708.64,
+    729.5332184151733
+   ],
+   "pos": null
+  },
+  "XRP": {
+   "pend": [
+    -1,
+    1.284,
+    1.3468493127004915
+   ],
+   "pos": null
+  },
+  "SOL": {
+   "pend": [
+    -1,
+    100.62,
+    105.85624129520443
+   ],
+   "pos": null
+  },
+  "TRX": {
+   "pend": [
+    1,
+    0.3409,
+    0.3354036704763128
+   ],
+   "pos": null
+  },
+  "ZEC": {
+   "pend": [
+    -1,
+    1075.0,
+    1204.1934316050401
+   ],
+   "pos": null
+  },
+  "DOGE": {
+   "pend": [
+    -1,
+    0.0777,
+    0.08225755202611594
+   ],
+   "pos": null
+  },
+  "LINK": {
+   "pend": [
+    -1,
+    11.82,
+    12.54634955912029
+   ],
+   "pos": null
+  },
+  "ADA": {
+   "pend": null,
+   "pos": null
+  },
+  "NEAR": {
+   "pend": [
+    -1,
+    4.301,
+    5.002001327643119
+   ],
+   "pos": null
+  },
+  "XLM": {
+   "pend": null,
+   "pos": null
+  },
+  "BCH": {
+   "pend": null,
+   "pos": null
+  },
+  "LTC": {
+   "pend": null,
+   "pos": null
+  },
+  "UNI": {
+   "pend": null,
+   "pos": null
+  },
+  "AVAX": {
+   "pend": null,
+   "pos": null
+  },
+  "SUI": {
+   "pend": null,
+   "pos": null
+  },
+  "HBAR": {
+   "pend": null,
+   "pos": null
+  },
+  "TAO": {
+   "pend": null,
+   "pos": null
+  },
+  "SHIB": {
+   "pend": null,
+   "pos": null
+  },
+  "ENA": {
+   "pend": null,
+   "pos": null
+  },
+  "QNT": {
+   "pend": null,
+   "pos": null
+  },
+  "AAVE": {
+   "pend": null,
+   "pos": null
+  },
+  "ONDO": {
+   "pend": null,
+   "pos": null
+  }
+ },
+ "last_ts": 1792256400
+}
