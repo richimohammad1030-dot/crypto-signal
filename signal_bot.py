@@ -85,6 +85,21 @@ def fmt(p):
 def wib(ts):
     return (dt.datetime.fromtimestamp(ts, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%d %b %H:%M WIB")
 
+
+def safe_lev(entry, sl):
+    """Leverage maksimal agar harga likuidasi (isolated) jauh di luar SL: <= 50% jarak likuidasi, maks 5x."""
+    dist = abs(entry - sl) / entry
+    return max(1, min(5, int(0.5 / dist))) if dist > 0 else 1
+
+def exit_label(R):
+    if R <= -0.9:
+        return f"❌ Kena SL awal ({R:+.2f}R)"
+    if abs(R) < 0.15:
+        return f"🟡 SL+ impas ({R:+.2f}R)"
+    if R > 0:
+        return f"✅ SL+ untung ({R:+.2f}R)"
+    return f"⚠️ Rugi sebagian ({R:+.2f}R)"
+
 # ---------------------------------------------------------------- mesin strategi
 class Engine:
     """Memproses candle satu per satu, sama persis dengan urutan di backtest.
@@ -110,7 +125,7 @@ class Engine:
             if (d == 1 and H >= en) or (d == -1 and L <= en):
                 fill = max(en, O) if d == 1 else min(en, O)
                 cs["pend"] = None
-                cs["pos"] = [d, fill, sl, T]
+                cs["pos"] = [d, fill, sl, T, abs(fill - sl)]
                 self.notify("fill", coin, d=d, entry=fill, sl=sl, t=T)
                 # Batas slot tercapai -> order pending koin lain dibatalkan
                 if self.open_count() >= MAX_SLOTS:
@@ -121,24 +136,27 @@ class Engine:
                 if (d == 1 and L <= sl) or (d == -1 and H >= sl):
                     self.close(coin, sl, T, "SL di candle yang sama")
         elif cs.get("pos") is not None and cs["pos"][3] < T:
-            d, e, sl, t0 = cs["pos"]
+            d, e, sl, t0 = cs["pos"][:4]
             if (d == 1 and L <= sl) or (d == -1 and H >= sl):
                 ex = min(sl, O) if d == 1 else max(sl, O)
                 self.close(coin, ex, T, "kena SL")
 
     def close(self, coin, ex, T, why):
         cs = self.s["coins"][coin]
-        d, e, sl, t0 = cs["pos"]
+        d, e, sl, t0 = cs["pos"][:4]
+        r0 = cs["pos"][4] if len(cs["pos"]) > 4 else abs(e - sl)
         self.trades.append((coin, d, t0, T, e, ex))
         cs["pos"] = None
-        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why)
+        R = (ex - e) * d / r0 if r0 else 0.0
+        self.s.setdefault("hist", []).append([coin, d, t0, T, e, ex, round(R, 3)])
+        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R)
 
     def step_check(self, coin, i, D, allow_new):
         """Langkah 3 di candle cek (setiap 4 jam): trailing SL / order baru."""
         cs = self.s["coins"].setdefault(coin, {"pend": None, "pos": None})
         C, H, L, A, EF, ES, T = D["C"], D["H"], D["L"], D["A"], D["EF"], D["ES"], D["T"][i]
         if cs.get("pos") is not None:
-            d, e, sl, t0 = cs["pos"]
+            d, e, sl, t0 = cs["pos"][:4]
             if d == 1:
                 v = min(L[i - TRAIL + 1:i + 1])
                 if v > sl:
@@ -208,7 +226,7 @@ def tg_send(text):
 def make_notifier(buf, risk_pct, modal):
     def size_line(entry, sl):
         dist = abs(entry - sl) / entry * 100
-        s = f"Jarak SL {dist:.1f}%"
+        s = f"Jarak SL {dist:.1f}% · leverage maks aman {safe_lev(entry, sl)}× (isolated)"
         if modal:
             risk_usd = modal * risk_pct / 100
             qty = risk_usd / abs(entry - sl)
@@ -226,8 +244,7 @@ def make_notifier(buf, risk_pct, modal):
         elif kind == "trail":
             buf.append(f"⬆️ <b>{sym}</b> geser SL {'BUY' if k['d']==1 else 'SELL'}: {fmt(k['old'])} → <b>{fmt(k['sl'])}</b>")
         elif kind == "exit":
-            r = (k["exit"] - k["entry"]) * k["d"]
-            buf.append(f"🏁 <b>{sym}</b> posisi {'BUY' if k['d']==1 else 'SELL'} selesai ({k['why']}) di ±{fmt(k['exit'])} · {'untung' if r>0 else 'rugi'} {abs(r)/k['entry']*100:.1f}% harga")
+            buf.append(f"🏁 <b>{sym}</b> posisi {'BUY' if k['d']==1 else 'SELL'} selesai di ±{fmt(k['exit'])} ({k['why']})\n{exit_label(k['R'])}")
     return notify
 
 # ---------------------------------------------------------------- main
@@ -242,6 +259,26 @@ def main():
         state = json.load(open(STATE_FILE))
     else:
         state = {"coins": {}, "last_ts": 0}
+
+    # 1) Perintah Telegram dari pemilik (/status, /terisi, /tidak, /tutup, /panduan)
+    import commands
+    def last_price(coin):
+        try:
+            d = http_json(f"https://data-api.binance.vision/api/v3/ticker/price?symbol={coin}USDT")
+            return float(d["price"])
+        except Exception:
+            return None
+    for text in commands.fetch_commands(state):
+        try:
+            reply = commands.handle(state, text, last_price, fmt, exit_label, wib)
+        except Exception as e:
+            reply = f"⚠️ Gagal memproses perintah: {e}"
+        tg_send(reply)
+    if os.environ.get("MODE") == "cmd":
+        json.dump(state, open(STATE_FILE, "w"), indent=1)
+        return
+
+    # 2) Cek sinyal (setiap 4 jam)
     data = {}
     errors = []
     for c in COINS:

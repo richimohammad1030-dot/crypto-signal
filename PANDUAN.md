@@ -67,3 +67,20 @@ Tidak ada TP: keuntungan dikunci oleh SL yang terus digeser.
 - Pastikan exchange yang Anda gunakan **legal & terdaftar di OJK**.
 - Hasil backtest 2020–2026 (aturan bot ini): ±65%/tahun pada drawdown ±20% (risiko 0,67%/trade),
   ekspektasi realistis lebih rendah (±25–50%). Bukan saran investasi; mulai dengan dana kecil.
+
+---
+
+## Perintah Telegram (sinkron dengan posisi Anda yang sebenarnya)
+Bot tidak terhubung ke akun exchange, jadi bot hanya *memperkirakan* order terisi dari harga.
+Laporkan kondisi sebenarnya lewat chat ke bot (dibaca setiap ±1 jam):
+
+| Perintah | Fungsi |
+|---|---|
+| `/status` | Posisi terbuka (entry, SL, status SL awal / SL+), order pending, hasil bulan ini |
+| `/terisi KOIN harga` | Order sudah terisi, misal `/terisi SOL 100.5` |
+| `/tidak KOIN` | Order tidak dipasang / tidak terisi — hapus dari catatan |
+| `/tutup KOIN harga` | Posisi sudah ditutup, misal `/tutup ETH 2290` |
+| `/panduan` · `/panduan binance` · `/panduan okx` | Panduan risiko, leverage, stop order, SL & geser SL |
+
+Setiap posisi selesai dilaporkan sebagai **❌ Kena SL awal (−1R)**, **🟡 SL+ impas**, atau **✅ SL+ untung (+xR)**.
+Setiap order menyertakan **leverage maks aman** (isolated) agar tidak terlikuidasi sebelum SL.
