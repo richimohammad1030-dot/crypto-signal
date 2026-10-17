@@ -81,6 +81,47 @@ PANDUAN_OKX = """<b>📘 OKX (Perpetual / Swap)</b>
 <b>Batalkan order</b>
 12. Tab <b>Open orders / Algo orders</b> → Cancel."""
 
+PANDUAN_ANGGOTA = """<b>📌 PANDUAN ANGGOTA — Sinyal Crypto Futures</b>
+
+<b>Cara kerja</b>
+Sinyal trend-following di 24 koin besar (futures USDT perpetual). Dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB). Maksimal 10 posisi/order sekaligus. Tidak ada TP: keuntungan dikunci dengan SL yang terus digeser.
+
+<b>Arti pesan</b>
+🆕 BUY STOP / SELL STOP X, SL Y → pasang order baru
+♻️ GANTI → batalkan order lama koin itu, pasang angka baru
+❌ batalkan order pending → cancel order koin itu
+✅ kemungkinan TERISI → cek di exchange, pastikan SL terpasang
+⬆️ geser SL → ubah SL posisi itu ke angka baru
+🏁 posisi selesai → ❌ SL awal (rugi) · 🟡 SL+ impas · ✅ SL+ untung
+
+<b>1. Ukuran posisi (WAJIB dihitung sendiri)</b>
+Ukuran (koin) = (Modal × Risiko%) ÷ |Entry − SL|
+Contoh: modal 1.000 USDT, risiko 0,5% = 5 USDT; entry 100, SL 95 → 5 ÷ 5 = 1 koin.
+Saran risiko 0,3–0,5% per trade. Maksimal 10 posisi bersamaan.
+
+<b>2. Margin & leverage</b>
+• Selalu <b>Isolated</b>.
+• Leverage ≤ "leverage maks aman" di pesan (maks 5×). Leverage tidak menambah risiko selama ukuran posisi dihitung dengan rumus di atas.
+
+<b>3. Order masuk</b>
+• BUY STOP → order <b>Stop Market</b> Buy/Long, harga pemicu = angka sinyal (pemicu Last Price).
+• SELL STOP → order <b>Stop Market</b> Sell/Short.
+
+<b>4. Stop loss</b>
+Pasang SL (Stop Market, reduce-only, Last Price) saat order dibuat atau segera setelah terisi. Tanpa TP.
+
+<b>5. Geser SL</b>
+Ubah SL manual sesuai pesan "geser SL". Jangan pakai fitur Trailing Stop bawaan exchange (aturannya berbeda).
+
+<b>Binance Futures</b>
+Isolated + leverage → order <b>Stop Market</b> (Stop Price = sinyal, Last) → centang <b>TP/SL</b>, isi Stop Loss → Buy/Long atau Sell/Short. Geser SL: tab Positions → pensil TP/SL. Batal: Open Orders → Cancel.
+
+<b>OKX</b>
+Perpetual → Isolated + leverage → order <b>Trigger</b> (trigger = sinyal, Last, harga Market) → aktifkan <b>TP/SL</b>, isi SL → Buy/Long atau Sell/Short. Geser SL: Positions → TP/SL. Batal: Algo orders → Cancel.
+
+<b>⚠️ Risiko</b>
+Win rate ±40%: kalah beruntun itu normal. Gunakan exchange yang legal (terdaftar OJK). Bukan saran investasi; gunakan dana yang siap hilang."""
+
 BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini
 /terisi KOIN harga — order terisi (contoh: <code>/terisi SOL 100.5</code>)
@@ -88,7 +129,9 @@ BANTUAN = """<b>🤖 Perintah bot</b>
 /tutup KOIN harga — posisi sudah ditutup (contoh: <code>/tutup ETH 2290</code>)
 /panduan — panduan umum (risiko, leverage, SL, trailing)
 /panduan binance · /panduan okx — langkah di exchange
-Perintah dibaca bot setiap ±1 jam."""
+/channel — cek channel sinyal
+/kirim_panduan — posting & pin panduan anggota di channel
+Perintah hanya berlaku dari chat pribadi Anda dan dibaca bot setiap ±1 jam."""
 
 
 def _api(method, params):
@@ -104,13 +147,27 @@ def fetch_commands(state):
     if not tok or not chat:
         return []
     try:
-        res = _api("getUpdates", {"offset": state.get("tg_offset", 0), "timeout": 0, "allowed_updates": json.dumps(["message"])})
+        res = _api("getUpdates", {"offset": state.get("tg_offset", 0), "timeout": 0, "allowed_updates": json.dumps(["message", "my_chat_member"])})
     except Exception as e:
         print("Gagal membaca perintah Telegram:", e)
         return []
     cmds = []
     for u in res.get("result", []):
         state["tg_offset"] = u["update_id"] + 1
+        mcm = u.get("my_chat_member")
+        if mcm:
+            # Bot dijadikan admin channel -> simpan id channel otomatis
+            ch = mcm.get("chat") or {}
+            status = (mcm.get("new_chat_member") or {}).get("status")
+            if ch.get("type") == "channel":
+                if status == "administrator":
+                    state["channel_id"] = ch.get("id")
+                    state["channel_title"] = ch.get("title")
+                    cmds.append("/_channel_ok")
+                elif status in ("left", "kicked", "member") and state.get("channel_id") == ch.get("id"):
+                    state.pop("channel_id", None)
+                    cmds.append("/_channel_off")
+            continue
         m = u.get("message") or {}
         if str((m.get("chat") or {}).get("id")) != str(chat):
             continue          # abaikan pesan dari orang lain
@@ -129,6 +186,17 @@ def handle(state, text, last_price, fmt, exit_label, wib):
     parts = text.split()
     cmd = parts[0].split("@")[0].lower()
     coins = state.setdefault("coins", {})
+    if cmd == "/_channel_ok":
+        return (f"📢 Bot sudah menjadi admin channel <b>{state.get('channel_title')}</b>. "
+                "Mulai sekarang semua sinyal & update dikirim ke channel. "
+                "Kirim /kirim_panduan untuk mem-posting & pin panduan anggota di channel.")
+    if cmd == "/_channel_off":
+        return "📢 Bot tidak lagi menjadi admin channel. Sinyal kembali dikirim ke chat pribadi Anda."
+    if cmd == "/channel":
+        return (f"Channel aktif: <b>{state.get('channel_title')}</b>" if state.get("channel_id")
+                else "Belum ada channel. Jadikan bot admin channel (izin: Post Messages & Pin Messages).")
+    if cmd == "/kirim_panduan":
+        return "/_kirim_panduan" if state.get("channel_id") else "Belum ada channel. Jadikan bot admin channel dulu."
     if cmd in ("/start", "/bantuan", "/help"):
         return BANTUAN
     if cmd == "/panduan":

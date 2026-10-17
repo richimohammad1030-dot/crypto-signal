@@ -211,32 +211,43 @@ def prep(rows):
     return dict(T=T, O=O, H=H, L=L, C=C, A=atr(H, L, C), EF=ema(C, EMA_F), ES=ema(C, EMA_S))
 
 # ---------------------------------------------------------------- Telegram
-def tg_send(text):
-    tok, chat = os.environ.get("TELEGRAM_TOKEN"), os.environ.get("TELEGRAM_CHAT_ID")
+def tg_send(text, chat=None, pin=False):
+    """Kirim pesan. chat=None -> chat pribadi pemilik. pin=True -> sematkan pesan (butuh izin admin)."""
+    tok = os.environ.get("TELEGRAM_TOKEN")
+    chat = chat or os.environ.get("TELEGRAM_CHAT_ID")
     if not tok or not chat:
-        print("[TELEGRAM belum diatur]\n" + text); return
+        print("[TELEGRAM belum diatur]\n" + text); return None
     data = urllib.parse.urlencode({"chat_id": chat, "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}).encode()
     for t in range(3):
         try:
-            urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/sendMessage", data=data, timeout=30); return
+            with urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/sendMessage", data=data, timeout=30) as r:
+                msg = json.load(r).get("result", {})
+            if pin and msg.get("message_id"):
+                pdata = urllib.parse.urlencode({"chat_id": chat, "message_id": msg["message_id"], "disable_notification": "true"}).encode()
+                try:
+                    urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/pinChatMessage", data=pdata, timeout=30)
+                except Exception as e:
+                    print("Gagal pin pesan:", e)
+            return msg
         except Exception as e:
             time.sleep(3)
     print("Gagal kirim Telegram:", text)
+    return None
 
-def make_notifier(buf, risk_pct, modal):
+def make_notifier(buf, risk_pct, modal, priv=None):
+    """buf: pesan publik (channel). priv: ukuran posisi pribadi pemilik (dari MODAL_USDT), tidak dikirim ke channel."""
     def size_line(entry, sl):
         dist = abs(entry - sl) / entry * 100
-        s = f"Jarak SL {dist:.1f}% · leverage maks aman {safe_lev(entry, sl)}× (isolated)"
-        if modal:
-            risk_usd = modal * risk_pct / 100
-            qty = risk_usd / abs(entry - sl)
-            s += f" · risiko {risk_pct}% = {risk_usd:,.2f} USDT · ukuran ±{qty:.6g} koin (nilai ±{qty*entry:,.0f} USDT)"
-        return s
+        return f"Jarak SL {dist:.1f}% · leverage maks aman {safe_lev(entry, sl)}× (isolated)"
     def notify(kind, coin, **k):
         sym = coin + "USDT"
         if kind == "order":
             arah = "🟢 BUY STOP" if k["d"] == 1 else "🔴 SELL STOP"
             buf.append(f"{'♻️ GANTI ' if k['replace'] else '🆕 '}<b>{sym}</b> {arah} <b>{fmt(k['entry'])}</b>\nSL {fmt(k['sl'])} · tanpa TP\n{size_line(k['entry'], k['sl'])}")
+            if modal and priv is not None:
+                risk_usd = modal * risk_pct / 100
+                qty = risk_usd / abs(k["entry"] - k["sl"])
+                priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ukuran ±{qty:.6g} koin (nilai ±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)")
         elif kind == "cancel":
             buf.append(f"❌ <b>{sym}</b> batalkan order pending ({k['reason']})")
         elif kind == "fill":
@@ -273,6 +284,9 @@ def main():
             reply = commands.handle(state, text, last_price, fmt, exit_label, wib)
         except Exception as e:
             reply = f"⚠️ Gagal memproses perintah: {e}"
+        if reply == "/_kirim_panduan":
+            ok = tg_send(commands.PANDUAN_ANGGOTA, chat=state["channel_id"], pin=True)
+            reply = "📌 Panduan anggota sudah diposting & di-pin di channel." if ok else "⚠️ Gagal posting panduan. Pastikan bot admin channel dengan izin Post & Pin Messages."
         tg_send(reply)
     if os.environ.get("MODE") == "cmd":
         json.dump(state, open(STATE_FILE, "w"), indent=1)
@@ -299,8 +313,8 @@ def main():
         if key not in fcache:
             fcache[key] = fetch_funding_avg(coin, t)
         return fcache[key]
-    buf = []
-    eng = Engine(state, funding, make_notifier(buf, risk_pct, modal))
+    buf, priv = [], []
+    eng = Engine(state, funding, make_notifier(buf, risk_pct, modal, priv))
     if first_run:
         # Run pertama: bentuk order awal di candle cek terakhir agar langsung ada daftar order
         last_check = max(t for t in data["BTC"]["T"] if (t // 3600) % 24 in CHECK_HOURS_UTC)
@@ -308,8 +322,10 @@ def main():
     eng.run(data, since)
     json.dump(state, open(STATE_FILE, "w"), indent=1)
     head = f"📊 <b>Sinyal Crypto Futures</b> · candle s.d. {wib(newest + 3600)}\nPosisi terbuka: {eng.open_count()} · order pending: {sum(1 for c in state['coins'].values() if c.get('pend'))} (maks {MAX_SLOTS})"
+    # Sinyal publik -> channel (jika bot sudah admin channel), jika belum -> chat pribadi pemilik
+    target = state.get("channel_id")
     if errors:
-        head += "\n⚠️ Data gagal: " + ", ".join(e.split(':')[0] for e in errors)
+        tg_send("⚠️ Data gagal diambil untuk: " + ", ".join(e.split(':')[0] for e in errors))
     if buf:
         msgs, cur = [], head
         for line in buf:
@@ -318,10 +334,13 @@ def main():
             cur += "\n\n" + line
         msgs.append(cur)
         for m in msgs:
-            tg_send(m)
-    elif os.environ.get("SEND_EMPTY", "0") == "1" or first_run:
-        tg_send(head + "\n\nTidak ada perubahan.")
-    print(head, *buf, sep="\n\n")
+            tg_send(m, chat=target)
+    elif os.environ.get("SEND_EMPTY", "0") == "1":
+        tg_send(head + "\n\nTidak ada perubahan.", chat=target)
+    # Ukuran posisi pribadi (MODAL_USDT) hanya ke chat pemilik
+    if priv:
+        tg_send("🔒 <b>Ukuran posisi Anda</b> (modal " + f"{modal:,.0f} USDT, risiko {risk_pct}%)\n" + "\n".join(priv))
+    print(head, *buf, *priv, sep="\n\n")
 
 if __name__ == "__main__":
     main()

@@ -84,3 +84,17 @@ Laporkan kondisi sebenarnya lewat chat ke bot (dibaca setiap ±1 jam):
 
 Setiap posisi selesai dilaporkan sebagai **❌ Kena SL awal (−1R)**, **🟡 SL+ impas**, atau **✅ SL+ untung (+xR)**.
 Setiap order menyertakan **leverage maks aman** (isolated) agar tidak terlikuidasi sebelum SL.
+
+---
+
+## Channel untuk anggota (anggota hanya membaca)
+1. Telegram → **New Channel** → beri nama → pilih Private atau Public.
+2. Channel → **Administrators** → **Add Admin** → cari bot Anda → izinkan **Post Messages** dan **Pin Messages** → Save.
+3. Dalam ±1 jam bot mendeteksi channel otomatis dan memberi tahu Anda di chat pribadi.
+4. Kirim **/kirim_panduan** ke bot (chat pribadi) → panduan anggota diposting & di-pin di channel.
+
+Setelah itu:
+- **Semua sinyal & update** (order baru, ganti, batal, terisi, geser SL, SL/SL+) dikirim ke **channel**.
+- **Ukuran posisi pribadi** (dari `MODAL_USDT`) dan balasan perintah hanya dikirim ke **chat pribadi** Anda.
+- Anggota tidak bisa mengirim perintah; perintah dari selain chat id Anda diabaikan.
+- Cek channel aktif: **/channel**. Jika bot dikeluarkan dari admin, sinyal kembali ke chat pribadi.
