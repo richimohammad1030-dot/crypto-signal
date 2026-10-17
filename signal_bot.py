@@ -236,8 +236,8 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
-    risk_pct = float(os.environ.get("RISK_PCT", "0.67"))
-    modal = float(os.environ.get("MODAL_USDT", "0") or 0)
+    risk_pct = float(os.environ.get("RISK_PCT") or "0.67")
+    modal = float(os.environ.get("MODAL_USDT") or 0)
     if os.path.exists(STATE_FILE):
         state = json.load(open(STATE_FILE))
     else:
