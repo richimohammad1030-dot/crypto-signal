@@ -2,8 +2,9 @@ name: Sinyal Crypto Futures
 
 on:
   schedule:
-    # Setiap 4 jam, 7 menit setelah candle H1 close pada 03,07,11,15,19,23 WIB (UTC 20,0,4,8,12,16)
-    - cron: "7 0,4,8,12,16,20 * * *"
+    # Setiap 2 jam (01,03,05,...,23 WIB). Strategi dicek tiap 4 jam (03,07,11,15,19,23 WIB);
+    # run di antaranya melaporkan order terisi / posisi ditutup lebih cepat.
+    - cron: "4 */2 * * *"
   workflow_dispatch: {}   # tombol "Run workflow" untuk menjalankan manual
 
 permissions:

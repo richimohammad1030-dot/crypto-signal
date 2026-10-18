@@ -84,7 +84,7 @@ PANDUAN_OKX = """<b>📘 OKX (Perpetual / Swap)</b>
 PANDUAN_ANGGOTA = """<b>📌 PANDUAN ANGGOTA — Sinyal Crypto Futures</b>
 
 <b>Cara kerja</b>
-Sinyal trend-following di 24 koin besar (futures USDT perpetual). Dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB). Maksimal 10 posisi/order sekaligus. Tidak ada TP: keuntungan dikunci dengan SL yang terus digeser.
+Sinyal trend-following di 50 koin teratas CoinMarketCap (futures USDT perpetual). Strategi dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB); bot juga mengabarkan order terisi / posisi ditutup setiap 2 jam. Maksimal 10 posisi/order sekaligus. Tidak ada TP: keuntungan dikunci dengan SL yang terus digeser.
 
 <b>Arti pesan</b>
 🆕 SINYAL BARU → pasang order Stop Market + SL sesuai angka

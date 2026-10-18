@@ -15,8 +15,9 @@ Bot ini hanya membaca data publik dan mengirim pesan. Bot TIDAK punya akses ke a
 """
 import json, os, sys, time, urllib.request, urllib.parse, datetime as dt
 
-COINS = "BTC ETH BNB XRP SOL TRX ZEC DOGE LINK ADA NEAR XLM BCH LTC UNI AVAX SUI HBAR TAO SHIB ENA QNT AAVE ONDO".split()
-HL_NAME = {"SHIB": "kSHIB"}            # nama koin di Hyperliquid (sumber funding)
+# 50 koin teratas CoinMarketCap (tanpa stablecoin/token emas) yang aktif di Binance, urut market cap
+COINS = "BTC ETH BNB XRP SOL TRX HYPE ZEC DOGE LINK ADA NEAR XLM BCH LTC UNI AVAX SUI GRAM HBAR TAO SHIB ENA AAVE QNT ONDO PUMP ASTER DOT WLD WLFI SKY PEPE ICP ARB MORPHO ETC JST ALGO POL JUP RENDER ATOM FIL INJ AERO ZRO CAKE APT NIGHT".split()
+HL_NAME = {"SHIB": "kSHIB", "PEPE": "kPEPE"}            # nama koin di Hyperliquid (sumber funding)
 K, SL_ATR, TRAIL, EMA_F, EMA_S, ATR_N = 480, 8.0, 72, 100, 200, 14
 CHECK_HOURS_UTC = {3, 7, 11, 15, 19, 23}  # jam BUKA candle H1 (UTC); candle close = 03,07,11,15,19,23 WIB
 MAX_SLOTS = 10
@@ -34,7 +35,7 @@ def http_json(url, data=None, tries=5):
             time.sleep(3 * (t + 1))
     raise RuntimeError(f"Gagal mengambil data: {url} ({err})")
 
-def fetch_klines(coin, n=1800):
+def fetch_klines(coin, n=1000):
     """Candle H1 spot Binance (data publik). Return list [open_time_s, o, h, l, c] candle yang SUDAH close."""
     sym = coin + "USDT"
     out = []
@@ -109,6 +110,7 @@ class Engine:
         self.funding_fn = funding_fn
         self.notify = notify
         self.trades = []
+        self.checked = False   # True jika ada candle cek (setiap 4 jam) yang diproses di run ini
 
     def open_count(self):
         return sum(1 for c in self.s["coins"].values() if c.get("pos"))
@@ -197,6 +199,7 @@ class Engine:
                     if i >= max(K, 1300 if self.s.get("replay") else K):
                         self.step_fill_exit(coin, i, data[coin])
             if (t // 3600) % 24 in CHECK_HOURS_UTC:
+                self.checked = True
                 # alokasi slot: prioritas peringkat market cap
                 for coin in COINS:
                     if coin in data and t in idx[coin]:
@@ -237,36 +240,35 @@ def tg_send(text, chat=None, pin=False):
     print("Gagal kirim Telegram:", text)
     return None
 
-def make_notifier(buf, risk_pct, modal, priv=None):
-    """buf: pesan publik (channel). priv: ukuran posisi pribadi pemilik (dari MODAL_USDT), tidak dikirim ke channel."""
-    def size_line(entry, sl):
-        dist = abs(entry - sl) / entry * 100
-        return f"Jarak SL {dist:.1f}% · leverage maks aman {safe_lev(entry, sl)}× (isolated)"
-    import templates as tpl
+def new_events():
+    return {"new": [], "upd": [], "cancel": [], "fill": [], "trail": [], "exit": []}
+
+def make_notifier(ev, risk_pct, modal, priv=None):
+    """ev: kumpulan kejadian (disusun menjadi 2 bubble). priv: ukuran posisi pribadi pemilik (MODAL_USDT)."""
     def notify(kind, coin, **k):
         sym = coin + "USDT"
         if kind == "order":
             lev = safe_lev(k["entry"], k["sl"])
             if k.get("old"):
                 o = k["old"]
-                # Hanya kirim update jika entry berubah atau SL bergeser > 0,2% harga (hindari spam tiap 4 jam)
-                if not (abs(k["entry"] - o[1]) > 1e-12 or abs(k["sl"] - o[2]) / k["entry"] > 0.002 or k["d"] != o[0]):
+                # Hanya laporkan update jika harga entry atau arah berubah (SL final diberikan saat order TERISI)
+                if not (abs(k["entry"] - o[1]) / k["entry"] > 1e-9 or k["d"] != o[0]):
                     return
-                buf.append(tpl.order_update(sym, k["d"], k["entry"], k["sl"], o, lev, fmt))
+                ev["upd"].append((sym, k["d"], k["entry"], k["sl"], o[1], o[2], lev))
             else:
-                buf.append(tpl.order_baru(sym, k["d"], k["entry"], k["sl"], lev, fmt))
+                ev["new"].append((sym, k["d"], k["entry"], k["sl"], lev))
             if modal and priv is not None:
                 risk_usd = modal * risk_pct / 100
                 qty = risk_usd / abs(k["entry"] - k["sl"])
-                priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ukuran ±{qty:.6g} koin (nilai ±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)")
+                priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ±{qty:.6g} koin (±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)")
         elif kind == "cancel":
-            buf.append(tpl.order_batal(sym, k["reason"]))
+            ev["cancel"].append((sym, k["reason"]))
         elif kind == "fill":
-            buf.append(tpl.posisi_terbuka(sym, k["d"], k["entry"], k["sl"], k["t"], k["r0"], fmt))
+            ev["fill"].append((sym, k["d"], k["entry"], k["sl"]))
         elif kind == "trail":
-            buf.append(tpl.geser_sl(sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"], fmt))
+            ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"]))
         elif kind == "exit":
-            buf.append(tpl.posisi_tutup(sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k["why"], exit_label(k["R"]), fmt))
+            ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"]))
     return notify
 
 # ---------------------------------------------------------------- main
@@ -331,8 +333,8 @@ def main():
         if key not in fcache:
             fcache[key] = fetch_funding_avg(coin, t)
         return fcache[key]
-    buf, priv = [], []
-    eng = Engine(state, funding, make_notifier(buf, risk_pct, modal, priv))
+    ev, priv = new_events(), []
+    eng = Engine(state, funding, make_notifier(ev, risk_pct, modal, priv))
     if first_run:
         # Run pertama: bentuk order awal di candle cek terakhir agar langsung ada daftar order
         last_check = max(t for t in data["BTC"]["T"] if (t // 3600) % 24 in CHECK_HOURS_UTC)
@@ -344,20 +346,26 @@ def main():
     target = state.get("channel_id")
     if errors:
         tg_send("⚠️ Data gagal diambil untuk: " + ", ".join(e.split(':')[0] for e in errors))
-    # Setiap kejadian = satu bubble
-    for m in buf:
-        tg_send(m, chat=target)
-    # Satu bubble ringkasan semua posisi terbuka (setiap cek 4 jam)
+    # Maksimal 2 bubble: (1) SINYAL order, (2) UPDATE posisi. Hanya dikirim jika ada candle cek baru.
+    import templates as tpl
+    buf = []
+    # Bot berjalan tiap 2 jam; strategi dicek tiap 4 jam. Run di antara cek hanya mengirim UPDATE
+    # jika ada order terisi / posisi ditutup (dan SINYAL jika ada order yang harus dibatalkan).
     rows = []
     for c, v in state["coins"].items():
         p = v.get("pos")
         if p and c in data:
             r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
             rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3]))
-    if rows:
-        import templates as tpl
-        tg_send(tpl.update_posisi(rows, fmt, newest + 3600), chat=target)
-    elif not buf and os.environ.get("SEND_EMPTY", "0") == "1":
+    send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"]
+    bubbles = [tpl.signal_bubble(ev, newest + 3600, fmt),
+               tpl.update_bubble(ev, rows, newest + 3600, fmt) if send_update else None]
+    for b in bubbles:
+        if b:
+            buf.append(b)
+            for part in tpl.split_message(b):
+                tg_send(part, chat=target)
+    if not buf and os.environ.get("SEND_EMPTY", "0") == "1":
         tg_send(head + "\n\nTidak ada perubahan.", chat=target)
     # Rekap otomatis: mingguan setiap Senin (minggu lalu), bulanan setiap tanggal 1 (bulan lalu)
     now_wib = dt.datetime.now(commands.WIB)

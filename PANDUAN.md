@@ -7,7 +7,7 @@ instruksi ke **Telegram** Anda. Bot **tidak** punya akses ke akun exchange; Anda
 | File | Fungsi |
 |---|---|
 | `signal_bot.py` | Mesin strategi + pengirim pesan Telegram |
-| `.github/workflows/signal.yml` | Jadwal otomatis (03, 07, 11, 15, 19, 23 WIB) |
+| `.github/workflows/signal.yml` | Jadwal otomatis setiap 2 jam (strategi dicek 03, 07, 11, 15, 19, 23 WIB) |
 | `state.json` | Dibuat otomatis: mencatat order & posisi yang sedang berjalan |
 
 ---
