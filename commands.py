@@ -87,12 +87,17 @@ PANDUAN_ANGGOTA = """<b>📌 PANDUAN ANGGOTA — Sinyal Crypto Futures</b>
 Sinyal trend-following di 24 koin besar (futures USDT perpetual). Dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB). Maksimal 10 posisi/order sekaligus. Tidak ada TP: keuntungan dikunci dengan SL yang terus digeser.
 
 <b>Arti pesan</b>
-🆕 BUY STOP / SELL STOP X, SL Y → pasang order baru
-♻️ GANTI → batalkan order lama koin itu, pasang angka baru
-❌ batalkan order pending → cancel order koin itu
-✅ kemungkinan TERISI → cek di exchange, pastikan SL terpasang
-⬆️ geser SL → ubah SL posisi itu ke angka baru
-🏁 posisi selesai → ❌ SL awal (rugi) · 🟡 SL+ impas · ✅ SL+ untung
+🆕 SINYAL BARU → pasang order Stop Market + SL sesuai angka
+♻️ UPDATE ORDER → order Anda BELUM terisi tapi angkanya berubah (high/low 20 hari atau volatilitas bergeser) → edit order ke angka baru
+❌ ORDER DIBATALKAN → cancel order pending koin itu (alasan tertulis)
+✅ POSISI TERBUKA → order terisi; pastikan SL terpasang
+🔁 GESER SL → ubah SL posisi itu ke angka baru (lihat "Cara kerja SL+")
+📊 UPDATE POSISI → ringkasan semua posisi terbuka setiap 4 jam: harga kini, % & R berjalan, SL, status SL+
+🏁 POSISI DITUTUP → hasil akhir: ❌ SL awal (rugi) · 🟡 SL+ impas · ✅ SL+ untung
+
+<b>Cara kerja SL+ (trailing)</b>
+Setiap 4 jam bot menghitung SL baru: BUY → low terendah 3 hari terakhir, SELL → high tertinggi 3 hari terakhir. SL hanya dipindah jika lebih menguntungkan. Bot mengirim angka pasti di pesan 🔁 GESER SL — cukup samakan SL di exchange dengan angka itu.
+Begitu SL melewati harga entry, posisi berstatus SL+ (tidak bisa rugi lagi). Jangan pakai fitur Trailing Stop bawaan exchange: aturannya (jarak % tetap, bergerak tiap detik) berbeda dari strategi ini dan membuat hasil tidak sama.
 
 <b>1. Ukuran posisi (WAJIB dihitung sendiri)</b>
 Ukuran (koin) = (Modal × Risiko%) ÷ |Entry − SL|

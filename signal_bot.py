@@ -126,7 +126,7 @@ class Engine:
                 fill = max(en, O) if d == 1 else min(en, O)
                 cs["pend"] = None
                 cs["pos"] = [d, fill, sl, T, abs(fill - sl)]
-                self.notify("fill", coin, d=d, entry=fill, sl=sl, t=T)
+                self.notify("fill", coin, d=d, entry=fill, sl=sl, t=T, r0=abs(fill - sl))
                 # Batas slot tercapai -> order pending koin lain dibatalkan
                 if self.open_count() >= MAX_SLOTS:
                     for c2, st2 in self.s["coins"].items():
@@ -149,7 +149,7 @@ class Engine:
         cs["pos"] = None
         R = (ex - e) * d / r0 if r0 else 0.0
         self.s.setdefault("hist", []).append([coin, d, t0, T, e, ex, round(R, 3)])
-        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R)
+        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R, t0=t0, sl=sl)
 
     def step_check(self, coin, i, D, allow_new):
         """Langkah 3 di candle cek (setiap 4 jam): trailing SL / order baru."""
@@ -160,26 +160,29 @@ class Engine:
             if d == 1:
                 v = min(L[i - TRAIL + 1:i + 1])
                 if v > sl:
-                    cs["pos"][2] = v; self.notify("trail", coin, d=d, sl=v, old=sl, t=T)
+                    cs["pos"][2] = v; self.notify("trail", coin, d=d, sl=v, old=sl, t=T, entry=e, r0=(cs["pos"][4] if len(cs["pos"]) > 4 else abs(e - sl)))
             else:
                 v = max(H[i - TRAIL + 1:i + 1])
                 if v < sl:
-                    cs["pos"][2] = v; self.notify("trail", coin, d=d, sl=v, old=sl, t=T)
+                    cs["pos"][2] = v; self.notify("trail", coin, d=d, sl=v, old=sl, t=T, entry=e, r0=(cs["pos"][4] if len(cs["pos"]) > 4 else abs(e - sl)))
             return
         old = cs.get("pend")
         new = None
+        reason = "trend sudah tidak searah (EMA)"
         if C[i] > ES[i] and EF[i] > ES[i]:
             en = max(H[i - K + 1:i + 1]); new = [1, en, en - SL_ATR * A[i]]
         elif C[i] < ES[i] and EF[i] < ES[i]:
             f = self.funding_fn(coin, T)
             if f is not None and f > 0:
                 en = min(L[i - K + 1:i + 1]); new = [-1, en, en + SL_ATR * A[i]]
+            else:
+                reason = "funding rate tidak positif (filter SELL)"
         if new and not allow_new(coin, old):
-            new = None
+            new = None; reason = "slot penuh (maks 10 posisi/order)"
         if old and not new:
-            self.notify("cancel", coin, reason="trend/filter tidak lagi terpenuhi atau slot penuh")
+            self.notify("cancel", coin, reason=reason)
         elif new and (not old or abs(new[1] - old[1]) > 1e-12 or abs(new[2] - old[2]) > 1e-12 or new[0] != old[0]):
-            self.notify("order", coin, d=new[0], entry=new[1], sl=new[2], t=T, replace=bool(old))
+            self.notify("order", coin, d=new[0], entry=new[1], sl=new[2], t=T, replace=bool(old), old=old, price=C[i])
         cs["pend"] = new
 
     def run(self, data, since_ts):
@@ -239,23 +242,31 @@ def make_notifier(buf, risk_pct, modal, priv=None):
     def size_line(entry, sl):
         dist = abs(entry - sl) / entry * 100
         return f"Jarak SL {dist:.1f}% · leverage maks aman {safe_lev(entry, sl)}× (isolated)"
+    import templates as tpl
     def notify(kind, coin, **k):
         sym = coin + "USDT"
         if kind == "order":
-            arah = "🟢 BUY STOP" if k["d"] == 1 else "🔴 SELL STOP"
-            buf.append(f"{'♻️ GANTI ' if k['replace'] else '🆕 '}<b>{sym}</b> {arah} <b>{fmt(k['entry'])}</b>\nSL {fmt(k['sl'])} · tanpa TP\n{size_line(k['entry'], k['sl'])}")
+            lev = safe_lev(k["entry"], k["sl"])
+            if k.get("old"):
+                o = k["old"]
+                # Hanya kirim update jika entry berubah atau SL bergeser > 0,2% harga (hindari spam tiap 4 jam)
+                if not (abs(k["entry"] - o[1]) > 1e-12 or abs(k["sl"] - o[2]) / k["entry"] > 0.002 or k["d"] != o[0]):
+                    return
+                buf.append(tpl.order_update(sym, k["d"], k["entry"], k["sl"], o, lev, fmt))
+            else:
+                buf.append(tpl.order_baru(sym, k["d"], k["entry"], k["sl"], lev, fmt))
             if modal and priv is not None:
                 risk_usd = modal * risk_pct / 100
                 qty = risk_usd / abs(k["entry"] - k["sl"])
                 priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ukuran ±{qty:.6g} koin (nilai ±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)")
         elif kind == "cancel":
-            buf.append(f"❌ <b>{sym}</b> batalkan order pending ({k['reason']})")
+            buf.append(tpl.order_batal(sym, k["reason"]))
         elif kind == "fill":
-            buf.append(f"✅ <b>{sym}</b> order {'BUY' if k['d']==1 else 'SELL'} kemungkinan TERISI di ±{fmt(k['entry'])} ({wib(k['t'])}). Pastikan SL {fmt(k['sl'])} terpasang.")
+            buf.append(tpl.posisi_terbuka(sym, k["d"], k["entry"], k["sl"], k["t"], k["r0"], fmt))
         elif kind == "trail":
-            buf.append(f"⬆️ <b>{sym}</b> geser SL {'BUY' if k['d']==1 else 'SELL'}: {fmt(k['old'])} → <b>{fmt(k['sl'])}</b>")
+            buf.append(tpl.geser_sl(sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"], fmt))
         elif kind == "exit":
-            buf.append(f"🏁 <b>{sym}</b> posisi {'BUY' if k['d']==1 else 'SELL'} selesai di ±{fmt(k['exit'])} ({k['why']})\n{exit_label(k['R'])}")
+            buf.append(tpl.posisi_tutup(sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k["why"], exit_label(k["R"]), fmt))
     return notify
 
 # ---------------------------------------------------------------- main
@@ -330,16 +341,20 @@ def main():
     target = state.get("channel_id")
     if errors:
         tg_send("⚠️ Data gagal diambil untuk: " + ", ".join(e.split(':')[0] for e in errors))
-    if buf:
-        msgs, cur = [], head
-        for line in buf:
-            if len(cur) + len(line) > 3500:
-                msgs.append(cur); cur = ""
-            cur += "\n\n" + line
-        msgs.append(cur)
-        for m in msgs:
-            tg_send(m, chat=target)
-    elif os.environ.get("SEND_EMPTY", "0") == "1":
+    # Setiap kejadian = satu bubble
+    for m in buf:
+        tg_send(m, chat=target)
+    # Satu bubble ringkasan semua posisi terbuka (setiap cek 4 jam)
+    rows = []
+    for c, v in state["coins"].items():
+        p = v.get("pos")
+        if p and c in data:
+            r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
+            rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3]))
+    if rows:
+        import templates as tpl
+        tg_send(tpl.update_posisi(rows, fmt, newest + 3600), chat=target)
+    elif not buf and os.environ.get("SEND_EMPTY", "0") == "1":
         tg_send(head + "\n\nTidak ada perubahan.", chat=target)
     # Rekap otomatis: mingguan setiap Senin (minggu lalu), bulanan setiap tanggal 1 (bulan lalu)
     now_wib = dt.datetime.now(commands.WIB)
