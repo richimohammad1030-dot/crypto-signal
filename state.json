@@ -144,7 +144,9 @@
   }
  },
  "last_ts": 1792292400,
- "tg_offset": 608781117,
+ "tg_offset": 608781121,
  "channel_id": -1004447663067,
- "channel_title": "Coin Call"
+ "channel_title": "Coin Call",
+ "gold_channel_id": -1004324140827,
+ "gold_channel_title": "Market Call XAU"
 }
