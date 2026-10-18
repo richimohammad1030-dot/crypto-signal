@@ -111,75 +111,7 @@ class GoldEngine:
         return C[-1] if C else None
 
 
-# ---------------------------------------------------------------- templat bubble
-def make_notifier(buf, risk_pct):
-    def notify(kind, **k):
-        if kind == "order":
-            p = k["pend"]; b, s = p["buy"], p["sell"]
-            warn = []
-            px = k.get("live")
-            if px is not None and px >= b[0]:
-                warn.append("⚠️ Harga sudah di atas BUY STOP — order BUY akan langsung terisi di harga pasar.")
-            if px is not None and px <= s[0]:
-                warn.append("⚠️ Harga sudah di bawah SELL STOP — order SELL akan langsung terisi di harga pasar.")
-            buf.append(
-                f"🌅 <b>ORDER HARI INI · {SYM}</b>\n{LINE}\n"
-                f"📐 Range 04:00–07:00 WIB: {fmt(p['lo'])} – {fmt(p['hi'])}\n\n"
-                f"🟢 <b>BUY STOP</b>  {fmt(b[0])}\n"
-                f"   🛑 SL {fmt(b[1])} · 🎯 TP {fmt(b[2])}\n\n"
-                f"🔴 <b>SELL STOP</b> {fmt(s[0])}\n"
-                f"   🛑 SL {fmt(s[1])} · 🎯 TP {fmt(s[2])}\n"
-                f"{LINE}\n"
-                f"🔗 OCO: jika satu terisi, <b>batalkan</b> yang lain.\n"
-                f"⏰ Berlaku s.d. <b>23:00 WIB</b> (order dibatalkan & posisi ditutup).\n"
-                f"⚖️ Risiko per order: {risk_pct}% modal · SL {fmt(abs(b[0]-b[1]))} USD"
-                + ("\n" + "\n".join(warn) if warn else ""))
-        elif kind == "fill":
-            arah = "🟢 BUY" if k["d"] == 1 else "🔴 SELL"
-            lawan = "SELL STOP" if k["d"] == 1 else "BUY STOP"
-            buf.append(
-                f"✅ <b>POSISI TERBUKA · {SYM}</b> · {arah}\n{LINE}\n"
-                f"🎯 Entry : <b>{fmt(k['entry'])}</b> (±{wib(k['t'])})\n"
-                f"🛑 SL    : {fmt(k['sl'])}\n"
-                f"🏁 TP    : {fmt(k['tp'])} (4R)\n"
-                f"{LINE}\n"
-                f"👉 <b>Batalkan {lawan}</b> (OCO). Posisi ditutup paling lambat 23:00 WIB.")
-        elif kind == "exit":
-            arah = "🟢 BUY" if k["d"] == 1 else "🔴 SELL"
-            gerak = k["exit"] - k["entry"]
-            buf.append(
-                f"🏁 <b>POSISI DITUTUP · {SYM}</b> · {arah}\n{LINE}\n"
-                f"🎯 Entry  : {fmt(k['entry'])}\n"
-                f"🚪 Keluar : <b>{fmt(k['exit'])}</b> ({k['why']})\n"
-                f"📈 Gerak  : {gerak * k['d']:+.2f} USD\n"
-                f"{LINE}\n"
-                + ("⏰ Jika masih terbuka di akun Anda, <b>tutup sekarang</b>.\n" if "23:00" in k["why"] else "")
-                + label(k["R"]))
-        elif kind == "expire":
-            buf.append(f"⏰ <b>23:00 WIB · {SYM}</b>\n{LINE}\nOrder hari ini tidak terisi.\n👉 <b>Batalkan</b> BUY STOP & SELL STOP yang masih aktif.")
-    return notify
-
-
-def label(R):
-    if R >= 3.5:
-        return f"🎯 <b>Kena TP</b> ({R:+.2f}R)"
-    if R >= 0.15:
-        return f"✅ <b>Untung</b> ({R:+.2f}R)"
-    if R > -0.15:
-        return f"🟡 <b>Impas</b> ({R:+.2f}R)"
-    if R <= -0.9:
-        return f"❌ <b>Kena SL</b> ({R:+.2f}R)"
-    return f"⚠️ <b>Rugi sebagian</b> ({R:+.2f}R)"
-
-
-def update_bubble(pos, px):
-    d, e = pos["d"], pos["e"]
-    R = (px - e) * d / pos["r0"] if pos["r0"] else 0
-    return (f"📊 <b>UPDATE POSISI · {SYM}</b> · {'🟢 BUY' if d == 1 else '🔴 SELL'}\n{LINE}\n"
-            f"Entry {fmt(e)} → kini <b>{fmt(px)}</b>\n"
-            f"{'🟢' if R > 0 else '🔴' if R < 0 else '⚪'} {(px - e) * d:+.2f} USD · <b>{R:+.2f}R</b> berjalan\n"
-            f"🛑 SL {fmt(pos['sl'])} · 🎯 TP {fmt(pos['tp'])}\n"
-            f"⏰ Ditutup paling lambat 23:00 WIB")
+# Templat pesan ada di gold_templates.py
 
 
 # ---------------------------------------------------------------- main
@@ -205,19 +137,18 @@ def main():
         since = closes[-1] if closes else rows[-1][0] - 1
     else:
         since = state["last_ts"]
-    buf = []
-    eng = GoldEngine(state, make_notifier(buf, risk_pct))
+    import gold_templates as gt
+    ev = gt.new_events()
+    eng = GoldEngine(state, gt.make_notifier(ev))
     px = eng.run(rows, since)
-    # peringatan jika harga live sudah melewati level order (pesan pagi tiba beberapa menit setelah 07:00)
-    for k, m in enumerate(buf):
-        if m.startswith("🌅") and state.get("pend"):
-            b, s = state["pend"]["buy"][0], state["pend"]["sell"][0]
-            if px >= b or px <= s:
-                buf[k] = m + f"\n⚠️ Harga terakhir {fmt(px)} sudah melewati salah satu level order."
-    for m in buf:
-        tg_send(m, chat=target)
-    if state.get("pos") and not any(m.startswith("✅") for m in buf):
-        tg_send(update_bubble(state["pos"], px), chat=target)
+    t_last = rows[-1][0] + 3600
+    # Maksimal 2 bubble: (1) SINYAL order/pembatalan, (2) UPDATE terisi/ditutup/posisi berjalan
+    buf = []
+    for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None),
+              gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] else None):
+        if b:
+            buf.append(b)
+            tg_send(b, chat=target)
     # rekap otomatis: mingguan (Senin, cek pertama) & bulanan (tanggal 1)
     now_wib = dt.datetime.now(commands.WIB)
     wk, _ = commands.period_bounds("minggu", now_wib, previous=True)
