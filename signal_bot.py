@@ -299,6 +299,9 @@ def main():
             body = reply.split("\n", 1)[1]
             ok = tg_send(body, chat=state["channel_id"])
             reply = "📤 Rekap sudah diposting ke channel." if ok else "⚠️ Gagal posting rekap ke channel."
+        if reply == "/_kirim_panduan_xau":
+            ok = tg_send(commands.PANDUAN_XAU, chat=state["gold_channel_id"], pin=True)
+            reply = "📌 Panduan XAU sudah diposting & di-pin di channel XAU." if ok else "⚠️ Gagal posting panduan XAU. Pastikan bot admin dengan izin Post & Pin Messages."
         if reply == "/_kirim_panduan":
             ok = tg_send(commands.PANDUAN_ANGGOTA, chat=state["channel_id"], pin=True)
             reply = "📌 Panduan anggota sudah diposting & di-pin di channel." if ok else "⚠️ Gagal posting panduan. Pastikan bot admin channel dengan izin Post & Pin Messages."

@@ -1,0 +1,38 @@
+name: Sinyal XAU Straddle
+
+on:
+  schedule:
+    # Senin-Jumat, setiap 2 jam dari 07:00 s.d. 23:00 WIB (UTC 00,02,...,16), 9 menit setelah candle H1 close
+    - cron: "9 0,2,4,6,8,10,12,14,16 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-bot          # sama dengan workflow lain agar file state tidak bentrok
+  cancel-in-progress: false
+
+jobs:
+  gold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Jalankan bot XAU
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          XAU_RISK_PCT: ${{ vars.XAU_RISK_PCT }}
+        run: python gold_bot.py
+      - name: Simpan state
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add gold_state.json
+          git diff --cached --quiet || git commit -m "xau state $(date -u +%Y-%m-%dT%H:%M)"
+          git pull --rebase -q || true
+          git push

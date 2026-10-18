@@ -108,3 +108,13 @@ Setelah itu:
 - Isi: total R & estimasi %, jumlah trade (✅ untung · 🟡 SL+ impas · ❌ loss), win rate, profit factor, rata-rata R,
   trade terbaik/terburuk, drawdown, kalah beruntun, kurva harian, posisi terbuka & R yang sudah terkunci.
 - Estimasi % = total R × `RISK_PCT`. Rekap dihitung dari catatan bot, jadi lapor `/terisi`, `/tidak`, `/tutup` agar akurat.
+
+---
+
+## Bot XAU — Gold Daily Straddle (channel terpisah)
+- Jadwal: Senin–Jumat setiap 2 jam, 07:00–23:00 WIB (`gold.yml`). 07:00 kirim order OCO hari itu; 23:00 batalkan/tutup.
+- Data: XAU/USD H1 dari Setra (server MT5). Hasil backtest dengan data ini: 424 trade, +67R (2025–2026, biaya 0,40 USD).
+- Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
+  Bot otomatis mengenalinya sebagai channel XAU (±1 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota.
+- Perintah pribadi: `/status_xau`, `/rekap_xau`, `/rekap_xau bulan`, `/rekap_xau minggu lalu`.
+- Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
