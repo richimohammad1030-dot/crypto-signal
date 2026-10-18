@@ -4,7 +4,7 @@
    "pend": [
     -1,
     79800.0,
-    81758.66207574138
+    82020.63679849
    ],
    "pos": null
   },
@@ -12,17 +12,19 @@
    "pend": [
     -1,
     2318.0,
-    2417.8590962349126
+    2449.379098761682
    ],
    "pos": null
   },
   "BNB": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     708.64,
-    729.8916677719922
-   ],
-   "pos": null
+    733.7665619334618,
+    1792350000,
+    25.126561933461858
+   ]
   },
   "XRP": {
    "pend": null,
@@ -35,24 +37,28 @@
    ]
   },
   "SOL": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     100.62,
-    106.3468560651345
-   ],
-   "pos": null
+    106.97058767378972,
+    1792350000,
+    6.350587673789718
+   ]
   },
   "TRX": {
    "pend": null,
    "pos": null
   },
   "ZEC": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     1075.0,
-    1207.8391424630397
-   ],
-   "pos": null
+    1221.3612335455766,
+    1792350000,
+    146.36123354557662
+   ]
   },
   "DOGE": {
    "pend": null,
@@ -82,17 +88,19 @@
    "pend": [
     -1,
     4.301,
-    4.9686755784328485
+    4.9918594003214505
    ],
    "pos": null
   },
   "XLM": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     0.1742,
-    0.1836624458839156
-   ],
-   "pos": null
+    0.1836624458839156,
+    1792335600,
+    0.009462445883915593
+   ]
   },
   "BCH": {
    "pend": null,
@@ -141,12 +149,117 @@
   "ONDO": {
    "pend": null,
    "pos": null
+  },
+  "HYPE": {
+   "pend": null,
+   "pos": null
+  },
+  "GRAM": {
+   "pend": null,
+   "pos": null
+  },
+  "PUMP": {
+   "pend": null,
+   "pos": null
+  },
+  "ASTER": {
+   "pend": null,
+   "pos": null
+  },
+  "DOT": {
+   "pend": null,
+   "pos": null
+  },
+  "WLD": {
+   "pend": null,
+   "pos": null
+  },
+  "WLFI": {
+   "pend": null,
+   "pos": null
+  },
+  "SKY": {
+   "pend": null,
+   "pos": null
+  },
+  "PEPE": {
+   "pend": null,
+   "pos": null
+  },
+  "ICP": {
+   "pend": null,
+   "pos": null
+  },
+  "ARB": {
+   "pend": null,
+   "pos": null
+  },
+  "MORPHO": {
+   "pend": null,
+   "pos": null
+  },
+  "ETC": {
+   "pend": null,
+   "pos": null
+  },
+  "JST": {
+   "pend": null,
+   "pos": null
+  },
+  "ALGO": {
+   "pend": null,
+   "pos": null
+  },
+  "POL": {
+   "pend": null,
+   "pos": null
+  },
+  "JUP": {
+   "pend": null,
+   "pos": null
+  },
+  "RENDER": {
+   "pend": null,
+   "pos": null
+  },
+  "ATOM": {
+   "pend": null,
+   "pos": null
+  },
+  "FIL": {
+   "pend": null,
+   "pos": null
+  },
+  "INJ": {
+   "pend": null,
+   "pos": null
+  },
+  "AERO": {
+   "pend": null,
+   "pos": null
+  },
+  "ZRO": {
+   "pend": null,
+   "pos": null
+  },
+  "CAKE": {
+   "pend": null,
+   "pos": null
+  },
+  "APT": {
+   "pend": null,
+   "pos": null
+  },
+  "NIGHT": {
+   "pend": null,
+   "pos": null
   }
  },
- "last_ts": 1792321200,
- "tg_offset": 608781121,
+ "last_ts": 1792350000,
+ "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
  "gold_channel_id": -1004324140827,
- "gold_channel_title": "Market Call XAU"
+ "gold_channel_title": "Market Call XAU",
+ "recap_week": "2026-10-12T00:00:00+07:00"
 }
