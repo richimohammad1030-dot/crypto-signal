@@ -284,6 +284,10 @@ def main():
             reply = commands.handle(state, text, last_price, fmt, exit_label, wib)
         except Exception as e:
             reply = f"⚠️ Gagal memproses perintah: {e}"
+        if reply.startswith("/_post_channel"):
+            body = reply.split("\n", 1)[1]
+            ok = tg_send(body, chat=state["channel_id"])
+            reply = "📤 Rekap sudah diposting ke channel." if ok else "⚠️ Gagal posting rekap ke channel."
         if reply == "/_kirim_panduan":
             ok = tg_send(commands.PANDUAN_ANGGOTA, chat=state["channel_id"], pin=True)
             reply = "📌 Panduan anggota sudah diposting & di-pin di channel." if ok else "⚠️ Gagal posting panduan. Pastikan bot admin channel dengan izin Post & Pin Messages."
@@ -337,6 +341,17 @@ def main():
             tg_send(m, chat=target)
     elif os.environ.get("SEND_EMPTY", "0") == "1":
         tg_send(head + "\n\nTidak ada perubahan.", chat=target)
+    # Rekap otomatis: mingguan setiap Senin (minggu lalu), bulanan setiap tanggal 1 (bulan lalu)
+    now_wib = dt.datetime.now(commands.WIB)
+    wk_start, _ = commands.period_bounds("minggu", now_wib, previous=True)
+    if now_wib.weekday() == 0 and state.get("recap_week") != wk_start.isoformat():
+        tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt), chat=target)
+        state["recap_week"] = wk_start.isoformat()
+    mo_start, _ = commands.period_bounds("bulan", now_wib, previous=True)
+    if now_wib.day == 1 and state.get("recap_month") != mo_start.isoformat():
+        tg_send(commands.build_recap(state, "bulan", True, risk_pct, now_wib, fmt), chat=target)
+        state["recap_month"] = mo_start.isoformat()
+    json.dump(state, open(STATE_FILE, "w"), indent=1)
     # Ukuran posisi pribadi (MODAL_USDT) hanya ke chat pemilik
     if priv:
         tg_send("🔒 <b>Ukuran posisi Anda</b> (modal " + f"{modal:,.0f} USDT, risiko {risk_pct}%)\n" + "\n".join(priv))

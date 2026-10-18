@@ -129,9 +129,102 @@ BANTUAN = """<b>🤖 Perintah bot</b>
 /tutup KOIN harga — posisi sudah ditutup (contoh: <code>/tutup ETH 2290</code>)
 /panduan — panduan umum (risiko, leverage, SL, trailing)
 /panduan binance · /panduan okx — langkah di exchange
+/rekap · /rekap bulan — rekap performa minggu/bulan berjalan
+/rekap minggu lalu · /rekap bulan lalu — rekap periode sebelumnya
+/rekap_channel [minggu|bulan] [lalu] — posting rekap ke channel
 /channel — cek channel sinyal
 /kirim_panduan — posting & pin panduan anggota di channel
 Perintah hanya berlaku dari chat pribadi Anda dan dibaca bot setiap ±1 jam."""
+
+
+WIB = dt.timezone(dt.timedelta(hours=7))
+BULAN = ["", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
+
+
+def period_bounds(kind, now=None, previous=False):
+    """Batas periode dalam WIB. kind 'minggu' (Senin-Minggu) atau 'bulan'. Return (awal, akhir) datetime WIB."""
+    now = (now or dt.datetime.now(WIB)).astimezone(WIB)
+    if kind == "bulan":
+        start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+        if previous:
+            start = (start - dt.timedelta(days=1)).replace(day=1)
+        nxt = (start.replace(day=28) + dt.timedelta(days=4)).replace(day=1)
+        return start, nxt
+    start = (now - dt.timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+    if previous:
+        start -= dt.timedelta(days=7)
+    return start, start + dt.timedelta(days=7)
+
+
+def _spark(vals):
+    bars = "▁▂▃▄▅▆▇█"
+    if not vals:
+        return ""
+    lo, hi = min(vals), max(vals)
+    if hi - lo < 1e-9:
+        return bars[3] * len(vals)
+    return "".join(bars[int((v - lo) / (hi - lo) * 7)] for v in vals)
+
+
+def build_recap(state, kind="minggu", previous=False, risk_pct=0.67, now=None, fmt=lambda x: f"{x:g}"):
+    """Satu bubble rekap performa (HTML Telegram)."""
+    start, end = period_bounds(kind, now, previous)
+    t0, t1 = start.timestamp(), end.timestamp()
+    tr = [h for h in state.get("hist", []) if t0 <= h[3] < t1]          # h = [koin, arah, t_buka, t_tutup, entry, exit, R]
+    last_day = end - dt.timedelta(days=1)
+    if kind == "bulan":
+        title, rng = "REKAP BULANAN", f"{BULAN[start.month]} {start.year}"
+    else:
+        title, rng = "REKAP MINGGUAN", f"{start.day} {BULAN[start.month]} – {last_day.day} {BULAN[last_day.month]} {last_day.year}"
+    if not previous:
+        rng += " (berjalan)"
+    L = [f"<b>━━━━━━━━━━━━━━━━━━━━</b>",
+         f"📈 <b>{title}</b>",
+         f"🗓 {rng}",
+         f"<b>━━━━━━━━━━━━━━━━━━━━</b>"]
+    if tr:
+        R = [h[6] for h in tr]
+        tot = sum(R)
+        win = [r for r in R if r >= 0.15]
+        be = [r for r in R if -0.15 < r < 0.15]
+        loss = [r for r in R if r <= -0.15]
+        gp, gl = sum(r for r in R if r > 0), -sum(r for r in R if r < 0)
+        pf = (gp / gl) if gl > 0 else None
+        best = max(tr, key=lambda h: h[6]); worst = min(tr, key=lambda h: h[6])
+        eq = pk = dd = 0.0; streak = mstreak = 0
+        for h in sorted(tr, key=lambda h: h[3]):
+            eq += h[6]; pk = max(pk, eq); dd = min(dd, eq - pk)
+            streak = streak + 1 if h[6] <= -0.15 else 0; mstreak = max(mstreak, streak)
+        # kurva harian (kumulatif R)
+        days = (end - start).days
+        cum, curve = 0.0, []
+        for k in range(days):
+            ds, de = (start + dt.timedelta(days=k)).timestamp(), (start + dt.timedelta(days=k + 1)).timestamp()
+            if ds > (now or dt.datetime.now(WIB)).timestamp():
+                break
+            cum += sum(h[6] for h in tr if ds <= h[3] < de); curve.append(cum)
+        icon = "🟢" if tot > 0 else "🔴" if tot < 0 else "⚪"
+        L += [f"{icon} <b>Hasil: {tot:+.2f}R</b>  (≈ {tot * risk_pct:+.1f}%)",
+              f"🎯 Trade selesai: <b>{len(R)}</b>  ✅{len(win)} · 🟡{len(be)} · ❌{len(loss)}",
+              f"📊 Win rate: <b>{len(win) / len(R) * 100:.0f}%</b>",
+              f"⚖️ Profit factor: <b>{pf:.2f}</b>" if pf is not None else "⚖️ Profit factor: <b>∞</b> (tanpa loss)",
+              f"📐 Rata-rata: <b>{tot / len(R):+.2f}R</b> / trade",
+              f"🏆 Terbaik: {best[0]} {best[6]:+.2f}R",
+              f"💥 Terburuk: {worst[0]} {worst[6]:+.2f}R",
+              f"📉 Drawdown: {dd:.2f}R · kalah beruntun maks {mstreak}",
+              f"📈 Kurva: <code>{_spark(curve)}</code>"]
+    else:
+        L.append("Belum ada trade yang selesai pada periode ini.")
+    opn = [(c, v["pos"]) for c, v in state.get("coins", {}).items() if v.get("pos")]
+    if opn:
+        lock = 0.0
+        for c, p in opn:
+            r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
+            lock += (p[2] - p[1]) * p[0] / r0 if r0 else 0
+        L.append(f"📂 Posisi terbuka: <b>{len(opn)}</b> · SL terkunci {lock:+.2f}R")
+    L += [f"<b>━━━━━━━━━━━━━━━━━━━━</b>",
+          f"<i>% = estimasi pada risiko {risk_pct}%/trade · ✅ ≥ +0,15R · 🟡 SL+ impas · ❌ loss</i>"]
+    return "\n".join(L)
 
 
 def _api(method, params):
@@ -197,6 +290,15 @@ def handle(state, text, last_price, fmt, exit_label, wib):
                 else "Belum ada channel. Jadikan bot admin channel (izin: Post Messages & Pin Messages).")
     if cmd == "/kirim_panduan":
         return "/_kirim_panduan" if state.get("channel_id") else "Belum ada channel. Jadikan bot admin channel dulu."
+    if cmd in ("/rekap", "/rekap_channel"):
+        kind = "bulan" if len(parts) > 1 and parts[1].lower().startswith("bul") else "minggu"
+        prev = len(parts) > 2 and parts[2].lower() in ("lalu", "kemarin", "sebelumnya")
+        txt = build_recap(state, kind, prev, float(os.environ.get("RISK_PCT") or "0.67"), fmt=fmt)
+        if cmd == "/rekap_channel":
+            if not state.get("channel_id"):
+                return "Belum ada channel."
+            return "/_post_channel\n" + txt
+        return txt
     if cmd in ("/start", "/bantuan", "/help"):
         return BANTUAN
     if cmd == "/panduan":

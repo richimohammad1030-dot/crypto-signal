@@ -98,3 +98,13 @@ Setelah itu:
 - **Ukuran posisi pribadi** (dari `MODAL_USDT`) dan balasan perintah hanya dikirim ke **chat pribadi** Anda.
 - Anggota tidak bisa mengirim perintah; perintah dari selain chat id Anda diabaikan.
 - Cek channel aktif: **/channel**. Jika bot dikeluarkan dari admin, sinyal kembali ke chat pribadi.
+
+---
+
+## Rekap performa
+- Otomatis ke channel: **mingguan setiap Senin** (minggu lalu) dan **bulanan setiap tanggal 1** (bulan lalu), di cek pertama hari itu.
+- Manual (chat pribadi): `/rekap`, `/rekap bulan`, `/rekap minggu lalu`, `/rekap bulan lalu`.
+- Posting ke channel kapan saja: `/rekap_channel`, `/rekap_channel bulan`, `/rekap_channel minggu lalu`.
+- Isi: total R & estimasi %, jumlah trade (✅ untung · 🟡 SL+ impas · ❌ loss), win rate, profit factor, rata-rata R,
+  trade terbaik/terburuk, drawdown, kalah beruntun, kurva harian, posisi terbuka & R yang sudah terkunci.
+- Estimasi % = total R × `RISK_PCT`. Rekap dihitung dari catatan bot, jadi lapor `/terisi`, `/tidak`, `/tutup` agar akurat.
