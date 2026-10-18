@@ -1,9 +1,8 @@
 name: Perintah Telegram
 
 on:
-  schedule:
-    # Setiap jam (menit ke-37) membaca perintah /status, /terisi, /tidak, /tutup, /panduan
-    - cron: "37 * * * *"
+  # Tidak terjadwal: perintah Telegram sudah dibaca oleh workflow "Sinyal Crypto Futures" setiap 2 jam.
+  # Jalankan manual (Run workflow) jika ingin perintah diproses segera.
   workflow_dispatch: {}
 
 permissions:

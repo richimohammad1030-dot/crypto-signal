@@ -31,7 +31,7 @@ Mulai kecil (0,3–0,5%). Maksimal 10 posisi sekaligus, jadi risiko total maksim
 
 <b>6. Laporkan ke bot</b>
 /terisi KOIN harga · /tidak KOIN · /tutup KOIN harga · /status
-Bot membaca perintah setiap ±1 jam."""
+Bot membaca perintah setiap ±2 jam."""
 
 PANDUAN_BINANCE = """<b>📗 Binance Futures (USDⓈ-M)</b>
 
@@ -168,7 +168,7 @@ BANTUAN = """<b>🤖 Perintah bot</b>
 /kirim_panduan_xau — posting & pin panduan anggota di channel XAU
 /channel — cek channel sinyal
 /kirim_panduan — posting & pin panduan anggota di channel
-Perintah hanya berlaku dari chat pribadi Anda dan dibaca bot setiap ±1 jam."""
+Perintah hanya berlaku dari chat pribadi Anda dan dibaca bot setiap ±2 jam."""
 
 
 WIB = dt.timezone(dt.timedelta(hours=7))

@@ -72,7 +72,7 @@ Tidak ada TP: keuntungan dikunci oleh SL yang terus digeser.
 
 ## Perintah Telegram (sinkron dengan posisi Anda yang sebenarnya)
 Bot tidak terhubung ke akun exchange, jadi bot hanya *memperkirakan* order terisi dari harga.
-Laporkan kondisi sebenarnya lewat chat ke bot (dibaca setiap ±1 jam):
+Laporkan kondisi sebenarnya lewat chat ke bot (dibaca setiap ±2 jam):
 
 | Perintah | Fungsi |
 |---|---|
@@ -90,7 +90,7 @@ Setiap order menyertakan **leverage maks aman** (isolated) agar tidak terlikuida
 ## Channel untuk anggota (anggota hanya membaca)
 1. Telegram → **New Channel** → beri nama → pilih Private atau Public.
 2. Channel → **Administrators** → **Add Admin** → cari bot Anda → izinkan **Post Messages** dan **Pin Messages** → Save.
-3. Dalam ±1 jam bot mendeteksi channel otomatis dan memberi tahu Anda di chat pribadi.
+3. Dalam ±2 jam bot mendeteksi channel otomatis dan memberi tahu Anda di chat pribadi.
 4. Kirim **/kirim_panduan** ke bot (chat pribadi) → panduan anggota diposting & di-pin di channel.
 
 Setelah itu:
@@ -115,6 +115,6 @@ Setelah itu:
 - Jadwal: Senin–Jumat setiap 2 jam, 07:00–23:00 WIB (`gold.yml`). 07:00 kirim order OCO hari itu; 23:00 batalkan/tutup.
 - Data: XAU/USD H1 dari Setra (server MT5). Hasil backtest dengan data ini: 424 trade, +67R (2025–2026, biaya 0,40 USD).
 - Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
-  Bot otomatis mengenalinya sebagai channel XAU (±1 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota.
+  Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota.
 - Perintah pribadi: `/status_xau`, `/rekap_xau`, `/rekap_xau bulan`, `/rekap_xau minggu lalu`.
 - Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
