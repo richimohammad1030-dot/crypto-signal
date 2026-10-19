@@ -68,6 +68,27 @@ Tidak ada TP: keuntungan dikunci oleh SL yang terus digeser.
 - Hasil backtest 2020–2026 (aturan bot ini): ±65%/tahun pada drawdown ±20% (risiko 0,67%/trade),
   ekspektasi realistis lebih rendah (±25–50%). Bukan saran investasi; mulai dengan dana kecil.
 
+### Label sinyal: 🟢 HIGH · 🟡 MEDIUM · 🔴 LOW
+Setiap order diberi label kualitas setup berdasarkan backtest 2223 trade (Des 2019 – Okt 2026).
+Skor dari 4 faktor yang terbukti konsisten di 2020–2023 **dan** 2024–2026:
+- Jarak SL dalam % (volatilitas): < 7,88% → +1 · > 12,63% → −1
+- Jarak harga dari EMA200 (dalam ATR): < 4,23 → +1 · > 5,55 → −1 (belum terlalu jauh dari tren)
+- Peringkat market cap: 7 besar → +1 · di luar 15 besar → −1
+- Tren BTC: searah posisi → +1 · berlawanan → −1
+
+HIGH = skor ≥ 2 · MEDIUM = 0–1 · LOW = skor ≤ −1.
+
+| Label | Porsi trade | Win rate | Rata-rata 2020–2023 | Rata-rata 2024–2026 |
+|---|---|---|---|---|
+| 🟢 HIGH | 31% | 44% | +0,57R | +0,68R |
+| 🟡 MEDIUM | 39% | 40% | +0,40R | +0,12R |
+| 🔴 LOW | 30% | 36% | +0,14R | −0,01R |
+
+HIGH lebih baik dari LOW di **setiap tahun** 2020–2026. Catatan: label adalah gambaran historis, bukan
+jaminan; trade LOW sesekali tetap menghasilkan profit besar. Ukuran risiko per trade tetap sama untuk
+semua label kecuali Anda memutuskan lain. Backtest memakai funding Binance sebagai pengganti Hyperliquid
+dan daftar 50 koin saat ini (ada bias koin yang "bertahan"), tanpa biaya trading.
+
 ---
 
 ## Perintah Telegram (sinkron dengan posisi Anda yang sebenarnya)

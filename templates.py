@@ -29,6 +29,13 @@ def _pct(a, b):
     return abs(a - b) / a * 100
 
 
+CONV = {"HIGH": "🟢 HIGH", "MEDIUM": "🟡 MEDIUM", "LOW": "🔴 LOW"}
+
+
+def _conv(c):
+    return f"  Label : {CONV[c]}" if c in CONV else None
+
+
 def _pre(lines):
     return "<pre>" + html.escape("\n".join(lines)) + "</pre>"
 
@@ -71,8 +78,10 @@ def signal_bubble(ev, t, fmt, pending, day):
 
     def order_rows(group, show_old=False):
         rows = []
-        for sym, d, e, sl, lev in group:
+        for sym, d, e, sl, lev, conv in group:
             rows.append(f"{sym:<10}{'BUY STOP' if d == 1 else 'SELL STOP'}")
+            if _conv(conv):
+                rows.append(_conv(conv))
             if show_old:
                 oe, osl = upd_today[sym]
                 rows += [f"  Entry : {fmt(oe)} → {fmt(e)}",
@@ -103,7 +112,8 @@ def signal_bubble(ev, t, fmt, pending, day):
         L += p
     L += [BAR,
           "📌 Order: <b>Stop Market</b> · SL reduce-only · <b>tanpa TP</b>",
-          "📌 Margin <b>Isolated</b> · leverage ≤ angka Lev"]
+          "📌 Margin <b>Isolated</b> · leverage ≤ angka Lev",
+          "🏷 Label = kualitas historis setup (backtest 2020–2026). Semua sinyal tetap sah."]
     return "\n".join(L)
 
 
@@ -120,7 +130,8 @@ def update_bubble(ev, open_rows, t, fmt):
         first = False
     if ev["fill"]:
         sep(); L.append(f"✅ <b>TERISI</b> · pastikan SL terpasang")
-        L.append(_pre([f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} @ {fmt(e)}\n  SL    : {fmt(sl)}" for sym, d, e, sl in ev["fill"]]))
+        L.append(_pre([f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} @ {fmt(e)}\n  SL    : {fmt(sl)}" + (f"\n{_conv(c)}" if _conv(c) else "")
+                       for sym, d, e, sl, c in ev["fill"]]))
     if ev["trail"]:
         sep(); L.append(f"🔁 <b>GESER SL</b> · ubah SL di exchange")
         L.append(_pre([f"{sym:<10}{fmt(old)} → {fmt(sl)}\n  {_sl_tag(d, e, sl, r0)}" for sym, d, e, old, sl, r0 in ev["trail"]]))

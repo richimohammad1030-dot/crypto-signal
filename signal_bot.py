@@ -109,6 +109,36 @@ def wib(ts):
     return (dt.datetime.fromtimestamp(ts, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%d %b %H:%M WIB")
 
 
+# Label conviction (hasil backtest 2020-2026, divalidasi in-sample 2020-2023 vs out-of-sample 2024-2026).
+# Skor = jarak SL % (kecil +1, besar -1) + jarak harga dari EMA200 dalam ATR (dekat +1, jauh -1)
+#      + peringkat market cap (top 7 +1, di luar 15 besar -1) + tren BTC (searah +1, berlawanan -1).
+# HIGH skor >= 2 · MEDIUM 0..1 · LOW <= -1. Semua sinyal tetap sah; label hanya kualitas historis setup.
+CONV_SL, CONV_EXT, CONV_RANK = (7.88, 12.63), (4.23, 5.55), (7, 15)
+
+def _regime(D, i):
+    C, EF, ES = D["C"][i], D["EF"][i], D["ES"][i]
+    return 1 if (C > ES and EF > ES) else -1 if (C < ES and EF < ES) else 0
+
+def conviction(data, coin, t, d, entry, sl):
+    """Label HIGH / MEDIUM / LOW untuk order di candle cek t. None jika data tidak cukup."""
+    import bisect
+    D = data.get(coin)
+    if not D:
+        return None
+    i = bisect.bisect_right(D["T"], t) - 1
+    if i < 0 or D["A"][i] <= 0:
+        return None
+    pts = lambda x, ab: 1 if x < ab[0] else -1 if x > ab[1] else 0
+    s = (pts(abs(entry - sl) / entry * 100, CONV_SL)
+         + pts(d * (D["C"][i] - D["ES"][i]) / D["A"][i], CONV_EXT)
+         + pts(COINS.index(coin), CONV_RANK))
+    B = data.get("BTC")
+    if B:
+        j = bisect.bisect_right(B["T"], t) - 1
+        if j >= 0:
+            s += _regime(B, j) * d
+    return "HIGH" if s >= 2 else "LOW" if s <= -1 else "MEDIUM"
+
 def safe_lev(entry, sl):
     """Leverage maksimal agar harga likuidasi (isolated) jauh di luar SL: <= 50% jarak likuidasi, maks 5x."""
     dist = abs(entry - sl) / entry
@@ -286,7 +316,7 @@ def make_notifier(ev, risk_pct, modal, priv=None):
         elif kind == "cancel":
             ev["cancel"].append((sym, k["reason"]))
         elif kind == "fill":
-            ev["fill"].append((sym, k["d"], k["entry"], k["sl"]))
+            ev["fill"].append((sym, k["d"], k["entry"], k["sl"], k.get("conv")))
         elif kind == "trail":
             ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"]))
         elif kind == "exit":
@@ -364,7 +394,15 @@ def main():
             fcache[key] = fetch_funding_avg(coin, t)
         return fcache[key]
     ev, priv = new_events(), []
-    eng = Engine(state, funding, make_notifier(ev, risk_pct, modal, priv))
+    base_notify = make_notifier(ev, risk_pct, modal, priv)
+    def notify(kind, coin, **k):
+        cs = state["coins"].setdefault(coin, {"pend": None, "pos": None})
+        if kind == "order":
+            cs["conv"] = conviction(data, coin, k["t"], k["d"], k["entry"], k["sl"])
+        elif kind == "fill":
+            k["conv"] = cs.get("conv")
+        base_notify(kind, coin, **k)
+    eng = Engine(state, funding, notify)
     if first_run:
         # Run pertama: bentuk order awal di candle cek terakhir agar langsung ada daftar order
         last_check = max(t for t in data["BTC"]["T"] if (t // 3600) % 24 in CHECK_HOURS_UTC)
@@ -401,7 +439,11 @@ def main():
     for sym, reason in ev["cancel"]:
         day["cancel"] = [c for c in day["cancel"] if c[0] != sym] + [[sym, reason]]
     state["day_log"] = day
-    pending = [(c + "USDT", v["pend"][0], v["pend"][1], v["pend"][2], safe_lev(v["pend"][1], v["pend"][2]))
+    for c in COINS:   # order lama tanpa label (dibuat sebelum fitur ini): beri label dari candle cek terakhir
+        v = state["coins"].get(c) or {}
+        if v.get("pend") and not v.get("conv") and c in data:
+            v["conv"] = conviction(data, c, newest, *v["pend"])
+    pending = [(c + "USDT", v["pend"][0], v["pend"][1], v["pend"][2], safe_lev(v["pend"][1], v["pend"][2]), v.get("conv"))
                for c in COINS for v in [state["coins"].get(c) or {}] if v.get("pend")]
     # Peringatan news: event USD berdampak tinggi dalam 3 jam ke depan, dikirim sekali per event.
     sent = state.get("news_sent", [])
