@@ -54,36 +54,53 @@ def _hasil(R):
     return "✅ untung"
 
 
-def signal_bubble(ev, t, fmt):
-    """ev: dict dengan list 'new', 'upd', 'cancel'. Return teks atau None jika kosong."""
+def signal_bubble(ev, t, fmt, pending, day):
+    """Satu bubble berisi SEMUA order yang belum terisi.
+    ev      : kejadian run ini ('new', 'upd', 'cancel'); bubble hanya dikirim jika ada perubahan.
+    pending : order aktif saat ini, list (sym, d, entry, sl, lev), urut peringkat market cap.
+    day     : catatan hari ini (WIB): {'new': [sym], 'upd': {sym: [entry_awal, sl_awal]}, 'cancel': [[sym, alasan]]}.
+    Kelompok: order baru hari ini, update order hari ini, order aktif lain (tidak berubah), dibatalkan hari ini."""
     if not (ev["new"] or ev["upd"] or ev["cancel"]):
         return None
-    L = [f"📡 <b>SINYAL CRYPTO FUTURES</b>", f"🕐 {_wib(t)}", BAR]
-    if ev["new"]:
-        L.append(f"🆕 <b>ORDER BARU</b> · {len(ev['new'])}")
+    new_today = set(day.get("new", []))
+    upd_today = day.get("upd", {})
+    baru = [p for p in pending if p[0] in new_today]
+    upd = [p for p in pending if p[0] not in new_today and p[0] in upd_today]
+    aktif = [p for p in pending if p[0] not in new_today and p[0] not in upd_today]
+    batal = [c for c in day.get("cancel", []) if c[0] not in {p[0] for p in pending}]
+
+    def order_rows(group, show_old=False):
         rows = []
-        for sym, d, e, sl, lev in ev["new"]:
-            rows += [f"{sym:<10}{'BUY STOP' if d == 1 else 'SELL STOP'}",
-                     f"  Entry : {fmt(e)}",
-                     f"  SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)",
-                     f"  Lev   : maks {lev}x", ""]
-        L.append(_pre(rows[:-1]))
-    if ev["upd"]:
-        if ev["new"]:
+        for sym, d, e, sl, lev in group:
+            rows.append(f"{sym:<10}{'BUY STOP' if d == 1 else 'SELL STOP'}")
+            if show_old:
+                oe, osl = upd_today[sym]
+                rows += [f"  Entry : {fmt(oe)} → {fmt(e)}",
+                         f"  SL    : {fmt(osl)} → {fmt(sl)}"]
+            else:
+                rows += [f"  Entry : {fmt(e)}",
+                         f"  SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)"]
+            rows += [f"  Lev   : maks {lev}x", ""]
+        return _pre(rows[:-1])
+
+    L = [f"📡 <b>SINYAL CRYPTO FUTURES</b>", f"🕐 {_wib(t)}", BAR,
+         f"📋 <b>ORDER BELUM TERISI</b> · {len(pending)} aktif"]
+    parts = []
+    if baru:
+        parts.append([f"🆕 <b>ORDER BARU</b> hari ini · {len(baru)}", order_rows(baru)])
+    if upd:
+        parts.append([f"♻️ <b>UPDATE ORDER</b> hari ini (harga entry berubah) · {len(upd)}", order_rows(upd, True)])
+    if aktif:
+        parts.append([f"⏳ <b>ORDER AKTIF</b> (tidak berubah) · {len(aktif)}", order_rows(aktif)])
+    if not pending:
+        parts.append(["<i>Tidak ada order aktif.</i>"])
+    if batal:
+        parts.append([f"❌ <b>DIBATALKAN</b> hari ini · {len(batal)}",
+                      _pre([f"{sym:<10}{reason}" for sym, reason in batal])])
+    for i, p in enumerate(parts):
+        if i:
             L.append(SUB)
-        L.append(f"♻️ <b>UPDATE ORDER</b> (belum terisi, harga entry berubah) · {len(ev['upd'])}")
-        rows = []
-        for sym, d, e, sl, oe, osl, lev in ev["upd"]:
-            rows += [f"{sym:<10}{'BUY STOP' if d == 1 else 'SELL STOP'}",
-                     f"  Entry : {fmt(oe)} → {fmt(e)}",
-                     f"  SL    : {fmt(osl)} → {fmt(sl)}",
-                     f"  Lev   : maks {lev}x", ""]
-        L.append(_pre(rows[:-1]))
-    if ev["cancel"]:
-        if ev["new"] or ev["upd"]:
-            L.append(SUB)
-        L.append(f"❌ <b>BATALKAN ORDER</b> · {len(ev['cancel'])}")
-        L.append(_pre([f"{sym:<10}{reason}" for sym, reason in ev["cancel"]]))
+        L += p
     L += [BAR,
           "📌 Order: <b>Stop Market</b> · SL reduce-only · <b>tanpa TP</b>",
           "📌 Margin <b>Isolated</b> · leverage ≤ angka Lev"]

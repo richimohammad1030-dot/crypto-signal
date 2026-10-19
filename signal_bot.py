@@ -366,7 +366,22 @@ def main():
             r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
             rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3]))
     send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"]
-    bubbles = [tpl.signal_bubble(ev, newest + 3600, fmt),
+    # Catatan order hari ini (WIB): order baru, update (harga awal hari ini), dan pembatalan.
+    today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)).date().isoformat()
+    day = state.get("day_log") or {}
+    if day.get("date") != today:
+        day = {"date": today, "new": [], "upd": {}, "cancel": []}
+    for sym, *_ in ev["new"]:
+        if sym not in day["new"]:
+            day["new"].append(sym)
+    for sym, d, e, sl, oe, osl, lev in ev["upd"]:
+        day["upd"].setdefault(sym, [oe, osl])           # simpan harga sebelum update pertama hari ini
+    for sym, reason in ev["cancel"]:
+        day["cancel"] = [c for c in day["cancel"] if c[0] != sym] + [[sym, reason]]
+    state["day_log"] = day
+    pending = [(c + "USDT", v["pend"][0], v["pend"][1], v["pend"][2], safe_lev(v["pend"][1], v["pend"][2]))
+               for c in COINS for v in [state["coins"].get(c) or {}] if v.get("pend")]
+    bubbles = [tpl.signal_bubble(ev, newest + 3600, fmt, pending, day),
                tpl.update_bubble(ev, rows, newest + 3600, fmt) if send_update else None]
     for b in bubbles:
         if b:
