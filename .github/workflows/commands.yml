@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: signal-bot        # sama dengan workflow sinyal agar state.json tidak bentrok
+  group: crypto-state      # sama dengan workflow sinyal crypto agar state.json tidak bentrok
   cancel-in-progress: false
 
 jobs:

@@ -312,6 +312,14 @@ def main():
         json.dump(state, open(STATE_FILE, "w"), indent=1)
         return
 
+    # Run ganda (cron-job.org + jadwal cadangan GitHub) untuk slot yang sama: jika candle H1 terakhir
+    # yang sudah close sudah diproses, berhenti di sini tanpa mengambil data 50 koin (hemat menit Actions).
+    latest_closed = int(time.time()) // 3600 * 3600 - 3600
+    if state.get("last_ts", 0) >= latest_closed and os.environ.get("FORCE") != "1":
+        json.dump(state, open(STATE_FILE, "w"), indent=1)
+        print("Candle terakhir sudah diproses oleh run sebelumnya, tidak ada yang baru.")
+        return
+
     # 2) Cek sinyal (setiap 4 jam)
     data = {}
     errors = []

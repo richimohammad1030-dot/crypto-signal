@@ -1,16 +1,18 @@
 name: Sinyal XAU Straddle
 
 on:
-  schedule:
-    # Senin-Jumat, setiap 2 jam dari 07:00 s.d. 23:00 WIB (UTC 00,02,...,16), 9 menit setelah candle H1 close
-    - cron: "9 0,2,4,6,8,10,12,14,16 * * 1-5"
+  # Pemicu UTAMA: cron-job.org memanggil workflow_dispatch Senin-Jumat 07:09 s.d. 23:09 WIB tiap 2 jam.
+  # Jadwal di bawah hanya CADANGAN jika cron-job.org gagal. Run ganda aman: bot hanya memproses
+  # candle yang belum diproses, jadi tidak ada pesan dobel.
   workflow_dispatch: {}
+  schedule:
+    - cron: "39 0,2,4,6,8,10,12,14,16 * * 1-5"
 
 permissions:
   contents: write
 
 concurrency:
-  group: signal-bot          # sama dengan workflow lain agar file state tidak bentrok
+  group: gold-state          # terpisah dari crypto agar run XAU tidak saling membatalkan dengan run crypto
   cancel-in-progress: false
 
 jobs:
