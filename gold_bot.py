@@ -20,7 +20,7 @@ SYM = "XAUUSD"
 LINE = "━━━━━━━━━━━━━━━━━━"
 
 sys.path.insert(0, HERE)
-from signal_bot import tg_send, http_json, atr          # pakai fungsi yang sama dengan bot crypto
+from signal_bot import tg_send, http_json, atr, upcoming_news          # pakai fungsi yang sama dengan bot crypto
 import commands
 
 
@@ -144,6 +144,18 @@ def main():
     t_last = rows[-1][0] + 3600
     # Maksimal 2 bubble: (1) SINYAL order/pembatalan, (2) UPDATE terisi/ditutup/posisi berjalan
     buf = []
+    # Peringatan news: event USD berdampak tinggi dalam 3 jam ke depan dan sebelum tutup 23:00 WIB
+    # (setelah itu bot tidak punya posisi/order). Dikirim sekali per event, sebelum bubble lain.
+    now = time.time()
+    w = dt.datetime.fromtimestamp(now, dt.timezone.utc) + dt.timedelta(hours=7)
+    close_ts = (w.replace(hour=23, minute=0, second=0, microsecond=0) - dt.timedelta(hours=7)).replace(tzinfo=dt.timezone.utc).timestamp()
+    sent = state.get("news_sent", [])
+    news = [n for n in upcoming_news(now) if n[0] <= close_ts and f"{n[0]}|{n[1]}" not in sent]
+    if news:
+        nb = gt.news_bubble(news, state.get("pos"), state.get("pend"), px, now)
+        buf.append(nb)
+        tg_send(nb, chat=target)
+        state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
     for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None),
               gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] else None):
         if b:

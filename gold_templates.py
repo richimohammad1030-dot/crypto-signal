@@ -109,6 +109,38 @@ def signal_bubble(ev, t, risk_pct, live_px=None):
     return "\n".join(L)
 
 
+def news_bubble(news, pos, pend, px, now):
+    """Peringatan event USD berdampak tinggi untuk XAU. news: list (t, judul, forecast, previous).
+    Netral: tidak menyuruh menutup posisi."""
+    L = ["⚠️ <b>PERINGATAN NEWS</b> · USD dampak tinggi", f"🕐 {_wib(now)}", BAR,
+         f"📅 <b>JADWAL</b> · {len(news)} event"]
+    rows = []
+    for t, title, fc, prev in news:
+        m = max(0, int(t - now) // 60)
+        rows.append(f"{_jam(t)} · {m // 60} jam {m % 60} mnt lagi" if m >= 60 else f"{_jam(t)} · {m} mnt lagi")
+        rows.append(f"  {title}")
+        info = " · ".join(x for x in (f"Forecast {fc}" if fc else "", f"Sebelumnya {prev}" if prev else "") if x)
+        if info:
+            rows.append(f"  {info}")
+        rows.append("")
+    L.append(_pre(rows[:-1]))
+    L.append(SUB)
+    if pos:
+        R = (px - pos["e"]) * pos["d"] / pos["r0"] if pos.get("r0") and px else 0.0
+        L.append(f"📂 <b>POSISI {SYM} · {'BUY' if pos['d'] == 1 else 'SELL'}</b> · {R:+.2f}R")
+        L.append(_pre([f"Entry : {fmt(pos['e'])}"] + ([f"Kini  : {fmt(px)}"] if px else []) +
+                      [f"SL    : {fmt(pos['sl'])}", f"TP    : {fmt(pos['tp'])}"]))
+    elif pend:
+        L.append(f"⏳ <b>ORDER OCO AKTIF</b> · bisa terisi saat news")
+        L.append(_pre([f"BUY STOP  : {fmt(pend['buy'][0])}", f"SELL STOP : {fmt(pend['sell'][0])}"]))
+    else:
+        L.append("📂 Tidak ada posisi atau order aktif.")
+    L += [BAR,
+          "ℹ️ Emas biasanya bergerak tajam saat news USD. Pastikan <b>SL sudah terpasang</b>.",
+          "Keputusan menutup posisi atau membatalkan order ada di tangan masing-masing."]
+    return "\n".join(L)
+
+
 def update_bubble(ev, pos, px, t):
     if not (ev["fill"] or ev["exit"] or pos):
         return None
