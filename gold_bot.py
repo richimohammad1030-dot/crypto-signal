@@ -149,10 +149,18 @@ def main():
         if b:
             buf.append(b)
             tg_send(b, chat=target)
-    # rekap otomatis: mingguan (Senin, cek pertama) & bulanan (tanggal 1)
+    # rekap otomatis mingguan: Jumat malam setelah candle tutup 23:00 WIB diproses (hasil Senin-Jumat lengkap).
+    # Cadangan: jika rekap Jumat terlewat, dikirim di run pertama hari Senin. Bulanan tetap tanggal 1.
     now_wib = dt.datetime.now(commands.WIB)
-    wk, _ = commands.period_bounds("minggu", now_wib, previous=True)
-    if now_wib.weekday() == 0 and state.get("recap_week") != wk.isoformat():
+    wk, _ = commands.period_bounds("minggu", now_wib, previous=True)        # minggu lalu
+    this_wk, _ = commands.period_bounds("minggu", now_wib)                   # minggu ini
+    fri_close = this_wk + dt.timedelta(days=4, hours=22)                     # candle Jumat 22:00-23:00 WIB
+    if (now_wib.weekday() == 4 and state.get("last_ts", 0) >= fri_close.timestamp()
+            and state.get("recap_week") != this_wk.isoformat()):
+        # now = Senin depan + previous=True -> periode minggu ini, tanpa label "(berjalan)"
+        tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib + dt.timedelta(days=3), fmt).replace("REKAP", "REKAP XAU"), chat=target)
+        state["recap_week"] = this_wk.isoformat()
+    elif now_wib.weekday() == 0 and state.get("recap_week") != wk.isoformat():
         tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt).replace("REKAP", "REKAP XAU"), chat=target)
         state["recap_week"] = wk.isoformat()
     mo, _ = commands.period_bounds("bulan", now_wib, previous=True)
