@@ -320,7 +320,7 @@ def make_notifier(ev, risk_pct, modal, priv=None):
         elif kind == "trail":
             ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"]))
         elif kind == "exit":
-            ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"]))
+            ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k.get("conv")))
     return notify
 
 # ---------------------------------------------------------------- main
@@ -399,7 +399,7 @@ def main():
         cs = state["coins"].setdefault(coin, {"pend": None, "pos": None})
         if kind == "order":
             cs["conv"] = conviction(data, coin, k["t"], k["d"], k["entry"], k["sl"])
-        elif kind == "fill":
+        elif kind in ("fill", "exit"):
             k["conv"] = cs.get("conv")
         base_notify(kind, coin, **k)
     eng = Engine(state, funding, notify)
@@ -424,7 +424,9 @@ def main():
         p = v.get("pos")
         if p and c in data:
             r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
-            rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3]))
+            if not v.get("conv"):   # posisi lama tanpa label: hitung dari SL awal di candle terisi
+                v["conv"] = conviction(data, c, p[3], p[0], p[1], p[1] - p[0] * r0)
+            rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3], v.get("conv")))
     send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"]
     # Catatan order hari ini (WIB): order baru, update (harga awal hari ini), dan pembatalan.
     today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)).date().isoformat()

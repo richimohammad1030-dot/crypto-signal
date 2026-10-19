@@ -138,15 +138,15 @@ def update_bubble(ev, open_rows, t, fmt):
     if ev["exit"]:
         sep(); L.append(f"🏁 <b>POSISI DITUTUP</b>")
         L.append(_pre([f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} {_hasil(R)}\n  {fmt(e)} → {fmt(ex)}  {R:+.2f}R · {_durasi(t0, t1)}"
-                       for sym, d, e, ex, R, t0, t1 in ev["exit"]]))
+                       + (f"\n{_conv(c)}" if _conv(c) else "") for sym, d, e, ex, R, t0, t1, c in ev["exit"]]))
     if open_rows:
         sep()
         tot = 0.0
         rows = []
-        for sym, d, e, sl, r0, px, t0 in open_rows:
+        for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            rows += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {_durasi(t0, t)}",
+            rows += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {_durasi(t0, t)}"] + ([_conv(conv)] if _conv(conv) else []) + [
                      f"  Entry : {fmt(e)}",
                      f"  Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
                      f"  Hasil : {R:+.2f}R berjalan",
@@ -175,10 +175,10 @@ def news_bubble(news, open_rows, n_pend, now, fmt):
     L.append(SUB)
     if open_rows:
         tot, prs = 0.0, []
-        for sym, d, e, sl, r0, px, t0 in open_rows:
+        for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            prs += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {R:+.2f}R",
+            prs += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {R:+.2f}R" + (f" · {CONV[conv]}" if conv in CONV else ""),
                     f"  SL    : {fmt(sl)} · {_sl_tag(d, e, sl, r0)}"]
         L.append(f"📂 <b>POSISI TERBUKA</b> · {len(open_rows)} · Σ <b>{tot:+.2f}R</b>")
         L.append(_pre(prs))
