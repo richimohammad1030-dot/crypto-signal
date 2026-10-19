@@ -55,6 +55,28 @@ def fetch_klines(coin, n=1000):
     dedup = {r[0]: r for r in out}
     return [dedup[k] for k in sorted(dedup)]
 
+NEWS_URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"   # kalender ekonomi ForexFactory (publik)
+NEWS_WINDOW_H = 3   # peringatan untuk event dalam 3 jam ke depan (bot berjalan tiap 2 jam)
+
+def upcoming_news(now_ts, window_h=NEWS_WINDOW_H):
+    """Event USD berdampak tinggi dalam window_h jam ke depan: list (t, judul, forecast, previous). [] jika gagal."""
+    try:
+        d = http_json(NEWS_URL, tries=2)
+    except Exception as e:
+        print("Kalender news gagal diambil:", e)
+        return []
+    out = []
+    for e in d:
+        if e.get("country") != "USD" or e.get("impact") != "High":
+            continue
+        try:
+            t = dt.datetime.fromisoformat(e["date"]).timestamp()
+        except Exception:
+            continue
+        if now_ts < t <= now_ts + window_h * 3600:
+            out.append((int(t), e.get("title", ""), e.get("forecast", ""), e.get("previous", "")))
+    return sorted(out)
+
 def fetch_funding_avg(coin, t_end):
     """Rata-rata funding 72 jam terakhir (Hyperliquid, per jam). None jika tidak tersedia."""
     name = HL_NAME.get(coin, coin)
@@ -381,6 +403,15 @@ def main():
     state["day_log"] = day
     pending = [(c + "USDT", v["pend"][0], v["pend"][1], v["pend"][2], safe_lev(v["pend"][1], v["pend"][2]))
                for c in COINS for v in [state["coins"].get(c) or {}] if v.get("pend")]
+    # Peringatan news: event USD berdampak tinggi dalam 3 jam ke depan, dikirim sekali per event.
+    sent = state.get("news_sent", [])
+    news = [n for n in upcoming_news(time.time()) if f"{n[0]}|{n[1]}" not in sent]
+    if news:
+        nb = tpl.news_bubble(news, rows, len(pending), time.time(), fmt)
+        buf.append(nb)
+        for part in tpl.split_message(nb):
+            tg_send(part, chat=target)
+        state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
     bubbles = [tpl.signal_bubble(ev, newest + 3600, fmt, pending, day),
                tpl.update_bubble(ev, rows, newest + 3600, fmt) if send_update else None]
     for b in bubbles:

@@ -146,6 +146,41 @@ def update_bubble(ev, open_rows, t, fmt):
     return "\n".join(L)
 
 
+def news_bubble(news, open_rows, n_pend, now, fmt):
+    """Peringatan event USD berdampak tinggi. news: list (t, judul, forecast, previous).
+    open_rows: (sym, d, entry, sl, r0, harga, t0). Netral: tidak menyuruh menutup posisi."""
+    L = ["⚠️ <b>PERINGATAN NEWS</b> · USD dampak tinggi", f"🕐 {_wib(now)}", BAR,
+         f"📅 <b>JADWAL</b> · {len(news)} event"]
+    rows = []
+    for t, title, fc, prev in news:
+        m = max(0, int(t - now) // 60)
+        rows.append(f"{_wib(t).split(' · ')[1]} · {m // 60} jam {m % 60} mnt lagi" if m >= 60 else f"{_wib(t).split(' · ')[1]} · {m} mnt lagi")
+        rows.append(f"  {title}")
+        info = " · ".join(x for x in (f"Forecast {fc}" if fc else "", f"Sebelumnya {prev}" if prev else "") if x)
+        if info:
+            rows.append(f"  {info}")
+        rows.append("")
+    L.append(_pre(rows[:-1]))
+    L.append(SUB)
+    if open_rows:
+        tot, prs = 0.0, []
+        for sym, d, e, sl, r0, px, t0 in open_rows:
+            R = (px - e) * d / r0 if r0 else 0.0
+            tot += R
+            prs += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {R:+.2f}R",
+                    f"  SL    : {fmt(sl)} · {_sl_tag(d, e, sl, r0)}"]
+        L.append(f"📂 <b>POSISI TERBUKA</b> · {len(open_rows)} · Σ <b>{tot:+.2f}R</b>")
+        L.append(_pre(prs))
+    else:
+        L.append("📂 Tidak ada posisi terbuka.")
+    if n_pend:
+        L.append(f"⏳ Order pending: <b>{n_pend}</b> (bisa terisi saat news)")
+    L += [BAR,
+          "ℹ️ Volatilitas tinggi diperkirakan. Pastikan <b>SL sudah terpasang</b> di exchange.",
+          "Keputusan menutup posisi atau membatalkan order ada di tangan masing-masing."]
+    return "\n".join(L)
+
+
 def split_message(text, limit=3900):
     """Pecah pesan panjang di batas blok agar tidak melebihi batas Telegram (4096)."""
     if len(text) <= limit:
