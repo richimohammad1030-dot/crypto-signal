@@ -1,0 +1,19 @@
+<b>LAPORAN ANGKA BULANAN</b>
+Periode 2026-09
+────────────────────
+
+<b>CRYPTO</b>
+────────────────────
+Live: 1 trade · -0.88R
+Backtest periode sama: 0 trade
+Backtest total: 2222 trade · +0.32R/trade · DD terburuk 25.7R
+Label conviction: masih valid
+ML: ML belum lebih baik dari label sekarang.
+
+<b>XAU</b>
+────────────────────
+Live: 1 trade · -1.00R
+Backtest periode sama: 1 trade · -1.00R
+Backtest total: 425 trade · +0.18R/trade · DD terburuk 14.1R
+
+Laporan lengkap: riset/laporan/angka-2026-09.md
