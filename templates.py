@@ -39,11 +39,15 @@ def _conv(c):
 CONV_TXT = {"HIGH": "High Conviction", "MEDIUM": "Medium Conviction", "LOW": "Low Conviction"}
 
 
+CONV_SHORT = {"HIGH": "High", "MEDIUM": "Medium", "LOW": "Low"}
+
+
 def _head(conv, sym, right):
-    """Judul koin: titik warna + simbol + arah, lalu conviction di baris tepat di bawahnya (rata dengan isi)."""
+    """Judul koin: titik warna + simbol + arah + conviction di kolom kanan yang sejajar untuk semua koin."""
     dot = DOT.get(conv)
-    line = f"{dot} {sym:<10}{right}" if dot else f"   {sym:<10}{right}"
-    return line + (f"\n   {CONV_TXT[conv]}" if conv in CONV_TXT else "")
+    if not dot:
+        return f"   {sym:<10}{right}"
+    return f"{dot} {sym:<10}{right:<12}{CONV_SHORT[conv]}"
 
 
 def _pre(lines):
@@ -196,7 +200,7 @@ def news_bubble(news, open_rows, n_pend, now, fmt):
         for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            prs += [_head(conv, sym, f"{'BUY' if d == 1 else 'SELL'} · {R:+.2f}R"), f"   SL    : {fmt(sl)}"]
+            prs += [_head(conv, sym, "BUY" if d == 1 else "SELL"), f"   Hasil : {R:+.2f}R", f"   SL    : {fmt(sl)}"]
         _sec(L, "POSISI TERBUKA", len(open_rows)); L.append(f"Total berjalan: <b>{tot:+.2f}R</b>")
         L.append(_pre(prs))
     else:
