@@ -40,10 +40,10 @@ CONV_TXT = {"HIGH": "High Conviction", "MEDIUM": "Medium Conviction", "LOW": "Lo
 
 
 def _head(conv, sym, right):
-    """Baris judul koin: titik label + simbol + arah + keterangan conviction."""
+    """Judul koin: titik warna + simbol + arah, lalu conviction di baris tepat di bawahnya (rata dengan isi)."""
     dot = DOT.get(conv)
-    txt = f"{right} · {CONV_TXT[conv]}" if conv in CONV_TXT else right
-    return f"{dot} {sym:<10}{txt}" if dot else f"   {sym:<10}{txt}"
+    line = f"{dot} {sym:<10}{right}" if dot else f"   {sym:<10}{right}"
+    return line + (f"\n   {CONV_TXT[conv]}" if conv in CONV_TXT else "")
 
 
 def _pre(lines):
@@ -141,7 +141,7 @@ def update_bubble(ev, open_rows, t, fmt):
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
             rows += [_head(conv, sym, "BUY" if d == 1 else "SELL"),
-                     f"   Umur  : {_durasi(t0, t)}",
+                     f"   Durasi: {_durasi(t0, t)}",
                      f"   Entry : {fmt(e)}",
                      f"   Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
                      f"   Hasil : {R:+.2f}R",
@@ -170,7 +170,7 @@ def update_bubble(ev, open_rows, t, fmt):
         for sym, d, e, ex, R, t0, t1, c in ev["exit"]:
             rows += [_head(c, sym, "BUY" if d == 1 else "SELL"),
                      f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_hasil(R)}",
-                     f"   Umur  : {_durasi(t0, t1)}", ""]
+                     f"   Durasi: {_durasi(t0, t1)}", ""]
         L.append(_pre(rows[:-1]))
     return "\n".join(L)
 
