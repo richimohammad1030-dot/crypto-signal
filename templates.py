@@ -36,10 +36,14 @@ def _conv(c):
     return f"  Label : {CONV[c]}" if c in CONV else None
 
 
+CONV_TXT = {"HIGH": "High Conviction", "MEDIUM": "Medium Conviction", "LOW": "Low Conviction"}
+
+
 def _head(conv, sym, right):
-    """Baris judul koin: titik label (jika ada) + simbol + keterangan, rata kiri."""
+    """Baris judul koin: titik label + simbol + arah + keterangan conviction."""
     dot = DOT.get(conv)
-    return f"{dot} {sym:<10}{right}" if dot else f"   {sym:<10}{right}"
+    txt = f"{right} · {CONV_TXT[conv]}" if conv in CONV_TXT else right
+    return f"{dot} {sym:<10}{txt}" if dot else f"   {sym:<10}{txt}"
 
 
 def _pre(lines):
@@ -77,7 +81,7 @@ def _title(name, t):
 def _sec(L, name, n=None):
     if L and L[-1] not in ("", LINE):
         L.append("")
-    L.append(f"<b>{name}</b>" + (f" <b>({n})</b>" if n is not None else ""))
+    L.append(f"<b>{name}</b>")
     L.append(LINE)
 
 
@@ -110,20 +114,17 @@ def signal_bubble(ev, t, fmt, pending, day):
         return _pre(rows[:-1])
 
     L = _title("SINYAL CRYPTO FUTURES", t)
-    L.append(f"Total order belum terisi: <b>{len(pending)}</b>")
     if baru:
         _sec(L, "ORDER BARU", len(baru)); L.append(order_rows(baru))
     if upd:
         _sec(L, "UPDATE ORDER", len(upd)); L.append("Harga order berubah, ganti order lama di exchange."); L.append(order_rows(upd, True))
     if aktif:
         _sec(L, "ORDER MENUNGGU", len(aktif))
-        L.append("Order dari sinyal sebelumnya yang belum tersentuh harga. Tidak ada perubahan, biarkan tetap terpasang.")
+        L.append(f"Total order belum terisi: <b>{len(pending)}</b>")
         L.append(order_rows(aktif))
     if batal:
         _sec(L, "DIBATALKAN HARI INI", len(batal)); L.append("Hapus order ini di exchange.")
         L.append(_pre([f"   {sym:<10}{reason}" for sym, reason in batal]))
-    L += ["", LINE, "Cara order: Bersyarat, Stop = Entry, pilih Market, centang TP/SL dan isi SL saja (tanpa TP). "
-          "Margin Isolated, leverage sesuai Lev.", LEGEND]
     return "\n".join(L)
 
 
@@ -139,7 +140,8 @@ def update_bubble(ev, open_rows, t, fmt):
         for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            rows += [_head(conv, sym, f"{'BUY' if d == 1 else 'SELL'} · {_durasi(t0, t)}"),
+            rows += [_head(conv, sym, "BUY" if d == 1 else "SELL"),
+                     f"   Umur  : {_durasi(t0, t)}",
                      f"   Entry : {fmt(e)}",
                      f"   Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
                      f"   Hasil : {R:+.2f}R",
@@ -158,19 +160,18 @@ def update_bubble(ev, open_rows, t, fmt):
         _sec(L, "GESER SL", len(ev["trail"])); L.append("Ubah SL di exchange ke angka baru.")
         rows = []
         for sym, d, e, old, sl, r0, c in ev["trail"]:
-            why = "SL turun ke harga tertinggi 3 hari terakhir" if d == -1 else "SL naik ke harga terendah 3 hari terakhir"
+            why = "ikut harga tertinggi 3 hari" if d == -1 else "ikut harga terendah 3 hari"
             rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   SL    : {fmt(old)} → {fmt(sl)}",
                      f"   Status: {_sl_tag(d, e, sl, r0)}", f"   Alasan: {why}", ""]
         L.append(_pre(rows[:-1]))
-        L.append("SL mengikuti harga agar risiko makin kecil atau profit terkunci. SL tidak pernah dijauhkan.")
     if ev["exit"]:
         _sec(L, "POSISI DITUTUP", len(ev["exit"]))
         rows = []
         for sym, d, e, ex, R, t0, t1, c in ev["exit"]:
-            rows += [_head(c, sym, f"{'BUY' if d == 1 else 'SELL'} · {_hasil(R)}"),
-                     f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_durasi(t0, t1)}", ""]
+            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"),
+                     f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_hasil(R)}",
+                     f"   Umur  : {_durasi(t0, t1)}", ""]
         L.append(_pre(rows[:-1]))
-    L += ["", LINE, LEGEND]
     return "\n".join(L)
 
 
