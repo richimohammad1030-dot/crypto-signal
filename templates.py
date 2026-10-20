@@ -7,8 +7,6 @@ Bagian monospace (<pre>) membuat angka sejajar dan mudah dibaca.
 import datetime as dt
 import html
 
-BAR = "━━━━━━━━━━━━━━━━━━━━"
-SUB = "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"
 
 
 BULAN = ["", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
@@ -30,10 +28,18 @@ def _pct(a, b):
 
 
 CONV = {"HIGH": "🟢 HIGH", "MEDIUM": "🟡 MEDIUM", "LOW": "🔴 LOW"}
+DOT = {"HIGH": "🟢", "MEDIUM": "🟡", "LOW": "🔴"}
+LEGEND = "Label: 🟢 HIGH · 🟡 MEDIUM · 🔴 LOW (kualitas historis setup)"
 
 
 def _conv(c):
     return f"  Label : {CONV[c]}" if c in CONV else None
+
+
+def _head(conv, sym, right):
+    """Baris judul koin: titik label (jika ada) + simbol + keterangan, rata kiri."""
+    dot = DOT.get(conv)
+    return f"{dot} {sym:<10}{right}" if dot else f"   {sym:<10}{right}"
 
 
 def _pre(lines):
@@ -43,30 +49,43 @@ def _pre(lines):
 def _sl_tag(d, e, sl, r0):
     lock = (sl - e) * d / r0 if r0 else 0.0
     if lock <= -0.9:
-        return f"SL awal ({lock:+.2f}R)"
+        return "risiko penuh -1R"
     if lock < -0.15:
-        return f"SL ketat ({lock:+.2f}R)"
+        return f"risiko {lock:.2f}R"
     if lock < 0.15:
-        return f"SL+ impas ({lock:+.2f}R)"
-    return f"SL+ terkunci {lock:+.2f}R"
+        return "impas"
+    return f"profit terkunci {lock:+.2f}R"
 
 
 def _hasil(R):
     if R <= -0.9:
-        return "❌ SL"
+        return "Kena SL"
     if R < -0.15:
-        return "⚠️ rugi"
+        return "Rugi"
     if R < 0.15:
-        return "🟡 impas"
-    return "✅ untung"
+        return "Impas"
+    return "Untung"
+
+
+LINE = "────────────────────"
+
+
+def _title(name, t):
+    return [f"<b>{name}</b>", _wib(t), LINE]
+
+
+def _sec(L, name, n=None):
+    if L and L[-1] not in ("", LINE):
+        L.append("")
+    L.append(f"<b>{name}</b>" + (f" <b>({n})</b>" if n is not None else ""))
+    L.append(LINE)
 
 
 def signal_bubble(ev, t, fmt, pending, day):
     """Satu bubble berisi SEMUA order yang belum terisi.
     ev      : kejadian run ini ('new', 'upd', 'cancel'); bubble hanya dikirim jika ada perubahan.
-    pending : order aktif saat ini, list (sym, d, entry, sl, lev), urut peringkat market cap.
-    day     : catatan hari ini (WIB): {'new': [sym], 'upd': {sym: [entry_awal, sl_awal]}, 'cancel': [[sym, alasan]]}.
-    Kelompok: order baru hari ini, update order hari ini, order aktif lain (tidak berubah), dibatalkan hari ini."""
+    pending : order aktif saat ini, list (sym, d, entry, sl, lev, label), urut peringkat market cap.
+    day     : catatan hari ini (WIB): {'new': [sym], 'upd': {sym: [entry_awal, sl_awal]}, 'cancel': [[sym, alasan]]}."""
     if not (ev["new"] or ev["upd"] or ev["cancel"]):
         return None
     new_today = set(day.get("new", []))
@@ -79,115 +98,111 @@ def signal_bubble(ev, t, fmt, pending, day):
     def order_rows(group, show_old=False):
         rows = []
         for sym, d, e, sl, lev, conv in group:
-            rows.append(f"{sym:<10}{'BUY STOP' if d == 1 else 'SELL STOP'}")
-            if _conv(conv):
-                rows.append(_conv(conv))
+            rows.append(_head(conv, sym, "BUY STOP" if d == 1 else "SELL STOP"))
             if show_old:
                 oe, osl = upd_today[sym]
-                rows += [f"  Entry : {fmt(oe)} → {fmt(e)}",
-                         f"  SL    : {fmt(osl)} → {fmt(sl)}"]
+                rows += [f"   Entry : {fmt(oe)} → {fmt(e)}",
+                         f"   SL    : {fmt(osl)} → {fmt(sl)}"]
             else:
-                rows += [f"  Entry : {fmt(e)}",
-                         f"  SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)"]
-            rows += [f"  Lev   : maks {lev}x", ""]
+                rows += [f"   Entry : {fmt(e)}",
+                         f"   SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)"]
+            rows += [f"   Lev   : {lev}x", ""]
         return _pre(rows[:-1])
 
-    L = [f"📡 <b>SINYAL CRYPTO FUTURES</b>", f"🕐 {_wib(t)}", BAR,
-         f"📋 <b>ORDER BELUM TERISI</b> · {len(pending)} aktif"]
-    parts = []
+    L = _title("SINYAL CRYPTO FUTURES", t)
+    L.append(f"Total order belum terisi: <b>{len(pending)}</b>")
     if baru:
-        parts.append([f"🆕 <b>ORDER BARU</b> hari ini · {len(baru)}", order_rows(baru)])
+        _sec(L, "ORDER BARU", len(baru)); L.append(order_rows(baru))
     if upd:
-        parts.append([f"♻️ <b>UPDATE ORDER</b> hari ini (harga entry berubah) · {len(upd)}", order_rows(upd, True)])
+        _sec(L, "UPDATE ORDER", len(upd)); L.append("Harga order berubah, ganti order lama di exchange."); L.append(order_rows(upd, True))
     if aktif:
-        parts.append([f"⏳ <b>ORDER AKTIF</b> (tidak berubah) · {len(aktif)}", order_rows(aktif)])
-    if not pending:
-        parts.append(["<i>Tidak ada order aktif.</i>"])
+        _sec(L, "ORDER MENUNGGU", len(aktif))
+        L.append("Order dari sinyal sebelumnya yang belum tersentuh harga. Tidak ada perubahan, biarkan tetap terpasang.")
+        L.append(order_rows(aktif))
     if batal:
-        parts.append([f"❌ <b>DIBATALKAN</b> hari ini · {len(batal)}",
-                      _pre([f"{sym:<10}{reason}" for sym, reason in batal])])
-    for i, p in enumerate(parts):
-        if i:
-            L.append(SUB)
-        L += p
-    L += [BAR,
-          "📌 Order: <b>Stop Market</b> · SL reduce-only · <b>tanpa TP</b>",
-          "📌 Margin <b>Isolated</b> · leverage ≤ angka Lev",
-          "🏷 Label = kualitas historis setup (backtest 2020–2026). Semua sinyal tetap sah."]
+        _sec(L, "DIBATALKAN HARI INI", len(batal)); L.append("Hapus order ini di exchange.")
+        L.append(_pre([f"   {sym:<10}{reason}" for sym, reason in batal]))
+    L += ["", LINE, "Cara order: Bersyarat, Stop = Entry, pilih Market, centang TP/SL dan isi SL saja (tanpa TP). "
+          "Margin Isolated, leverage sesuai Lev.", LEGEND]
     return "\n".join(L)
 
 
 def update_bubble(ev, open_rows, t, fmt):
-    """ev: list 'fill', 'trail', 'exit'. open_rows: (sym, d, entry, sl, r0, harga, t0). Return teks atau None."""
+    """Urutan: posisi terbuka, terisi, geser SL, posisi ditutup.
+    ev: list 'fill', 'trail', 'exit'. open_rows: (sym, d, entry, sl, r0, harga, t0, label). Return teks atau None."""
     if not (ev["fill"] or ev["trail"] or ev["exit"] or open_rows):
         return None
-    L = [f"📊 <b>UPDATE POSISI</b>", f"🕐 {_wib(t)}", BAR]
-    first = True
-    def sep():
-        nonlocal first
-        if not first:
-            L.append(SUB)
-        first = False
-    if ev["fill"]:
-        sep(); L.append(f"✅ <b>TERISI</b> · pastikan SL terpasang")
-        L.append(_pre([f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} @ {fmt(e)}\n  SL    : {fmt(sl)}" + (f"\n{_conv(c)}" if _conv(c) else "")
-                       for sym, d, e, sl, c in ev["fill"]]))
-    if ev["trail"]:
-        sep(); L.append(f"🔁 <b>GESER SL</b> · ubah SL di exchange")
-        L.append(_pre([f"{sym:<10}{fmt(old)} → {fmt(sl)}\n  {_sl_tag(d, e, sl, r0)}" for sym, d, e, old, sl, r0 in ev["trail"]]))
-    if ev["exit"]:
-        sep(); L.append(f"🏁 <b>POSISI DITUTUP</b>")
-        L.append(_pre([f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} {_hasil(R)}\n  {fmt(e)} → {fmt(ex)}  {R:+.2f}R · {_durasi(t0, t1)}"
-                       + (f"\n{_conv(c)}" if _conv(c) else "") for sym, d, e, ex, R, t0, t1, c in ev["exit"]]))
+    L = _title("POSISI CRYPTO FUTURES", t)
     if open_rows:
-        sep()
         tot = 0.0
         rows = []
         for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            rows += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {_durasi(t0, t)}"] + ([_conv(conv)] if _conv(conv) else []) + [
-                     f"  Entry : {fmt(e)}",
-                     f"  Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
-                     f"  Hasil : {R:+.2f}R berjalan",
-                     f"  SL    : {fmt(sl)} · {_sl_tag(d, e, sl, r0)}", ""]
-        L.append(f"📂 <b>POSISI TERBUKA</b> · {len(open_rows)} · Σ <b>{tot:+.2f}R</b>")
+            rows += [_head(conv, sym, f"{'BUY' if d == 1 else 'SELL'} · {_durasi(t0, t)}"),
+                     f"   Entry : {fmt(e)}",
+                     f"   Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
+                     f"   Hasil : {R:+.2f}R",
+                     f"   SL    : {fmt(sl)}  ({_sl_tag(d, e, sl, r0)})", ""]
+        _sec(L, "POSISI TERBUKA", len(open_rows)); L.append(f"Total berjalan: <b>{tot:+.2f}R</b>")
         L.append(_pre(rows[:-1]))
-    L.append(BAR)
+    else:
+        _sec(L, "POSISI TERBUKA"); L.append("Tidak ada posisi terbuka.")
+    if ev["fill"]:
+        _sec(L, "ORDER TERISI", len(ev["fill"])); L.append("Order sudah menjadi posisi. Pastikan SL sudah terpasang.")
+        rows = []
+        for sym, d, e, sl, c in ev["fill"]:
+            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   Entry : {fmt(e)}", f"   SL    : {fmt(sl)}", ""]
+        L.append(_pre(rows[:-1]))
+    if ev["trail"]:
+        _sec(L, "GESER SL", len(ev["trail"])); L.append("Ubah SL di exchange ke angka baru.")
+        rows = []
+        for sym, d, e, old, sl, r0, c in ev["trail"]:
+            why = "SL turun ke harga tertinggi 3 hari terakhir" if d == -1 else "SL naik ke harga terendah 3 hari terakhir"
+            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   SL    : {fmt(old)} → {fmt(sl)}",
+                     f"   Status: {_sl_tag(d, e, sl, r0)}", f"   Alasan: {why}", ""]
+        L.append(_pre(rows[:-1]))
+        L.append("SL mengikuti harga agar risiko makin kecil atau profit terkunci. SL tidak pernah dijauhkan.")
+    if ev["exit"]:
+        _sec(L, "POSISI DITUTUP", len(ev["exit"]))
+        rows = []
+        for sym, d, e, ex, R, t0, t1, c in ev["exit"]:
+            rows += [_head(c, sym, f"{'BUY' if d == 1 else 'SELL'} · {_hasil(R)}"),
+                     f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_durasi(t0, t1)}", ""]
+        L.append(_pre(rows[:-1]))
+    L += ["", LINE, LEGEND]
     return "\n".join(L)
 
 
 def news_bubble(news, open_rows, n_pend, now, fmt):
     """Peringatan event USD berdampak tinggi. news: list (t, judul, forecast, previous).
-    open_rows: (sym, d, entry, sl, r0, harga, t0). Netral: tidak menyuruh menutup posisi."""
-    L = ["⚠️ <b>PERINGATAN NEWS</b> · USD dampak tinggi", f"🕐 {_wib(now)}", BAR,
-         f"📅 <b>JADWAL</b> · {len(news)} event"]
+    open_rows: (sym, d, entry, sl, r0, harga, t0, label). Netral: tidak menyuruh menutup posisi."""
+    L = _title("PERINGATAN NEWS USD", now)
+    _sec(L, "JADWAL", len(news))
     rows = []
     for t, title, fc, prev in news:
         m = max(0, int(t - now) // 60)
-        rows.append(f"{_wib(t).split(' · ')[1]} · {m // 60} jam {m % 60} mnt lagi" if m >= 60 else f"{_wib(t).split(' · ')[1]} · {m} mnt lagi")
-        rows.append(f"  {title}")
+        jam = _wib(t).split(" · ")[1]
+        rows.append(f"   {jam} · {m // 60} jam {m % 60} mnt lagi" if m >= 60 else f"   {jam} · {m} mnt lagi")
+        rows.append(f"   {title}")
         info = " · ".join(x for x in (f"Forecast {fc}" if fc else "", f"Sebelumnya {prev}" if prev else "") if x)
         if info:
-            rows.append(f"  {info}")
+            rows.append(f"   {info}")
         rows.append("")
     L.append(_pre(rows[:-1]))
-    L.append(SUB)
     if open_rows:
         tot, prs = 0.0, []
         for sym, d, e, sl, r0, px, t0, conv in open_rows:
             R = (px - e) * d / r0 if r0 else 0.0
             tot += R
-            prs += [f"{sym:<10}{'BUY ' if d == 1 else 'SELL'} · {R:+.2f}R" + (f" · {CONV[conv]}" if conv in CONV else ""),
-                    f"  SL    : {fmt(sl)} · {_sl_tag(d, e, sl, r0)}"]
-        L.append(f"📂 <b>POSISI TERBUKA</b> · {len(open_rows)} · Σ <b>{tot:+.2f}R</b>")
+            prs += [_head(conv, sym, f"{'BUY' if d == 1 else 'SELL'} · {R:+.2f}R"), f"   SL    : {fmt(sl)}"]
+        _sec(L, "POSISI TERBUKA", len(open_rows)); L.append(f"Total berjalan: <b>{tot:+.2f}R</b>")
         L.append(_pre(prs))
     else:
-        L.append("📂 Tidak ada posisi terbuka.")
+        _sec(L, "POSISI TERBUKA"); L.append("Tidak ada.")
     if n_pend:
-        L.append(f"⏳ Order pending: <b>{n_pend}</b> (bisa terisi saat news)")
-    L += [BAR,
-          "ℹ️ Volatilitas tinggi diperkirakan. Pastikan <b>SL sudah terpasang</b> di exchange.",
+        L.append(f"Order belum terisi: <b>{n_pend}</b> (bisa terisi saat news)")
+    L += ["", LINE, "Volatilitas tinggi diperkirakan. Pastikan SL sudah terpasang. "
           "Keputusan menutup posisi atau membatalkan order ada di tangan masing-masing."]
     return "\n".join(L)
 
