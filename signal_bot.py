@@ -318,7 +318,7 @@ def make_notifier(ev, risk_pct, modal, priv=None):
         elif kind == "fill":
             ev["fill"].append((sym, k["d"], k["entry"], k["sl"], k.get("conv")))
         elif kind == "trail":
-            ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"]))
+            ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"], k.get("conv")))
         elif kind == "exit":
             ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k.get("conv")))
     return notify
@@ -399,7 +399,7 @@ def main():
         cs = state["coins"].setdefault(coin, {"pend": None, "pos": None})
         if kind == "order":
             cs["conv"] = conviction(data, coin, k["t"], k["d"], k["entry"], k["sl"])
-        elif kind in ("fill", "exit"):
+        elif kind in ("fill", "exit", "trail"):
             k["conv"] = cs.get("conv")
         base_notify(kind, coin, **k)
     eng = Engine(state, funding, notify)
