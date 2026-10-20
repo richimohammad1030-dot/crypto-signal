@@ -1,0 +1,55 @@
+name: Kirim Laporan Riset
+
+# Lapis 3: routine Claude (Jumat 01:00 WIB) mendorong laporan riset ke branch claude/riset-*.
+# Workflow ini mengirim ringkasannya ke chat pribadi pemilik, lalu menyalin HANYA file riset
+# (riset/laporan, riset/log.md, riset/ide.md) ke main. Kode bot tidak pernah ikut tersalin,
+# jadi perubahan aturan bot tetap harus lewat persetujuan pemilik.
+on:
+  push:
+    branches: ["claude/riset-**"]
+    paths: ["riset/laporan/**"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kirim-laporan-riset
+  cancel-in-progress: false
+
+jobs:
+  kirim:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Kirim ringkasan ke chat pribadi
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          F=$(git diff --name-only origin/main...HEAD -- 'riset/laporan/*.txt' | sort | tail -1)
+          if [ -z "$F" ]; then echo "Tidak ada ringkasan baru"; exit 0; fi
+          python -c "
+          import sys, signal_bot as s
+          t = open(sys.argv[1]).read()[:3900]
+          s.tg_send(t)
+          " "$F"
+      - name: Salin file riset ke main dan hapus branch
+        run: |
+          BR="${GITHUB_REF#refs/heads/}"
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git checkout -q main
+          git pull -q --rebase origin main
+          git checkout "origin/$BR" -- riset/laporan 2>/dev/null || true
+          git checkout "origin/$BR" -- riset/log.md 2>/dev/null || true
+          git checkout "origin/$BR" -- riset/ide.md 2>/dev/null || true
+          git add riset/laporan riset/log.md riset/ide.md 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "laporan riset dari $BR"
+          git push origin main
+          git push origin --delete "$BR" || true

@@ -53,7 +53,7 @@ class GoldEngine:
         R = (ex - e) * d / r0 if r0 else 0.0
         self.trades.append((t0, t1, d, e, ex, r0))
         self.s.setdefault("hist", []).append(["XAU", d, t0, t1, e, ex, round(R, 3)])
-        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why)
+        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why, r0=r0)
 
     def step(self, i, T, O, H, L, C, A):
         s = self.s
@@ -115,6 +115,21 @@ class GoldEngine:
 
 
 # ---------------------------------------------------------------- main
+def send_health(state, start, end, jenis):
+    """Lapis 2: cek kesehatan strategi XAU ke chat pribadi pemilik (bukan channel)."""
+    try:
+        import kesehatan
+        hist = state.get("hist", [])
+        per = [h[6] for h in hist if start.timestamp() <= h[3] < end.timestamp()]
+        last = end - dt.timedelta(days=1)
+        judul = f"{jenis} {start:%d %b} - {last:%d %b %Y}" if jenis == "Minggu" else f"{jenis} {start:%B %Y}"
+        txt = kesehatan.build("xau", hist, None, judul, per)
+        if txt:
+            tg_send(txt)
+    except Exception as e:
+        print("Cek kesehatan gagal:", e)
+
+
 def main():
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -139,7 +154,26 @@ def main():
         since = state["last_ts"]
     import gold_templates as gt
     ev = gt.new_events()
-    eng = GoldEngine(state, gt.make_notifier(ev))
+    base_notify = gt.make_notifier(ev)
+    import jurnal
+    T_, H_, L_ = [r[0] for r in rows], [r[2] for r in rows], [r[3] for r in rows]
+    def notify(kind, **k):
+        if kind == "order":   # faktor saat order dipasang (dipakai riset)
+            p = k["pend"]; a = abs(p["buy"][0] - p["buy"][1]) / SL_ATR
+            state["feat"] = dict(range=round(p["hi"] - p["lo"], 3), atr=round(a, 3),
+                                 range_atr=round((p["hi"] - p["lo"]) / a, 3) if a else None,
+                                 hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
+        if kind == "exit":    # Lapis 1: catat trade selesai ke jurnal
+            r0 = k.get("r0")
+            try:
+                mfe, mae = jurnal.mfe_mae(T_, H_, L_, k["t0"], k["t"], k["d"], k["entry"], r0)
+                jurnal.append("xau", dict(sym=SYM, d=k["d"], t0=k["t0"], t1=k["t"], entry=k["entry"], exit=k["exit"],
+                                          R=round(k["R"], 3), alasan=k.get("why"), r0=round(r0, 3) if r0 else None,
+                                          mfe=mfe, mae=mae, **(state.get("feat") or {})))
+            except Exception as e:
+                print("Jurnal gagal ditulis:", e)
+        base_notify(kind, **k)
+    eng = GoldEngine(state, notify)
     px = eng.run(rows, since)
     t_last = rows[-1][0] + 3600
     # Maksimal 2 bubble: (1) SINYAL order/pembatalan, (2) UPDATE terisi/ditutup/posisi berjalan
@@ -172,13 +206,17 @@ def main():
         # now = Senin depan + previous=True -> periode minggu ini, tanpa label "(berjalan)"
         tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib + dt.timedelta(days=3), fmt).replace("REKAP", "REKAP XAU"), chat=target)
         state["recap_week"] = this_wk.isoformat()
+        send_health(state, this_wk, this_wk + dt.timedelta(days=7), "Minggu")
     elif now_wib.weekday() == 0 and state.get("recap_week") != wk.isoformat():
         tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt).replace("REKAP", "REKAP XAU"), chat=target)
         state["recap_week"] = wk.isoformat()
+        send_health(state, wk, wk + dt.timedelta(days=7), "Minggu")
     mo, _ = commands.period_bounds("bulan", now_wib, previous=True)
-    if now_wib.day == 1 and state.get("recap_month") != mo.isoformat():
+    # bot XAU hanya jalan Senin-Jumat: jika tanggal 1 jatuh di akhir pekan, rekap bulanan dikirim di run pertama bulan itu
+    if now_wib.day <= 3 and state.get("recap_month") != mo.isoformat():
         tg_send(commands.build_recap(state, "bulan", True, risk_pct, now_wib, fmt).replace("REKAP", "REKAP XAU"), chat=target)
         state["recap_month"] = mo.isoformat()
+        send_health(state, mo, commands.period_bounds("bulan", now_wib)[0], "Bulan")
     json.dump(state, open(STATE_FILE, "w"), indent=1)
     print(*buf, sep="\n\n")
 

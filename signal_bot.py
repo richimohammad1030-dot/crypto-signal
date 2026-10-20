@@ -119,25 +119,43 @@ def _regime(D, i):
     C, EF, ES = D["C"][i], D["EF"][i], D["ES"][i]
     return 1 if (C > ES and EF > ES) else -1 if (C < ES and EF < ES) else 0
 
-def conviction(data, coin, t, d, entry, sl):
-    """Label HIGH / MEDIUM / LOW untuk order di candle cek t. None jika data tidak cukup."""
+def conviction_detail(data, coin, t, d, entry, sl):
+    """(label, faktor) untuk order di candle cek t. label None jika data tidak cukup.
+    faktor dicatat di jurnal agar bisa dianalisis ulang di review bulanan."""
     import bisect
     D = data.get(coin)
     if not D:
-        return None
+        return None, {}
     i = bisect.bisect_right(D["T"], t) - 1
     if i < 0 or D["A"][i] <= 0:
-        return None
-    pts = lambda x, ab: 1 if x < ab[0] else -1 if x > ab[1] else 0
-    s = (pts(abs(entry - sl) / entry * 100, CONV_SL)
-         + pts(d * (D["C"][i] - D["ES"][i]) / D["A"][i], CONV_EXT)
-         + pts(COINS.index(coin), CONV_RANK))
+        return None, {}
+    A = D["A"][i]
+    f = dict(slpct=round(abs(entry - sl) / entry * 100, 3),
+             ext=round(d * (D["C"][i] - D["ES"][i]) / A, 3),
+             trend=round(d * (D["EF"][i] - D["ES"][i]) / A, 3),
+             dist=round(abs(entry - D["C"][i]) / A, 3),
+             mom20=round(d * (D["C"][i] / D["C"][i - 480] - 1) * 100, 3) if i >= 480 else None,
+             rank=COINS.index(coin), btc=0)
     B = data.get("BTC")
     if B:
         j = bisect.bisect_right(B["T"], t) - 1
         if j >= 0:
-            s += _regime(B, j) * d
-    return "HIGH" if s >= 2 else "LOW" if s <= -1 else "MEDIUM"
+            f["btc"] = _regime(B, j) * d
+    pts = lambda x, ab: 1 if x < ab[0] else -1 if x > ab[1] else 0
+    s = pts(f["slpct"], CONV_SL) + pts(f["ext"], CONV_EXT) + pts(f["rank"], CONV_RANK) + f["btc"]
+    f["skor"] = s
+    return ("HIGH" if s >= 2 else "LOW" if s <= -1 else "MEDIUM"), f
+
+def conviction(data, coin, t, d, entry, sl):
+    """Label HIGH / MEDIUM / LOW untuk order di candle cek t. None jika data tidak cukup."""
+    return conviction_detail(data, coin, t, d, entry, sl)[0]
+
+def mfe_mae_safe(D, t0, t1, d, e, r0):
+    import jurnal
+    try:
+        return jurnal.mfe_mae(D.get("T", []), D.get("H", []), D.get("L", []), t0, t1, d, e, r0)
+    except Exception:
+        return None, None
 
 def safe_lev(entry, sl):
     """Leverage maksimal agar harga likuidasi (isolated) jauh di luar SL: <= 50% jarak likuidasi, maks 5x."""
@@ -203,7 +221,7 @@ class Engine:
         cs["pos"] = None
         R = (ex - e) * d / r0 if r0 else 0.0
         self.s.setdefault("hist", []).append([coin, d, t0, T, e, ex, round(R, 3)])
-        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R, t0=t0, sl=sl)
+        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R, t0=t0, sl=sl, r0=r0)
 
     def step_check(self, coin, i, D, allow_new):
         """Langkah 3 di candle cek (setiap 4 jam): trailing SL / order baru."""
@@ -324,6 +342,21 @@ def make_notifier(ev, risk_pct, modal, priv=None):
     return notify
 
 # ---------------------------------------------------------------- main
+def send_health(state, start, end, jenis):
+    """Lapis 2: cek kesehatan strategi ke chat pribadi pemilik (bukan channel)."""
+    try:
+        import jurnal, kesehatan
+        labels = {(j["sym"], j["t0"]): j.get("label") for j in jurnal.load("crypto")}
+        hist = state.get("hist", [])
+        per = [h[6] for h in hist if start.timestamp() <= h[3] < end.timestamp()]
+        last = end - dt.timedelta(days=1)
+        judul = f"{jenis} {start:%d %b} - {last:%d %b %Y}" if jenis == "Minggu" else f"{jenis} {start:%B %Y}"
+        txt = kesehatan.build("crypto", hist, labels, judul, per)
+        if txt:
+            tg_send(txt)
+    except Exception as e:
+        print("Cek kesehatan gagal:", e)
+
 def main():
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -395,12 +428,24 @@ def main():
         return fcache[key]
     ev, priv = new_events(), []
     base_notify = make_notifier(ev, risk_pct, modal, priv)
+    import jurnal
     def notify(kind, coin, **k):
         cs = state["coins"].setdefault(coin, {"pend": None, "pos": None})
         if kind == "order":
-            cs["conv"] = conviction(data, coin, k["t"], k["d"], k["entry"], k["sl"])
+            cs["conv"], cs["feat"] = conviction_detail(data, coin, k["t"], k["d"], k["entry"], k["sl"])
+            if k.get("d") == -1:
+                cs["feat"]["fund"] = funding(coin, k["t"])
         elif kind in ("fill", "exit", "trail"):
             k["conv"] = cs.get("conv")
+        if kind == "exit":   # Lapis 1: catat trade selesai ke jurnal
+            D = data.get(coin, {})
+            mfe, mae = mfe_mae_safe(D, k["t0"], k["t"], k["d"], k["entry"], k.get("r0"))
+            try:
+                jurnal.append("crypto", dict(sym=coin + "USDT", d=k["d"], t0=k["t0"], t1=k["t"], entry=k["entry"],
+                                             exit=k["exit"], R=round(k["R"], 3), alasan=k.get("why"), label=cs.get("conv"),
+                                             mfe=mfe, mae=mae, **(cs.get("feat") or {})))
+            except Exception as e:
+                print("Jurnal gagal ditulis:", e)
         base_notify(kind, coin, **k)
     eng = Engine(state, funding, notify)
     if first_run:
@@ -471,10 +516,12 @@ def main():
     if now_wib.weekday() == 0 and state.get("recap_week") != wk_start.isoformat():
         tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt), chat=target)
         state["recap_week"] = wk_start.isoformat()
+        send_health(state, wk_start, wk_start + dt.timedelta(days=7), "Minggu")
     mo_start, _ = commands.period_bounds("bulan", now_wib, previous=True)
     if now_wib.day == 1 and state.get("recap_month") != mo_start.isoformat():
         tg_send(commands.build_recap(state, "bulan", True, risk_pct, now_wib, fmt), chat=target)
         state["recap_month"] = mo_start.isoformat()
+        send_health(state, mo_start, commands.period_bounds("bulan", now_wib)[0], "Bulan")
     json.dump(state, open(STATE_FILE, "w"), indent=1)
     # Ukuran posisi pribadi (MODAL_USDT) hanya ke chat pemilik
     if priv:

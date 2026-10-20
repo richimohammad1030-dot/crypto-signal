@@ -1,0 +1,63 @@
+name: Laporan Angka Bulanan
+
+# Bagian angka Lapis 3 (gratis, tanpa Claude): backtest ulang crypto & XAU sampai data terbaru,
+# perbarui baseline.json (patokan cek kesehatan), cek label conviction, uji ML walk-forward,
+# lalu kirim ringkasan ke chat pribadi pemilik.
+on:
+  schedule:
+    - cron: "0 1 1 * *"        # tanggal 1, 08:00 WIB
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: laporan-bulanan
+  cancel-in-progress: false
+
+jobs:
+  laporan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pasang library analisis
+        run: pip install -q numpy pandas scikit-learn scipy
+      - name: Ambil cache data harga
+        uses: actions/cache@v4
+        with:
+          path: data
+          key: data-${{ github.run_id }}
+          restore-keys: data-
+      - name: Unduh data terbaru (inkremental)
+        run: |
+          COINS=$(python -c "import signal_bot as s; print(' '.join(s.COINS))")
+          python riset/unduh_crypto.py data "$COINS"
+          python riset/unduh_xau.py data
+      - name: Backtest ulang
+        run: |
+          python riset/backtest_crypto.py . data data/trades_crypto.csv
+          python riset/backtest_xau.py . data/xau.json data/trades_xau.csv
+      - name: Analisis dan laporan
+        run: python riset/analisis.py . data/trades_crypto.csv data/trades_xau.csv
+      - name: Kirim ringkasan ke chat pribadi
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python -c "
+          import glob, signal_bot as s
+          f = sorted(glob.glob('riset/laporan/angka-*.txt'))[-1]
+          s.tg_send(open(f).read())
+          "
+      - name: Simpan laporan dan patokan
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add baseline.json riset/laporan
+          git diff --cached --quiet || git commit -m "laporan angka bulanan $(date -u +%Y-%m)"
+          git pull --rebase -q || true
+          git push
