@@ -47,7 +47,7 @@ def _head(conv, sym, right):
     dot = DOT.get(conv)
     if not dot:
         return f"   {sym:<10}{right}"
-    return f"{dot} {sym:<10}{right:<12}{CONV_SHORT[conv]}"
+    return f"{dot} {sym:<10}{right} | {CONV_TXT[conv]}"
 
 
 def _pre(lines):
