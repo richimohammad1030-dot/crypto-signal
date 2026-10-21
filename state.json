@@ -73,20 +73,20 @@
    "pend": [
     -1,
     0.327,
-    0.3311375190712878
+    0.3306308538680511
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 1.265,
-    "ext": 2.328,
-    "trend": 0.554,
-    "dist": 8.314,
-    "mom20": 2.127,
+    "slpct": 1.11,
+    "ext": 2.759,
+    "trend": 0.693,
+    "dist": 9.254,
+    "mom20": 1.896,
     "rank": 5,
     "btc": 0,
     "skor": 3,
-    "fund": 4.934775342465754e-06
+    "fund": 3.931868493150686e-06
    }
   },
   "ZEC": {
@@ -95,11 +95,7 @@
    "conv": "LOW"
   },
   "DOGE": {
-   "pend": [
-    -1,
-    0.07607,
-    0.08113845444430694
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -115,11 +111,7 @@
    }
   },
   "LINK": {
-   "pend": [
-    -1,
-    11.531,
-    12.42637886362388
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -155,11 +147,7 @@
    }
   },
   "XLM": {
-   "pend": [
-    -1,
-    0.1717,
-    0.18412030277691604
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -222,16 +210,16 @@
    "pend": [
     -1,
     0.08001,
-    0.08702267048108335
+    0.08672436072496412
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 8.765,
-    "ext": 2.576,
-    "trend": 1.775,
-    "dist": 3.902,
-    "mom20": 20.859,
+    "slpct": 8.392,
+    "ext": 1.228,
+    "trend": 1.799,
+    "dist": 5.445,
+    "mom20": 19.402,
     "rank": 19,
     "btc": 0,
     "skor": 0,
@@ -239,11 +227,7 @@
    }
   },
   "TAO": {
-   "pend": [
-    -1,
-    254.3,
-    281.5272743453829
-   ],
+   "pend": null,
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
@@ -283,11 +267,7 @@
    "pos": null
   },
   "AAVE": {
-   "pend": [
-    -1,
-    146.03,
-    163.0573747240106
-   ],
+   "pend": null,
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
@@ -326,20 +306,20 @@
    "pend": [
     -1,
     1.303,
-    1.3682596801052647
+    1.364596046529739
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 5.008,
-    "ext": 2.526,
-    "trend": 1.941,
-    "dist": 5.516,
-    "mom20": 11.14,
+    "slpct": 4.727,
+    "ext": 1.298,
+    "trend": 1.974,
+    "dist": 7.143,
+    "mom20": 8.981,
     "rank": 18,
     "btc": 0,
     "skor": 1,
-    "fund": 1.4160589041095894e-06
+    "fund": 1.5726671232876717e-06
    }
   },
   "PUMP": {
@@ -349,17 +329,17 @@
   "ASTER": {
    "pend": [
     1,
-    0.7716,
-    0.735281179249944
+    0.76,
+    0.7260914348333416
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 4.707,
-    "ext": 2.95,
-    "trend": 0.205,
-    "dist": 11.366,
-    "mom20": -4.484,
+    "slpct": 4.462,
+    "ext": 3.616,
+    "trend": 0.332,
+    "dist": 8.847,
+    "mom20": -4.254,
     "rank": 27,
     "btc": 0,
     "skor": 1
@@ -373,44 +353,122 @@
    "pend": [
     1,
     0.6192,
-    0.524311357528718
+    0.5308761318819688
    ],
    "pos": null,
    "conv": "LOW",
    "feat": {
-    "slpct": 15.324,
-    "ext": 5.937,
-    "trend": 0.672,
-    "dist": 2.327,
-    "mom20": 10.004,
+    "slpct": 14.264,
+    "ext": 5.455,
+    "trend": 0.883,
+    "dist": 3.197,
+    "mom20": 12.375,
     "rank": 29,
     "btc": 0,
-    "skor": -3
+    "skor": -2
    }
   },
   "WLFI": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    -1,
+    0.0531,
+    0.057074862134287724
+   ],
+   "pos": null,
+   "conv": "MEDIUM",
+   "feat": {
+    "slpct": 7.486,
+    "ext": 2.363,
+    "trend": 0.924,
+    "dist": 3.623,
+    "mom20": 0.723,
+    "rank": 30,
+    "btc": 0,
+    "skor": 1,
+    "fund": 7.635356164383562e-06
+   }
   },
   "SKY": {
    "pend": null,
    "pos": null
   },
   "PEPE": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    1,
+    4.75e-06,
+    4.156561782201712e-06
+   ],
+   "pos": null,
+   "conv": "LOW",
+   "feat": {
+    "slpct": 12.493,
+    "ext": 5.758,
+    "trend": 0.918,
+    "dist": 2.427,
+    "mom20": 5.787,
+    "rank": 32,
+    "btc": 0,
+    "skor": -2
+   }
   },
   "ICP": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    -1,
+    2.763,
+    3.0140223790729674
+   ],
+   "pos": null,
+   "conv": "MEDIUM",
+   "feat": {
+    "slpct": 9.085,
+    "ext": 0.722,
+    "trend": 1.897,
+    "dist": 5.991,
+    "mom20": 10.549,
+    "rank": 33,
+    "btc": 0,
+    "skor": 0,
+    "fund": 9.171738356164384e-06
+   }
   },
   "ARB": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    1,
+    0.2111,
+    0.18298846906278018
+   ],
+   "pos": null,
+   "conv": "LOW",
+   "feat": {
+    "slpct": 13.317,
+    "ext": 0.288,
+    "trend": 0.166,
+    "dist": 5.777,
+    "mom20": -4.457,
+    "rank": 34,
+    "btc": 0,
+    "skor": -1
+   }
   },
   "MORPHO": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    -1,
+    2.237,
+    2.527012340590411
+   ],
+   "pos": null,
+   "conv": "LOW",
+   "feat": {
+    "slpct": 12.964,
+    "ext": 1.93,
+    "trend": 0.216,
+    "dist": 2.703,
+    "mom20": 5.847,
+    "rank": 35,
+    "btc": 0,
+    "skor": -1,
+    "fund": 1.25e-05
+   }
   },
   "ETC": {
    "pend": null,
@@ -469,7 +527,7 @@
    "pos": null
   }
  },
- "last_ts": 1792558800,
+ "last_ts": 1792566000,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -487,16 +545,22 @@
    "ASTERUSDT",
    "DOGEUSDT",
    "TAOUSDT",
-   "WLDUSDT"
+   "WLDUSDT",
+   "WLFIUSDT",
+   "PEPEUSDT",
+   "ICPUSDT",
+   "ARBUSDT",
+   "MORPHOUSDT"
   ],
-  "upd": {},
+  "upd": {
+   "ASTERUSDT": [
+    0.7716,
+    0.735281179249944
+   ]
+  },
   "cancel": [
    [
     "SOLUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "DOGEUSDT",
     "trend sudah tidak searah (EMA)"
    ],
    [
@@ -525,6 +589,26 @@
    ],
    [
     "ENAUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "DOGEUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "LINKUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "XLMUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "TAOUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "AAVEUSDT",
     "trend sudah tidak searah (EMA)"
    ]
   ]
