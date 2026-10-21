@@ -575,7 +575,7 @@
    "pos": null
   }
  },
- "last_ts": 1792594800,
+ "last_ts": 1792598400,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -583,103 +583,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-10-12T00:00:00+07:00",
  "day_log": {
-  "date": "2026-10-21",
-  "new": [
-   "UNIUSDT",
-   "GRAMUSDT",
-   "HBARUSDT",
-   "ENAUSDT",
-   "AAVEUSDT",
-   "ASTERUSDT",
-   "DOGEUSDT",
-   "TAOUSDT",
-   "WLDUSDT",
-   "WLFIUSDT",
-   "PEPEUSDT",
-   "ICPUSDT",
-   "ARBUSDT",
-   "MORPHOUSDT",
-   "JSTUSDT",
-   "ALGOUSDT",
-   "FILUSDT",
-   "INJUSDT"
-  ],
-  "upd": {
-   "ASTERUSDT": [
-    0.7716,
-    0.735281179249944
-   ]
-  },
-  "cancel": [
-   [
-    "SOLUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "LTCUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ETHUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "XRPUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "UNIUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "HYPEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "NEARUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ENAUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "DOGEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "LINKUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "XLMUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "TAOUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "AAVEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "WLFIUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "MORPHOUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "HBARUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ALGOUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "date": "2026-10-22",
+  "new": [],
+  "upd": {},
+  "cancel": []
  },
  "hist": [
   [
