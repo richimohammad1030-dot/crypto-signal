@@ -1,0 +1,48 @@
+<b>RISET MINGGUAN</b>
+Jumat, 23 Okt 2026
+────────────────────
+Mode: riset mingguan (bukan review bulanan)
+Data: 49 koin crypto + XAU terunduh lengkap.
+Juara crypto: 2230 trade, +707R, DD 25,7R.
+
+<b>Ide #1 Batas posisi searah</b>
+────────────────────
+Maks N posisi BUY/SELL (N 4, 5, 6),
+replay penuh, 2 varian.
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        21,8    8,8    25,7
+slot N5      31,8    6,5    14,8
+slot N6      24,2    7,0    17,9
+pos N4       28,8    5,3    16,7
+</pre>
+Keputusan: <b>GAGAL</b>. DD turun, tetapi
+periode 2024-skrg memburuk di semua
+varian (-20% s.d. -50%) dan total R
+terpangkas 29-48%.
+
+<b>Ide #2 Sinyal LOW conviction</b>
+────────────────────
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        21,8    8,8    25,7
+Lewati       21,2    8,4    25,0
+Risiko 1/2   21,6    9,9    22,9
+</pre>
+Keputusan: <b>GAGAL</b>. Lewati: slot terisi
+sinyal lebih lemah. Risiko setengah:
++13% di 2024-skrg, tetapi -1% di
+2020-2023 (syarat +10% di keduanya).
+
+<b>Kandidat penantang</b>
+────────────────────
+Tidak ada. Bot live tidak diubah.
+
+<b>Ide baru</b>
+────────────────────
+SELL LOW rata-rata -0,05R (2024-skrg),
+satu-satunya kelompok negatif.
+#11 SELL LOW dilewati (prioritas 2)
+#12 Batas searah khusus SELL (prio 3)
+
+Laporan lengkap: riset/laporan/riset-2026-10-23.md
