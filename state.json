@@ -608,7 +608,7 @@
    "pos": null
   }
  },
- "last_ts": 1792767600,
+ "last_ts": 1792771200,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -616,26 +616,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-10-12T00:00:00+07:00",
  "day_log": {
-  "date": "2026-10-23",
-  "new": [
-   "ARBUSDT"
-  ],
-  "upd": {
-   "AEROUSDT": [
-    0.7637,
-    0.8679084022855605
-   ],
-   "ZROUSDT": [
-    1.725,
-    2.0277986321260375
-   ]
-  },
-  "cancel": [
-   [
-    "WLFIUSDT",
-    "funding rate tidak positif (filter SELL)"
-   ]
-  ]
+  "date": "2026-10-24",
+  "new": [],
+  "upd": {},
+  "cancel": []
  },
  "hist": [
   [
