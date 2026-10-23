@@ -527,7 +527,10 @@ def main():
             if not v.get("conv"):   # posisi lama tanpa label: hitung dari SL awal di candle terisi
                 v["conv"] = conviction(data, c, p[3], p[0], p[1], p[1] - p[0] * r0)
             rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3], v.get("conv"), pos_ext(p)))
-    send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"] or ev["partial"]
+    # Pesan POSISI dikirim setiap run (2 jam) sebagai update harga & hasil berjalan, juga saat tidak ada kejadian.
+    # Pesan SINYAL (order baru/update/batal) tetap hanya saat ada perubahan order di cek 4 jam.
+    # Run ganda untuk slot yang sama sudah berhenti lebih awal, jadi tidak ada pesan dobel.
+    send_update = True
     # Catatan order hari ini (WIB): order baru, update (harga awal hari ini), dan pembatalan.
     today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)).date().isoformat()
     day = state.get("day_log") or {}
