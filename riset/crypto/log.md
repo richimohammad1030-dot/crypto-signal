@@ -1,4 +1,4 @@
-# Jurnal riset
+# Jurnal riset · CRYPTO
 
 Catatan setiap ide yang diuji: tanggal, ide, angka utama, keputusan. Ide yang gagal tidak diuji ulang
 kecuali ada data baru yang relevan.
@@ -12,11 +12,9 @@ kecuali ada data baru yang relevan.
   LOW +0,14R / -0,01R (2020-2023 / 2024-2026). HIGH > LOW di 7 dari 7 tahun. **Dipasang.**
 - **Uji ML walk-forward** (4 model, 11 faktor, 2022-2026): selisih HIGH-LOW terbaik ML 0,31R vs label 0,52R.
   **Gagal** mengalahkan label. Diuji ulang otomatis setiap bulan.
-- **Backtest XAU** (Feb 2025 - Okt 2026): 425 trade, win rate 41%, +0,18R/trade kotor (+0,16R setelah biaya 0,40 USD),
-  drawdown terburuk 14,1R. Histori sumber data hanya tersedia sejak Feb 2025.
 
 ## 2026-10-23 · Riset mingguan
-- Data lengkap (49 koin, XAU s.d. 22 Okt). Juara crypto: 2230 trade, +707R, DD 25,7R; rasio R/DD 21,8 (2020-2023) / 8,8 (2024-skrg).
+- Data lengkap (49 koin). Juara: 2230 trade, +707R, DD 25,7R; rasio R/DD 21,8 (2020-2023) / 8,8 (2024-skrg).
   Replay gerbang no-op identik dengan backtest_crypto.py.
 - **#1 Batas posisi searah** (N 4/5/6, varian slot & pos, replay penuh): rasio lama +2% s.d. +46%, baru -20% s.d. -50%,
   DD terburuk turun ke ±15R (slot) tetapi total R -29% s.d. -48%. **Gagal** (periode baru memburuk di semua varian).
