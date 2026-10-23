@@ -33,7 +33,7 @@ Di repository: **Settings → Secrets and variables → Actions**
   - `TELEGRAM_TOKEN` = token dari BotFather
   - `TELEGRAM_CHAT_ID` = chat id Anda
 - Tab **Variables** → **New repository variable** (opsional, untuk menghitung ukuran posisi):
-  - `RISK_PCT` = risiko per trade dalam persen, misalnya `0.67` (default) atau `0.3` untuk lebih aman
+  - `RISK_PCT` = risiko per trade dalam persen, misalnya `1` (default) atau `0.5` untuk lebih aman. **Jika variable `RISK_PCT` sudah diisi di GitHub, nilai itu yang dipakai.**
   - `MODAL_USDT` = modal futures Anda dalam USDT, misalnya `1000`
 
 Lalu **Settings → Actions → General → Workflow permissions** → pilih **Read and write permissions** → Save.
@@ -53,9 +53,15 @@ karena yang dipasang adalah stop order).
 | ❌ **batalkan order pending** | Batalkan order koin itu yang belum terisi |
 | ✅ **kemungkinan TERISI** | Cek di exchange; pastikan SL sudah terpasang |
 | ⬆️ **geser SL** | Ubah SL posisi itu ke harga baru (hanya ke arah untung) |
-| 🏁 **posisi selesai** | Posisi sudah kena SL; tidak perlu tindakan selain memastikan posisi tertutup |
+| 💰 **AMBIL PROFIT 25%** | Harga menyentuh +1R. Jika TP 25% (reduce-only, 25% ukuran) belum terisi otomatis, tutup 25% posisi |
+| 🏁 **posisi selesai** | Kena SL: pastikan posisi tertutup. **✂️ Cut-loss stagnan: tutup posisi manual di harga pasar** dan hapus SL/TP-nya |
 
-Tidak ada TP: keuntungan dikunci oleh SL yang terus digeser.
+Aturan keluar (versi 24 Okt 2026):
+1. **Rugi maksimum 1R**: SL awal 8× ATR.
+2. **TP 25% di +1R**: 25% posisi ditutup di entry ± 1R (dicek setiap candle H1).
+3. **Trailing SL** untuk sisa 75%: low/high 72 candle, digeser setiap 4 jam. Tanpa TP untuk sisa ini.
+4. **Cut-loss stagnan**: setiap cek 4 jam, posisi yang berumur ≥ 2 hari dan R berjalan < −0,2R ditutup di harga close.
+Tidak ada batas lama hold (batas 10/15 hari terbukti menurunkan hasil).
 
 ## Catatan penting
 - **Maksimal 10 slot** (posisi + order pending). Bot otomatis membatalkan order lain saat 10 posisi terbuka.
@@ -65,8 +71,10 @@ Tidak ada TP: keuntungan dikunci oleh SL yang terus digeser.
 - GitHub bisa menonaktifkan jadwal jika repository tidak ada aktivitas lama; bot menulis `state.json` setiap
   berjalan sehingga biasanya tetap aktif. Jika berhenti, buka tab Actions → **Enable workflow**.
 - Pastikan exchange yang Anda gunakan **legal & terdaftar di OJK**.
-- Hasil backtest 2020–2026 (aturan bot ini): ±65%/tahun pada drawdown ±20% (risiko 0,67%/trade),
-  ekspektasi realistis lebih rendah (±25–50%). Bukan saran investasi; mulai dengan dana kecil.
+- Hasil backtest Des 2019 – Okt 2026 (versi ini, net fee + funding, risiko 1%/trade): ±109%/tahun, drawdown
+  maksimum ±20%, 7 dari 7 tahun (2020–2026) untung, ±2 dari 3 bulan untung, win rate ±41%.
+  Drawdown live biasanya 1,5–2× backtest (±30–40% pada risiko 1%) dan return realistis jauh lebih rendah.
+  Bukan saran investasi; mulai dengan dana kecil.
 
 ### Label sinyal: 🟢 HIGH · 🟡 MEDIUM · 🔴 LOW
 Setiap order diberi label kualitas setup berdasarkan backtest 2223 trade (Des 2019 – Okt 2026).

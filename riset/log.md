@@ -23,3 +23,14 @@ kecuali ada data baru yang relevan.
 - **#2 LOW conviction**: dilewati (replay penuh) rasio -3% / -5%; risiko setengah -1% / +13%, DD 22,9R. **Gagal**
   (tidak +10% di periode lama). Risiko setengah paling dekat lolos.
 - Ide baru: #11 SELL LOW dilewati (SELL LOW -0,05R di 2024-2026), #12 batas searah khusus SELL.
+
+## 2026-10-23 · Riset (chat) → dipasang 24 Okt 2026: versi v2
+- Pembanding TSMOM 28/1 (Han, Kang & Ryu) long-only & long-short (11 varian, data sama, fee 0,06%/sisi + funding aktual):
+  semua kalah dari juara, terutama 2024-skrg. Filter regime TSMOM untuk SELL (A-D) gagal di replay penuh.
+- Aturan keluar (replay penuh, net): TP penuh 2-15R, SL impas, batas hold 10/15 hari **gagal**.
+  **Cut-loss stagnan** (umur ≥ 2 hari & R < -0,2) **lolos**: rasio R/DD +28% / +39%, 5/6 tahun, tanpa 2% terbaik 2024-skrg -9,1R → +8,3R.
+- **TP 25% di 1R** di atas stagnan: win rate 35,9% → 40,7%, Sharpe 1,74 → 1,81, MaxDD ekuitas -16,8% → -13,5% (risiko sama).
+- Slot 3/5/7/8/10/12/15 (DD disamakan -16,8%): 10 slot optimal (CAGR 89%); 5 slot 50%.
+- **Dipasang atas persetujuan pemilik**: 10 slot + stagnan + TP 25% di 1R, risiko default 1%
+  (backtest net: CAGR ±109%, MaxDD -19,7%, 7/7 tahun untung). Replay engine baru identik dengan replay riset (2418 trade).
+  baseline.json crypto dibuat ulang; LIVE_START crypto = 24 Okt 2026.

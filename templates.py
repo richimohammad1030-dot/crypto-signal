@@ -7,6 +7,21 @@ Bagian monospace (<pre>) membuat angka sejajar dan mudah dibaca.
 import datetime as dt
 import html
 
+try:   # aturan versi optimal (satu sumber: signal_bot.py)
+    from signal_bot import TP1_R, TP1_FRAC, STAG_DAYS, STAG_R
+except Exception:
+    TP1_R, TP1_FRAC, STAG_DAYS, STAG_R = 1.0, 0.25, 2.0, -0.2
+
+
+def _tp1(d, e, r0):
+    return e + d * TP1_R * r0
+
+
+def _blend(d, e, r0, px, ext):
+    rest = (px - e) * d / r0 if r0 else 0.0
+    part = (ext or {}).get("part", 0.0)
+    return part * (ext or {}).get("partR", 0.0) + (1 - part) * rest
+
 
 
 BULAN = ["", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
@@ -46,8 +61,8 @@ def _head(conv, sym, right):
     """Judul koin: titik warna + simbol + arah + conviction di kolom kanan yang sejajar untuk semua koin."""
     dot = DOT.get(conv)
     if not dot:
-        return f"   {sym:<10}{right}"
-    return f"{dot} {sym:<10}{right} | {CONV_TXT[conv]}"
+        return f"   {sym:<11}{right}"
+    return f"{dot} {sym:<11}{right} | {CONV_TXT[conv]}"
 
 
 def _pre(lines):
@@ -65,7 +80,9 @@ def _sl_tag(d, e, sl, r0):
     return f"profit terkunci {lock:+.2f}R"
 
 
-def _hasil(R):
+def _hasil(R, why=""):
+    if "stagnan" in (why or ""):
+        return "Cut-loss stagnan"
     if R <= -0.9:
         return "Kena SL"
     if R < -0.15:
@@ -107,13 +124,16 @@ def signal_bubble(ev, t, fmt, pending, day):
         rows = []
         for sym, d, e, sl, lev, conv in group:
             rows.append(_head(conv, sym, "BUY STOP" if d == 1 else "SELL STOP"))
+            tp = _tp1(d, e, abs(e - sl))
             if show_old:
                 oe, osl = upd_today[sym]
                 rows += [f"   Entry : {fmt(oe)} → {fmt(e)}",
-                         f"   SL    : {fmt(osl)} → {fmt(sl)}"]
+                         f"   SL    : {fmt(osl)} → {fmt(sl)}",
+                         f"   TP 25%: {fmt(_tp1(d, oe, abs(oe - osl)))} → {fmt(tp)}"]
             else:
                 rows += [f"   Entry : {fmt(e)}",
-                         f"   SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)"]
+                         f"   SL    : {fmt(sl)}  ({_pct(e, sl):.1f}%)",
+                         f"   TP 25%: {fmt(tp)}  (+1R, tutup 25%)"]
             rows += [f"   Lev   : {lev}x", ""]
         return _pre(rows[:-1])
 
@@ -135,30 +155,49 @@ def signal_bubble(ev, t, fmt, pending, day):
 def update_bubble(ev, open_rows, t, fmt):
     """Urutan: posisi terbuka, terisi, geser SL, posisi ditutup.
     ev: list 'fill', 'trail', 'exit'. open_rows: (sym, d, entry, sl, r0, harga, t0, label). Return teks atau None."""
-    if not (ev["fill"] or ev["trail"] or ev["exit"] or open_rows):
+    partial = ev.get("partial", [])
+    if not (ev["fill"] or ev["trail"] or ev["exit"] or partial or open_rows):
         return None
     L = _title("POSISI CRYPTO FUTURES", t)
     if open_rows:
         tot = 0.0
         rows = []
-        for sym, d, e, sl, r0, px, t0, conv in open_rows:
-            R = (px - e) * d / r0 if r0 else 0.0
+        for sym, d, e, sl, r0, px, t0, conv, *rest in open_rows:
+            ext = rest[0] if rest else {}
+            R = _blend(d, e, r0, px, ext)
             tot += R
+            tp_txt = (f"sudah diambil ({ext.get('partR', 0):+.2f}R)" if ext.get("part")
+                      else f"{fmt(_tp1(d, e, r0))}  (belum)")
+            t_cut = t0 + STAG_DAYS * 86400
+            cut_txt = (f"aktif · tutup jika < {STAG_R:.1f}R" if t >= t_cut
+                       else f"aktif mulai {_wib(t_cut).split(' · ')[0]} {_wib(t_cut).split(' · ')[1][:5]}")
             rows += [_head(conv, sym, "BUY" if d == 1 else "SELL"),
                      f"   Durasi: {_durasi(t0, t)}",
                      f"   Entry : {fmt(e)}",
                      f"   Kini  : {fmt(px)}  ({(px - e) * d / e * 100:+.2f}%)",
                      f"   Hasil : {R:+.2f}R",
-                     f"   SL    : {fmt(sl)}  ({_sl_tag(d, e, sl, r0)})", ""]
+                     f"   SL    : {fmt(sl)}  ({_sl_tag(d, e, sl, r0)})",
+                     f"   TP 25%: {tp_txt}",
+                     f"   Cut   : {cut_txt}", ""]
         _sec(L, "POSISI TERBUKA", len(open_rows)); L.append(f"Total berjalan: <b>{tot:+.2f}R</b>")
         L.append(_pre(rows[:-1]))
     else:
         _sec(L, "POSISI TERBUKA"); L.append("Tidak ada posisi terbuka.")
     if ev["fill"]:
-        _sec(L, "ORDER TERISI", len(ev["fill"])); L.append("Order sudah menjadi posisi. Pastikan SL sudah terpasang.")
+        _sec(L, "ORDER TERISI", len(ev["fill"]))
+        L.append("Order sudah menjadi posisi. Pastikan SL terpasang, lalu pasang TP 25% (reduce-only, 25% ukuran posisi).")
         rows = []
         for sym, d, e, sl, c in ev["fill"]:
-            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   Entry : {fmt(e)}", f"   SL    : {fmt(sl)}", ""]
+            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   Entry : {fmt(e)}", f"   SL    : {fmt(sl)}",
+                     f"   TP 25%: {fmt(_tp1(d, e, abs(e - sl)))}  (+1R)", ""]
+        L.append(_pre(rows[:-1]))
+    if partial:
+        _sec(L, "AMBIL PROFIT 25%", len(partial))
+        L.append("Harga sudah menyentuh +1R. Jika TP 25% belum terisi otomatis, tutup 25% posisi sekarang. Sisa 75% tetap jalan dengan SL.")
+        rows = []
+        for sym, d, e, px, R, frac, sl, r0, c in partial:
+            rows += [_head(c, sym, "BUY" if d == 1 else "SELL"), f"   Entry : {fmt(e)}",
+                     f"   TP 25%: {fmt(px)}  ({R:+.2f}R untuk porsi {frac * 100:.0f}%)", f"   SL    : {fmt(sl)}  (sisa 75%)", ""]
         L.append(_pre(rows[:-1]))
     if ev["trail"]:
         _sec(L, "GESER SL", len(ev["trail"])); L.append("Ubah SL di exchange ke angka baru.")
@@ -170,11 +209,20 @@ def update_bubble(ev, open_rows, t, fmt):
         L.append(_pre(rows[:-1]))
     if ev["exit"]:
         _sec(L, "POSISI DITUTUP", len(ev["exit"]))
+        stag = [x for x in ev["exit"] if len(x) > 8 and "stagnan" in (x[8] or "")]
+        if stag:
+            batas = f"{abs(STAG_R):.1f}".replace(".", ",")
+            L.append(f"✂️ Cut-loss stagnan ({', '.join(x[0] for x in stag)}): posisi ≥ {STAG_DAYS:.0f} hari masih rugi > "
+                     f"{batas}R. <b>Tutup posisi di harga pasar sekarang</b> dan hapus SL/TP-nya.")
         rows = []
-        for sym, d, e, ex, R, t0, t1, c in ev["exit"]:
+        for sym, d, e, ex, R, t0, t1, c, *rest in ev["exit"]:
+            why = rest[0] if rest else ""
+            part = rest[1] if len(rest) > 1 else 0
             rows += [_head(c, sym, "BUY" if d == 1 else "SELL"),
-                     f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_hasil(R)}",
-                     f"   Durasi: {_durasi(t0, t1)}", ""]
+                     f"   Entry : {fmt(e)}", f"   Keluar: {fmt(ex)}", f"   Hasil : {R:+.2f}R · {_hasil(R, why)}"]
+            if part:
+                rows.append(f"   Catat : termasuk TP {part * 100:.0f}% di +1R")
+            rows += [f"   Durasi: {_durasi(t0, t1)}", ""]
         L.append(_pre(rows[:-1]))
     return "\n".join(L)
 
@@ -197,8 +245,8 @@ def news_bubble(news, open_rows, n_pend, now, fmt):
     L.append(_pre(rows[:-1]))
     if open_rows:
         tot, prs = 0.0, []
-        for sym, d, e, sl, r0, px, t0, conv in open_rows:
-            R = (px - e) * d / r0 if r0 else 0.0
+        for sym, d, e, sl, r0, px, t0, conv, *rest in open_rows:
+            R = _blend(d, e, r0, px, rest[0] if rest else {})
             tot += R
             prs += [_head(conv, sym, "BUY" if d == 1 else "SELL"), f"   Hasil : {R:+.2f}R", f"   SL    : {fmt(sl)}"]
         _sec(L, "POSISI TERBUKA", len(open_rows)); L.append(f"Total berjalan: <b>{tot:+.2f}R</b>")

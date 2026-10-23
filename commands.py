@@ -8,8 +8,8 @@ PANDUAN_UMUM = """<b>📘 Panduan umum strategi</b>
 
 <b>1. Risiko per trade</b>
 Bot menghitung ukuran posisi dari variable <code>MODAL_USDT</code> dan <code>RISK_PCT</code> di GitHub.
-Contoh modal 1.000 USDT, risiko 0,5% → rugi maksimal per trade 5 USDT jika kena SL awal.
-Mulai kecil (0,3–0,5%). Maksimal 10 posisi sekaligus, jadi risiko total maksimal ±10× risiko per trade.
+Default 1%. Contoh modal 1.000 USDT, risiko 1% → rugi maksimal per trade 10 USDT jika kena SL awal (1R).
+Maksimal 10 posisi sekaligus, jadi risiko total maksimal ±10× risiko per trade (±10% pada risiko 1%).
 
 <b>2. Margin & leverage</b>
 • Selalu <b>Isolated</b> (bukan Cross).
@@ -23,7 +23,9 @@ Mulai kecil (0,3–0,5%). Maksimal 10 posisi sekaligus, jadi risiko total maksim
 
 <b>4. Stop loss</b>
 • Pasang SL saat order dibuat (fitur TP/SL) atau segera setelah terisi.
-• SL = Stop Market, <b>reduce-only</b>, pemicu Last Price, harga sesuai pesan. <b>Tidak ada TP.</b>
+• SL = Stop Market, <b>reduce-only</b>, pemicu Last Price, harga sesuai pesan. Rugi maksimum 1R per trade.
+• <b>TP 25%</b>: setelah terisi, pasang Take Profit reduce-only untuk <b>25% ukuran posisi</b> di harga "TP 25%" (+1R). Sisa 75% tanpa TP.
+• <b>Cut-loss stagnan</b>: posisi ≥ 2 hari yang masih rugi > 0,2R ditutup bot di cek 4 jam berikutnya → tutup manual di harga pasar.
 
 <b>5. Trailing stop (geser SL)</b>
 • Pesan "⬆️ geser SL ... → Y": ubah SL posisi itu ke Y. Jangan pakai fitur "Trailing Stop" bawaan exchange — aturannya berbeda.
@@ -44,12 +46,13 @@ PANDUAN_BINANCE = """<b>📗 Binance Futures (USDⓈ-M)</b>
 4. Tab order: pilih <b>Stop Market</b> (di dropdown "Stop Limit").
 5. <b>Stop Price</b> = harga di pesan; pemicu <b>Last</b>.
 6. <b>Size</b> = ukuran koin di pesan (ubah satuan ke koin, bukan USDT, jika perlu).
-7. Centang <b>TP/SL</b> → isi <b>Stop Loss</b> = SL di pesan (trigger Last). Kosongkan Take Profit.
+7. Centang <b>TP/SL</b> → isi <b>Stop Loss</b> = SL di pesan (trigger Last). Kosongkan Take Profit (TP 25% dipasang terpisah setelah terisi).
 8. Klik <b>Buy/Long</b> (untuk BUY STOP) atau <b>Sell/Short</b> (untuk SELL STOP).
 
 <b>Setelah terisi</b>
 9. Tab <b>Positions</b> → pastikan kolom TP/SL menampilkan SL. Jika belum: klik ikon pensil TP/SL → isi Stop Loss → Confirm.
 10. Kirim ke bot: <code>/terisi BTC 79800</code> (harga isi sebenarnya).
+11a. Pasang TP 25%: tab order <b>Limit</b> (atau Take Profit Market) sisi berlawanan, harga = "TP 25%", size = 25% posisi, centang <b>Reduce-Only</b>.
 
 <b>Geser SL</b>
 11. Positions → ikon pensil di kolom TP/SL → ubah harga Stop Loss → Confirm.
@@ -68,12 +71,13 @@ PANDUAN_OKX = """<b>📘 OKX (Perpetual / Swap)</b>
 4. Jenis order: <b>Trigger</b> (atau "Stop").
 5. <b>Trigger price</b> = harga di pesan; pemicu <b>Last</b>; order price = <b>Market</b>.
 6. <b>Amount</b> = ukuran di pesan (pilih satuan koin; OKX bisa memakai satuan kontrak, cek nilai kontrak).
-7. Aktifkan <b>TP/SL</b> → isi <b>SL trigger</b> = SL di pesan, Market. Kosongkan TP.
+7. Aktifkan <b>TP/SL</b> → isi <b>SL trigger</b> = SL di pesan, Market. Kosongkan TP (TP 25% dipasang terpisah setelah terisi).
 8. Klik <b>Buy/Long</b> atau <b>Sell/Short</b> sesuai pesan.
 
 <b>Setelah terisi</b>
 9. Tab <b>Positions</b> → cek TP/SL. Jika belum ada: klik <b>TP/SL</b> → isi SL → Confirm.
 10. Kirim ke bot: <code>/terisi BTC 79800</code>.
+11a. Pasang TP 25%: order Limit sisi berlawanan, harga = "TP 25%", jumlah = 25% posisi, <b>Reduce-only</b>.
 
 <b>Geser SL</b>
 11. Positions → TP/SL → ubah harga SL → Confirm (atau tab "Algo orders" → Amend).
@@ -84,7 +88,14 @@ PANDUAN_OKX = """<b>📘 OKX (Perpetual / Swap)</b>
 PANDUAN_ANGGOTA = """<b>📌 PANDUAN ANGGOTA — Sinyal Crypto Futures</b>
 
 <b>Cara kerja</b>
-Sinyal trend-following di 50 koin teratas CoinMarketCap (futures USDT perpetual). Strategi dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB); bot juga mengabarkan order terisi / posisi ditutup setiap 2 jam. Maksimal 10 posisi/order sekaligus. Tidak ada TP: keuntungan dikunci dengan SL yang terus digeser.
+Sinyal trend-following di 50 koin teratas CoinMarketCap (futures USDT perpetual). Strategi dicek setiap 4 jam (03, 07, 11, 15, 19, 23 WIB); bot juga mengabarkan order terisi / posisi ditutup setiap 2 jam. Maksimal 10 posisi/order sekaligus.
+
+<b>Aturan keluar (jelas & terukur)</b>
+1. <b>Rugi maksimum 1R</b>: SL awal = 8× ATR. 1R = risiko yang Anda tetapkan per trade.
+2. <b>TP 25% di +1R</b>: saat harga mencapai entry ± 1R, 25% posisi ditutup (profit terkunci).
+3. <b>Trailing SL</b>: sisa 75% dikunci SL yang digeser setiap 4 jam (low/high 3 hari). Tanpa TP, agar tren besar tidak terpotong.
+4. <b>Cut-loss stagnan</b>: posisi yang sudah ≥ 2 hari tapi masih rugi lebih dari 0,2R ditutup di harga pasar. Rugi kecil, bukan SL penuh.
+Tidak ada batas lama hold: trade rugi rata-rata selesai ±2,5 hari, trade untung ±8 hari, 90% selesai ≤ 9 hari.
 
 <b>Arti pesan</b>
 🆕 SINYAL BARU → pasang order Stop Market + SL sesuai angka
@@ -93,7 +104,8 @@ Sinyal trend-following di 50 koin teratas CoinMarketCap (futures USDT perpetual)
 ✅ POSISI TERBUKA → order terisi; pastikan SL terpasang
 🔁 GESER SL → ubah SL posisi itu ke angka baru (lihat "Cara kerja SL+")
 📊 UPDATE POSISI → ringkasan semua posisi terbuka setiap 4 jam: harga kini, % & R berjalan, SL, status SL+
-🏁 POSISI DITUTUP → hasil akhir: ❌ SL awal (rugi) · 🟡 SL+ impas · ✅ SL+ untung
+💰 AMBIL PROFIT 25% → harga menyentuh +1R; jika TP 25% belum terisi otomatis, tutup 25% posisi
+🏁 POSISI DITUTUP → hasil akhir: ❌ SL awal · ✂️ cut-loss stagnan (tutup manual di harga pasar) · 🟡 impas · ✅ untung
 
 <b>Cara kerja SL+ (trailing)</b>
 Setiap 4 jam bot menghitung SL baru: BUY → low terendah 3 hari terakhir, SELL → high tertinggi 3 hari terakhir. SL hanya dipindah jika lebih menguntungkan. Bot mengirim angka pasti di pesan 🔁 GESER SL — cukup samakan SL di exchange dengan angka itu.
@@ -101,8 +113,8 @@ Begitu SL melewati harga entry, posisi berstatus SL+ (tidak bisa rugi lagi). Jan
 
 <b>1. Ukuran posisi (WAJIB dihitung sendiri)</b>
 Ukuran (koin) = (Modal × Risiko%) ÷ |Entry − SL|
-Contoh: modal 1.000 USDT, risiko 0,5% = 5 USDT; entry 100, SL 95 → 5 ÷ 5 = 1 koin.
-Saran risiko 0,3–0,5% per trade. Maksimal 10 posisi bersamaan.
+Contoh: modal 1.000 USDT, risiko 1% = 10 USDT; entry 100, SL 95 → 10 ÷ 5 = 2 koin. TP 25% = 0,5 koin di 105.
+Risiko standar 1% per trade; baru mengenal trading → mulai 0,5%. Maksimal 10 posisi bersamaan.
 
 <b>2. Margin & leverage</b>
 • Selalu <b>Isolated</b>.
@@ -113,7 +125,7 @@ Saran risiko 0,3–0,5% per trade. Maksimal 10 posisi bersamaan.
 • SELL STOP → order <b>Stop Market</b> Sell/Short.
 
 <b>4. Stop loss</b>
-Pasang SL (Stop Market, reduce-only, Last Price) saat order dibuat atau segera setelah terisi. Tanpa TP.
+Pasang SL (Stop Market, reduce-only, Last Price) saat order dibuat atau segera setelah terisi. Setelah terisi, pasang TP reduce-only untuk 25% posisi di harga "TP 25%".
 
 <b>5. Geser SL</b>
 Ubah SL manual sesuai pesan "geser SL". Jangan pakai fitur Trailing Stop bawaan exchange (aturannya berbeda).
@@ -125,7 +137,7 @@ Isolated + leverage → order <b>Stop Market</b> (Stop Price = sinyal, Last) →
 Perpetual → Isolated + leverage → order <b>Trigger</b> (trigger = sinyal, Last, harga Market) → aktifkan <b>TP/SL</b>, isi SL → Buy/Long atau Sell/Short. Geser SL: Positions → TP/SL. Batal: Algo orders → Cancel.
 
 <b>⚠️ Risiko</b>
-Win rate ±40%: kalah beruntun itu normal. Gunakan exchange yang legal (terdaftar OJK). Bukan saran investasi; gunakan dana yang siap hilang."""
+Win rate ±40%, sekitar 2 dari 3 bulan untung (backtest 2020-2026). Kalah beruntun 20-25 trade pernah terjadi dan masih normal. Sebagian besar kekalahan adalah cut kecil (±0,2–0,4R), bukan SL penuh. Gunakan exchange yang legal (terdaftar OJK). Bukan saran investasi; gunakan dana yang siap hilang."""
 
 PANDUAN_XAU = """<b>📌 PANDUAN ANGGOTA — Gold Daily Straddle (XAUUSD)</b>
 
@@ -158,7 +170,7 @@ BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini
 /terisi KOIN harga — order terisi (contoh: <code>/terisi SOL 100.5</code>)
 /tidak KOIN — order tidak dipasang/tidak terisi, hapus dari catatan
-/tutup KOIN harga — posisi sudah ditutup (contoh: <code>/tutup ETH 2290</code>)
+/tutup KOIN harga — posisi sudah ditutup (contoh: <code>/tutup ETH 2290</code>; R ikut menghitung TP 25% jika sudah diambil)
 /panduan — panduan umum (risiko, leverage, SL, trailing)
 /panduan binance · /panduan okx — langkah di exchange
 /rekap · /rekap bulan — rekap performa minggu/bulan berjalan
@@ -200,7 +212,7 @@ def _spark(vals):
     return "".join(bars[int((v - lo) / (hi - lo) * 7)] for v in vals)
 
 
-def build_recap(state, kind="minggu", previous=False, risk_pct=0.67, now=None, fmt=lambda x: f"{x:g}"):
+def build_recap(state, kind="minggu", previous=False, risk_pct=1.0, now=None, fmt=lambda x: f"{x:g}"):
     """Satu bubble rekap performa (HTML Telegram)."""
     start, end = period_bounds(kind, now, previous)
     t0, t1 = start.timestamp(), end.timestamp()
@@ -349,7 +361,7 @@ def handle(state, text, last_price, fmt, exit_label, wib):
     if cmd in ("/rekap", "/rekap_channel"):
         kind = "bulan" if len(parts) > 1 and parts[1].lower().startswith("bul") else "minggu"
         prev = len(parts) > 2 and parts[2].lower() in ("lalu", "kemarin", "sebelumnya")
-        txt = build_recap(state, kind, prev, float(os.environ.get("RISK_PCT") or "0.67"), fmt=fmt)
+        txt = build_recap(state, kind, prev, float(os.environ.get("RISK_PCT") or "1"), fmt=fmt)
         if cmd == "/rekap_channel":
             if not state.get("channel_id"):
                 return "Belum ada channel."
@@ -370,7 +382,9 @@ def handle(state, text, last_price, fmt, exit_label, wib):
             r0 = p[4] if len(p) > 4 else abs(e - sl)
             locked = (sl - e) * d / r0 if r0 else 0
             tag = "SL+ (terkunci %+.2fR)" % locked if locked > -0.15 else "SL awal"
-            lines.append(f"• <b>{c}</b> {'BUY' if d==1 else 'SELL'} entry {fmt(e)} · SL {fmt(sl)} · {tag}")
+            ext = p[5] if len(p) > 5 and isinstance(p[5], dict) else {}
+            tp = "TP 25% sudah diambil" if ext.get("part") else f"TP 25% {fmt(e + d * r0)}"
+            lines.append(f"• <b>{c}</b> {'BUY' if d==1 else 'SELL'} entry {fmt(e)} · SL {fmt(sl)} · {tag} · {tp}")
         for c, p in pend:
             lines.append(f"• {c} pending {'BUY STOP' if p[0]==1 else 'SELL STOP'} {fmt(p[1])} · SL {fmt(p[2])}")
         now = dt.datetime.now(dt.timezone.utc)
@@ -422,7 +436,9 @@ def handle(state, text, last_price, fmt, exit_label, wib):
             ex = price or last_price(c)
             if ex is None:
                 return "Harga penutupan tidak diketahui. Kirim: /tutup KOIN harga"
-            R = (ex - e) * d / r0 if r0 else 0.0
+            ext = st["pos"][5] if len(st["pos"]) > 5 and isinstance(st["pos"][5], dict) else {}
+            part = ext.get("part", 0.0)        # TP 25% sudah diambil -> R gabungan
+            R = part * ext.get("partR", 0.0) + (1 - part) * ((ex - e) * d / r0 if r0 else 0.0)
             state.setdefault("hist", []).append([c, d, t0, int(time.time()), e, ex, round(R, 3)])
             st["pos"] = None
             return f"🏁 {c} ditutup di {fmt(ex)}\n{exit_label(R)}"

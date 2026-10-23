@@ -7,9 +7,13 @@ Aturan (sama dengan versi terbaik hasil backtest 2020-2026):
 - Trend naik : close > EMA200 dan EMA100 > EMA200  -> BUY STOP di high 480 candle (20 hari)
 - Trend turun: close < EMA200 dan EMA100 < EMA200  -> SELL STOP di low 480 candle,
                HANYA jika funding rata-rata 72 jam terakhir > 0
-- SL awal 8 x ATR(14). Tanpa TP.
+- SL awal 8 x ATR(14) = 1R. Rugi maksimum 1R per trade.
+- TP sebagian: 25% posisi ditutup saat harga mencapai entry ± 1R (dicek setiap candle). Sisa 75% tanpa TP.
 - Setiap cek: SL digeser ke low 72 candle (long) / high 72 candle (short), hanya ke arah untung.
+- Cut-loss stagnan: setiap cek, posisi yang sudah >= 2 hari dan R berjalan < -0,2R ditutup di harga close.
 - Maksimal 10 slot (posisi terbuka + order pending). Prioritas sesuai peringkat market cap.
+- Risiko default 1% modal per trade (variable RISK_PCT).
+Versi 24 Okt 2026 (riset 23 Okt): cut-loss stagnan + TP 25% di 1R, replay penuh 2019-2026.
 
 Bot ini hanya membaca data publik dan mengirim pesan. Bot TIDAK punya akses ke akun exchange.
 """
@@ -21,6 +25,9 @@ HL_NAME = {"SHIB": "kSHIB", "PEPE": "kPEPE"}            # nama koin di Hyperliqu
 K, SL_ATR, TRAIL, EMA_F, EMA_S, ATR_N = 480, 8.0, 72, 100, 200, 14
 CHECK_HOURS_UTC = {3, 7, 11, 15, 19, 23}  # jam BUKA candle H1 (UTC); candle close = 03,07,11,15,19,23 WIB
 MAX_SLOTS = 10
+TP1_R, TP1_FRAC = 1.0, 0.25          # TP sebagian: 25% posisi di entry ± 1R
+STAG_DAYS, STAG_R = 2.0, -0.2        # cut-loss stagnan: umur >= 2 hari dan R berjalan < -0,2R
+DEFAULT_RISK_PCT = "1"
 STATE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "state.json")
 
 # ---------------------------------------------------------------- utilitas
@@ -162,7 +169,26 @@ def safe_lev(entry, sl):
     dist = abs(entry - sl) / entry
     return max(1, min(5, int(0.5 / dist))) if dist > 0 else 1
 
-def exit_label(R):
+def pos_ext(p):
+    """Info tambahan posisi (elemen ke-6): {'part': porsi TP sebagian, 'partR': R porsi itu, 'partPx', 'partT'}."""
+    return p[5] if len(p) > 5 and isinstance(p[5], dict) else {}
+
+def pos_r0(p):
+    return p[4] if len(p) > 4 else abs(p[1] - p[2])
+
+def blended_R(p, px):
+    """R gabungan posisi di harga px: porsi TP sebagian (jika sudah diambil) + sisa posisi."""
+    d, e, r0, ext = p[0], p[1], pos_r0(p), pos_ext(p)
+    rest = (px - e) * d / r0 if r0 else 0.0
+    part = ext.get("part", 0.0)
+    return part * ext.get("partR", 0.0) + (1 - part) * rest
+
+def tp1_price(d, e, r0):
+    return e + d * TP1_R * r0
+
+def exit_label(R, why=""):
+    if "stagnan" in (why or ""):
+        return f"✂️ Cut-loss stagnan ({R:+.2f}R)"
     if R <= -0.9:
         return f"❌ Kena SL awal ({R:+.2f}R)"
     if abs(R) < 0.15:
@@ -208,20 +234,37 @@ class Engine:
                 if (d == 1 and L <= sl) or (d == -1 and H >= sl):
                     self.close(coin, sl, T, "SL di candle yang sama")
         elif cs.get("pos") is not None and cs["pos"][3] < T:
-            d, e, sl, t0 = cs["pos"][:4]
-            if (d == 1 and L <= sl) or (d == -1 and H >= sl):
+            p = cs["pos"]
+            d, e, sl, t0 = p[:4]
+            if (d == 1 and L <= sl) or (d == -1 and H >= sl):     # SL dicek lebih dulu (konservatif)
                 ex = min(sl, O) if d == 1 else max(sl, O)
                 self.close(coin, ex, T, "kena SL")
+                return
+            r0 = pos_r0(p)
+            if r0 and not pos_ext(p).get("part"):
+                lvl = tp1_price(d, e, r0)
+                if (d == 1 and H >= lvl) or (d == -1 and L <= lvl):
+                    px = max(lvl, O) if d == 1 else min(lvl, O)
+                    while len(p) < 5:
+                        p.append(r0)
+                    info = {"part": TP1_FRAC, "partR": (px - e) * d / r0, "partPx": px, "partT": T}
+                    if len(p) > 5 and isinstance(p[5], dict):
+                        p[5].update(info)
+                    else:
+                        p.append(info)
+                    self.notify("partial", coin, d=d, entry=e, px=px, t=T, R=info["partR"], frac=TP1_FRAC, sl=sl, r0=r0)
 
     def close(self, coin, ex, T, why):
         cs = self.s["coins"][coin]
-        d, e, sl, t0 = cs["pos"][:4]
-        r0 = cs["pos"][4] if len(cs["pos"]) > 4 else abs(e - sl)
+        p = cs["pos"]
+        d, e, sl, t0 = p[:4]
+        r0, ext = pos_r0(p), pos_ext(p)
         self.trades.append((coin, d, t0, T, e, ex))
         cs["pos"] = None
-        R = (ex - e) * d / r0 if r0 else 0.0
+        R = blended_R(p, ex)
         self.s.setdefault("hist", []).append([coin, d, t0, T, e, ex, round(R, 3)])
-        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R, t0=t0, sl=sl, r0=r0)
+        self.notify("exit", coin, d=d, entry=e, exit=ex, t=T, why=why, R=R, t0=t0, sl=sl, r0=r0,
+                    part=ext.get("part", 0.0), partR=ext.get("partR"))
 
     def step_check(self, coin, i, D, allow_new):
         """Langkah 3 di candle cek (setiap 4 jam): trailing SL / order baru."""
@@ -229,6 +272,11 @@ class Engine:
         C, H, L, A, EF, ES, T = D["C"], D["H"], D["L"], D["A"], D["EF"], D["ES"], D["T"][i]
         if cs.get("pos") is not None:
             d, e, sl, t0 = cs["pos"][:4]
+            r0 = pos_r0(cs["pos"])
+            # Cut-loss stagnan: posisi >= 2 hari yang masih rugi > 0,2R ditutup di harga close candle cek
+            if r0 and (T - t0) / 86400 >= STAG_DAYS and (C[i] - e) * d / r0 < STAG_R:
+                self.close(coin, C[i], T, "cut-loss stagnan")
+                return
             if d == 1:
                 v = min(L[i - TRAIL + 1:i + 1])
                 if v > sl:
@@ -311,7 +359,7 @@ def tg_send(text, chat=None, pin=False):
     return None
 
 def new_events():
-    return {"new": [], "upd": [], "cancel": [], "fill": [], "trail": [], "exit": []}
+    return {"new": [], "upd": [], "cancel": [], "fill": [], "trail": [], "exit": [], "partial": []}
 
 def make_notifier(ev, risk_pct, modal, priv=None):
     """ev: kumpulan kejadian (disusun menjadi 2 bubble). priv: ukuran posisi pribadi pemilik (MODAL_USDT)."""
@@ -330,7 +378,9 @@ def make_notifier(ev, risk_pct, modal, priv=None):
             if modal and priv is not None:
                 risk_usd = modal * risk_pct / 100
                 qty = risk_usd / abs(k["entry"] - k["sl"])
-                priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ±{qty:.6g} koin (±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)")
+                tp = tp1_price(k["d"], k["entry"], abs(k["entry"] - k["sl"]))
+                priv.append(f"• {sym} {'BUY' if k['d']==1 else 'SELL'} STOP {fmt(k['entry'])}: ±{qty:.6g} koin (±{qty*k['entry']:,.0f} USDT, risiko {risk_usd:,.2f} USDT)"
+                            f" · TP 25%: ±{qty * TP1_FRAC:.6g} koin di {fmt(tp)}")
         elif kind == "cancel":
             ev["cancel"].append((sym, k["reason"]))
         elif kind == "fill":
@@ -338,7 +388,10 @@ def make_notifier(ev, risk_pct, modal, priv=None):
         elif kind == "trail":
             ev["trail"].append((sym, k["d"], k["entry"], k["old"], k["sl"], k["r0"], k.get("conv")))
         elif kind == "exit":
-            ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k.get("conv")))
+            ev["exit"].append((sym, k["d"], k["entry"], k["exit"], k["R"], k["t0"], k["t"], k.get("conv"),
+                               k.get("why", ""), k.get("part", 0.0)))
+        elif kind == "partial":
+            ev["partial"].append((sym, k["d"], k["entry"], k["px"], k["R"], k["frac"], k["sl"], k["r0"], k.get("conv")))
     return notify
 
 # ---------------------------------------------------------------- main
@@ -362,7 +415,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
-    risk_pct = float(os.environ.get("RISK_PCT") or "0.67")
+    risk_pct = float(os.environ.get("RISK_PCT") or DEFAULT_RISK_PCT)
     modal = float(os.environ.get("MODAL_USDT") or 0)
     if os.path.exists(STATE_FILE):
         state = json.load(open(STATE_FILE))
@@ -435,7 +488,7 @@ def main():
             cs["conv"], cs["feat"] = conviction_detail(data, coin, k["t"], k["d"], k["entry"], k["sl"])
             if k.get("d") == -1:
                 cs["feat"]["fund"] = funding(coin, k["t"])
-        elif kind in ("fill", "exit", "trail"):
+        elif kind in ("fill", "exit", "trail", "partial"):
             k["conv"] = cs.get("conv")
         if kind == "exit":   # Lapis 1: catat trade selesai ke jurnal
             D = data.get(coin, {})
@@ -443,7 +496,9 @@ def main():
             try:
                 jurnal.append("crypto", dict(sym=coin + "USDT", d=k["d"], t0=k["t0"], t1=k["t"], entry=k["entry"],
                                              exit=k["exit"], R=round(k["R"], 3), alasan=k.get("why"), label=cs.get("conv"),
-                                             mfe=mfe, mae=mae, **(cs.get("feat") or {})))
+                                             mfe=mfe, mae=mae, tp_sebagian=k.get("part") or 0,
+                                             R_tp_sebagian=(round(k["partR"], 3) if k.get("partR") is not None else None),
+                                             versi="v2-stagnan-tp25", **(cs.get("feat") or {})))
             except Exception as e:
                 print("Jurnal gagal ditulis:", e)
         base_notify(kind, coin, **k)
@@ -471,8 +526,8 @@ def main():
             r0 = p[4] if len(p) > 4 else abs(p[1] - p[2])
             if not v.get("conv"):   # posisi lama tanpa label: hitung dari SL awal di candle terisi
                 v["conv"] = conviction(data, c, p[3], p[0], p[1], p[1] - p[0] * r0)
-            rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3], v.get("conv")))
-    send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"]
+            rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3], v.get("conv"), pos_ext(p)))
+    send_update = eng.checked or ev["fill"] or ev["exit"] or ev["trail"] or ev["partial"]
     # Catatan order hari ini (WIB): order baru, update (harga awal hari ini), dan pembatalan.
     today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)).date().isoformat()
     day = state.get("day_log") or {}

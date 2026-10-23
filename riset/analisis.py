@@ -16,7 +16,7 @@ import signal_bot as sb
 WIB = dt.timezone(dt.timedelta(hours=7))
 NOW = dt.datetime.now(WIB)
 PERIODE = sys.argv[4] if len(sys.argv) > 4 else (NOW.replace(day=1) - dt.timedelta(days=1)).strftime("%Y-%m")
-LIVE_START = {"crypto": dt.datetime(2026, 10, 17, tzinfo=WIB).timestamp(), "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp()}
+LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(), "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp()}
 GRID = [5, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 500]
 rng = np.random.default_rng(42)
 
