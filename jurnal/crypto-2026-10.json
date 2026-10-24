@@ -82,5 +82,30 @@
   "label": "MEDIUM",
   "mfe": 0.264,
   "mae": -0.877
+ },
+ {
+  "waktu_tutup_wib": "2026-10-24 06:00",
+  "sym": "PEPEUSDT",
+  "d": 1,
+  "t0": 1792591200,
+  "t1": 1792796400,
+  "entry": 4.75e-06,
+  "exit": 4.57e-06,
+  "R": -0.339,
+  "alasan": "cut-loss stagnan",
+  "label": "LOW",
+  "mfe": 0.677,
+  "mae": -0.79,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 11.193,
+  "ext": 6.475,
+  "trend": 1.19,
+  "dist": 2.408,
+  "mom20": 4.795,
+  "rank": 32,
+  "btc": 0,
+  "skor": -2
  }
 ]
