@@ -107,5 +107,31 @@
   "rank": 32,
   "btc": 0,
   "skor": -2
+ },
+ {
+  "waktu_tutup_wib": "2026-10-26 22:00",
+  "sym": "POLUSDT",
+  "d": -1,
+  "t0": 1792854000,
+  "t1": 1793026800,
+  "entry": 0.08776,
+  "exit": 0.09216,
+  "R": -0.745,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 0.107,
+  "mae": -0.801,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 6.73,
+  "ext": 5.384,
+  "trend": 1.983,
+  "dist": 2.276,
+  "mom20": 17.346,
+  "rank": 39,
+  "btc": 1,
+  "skor": 1,
+  "fund": 5.697116438356164e-06
  }
 ]
