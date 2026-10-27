@@ -159,5 +159,31 @@
   "btc": 0,
   "skor": -1,
   "fund": 1.25e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-10-27 22:00",
+  "sym": "AEROUSDT",
+  "d": -1,
+  "t0": 1792760400,
+  "t1": 1793113200,
+  "entry": 0.7644,
+  "exit": 0.7093,
+  "R": 0.775,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 1.342,
+  "mae": -0.23,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 10.3,
+  "ext": 4.517,
+  "trend": 1.433,
+  "dist": 2.479,
+  "mom20": 1.215,
+  "rank": 45,
+  "btc": 1,
+  "skor": 0,
+  "fund": 1.2429213698630137e-05
  }
 ]
