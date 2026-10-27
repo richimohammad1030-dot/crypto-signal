@@ -133,5 +133,31 @@
   "btc": 1,
   "skor": 1,
   "fund": 5.697116438356164e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-10-27 15:00",
+  "sym": "MORPHOUSDT",
+  "d": -1,
+  "t0": 1792681200,
+  "t1": 1793088000,
+  "entry": 2.237,
+  "exit": 2.203,
+  "R": 0.368,
+  "alasan": "kena SL",
+  "label": "LOW",
+  "mfe": 1.095,
+  "mae": -0.333,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 9.677,
+  "ext": 4.691,
+  "trend": 0.665,
+  "dist": 0.924,
+  "mom20": 15.313,
+  "rank": 35,
+  "btc": 0,
+  "skor": -1,
+  "fund": 1.25e-05
  }
 ]
