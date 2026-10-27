@@ -1,13 +1,13 @@
 name: Kirim Laporan Riset
 
-# Lapis 3: routine Claude "Riset Bot Crypto" dan "Riset Bot XAU" (Jumat dini hari) mendorong laporan riset ke
-# branch claude/riset-crypto-* atau claude/riset-xau-*. Workflow ini mengirim ringkasannya ke chat pribadi pemilik,
+# Lapis 3: routine Claude "Riset Bot Crypto", "Riset Bot XAU", dan "Riset Bot Intraday" (Jumat dini hari) mendorong laporan riset ke
+# branch claude/riset-crypto-*, claude/riset-xau-*, atau claude/riset-intraday-*. Workflow ini mengirim ringkasannya ke chat pribadi pemilik,
 # lalu menyalin HANYA folder riset milik bot tersebut (riset/<bot>/ dan riset/laporan/<bot>/) ke main.
 # Kode bot dan folder riset bot lain tidak pernah ikut tersalin.
 on:
   push:
-    branches: ["claude/riset-crypto-**", "claude/riset-xau-**"]
-    paths: ["riset/laporan/crypto/**", "riset/laporan/xau/**"]
+    branches: ["claude/riset-crypto-**", "claude/riset-xau-**", "claude/riset-intraday-**"]
+    paths: ["riset/laporan/crypto/**", "riset/laporan/xau/**", "riset/laporan/intraday/**"]
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          BOT=$(echo "${GITHUB_REF#refs/heads/}" | sed -E 's#^claude/riset-(crypto|xau)-.*#\1#')
+          BOT=$(echo "${GITHUB_REF#refs/heads/}" | sed -E 's#^claude/riset-(crypto|xau|intraday)-.*#\1#')
           F=$(git diff --name-only origin/main...HEAD -- "riset/laporan/$BOT/*.txt" | sort | tail -1)
           if [ -z "$F" ]; then echo "Tidak ada ringkasan baru"; exit 0; fi
           python -c "
@@ -47,8 +47,8 @@ jobs:
           git config user.email "signal-bot@users.noreply.github.com"
           git checkout -q main
           git pull -q --rebase origin main
-          BOT=$(echo "$BR" | sed -E 's#^claude/riset-(crypto|xau)-.*#\1#')
-          case "$BOT" in crypto|xau) ;; *) echo "Branch tidak dikenal: $BR"; exit 1;; esac
+          BOT=$(echo "$BR" | sed -E 's#^claude/riset-(crypto|xau|intraday)-.*#\1#')
+          case "$BOT" in crypto|xau|intraday) ;; *) echo "Branch tidak dikenal: $BR"; exit 1;; esac
           git checkout "origin/$BR" -- "riset/$BOT" 2>/dev/null || true
           git checkout "origin/$BR" -- "riset/laporan/$BOT" 2>/dev/null || true
           git add "riset/$BOT" "riset/laporan/$BOT" 2>/dev/null || true
