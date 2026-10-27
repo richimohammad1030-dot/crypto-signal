@@ -95,8 +95,11 @@ def _hasil(R, why=""):
 LINE = "────────────────────"
 
 
+TAG = "🔵 <b>SWING</b>"   # pembeda dengan bot intraday (🟠 INTRADAY) di channel yang sama
+
+
 def _title(name, t):
-    return [f"<b>{name}</b>", _wib(t), LINE]
+    return [f"{TAG} · <b>{name}</b>", _wib(t), LINE]
 
 
 def _sec(L, name, n=None):

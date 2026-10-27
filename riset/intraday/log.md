@@ -57,3 +57,9 @@ dan 2 vs 3 posisi belum diuji dengan conviction harian.
   Risiko 1%: CAGR ±58%, DD ekuitas 14,0%; periode uji 2024-skrg CAGR ±33%.
 - Koreksi angka: simulasi awal (sebelum model realistis) mengabaikan order menunggu yang memakan slot dan memilih dari
   order yang sudah terisi, sehingga terlalu optimis (CAGR 76-95%). Semua angka resmi memakai model realistis.
+
+## 2026-10-27 · Live
+- `intraday_bot.py` memakai mesin per-candle yang sama dengan backtest (order bayangan untuk jeda sinyal per koin,
+  portofolio 3 posisi / 3 order menunggu, pembatalan saat penuh). Replay 2020-2026: 4.883 dari 4.886 trade identik
+  (selisih R maks 0,14 pada trade di celah data Binance 2020-2021); 2025-2026: 1.086 = 1.086 trade, selisih R ≤ 0,00005.
+- Jadwal: tiap 15 menit (cron-job.org), pesan saat ada kejadian + ringkasan 2 jam. Channel sama dengan swing, label 🟠 INTRADAY.

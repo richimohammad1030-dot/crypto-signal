@@ -1,6 +1,7 @@
 # Strategi INTRADAY · juara terkunci v2 (27 Okt 2026)
 
-Status: **dikunci**, belum live. Belum ada bot/workflow; riset mingguan memakai mesin `riset/backtest_intraday.py`.
+Status: **dikunci, LIVE sejak 27 Okt 2026** (`intraday_bot.py`, workflow `intraday.yml`, tiap 15 menit). Riset mingguan memakai
+`riset/backtest_intraday.py`; kesetaraan mesin live vs backtest dicek dengan `riset/replay_intraday.py`.
 Parameter juara ada di `PARAM` pada skrip itu. Perubahan juara hanya lewat riset + persetujuan pemilik.
 v2 menggantikan v1 (fill rate v1 hanya 14%, ditolak pemilik).
 

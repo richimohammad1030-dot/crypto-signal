@@ -527,10 +527,17 @@ def main():
             if not v.get("conv"):   # posisi lama tanpa label: hitung dari SL awal di candle terisi
                 v["conv"] = conviction(data, c, p[3], p[0], p[1], p[1] - p[0] * r0)
             rows.append((c + "USDT", p[0], p[1], p[2], r0, data[c]["C"][-1], p[3], v.get("conv"), pos_ext(p)))
-    # Pesan POSISI dikirim setiap run (2 jam) sebagai update harga & hasil berjalan, juga saat tidak ada kejadian.
-    # Pesan SINYAL (order baru/update/batal) tetap hanya saat ada perubahan order di cek 4 jam.
+    # Bot tetap menghitung tiap 2 jam, tetapi pesan POSISI hanya dikirim jika ada kejadian (order terisi, geser SL,
+    # TP sebagian, posisi ditutup) ATAU sebagai ringkasan tiap 8 jam (jendela mulai 07:00, 15:00, 23:00 WIB).
+    # Pesan SINYAL (order baru/update/batal) tetap dikirim setiap ada perubahan order di cek 4 jam.
     # Run ganda untuk slot yang sama sudah berhenti lebih awal, jadi tidak ada pesan dobel.
-    send_update = True
+    _w = dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)
+    _h = (_w.hour + 1) % 24                      # 07->8, 15->16, 23->0: jendela 8 jam = _h // 8
+    digest_key = f"{(_w + dt.timedelta(hours=1)).date()}-{_h // 8}"
+    has_event = bool(ev["fill"] or ev["trail"] or ev["exit"] or ev["partial"])
+    send_update = has_event or state.get("digest_key") != digest_key
+    if send_update:
+        state["digest_key"] = digest_key
     # Catatan order hari ini (WIB): order baru, update (harga awal hari ini), dan pembatalan.
     today = (dt.datetime.now(dt.timezone.utc) + dt.timedelta(hours=7)).date().isoformat()
     day = state.get("day_log") or {}
@@ -572,12 +579,12 @@ def main():
     now_wib = dt.datetime.now(commands.WIB)
     wk_start, _ = commands.period_bounds("minggu", now_wib, previous=True)
     if now_wib.weekday() == 0 and state.get("recap_week") != wk_start.isoformat():
-        tg_send(commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt), chat=target)
+        tg_send("🔵 <b>SWING</b>\n" + commands.build_recap(state, "minggu", True, risk_pct, now_wib, fmt), chat=target)
         state["recap_week"] = wk_start.isoformat()
         send_health(state, wk_start, wk_start + dt.timedelta(days=7), "Minggu")
     mo_start, _ = commands.period_bounds("bulan", now_wib, previous=True)
     if now_wib.day == 1 and state.get("recap_month") != mo_start.isoformat():
-        tg_send(commands.build_recap(state, "bulan", True, risk_pct, now_wib, fmt), chat=target)
+        tg_send("🔵 <b>SWING</b>\n" + commands.build_recap(state, "bulan", True, risk_pct, now_wib, fmt), chat=target)
         state["recap_month"] = mo_start.isoformat()
         send_health(state, mo_start, commands.period_bounds("bulan", now_wib)[0], "Bulan")
     json.dump(state, open(STATE_FILE, "w"), indent=1)

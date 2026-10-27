@@ -8,7 +8,8 @@ Perubahan dipasang hanya setelah pemilik setuju di chat. Riset crypto (swing) da
 ## 0. Aturan keras
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), `.github/`,
-  dan **juara intraday**: `riset/backtest_intraday.py`, `riset/unduh_intraday.py`, `riset/intraday/STRATEGI.md`.
+  dan **juara intraday**: `intraday_bot.py`, `intraday_state.json`, `riset/backtest_intraday.py`, `riset/unduh_intraday.py`,
+  `riset/replay_intraday.py`, `riset/intraday/STRATEGI.md`.
 - Hanya tulis di `riset/intraday/` (kecuali STRATEGI.md) dan `riset/laporan/intraday/`.
 - Kerjakan di branch baru `claude/riset-intraday-YYYY-MM-DD` (tanggal WIB hari ini), commit, lalu push branch itu.
   Workflow `kirim-laporan-riset.yml` otomatis mengirim ringkasan ke chat pribadi pemilik dan menyalin berkas riset ke main.
@@ -55,7 +56,8 @@ Tambahan selain langkah 3:
 1. Statistik juara terbaru per tahun, per modul (A, B-long, B-short), per cara keluar (TP/RSI/SL/WAKTU).
 2. Cek kesehatan edge: R/trade 6 bulan terakhir vs rata-rata 2024-sekarang. Jika 6 bulan terakhir negatif,
    tandai **PERINGATAN** di laporan dan cari penyebabnya (modul mana, arah mana).
-3. Jika bot intraday sudah live (ada `jurnal/intraday-*.json`), bandingkan hasil live dengan backtest periode sama.
+3. Bot intraday live sejak 27 Okt 2026: bandingkan `jurnal/intraday-*.json` (kolom `R`) dengan backtest periode yang sama
+   (trade dengan koin & waktu isi sama). Selisih besar menandakan masalah eksekusi, data, atau jadwal cron.
 4. Rangkum semua **kandidat penantang** yang masih berlaku beserta buktinya: apa yang diubah, bukti periode lama dan baru,
    dampak ke profit, drawdown, dan jumlah sinyal.
 

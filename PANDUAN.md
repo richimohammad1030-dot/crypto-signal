@@ -147,3 +147,28 @@ Setelah itu:
   Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota.
 - Perintah pribadi: `/status_xau`, `/rekap_xau`, `/rekap_xau bulan`, `/rekap_xau minggu lalu`.
 - Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
+
+## Bot Intraday (channel yang sama, label 🟠 INTRADAY)
+Strategi: `riset/intraday/STRATEGI.md` (juara v2). File: `intraday_bot.py`, `intraday_state.json`, workflow `intraday.yml`.
+Pesan bot swing kini berlabel 🔵 SWING; pesan bot intraday berlabel 🟠 INTRADAY.
+
+**Jadwal**
+- Bot intraday dijalankan **tiap 15 menit** (cron-job.org menit 01, 16, 31, 46). Pesan dikirim hanya jika ada kejadian,
+  ditambah **ringkasan tiap 2 jam** (jam genap WIB).
+- Bot swing tetap menghitung tiap 2 jam. Pesan posisi kini hanya dikirim saat ada kejadian (terisi, geser SL, TP 25%,
+  ditutup) dan sebagai **ringkasan tiap 8 jam** (07:00, 15:00, 23:00 WIB). Sinyal order baru/update/batal tetap langsung.
+
+**Arti pesan intraday**
+| Pesan | Yang dilakukan |
+|---|---|
+| SINYAL BARU | Pasang LIMIT order di harga Entry + SL. Jika ada TP (sinyal pagi), pasang TP juga. |
+| ORDER TERISI | Pastikan SL (dan TP) terpasang. Dip 15m tidak punya TP: tunggu perintah TUTUP. |
+| ⚡ TUTUP SEKARANG | Tutup posisi di harga pasar dan hapus SL/TP (target RSI tercapai atau batas waktu hold). |
+| POSISI SELESAI | TP atau SL sudah tersentuh; tidak perlu tindakan selain mencatat. |
+| BATALKAN ORDER | Hapus limit order di exchange (kadaluarsa atau posisi sudah penuh 3). |
+| RINGKASAN 2 JAM | Posisi terbuka, order menunggu, hasil hari ini. |
+
+Aturan: maks 3 posisi intraday terbuka bersamaan, risiko 1% per trade (variabel `INTRADAY_RISK_PCT`).
+Ukuran posisi pribadi (jika `MODAL_USDT` diisi) dikirim ke chat pribadi pemilik.
+Uji kesetaraan mesin bot vs backtest: `python riset/replay_intraday.py . <data_dir>` (2020-2026: 4.883 dari 4.886 trade identik;
+selisih 3 trade di celah data Binance 2020-2021).

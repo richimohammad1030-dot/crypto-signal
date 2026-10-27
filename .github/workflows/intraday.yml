@@ -1,0 +1,42 @@
+name: Sinyal Crypto Intraday
+
+on:
+  # Pemicu UTAMA: cron-job.org memanggil workflow_dispatch setiap 15 menit (menit 01, 16, 31, 46).
+  # Jadwal di bawah hanya CADANGAN jika cron-job.org gagal. Run ganda aman: bot berhenti sendiri
+  # jika candle 15m terakhir sudah diproses, jadi tidak ada pesan dobel.
+  workflow_dispatch: {}
+  schedule:
+    - cron: "9,24,39,54 * * * *"
+
+permissions:
+  contents: write         # menyimpan intraday_state.json dan jurnal
+
+concurrency:
+  group: intraday-state
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pasang numpy
+        run: pip install -q numpy
+      - name: Jalankan bot intraday
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          INTRADAY_RISK_PCT: ${{ vars.INTRADAY_RISK_PCT }}
+          MODAL_USDT: ${{ vars.MODAL_USDT }}
+        run: python intraday_bot.py
+      - name: Simpan state
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add intraday_state.json jurnal
+          git diff --cached --quiet || git commit -m "intraday state $(date -u +%Y-%m-%dT%H:%M)"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
