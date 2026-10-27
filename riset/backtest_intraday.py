@@ -1,4 +1,4 @@
-"""Backtest strategi INTRADAY (juara terkunci v1, 27 Okt 2026). Mandiri: hanya butuh numpy.
+"""Backtest strategi INTRADAY (juara terkunci v2, 27 Okt 2026). Mandiri: hanya butuh numpy.
 
 Model eksekusi realistis berbasis event:
 - Order limit yang dikirim bisa menunggu sampai kadaluarsa; maks PEND order menunggu sekaligus.
@@ -7,8 +7,8 @@ Model eksekusi realistis berbasis event:
 - Biaya: limit/TP maker 0,02%, market/SL/time stop taker 0,07% (fee + slippage). Funding dihitung tiap settlement.
 
 Modul (parameter di PARAM, bisa ditimpa skrip eksperimen):
-  A  dip 15m, kapan saja : tren naik 15m (EMA100>EMA200, close>EMA200), RSI2<5 atau RSI14<30, ATR15/harga >= 1%.
-                           LONG limit 1,5 ATR di bawah close, kadaluarsa 30 menit, SL 3 ATR, exit RSI2>70, time stop 2 jam.
+  A  dip 15m, kapan saja : tren naik 15m (EMA100>EMA200, close>EMA200), RSI2<5 atau RSI14<30, ATR15/harga >= 1,5%.
+                           LONG limit 0,25 ATR di bawah close, kadaluarsa 2 jam, SL 3 ATR, exit RSI2>70, time stop 2 jam.
   B  pagi 07:00 WIB       : data H1 di close 07:00. Tren koin searah tren BTC (short hanya jika funding > 0),
                            ATR H1 >= 1,1 x rata-rata 14 hari dan >= 1,34% harga. Limit 1 ATR H1 dari open 07:00,
                            TP di harga open, SL 1,5 ATR H1, kadaluarsa 12 jam, time stop 24 jam.
@@ -19,9 +19,9 @@ import bisect, collections, csv, json, os, sys, time
 import numpy as np
 
 PARAM = dict(
-    CAP=2, PEND=12, START=1583020800,                       # 1 Mar 2020 (pemanasan EMA)
+    CAP=3, PEND=3, START=1583020800,                       # 1 Mar 2020 (pemanasan EMA)
     MAKER=0.02, TAKER=0.07,
-    A_ON=True, A_VMIN=0.01, A_OFF=1.5, A_SL=3.0, A_VALID_MIN=30, A_HOLD_JAM=2, A_RSI_EXIT=70,
+    A_ON=True, A_VMIN=0.015, A_OFF=0.25, A_SL=3.0, A_VALID_MIN=120, A_HOLD_JAM=2, A_RSI_EXIT=70,
     B_ON=True, B_K=1.0, B_SL=1.5, B_TPF=1.0, B_VALID_JAM=12, B_HOLD_JAM=24, B_VR=1.1, B_ATRP=0.0134, B_BTC=True, B_SHORT=True,
 )
 IS_END = 1704067200   # 2020-2023 = periode lama (pemilihan), 2024-sekarang = periode baru (uji)

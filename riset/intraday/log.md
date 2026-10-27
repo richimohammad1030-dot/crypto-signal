@@ -38,3 +38,22 @@ Permintaan pemilik: bot crypto kedua dengan trade intraday/scalping, ada sinyal 
 2.963 trade, win 66,9%, +0,092R/trade, +41R/thn, DD 14,4R, PF 1,32.
 2020-2023: +0,113R, rasio 5,67 · 2024-skrg: +0,060R, rasio 1,85. Semua tahun positif (2024 +15R terlemah).
 Fill rate order 14% (dari 15 order dikirim ±2 terisi). Win beruntun maks 21, kalah beruntun maks 8.
+
+## 2026-10-27 · Revisi pemilik → juara v2
+Keberatan pemilik atas v1: fill rate 14% (±60 alert/minggu, mengganggu anggota), risiko harus 1% (bukan 0,5%),
+dan 2 vs 3 posisi belum diuji dengan conviction harian.
+- **Modul B saja** (model realistis): 3 posisi / 3 order menunggu: fill 61%, +0,073R (2024-skrg), rasio baru 1,41,
+  CAGR risiko 1% ±30%. Lebih rendah dari gabungan → modul A tetap dipakai, tetapi dirancang ulang.
+- **Conviction harian (I-11)**: 9 fitur jam 07:00 × 2 arah × 2 batas order. Aturan terbaik di 2020-2023 (3 posisi jika
+  volatilitas kandidat < median) rasio baru 0,79 vs tetap 3 posisi 1,41. **Gagal.** Tidak ada aturan harian yang lebih
+  baik dari jumlah posisi tetap.
+- **Desain ulang modul A (I-01)**: 30 kombinasi (limit 0,25-1,5 ATR × berlaku 30/60/120 mnt × ATR ≥ 1%/1,5%) bersama B,
+  3 posisi. Filter ATR ≥ 1,5% konsisten menurunkan DD 2024-skrg (11-16R vs 17-29R). Dipilih: fill total ≥ 65% dan rasio
+  2020-2023 terbaik → limit 0,25 ATR, berlaku 2 jam, ATR ≥ 1,5%.
+- **Jumlah posisi**: rasio 2020-2023: 1 → 2,65 · 2 → 5,70 · 3 → 5,66 · 4 → 4,58 · 5 → 4,04. 2 dan 3 seri;
+  dipilih **3** karena berada di dataran (tetangga 2 dan 4 sama-sama tinggi), bukan berdasarkan hasil 2024-skrg.
+- **Juara v2 dikunci**: 4.886 trade, fill 70,9%, win 66,5%, +0,064R/trade, +47R/thn, DD 13,4R, PF 1,30.
+  2020-2023 rasio 5,66 · 2024-skrg rasio 2,24 (v1: 1,85). Semua tahun positif (2025 terlemah +10,5R).
+  Risiko 1%: CAGR ±58%, DD ekuitas 14,0%; periode uji 2024-skrg CAGR ±33%.
+- Koreksi angka: simulasi awal (sebelum model realistis) mengabaikan order menunggu yang memakan slot dan memilih dari
+  order yang sudah terisi, sehingga terlalu optimis (CAGR 76-95%). Semua angka resmi memakai model realistis.
