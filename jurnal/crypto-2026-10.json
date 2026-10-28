@@ -185,5 +185,31 @@
   "btc": 1,
   "skor": 0,
   "fund": 1.2429213698630137e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-10-29 02:00",
+  "sym": "ICPUSDT",
+  "d": -1,
+  "t0": 1792674000,
+  "t1": 1793214000,
+  "entry": 2.763,
+  "exit": 2.667,
+  "R": 0.427,
+  "alasan": "kena SL",
+  "label": "LOW",
+  "mfe": 0.96,
+  "mae": -0.12,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 8.142,
+  "ext": 5.79,
+  "trend": 1.897,
+  "dist": 0.889,
+  "mom20": 14.844,
+  "rank": 33,
+  "btc": 0,
+  "skor": -2,
+  "fund": 4.989013698630138e-06
  }
 ]
