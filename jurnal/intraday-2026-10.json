@@ -54,5 +54,19 @@
   "R_kotor": 0.388,
   "alasan": "RSI",
   "versi": "intraday-v2"
+ },
+ {
+  "waktu_tutup_wib": "2026-10-30 02:45",
+  "sym": "ZROUSDT",
+  "modul": "A",
+  "d": 1,
+  "t0": 1793295900,
+  "t1": 1793303100,
+  "entry": 1.7064929145044792,
+  "exit": 1.699,
+  "R": -0.1,
+  "R_kotor": -0.083,
+  "alasan": "WAKTU",
+  "versi": "intraday-v2"
  }
 ]
