@@ -702,7 +702,7 @@
    "pos": null
   }
  },
- "last_ts": 1793286000,
+ "last_ts": 1793293200,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -710,69 +710,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-10-19T00:00:00+07:00",
  "day_log": {
-  "date": "2026-10-29",
-  "new": [
-   "BCHUSDT",
-   "AVAXUSDT",
-   "JSTUSDT",
-   "DOGEUSDT",
-   "LINKUSDT",
-   "LTCUSDT",
-   "XRPUSDT",
-   "SUIUSDT",
-   "BNBUSDT",
-   "ADAUSDT",
-   "NEARUSDT",
-   "HBARUSDT"
-  ],
-  "upd": {
-   "JSTUSDT": [
-    0.1433,
-    0.13894478590622977
-   ]
-  },
-  "cancel": [
-   [
-    "ETHUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ARBUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "HYPEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ZECUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "BCHUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "BNBUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "LTCUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "DOGEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "LINKUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "SUIUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "date": "2026-10-30",
+  "new": [],
+  "upd": {},
+  "cancel": []
  },
  "hist": [
   [
