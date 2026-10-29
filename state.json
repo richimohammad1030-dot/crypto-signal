@@ -680,7 +680,7 @@
    "pos": null
   }
  },
- "last_ts": 1793257200,
+ "last_ts": 1793264400,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -835,6 +835,8 @@
  "news_sent": [
   "1793210400|FOMC Statement",
   "1793210400|Federal Funds Rate",
-  "1793212200|FOMC Press Conference"
+  "1793212200|FOMC Press Conference",
+  "1793277000|Advance GDP q/q",
+  "1793277000|Core PCE Price Index m/m"
  ]
 }
