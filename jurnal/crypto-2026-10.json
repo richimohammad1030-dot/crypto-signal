@@ -211,5 +211,31 @@
   "btc": 0,
   "skor": -2,
   "fund": 4.989013698630138e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-10-29 19:00",
+  "sym": "ZROUSDT",
+  "d": -1,
+  "t0": 1792782000,
+  "t1": 1793275200,
+  "entry": 1.726,
+  "exit": 1.779,
+  "R": -0.18,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 0.438,
+  "mae": -0.251,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 17.065,
+  "ext": 2.991,
+  "trend": 0.988,
+  "dist": 2.281,
+  "mom20": 12.939,
+  "rank": 46,
+  "btc": 1,
+  "skor": 0,
+  "fund": 1.5339830136986302e-05
  }
 ]
