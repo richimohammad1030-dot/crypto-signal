@@ -63,3 +63,16 @@ dan 2 vs 3 posisi belum diuji dengan conviction harian.
   portofolio 3 posisi / 3 order menunggu, pembatalan saat penuh). Replay 2020-2026: 4.883 dari 4.886 trade identik
   (selisih R maks 0,14 pada trade di celah data Binance 2020-2021); 2025-2026: 1.086 = 1.086 trade, selisih R ≤ 0,00005.
 - Jadwal: tiap 15 menit (cron-job.org), pesan saat ada kejadian + ringkasan 2 jam. Channel sama dengan swing, label 🟠 INTRADAY.
+
+## 2026-10-30 · Review bulanan + riset I-02, I-03
+Data diperbarui s.d. 30 Okt 2026 01:45 WIB (49 koin + BTC, H1 + funding + 15m, tanpa kegagalan unduh).
+Juara v2 (data baru): 4.931 trade, fill 70,9%, win 66,4%, +0,062R/trade, +45,9R/thn, DD 13,4R, rasio 3,41.
+2020-2023 rasio 5,66 (tetap) · 2024-skrg +0,040R, rasio 2,00 (turun dari 2,24 karena Okt 2026 -6,8R).
+- **I-02 kadaluarsa B** (4/6/8/10/12/16 jam, replay penuh): rasio lama 4,85/5,33/5,39/5,45/**5,66**/4,80,
+  baru 1,29/1,00/1,19/1,44/**2,00**/2,05. Jam pendek menaikkan DD baru (17-20R) dan menurunkan R. 16 jam baru sedikit lebih baik
+  tetapi lama -15%. **GAGAL**: 12 jam sudah puncak.
+- **I-03 batas order menunggu per modul** (A≤1, A≤2, B≤1, B≤2, A≤1+B≤2, A≤2+B≤1; total tetap 3): semua rasio lama turun
+  (-1% s.d. -25%). A≤1 rasio baru +14% (2,29) tetapi lama -10%, 3/7 tahun, tanpa_top2 215 vs 230. **GAGAL**.
+- Review: modul A melemah (2025 -6,1R, 2026 +0,7R; 6 bln terakhir +0,013R/trade), B-long kuat (+0,16R 6 bln). 6 bln terakhir
+  total +0,059R/trade ≥ rata-rata 2024-skrg (+0,040R) → bukan PERINGATAN. Ide baru I-14 (filter BTC modul A).
+- Live vs backtest (27-30 Okt): 4 trade tertutup (PEPE, modul A) identik R dan waktu keluar; ZRO terbuka di kedua mesin.

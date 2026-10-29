@@ -1,0 +1,64 @@
+<b>REVIEW BULANAN INTRADAY</b>
+30 Okt 2026
+────────────────────
+Mode: review bulanan + riset mingguan.
+Data s.d. 30 Okt 01:45 WIB, unduh lengkap. Juara v2 tidak diubah.
+
+<b>Juara v2 (data terbaru)</b>
+────────────────────
+<pre>
+            Semua  20-23  24-skrg
+Trade        4931   3021   1910
+Fill        70,9%  70,8%  71,0%
+Win         66,4%  68,2%  63,5%
+R/trade    +0,062 +0,076 +0,040
+R/tahun     +45,9  +59,9  +26,8
+DD (R)       13,4   10,6   13,4
+Rasio        3,41   5,66   2,00
+</pre>
+Rasio periode baru turun dari 2,24 karena Okt 2026 -6,8R. Semua tahun positif (2025 terlemah +10,5R).
+
+<b>Per modul (total R)</b>
+────────────────────
+<pre>
+         Semua   2025   2026
+A long  +149,6   -6,1   +0,7
+B long  +129,1   +7,1  +19,1
+B short  +26,6   +9,6   +4,4
+</pre>
+Keluar: RSI 48%, TP 25%, SL 16%, waktu 11%.
+
+<b>Kesehatan edge</b>
+────────────────────
+6 bln terakhir +0,059R/trade (415 trade) vs rata-rata 2024-skrg +0,040R. Tidak ada peringatan.
+Catatan: modul A hampir nol sejak 2025 (6 bln +0,013R/trade), edge kini dari modul B (B long +0,16R/trade).
+
+<b>Live vs backtest (27-30 Okt)</b>
+────────────────────
+4 trade tertutup (PEPE, modul A), total +1,15R, identik dengan backtest (R dan waktu keluar). Posisi ZRO terbuka di kedua mesin. Eksekusi sehat; sampel masih kecil.
+
+<b>Ide yang diuji</b>
+────────────────────
+I-02 kadaluarsa order B: GAGAL
+<pre>
+Jam   Rasio lama  Rasio baru
+4        4,85        1,29
+8        5,39        1,19
+12*      5,66        2,00
+16       4,80        2,05
+</pre>
+12 jam sudah puncak; jam lebih pendek menaikkan DD.
+
+I-03 batas order menunggu per modul: GAGAL
+<pre>
+Varian    Rasio lama  Rasio baru
+Juara        5,66        2,00
+A&lt;=1        5,11        2,29
+B&lt;=2        5,47        1,25
+</pre>
+Tidak ada varian lebih baik di periode lama; membatasi B selalu merusak.
+
+<b>Kandidat penantang</b>
+────────────────────
+Tidak ada. Juara v2 tetap.
+Ide baru I-14: modul A hanya saat tren BTC searah (diuji minggu depan).
