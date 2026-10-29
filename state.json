@@ -36,19 +36,19 @@
    "pend": [
     1,
     762.2,
-    727.813625220679
+    722.674103236355
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 4.511,
-    "ext": 4.194,
-    "trend": 0.762,
-    "dist": 0.547,
-    "mom20": 3.229,
+    "slpct": 5.186,
+    "ext": 0.974,
+    "trend": 0.671,
+    "dist": 3.089,
+    "mom20": 0.796,
     "rank": 2,
-    "btc": 0,
-    "skor": 3
+    "btc": -1,
+    "skor": 2
    }
   },
   "XRP": {
@@ -100,11 +100,7 @@
    }
   },
   "ZEC": {
-   "pend": [
-    1,
-    1368.4,
-    1220.7017636727196
-   ],
+   "pend": null,
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
@@ -119,35 +115,43 @@
    }
   },
   "DOGE": {
-   "pend": null,
+   "pend": [
+    -1,
+    0.07478,
+    0.0802008550766854
+   ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 6.663,
-    "ext": 0.011,
-    "trend": 1.862,
-    "dist": 8.555,
-    "mom20": 14.92,
+    "slpct": 7.249,
+    "ext": 1.668,
+    "trend": 0.538,
+    "dist": 4.486,
+    "mom20": 8.501,
     "rank": 8,
-    "btc": 0,
-    "skor": 2,
-    "fund": 1.035847397260274e-05
+    "btc": 1,
+    "skor": 3,
+    "fund": 1.084952191780822e-05
    }
   },
   "LINK": {
-   "pend": null,
+   "pend": [
+    -1,
+    11.2,
+    12.300643255821926
+   ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 7.765,
-    "ext": 0.234,
-    "trend": 1.719,
-    "dist": 7.112,
-    "mom20": 15.039,
+    "slpct": 9.827,
+    "ext": 2.519,
+    "trend": 1.028,
+    "dist": 1.454,
+    "mom20": 11.298,
     "rank": 9,
-    "btc": 0,
+    "btc": 1,
     "skor": 2,
-    "fund": 1.0324912328767124e-05
+    "fund": 8.896438356164384e-06
    }
   },
   "ADA": {
@@ -187,11 +191,7 @@
    }
   },
   "BCH": {
-   "pend": [
-    1,
-    304.8,
-    275.7081022127538
-   ],
+   "pend": null,
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
@@ -206,19 +206,23 @@
    }
   },
   "LTC": {
-   "pend": null,
+   "pend": [
+    -1,
+    55.09,
+    60.772375984714756
+   ],
    "pos": null,
-   "conv": "MEDIUM",
+   "conv": "HIGH",
    "feat": {
-    "slpct": 9.66,
-    "ext": 1.139,
-    "trend": 1.339,
-    "dist": 4.454,
-    "mom20": 10.979,
+    "slpct": 10.315,
+    "ext": 1.103,
+    "trend": 0.656,
+    "dist": 3.041,
+    "mom20": 10.196,
     "rank": 14,
-    "btc": 0,
-    "skor": 1,
-    "fund": 6.211420547945205e-06
+    "btc": 1,
+    "skor": 2,
+    "fund": 7.707168493150685e-06
    }
   },
   "UNI": {
@@ -238,12 +242,14 @@
    }
   },
   "AVAX": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     8.662,
-    9.359817518180666
+    9.162,
+    1793239200,
+    0.6978175181806652
    ],
-   "pos": null,
    "conv": "MEDIUM",
    "feat": {
     "slpct": 8.056,
@@ -338,11 +344,7 @@
    "pos": null
   },
   "HYPE": {
-   "pend": [
-    1,
-    88.12,
-    82.28465634351527
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -361,7 +363,7 @@
    "pos": [
     -1,
     1.303,
-    1.255,
+    1.254,
     1792713600,
     0.07519460310163839,
     {
@@ -513,19 +515,19 @@
    "pend": [
     1,
     0.1433,
-    0.13899178646925703
+    0.13854635967691717
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 3.006,
-    "ext": 2.232,
-    "trend": 0.376,
-    "dist": 4.215,
-    "mom20": 0.757,
+    "slpct": 3.317,
+    "ext": 1.95,
+    "trend": 0.385,
+    "dist": 3.82,
+    "mom20": -0.634,
     "rank": 37,
-    "btc": 0,
-    "skor": 1
+    "btc": -1,
+    "skor": 0
    }
   },
   "ALGO": {
@@ -575,7 +577,7 @@
    "pos": [
     -1,
     1.643,
-    1.8229427785015129,
+    1.771,
     1793235600,
     0.17994277850151286
    ],
@@ -678,7 +680,7 @@
    "pos": null
   }
  },
- "last_ts": 1793235600,
+ "last_ts": 1793242800,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -690,7 +692,10 @@
   "new": [
    "BCHUSDT",
    "AVAXUSDT",
-   "JSTUSDT"
+   "JSTUSDT",
+   "DOGEUSDT",
+   "LINKUSDT",
+   "LTCUSDT"
   ],
   "upd": {},
   "cancel": [
@@ -700,6 +705,18 @@
    ],
    [
     "ARBUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "HYPEUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "ZECUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "BCHUSDT",
     "trend sudah tidak searah (EMA)"
    ]
   ]
