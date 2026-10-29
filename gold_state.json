@@ -1,5 +1,5 @@
 {
- "last_ts": 1793257200,
+ "last_ts": 1793264400,
  "pend": null,
  "pos": {
   "d": -1,
@@ -89,5 +89,9 @@
   "atr": 15.833,
   "range_atr": 2.035,
   "hari": "Thu"
- }
+ },
+ "news_sent": [
+  "1793277000|Advance GDP q/q",
+  "1793277000|Core PCE Price Index m/m"
+ ]
 }
