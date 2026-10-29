@@ -1,0 +1,70 @@
+<b>REVIEW BULANAN XAU</b>
+Jumat, 30 Okt 2026
+────────────────────
+Mode: review bulanan (Jumat terakhir
+Oktober) + uji 2 ide.
+Data: XAU H1 Feb 2025 - 29 Okt 2026.
+Juara: 433 trade, +66,4R bersih,
+DD 15,2R, R/DD 4,37.
+
+<b>Ide #5 Filter lebar range/ATR</b>
+────────────────────
+Ambang dari 2025, 2026 out-of-sample.
+<pre>
+R/DD         P1 2025  P2 2026
+Juara        1,81     3,22
+Lewati sempit 1,68    2,71
+Lewati lebar 1,95     2,87
+Sempit+lebar 1,58     1,15
+</pre>
+Keputusan: <b>GAGAL</b>. Range paling
+sempit dan paling lebar tetap untung;
+membuangnya memangkas profit. Kalah
+di 4-6 dari 7 kuartal.
+
+<b>Ide #13 Sisi searah tren EMA</b>
+────────────────────
+<pre>
+R/DD         P1 2025  P2 2026
+Juara        1,81     3,22
+EMA200 1 sisi 1,03    3,19
+EMA200 lawan½ 2,45    3,44
+EMA50 1 sisi 2,63     2,73
+EMA50 lawan½ 3,17     3,69
+</pre>
+Keputusan: <b>GAGAL</b>. EMA200 merusak
+2025; hasil bergantung periode EMA;
+varian terbaik hanya unggul di 3/7
+kuartal. Sisi unggul berganti: BUY
+kuat 2025, SELL kuat 2026.
+
+<b>Live vs backtest</b>
+────────────────────
+<pre>
+Sejak 18 Okt   Trade  Total R
+Live           9      -0,74
+Backtest       9      -0,74
+Cocok          9/9 (sisi dan R)
+</pre>
+Eksekusi dan data sesuai backtest.
+
+<b>Juara per kuartal (R bersih)</b>
+────────────────────
+<pre>
+2025 Q1 +10,1  Q2 +15,2
+     Q3  -1,5  Q4  +3,7
+2026 Q1  +9,1  Q2 +22,0
+     Q3  +8,8  Q4  -1,1 (21 trade)
+Keluar: SL 55%, TP 7%, 23:00 38%
+</pre>
+Q4 negatif tipis, masih wajar
+(DD 5,5R vs terburuk 15,2R).
+
+<b>Kandidat dan usulan</b>
+────────────────────
+Tidak ada kandidat penantang dan
+tidak ada usulan menunggu
+persetujuan. Bot live tidak diubah.
+Ide baru #18: zona range/ATR
+0,88-1,06 negatif di 2025 dan 2026
+(prioritas rendah, rawan kebetulan).
