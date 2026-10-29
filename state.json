@@ -33,11 +33,7 @@
    }
   },
   "BNB": {
-   "pend": [
-    1,
-    762.2,
-    720.5078004616184
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -52,19 +48,23 @@
    }
   },
   "XRP": {
-   "pend": null,
+   "pend": [
+    -1,
+    1.2546,
+    1.3287557177611202
+   ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 7.801,
-    "ext": 0.023,
-    "trend": 1.581,
-    "dist": 5.951,
-    "mom20": 10.751,
+    "slpct": 5.911,
+    "ext": 2.265,
+    "trend": 0.313,
+    "dist": 3.981,
+    "mom20": 7.855,
     "rank": 3,
-    "btc": 0,
-    "skor": 3,
-    "fund": 7.785906849315068e-06
+    "btc": 1,
+    "skor": 4,
+    "fund": 1.25e-05
    }
   },
   "SOL": {
@@ -118,40 +118,40 @@
    "pend": [
     -1,
     0.07478,
-    0.08022060604553342
+    0.07985173545570805
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 7.275,
-    "ext": 1.794,
-    "trend": 0.539,
-    "dist": 4.294,
-    "mom20": 9.027,
+    "slpct": 6.782,
+    "ext": 0.378,
+    "trend": 0.564,
+    "dist": 6.12,
+    "mom20": 7.47,
     "rank": 8,
     "btc": 1,
     "skor": 3,
-    "fund": 1.1294563013698631e-05
+    "fund": 1.1807069863013699e-05
    }
   },
   "LINK": {
    "pend": [
     -1,
     11.2,
-    12.267622033255154
+    12.20345358423054
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 9.532,
-    "ext": 2.756,
-    "trend": 1.063,
-    "dist": 1.251,
-    "mom20": 12.231,
+    "slpct": 8.959,
+    "ext": 0.826,
+    "trend": 1.099,
+    "dist": 3.38,
+    "mom20": 10.031,
     "rank": 9,
     "btc": 1,
     "skor": 2,
-    "fund": 8.884850684931507e-06
+    "fund": 8.973565753424657e-06
    }
   },
   "ADA": {
@@ -206,11 +206,7 @@
    }
   },
   "LTC": {
-   "pend": [
-    -1,
-    55.09,
-    60.53550865523319
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -264,8 +260,24 @@
    }
   },
   "SUI": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    -1,
+    0.8988,
+    0.9867218030164708
+   ],
+   "pos": null,
+   "conv": "MEDIUM",
+   "feat": {
+    "slpct": 9.782,
+    "ext": 2.329,
+    "trend": 1.619,
+    "dist": 2.147,
+    "mom20": 13.907,
+    "rank": 17,
+    "btc": 1,
+    "skor": 1,
+    "fund": 1.0653219178082193e-05
+   }
   },
   "HBAR": {
    "pend": null,
@@ -515,16 +527,16 @@
    "pend": [
     1,
     0.1433,
-    0.13875818197450102
+    0.13894478590622977
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 3.169,
-    "ext": 1.679,
-    "trend": 0.431,
-    "dist": 4.298,
-    "mom20": -0.866,
+    "slpct": 3.039,
+    "ext": 2.692,
+    "trend": 0.5,
+    "dist": 3.453,
+    "mom20": -0.883,
     "rank": 37,
     "btc": -1,
     "skor": 0
@@ -680,7 +692,7 @@
    "pos": null
   }
  },
- "last_ts": 1793264400,
+ "last_ts": 1793271600,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -695,7 +707,9 @@
    "JSTUSDT",
    "DOGEUSDT",
    "LINKUSDT",
-   "LTCUSDT"
+   "LTCUSDT",
+   "XRPUSDT",
+   "SUIUSDT"
   ],
   "upd": {},
   "cancel": [
@@ -717,6 +731,14 @@
    ],
    [
     "BCHUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "BNBUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "LTCUSDT",
     "trend sudah tidak searah (EMA)"
    ]
   ]
