@@ -1,0 +1,78 @@
+<b>REVIEW BULANAN CRYPTO</b>
+Jumat, 30 Okt 2026
+────────────────────
+Mode: review bulanan (Jumat terakhir Okt)
+Data: 49 koin (HYPE belum cukup data).
+Juara v2: 2424 trade, +641R, DD 16,3R.
+
+<b>Ide #3 SELL searah BTC</b>
+────────────────────
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        26,9    12,7   16,3
+BTC turun    16,9    7,6    23,8
+Blok naik    24,7    10,0   17,2
+</pre>
+Keputusan: <b>GAGAL</b>. SELL yang tersaring
+justru untung, slot diisi BUY lebih lemah.
+
+<b>Ide #11 SELL LOW dilewati</b>
+────────────────────
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        26,9    12,7   16,3
+Lewati       25,7    9,4    17,8
+Risiko 1/2   26,7    13,2   16,2
+</pre>
+Keputusan: <b>GAGAL</b>. Di mesin v2 SELL LOW
+tidak lagi negatif (+0,02R 2024-skrg).
+
+<b>Live vs backtest (sejak 24 Okt)</b>
+────────────────────
+6 trade tutup, semuanya identik:
+live +0,31R = backtest +0,31R.
+Slot terbuka 9/10 sama. Beda SUI vs
+NEAR berasal dari HYPE: bot live sudah
+pasang order HYPE, backtest belum
+memasukkan HYPE (data pendek). Bukan
+masalah eksekusi.
+Catatan data: funding HL ADA/ETC sempat
+kosong di unduhan, sudah dilengkapi.
+
+<b>Label conviction</b>
+────────────────────
+<pre>
+R/trade    HIGH   MED    LOW
+Semua      +0,44  +0,26  +0,11
+2025       +0,32  -0,03  +0,06
+2026       +0,46  +0,05  +0,02
+</pre>
+HIGH &gt; LOW 7/7 tahun: masih valid.
+Peringatan: MEDIUM melemah 2025-2026,
+setara LOW. Dipantau.
+
+<b>Uji ML walk-forward</b>
+────────────────────
+<pre>
+Selisih HIGH-LOW      R     thn
+Label sekarang        0,32  5/5
+ML terbaik (pohon)    0,18  3/5
+</pre>
+ML belum lebih baik dari label.
+
+<b>Kandidat dan usulan</b>
+────────────────────
+Kandidat penantang: tidak ada.
+Bot live tidak diubah.
+Usulan alat riset (perlu izin):
+1. Backtest ikut hitung koin baru
+   (HYPE) seperti bot live.
+2. Unduhan funding HL coba ulang bila
+   gagal, jangan simpan kosong.
+
+<b>Ide baru</b>
+────────────────────
+#19 Risiko SELL 0,5%, BUY tetap 1%
+#20 Analisis MEDIUM melemah 2025-26
+
+Laporan lengkap: riset/laporan/crypto/riset-2026-10-30.md

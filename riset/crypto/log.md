@@ -32,3 +32,19 @@ kecuali ada data baru yang relevan.
 - **Dipasang atas persetujuan pemilik**: 10 slot + stagnan + TP 25% di 1R, risiko default 1%
   (backtest net: CAGR ±109%, MaxDD -19,7%, 7/7 tahun untung). Replay engine baru identik dengan replay riset (2418 trade).
   baseline.json crypto dibuat ulang; LIVE_START crypto = 24 Okt 2026.
+
+## 2026-10-30 · Review bulanan (Jumat terakhir Okt)
+- Data 49 koin (HYPE dilewati backtest: 848 candle). Funding HL ADA/ETC tersimpan kosong oleh unduhan (gagal diam-diam),
+  dilengkapi dengan `eksperimen/lengkapi_funding_hl.py`. JST/QNT/NIGHT tidak ada di Hyperliquid.
+- Juara v2: 2424 trade, +641,2R, +0,265R/trade, DD 16,3R; rasio 26,9 (2020-2023) / 12,7 (2024-skrg).
+  Replay `eksperimen/_replay.py` (gerbang no-op) identik dengan backtest_crypto.py.
+- **#3 SELL searah BTC** (A: hanya saat BTC turun, B: blok saat BTC naik; replay penuh): rasio -37%/-40% (A), -8%/-21% (B),
+  DD naik ke 23,8R / 17,2R. **Gagal**: SELL yang tersaring untung, slot terisi BUY lebih lemah.
+- **#11 SELL LOW dilewati** (replay penuh): rasio -5% / -26%, total R -46R. Risiko 1/2: -1% / +4%. **Gagal**.
+  Di mesin v2 SELL LOW +0,11R / +0,02R (tidak lagi negatif).
+- Tinjau ulang #2 (LOW risiko 1/2) di v2: -2% / +4%, 4/6 tahun. Tetap gagal.
+- Live vs backtest sejak 24 Okt: 6/6 trade tutup identik (+0,306R). Beda slot SUI (backtest) vs NEAR (live) berasal dari
+  order HYPE di bot live (backtest tidak memuat HYPE). Bukan masalah eksekusi.
+- Label: HIGH > MEDIUM > LOW (semua), HIGH > LOW 7/7 tahun. MEDIUM melemah 2025-2026 (+0,007R vs LOW +0,045R).
+- ML walk-forward: label selisih 0,32R (5/5) vs ML terbaik 0,18R (3/5). Belum lebih baik.
+- Ide baru: #19 risiko SELL 0,5%, #20 analisis MEDIUM melemah.
