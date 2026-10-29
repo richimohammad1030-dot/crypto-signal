@@ -12,5 +12,19 @@
   "R_kotor": -0.005,
   "alasan": "RSI",
   "versi": "intraday-v2"
+ },
+ {
+  "waktu_tutup_wib": "2026-10-29 10:00",
+  "sym": "PEPEUSDT",
+  "modul": "A",
+  "d": 1,
+  "t0": 1793241000,
+  "t1": 1793242800,
+  "entry": 4.8995047030249325e-06,
+  "exit": 4.99e-06,
+  "R": 0.35,
+  "R_kotor": 0.368,
+  "alasan": "RSI",
+  "versi": "intraday-v2"
  }
 ]
