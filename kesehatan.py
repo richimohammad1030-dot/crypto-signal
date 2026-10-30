@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WIB = dt.timezone(dt.timedelta(hours=7))
 LINE = "────────────────────"
 LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(),   # versi v2 (stagnan + TP 25%) mulai 24 Okt 2026
-              "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp(),
+              "xau": dt.datetime(2026, 11, 2, tzinfo=WIB).timestamp(),       # versi K6 (searah tren EMA200 H1) mulai 2 Nov 2026
               "intraday": dt.datetime(2026, 10, 30, 16, 0, tzinfo=WIB).timestamp()}   # juara v3 live 30 Okt 2026
 MIN_LABEL = 20          # minimal trade per label sebelum perbandingan label dinilai
 

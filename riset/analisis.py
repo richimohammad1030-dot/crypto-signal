@@ -16,7 +16,7 @@ import signal_bot as sb
 WIB = dt.timezone(dt.timedelta(hours=7))
 NOW = dt.datetime.now(WIB)
 PERIODE = sys.argv[4] if len(sys.argv) > 4 else (NOW.replace(day=1) - dt.timedelta(days=1)).strftime("%Y-%m")
-LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(), "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp()}
+LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(), "xau": dt.datetime(2026, 11, 2, tzinfo=WIB).timestamp()}   # XAU K6 mulai 2 Nov 2026
 GRID = [5, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 500]
 rng = np.random.default_rng(42)
 
@@ -68,6 +68,8 @@ except Exception:
     base = {}
 base.update({"dibuat": NOW.strftime("%Y-%m-%d %H:%M WIB"), "catatan": "crypto & xau: R kotor (tanpa biaya), sama seperti perhitungan bot"})
 for bot, d in (("crypto", cr), ("xau", xa)):
+    if bot == "xau" and base.get("xau", {}).get("pembuat") == "riset/baseline_xau.py":
+        continue      # patokan XAU K6 dibuat riset/baseline_xau.py (urutan M1, lebih jujur); jangan ditimpa
     s = stats(d.R)
     base[bot] = dict(sumber=f"backtest {pd.to_datetime(d.t0.min(), unit='s'):%Y-%m} s.d. {pd.to_datetime(d.t1.max(), unit='s'):%Y-%m}",
                      **{k: (round(v, 3) if isinstance(v, float) else v) for k, v in s.items()}, band=bands(d.R))

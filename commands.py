@@ -141,30 +141,29 @@ Win rate ±40%, sekitar 2 dari 3 bulan untung (backtest 2020-2026). Kalah berunt
 
 PANDUAN_XAU = """<b>📌 PANDUAN ANGGOTA — Gold Daily Straddle (XAUUSD)</b>
 
-<b>Cara kerja</b>
-Setiap hari bursa pukul 07:00 WIB bot mengirim 2 order di batas range 3 jam terakhir (04:00–07:00 WIB). Harga yang keluar dari range lebih dulu menentukan arah hari itu. Semua selesai di hari yang sama: order & posisi ditutup paling lambat 23:00 WIB.
+<b>Cara kerja</b> (versi searah tren, sejak 2 Nov 2026)
+Setiap hari bursa pukul 07:00 WIB bot mengirim <b>1 order</b> di batas range 3 jam terakhir (04:00–07:00 WIB), searah tren H1 (EMA200): tren naik → BUY STOP di high range, tren turun → SELL STOP di low range. Sisi range seberangnya menjadi <b>batas batal</b>: jika harga menyentuh batas batal lebih dulu, order dibatalkan dan hari itu tidak ada trade. Semua selesai di hari yang sama: order & posisi ditutup paling lambat 23:00 WIB.
 
 <b>Arti pesan</b>
-🌅 ORDER HARI INI → pasang BUY STOP & SELL STOP, masing-masing dengan SL & TP
-✅ POSISI TERBUKA → satu order terisi → <b>batalkan order lawan</b> (OCO)
+🌅 ORDER HARI INI → pasang 1 order stop dengan SL & TP; pasang price alert di BATAS BATAL
+🚫 HARI INI DILEWATI → batas batal tersentuh lebih dulu → <b>batalkan</b> order
+✅ TERISI → hapus alert batas batal
 📊 UPDATE POSISI → harga kini, USD & R berjalan (setiap ±2 jam)
 🏁 POSISI DITUTUP → 🎯 TP · ✅ untung · 🟡 impas · ❌ SL
 ⏰ 23:00 WIB → tutup posisi yang masih terbuka / batalkan order yang belum terisi
 
 <b>1. Ukuran posisi (hitung sendiri)</b>
 Lot = (Modal × Risiko%) ÷ (jarak SL dalam USD × 100)   ← 1 lot XAUUSD = 100 oz
-Contoh: modal 1.000 USD, risiko 0,5% = 5 USD; jarak SL 15 USD → 5 ÷ 1.500 = 0,0033 lot (bulatkan ke bawah, misal 0,01 lot jika broker minimum 0,01 → risiko jadi lebih besar, sesuaikan modal).
-Karena kedua order bisa terisi jika tidak dibatalkan, saran risiko 0,25–0,5% per order.
+Contoh: modal 1.000 USD, risiko 1% = 10 USD; jarak SL 20 USD → 10 ÷ 2.000 = 0,005 lot (broker minimum 0,01 lot → risiko jadi lebih besar, sesuaikan modal).
 
 <b>2. Cara pasang (MT4/MT5 & aplikasi broker)</b>
-• Pasang <b>Buy Stop</b> di harga BUY STOP dan <b>Sell Stop</b> di harga SELL STOP.
-• Isi SL & TP sesuai pesan untuk masing-masing order.
+• Pasang <b>Buy Stop</b> atau <b>Sell Stop</b> sesuai pesan, isi SL & TP.
+• Pasang <b>price alert</b> di harga BATAS BATAL. Jika alert berbunyi sebelum order terisi → hapus order.
 • Opsional: isi waktu kedaluwarsa (Expiration) 23:00 WIB agar order otomatis batal.
-• Saat satu terisi → <b>hapus</b> order lainnya.
 • 23:00 WIB → tutup posisi yang masih terbuka secara manual.
 
 <b>⚠️ Risiko</b>
-Win rate ±41%, sering kalah kecil, sesekali menang besar (TP 4R). Spread & slippage saat berita besar bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
+Win rate ±40%, sering kalah kecil, sesekali menang besar (TP 4R). Strategi ini hanya kuat saat emas bergerak besar; di masa emas tenang (mis. 2015-2019) hasil riset sekitar impas sampai sedikit rugi. Spread & slippage saat berita besar bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
 
 BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini
@@ -344,12 +343,16 @@ def handle(state, text, last_price, fmt, exit_label, wib):
             p, o = g.get("pos"), g.get("pend")
             if p:
                 return f"🥇 XAU posisi {'BUY' if p['d']==1 else 'SELL'} entry {p['e']:,.2f} · SL {p['sl']:,.2f} · TP {p['tp']:,.2f}"
+            if o and o.get("main"):
+                u, bb = (o["buy"], o["sell"]) if o["main"] == 1 else (o["sell"], o["buy"])
+                return (f"🥇 XAU order aktif: {'BUY' if o['main'] == 1 else 'SELL'} STOP {u[0]:,.2f} · SL {u[1]:,.2f} · TP {u[2]:,.2f} · "
+                        f"batas batal {bb[0]:,.2f} (s.d. 23:00 WIB)")
             if o:
                 return f"🥇 XAU order aktif: BUY STOP {o['buy'][0]:,.2f} / SELL STOP {o['sell'][0]:,.2f} (s.d. 23:00 WIB)"
             return "🥇 XAU: tidak ada order/posisi aktif."
         kind = "bulan" if len(parts) > 1 and parts[1].lower().startswith("bul") else "minggu"
         prev = len(parts) > 2 and parts[2].lower() in ("lalu", "kemarin", "sebelumnya")
-        txt = build_recap(g, kind, prev, float(os.environ.get("XAU_RISK_PCT") or "0.5"), fmt=lambda x: f"{x:,.2f}").replace("REKAP", "REKAP XAU")
+        txt = build_recap(g, kind, prev, float(os.environ.get("XAU_RISK_PCT") or "1"), fmt=lambda x: f"{x:,.2f}").replace("REKAP", "REKAP XAU")
         return txt
     if cmd == "/_channel_off":
         return "📢 Bot tidak lagi menjadi admin channel. Sinyal kembali dikirim ke chat pribadi Anda."

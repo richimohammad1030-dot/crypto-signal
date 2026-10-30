@@ -121,3 +121,13 @@ Angka bersih biaya 0,40 USD; varian OCO memakai urutan M1 untuk candle ambigu 20
 - **Musiman kalender** (`eksperimen/musiman.py`): korelasi peringkat bulan 2015-2021 vs 2022-skrg juara +0,26 (p 0,42), K6 -0,13 (p 0,70).
   Hanya April positif di kedua periode (wajar karena kebetulan dari 12 bulan). **GAGAL** (ide #27).
 - Kesimpulan: dalam aturan tetap 07:00-23:00, satu-satunya perbaikan yang bertahan tetap K6 (ide #22, uji maju).
+
+## 2026-10-31 · K6 dipasang (keputusan pemilik: risiko 1%, "coba jalankan K6")
+- Live 10 trade (19-30 Okt): 4 menang / 6 kalah, +3,3R kotor (untung dari 22 Okt +3,35R dan 30 Okt +4R). K6 akan melewati
+  27 & 28 Okt (BUY lawan tren turun, keduanya -1R) → +5,3R. Sampel terlalu kecil untuk menilai.
+- OCO pemilik manual (pasang 2 order, batalkan satu setelah terisi). Implementasi K6: 1 order searah tren EMA200 H1 + BATAS BATAL
+  (price alert) di sisi range seberang; bot mengirim "HARI INI DILEWATI" bila batas batal tersentuh lebih dulu.
+- Uji kesetaraan `riset/replay_xau.py`: bot vs riset K6 IDENTIK (Setra 233/233, Dukascopy 2015-2026 1.476/1.476 trade).
+- Patokan cek kesehatan baru `riset/baseline_xau.py` (K6 2022-skrg, urutan M1, R kotor): 642 trade, win 38,3%, +0,191R, DD 24,2R,
+  kalah beruntun 17. LIVE_START XAU = 2 Nov 2026 (kesehatan.py, analisis.py). analisis.py tidak menimpa patokan ini.
+- XAU_RISK_PCT default 0,5 → 1 (estimasi % rekap). Strategi dikunci di `riset/xau/STRATEGI.md`.

@@ -1,9 +1,12 @@
 """
 Bot sinyal "Gold Daily Straddle" (XAUUSD) -> channel Telegram khusus XAU.
 
-Aturan (versi optimasi yang sudah di-backtest, chart H1):
+Aturan (versi K6, live sejak 2 Nov 2026; chart H1). Jam sinyal 07:00 & tutup 23:00 WIB = aturan tetap pemilik.
 - 07:00 WIB (candle H1 yang close 07:00): range = high & low 3 candle H1 terakhir.
-- BUY STOP di high range, SELL STOP di low range (OCO: satu terisi, yang lain dibatalkan).
+- Tren = close 07:00 vs EMA200 H1. Tren naik -> ORDER UTAMA BUY STOP di high range, BATAS BATAL di low range;
+  tren turun -> ORDER UTAMA SELL STOP di low range, BATAS BATAL di high range.
+- Jika harga menyentuh batas batal lebih dulu, order utama dibatalkan dan hari itu tidak ada trade (riset: ide #22 "K6",
+  sama persis dengan OCO 2 sisi yang melewati hari bila sisi lawan tren terisi duluan).
 - SL = 1,5 x ATR(14) dari entry. TP = 4R (6 x ATR).
 - 23:00 WIB: order yang belum terisi dibatalkan, posisi yang masih terbuka ditutup.
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
@@ -14,6 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(HERE, "gold_state.json")
 CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU disimpan oleh pemroses perintah
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
+TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 PLACE_HOUR_UTC = 23     # jam BUKA candle H1 (UTC) yang close 07:00 WIB
 CLOSE_HOUR_UTC = 15     # jam BUKA candle H1 (UTC) yang close 23:00 WIB
 SYM = "XAUUSD"
@@ -22,6 +26,15 @@ LINE = "━━━━━━━━━━━━━━━━━━"
 sys.path.insert(0, HERE)
 from signal_bot import tg_send, http_json, atr, upcoming_news          # pakai fungsi yang sama dengan bot crypto
 import commands
+
+
+def ema(x, n):
+    """EMA sederhana (nilai awal = data pertama); sama dengan riset/xau/eksperimen/audit_mesin.ema."""
+    out, k, e = [], 2 / (n + 1), None
+    for v in x:
+        e = v if e is None else e + k * (v - e)
+        out.append(e)
+    return out
 
 
 def fmt(p):
@@ -67,6 +80,11 @@ class GoldEngine:
                 hit = (1, max(b[0], O[i]), b[1], b[2])
             elif L[i] <= sl_[0]:
                 hit = (-1, min(sl_[0], O[i]), sl_[1], sl_[2])
+            if hit and pend.get("main", hit[0]) != hit[0]:
+                # K6: batas batal (sisi lawan tren) tersentuh lebih dulu -> order utama dibatalkan, hari dilewati
+                s["pend"] = None
+                self.notify("skip", d=hit[0], level=(b if hit[0] == 1 else sl_)[0], main=pend["main"], t=t)
+                hit = None
             if hit:
                 d, fill, slp, tpp = hit
                 r0 = abs(fill - slp)
@@ -95,14 +113,16 @@ class GoldEngine:
         if hr == PLACE_HOUR_UTC and s.get("pos") is None:
             hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
             if abs(hi - (hi - SL_ATR * a)) > 0.5:      # sama dengan backtest: abaikan order dengan SL < 0,5 USD
+                tren = 1 if C[i] > self.E[i] else -1
                 s["pend"] = {"buy": [hi, hi - SL_ATR * a, hi + RR * SL_ATR * a],
                              "sell": [lo, lo + SL_ATR * a, lo - RR * SL_ATR * a],
-                             "t": t, "hi": hi, "lo": lo}
+                             "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2)}
                 self.notify("order", pend=s["pend"], t=t, price=C[i])
 
     def run(self, rows, since):
         T = [r[0] for r in rows]; O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]; C = [r[4] for r in rows]
         A = atr(H, L, C, ATR_N)
+        self.E = ema(C, TREND_EMA)
         start = 250 if self.s.get("replay") else 50
         for i in range(start, len(rows)):
             if T[i] > since:
@@ -135,7 +155,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
-    risk_pct = float(os.environ.get("XAU_RISK_PCT") or "0.5")
+    risk_pct = float(os.environ.get("XAU_RISK_PCT") or "1")
     state = json.load(open(STATE_FILE)) if os.path.exists(STATE_FILE) else {"last_ts": 0}
     cstate = json.load(open(CRYPTO_STATE)) if os.path.exists(CRYPTO_STATE) else {}
     target = cstate.get("gold_channel_id")      # None -> kirim ke chat pribadi pemilik
@@ -191,7 +211,7 @@ def main():
         tg_send(nb, chat=target)
         state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
     for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None),
-              gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] else None):
+              gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] or ev["skip"] else None):
         if b:
             buf.append(b)
             tg_send(b, chat=target)
