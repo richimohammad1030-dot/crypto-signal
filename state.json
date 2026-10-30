@@ -1,12 +1,14 @@
 {
  "coins": {
   "BTC": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     76500.11,
-    81785.92103327012
+    81785.92103327012,
+    1793383200,
+    5285.811033270118
    ],
-   "pos": null,
    "conv": "HIGH",
    "feat": {
     "slpct": 6.91,
@@ -730,8 +732,8 @@
    "pos": null
   }
  },
- "last_ts": 1793379600,
- "tg_offset": 608781122,
+ "last_ts": 1793383200,
+ "tg_offset": 608781124,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
  "gold_channel_id": -1004324140827,
