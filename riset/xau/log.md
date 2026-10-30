@@ -157,3 +157,14 @@ hasil terburuk (konservatif). Mesin `eksperimen/strat_mesin.py`; skrip `strat_sc
   (2019 -16, 2023 -17). Per periode PF 1,01 / 1,08 / 1,25. Perlu uji maju (ide #30).
 - Kesimpulan: dalam jendela tetap 07:00-23:00 dengan biaya 0,40 USD, tidak ditemukan strategi yang memenuhi semua kriteria pemilik
   secara konsisten di periode pilih DAN uji. Edge intraday emas bergantung rezim: mean reversion di masa tenang, tren di masa volatil.
+
+## 2026-10-31 · Kriteria longgar: win ≥ 35% + RR terjamin (`eksperimen/rr_scan.py`)
+Kriteria (ditetapkan sebelum melihat hasil): win ≥ 35%, RR tercapai ≥ 1,5, PF > 1,05, ≥ 3 trade/mg, kalah beruntun ≤ 2 × menang
+beruntun, mayoritas tahun untung. 3.956 kandidat: K6 (SL 1-2 ATR × TP 2/3/4/6R/tanpa), RSI2 fade (kuantil 30/35/40%, ± filter tren,
+SL 1,5-3 ATR, TP 1,5/2/3R/tanpa), portofolio K6 + RSI2 (bobot RSI2 1 / 0,5). Seleksi 2015-2021.
+- Lulus di 2015-2021: **1** (portofolio K6 SL 1,25 tanpa TP + RSI2 35% searah tren SL 3 TP 3R): pilih win 40%, RR 1,58, PF 1,05,
+  W/L 8/16; **uji gagal** (W/L 5/21, P_rasio vs juara 0,77); Setra win 41%, RR 1,92, PF 1,35. 12 thn: win 39%, RR 1,69, PF 1,10,
+  +12,1 R/thn, DD 48R (46% ekuitas pada 1%), 8/12 tahun.
+- Pola: K6 punya RR ±2 tetapi win 32-35% dan hanya 2,3 trade/mg; RSI2 punya win ±50% tetapi RR ±1,05. Menaikkan TP tidak
+  menaikkan RR K6 (exit nyata = tutup 23:00); gabungan keduanya berakhir di win ±39% / RR ±1,6 / PF ±1,04 di masa emas tenang.
+- Kesimpulan: kriteria longgar pun tidak terpenuhi secara konsisten. GAGAL (ide #31).
