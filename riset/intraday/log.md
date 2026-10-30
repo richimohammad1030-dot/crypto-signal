@@ -105,3 +105,18 @@ Semua dengan daftar koin sesuai masanya (PIT), 3 posisi / 3 order menunggu. IS =
 - Signifikansi vs juara (OOS 2024-skrg): A 1-25 + B P_rasio 0,96 (seluruh periode 0,34); B saja 0,84; B 1:1 0,73.
   Risiko 1% OOS: juara CAGR 15% DD 23% · A 1-25 + B CAGR 22% DD 16% (±40 trade/bln) · B saja 19% DD 17% (±27 trade/bln).
 - Status: I-15 (A hanya peringkat 1-25) → `uji-maju` atas persetujuan pemilik / keputusan pemilik; scalping 1:1 → `gagal` (I-17).
+
+## 2026-10-30 · Intraday 1:1 (bukan scalping): modul A peringkat 1-25 diperkuat + modul B 1:1 (permintaan pemilik, risiko 1%)
+PIT, 3 posisi / 3 order menunggu. Skrip: `eksperimen/pit_a_diperkuat_b11_2026-10-30.py`.
+- **Modul A diperkuat** (56 varian, peringkat 1-25): exit RSI (hold 2 jam) vs 1:1 (SL 2/3 ATR, hold 4/8/24 jam), filter tren BTC,
+  ATR ≥ 1,5/2%, dip standar vs dalam (RSI2 < 2). Terbaik di KEDUA periode: **1:1, SL 3 ATR, hold maks 4 jam, BTC tren naik,
+  ATR ≥ 1,5%, dip standar, limit 0,5 ATR** → rasio A saja IS 2,69 / OOS 1,35 (juara A di 1-25: IS 2,75 / OOS 0,74). Peringkat ke-4
+  menurut IS saja (terbaik IS: RSI + BTC, IS 2,91 / OOS 0,63).
+- **Gabungan** (OOS 2024-skrg; avg / R/thn / DD / rasio / CAGR 1% / DD ekuitas / P>juara):
+  juara A+B: +0,021 / +15,5 / 23,9 / 0,65 / 15% / 23% / - ·
+  A 1-25 + B: +0,045 / +21,3 / 16,5 / 1,29 / 22% / 16% / 0,96 ·
+  **A diperkuat 1:1 + B (TP open)**: +0,059 / +23,3 / 17,2 / **1,36** / **25%** / **17%** / **0,94** (±37 trade/bln) ·
+  A diperkuat 1:1 + B 1:1 SL1,0 h24: +0,061 / +24,1 / 21,1 / 1,14 / 25% / 20% / 0,84 ·
+  A diperkuat 1:1 + B 1:1 SL1,5 h24: +0,068 / +26,4 / 26,9 / 0,98 / 28% / 25% / 0,85 · B 1:1 hold 12 jam lebih buruk (rasio 0,56-0,68).
+- Kesimpulan: 1:1 memperkuat modul A; untuk modul B, 1:1 menaikkan profit sedikit tetapi DD naik 17% → 20-25% (B sekarang RR ±0,67:1).
+  Seluruh periode (IS+OOS) risiko 1%: A diperkuat + B CAGR 44% DD 17%; + B 1:1 SL1,0 CAGR 42% DD 26%. Menunggu keputusan pemilik.
