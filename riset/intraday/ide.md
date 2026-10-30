@@ -20,6 +20,7 @@ Prioritas: 1 = paling penting. Nomor I-xx tetap agar rujukan di jurnal riset tid
 | I-13 | Modul B saja (tanpa A) sebagai versi "sinyal pagi" murni untuk channel | 4 | antri | 3 posisi: fill 61%, rasio baru 1,41, CAGR 1% ±30% (lebih rendah dari v2) |
 | I-15 | Modul A hanya untuk peringkat 1-25, atau dimatikan (B saja), dinilai DENGAN daftar koin sesuai masanya | 1 | perlu-data | 30 Okt 2026 PIT OOS: A 1-25 + B rasio 1,29 vs juara 0,65 (P 0,96), B saja 1,03; IS tidak membedakan → menunggu keputusan pemilik / uji maju |
 | I-18 | Modul A peringkat 1-25 diperkuat: exit 1:1 SL 3 ATR, hold maks 4 jam, filter tren BTC, ATR ≥ 1,5%, limit 0,5 ATR (+ B tetap atau B 1:1) | 1 | perlu-data | 30 Okt 2026 PIT: A+B rasio OOS 1,36 (P 0,94), CAGR 1% 2024+ 25% DD 17%; menunggu keputusan pemilik |
+| I-19 | Rasio TP:SL 0,5/1/1,5/2 (A diperkuat + B), PIT | 1 | perlu-data | 30 Okt 2026: terbaik A TP 2× SL 3 ATR maks 4 jam + B tetap: win 63%, CAGR 1% 2024+ 27%, DD 16%, P 0,96; B dengan RR ≥ 1 merusak DD |
 | I-17 | Gaya scalping: SL/TP tetap 1:1 untuk modul A (40 varian) dan B (12 varian), PIT | - | gagal | 30 Okt 2026: A terbaik IS OOS +0,009R; B 1:1 rasio 0,78 vs 1,03 |
 | I-16 | Batas risiko gabungan dengan swing: lewati order intraday di koin yang sedang dipegang swing searah | 2 | antri | 1.737 trade tumpang tindih; DD gabungan 25% |
 | I-10 | Optimasi parameter modul B (kedalaman limit, SL, TP, ambang vr) | - | gagal | 27 Okt 2026: terbaik di 2020-2023 tidak lebih baik di 2024-skrg; 81 tetangga juara semua positif |

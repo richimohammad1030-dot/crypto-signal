@@ -120,3 +120,15 @@ PIT, 3 posisi / 3 order menunggu. Skrip: `eksperimen/pit_a_diperkuat_b11_2026-10
   A diperkuat 1:1 + B 1:1 SL1,5 h24: +0,068 / +26,4 / 26,9 / 0,98 / 28% / 25% / 0,85 · B 1:1 hold 12 jam lebih buruk (rasio 0,56-0,68).
 - Kesimpulan: 1:1 memperkuat modul A; untuk modul B, 1:1 menaikkan profit sedikit tetapi DD naik 17% → 20-25% (B sekarang RR ±0,67:1).
   Seluruh periode (IS+OOS) risiko 1%: A diperkuat + B CAGR 44% DD 17%; + B 1:1 SL1,0 CAGR 42% DD 26%. Menunggu keputusan pemilik.
+
+## 2026-10-30 · Rasio TP:SL 0,5 / 1 / 1,5 / 2 (permintaan pemilik: win rate tinggi + R lumayan, risiko 1%)
+PIT, modul A diperkuat (peringkat 1-25, BTC naik, ATR ≥ 1,5%, limit 0,5 ATR) + modul B. Skrip: `eksperimen/pit_rasio_tp_sl_2026-10-30.py`.
+- Modul A saja (SL 3 ATR, hold 4 jam; OOS win / rasio): TP 0,5× 64,5% / 1,41 · 1× 58,4% / 1,35 · 1,5× 58,4% / 1,76 · **2× 58,4% / 1,96**
+  (IS 3,21, terbaik di kedua periode). Dengan hold 4 jam TP ≥ 1× jarang tersentuh: TP 2× → 80% keluar karena batas waktu (+0,23R),
+  TP 3,5%, SL 16%. Artinya exit nyata modul A = batas 4 jam; TP jauh hanya pengaman.
+- Modul B saja (limit 1 ATR dari open; OOS win / rasio / DD): TP 0,5× SL1,5 70,8% / 1,00 / 14,8R · 1× 54,4% / 0,78 / 28,3R ·
+  1,5× 46% / 0,61 / 44,6R · 2× 42% / 0,73 / 44,0R. B sekarang (TP di open = 0,67× SL) tetap terbaik; RR besar → DD melonjak.
+- Gabungan OOS 2024-skrg (win / CAGR 1% / DD ekuitas / P>juara): semua 0,5: 71,2% / 23% / 17% / 0,91 · semua 1: 55,2% / 28% / 25% / 0,85 ·
+  semua 1,5: 48,4% / 38% / 34% / 0,82 · semua 2: 45,3% / 46% / 33% / 0,89 ·
+  **A TP 2× (SL 3 ATR, maks 4 jam) + B tetap: 63,4% / 27% / 16% / 0,96** (seluruh periode CAGR 46%, rasio OOS 1,57) ·
+  A TP 1,5× + B tetap: 63,4% / 26% / 15% / 0,96 · A TP 1× + B tetap: 63,4% / 25% / 17% / 0,94 · A TP 0,5× (hold 24j) + B tetap: 65,8% / 26% / 20% / 0,96.
