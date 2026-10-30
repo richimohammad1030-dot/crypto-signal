@@ -22,8 +22,8 @@ Laporan menyebut **total ide yang sudah pernah diuji** untuk bot itu (makin bany
 3. **Uji data terkunci** (hanya sekali per ide, setelah lolos tahap 1-2; **dilarang** dipakai untuk memilih/menyetel parameter):
    - Crypto swing & intraday: daftar koin **sesuai masanya** (`riset/pit.py`, data `riset/unduh_pit.py`), termasuk koin yang
      sudah delisting. Syarat: rasio R/DD penantang tidak lebih buruk dari juara pada daftar ini.
-   - XAU: data **Dukascopy 2015 - Jan 2025** (`riset/unduh_xau_panjang.py`), periode yang tidak dipakai merancang juara.
-     Syarat: rasio R/DD penantang tidak lebih buruk dari juara (setelah biaya).
+   - XAU: sejak audit 30 Okt 2026 data Dukascopy 2015 - Jan 2025 sudah dipakai memilih (2015-2021) dan menguji (2022 - Jan 2025).
+     Tahap 3 XAU = konfirmasi sekali di Setra Feb 2025 - skrg (tidak lebih buruk dari juara); data benar-benar baru hanya lewat uji maju.
    Catat di log bahwa data terkunci sudah dipakai untuk ide itu.
 4. **Uji maju**: ide yang lolos tahap 1-3 berstatus `uji-maju` (bukan langsung diusulkan). Setiap minggu, bandingkan penantang
    vs juara **hanya pada data baru sejak tanggal lolos**. Usulan ke pemilik baru diajukan setelah minimal **6 minggu** dan
@@ -51,3 +51,5 @@ Status ide: `antri` · `diuji` · `perlu-data` · `uji-maju` (lolos tahap 1-3, s
 - XAU, data terkunci Dukascopy (2015 - Jan 2025): juara RUGI -0,061R/trade bersih (-157R, 2.579 trade); untung hanya di
   rezim volatil 2024-2026. Data Dukascopy setara Setra (99% trade searah di periode sama). Lihat riset/xau/log.md.
 - Intraday, daftar koin sesuai masanya 2024-skrg: rasio 0,65 vs 2,24 (daftar tetap); modul A tanpa edge. Lihat riset/intraday/log.md.
+- XAU, audit 30 Okt 2026: juara rugi 8 dari 12 tahun (2015-2026); backtest Setra optimis ±1/3 karena candle ambigu dianggap BUY
+  (urutan M1: +43 → +29R/thn). Tidak ada edge permanen; K6 (ide #22) uji maju. Lihat riset/xau/log.md.

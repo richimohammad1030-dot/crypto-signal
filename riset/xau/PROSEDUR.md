@@ -28,6 +28,16 @@ python3 riset/backtest_xau.py . /tmp/data/xau.json /tmp/data/trades_xau.csv
 ```
 `backtest_xau.py` memakai mesin asli bot (`gold_bot.GoldEngine`), jadi selalu mengikuti versi juara yang sedang live.
 Data XAU (Setra, sumber yang sama dengan bot) hanya tersedia sejak **Februari 2025**.
+
+**Sejak audit 30 Okt 2026** (lihat `riset/xau/log.md`):
+- Mesin eksperimen: `riset/xau/eksperimen/audit_mesin.py` (identik dengan bot; parameter, filter, bobot per sisi, fitur tren/volatilitas).
+- Pembagian data: pilih **2015-2021**, uji **2022 - Jan 2025** (Dukascopy), konfirmasi **Feb 2025 - skrg** (Setra; data sambung
+  `audit_mesin.sambung`). Dukascopy 2015 - Jan 2025 **sudah terpakai** (bukan data terkunci lagi); data bersih hanya data baru (uji maju).
+- **Bias candle ambigu**: ±6% hari candle H1 saat terisi menyentuh high DAN low range; bot memilih BUY, padahal SELL lebih sering
+  duluan (47/86 hari 2022-skrg). Pakai `ambigu=dict` dari `eksperimen/ambigu_m1_2022_2026.json` (+ `audit_m1.py` untuk hari baru)
+  saat membandingkan varian; laporkan angka "asumsi bot" dan "urutan M1".
+- **Uji maju K6 (ide #22)**: setiap minggu bandingkan K6 & K6b vs juara hanya pada trade sejak 30 Okt 2026 (`audit_ringkas.py`
+  dengan data Setra terbaru). Usulan ke pemilik setelah ≥ 6 minggu dan ≥ 20 trade K6.
 Data terkunci (tahap 3 ATURAN_BERSAMA): `python3 riset/unduh_xau_panjang.py /tmp/data 2015` → `/tmp/data/xau_panjang.json`
 (Dukascopy, harga BID, 2015-sekarang; bibit s.d. Okt 2026 ada di `riset/data/xau_dukascopy_h1.json.gz`, jadi hanya
 bulan baru yang diunduh, ±5-20 menit karena dibatasi server). **Juara sendiri rugi di periode ini (lihat log 30 Okt 2026).** Hanya dipakai periode **2015 - Jan 2025**

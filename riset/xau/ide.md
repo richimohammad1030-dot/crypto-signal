@@ -9,11 +9,14 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 |---|---|---|---|---|
 | 5 | Filter lebar range 04:00-07:00 dibanding ATR (lewati range terlalu sempit/lebar) | 2 | gagal | 30 Okt 2026: ujung sempit/lebar tetap untung; R/DD 2026 turun di semua varian |
 | 6 | Lewati hari dengan news USD dampak tinggi sebelum 23:00 WIB | 3 | antri | Kalender ForexFactory hanya minggu berjalan; perlu sumber histori |
-| 7 | Target TP 3R atau 5R vs 4R sekarang | 3 | antri | Parameter inti, butuh bukti kuat |
+| 7 | Target TP 3R atau 5R vs 4R sekarang | - | gagal | Audit 30 Okt 2026 (2015-2021): TP 0,5-6R & tanpa TP semua -23 s.d. -31R/thn (juara -25) |
 | 13 | Hanya satu sisi OCO yang searah tren harian (misalnya close H1 vs EMA200 H1) | 2 | gagal | 30 Okt 2026: EMA200 merusak 2025; EMA50/100 sensitif periode, kalah di ≥4/7 kuartal; sisi unggul berganti antar tahun |
-| 14 | Jam tutup posisi 21:00 atau 01:00 WIB vs 23:00 sekarang | 3 | antri | 160 trade ditutup jam 23:00 rata-rata +1,16R, jangan potong pemenang |
-| 15 | Lewati hari tertentu (Senin atau Jumat) | 3 | antri | Cek per hari dulu; butuh konsistensi di kedua paruh data |
-| 16 | Range 03:00-07:00 atau 05:00-08:00 vs 04:00-07:00 sekarang | 3 | antri | Parameter inti |
-| 17 | SL 1,2 atau 1,8 x ATR vs 1,5 sekarang | 4 | antri | Parameter inti, butuh bukti sangat kuat |
+| 14 | Jam tutup posisi 21:00 atau 01:00 WIB vs 23:00 sekarang | - | gagal | Audit 30 Okt 2026 (2015-2021): tutup 20:00-04:00 WIB semua -19 s.d. -24R/thn; tidak mengubah rugi |
+| 15 | Lewati hari tertentu (Senin atau Jumat) | - | gagal | Audit 30 Okt 2026: hari terburuk berganti (Setra Kamis, 2015-2026 Rabu); lewati 1 hari -15 s.d. -26R/thn |
+| 16 | Range 03:00-07:00 atau 05:00-08:00 vs 04:00-07:00 sekarang | - | gagal | Audit 30 Okt 2026 (2015-2021): range 1-6 candle, pasang 08/09/10/14/19 WIB semua negatif (-9 s.d. -46R/thn) |
+| 17 | SL 1,2 atau 1,8 x ATR vs 1,5 sekarang | - | gagal | Audit 30 Okt 2026 (2015-2021): SL 1-3 ATR & SL di sisi range semua negatif; SL 2,5 ATR -11R/thn (kurang rugi, tetap rugi) |
 | 18 | Lewati hari dengan rasio range/ATR di zona 0,88-1,06 (kuintil K2 2025) | 4 | antri | Negatif di 2025 (-15,2R) dan 2026 (-11,2R), tapi pola tak monoton; uji ulang setelah ≥ 2 kuartal data baru |
-| 21 | Filter rezim volatilitas: trade hanya jika ATR harian/H1 relatif terhadap harga di atas ambang (mis. ≥ persentil 50 setahun), atau saat tren emas kuat | 1 | antri | 30 Okt 2026: juara rugi di 2015-Jan 2025 (Dukascopy, -157R), untung hanya di rezim volatil 2024-2026 |
+| 21 | Filter rezim volatilitas: trade hanya jika ATR harian/H1 relatif terhadap harga di atas ambang (mis. ≥ persentil 50 setahun), atau saat tren emas kuat | - | gagal | Audit 30 Okt 2026: versi relatif (persentil/rata 1 thn, ATR D1) negatif 2015-2021; versi absolut/biaya (K1-K4) P uji 0,54-0,68 [lit] Lundström, Day trading returns across volatility states |
+| 22 | **K6**: OCO tetap 2 sisi, hari dilewati jika sisi LAWAN tren H1 EMA200 yang terisi duluan (praktik: sisi lawan lot minimum sebagai pemicu batal). Varian K6b: sisi lawan risiko 1/2 | 1 | uji-maju | Audit 30 Okt 2026: P uji 0,939 (K6b 0,946), Setra R/DD 3,93 vs juara 2,37; tetap -2R/thn di 2015-2021. Uji maju: ≥ 6 minggu & ≥ 20 trade sejak 30 Okt 2026 |
+| 23 | Bot: tentukan sisi terisi dari candle 1m/5m Setra bila candle H1 menyentuh high DAN low range (sekarang selalu BUY) | 1 | antri | Perbaikan akurasi, bukan strategi. Audit 30 Okt 2026: 6,2% hari ambigu, SELL duluan 47/86 (2022-skrg); backtest Setra +43 → +29R/thn |
+| 24 | Resolusi M1 hari ambigu 2015-2021 (101 hari) agar angka periode pilih tidak optimis | 3 | antri | `eksperimen/audit_m1.py` (unduhan Dukascopy dibatasi ±1 hari/menit) |

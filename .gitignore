@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 data/
+# bibit data riset XAU (Dukascopy H1) ikut di-commit agar routine tidak mengunduh ulang 2015-sekarang
+!riset/data/
+riset/data/*
+!riset/data/xau_dukascopy_h1.json.gz
