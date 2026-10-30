@@ -196,3 +196,15 @@ SL 1,5-3 ATR, TP 1,5/2/3R/tanpa), portofolio K6 + RSI2 (bobot RSI2 1 / 0,5). Sel
   2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14. Risiko 0,5%: DD 18,6%.
   Satu-satunya kandidat yang memenuhi kriteria awal pemilik (win ≥ 40%, PF > 1, ≥ 3/mg, beruntun seimbang, mayoritas tahun) di KETIGA
   periode, tetapi dirakit setelah melihat semua periode → status `perlu-data`, wajib uji maju (ide #34).
+
+## 2026-10-31 · Penyetelan bot multi-strategi (`eksperimen/multi_setel.py`) · risiko disetujui pemilik: 0,5%
+Aturan main ditetapkan sebelum melihat hasil: seleksi 2015-2021 (kriteria awal pemilik + skor tetangga), diterima hanya bila PF > 1 di uji &
+Setra DAN P_rasio vs baseline ≥ 0,90 di uji. Grid 324: RSI2 kuantil 30/35/40% × SL 2/2,5/3 × TP 2/3R/tanpa · K6 SL 1,25/1,5 × TP 4R/tanpa ·
+aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
+- Lulus 2015-2021: 95, semuanya "RSI2 dulu" (dua aturan lain 0).
+- Terbaik menurut skor (RSI2 30% SL 2-3 TP 2R/tanpa, K6 SL 1,25 tanpa TP): PF 1,07-1,28 di ketiga periode, R/thn lebih tinggi
+  (12 thn +11,8 vs +6,6), tetapi DD 51-71R vs 37R dan **P_rasio uji vs baseline 0,25-0,56** → TIDAK diterima. Baseline tetap.
+- **BASELINE (ide #34)**: maks 1 posisi/hari; RSI2 H1 jam 07:00 ≤ kuantil 35% (43,76) → BUY market / ≥ 71,22 → SELL market, SL 3 ATR,
+  tanpa TP; selain itu K6 (SL 1,5 ATR, TP 4R). Tutup 23:00. Risiko 0,5%: 12 thn 4,2 trade/mg, win 47%, RR 1,22, PF 1,07, +6,6 R/thn,
+  DD 37R (17,2% ekuitas), CAGR ±3%, W/L 10/8, bulan positif 53%. Per periode PF 1,03 / 1,10 / 1,17.
+- Penantang untuk uji maju bayangan: RSI2 30% SL 2,5 TP 2R + K6 SL 1,25 tanpa TP (12 thn PF 1,12, +11,8 R/thn, DD 51R, W/L 12/12).
