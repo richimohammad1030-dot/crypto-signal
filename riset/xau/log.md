@@ -139,3 +139,21 @@ Angka bersih biaya 0,40 USD; varian OCO memakai urutan M1 untuk candle ambigu 20
   2015-2021 -7,8R/thn DD 76R · 2022-Jan 2025 +8,7R/thn DD 29R · Setra +30,7R/thn DD 13,9R. P_rasio vs juara: pilih 0,962,
   uji 0,943, Setra 0,812; slip +0,20 USD uji +4,0R/thn. (K6: 0,986 / 0,939 / 0,768, slip +7,8; K6b: 0,933 / 0,946 / 0,848, slip +0,1.)
 - Pemasangan K6 (commit lokal a77c051) DITAHAN menunggu pilihan pemilik antara K6 (lebih kuat, ±2,4 trade/minggu) dan K6c (trade tiap hari).
+
+## 2026-10-31 · Riset strategi alternatif (kriteria pemilik: win ≥ 40%, PF > 1, ≥ 3 trade/minggu, beruntun seimbang, mayoritas tahun untung)
+Aturan tetap 07:00-23:00 WIB. Seleksi 2015-2021, uji 2022 - Jan 2025, konfirmasi Setra. Bila 2 order terisi di candle yang sama →
+hasil terburuk (konservatif). Mesin `eksperimen/strat_mesin.py`; skrip `strat_scan.py` (1.152 varian), `mr_scan.py` (1.792),
+`mr_uji.py`, `strat_keluarga.py`, `gabung.py`.
+- Literatur [lit]: pola jam emas "topi" (Donati & Jung, CBS: naik di jam Asia, turun sisa hari) → "selalu SELL 07-23" rugi di semua
+  periode (-9,6 / -18,4 / -6,4 R/thn), pola tidak berlaku 2015-2026. Pembalikan overnight-intraday (Della Corte, Kosowski & Wang 2015):
+  2015-21 -2,1, uji -0,4, Setra +22 R/thn. Momentum intraday (Gao, Han, Li & Zhou 2018; Baltussen dkk. 2021): win 26-28%, 2015-21
+  -26,6 R/thn. Fade range Asia OCO (limit): win 53-55% tetapi PF 0,83-0,95 di semua periode. Tren EMA200 market: 2015-21 -2,0.
+- Lulus kriteria pemilik di 2015-2021: hanya keluarga **RSI(2) fade** (mean reversion H1 jam 07:00; 67 varian, tetangga stabil),
+  mis. ambang kuantil 35% (beli RSI2 ≤ 43,8 / jual ≥ 71,2), market, SL 3 ATR, TP 2R: 3,5 trade/mg, win 50%, PF 1,06, W/L 11/9,
+  5/7 tahun. **Gagal di uji 2022 - Jan 2025**: PF 0,95-1,01, 2023 -18 s.d. -30R, P_rasio vs juara 0,37-0,52; Setra +6 s.d. +11 R/thn.
+  Edge sangat tipis (PF ±1,04 selama 12 tahun; negatif dengan slip +0,20 USD di uji). **GAGAL** (ide #29).
+- **Hipotesis** (lahir setelah melihat semua periode, BUKAN bukti): portofolio K6 + RSI2 fade (saling melengkapi: MR kuat 2015-21,
+  tren kuat 2022-26), risiko 1% masing-masing: 6 trade/mg, win 44%, PF 1,07, +10,4 R/thn, DD 42R (36%), W/L 7/12, 8/12 tahun untung
+  (2019 -16, 2023 -17). Per periode PF 1,01 / 1,08 / 1,25. Perlu uji maju (ide #30).
+- Kesimpulan: dalam jendela tetap 07:00-23:00 dengan biaya 0,40 USD, tidak ditemukan strategi yang memenuhi semua kriteria pemilik
+  secara konsisten di periode pilih DAN uji. Edge intraday emas bergantung rezim: mean reversion di masa tenang, tren di masa volatil.

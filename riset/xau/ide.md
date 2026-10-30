@@ -23,3 +23,6 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 25 | Analog/rezim walk-forward: pilih varian bulanan dari periode masa lalu yang mirip (tren, volatilitas) | - | gagal | 31 Okt 2026: sejak 2018 analog k=24 rasio 1,81 vs K6 tetap 1,99 (P 0,49); k kecil jauh lebih buruk |
 | 26 | Logika tren harian (Donchian/EMA/momentum D1) dalam jendela tetap 07:00-23:00 | - | gagal | 31 Okt 2026: 880 varian, 0 lolos di 2015-2021; terbaik -4,5R/thn di 2022-Jan 2025 |
 | 27 | Musiman kalender (lewati/pilih bulan tertentu) | - | gagal | 31 Okt 2026: peringkat bulan tidak konsisten antar periode (korelasi +0,26 / -0,13) |
+| 28 | Strategi literatur dalam jendela 07-23: bias jam (selalu SELL/BUY), pembalikan overnight, momentum intraday, fade range Asia OCO, tren EMA200 market [lit] | - | gagal | 31 Okt 2026: tidak lulus kriteria pemilik di 2015-2021 (kecuali RSI2); lihat log |
+| 29 | Mean reversion RSI(2) H1 jam 07:00 (beli oversold / jual overbought, SL 3 ATR) [lit] Connors | - | gagal | 31 Okt 2026: lulus kriteria pemilik 2015-2021 (win 50%, PF 1,06) tetapi PF 0,95-1,01 di 2022 - Jan 2025 |
+| 30 | Portofolio K6 + RSI2 fade (tren + mean reversion saling melengkapi) | 2 | perlu-data | 31 Okt 2026 hipotesis pasca-lihat: 6 trade/mg, win 44%, PF 1,07, 8/12 tahun; butuh uji maju |
