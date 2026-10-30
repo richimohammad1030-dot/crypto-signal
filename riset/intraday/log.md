@@ -76,3 +76,17 @@ Juara v2 (data baru): 4.931 trade, fill 70,9%, win 66,4%, +0,062R/trade, +45,9R/
 - Review: modul A melemah (2025 -6,1R, 2026 +0,7R; 6 bln terakhir +0,013R/trade), B-long kuat (+0,16R 6 bln). 6 bln terakhir
   total +0,059R/trade ≥ rata-rata 2024-skrg (+0,040R) → bukan PERINGATAN. Ide baru I-14 (filter BTC modul A).
 - Live vs backtest (27-30 Okt): 4 trade tertutup (PEPE, modul A) identik R dan waktu keluar; ZRO terbuka di kedua mesin.
+
+## 2026-10-30 · Fondasi riset diperkuat (chat bersama pemilik) · bias koin selamat
+Aturan baru: `riset/ATURAN_BERSAMA.md` (2 ide/minggu termasuk 1 ide baru, signifikansi ≥ 0,90, data terkunci, uji maju).
+- **Daftar koin sesuai masanya** (`riset/pit_intraday.py`, 195 koin termasuk yang delisting) vs daftar tetap, juara v2:
+  semua: +0,052R vs +0,064R, DD 23,9 vs 13,4R · 2020-2023: rasio 5,58 vs 5,66 (hampir sama) ·
+  **2024-skrg: +0,021R vs +0,044R, R/thn +15,5 vs +30,0, DD 23,9 vs 13,4R, rasio 0,65 vs 2,24**. Per tahun PIT:
+  2024 +9 · 2025 -1 · 2026 +35.
+- Diagnosa 2024-skrg (PIT): **modul A ±0,000R/trade (1.236 trade, tanpa edge)**; B-long +0,039R; B-short +0,084R.
+  Peringkat 11-25 +0,061R; 1-10 +0,022R; 26-50 -0,002R. Koin di luar daftar kini -0,008R (597 trade).
+  Kesimpulan: edge modul A di 2024-skrg sebagian besar berasal dari daftar koin yang sudah "tahu pemenang". Modul B tahan uji.
+- Kalibrasi signifikansi: v1 → v2 P_rasio_lebih_baik 0,66 (2024-skrg). Ide baru I-15, I-16 (prioritas 1).
+- Cek kesehatan & rekap intraday aktif (baseline.json["intraday"], R bersih 2024-skrg). Risiko gabungan swing+intraday
+  (risiko 1%): korelasi harian -0,05, DD gabungan 25,0% (swing 16,3 / intraday 13,4), risiko terbuka maks 13%,
+  1.737 trade intraday di koin yang sedang dipegang swing (8 berlawanan arah).

@@ -48,3 +48,13 @@ kecuali ada data baru yang relevan.
 - Label: HIGH > MEDIUM > LOW (semua), HIGH > LOW 7/7 tahun. MEDIUM melemah 2025-2026 (+0,007R vs LOW +0,045R).
 - ML walk-forward: label selisih 0,32R (5/5) vs ML terbaik 0,18R (3/5). Belum lebih baik.
 - Ide baru: #19 risiko SELL 0,5%, #20 analisis MEDIUM melemah.
+
+## 2026-10-30 · Fondasi riset diperkuat (chat bersama pemilik) · bias koin selamat
+Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_pit.py` + `riset/pit.py`.
+- **Juara v2, daftar tetap vs sesuai masanya** (195 koin termasuk delisting; mesin asli bot, order baru hanya di 50 besar bulan itu):
+  semua +0,264R vs +0,208R, R/thn +93 vs +74, DD 16,3 vs 26,4R, rasio 5,69 vs 2,81 ·
+  2020-2023 rasio 6,60 vs 3,41 · 2024-skrg R/thn +72 vs +52, DD 16,0 vs 15,3R, rasio 4,47 vs 3,37.
+  Per tahun PIT: 2020 +134 · 2021 +98 · 2022 +34 · 2023 +92 · 2024 +92 · 2025 +21 · 2026 +32 (semua positif).
+- Koin di luar daftar kini: 725 trade, +0,131R/trade (tetap positif). Trade yang dibuat saat koin BELUM 50 besar (daftar tetap):
+  234 trade +0,257R. Bias datang terutama dari prioritas slot berdasarkan peringkat hari ini, bukan koin "mati".
+- Kesimpulan: strategi tahan uji, tetapi ekspektasi jujur ±20-28% lebih rendah dan DD bisa ±26R. Angka PIT = patokan ekspektasi.
