@@ -1,4 +1,4 @@
-"""Patokan cek kesehatan bot XAU (Lapis 2) untuk versi K6, ditulis ke baseline.json["xau"].
+"""Patokan cek kesehatan bot XAU (Lapis 2) untuk versi MULTI-STRATEGI (MR RSI2 + K6), ditulis ke baseline.json["xau"].
 R KOTOR (bot mencatat R kotor). Periode 2022 - sekarang (Dukascopy s.d. Jan 2025 + Setra sesudahnya), urutan candle ambigu dari
 M1 Dukascopy (riset/xau/eksperimen/ambigu_m1_2022_2026.json) agar ekspektasi tidak optimis. analisis.py tidak menimpa patokan ini.
 Pemakaian: python riset/baseline_xau.py <repo> <xau_setra.json> <xau_dukascopy.json>"""
@@ -27,14 +27,15 @@ def bands(R, sims=5000):
 D = m.sambung(m.muat(DUKA), m.muat(SETRA))
 A = np.array(m.atr(list(D[2]), list(D[3]), list(D[4]), 14)); F = m.fitur(D, A)
 AMB = {int(k): v for k, v in json.load(open(os.path.join(REPO, "riset", "xau", "eksperimen", "ambigu_m1_2022_2026.json"))).items()}
-tr = m.potong(m.jalankan({"tren_lawan_w": ("ema200", 0.0), "ambigu": AMB}, D, A, F), "2022-01-01")
+import multi_mesin as mm
+tr = m.potong(mm.baseline(D, A, F, ambigu=AMB), "2022-01-01")
 R = np.array([x["R"] for x in tr])
 c = np.cumsum(R); dd = float((np.maximum.accumulate(np.concatenate([[0], c]))[1:] - c).max())
 s = st = 0
 for r in R: s = s + 1 if r <= 0 else 0; st = max(st, s)
 win, los = R[R > 0], R[R <= 0]
 base = json.load(open(os.path.join(REPO, "baseline.json")))
-base["xau"] = dict(sumber=f"riset K6 {m.wib(tr[0]['t0']):%Y-%m} s.d. {m.wib(tr[-1]['t1']):%Y-%m} (Dukascopy+Setra, urutan M1)",
+base["xau"] = dict(sumber=f"riset multi-strategi (MR+K6) {m.wib(tr[0]['t0']):%Y-%m} s.d. {m.wib(tr[-1]['t1']):%Y-%m} (Dukascopy+Setra, urutan M1)",
                    pembuat="riset/baseline_xau.py", n=len(R), wr=round(float((R > 0).mean() * 100), 3), avgR=round(float(R.mean()), 3),
                    totR=round(float(R.sum()), 3), pf=round(float(win.sum() / -los.sum()), 3), maxdd=round(dd, 3), streak=int(st), band=bands(R))
 json.dump(base, open(os.path.join(REPO, "baseline.json"), "w"), indent=1)

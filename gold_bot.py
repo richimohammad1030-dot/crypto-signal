@@ -1,7 +1,11 @@
 """
 Bot sinyal "Gold Daily Straddle" (XAUUSD) -> channel Telegram khusus XAU.
 
-Aturan (versi K6, live sejak 2 Nov 2026; chart H1). Jam sinyal 07:00 & tutup 23:00 WIB = aturan tetap pemilik.
+Aturan (versi MULTI-STRATEGI, live mulai 2 Nov 2026; chart H1; riset/xau/STRATEGI.md). Jam sinyal 07:00 & tutup 23:00 WIB
+= aturan tetap pemilik. Maksimal 1 posisi per hari, dipilih jam 07:00:
+A) MEAN REVERSION (prioritas): RSI(2) H1 close 07:00 <= MR_BUY -> BUY market; >= MR_SELL -> SELL market (masuk di open candle
+   berikutnya). SL = 3 x ATR(14) H1, tanpa TP, ditutup 23:00 WIB.
+B) BREAKOUT SEARAH TREN (K6), bila RSI(2) tidak ekstrem:
 - 07:00 WIB (candle H1 yang close 07:00): range = high & low 3 candle H1 terakhir.
 - Tren = close 07:00 vs EMA200 H1. Tren naik -> ORDER UTAMA BUY STOP di high range, BATAS BATAL di low range;
   tren turun -> ORDER UTAMA SELL STOP di low range, BATAS BATAL di high range.
@@ -18,6 +22,7 @@ STATE_FILE = os.path.join(HERE, "gold_state.json")
 CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU disimpan oleh pemroses perintah
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
+MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 71.22, 3.0   # mean reversion RSI(2); ambang = kuantil 35%/65% 2015-2021 (riset)
 PLACE_HOUR_UTC = 23     # jam BUKA candle H1 (UTC) yang close 07:00 WIB
 CLOSE_HOUR_UTC = 15     # jam BUKA candle H1 (UTC) yang close 23:00 WIB
 SYM = "XAUUSD"
@@ -34,6 +39,18 @@ def ema(x, n):
     for v in x:
         e = v if e is None else e + k * (v - e)
         out.append(e)
+    return out
+
+
+def rsi(x, n):
+    """RSI Wilder rekursif (alpha 1/n, awal 0); sama dengan riset/xau/eksperimen/multi_mesin.rsi."""
+    out, au, ad, a, prev = [], 0.0, 0.0, 1 / n, None
+    for v in x:
+        if prev is not None:
+            d = v - prev
+            au += a * ((d if d > 0 else 0.0) - au); ad += a * ((-d if d < 0 else 0.0) - ad)
+        prev = v
+        out.append(100 - 100 / (1 + au / max(ad, 1e-12)))
     return out
 
 
@@ -62,18 +79,27 @@ class GoldEngine:
         self.s, self.notify = state, notify
         self.trades = []
 
-    def record(self, d, e, ex, r0, t0, t1, why):
+    def record(self, d, e, ex, r0, t0, t1, why, strat="K6"):
         R = (ex - e) * d / r0 if r0 else 0.0
-        self.trades.append((t0, t1, d, e, ex, r0))
-        self.s.setdefault("hist", []).append(["XAU", d, t0, t1, e, ex, round(R, 3)])
-        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why, r0=r0)
+        self.trades.append((t0, t1, d, e, ex, r0, strat))
+        self.s.setdefault("hist", []).append(["XAU", d, t0, t1, e, ex, round(R, 3), strat])
+        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why, r0=r0, strat=strat)
 
     def step(self, i, T, O, H, L, C, A):
         s = self.s
         t, hr = T[i], (T[i] // 3600) % 24
         pend, pos = s.get("pend"), s.get("pos")
-        # 1) order pending terisi? (BUY STOP dicek lebih dulu)
-        if pos is None and pend:
+        # 1a) mean reversion: masuk market di open candle pertama setelah sinyal 07:00
+        if pos is None and pend and pend.get("mode") == "MR":
+            d = pend["d"]; fill = O[i]; slp = fill - d * pend["dist"]
+            s["pend"] = None
+            s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": None, "r0": pend["dist"], "t0": t, "strat": "MR"}
+            self.notify("fill", d=d, entry=fill, sl=slp, tp=None, t=t, strat="MR")
+            if (d == 1 and L[i] <= slp) or (d == -1 and H[i] >= slp):
+                s["pos"] = None
+                self.record(d, fill, slp, pend["dist"], t, t, "kena SL di candle yang sama", "MR")
+        # 1b) order stop K6 terisi? (BUY STOP dicek lebih dulu)
+        elif pos is None and pend:
             b, sl_ = pend["buy"], pend["sell"]
             hit = None
             if H[i] >= b[0]:
@@ -90,17 +116,17 @@ class GoldEngine:
                 r0 = abs(fill - slp)
                 s["pend"] = None
                 s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": r0, "t0": t}
-                self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t)
+                self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat="K6")
                 if (d == 1 and L[i] <= slp) or (d == -1 and H[i] >= slp):
                     s["pos"] = None
                     self.record(d, fill, slp, r0, t, t, "kena SL di candle yang sama")
         # 2) kelola posisi (SL dicek lebih dulu dari TP)
         elif pos is not None and pos["t0"] < t:
-            d = pos["d"]
+            d, st = pos["d"], pos.get("strat", "K6")
             if (d == 1 and L[i] <= pos["sl"]) or (d == -1 and H[i] >= pos["sl"]):
-                s["pos"] = None; self.record(d, pos["e"], pos["sl"], pos["r0"], pos["t0"], t, "kena SL")
-            elif (d == 1 and H[i] >= pos["tp"]) or (d == -1 and L[i] <= pos["tp"]):
-                s["pos"] = None; self.record(d, pos["e"], pos["tp"], pos["r0"], pos["t0"], t, "kena TP")
+                s["pos"] = None; self.record(d, pos["e"], pos["sl"], pos["r0"], pos["t0"], t, "kena SL", st)
+            elif pos.get("tp") is not None and ((d == 1 and H[i] >= pos["tp"]) or (d == -1 and L[i] <= pos["tp"])):
+                s["pos"] = None; self.record(d, pos["e"], pos["tp"], pos["r0"], pos["t0"], t, "kena TP", st)
         # 3) jam tutup 23:00 WIB
         if hr == CLOSE_HOUR_UTC:
             if s.get("pend"):
@@ -108,21 +134,29 @@ class GoldEngine:
                 self.notify("expire")
             if s.get("pos"):
                 p = s["pos"]; s["pos"] = None
-                self.record(p["d"], p["e"], C[i], p["r0"], p["t0"], t, "ditutup jam 23:00")
+                self.record(p["d"], p["e"], C[i], p["r0"], p["t0"], t, "ditutup jam 23:00", p.get("strat", "K6"))
         # 4) jam pasang 07:00 WIB
         if hr == PLACE_HOUR_UTC and s.get("pos") is None:
             hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
-            if abs(hi - (hi - SL_ATR * a)) > 0.5:      # sama dengan backtest: abaikan order dengan SL < 0,5 USD
+            r2 = self.R2[i]
+            if r2 <= MR_BUY or r2 >= MR_SELL:          # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
+                if MR_SL_ATR * a > 0.5:
+                    d = 1 if r2 <= MR_BUY else -1
+                    s["pend"] = {"mode": "MR", "d": d, "dist": MR_SL_ATR * a, "t": t, "rsi": round(r2, 1),
+                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1}
+                    self.notify("order", pend=s["pend"], t=t, price=C[i])
+            elif abs(hi - (hi - SL_ATR * a)) > 0.5:    # B) K6; sama dengan backtest: abaikan order dengan SL < 0,5 USD
                 tren = 1 if C[i] > self.E[i] else -1
                 s["pend"] = {"buy": [hi, hi - SL_ATR * a, hi + RR * SL_ATR * a],
                              "sell": [lo, lo + SL_ATR * a, lo - RR * SL_ATR * a],
-                             "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2)}
+                             "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2), "rsi": round(r2, 1)}
                 self.notify("order", pend=s["pend"], t=t, price=C[i])
 
     def run(self, rows, since):
         T = [r[0] for r in rows]; O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]; C = [r[4] for r in rows]
         A = atr(H, L, C, ATR_N)
         self.E = ema(C, TREND_EMA)
+        self.R2 = rsi(C, MR_N)
         start = 250 if self.s.get("replay") else 50
         for i in range(start, len(rows)):
             if T[i] > since:
@@ -155,7 +189,7 @@ def main():
         sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
-    risk_pct = float(os.environ.get("XAU_RISK_PCT") or "1")
+    risk_pct = float(os.environ.get("XAU_RISK_PCT") or "0.5")
     state = json.load(open(STATE_FILE)) if os.path.exists(STATE_FILE) else {"last_ts": 0}
     cstate = json.load(open(CRYPTO_STATE)) if os.path.exists(CRYPTO_STATE) else {}
     target = cstate.get("gold_channel_id")      # None -> kirim ke chat pribadi pemilik
@@ -179,10 +213,15 @@ def main():
     T_, H_, L_ = [r[0] for r in rows], [r[2] for r in rows], [r[3] for r in rows]
     def notify(kind, **k):
         if kind == "order":   # faktor saat order dipasang (dipakai riset)
-            p = k["pend"]; a = abs(p["buy"][0] - p["buy"][1]) / SL_ATR
-            state["feat"] = dict(range=round(p["hi"] - p["lo"], 3), atr=round(a, 3),
-                                 range_atr=round((p["hi"] - p["lo"]) / a, 3) if a else None,
-                                 hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
+            p = k["pend"]
+            if p.get("mode") == "MR":
+                state["feat"] = dict(strat="MR", rsi=p["rsi"], atr=round(p["a"], 3),
+                                     hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
+            else:
+                a = abs(p["buy"][0] - p["buy"][1]) / SL_ATR
+                state["feat"] = dict(strat="K6", range=round(p["hi"] - p["lo"], 3), atr=round(a, 3),
+                                     range_atr=round((p["hi"] - p["lo"]) / a, 3) if a else None, rsi=p.get("rsi"),
+                                     hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
         if kind == "exit":    # Lapis 1: catat trade selesai ke jurnal
             r0 = k.get("r0")
             try:

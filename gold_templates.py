@@ -74,13 +74,29 @@ def make_notifier(ev):
 def signal_bubble(ev, t, risk_pct, live_px=None):
     if not ev["order"] and not ev["expire"]:
         return None
-    L = [f"🥇 <b>SINYAL {SYM}</b> · Gold Daily Straddle", f"🕐 {_wib(t)}", BAR]
-    if ev["order"] and ev["order"]["pend"].get("main"):
+    L = [f"🥇 <b>SINYAL {SYM}</b> · XAU Intraday", f"🕐 {_wib(t)}", BAR]
+    if ev["order"] and ev["order"]["pend"].get("mode") == "MR":
+        p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"
+        L.append(f"🌅 <b>ORDER HARI INI · {arah} SEKARANG</b> (mean reversion)")
+        L.append(_pre([
+            f"RSI(2) H1 07:00 : {p['rsi']:.1f}  ({'jenuh jual' if d == 1 else 'jenuh beli'})",
+            f"Harga 07:00     : {fmt(p['px'])}",
+            "",
+            f"{arah} MARKET",
+            f"  Entry : ±{fmt(p['px'])} (harga saat ini)",
+            f"  SL    : {fmt(p['px'] - d * p['dist'])}  ({'-' if d == 1 else '+'}{fmt(p['dist'])} dari entry)",
+            "  TP    : tidak ada, tutup 23:00",
+        ]))
+        L += [BAR,
+              f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
+              "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
+              f"⚖️ Risiko saran {risk_pct}% modal"]
+    elif ev["order"] and ev["order"]["pend"].get("main"):
         p = ev["order"]["pend"]; d = p["main"]
         o = p["buy"] if d == 1 else p["sell"]
         batal = p["sell"][0] if d == 1 else p["buy"][0]
         arah = "BUY STOP" if d == 1 else "SELL STOP"
-        L.append(f"🌅 <b>ORDER HARI INI · {arah}</b> (searah tren)")
+        L.append(f"🌅 <b>ORDER HARI INI · {arah}</b> (breakout searah tren)")
         L.append(_pre([
             f"Range 04:00–07:00 : {fmt(p['lo'])} – {fmt(p['hi'])}",
             f"Tren H1 (EMA200 {fmt(p['ema'])}) : {'NAIK' if d == 1 else 'TURUN'}",
@@ -157,7 +173,9 @@ def news_bubble(news, pos, pend, px, now):
         R = (px - pos["e"]) * pos["d"] / pos["r0"] if pos.get("r0") and px else 0.0
         L.append(f"📂 <b>POSISI {SYM} · {'BUY' if pos['d'] == 1 else 'SELL'}</b> · {R:+.2f}R")
         L.append(_pre([f"Entry : {fmt(pos['e'])}"] + ([f"Kini  : {fmt(px)}"] if px else []) +
-                      [f"SL    : {fmt(pos['sl'])}", f"TP    : {fmt(pos['tp'])}"]))
+                      [f"SL    : {fmt(pos['sl'])}", f"TP    : {fmt(pos['tp']) if pos.get('tp') is not None else '- (tutup 23:00)'}"]))
+    elif pend and pend.get("mode") == "MR":
+        L.append(f"⏳ <b>SINYAL {'BUY' if pend['d'] == 1 else 'SELL'} MARKET</b> (mean reversion) baru dikirim")
     elif pend and pend.get("main"):
         d = pend["main"]
         L.append(f"⏳ <b>ORDER AKTIF</b> · bisa terisi saat news")
@@ -194,11 +212,15 @@ def update_bubble(ev, pos, px, t):
         sep()
         arah = "BUY" if k["d"] == 1 else "SELL"
         lawan = "SELL STOP" if k["d"] == 1 else "BUY STOP"
-        L.append(f"✅ <b>TERISI · {arah}</b>")
+        mr = k.get("strat") == "MR"
+        L.append(f"✅ <b>TERISI · {arah}</b>" + (" (mean reversion)" if mr else ""))
         L.append(_pre([f"Entry : {fmt(k['entry'])}  ({_jam(k['t'])})",
                        f"SL    : {fmt(k['sl'])}",
-                       f"TP    : {fmt(k['tp'])}"]))
-        L.append(f"👉 Hapus alert batas batal. Pastikan tidak ada order XAU lain yang aktif (mis. {lawan}).")
+                       f"TP    : {fmt(k['tp']) if k.get('tp') is not None else '- (tutup 23:00)'}"]))
+        if mr:
+            L.append("👉 Posisi model dihitung dari harga open 07:00. Pastikan SL di akun Anda terpasang.")
+        else:
+            L.append(f"👉 Hapus alert batas batal. Pastikan tidak ada order XAU lain yang aktif (mis. {lawan}).")
     for k in ev["exit"]:
         sep()
         arah = "BUY" if k["d"] == 1 else "SELL"
@@ -219,7 +241,7 @@ def update_bubble(ev, pos, px, t):
         L.append(_pre([f"Entry : {fmt(e)}",
                        f"Kini  : {fmt(px)}  ({(px - e) * d:+.2f} USD)",
                        f"SL    : {fmt(pos['sl'])}",
-                       f"TP    : {fmt(pos['tp'])}",
+                       f"TP    : {fmt(pos['tp']) if pos.get('tp') is not None else '- (tutup 23:00)'}",
                        f"Lama  : {_durasi(pos['t0'], t)}"]))
         L.append("⏰ Ditutup paling lambat <b>23:00 WIB</b>")
     L.append(BAR)

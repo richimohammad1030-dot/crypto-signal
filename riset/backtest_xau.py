@@ -7,7 +7,7 @@ rows = json.load(open(SRC))
 trades = []
 def notify(kind, **k):
     if kind == "exit":
-        trades.append(dict(d=k["d"], t0=k["t0"], t1=k["t"], e=k["entry"], ex=k["exit"], R=k["R"], why=k["why"]))
+        trades.append(dict(d=k["d"], t0=k["t0"], t1=k["t"], e=k["entry"], ex=k["exit"], R=k["R"], why=k["why"], strat=k.get("strat", "")))
 state = {"last_ts": 0, "replay": True}
 gb.GoldEngine(state, notify).run(rows, 0)
 with open(OUT, "w", newline="") as f:

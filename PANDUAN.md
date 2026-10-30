@@ -140,22 +140,22 @@ Setelah itu:
 
 ---
 
-## Bot XAU — Gold Daily Straddle (channel terpisah)
-Strategi: `riset/xau/STRATEGI.md` (versi K6 sejak 2 Nov 2026). Jam sinyal 07:00 & tutup 23:00 WIB = aturan tetap pemilik.
-- Jadwal: Senin–Jumat setiap 2 jam, 07:00–23:00 WIB (`gold.yml`). 07:00 kirim **1 order searah tren EMA200 H1** + **batas batal**;
-  23:00 batalkan/tutup.
-- Cara pasang: 1 order stop (SL & TP sesuai pesan) + price alert di batas batal. Jika batas batal tersentuh lebih dulu →
-  hapus order (bot juga mengirim **🚫 HARI INI DILEWATI**, tetapi bot hanya cek tiap 2 jam, jadi andalkan alert).
-- Data: XAU/USD H1 dari Setra (server MT5). Ekspektasi jujur (riset 2022-skrg, urutan candle M1, bersih biaya 0,40 USD):
-  ±10-11 trade/bulan, win ±36-40%, 2022-Jan 2025 +11,6R/thn (DD 27R), Feb 2025-skrg +31R/thn (DD 14R).
-  Di masa emas tenang (2015-2021) hasil riset ±impas sampai sedikit rugi (-2R/thn). Lihat `riset/xau/log.md`.
+## Bot XAU — Intraday multi-strategi (channel terpisah)
+Strategi: `riset/xau/STRATEGI.md` (sejak 2 Nov 2026). Jam sinyal 07:00 & tutup 23:00 WIB = aturan tetap pemilik. Maks 1 posisi/hari.
+- Jadwal: Senin–Jumat setiap 2 jam, 07:00–23:00 WIB (`gold.yml`). 07:00 bot memilih satu strategi:
+  **mean reversion** (RSI(2) H1 ekstrem → BUY/SELL market, SL 3 ATR, tanpa TP) atau, bila RSI(2) tidak ekstrem,
+  **breakout searah tren** (1 order stop searah EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). 23:00 batalkan/tutup.
+- Cara pasang: mean reversion → buka posisi market + SL sesuai jarak di pesan. Breakout → 1 order stop + SL & TP + price alert di
+  batas batal (bot juga mengirim **🚫 HARI INI DILEWATI**, tetapi bot hanya cek tiap 2 jam, jadi andalkan alert).
+- Ekspektasi (riset 2015-2026, bersih biaya 0,40 USD, risiko 0,5%): ±4,2 trade/minggu, win ±47%, PF ±1,07, untung 9 dari 12 tahun,
+  DD terburuk ±17% ekuitas, CAGR ±3% (era 2025-2026 ±8%). Edge tipis. Lihat `riset/xau/log.md`.
 - Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
   Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota
-  (**kirim ulang** setelah 2 Nov 2026 agar panduan versi K6 yang ter-pin).
+  (**kirim ulang** setelah 2 Nov 2026 agar panduan multi-strategi yang ter-pin).
 - Perintah pribadi: `/status_xau`, `/rekap_xau`, `/rekap_xau bulan`, `/rekap_xau minggu lalu`.
-- Variable opsional: `XAU_RISK_PCT` (default 1) untuk estimasi % di rekap.
-- Uji kesetaraan mesin bot vs riset: `python riset/replay_xau.py . <xau.json> [<xau_panjang.json>]` (wajib IDENTIK).
-  Patokan cek kesehatan: `python riset/baseline_xau.py . <xau.json> <xau_panjang.json>`.
+- Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
+- Uji kesetaraan bot vs riset: `python riset/replay_xau.py . <xau.json> [<xau_panjang.json>]` (wajib IDENTIK).
+  Patokan cek kesehatan: `python riset/baseline_xau.py . <xau.json> <xau_panjang.json>`. Bayangan semua strategi: `riset/xau/bayangan.py`.
 
 ## Bot Intraday (channel yang sama, label 🟠 INTRADAY)
 Strategi: `riset/intraday/STRATEGI.md` (juara v3: dip 15m hanya koin peringkat 1-25 saat BTC naik, TP 2:1, maks 4 jam; sinyal pagi tetap). File: `intraday_bot.py`, `intraday_state.json`, workflow `intraday.yml`.

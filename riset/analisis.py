@@ -81,7 +81,7 @@ json.dump(base, open(os.path.join(REPO, "baseline.json"), "w"), indent=1)
 def live(bot):
     f = os.path.join(REPO, "state.json" if bot == "crypto" else "gold_state.json")
     h = json.load(open(f)).get("hist", []) if os.path.exists(f) else []
-    return pd.DataFrame(h, columns=["sym", "d", "t0", "t1", "e", "ex", "R"]) if h else pd.DataFrame(columns=["sym", "d", "t0", "t1", "e", "ex", "R"])
+    return pd.DataFrame([x[:7] for x in h], columns=["sym", "d", "t0", "t1", "e", "ex", "R"]) if h else pd.DataFrame(columns=["sym", "d", "t0", "t1", "e", "ex", "R"])
 
 # ------------------------------------------------------------------ uji ML walk-forward
 ml_txt, ml_table = "Uji ML dilewati.", ""

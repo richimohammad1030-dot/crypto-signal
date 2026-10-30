@@ -208,3 +208,14 @@ aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
   tanpa TP; selain itu K6 (SL 1,5 ATR, TP 4R). Tutup 23:00. Risiko 0,5%: 12 thn 4,2 trade/mg, win 47%, RR 1,22, PF 1,07, +6,6 R/thn,
   DD 37R (17,2% ekuitas), CAGR ±3%, W/L 10/8, bulan positif 53%. Per periode PF 1,03 / 1,10 / 1,17.
 - Penantang untuk uji maju bayangan: RSI2 30% SL 2,5 TP 2R + K6 SL 1,25 tanpa TP (12 thn PF 1,12, +11,8 R/thn, DD 51R, W/L 12/12).
+
+## 2026-10-31 · Implementasi bot multi-strategi (ide #34, keputusan pemilik: lanjut, risiko 0,5%)
+- `gold_bot.py`: mode MR (RSI2 ≤ 43,76 BUY / ≥ 71,22 SELL market, SL 3 ATR, tanpa TP) diprioritaskan; selain itu K6. hist kini
+  menyimpan label strategi di indeks 7 (`analisis.py` disesuaikan). XAU_RISK_PCT default 0,5. Pesan, /status_xau, panduan anggota baru.
+- Acuan riset `eksperimen/multi_mesin.py` (konstanta dibaca dari gold_bot). `riset/replay_xau.py`: **IDENTIK** Setra 380/380
+  (MR 339, K6 41), Dukascopy 2015-2026 2.581/2.581 (MR 2.168, K6 413).
+- Patokan kesehatan (`riset/baseline_xau.py`, 2022-skrg, urutan M1, R kotor): 1.077 trade, win 47,6%, +0,079R, PF 1,19, DD 30,5R,
+  kalah beruntun 8. LIVE_START XAU 2 Nov 2026.
+- Catatan bayangan: `riset/xau/bayangan.py` (baseline, MR saja, K6 saja, juara lama, PENANTANG RSI2 30% 38,49/74,72 SL 2,5 TP 2R +
+  K6 SL 1,25 tanpa TP) vs catatan live, untuk uji maju riset Jumat.
+- Fakta penting: ±84% trade adalah MR; K6 hanya pada hari RSI2 tidak ekstrem (±1 dari 6 trade).
