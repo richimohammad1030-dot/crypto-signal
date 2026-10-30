@@ -132,3 +132,15 @@ PIT, modul A diperkuat (peringkat 1-25, BTC naik, ATR ≥ 1,5%, limit 0,5 ATR) +
   semua 1,5: 48,4% / 38% / 34% / 0,82 · semua 2: 45,3% / 46% / 33% / 0,89 ·
   **A TP 2× (SL 3 ATR, maks 4 jam) + B tetap: 63,4% / 27% / 16% / 0,96** (seluruh periode CAGR 46%, rasio OOS 1,57) ·
   A TP 1,5× + B tetap: 63,4% / 26% / 15% / 0,96 · A TP 1× + B tetap: 63,4% / 25% / 17% / 0,94 · A TP 0,5× (hold 24j) + B tetap: 65,8% / 26% / 20% / 0,96.
+
+## 2026-10-30 · Matriks rasio TP:SL modul A × modul B (boleh berbeda; permintaan pemilik)
+PIT, A diperkuat (SL 3 ATR, maks 4 jam; TP 0,5× pakai maks 24 jam) × B (SL 1,5 ATR; TP 0,5× / 0,67× sekarang / 1× / 1,5× / 2×), 20 kombinasi.
+Skrip: `eksperimen/pit_matriks_rasio_2026-10-30.py`. Pola: B dengan TP ≥ 1× selalu menaikkan DD ke 24-36%; A dengan TP 1,5-2× terbaik.
+OOS 2024-skrg (win / RR tercapai / exp / PF / CAGR 1% / DD / rasio / P>juara; seluruh periode CAGR / DD):
+- **A 2× + B 0,5×**: 68,7% / 0,55 / +0,056R / 1,20 / 24% / **13,5%** / **1,59** / 0,96 · semua 40% / 13,5% · bulan positif 65%, bulan terburuk -7R
+- A 1,5× + B 0,5×: 68,7% / 0,54 / +0,055R / 1,20 / 23% / 13,3% / 1,58 / 0,95 · semua 39% / 13,4%
+- **A 2× + B 0,67× (B sekarang)**: 63,4% / 0,69 / +0,064R / 1,19 / **27%** / 15,6% / 1,53 / 0,96 · semua **46%** / 15,6% · bulan positif 71%
+- A 1,5× + B 0,67×: 63,4% / 0,68 / +0,063R / 1,19 / 26% / 15,4% / 1,52 / 0,96 · semua 45% / 15,4%
+- A 1× + B 0,67×: 63,4% / 0,68 / +0,060R / 1,18 / 25% / 16,7% / 1,32 / 0,94
+- A 2× + B 1×: 55,2% / 0,95 / +0,072R / 1,17 / 30% / 23,8% / 1,08 / 0,88 · A 2× + B 2×: 45,3% / 1,47 / +0,109R / 1,22 / 46% / 33,3% / 1,05 / 0,89
+Win/kalah beruntun maks 21/8 untuk semua kombinasi teratas. IS rasio: A2+B0,5 3,25 · A2+B0,67 3,47 (tertinggi bersama A1+B0,67).
