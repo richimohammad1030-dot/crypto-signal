@@ -27,3 +27,4 @@ Prioritas: 1 = paling penting. Nomor I-xx tetap agar rujukan di jurnal riset tid
 | I-14 | Modul A: syarat tren BTC H1 searah (seperti modul B) atau jeda modul A saat BTC tren turun | - | dipasang | Review 30 Okt 2026: modul A 2025 -6,1R, 2026 +0,7R; 6 bln terakhir +0,013R/trade vs B-long +0,16R |
 | I-20 | Peringkat modul A diperbarui bulanan dari CoinMarketCap (daftar koin bot statis sejak Okt 2026; peringkat bergeser) | 2 | antri | v3 memakai urutan signal_bot.COINS; uji PIT memakai peringkat bulan berjalan |
 | I-21 | Batas hold modul A 3/5/6 jam vs 4 jam, dan TP 1,5× vs 2× (tetangga v3) dengan PIT | 2 | antri | Cek ketahanan v3 |
+| I-22 | Modul A cermin saat BTC turun: SHORT koin tren turun setelah lonjakan (RSI2 > 95 / RSI14 > 70), peringkat 1-25, funding > 0, TP 2× SL, maks 4 jam | 1 | antri | 30 Okt 2026 (pertanyaan pemilik): modul A long saat BTC turun 2024-skrg -0,015R (77 trade), netral -0,059R; BTC turun ±38% waktu |
