@@ -90,3 +90,18 @@ Aturan baru: `riset/ATURAN_BERSAMA.md` (2 ide/minggu termasuk 1 ide baru, signif
 - Cek kesehatan & rekap intraday aktif (baseline.json["intraday"], R bersih 2024-skrg). Risiko gabungan swing+intraday
   (risiko 1%): korelasi harian -0,05, DD gabungan 25,0% (swing 16,3 / intraday 13,4), risiko terbuka maks 13%,
   1.737 trade intraday di koin yang sedang dipegang swing (8 berlawanan arah).
+
+## 2026-10-30 · Eksplorasi PIT: struktur, scalping SL/TP 1:1 (permintaan pemilik)
+Semua dengan daftar koin sesuai masanya (PIT), 3 posisi / 3 order menunggu. IS = 2020-2023, OOS = 2024-skrg.
+- Struktur (OOS avg / R/thn / DD / rasio): juara A+B +0,021 / +15,5 / 23,9 / 0,65 · **B saja** +0,056 / +18,3 / 17,7 / 1,03 ·
+  A saja +0,006 / +3,1 / 13,3 / 0,23 · **A hanya peringkat 1-25 + B** +0,045 / +21,3 / 16,5 / **1,29** · semua 1-25 +0,053 / +21,2 / 17,1 / 1,24.
+  Catatan penting: di IS juara tetap terbaik (rasio 5,58 vs 4,25); IS 2020-2023 tidak membedakan versi yang tahan di 2024-skrg
+  (perubahan rezim pasar altcoin). Ide I-15 lahir dari diagnosa OOS → bukti OOS-nya "terpakai", wajib uji maju.
+- **Modul A gaya scalping SL/TP tetap 1:1** (SL 0,5/1/1,5/2/3 ATR × hold 2/4/8/24 jam × limit 0,25/0,5; 40 varian): **GAGAL**.
+  SL kecil (0,5 ATR) -0,12 s.d. -0,14R/trade; terbaik menurut IS (SL 3 ATR, hold 2 jam, limit 0,5) OOS +0,009R, rasio 0,24.
+  Win rate 1:1 ±50% → biaya memakan edge.
+- **Modul B 1:1** (12 varian): terbaik menurut IS (SL 1,5 ATR, limit 1 ATR, TP 1,5 ATR dari entry, hold 24 jam) OOS +0,068R,
+  R/thn +21,9, tetapi DD 28,3 (rasio 0,78) vs B sekarang (TP di open) rasio 1,03. **GAGAL** (rasio lebih buruk).
+- Signifikansi vs juara (OOS 2024-skrg): A 1-25 + B P_rasio 0,96 (seluruh periode 0,34); B saja 0,84; B 1:1 0,73.
+  Risiko 1% OOS: juara CAGR 15% DD 23% · A 1-25 + B CAGR 22% DD 16% (±40 trade/bln) · B saja 19% DD 17% (±27 trade/bln).
+- Status: I-15 (A hanya peringkat 1-25) → `uji-maju` atas persetujuan pemilik / keputusan pemilik; scalping 1:1 → `gagal` (I-17).
