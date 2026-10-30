@@ -48,3 +48,6 @@ Status ide: `antri` · `diuji` · `perlu-data` · `uji-maju` (lolos tahap 1-3, s
   melebih-lebihkan hasil ±20-28%.
 - Kalibrasi signifikansi: intraday v1 → v2 (27 Okt) P_rasio_lebih_baik hanya 0,66 di 2024-skrg. Perbaikan dari backtest
   sering lebih tidak pasti daripada kelihatannya; itulah alasan tahap 2-4.
+- XAU, data terkunci Dukascopy (2015 - Jan 2025): juara RUGI -0,061R/trade bersih (-157R, 2.579 trade); untung hanya di
+  rezim volatil 2024-2026. Data Dukascopy setara Setra (99% trade searah di periode sama). Lihat riset/xau/log.md.
+- Intraday, daftar koin sesuai masanya 2024-skrg: rasio 0,65 vs 2,24 (daftar tetap); modul A tanpa edge. Lihat riset/intraday/log.md.

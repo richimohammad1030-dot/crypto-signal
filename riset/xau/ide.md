@@ -16,3 +16,4 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 16 | Range 03:00-07:00 atau 05:00-08:00 vs 04:00-07:00 sekarang | 3 | antri | Parameter inti |
 | 17 | SL 1,2 atau 1,8 x ATR vs 1,5 sekarang | 4 | antri | Parameter inti, butuh bukti sangat kuat |
 | 18 | Lewati hari dengan rasio range/ATR di zona 0,88-1,06 (kuintil K2 2025) | 4 | antri | Negatif di 2025 (-15,2R) dan 2026 (-11,2R), tapi pola tak monoton; uji ulang setelah ≥ 2 kuartal data baru |
+| 21 | Filter rezim volatilitas: trade hanya jika ATR harian/H1 relatif terhadap harga di atas ambang (mis. ≥ persentil 50 setahun), atau saat tren emas kuat | 1 | antri | 30 Okt 2026: juara rugi di 2015-Jan 2025 (Dukascopy, -157R), untung hanya di rezim volatil 2024-2026 |

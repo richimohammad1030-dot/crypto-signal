@@ -21,3 +21,16 @@ kecuali ada data baru yang relevan.
 - **#13 Sisi searah tren** (EMA200/100/50 H1; satu sisi atau lawan tren risiko 1/2): EMA200 satu sisi R/DD 1,03 / 3,19;
   terbaik EMA50 lawan tren 1/2 3,17 / 3,69 tapi hanya tidak lebih buruk di 3/7 kuartal. **GAGAL**; sensitif terhadap periode EMA.
 - Kandidat penantang: tidak ada. Usulan menunggu persetujuan: tidak ada.
+
+## 2026-10-30 · Data terkunci Dukascopy 2015-2026 (fondasi riset diperkuat, chat bersama pemilik)
+Sumber: `riset/unduh_xau_panjang.py` (Dukascopy BID, 69.952 candle H1, Jan 2015 - Okt 2026). Validasi vs Setra (Feb 2025-skrg):
+418 dari 433 trade sama waktu buka, arah hasil sama 99%; hasil +68,7R vs +66,4R (bersih). Data Dukascopy setara data bot.
+- **Juara di 2015 - Jan 2025 (data terkunci): RUGI.** 2.579 trade, win 34,4%, -0,061R/trade bersih, total -157R, DD 222R.
+  Per tahun (R bersih): 2015 -26 · 2016 -38 · 2017 -28 · 2018 -38 · 2019 -35 · 2020 +3 · 2021 -14 · 2022 +5 · 2023 -25 ·
+  2024 +20 · 2025 +48 · 2026 +38. Positif hanya 5 dari 12 tahun.
+- Kotor (tanpa biaya) 2015-2023 ±0 (-0,06 s.d. +0,08R/trade); biaya tetap 0,40 USD = 0,08-0,12R saat r0 hanya 3-5 USD.
+  Edge muncul saat volatilitas emas tinggi: r0/harga 0,44% (2025) dan 0,62% (2026) vs 0,26-0,40% sebelumnya;
+  2024 (+0,126R kotor) dan 2020/2022 juga relatif lebih baik.
+- Kesimpulan: edge juara XAU kemungkinan besar bergantung pada rezim volatilitas tinggi 2024-2026 (reli emas), bukan permanen.
+  Ide baru #21 (filter rezim volatilitas, prioritas 1). Hasil periode Setra tetap dipakai sebagai uji utama; data terkunci untuk
+  konfirmasi sesuai ATURAN_BERSAMA (filter #21 boleh dirancang dengan alasan ekonomi, lalu dicek sekali di 2015 - Jan 2025).

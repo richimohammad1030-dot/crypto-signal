@@ -29,7 +29,8 @@ python3 riset/backtest_xau.py . /tmp/data/xau.json /tmp/data/trades_xau.csv
 `backtest_xau.py` memakai mesin asli bot (`gold_bot.GoldEngine`), jadi selalu mengikuti versi juara yang sedang live.
 Data XAU (Setra, sumber yang sama dengan bot) hanya tersedia sejak **Februari 2025**.
 Data terkunci (tahap 3 ATURAN_BERSAMA): `python3 riset/unduh_xau_panjang.py /tmp/data 2015` → `/tmp/data/xau_panjang.json`
-(Dukascopy, harga BID, 2015-sekarang; unduhan ±15-30 menit karena dibatasi server). Hanya dipakai periode **2015 - Jan 2025**
+(Dukascopy, harga BID, 2015-sekarang; bibit s.d. Okt 2026 ada di `riset/data/xau_dukascopy_h1.json.gz`, jadi hanya
+bulan baru yang diunduh, ±5-20 menit karena dibatasi server). **Juara sendiri rugi di periode ini (lihat log 30 Okt 2026).** Hanya dipakai periode **2015 - Jan 2025**
 untuk konfirmasi ide yang sudah lolos tahap 1-2: `python3 riset/backtest_xau.py . /tmp/data/xau_panjang.json <out.csv>`.
 Hitung juga hasil bersih biaya 0,40 USD per trade (biaya dalam R = 0,40 / r0, r0 = |entry - exit| / |R|).
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.

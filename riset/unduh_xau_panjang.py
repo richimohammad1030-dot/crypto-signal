@@ -1,6 +1,7 @@
 """Unduh candle H1 XAU/USD dari Dukascopy (harga BID) sejak 2015 untuk riset jangka panjang. Inkremental per bulan.
 Bot live tetap memakai Setra (riset/unduh_xau.py). Dukascopy vs Setra (Mar 2025): selisih close per jam ±0,22 USD
 (bid vs mid), rentang candle hampir identik. Candle akhir pekan yang datar (o=h=l=c) dibuang.
+Bibit data sampai bulan sebelumnya disimpan di riset/data/xau_dukascopy_h1.json.gz (hanya sisa bulan yang diunduh).
 Pemakaian: python unduh_xau_panjang.py <data_dir> [tahun_mulai]  -> <data_dir>/xau_panjang.json ([[open_s, o, h, l, c], ...])"""
 import datetime as dt, json, lzma, os, struct, sys, time, urllib.request
 
@@ -51,6 +52,15 @@ def month(y, m):
     return rows
 
 now = dt.datetime.now(dt.timezone.utc); out = []
+# bibit dari repo (riset/data/xau_dukascopy_h1.json.gz): bulan yang sudah ada tidak diunduh ulang
+SEED = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "xau_dukascopy_h1.json.gz")
+if os.path.exists(SEED):
+    import gzip
+    seed = json.load(gzip.open(SEED, "rt")); bym = {}
+    for r in seed: bym.setdefault(time.strftime("%Y-%m", time.gmtime(r[0])), []).append(r)
+    cur = f"{now.year}-{now.month:02d}"; last_full = max(bym) if bym else ""
+    for m, rs in bym.items():
+        if m < last_full and m != cur and not os.path.exists(f"{CACHE}/{m}.json"): json.dump(rs, open(f"{CACHE}/{m}.json", "w"))
 for y in range(Y0, now.year + 1):
     for m in range(1, 13):
         if (y, m) > (now.year, now.month): break
