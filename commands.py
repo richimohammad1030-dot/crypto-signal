@@ -258,6 +258,18 @@ def build_recap(state, kind="minggu", previous=False, risk_pct=1.0, now=None, fm
               f"💥 Terburuk: {worst[0]} {worst[6]:+.2f}R",
               f"📉 Drawdown: {dd:.2f}R · kalah beruntun maks {mstreak}",
               f"📈 Kurva: <code>{_spark(curve)}</code>"]
+        # bot XAU multi-strategi: rincian per strategi (label di h[7])
+        nama = {"MR": "Mean reversion", "K6": "Breakout tren"}
+        per = {}
+        for h in tr:
+            if len(h) > 7 and h[7] in nama:
+                per.setdefault(h[7], []).append(h[6])
+        if per:
+            L.append("🧩 <b>Per strategi</b>")
+            for k in ("MR", "K6"):
+                if k in per:
+                    r = per[k]
+                    L.append(f"   {nama[k]}: {len(r)} trade · {r and sum(x >= 0.15 for x in r) / len(r) * 100:.0f}% win · {sum(r):+.2f}R")
     else:
         L.append("Belum ada trade yang selesai pada periode ini.")
     opn = [(c, v["pos"]) for c, v in state.get("coins", {}).items() if v.get("pos")]
