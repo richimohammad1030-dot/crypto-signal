@@ -13,6 +13,8 @@ Jangan memakai kesimpulan riset crypto untuk XAU tanpa diuji ulang dengan data X
 berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1 saja.
 
 ## 0. Aturan keras
+- **Aturan tetap pemilik (31 Okt 2026): sinyal dikirim 07:00 WIB dan semua order/posisi ditutup 23:00 WIB. Jangan pernah
+  mengusulkan perubahan bagian ini** (jam pasang, jam tutup, hold multi-hari). Yang boleh diteliti: arah, cara masuk, SL/TP, filter, risiko.
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), dan `.github/`.
 - Hanya tulis di `riset/xau/` dan `riset/laporan/xau/`.

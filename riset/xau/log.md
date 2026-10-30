@@ -101,3 +101,23 @@ Aturan henti DD 20-25R hanya asuransi: mulai 2021/2023 akan berhenti padahal akh
 kotor ±0 dan biaya membuatnya rugi. K6 (lewati hari bila sisi lawan tren EMA200 H1 terisi duluan) konsisten mengurangi kerugian dan
 lolos tahap 1-3 di pembagian audit (status `uji-maju`), tetapi tetap sedikit rugi di 2015-2021. Pilihan & angka diserahkan ke pemilik;
 bot live TIDAK diubah.
+
+## 2026-10-31 · Analog/rezim, musiman, dan logika tren harian (permintaan pemilik, chat)
+**Aturan tetap pemilik: sinyal 07:00 WIB dan semua ditutup 23:00 WIB tidak boleh diubah.** Semua kandidat di bawah mematuhinya.
+Angka bersih biaya 0,40 USD; varian OCO memakai urutan M1 untuk candle ambigu 2022-skrg.
+- **Logika tren harian dalam jendela 07:00-23:00** (`eksperimen/harian_mesin.py`, `harian_scan.py`; 880 varian: arah Donchian 10/20/55,
+  EMA D1 20/50/100/200, momentum 20/60/120 hari, selalu long × masuk market/limit 0,25-1 ATR/stop × SL 1-3 ATR × TP 1/2/4R/tanpa;
+  seleksi 2015-2021): **0 varian** lolos (≥ 300 trade & positif tanpa 2% terbaik); hanya 3/880 positif; terbaik (momentum 60 hari,
+  market, SL 3 ATR, TP 4R) +0,004R/trade di 2015-2021, **-4,5R/thn di 2022-Jan 2025**, +14,2R/thn Setra. "Selalu BUY 07:00-23:00" pun
+  rugi 2015-2021 (emas naik ±50% tetapi kenaikannya tidak terjadi di jendela ini setelah biaya). **GAGAL** (ide #26).
+- Pembanding saja (melanggar aturan 23:00, bukan kandidat): swing emas multi-hari gaya bot crypto (`swing_pembanding.py`): positif hampir
+  tiap tahun tetapi kecil, +0,049R/trade, ±1,4 trade/bln, ±+0,8R/thn.
+- **Analog/rezim walk-forward** (`eksperimen/analog_wf.py`): tiap awal bulan ciri 3-6 bulan terakhir (return 63/126 hari, ATR D1/harga,
+  ATR vs 1 thn) dicocokkan ke k bulan masa lalu paling mirip (hanya data sebelum keputusan); pilih dari menu tetap (juara, K6, K6b,
+  hanya BUY, hanya SELL, SL 2,5 ATR, momentum 60 harian, JEDA). Sejak Feb 2018 (adil, semua aktif):
+  K6 tetap +8,0R/thn DD 35R rasio 1,99 · analog k=24 +6,2 / 30 / 1,81 (P vs K6 0,49) · k=12 +3,9 / 41 / 0,84 · k=6 +1,2 / 64 / 0,17 ·
+  momentum strategi 12 bln +7,4 / 45 / 1,45 (P 0,51) · juara -3,0 / 131 / -0,20. Analog mengalahkan juara hanya karena sering memilih
+  K6/JEDA; tidak mengalahkan K6 tetap, dan sangat sensitif terhadap k. **GAGAL** (ide #25).
+- **Musiman kalender** (`eksperimen/musiman.py`): korelasi peringkat bulan 2015-2021 vs 2022-skrg juara +0,26 (p 0,42), K6 -0,13 (p 0,70).
+  Hanya April positif di kedua periode (wajar karena kebetulan dari 12 bulan). **GAGAL** (ide #27).
+- Kesimpulan: dalam aturan tetap 07:00-23:00, satu-satunya perbaikan yang bertahan tetap K6 (ide #22, uji maju).
