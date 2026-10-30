@@ -131,3 +131,11 @@ Angka bersih biaya 0,40 USD; varian OCO memakai urutan M1 untuk candle ambigu 20
 - Patokan cek kesehatan baru `riset/baseline_xau.py` (K6 2022-skrg, urutan M1, R kotor): 642 trade, win 38,3%, +0,191R, DD 24,2R,
   kalah beruntun 17. LIVE_START XAU = 2 Nov 2026 (kesehatan.py, analisis.py). analisis.py tidak menimpa patokan ini.
 - XAU_RISK_PCT default 0,5 → 1 (estimasi % rekap). Strategi dikunci di `riset/xau/STRATEGI.md`.
+
+## 2026-10-31 · Frekuensi trade K6 vs syarat pemilik "minimal 1 entry per hari" (`eksperimen/frekuensi.py`)
+- Trade per minggu (minggu 5 hari bursa, 2015-skrg): juara 4,97/5 · **K6 2,40/5** (52% minggu ≤ 2 trade, 17% minggu ≥ 4) ·
+  K6b (lawan risiko 1/2) dan K6c (lawan risiko 1/4) 4,97/5. Per tahun K6 2,0-2,8/5 → **tidak memenuhi syarat pemilik**.
+- K6c (OCO 2 sisi tetap, sisi lawan tren EMA200 H1 risiko 1/4; titik tengah antara K6 dan K6b yang sudah diuji, bukan puncak baru):
+  2015-2021 -7,8R/thn DD 76R · 2022-Jan 2025 +8,7R/thn DD 29R · Setra +30,7R/thn DD 13,9R. P_rasio vs juara: pilih 0,962,
+  uji 0,943, Setra 0,812; slip +0,20 USD uji +4,0R/thn. (K6: 0,986 / 0,939 / 0,768, slip +7,8; K6b: 0,933 / 0,946 / 0,848, slip +0,1.)
+- Pemasangan K6 (commit lokal a77c051) DITAHAN menunggu pilihan pemilik antara K6 (lebih kuat, ±2,4 trade/minggu) dan K6c (trade tiap hari).
