@@ -4,16 +4,16 @@
    "pend": [
     -1,
     76500.11,
-    81737.06376821907
+    81785.92103327012
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 6.846,
-    "ext": 4.836,
-    "trend": 0.889,
-    "dist": 1.347,
-    "mom20": 6.633,
+    "slpct": 6.91,
+    "ext": 4.24,
+    "trend": 0.993,
+    "dist": 1.698,
+    "mom20": 6.534,
     "rank": 0,
     "btc": 1,
     "skor": 3,
@@ -730,7 +730,7 @@
    "pos": null
   }
  },
- "last_ts": 1793365200,
+ "last_ts": 1793372400,
  "tg_offset": 608781122,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -879,7 +879,7 @@
    -1.0
   ]
  ],
- "digest_key": "2026-10-30-2",
+ "digest_key": "2026-10-31-0",
  "news_sent": [
   "1793210400|FOMC Statement",
   "1793210400|Federal Funds Rate",
