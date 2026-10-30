@@ -168,3 +168,19 @@ SL 1,5-3 ATR, TP 1,5/2/3R/tanpa), portofolio K6 + RSI2 (bobot RSI2 1 / 0,5). Sel
 - Pola: K6 punya RR ±2 tetapi win 32-35% dan hanya 2,3 trade/mg; RSI2 punya win ±50% tetapi RR ±1,05. Menaikkan TP tidak
   menaikkan RR K6 (exit nyata = tutup 23:00); gabungan keduanya berakhir di win ±39% / RR ±1,6 / PF ±1,04 di masa emas tenang.
 - Kesimpulan: kriteria longgar pun tidak terpenuhi secara konsisten. GAGAL (ide #31).
+
+## 2026-10-31 · Bot multi-strategi berbasis rezim: bisakah rezim dideteksi? (`eksperimen/rezim_bulanan.py`, `rezim_harian.py`)
+- Rezim bulanan (efficiency ratio close harian × ATR D1/harga, ambang median 2015-2021), Jan 2015 - Okt 2026: TREN-VOLATIL 44 bln,
+  SIDEWAYS-VOLATIL 42, TREN-TENANG 30, SIDEWAYS-TENANG 25. **82 pergantian dalam 141 bulan, rata-rata 1,7 bln, terpanjang 5 bln**;
+  peluang rezim bulan depan = bulan ini 41%.
+- Edge per rezim NYATA bila rezim diketahui di bulan yang sama (R bersih/bln): TREN K6 +1,4/+2,2 vs RSI2 -0,7/+0,6; SIDEWAYS-VOLATIL
+  RSI2 +1,1 vs K6 -0,9. Pilihan sempurna 2016-2026: +380R vs K6 saja +67R, RSI2 saja +41R.
+- Tetapi rezim BULAN SEBELUMNYA hampir tidak memberi informasi; pemilih rezim walk-forward: **-21R** (lebih buruk dari strategi tunggal).
+- Pemilih harian (ER 5/10/20/40 hari, K6 bila tren, RSI2 bila sideways): tidak konsisten; aturan KEBALIKAN (kontrol) sering sama/lebih
+  baik (N=40: pilih -5,2 vs kontrol +7,4 R/thn; uji +11,3 vs +0,9). Deteksi rezim dari harga = noise pada skala ini.
+- Deteksi lewat performa strategi: dengan sd R per trade ±1,4 dan selisih edge ±0,1R, butuh ±500 trade (±2 tahun) untuk membedakan
+  "edge hilang" dari "kalah beruntun biasa" (95%); rezim rata-rata hanya ±1,7 bulan (±20 trade).
+- **Tahun analog** (bulan m tahun Y diprediksi dari tahun lalu paling mirip di bulan 1..m-1): arah benar 42/88 = 48% vs selalu "naik"
+  53% → tanpa edge. Contoh pemilik 2021 vs 2025: korelasi return bulanan -0,17, arah sama 5/12 bulan, total -4% vs +66%.
+  [lit] Musiman yang terbukti di literatur adalah bulan-kalender yang sama (Heston & Sadka 2008; Keloharju, Linnainmaa & Nyberg 2016,
+  termasuk komoditas), bukan pemetaan tahun analog; untuk XAU intraday sudah diuji (ide #27, gagal).

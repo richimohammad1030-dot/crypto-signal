@@ -27,3 +27,5 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 29 | Mean reversion RSI(2) H1 jam 07:00 (beli oversold / jual overbought, SL 3 ATR) [lit] Connors | - | gagal | 31 Okt 2026: lulus kriteria pemilik 2015-2021 (win 50%, PF 1,06) tetapi PF 0,95-1,01 di 2022 - Jan 2025 |
 | 30 | Portofolio K6 + RSI2 fade (tren + mean reversion saling melengkapi) | 2 | perlu-data | 31 Okt 2026 hipotesis pasca-lihat: 6 trade/mg, win 44%, PF 1,07, 8/12 tahun; butuh uji maju |
 | 31 | K6 / RSI2 / portofolio dengan exit RR tinggi (kriteria longgar win ≥ 35%, RR ≥ 1,5) | - | gagal | 31 Okt 2026: 1/3.956 lulus di 2015-2021, gagal di uji (kalah beruntun 21) |
+| 32 | Pemilih rezim (bulanan/harian: efficiency ratio × volatilitas) antara K6 dan RSI2 | - | gagal | 31 Okt 2026: rezim rata-rata 1,7 bln, persistensi 41%; pemilih walk-forward -21R; aturan kebalikan sama baiknya |
+| 33 | Tahun analog (pola bulanan tahun mirip) | - | gagal | 31 Okt 2026: arah benar 48% vs selalu naik 53% |
