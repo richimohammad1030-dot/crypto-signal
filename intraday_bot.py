@@ -1,11 +1,11 @@
 """
 Bot sinyal "Crypto Intraday" -> channel Telegram yang sama dengan bot swing (label 🟠 INTRADAY).
 
-Aturan = juara terkunci v2 (riset/intraday/STRATEGI.md, PARAM di riset/backtest_intraday.py):
+Aturan = juara terkunci v3 (riset/intraday/STRATEGI.md, PARAM di riset/backtest_intraday.py):
 - Modul B (sinyal pagi 07:00 WIB): koin searah tren BTC & volatilitas tinggi -> LIMIT 1 ATR H1 dari open 07:00,
   TP di harga open, SL 1,5 ATR H1, order berlaku 12 jam, posisi maks 24 jam. Short hanya jika funding > 0.
-- Modul A (dip 15m, kapan saja): tren naik 15m, RSI2<5 atau RSI14<30, ATR15 >= 1,5% -> LIMIT long 0,25 ATR di bawah
-  close, berlaku 2 jam, SL 3 ATR, TUTUP saat RSI2>70 (bot kirim perintah), posisi maks 2 jam.
+- Modul A (dip 15m, kapan saja): koin peringkat 1-25, tren BTC H1 naik, tren naik 15m, RSI2<5 atau RSI14<30, ATR15 >= 1,5%
+  -> LIMIT long 0,5 ATR di bawah close, berlaku 2 jam, SL 3 ATR, TP 2x SL, TUTUP paksa setelah 4 jam (bot kirim perintah).
 - Maks 3 posisi terbuka, maks 3 order menunggu, 1 order/posisi per koin. Posisi penuh -> order lain dibatalkan.
 Bot berjalan tiap 15 menit, memproses setiap candle 15m yang sudah close (mesin sama dengan backtest),
 mengirim pesan hanya saat ada kejadian, plus ringkasan setiap 2 jam.
@@ -21,7 +21,7 @@ import numpy as np
 import backtest_intraday as bi                     # PARAM juara + indikator (satu sumber dengan backtest)
 
 STATE_FILE = os.path.join(HERE, "intraday_state.json")
-VERSI = "intraday-v2"
+VERSI = "intraday-v3"
 STEP = 900
 
 
@@ -31,8 +31,9 @@ class Engine:
     s["orders"]: semua order (termasuk 'bayangan' yang tidak dikirim, agar jeda sinyal per koin sama dengan backtest).
     Order: c, m, d, lim, r0, tp, t0, vb, hb, rsi, st (pend/open/done), live (pend/open/done/cancel/none), dst."""
 
-    def __init__(self, state, P, coins, notify, funding_fn=None, cost_fn=None):
+    def __init__(self, state, P, coins, notify, funding_fn=None, cost_fn=None, btc_fn=None):
         self.s, self.P, self.coins, self.notify = state, P, coins, notify
+        self.btc_fn = btc_fn or (lambda t: 0)          # tren BTC H1 terakhir yang sudah close sebelum t
         self.rank = {c: i for i, c in enumerate(coins)}
         self.funding_fn = funding_fn or (lambda c, t: None)
         self.cost_fn = cost_fn or (lambda c, t0, t1, d: 0.0)
@@ -108,8 +109,10 @@ class Engine:
             D, i = data[c], cand[c]
             if P["A_ON"] and (c, "A") not in busy and self.s["done_t"].get(c + "A", -1) < t and i >= 900:   # riwayat min. 900 candle, sama dengan backtest
                 A, Cc = D["A"][i], D["C"][i]
-                if D["reg"][i] == 1 and (D["R2"][i] < 5 or D["R14"][i] < 30) and A / Cc >= P["A_VMIN"]:
-                    new.append(dict(c=c, m="A", d=1, lim=float(Cc - P["A_OFF"] * A), r0=float(P["A_SL"] * A), tp=None, t0=t1,
+                if (D["reg"][i] == 1 and (D["R2"][i] < 5 or D["R14"][i] < 30) and A / Cc >= P["A_VMIN"]
+                        and self.rank[c] < P["A_RANK_MAX"] and (not P["A_BTC"] or self.btc_fn(t1) == 1)):
+                    lim, r0 = float(Cc - P["A_OFF"] * A), float(P["A_SL"] * A)
+                    new.append(dict(c=c, m="A", d=1, lim=lim, r0=r0, tp=(lim + P["A_TP_R"] * r0) if P["A_TP_R"] else None, t0=t1,
                                     vb=P["A_VALID_MIN"] // 15, hb=P["A_HOLD_JAM"] * 4, rsi=P["A_RSI_EXIT"]))
             if P["B_ON"] and t1 % 86400 == 0 and (c, "B") not in busy and self.s["done_t"].get(c + "B", -1) <= t and "h1" in D and i + 1 >= 900:
                 b = D["h1"](t1)                     # info H1 di close 07:00 WIB: (a, vr, tren, tren_btc, harga_open) atau None
@@ -327,8 +330,15 @@ def main():
                         k = D["ix"].get(t1)
                         return float(D["O"][k]) if k is not None else cur_open.get((c, t1))
                     D["h1"] = h1_info_fn(H[c], H["BTC"], o_px)
+    # tren BTC H1 untuk filter modul A (satu permintaan per run)
+    btc_fn = lambda t: 0
+    try:
+        bh = bi.prep(fetch_1h("BTC")); bix = {int(x): k for k, x in enumerate(bh["T"])}
+        btc_fn = lambda t: int(bh["reg"][bix[t // 3600 * 3600 - 3600]]) if (t // 3600 * 3600 - 3600) in bix else 0
+    except Exception as e:
+        errors.append("BTC-H1")
     ev = []
-    eng = Engine(s, P, coins, lambda kind, o, t, why="": ev.append((kind, o, t, why)), funding_fn=sb.fetch_funding_avg)
+    eng = Engine(s, P, coins, lambda kind, o, t, why="": ev.append((kind, o, t, why)), funding_fn=sb.fetch_funding_avg, btc_fn=btc_fn)
     for t in times: eng.step(t, data)
     s["last_t"] = newest
     prices = {c: float(D["C"][-1]) for c, D in data.items()}

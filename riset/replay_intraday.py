@@ -19,7 +19,7 @@ for c, D in M15.items():
     data[c] = D
 eng = ib.Engine({}, P, sb.COINS, lambda *a: None,
                 funding_fn=lambda c, t: bi.funding_avg72(H1[c], t),
-                cost_fn=lambda c, t0, t1, d: bi.funding_cost(M15[c], t0, t1, d))
+                cost_fn=lambda c, t0, t1, d: bi.funding_cost(M15[c], t0, t1, d), btc_fn=bi.btc_regime_fn(H1))
 # candle sebelum START tidak menghasilkan order (backtest: T[i] >= START untuk sinyal)
 times = sorted({int(t) for D in data.values() for t in D["T"] if t >= start})
 t0 = time.time()

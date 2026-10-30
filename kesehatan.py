@@ -8,7 +8,7 @@ WIB = dt.timezone(dt.timedelta(hours=7))
 LINE = "────────────────────"
 LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(),   # versi v2 (stagnan + TP 25%) mulai 24 Okt 2026
               "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp(),
-              "intraday": dt.datetime(2026, 10, 27, 17, 0, tzinfo=WIB).timestamp()}   # juara v2 live 27 Okt 2026
+              "intraday": dt.datetime(2026, 10, 30, 16, 0, tzinfo=WIB).timestamp()}   # juara v3 live 30 Okt 2026
 MIN_LABEL = 20          # minimal trade per label sebelum perbandingan label dinilai
 
 

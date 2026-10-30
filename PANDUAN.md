@@ -149,7 +149,7 @@ Setelah itu:
 - Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
 
 ## Bot Intraday (channel yang sama, label 🟠 INTRADAY)
-Strategi: `riset/intraday/STRATEGI.md` (juara v2). File: `intraday_bot.py`, `intraday_state.json`, workflow `intraday.yml`.
+Strategi: `riset/intraday/STRATEGI.md` (juara v3: dip 15m hanya koin peringkat 1-25 saat BTC naik, TP 2:1, maks 4 jam; sinyal pagi tetap). File: `intraday_bot.py`, `intraday_state.json`, workflow `intraday.yml`.
 Pesan bot swing kini berlabel 🔵 SWING; pesan bot intraday berlabel 🟠 INTRADAY.
 
 **Jadwal**
@@ -162,8 +162,8 @@ Pesan bot swing kini berlabel 🔵 SWING; pesan bot intraday berlabel 🟠 INTRA
 | Pesan | Yang dilakukan |
 |---|---|
 | SINYAL BARU | Pasang LIMIT order di harga Entry + SL. Jika ada TP (sinyal pagi), pasang TP juga. |
-| ORDER TERISI | Pastikan SL (dan TP) terpasang. Dip 15m tidak punya TP: tunggu perintah TUTUP. |
-| ⚡ TUTUP SEKARANG | Tutup posisi di harga pasar dan hapus SL/TP (target RSI tercapai atau batas waktu hold). |
+| ORDER TERISI | Pastikan SL dan TP terpasang (dip 15m: TP 2× SL; sinyal pagi: TP di harga 07:00). |
+| ⚡ TUTUP SEKARANG | Tutup posisi di harga pasar dan hapus SL/TP (batas waktu hold: 4 jam untuk dip 15m, 24 jam untuk sinyal pagi). |
 | POSISI SELESAI | TP atau SL sudah tersentuh; tidak perlu tindakan selain mencatat. |
 | BATALKAN ORDER | Hapus limit order di exchange (kadaluarsa atau posisi sudah penuh 3). |
 | RINGKASAN 2 JAM | Posisi terbuka, order menunggu, hasil hari ini. |

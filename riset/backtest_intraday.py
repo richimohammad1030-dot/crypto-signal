@@ -1,4 +1,4 @@
-"""Backtest strategi INTRADAY (juara terkunci v2, 27 Okt 2026). Mandiri: hanya butuh numpy.
+"""Backtest strategi INTRADAY (juara terkunci v3, 30 Okt 2026). Mandiri: hanya butuh numpy.
 
 Model eksekusi realistis berbasis event:
 - Order limit yang dikirim bisa menunggu sampai kadaluarsa; maks PEND order menunggu sekaligus.
@@ -7,8 +7,9 @@ Model eksekusi realistis berbasis event:
 - Biaya: limit/TP maker 0,02%, market/SL/time stop taker 0,07% (fee + slippage). Funding dihitung tiap settlement.
 
 Modul (parameter di PARAM, bisa ditimpa skrip eksperimen):
-  A  dip 15m, kapan saja : tren naik 15m (EMA100>EMA200, close>EMA200), RSI2<5 atau RSI14<30, ATR15/harga >= 1,5%.
-                           LONG limit 0,25 ATR di bawah close, kadaluarsa 2 jam, SL 3 ATR, exit RSI2>70, time stop 2 jam.
+  A  dip 15m, kapan saja : koin peringkat 1-25, tren BTC H1 naik, tren naik 15m (EMA100>EMA200, close>EMA200),
+                           RSI2<5 atau RSI14<30, ATR15/harga >= 1,5%. LONG limit 0,5 ATR di bawah close, kadaluarsa 2 jam,
+                           SL 3 ATR, TP 2x SL (6 ATR), tutup paksa setelah 4 jam.
   B  pagi 07:00 WIB       : data H1 di close 07:00. Tren koin searah tren BTC (short hanya jika funding > 0),
                            ATR H1 >= 1,1 x rata-rata 14 hari dan >= 1,34% harga. Limit 1 ATR H1 dari open 07:00,
                            TP di harga open, SL 1,5 ATR H1, kadaluarsa 12 jam, time stop 24 jam.
@@ -21,7 +22,8 @@ import numpy as np
 PARAM = dict(
     CAP=3, PEND=3, START=1583020800,                       # 1 Mar 2020 (pemanasan EMA)
     MAKER=0.02, TAKER=0.07,
-    A_ON=True, A_VMIN=0.015, A_OFF=0.25, A_SL=3.0, A_VALID_MIN=120, A_HOLD_JAM=2, A_RSI_EXIT=70,
+    A_ON=True, A_VMIN=0.015, A_OFF=0.5, A_SL=3.0, A_VALID_MIN=120, A_HOLD_JAM=4, A_RSI_EXIT=None,
+    A_TP_R=2.0, A_RANK_MAX=25, A_BTC=True,                  # v3: TP 2x SL, hanya peringkat 1-25, BTC H1 tren naik
     B_ON=True, B_K=1.0, B_SL=1.5, B_TPF=1.0, B_VALID_JAM=12, B_HOLD_JAM=24, B_VR=1.1, B_ATRP=0.0134, B_BTC=True, B_SHORT=True,
 )
 IS_END = 1704067200   # 2020-2023 = periode lama (pemilihan), 2024-sekarang = periode baru (uji)
@@ -109,7 +111,21 @@ def sim(D, i0, d, lim, r0, tp, valid_bars, hold_bars, rsi_exit, P):
 
 
 # ------------------------------------------------------------------ semua order kandidat
-def orders(H1, M15, P):
+def btc_regime_fn(H1):
+    """Tren BTC dari candle H1 terakhir yang SUDAH close sebelum waktu t (detik). 1 naik, -1 turun, 0 netral."""
+    B = H1["BTC"]; ix = {int(t): k for k, t in enumerate(B["T"])}
+    def f(t):
+        k = ix.get(t // 3600 * 3600 - 3600)
+        return int(B["reg"][k]) if k is not None else 0
+    return f
+
+def orders(H1, M15, P, rank_fn=None):
+    """rank_fn(koin, t) -> peringkat market cap (0 = terbesar). Default: urutan signal_bot.COINS (sama dengan bot live)."""
+    if rank_fn is None:
+        import signal_bot as sb
+        rk = {c: i for i, c in enumerate(sb.COINS)}
+        rank_fn = lambda c, t: rk.get(c, 999)
+    btc = btc_regime_fn(H1)
     out = []
     for c, D in M15.items():
         T, C, A, R2, R14, reg = D["T"], D["C"], D["A"], D["R2"], D["R14"], D["reg"]
@@ -117,9 +133,12 @@ def orders(H1, M15, P):
             nxt = 0
             for i in np.flatnonzero((reg == 1) & ((R2 < 5) | (R14 < 30)) & (A / C >= P["A_VMIN"])):
                 if i < max(nxt, 900) or i + 1 >= len(T) or T[i] < P["START"]: continue
-                r, nxt = sim(D, i + 1, 1, C[i] - P["A_OFF"] * A[i], P["A_SL"] * A[i], None,
+                t1 = int(T[i + 1])
+                if rank_fn(c, t1) >= P["A_RANK_MAX"] or (P["A_BTC"] and btc(t1) != 1): continue
+                lim, r0 = C[i] - P["A_OFF"] * A[i], P["A_SL"] * A[i]
+                r, nxt = sim(D, i + 1, 1, lim, r0, (lim + P["A_TP_R"] * r0) if P["A_TP_R"] else None,
                              P["A_VALID_MIN"] // 15, P["A_HOLD_JAM"] * 4, P["A_RSI_EXIT"], P)
-                out.append(dict(r, t=int(T[i + 1]), c=c, m="A", d=1, vr=0.0))
+                out.append(dict(r, t=t1, c=c, m="A", d=1, vr=0.0))
         if P["B_ON"]:
             G = H1[c]; GA = G["A"]; nxt = 0
             for i in np.flatnonzero(T % 86400 == 0):        # candle 00:00 UTC = 07:00 WIB

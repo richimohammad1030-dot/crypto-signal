@@ -15,7 +15,8 @@ def run_pit(P):
     H1, M15 = bi.load(DATA, coins)
     first = {c: int(D["T"][900]) for c, D in M15.items() if len(D["T"]) > 900}
     uni = pit.universe_fn(DATA, lambda c, t: c in first and c in H1 and first[c] <= t)
-    ords = [o for o in bi.orders(H1, M15, P) if o["c"] in uni(o["t"])]
+    rank_fn = lambda c, t: uni(t).index(c) if c in uni(t) else 999      # peringkat bulan berjalan
+    ords = [o for o in bi.orders(H1, M15, P, rank_fn) if o["c"] in uni(o["t"])]
     # portofolio dengan prioritas peringkat bulan berjalan
     rank_of = lambda o: uni(o["t"]).index(o["c"])
     ev = sorted(ords, key=lambda o: (o["t"], rank_of(o)))

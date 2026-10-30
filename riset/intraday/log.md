@@ -144,3 +144,11 @@ OOS 2024-skrg (win / RR tercapai / exp / PF / CAGR 1% / DD / rasio / P>juara; se
 - A 1× + B 0,67×: 63,4% / 0,68 / +0,060R / 1,18 / 25% / 16,7% / 1,32 / 0,94
 - A 2× + B 1×: 55,2% / 0,95 / +0,072R / 1,17 / 30% / 23,8% / 1,08 / 0,88 · A 2× + B 2×: 45,3% / 1,47 / +0,109R / 1,22 / 46% / 33,3% / 1,05 / 0,89
 Win/kalah beruntun maks 21/8 untuk semua kombinasi teratas. IS rasio: A2+B0,5 3,25 · A2+B0,67 3,47 (tertinggi bersama A1+B0,67).
+
+## 2026-10-30 · Juara v3 dipasang (pilihan pemilik: strategi #2)
+- Modul A: peringkat 1-25, BTC H1 naik, limit 0,5 ATR, SL 3 ATR, TP 2× SL, tutup paksa 4 jam (tanpa exit RSI). Modul B tetap.
+- Verifikasi: `pit_intraday.py` mereproduksi eksperimen persis (2.944 trade; 2024-skrg 1.091 trade, +0,064R, rasio 1,57).
+  Daftar tetap: 2.665 trade, +0,098R, rasio 2,98 (2024-skrg 2,34). Replay mesin bot: 2.662/2.665 identik (3 = celah data 2020-2021).
+- LIVE_START intraday = 30 Okt 2026 16:00 WIB; baseline.json["intraday"] dibuat ulang dari juara v3.
+- Pemilik meminta riset mingguan tetap berjalan untuk mengoptimalkan v3. Mulai sekarang keputusan intraday wajib memakai uji
+  daftar koin sesuai masanya (PROSEDUR langkah 1-3).

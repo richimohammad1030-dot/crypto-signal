@@ -25,7 +25,15 @@ COINS=$(python3 -c "import signal_bot as s; print(' '.join(s.COINS))")
 python3 riset/unduh_crypto.py /tmp/data "$COINS"       # candle H1 + funding
 python3 riset/unduh_intraday.py /tmp/data "$COINS"     # candle 15 menit
 python3 riset/backtest_intraday.py . /tmp/data /tmp/data/trades_intraday.csv
+# WAJIB untuk intraday: daftar koin sesuai masanya (ekspektasi jujur; ±30-40 menit unduhan pertama)
+python3 riset/unduh_pit.py /tmp/data
+python3 riset/unduh_crypto.py /tmp/data "$(cat /tmp/data/pit/extra.txt)"
+python3 riset/unduh_intraday.py /tmp/data "$(cat /tmp/data/pit/extra.txt)"
+python3 riset/pit_intraday.py . /tmp/data            # juara; penantang: tambah argumen JSON parameter
 ```
+Sejak v3 (30 Okt 2026), keputusan LOLOS/GAGAL intraday memakai hasil **sesuai masanya** (`pit_intraday.py`) sebagai uji utama;
+hasil daftar tetap hanya pembanding. Ide yang butuh logika baru: salin `orders()` ke skrip eksperimen dan gunakan
+`pit_intraday.run_pit` sebagai pola (lihat `eksperimen/pit_*.py`).
 Output terakhir adalah statistik juara (semua, 2020-2023, 2024-sekarang, per tahun). Simpan untuk pembanding.
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 
