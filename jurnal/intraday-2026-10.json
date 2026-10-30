@@ -110,5 +110,19 @@
   "R_kotor": -0.318,
   "alasan": "WAKTU",
   "versi": "intraday-v2"
+ },
+ {
+  "waktu_tutup_wib": "2026-10-30 17:15",
+  "sym": "DOGEUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1793336400,
+  "t1": 1793355300,
+  "entry": 0.07639743941329355,
+  "exit": 0.07526,
+  "R": 0.649,
+  "R_kotor": 0.667,
+  "alasan": "TP",
+  "versi": "intraday-v3"
  }
 ]
