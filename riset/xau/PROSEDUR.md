@@ -9,6 +9,9 @@ Strategi XAU berbeda total dengan crypto: satu instrumen, breakout harian dari r
 (BUY STOP dan SELL STOP sekaligus, OCO), SL 1,5 x ATR, TP 4R, semua ditutup pukul 23:00 WIB.
 Jangan memakai kesimpulan riset crypto untuk XAU tanpa diuji ulang dengan data XAU.
 
+**Wajib baca dulu `riset/ATURAN_BERSAMA.md`** (sumber ide, uji signifikansi, data terkunci, uji maju). Aturan di sana
+berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1 saja.
+
 ## 0. Aturan keras
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), dan `.github/`.
@@ -25,6 +28,9 @@ python3 riset/backtest_xau.py . /tmp/data/xau.json /tmp/data/trades_xau.csv
 ```
 `backtest_xau.py` memakai mesin asli bot (`gold_bot.GoldEngine`), jadi selalu mengikuti versi juara yang sedang live.
 Data XAU (Setra, sumber yang sama dengan bot) hanya tersedia sejak **Februari 2025**.
+Data terkunci (tahap 3 ATURAN_BERSAMA): `python3 riset/unduh_xau_panjang.py /tmp/data 2015` → `/tmp/data/xau_panjang.json`
+(Dukascopy, harga BID, 2015-sekarang; unduhan ±15-30 menit karena dibatasi server). Hanya dipakai periode **2015 - Jan 2025**
+untuk konfirmasi ide yang sudah lolos tahap 1-2: `python3 riset/backtest_xau.py . /tmp/data/xau_panjang.json <out.csv>`.
 Hitung juga hasil bersih biaya 0,40 USD per trade (biaya dalam R = 0,40 / r0, r0 = |entry - exit| / |R|).
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 
@@ -33,7 +39,8 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan: uji 1-2 ide XAU
-1. Ambil 1-2 ide teratas berstatus `antri` dari `riset/xau/ide.md` (prioritas tertinggi dulu).
+1. Uji 2 ide: ide teratas berstatus `antri` dari `riset/xau/ide.md`, **ditambah 1 ide baru** sesuai
+   ATURAN_BERSAMA bagian A (literatur = nilai tambah, tidak wajib).
 2. Tulis hipotesis singkat, lalu uji dengan skrip di `riset/xau/eksperimen/<nama-ide>.py`
    (salin dan modifikasi `backtest_xau.py`; ide yang mengubah kapan order dipasang/ditutup wajib replay penuh).
 3. Bandingkan dengan juara (aturan yang sedang live), **setelah biaya**:
@@ -43,7 +50,8 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 4. Keputusan (kriteria lebih ketat karena data hanya ±20 bulan):
    - **LOLOS** jika rasio R/drawdown membaik ≥ 15% di paruh pertama **dan** paruh kedua, tidak lebih buruk di ≥ 5 dari
      7 kuartal terakhir, jumlah trade tidak turun lebih dari 40%, dan tidak bergantung pada segelintir trade besar.
-     Ide ini menjadi **kandidat penantang**.
+     Ide ini lanjut ke tahap 2-4 ATURAN_BERSAMA
+     (signifikansi, data terkunci, uji maju) sebelum menjadi **kandidat penantang**.
    - **GAGAL** jika tidak memenuhi. Catat alasannya agar tidak diuji ulang.
    - **PERLU DATA** jika hasil menjanjikan tetapi jumlah trade per kuartal terlalu sedikit untuk dinilai.
 5. Catat di `riset/xau/log.md` (tanggal, ide, angka utama, keputusan) dan perbarui status di `riset/xau/ide.md`.

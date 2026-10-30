@@ -62,7 +62,11 @@ cr["label"] = np.where(cr.score >= 2, "HIGH", np.where(cr.score <= -1, "LOW", "M
 xa = pd.read_csv(XAU_CSV).sort_values("t1").reset_index(drop=True)
 xa["year"] = pd.to_datetime(xa.t0, unit="s").dt.year
 
-base = {"dibuat": NOW.strftime("%Y-%m-%d %H:%M WIB"), "catatan": "R kotor (tanpa biaya), sama seperti perhitungan bot"}
+try:   # pertahankan patokan bot lain (mis. intraday dari riset/baseline_intraday.py)
+    base = json.load(open(os.path.join(REPO, "baseline.json")))
+except Exception:
+    base = {}
+base.update({"dibuat": NOW.strftime("%Y-%m-%d %H:%M WIB"), "catatan": "crypto & xau: R kotor (tanpa biaya), sama seperti perhitungan bot"})
 for bot, d in (("crypto", cr), ("xau", xa)):
     s = stats(d.R)
     base[bot] = dict(sumber=f"backtest {pd.to_datetime(d.t0.min(), unit='s'):%Y-%m} s.d. {pd.to_datetime(d.t1.max(), unit='s'):%Y-%m}",

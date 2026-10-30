@@ -5,6 +5,9 @@ Tujuan: menemukan perbaikan bot crypto yang terbukti dengan data, lalu **mengusu
 Routine tidak pernah mengubah bot live. Perubahan dipasang hanya setelah pemilik setuju di chat.
 Riset XAU dikerjakan routine terpisah (`riset/xau/`). Jangan menyentuh berkas XAU.
 
+**Wajib baca dulu `riset/ATURAN_BERSAMA.md`** (sumber ide, uji signifikansi, data terkunci, uji maju). Aturan di sana
+berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1 saja.
+
 ## 0. Aturan keras
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), dan `.github/`.
@@ -24,12 +27,17 @@ python3 riset/backtest_crypto.py . /tmp/data /tmp/data/trades_crypto.csv
 Hasilnya berisi faktor setiap trade (trend, ext, dist, slpct, mom20, slope, breadth, rank, btc, fund).
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 
+Data terkunci / daftar koin sesuai masanya (tahap 3 ATURAN_BERSAMA dan review bulanan, **hanya jika dibutuhkan**, ±15-40 menit):
+`python3 riset/unduh_pit.py /tmp/data`, lalu unduh koin tambahan H1 + funding: `python3 riset/unduh_crypto.py /tmp/data "$(cat /tmp/data/pit/extra.txt)"`;
+jalankan `python3 riset/pit.py swing . /tmp/data` untuk juara, dan versi penantang dengan engine eksperimen.
+
 ## 2. Tentukan mode
 - Jika **Jumat berikutnya sudah masuk bulan baru** (hari ini Jumat terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan: uji 1-2 ide crypto
-1. Ambil 1-2 ide teratas berstatus `antri` dari `riset/crypto/ide.md` (prioritas tertinggi dulu).
+1. Uji 2 ide: ide teratas berstatus `antri` dari `riset/crypto/ide.md`, **ditambah 1 ide baru** sesuai
+   ATURAN_BERSAMA bagian A (literatur = nilai tambah, tidak wajib).
 2. Tulis hipotesis singkat, lalu uji dengan skrip di `riset/crypto/eksperimen/<nama-ide>.py`.
    Ide yang memengaruhi urutan atau slot posisi (filter sinyal, batas posisi, aturan keluar) wajib replay penuh,
    bukan filter setelah backtest.
@@ -39,7 +47,8 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
    - Ketahanan: hasil tanpa 2% trade terbaik.
 4. Keputusan:
    - **LOLOS** jika rasio R/drawdown membaik ≥ 10% di periode lama **dan** baru, tidak lebih buruk di ≥ 4 dari 6 tahun terakhir,
-     dan tidak bergantung pada segelintir trade besar. Ide ini menjadi **kandidat penantang**.
+     dan tidak bergantung pada segelintir trade besar. Ide ini lanjut ke tahap 2-4 ATURAN_BERSAMA
+     (signifikansi, data terkunci, uji maju) sebelum menjadi **kandidat penantang**.
    - **GAGAL** jika tidak memenuhi. Catat alasannya agar tidak diuji ulang.
    - **PERLU DATA** jika hasil bergantung pada data yang belum cukup (misalnya data live).
 5. Catat di `riset/crypto/log.md` (tanggal, ide, angka utama, keputusan) dan perbarui status di `riset/crypto/ide.md`.
@@ -54,7 +63,8 @@ Tambahan selain langkah 3:
 3. Cek apakah label conviction masih valid (HIGH > MEDIUM > LOW, juga di tahun terakhir).
 4. Uji ML walk-forward: `python3 riset/ml_walkforward.py` membutuhkan file pickle dengan kolom `score` dan `year`;
    buat dari CSV backtest dengan aturan skor yang sama seperti `riset/analisis.py`.
-5. Rangkum semua **kandidat penantang** crypto yang masih berlaku beserta buktinya, dan usulan yang masih menunggu
+5. **Bias koin selamat** (ATURAN_BERSAMA bagian C): `python3 riset/pit.py swing . /tmp/data`, laporkan selisih tetap vs sesuai masanya.
+6. Rangkum semua **kandidat penantang** crypto yang masih berlaku beserta buktinya, dan usulan yang masih menunggu
    persetujuan pemilik: apa yang diubah, bukti periode lama dan baru, dampak ke profit dan drawdown.
 
 ## 5. Keluaran

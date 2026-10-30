@@ -260,6 +260,32 @@ def build_digest(s, now, fmt, prices):
     return "\n".join(L)
 
 
+# ======================================================================= rekap & cek kesehatan
+def _recap_state(s, net=False):
+    """Format hist intraday -> format rekap bersama [koin, arah, t_buka, t_tutup, entry, exit, R].
+    net=False: R kotor (sama dengan angka di pesan channel). net=True: R bersih (dibanding backtest)."""
+    return {"hist": [[h[0], h[2], h[3], h[4], h[5], h[6], h[7] if net else h[9]] for h in s.get("hist", [])], "coins": {}}
+
+def send_recaps(s, target, risk_pct):
+    import commands, kesehatan, signal_bot as sb
+    now_wib = dt.datetime.now(commands.WIB)
+    rec, net = _recap_state(s), _recap_state(s, net=True)
+    def health(start, end, jenis):
+        per = [h[6] for h in net["hist"] if start.timestamp() <= h[3] < end.timestamp()]
+        last = end - dt.timedelta(days=1)
+        judul = f"{jenis} {start:%d %b} - {last:%d %b %Y}" if jenis == "Minggu" else f"{jenis} {start:%B %Y}"
+        txt = kesehatan.build("intraday", net["hist"], None, judul, per)
+        if txt: sb.tg_send("🟠 " + txt)
+    wk, _ = commands.period_bounds("minggu", now_wib, previous=True)
+    if now_wib.weekday() == 0 and s.get("recap_week") != wk.isoformat():
+        sb.tg_send(f"{TAG}\n" + commands.build_recap(rec, "minggu", True, risk_pct, now_wib, sb.fmt), chat=target)
+        s["recap_week"] = wk.isoformat(); health(wk, wk + dt.timedelta(days=7), "Minggu")
+    mo, _ = commands.period_bounds("bulan", now_wib, previous=True)
+    if now_wib.day == 1 and s.get("recap_month") != mo.isoformat():
+        sb.tg_send(f"{TAG}\n" + commands.build_recap(rec, "bulan", True, risk_pct, now_wib, sb.fmt), chat=target)
+        s["recap_month"] = mo.isoformat(); health(mo, commands.period_bounds("bulan", now_wib)[0], "Bulan")
+
+
 # ======================================================================= main
 def main():
     import signal_bot as sb, jurnal
@@ -321,6 +347,11 @@ def main():
     key = f"{w:%Y-%m-%d}-{w.hour // 2}"
     if s.get("digest") != key:
         sb.tg_send(build_digest(s, now, sb.fmt, prices), chat=target); s["digest"] = key
+    # Rekap otomatis ke channel (mingguan setiap Senin, bulanan tanggal 1) + cek kesehatan ke chat pribadi (Lapis 2)
+    try:
+        send_recaps(s, target, risk_pct)
+    except Exception as e:
+        print("Rekap/cek kesehatan gagal:", e)
     # ukuran posisi pribadi pemilik
     if modal:
         priv = []

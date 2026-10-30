@@ -7,7 +7,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WIB = dt.timezone(dt.timedelta(hours=7))
 LINE = "────────────────────"
 LIVE_START = {"crypto": dt.datetime(2026, 10, 24, tzinfo=WIB).timestamp(),   # versi v2 (stagnan + TP 25%) mulai 24 Okt 2026
-              "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp()}
+              "xau": dt.datetime(2026, 10, 18, tzinfo=WIB).timestamp(),
+              "intraday": dt.datetime(2026, 10, 27, 17, 0, tzinfo=WIB).timestamp()}   # juara v2 live 27 Okt 2026
 MIN_LABEL = 20          # minimal trade per label sebelum perbandingan label dinilai
 
 
@@ -43,7 +44,7 @@ def build(bot, hist, labels=None, judul_periode="", periode_R=None, now=None):
     live = sorted([h for h in hist if h[3] >= LIVE_START[bot]], key=lambda h: h[3])
     R = [h[6] for h in live]
     s = _stats(R)
-    nama = "CRYPTO" if bot == "crypto" else "XAU"
+    nama = {"crypto": "CRYPTO SWING", "xau": "XAU", "intraday": "CRYPTO INTRADAY"}.get(bot, bot.upper())
     L = [f"<b>CEK KESEHATAN {nama}</b>", judul_periode or now.strftime("%d %b %Y"), LINE]
     if periode_R is not None:
         L.append(f"Trade selesai periode ini: <b>{len(periode_R)}</b> · hasil <b>{sum(periode_R):+.2f}R</b>")

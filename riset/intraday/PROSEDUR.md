@@ -5,6 +5,9 @@ Tujuan: menemukan perbaikan strategi intraday yang terbukti dengan data, lalu **
 Routine tidak pernah mengubah juara (`PARAM` di `riset/backtest_intraday.py`) maupun bot live.
 Perubahan dipasang hanya setelah pemilik setuju di chat. Riset crypto (swing) dan XAU dikerjakan routine terpisah.
 
+**Wajib baca dulu `riset/ATURAN_BERSAMA.md`** (sumber ide, uji signifikansi, data terkunci, uji maju). Aturan di sana
+berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1 saja.
+
 ## 0. Aturan keras
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), `.github/`,
@@ -26,12 +29,17 @@ python3 riset/backtest_intraday.py . /tmp/data /tmp/data/trades_intraday.csv
 Output terakhir adalah statistik juara (semua, 2020-2023, 2024-sekarang, per tahun). Simpan untuk pembanding.
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 
+Data terkunci / daftar koin sesuai masanya (tahap 3 ATURAN_BERSAMA dan review bulanan, **hanya jika dibutuhkan**, ±15-40 menit):
+`python3 riset/unduh_pit.py /tmp/data`, lalu unduh koin tambahan H1 + funding + 15m: `unduh_crypto.py` dan `unduh_intraday.py` dengan `$(cat /tmp/data/pit/extra.txt)`;
+jalankan `python3 riset/pit_intraday.py . /tmp/data` untuk juara vs penantang (parameter lewat argumen JSON).
+
 ## 2. Tentukan mode
 - Jika **Jumat berikutnya sudah masuk bulan baru** (hari ini Jumat terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan: uji 1-2 ide
-1. Ambil 1-2 ide teratas berstatus `antri` dari `riset/intraday/ide.md` (prioritas tertinggi dulu).
+1. Uji 2 ide: ide teratas berstatus `antri` dari `riset/intraday/ide.md`, **ditambah 1 ide baru** sesuai
+   ATURAN_BERSAMA bagian A (literatur = nilai tambah, tidak wajib).
 2. Tulis hipotesis singkat, lalu uji dengan skrip di `riset/intraday/eksperimen/<nama-ide>.py`.
    Cara standar: `import backtest_intraday as bi` lalu `bi.run(".", "/tmp/data", {"PARAMETER": nilai})`.
    Untuk logika baru, salin fungsi `orders()`/`portfolio()` ke skrip eksperimen dan ubah di sana (jangan ubah file juara).
@@ -44,7 +52,8 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
    - Uji tetangga: geser parameter baru ±1 langkah. Ide yang hanya bagus di satu angka = **GAGAL** (overfit).
 4. Keputusan:
    - **LOLOS** jika rasio R/DD membaik ≥ 10% di periode lama **dan** baru, tidak lebih buruk di ≥ 5 dari 7 tahun,
-     `tanpa_top2` tidak memburuk, dan tetangga parameternya juga membaik. Ide ini menjadi **kandidat penantang**.
+     `tanpa_top2` tidak memburuk, dan tetangga parameternya juga membaik. Ide ini lanjut ke tahap 2-4 ATURAN_BERSAMA
+     (signifikansi, data terkunci, uji maju) sebelum menjadi **kandidat penantang**.
    - **GAGAL** jika tidak memenuhi. Catat alasannya agar tidak diuji ulang.
    - **PERLU DATA** jika butuh data yang belum ada (misalnya data live).
    - Jangan memilih parameter karena hasil 2024-sekarang paling bagus; periode baru hanya untuk **menguji**.
@@ -58,7 +67,9 @@ Tambahan selain langkah 3:
    tandai **PERINGATAN** di laporan dan cari penyebabnya (modul mana, arah mana).
 3. Bot intraday live sejak 27 Okt 2026: bandingkan `jurnal/intraday-*.json` (kolom `R`) dengan backtest periode yang sama
    (trade dengan koin & waktu isi sama). Selisih besar menandakan masalah eksekusi, data, atau jadwal cron.
-4. Rangkum semua **kandidat penantang** yang masih berlaku beserta buktinya: apa yang diubah, bukti periode lama dan baru,
+4. **Risiko gabungan swing + intraday** dan **bias koin selamat** (ATURAN_BERSAMA bagian C). Butuh CSV swing:
+   `python3 riset/unduh_crypto.py /tmp/data "$COINS"` (sudah) lalu `python3 riset/backtest_crypto.py . /tmp/data /tmp/data/trades_swing.csv`.
+5. Rangkum semua **kandidat penantang** yang masih berlaku beserta buktinya: apa yang diubah, bukti periode lama dan baru,
    dampak ke profit, drawdown, dan jumlah sinyal.
 
 ## 5. Keluaran

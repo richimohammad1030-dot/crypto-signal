@@ -1,6 +1,7 @@
 # Daftar ide riset · CRYPTO
 
-Status: `antri` (belum diuji) · `diuji` (sedang) · `lolos` (kandidat penantang) · `gagal` · `perlu-data` · `dipasang`
+Status: `antri` (belum diuji) · `diuji` (sedang) · `perlu-data` · `uji-maju` (lolos tahap 1-3) · `lolos` (siap diusulkan) · `gagal` · `dipasang`
+Ide dari literatur ditandai `[lit]` (nilai tambah, tidak wajib). Aturan lengkap: `riset/ATURAN_BERSAMA.md`.
 Prioritas: 1 = paling penting.
 Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah.
 
