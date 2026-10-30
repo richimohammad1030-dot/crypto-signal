@@ -184,3 +184,15 @@ SL 1,5-3 ATR, TP 1,5/2/3R/tanpa), portofolio K6 + RSI2 (bobot RSI2 1 / 0,5). Sel
   53% → tanpa edge. Contoh pemilik 2021 vs 2025: korelasi return bulanan -0,17, arah sama 5/12 bulan, total -4% vs +66%.
   [lit] Musiman yang terbukti di literatur adalah bulan-kalender yang sama (Heston & Sadka 2008; Keloharju, Linnainmaa & Nyberg 2016,
   termasuk komoditas), bukan pemetaan tahun analog; untuk XAU intraday sudah diuji (ide #27, gagal).
+
+## 2026-10-31 · Risiko 2 posisi/hari (K6 + RSI2) vs maks 1 posisi/hari (`eksperimen/dua_posisi.py`)
+- Portofolio boleh 2 posisi: 41% hari trade punya 2 posisi (820 berlawanan arah, 242 searah); korelasi R harian -0,30.
+  Keduanya kena SL di hari yang sama: 115 hari (4,4%, ±10×/thn). Risiko 1%+1%: rugi terburuk/hari -2,28%, DD 41%.
+  Risiko 0,5%+0,5%: terburuk -1,14%/hari, DD 20%, total +61%.
+- Versi "maks 1/hari, K6 diprioritaskan" yang sempat dihitung MEMAKAI INFORMASI MASA DEPAN (fill K6 belum diketahui jam 07:00) → dibuang.
+- **Aturan sah (diputuskan 07:00): ada sinyal RSI2 → hanya RSI2 market (K6 tidak dipasang); tidak ada → pasang K6.**
+  Risiko 1%: 4,2 trade/mg, win 47%, RR 1,22, PF 1,07, W/L maks 10/8, 9/12 tahun untung, rugi terburuk/hari -1,18%, kalah hari beruntun 8,
+  DD 37% (majemuk 32%); per periode PF 1,03 / 1,10 / 1,17, R/thn +2,9 / +9,9 / +15,6. Per tahun: 2015 +2 · 2016 +3 · 2017 +10 · 2018 -4 ·
+  2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14. Risiko 0,5%: DD 18,6%.
+  Satu-satunya kandidat yang memenuhi kriteria awal pemilik (win ≥ 40%, PF > 1, ≥ 3/mg, beruntun seimbang, mayoritas tahun) di KETIGA
+  periode, tetapi dirakit setelah melihat semua periode → status `perlu-data`, wajib uji maju (ide #34).
