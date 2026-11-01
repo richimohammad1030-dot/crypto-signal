@@ -50,5 +50,31 @@
   "btc": 0,
   "skor": 0,
   "fund": 6.3377561643835614e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-11-02 02:00",
+  "sym": "BTCUSDT",
+  "d": -1,
+  "t0": 1793383200,
+  "t1": 1793559600,
+  "entry": 76500.11,
+  "exit": 77799.29,
+  "R": -0.246,
+  "alasan": "cut-loss stagnan",
+  "label": "HIGH",
+  "mfe": 0.033,
+  "mae": -0.338,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 6.91,
+  "ext": 4.24,
+  "trend": 0.993,
+  "dist": 1.698,
+  "mom20": 6.534,
+  "rank": 0,
+  "btc": 1,
+  "skor": 3,
+  "fund": 1.1841346575342466e-05
  }
 ]
