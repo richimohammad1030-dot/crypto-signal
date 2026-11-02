@@ -219,3 +219,13 @@ aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
 - Catatan bayangan: `riset/xau/bayangan.py` (baseline, MR saja, K6 saja, juara lama, PENANTANG RSI2 30% 38,49/74,72 SL 2,5 TP 2R +
   K6 SL 1,25 tanpa TP) vs catatan live, untuk uji maju riset Jumat.
 - Fakta penting: ±84% trade adalah MR; K6 hanya pada hari RSI2 tidak ekstrem (±1 dari 6 trade).
+
+## 2026-11-02 · Insiden: tidak ada sinyal 07:00 (feed Setra macet sejak Jumat malam) · perbaikan dipasang (persetujuan pemilik)
+- Setra H1/5m/1m berhenti di Sabtu 31 Okt 04:59 WIB; pasar buka Senin 06:00 WIB (Dukascopy aktif, gap turun 3.966 → 3.869).
+  Run 07:05 WIB sukses tetapi tanpa candle baru → tidak ada pesan. Sinyal seharusnya: BUY market MR (RSI2 1,8).
+- Perbaikan `gold_bot.py`: (1) peringatan data macet (> 2 jam di hari bursa) ke chat pribadi, sekali per kejadian + pesan pulih;
+  (2) sinyal 07:00 yang baru diproses ≥ 10:00 WIB = TERLAMBAT (tidak dikirim/dicatat); < 10:00 diberi catatan keterlambatan;
+  (3) cadangan Dukascopy (M1 harian + tick per jam hari berjalan, BID, hanya prefiks berurutan tanpa lubang).
+  Replay tetap IDENTIK (aturan terlambat hanya live). Diuji end-to-end pada kondisi nyata pagi ini dan simulasi 10:30 WIB.
+- Temuan sampingan: API Setra (1.000 candle terakhir) tidak memuat 80 candle yang ada di file unduhan riset untuk rentang yang sama →
+  ATR live bisa sedikit berbeda dari backtest (pagi ini SL 66,9 vs 71,0 USD). Ide #35.

@@ -20,6 +20,10 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 - Candle H1 yang menyentuh keduanya: mesin menganggap sisi BUY duluan (ide #23 untuk perbaikan).
 - Order diabaikan bila jarak SL ≤ 0,5 USD.
 
+## Data & keterlambatan (live saja; tidak memengaruhi backtest/replay)
+- Data utama Setra. Candle terakhir > 2 jam di hari bursa → cadangan Dukascopy (BID) + peringatan ke pemilik.
+- Candle 07:00 baru diproses ≥ 10:00 WIB → sinyal hari itu TERLAMBAT: tidak dikirim sebagai order dan tidak dicatat.
+
 ## Ekspektasi (bersih biaya 0,40 USD; urutan candle ambigu M1 untuk 2022-skrg; risiko 0,5%)
 | Periode | Trade/mg | MR / K6 | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
 |---|---|---|---|---|---|---|---|---|---|---|---|

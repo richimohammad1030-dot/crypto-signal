@@ -152,6 +152,10 @@ Strategi: `riset/xau/STRATEGI.md` (sejak 2 Nov 2026). Jam sinyal 07:00 & tutup 2
 - Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
   Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota
   (**kirim ulang** setelah 2 Nov 2026 agar panduan multi-strategi yang ter-pin).
+- Data: Setra (utama). Jika di hari bursa candle terakhir Setra lebih tua dari 2 jam → peringatan ke chat pribadi dan bot memakai
+  **cadangan Dukascopy** (BID; M1 harian untuk hari sebelumnya, tick per jam untuk hari berjalan; hanya dipakai berurutan tanpa lubang).
+- Sinyal 07:00 yang baru bisa diproses **≥ 10:00 WIB** → pesan **SINYAL 07:00 TERLAMBAT**, hari itu tanpa trade dan tidak dicatat.
+  Sinyal yang terkirim terlambat < 10:00 diberi catatan berapa jam terlambat.
 - Perintah pribadi: `/status_xau`, `/rekap_xau`, `/rekap_xau bulan`, `/rekap_xau minggu lalu`.
 - Variable opsional: `XAU_RISK_PCT` (default 0.5) untuk estimasi % di rekap.
 - Uji kesetaraan bot vs riset: `python riset/replay_xau.py . <xau.json> [<xau_panjang.json>]` (wajib IDENTIK).

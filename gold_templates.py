@@ -53,7 +53,7 @@ def _hasil(R):
 
 
 def new_events():
-    return {"order": None, "expire": False, "fill": [], "exit": [], "skip": []}
+    return {"order": None, "expire": False, "fill": [], "exit": [], "skip": [], "late": None}
 
 
 def make_notifier(ev):
@@ -68,13 +68,24 @@ def make_notifier(ev):
             ev["exit"].append(k)
         elif kind == "skip":
             ev["skip"].append(k)
+        elif kind == "late":
+            ev["late"] = k
     return notify
 
 
-def signal_bubble(ev, t, risk_pct, live_px=None):
-    if not ev["order"] and not ev["expire"]:
+def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
+    if not ev["order"] and not ev["expire"] and not ev.get("late"):
         return None
     L = [f"🥇 <b>SINYAL {SYM}</b> · XAU Intraday", f"🕐 {_wib(t)}", BAR]
+    if ev.get("late"):
+        L += ["⏰ <b>SINYAL 07:00 TERLAMBAT</b>",
+              f"Data harga jam 07:00 baru tersedia {_jam(now) if now else 'setelah 10:00 WIB'}.",
+              "Sinyal hari ini <b>tidak dikirim dan tidak dicatat</b>. Tidak ada trade XAU dari bot hari ini.",
+              BAR]
+    telat = (now - ev["order"]["t"] - 3600) if (ev["order"] and now) else 0
+    if telat >= 1800:
+        L.append(f"⚠️ Sinyal ini terkirim terlambat ±{telat / 3600:.1f} jam karena data harga tertunda. "
+                 "Harga sekarang bisa sudah berbeda dari angka di bawah.")
     if ev["order"] and ev["order"]["pend"].get("mode") == "MR":
         p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"
         L.append(f"🌅 <b>ORDER HARI INI · {arah} SEKARANG</b> (mean reversion)")

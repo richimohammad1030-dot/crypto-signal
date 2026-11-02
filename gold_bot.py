@@ -22,7 +22,9 @@ STATE_FILE = os.path.join(HERE, "gold_state.json")
 CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU disimpan oleh pemroses perintah
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
-MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 71.22, 3.0   # mean reversion RSI(2); ambang = kuantil 35%/65% 2015-2021 (riset)
+MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 71.22, 3.0
+STALE_S = 2 * 3600     # data dianggap macet bila candle H1 terakhir yang close lebih tua dari 2 jam (hari bursa)
+LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat   # mean reversion RSI(2); ambang = kuantil 35%/65% 2015-2021 (riset)
 PLACE_HOUR_UTC = 23     # jam BUKA candle H1 (UTC) yang close 07:00 WIB
 CLOSE_HOUR_UTC = 15     # jam BUKA candle H1 (UTC) yang close 23:00 WIB
 SYM = "XAUUSD"
@@ -72,12 +74,67 @@ def fetch_xau(n=1000):
     return [dedup[k] for k in sorted(dedup)]
 
 
+def _duka_get(url):
+    for k in range(3):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=30) as r:
+                return r.read()
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                return b""
+            time.sleep(3 * (k + 1))
+        except Exception:
+            time.sleep(3 * (k + 1))
+    return None
+
+
+def fetch_dukascopy(after_ts):
+    """CADANGAN saat Setra macet: candle H1 XAU/USD Dukascopy (harga BID) yang sudah close dan open > after_ts.
+    Hari sebelumnya dari file M1 harian; hari berjalan (UTC) dari file tick per jam. Gagal -> list kosong."""
+    import lzma, struct
+    now = time.time(); out = {}; gagal = False
+    today = dt.datetime.fromtimestamp(now, dt.timezone.utc).date()
+    day = dt.datetime.fromtimestamp(after_ts, dt.timezone.utc).date()
+    try:
+        while day <= today:
+            base = f"https://datafeed.dukascopy.com/datafeed/XAUUSD/{day.year}/{day.month - 1:02d}/{day.day:02d}"
+            d0 = dt.datetime(day.year, day.month, day.day, tzinfo=dt.timezone.utc).timestamp()
+            if day < today:
+                b = _duka_get(f"{base}/BID_candles_min_1.bi5")
+                if b is None:
+                    break                    # gagal unduh -> berhenti di sini agar tidak ada candle yang terlewat (lubang)
+                raw = lzma.decompress(b) if b else b""
+                for i in range(len(raw) // 24):
+                    t, o, c, l, h, v = struct.unpack(">5if", raw[i * 24:(i + 1) * 24])
+                    k = int(d0 + t) // 3600 * 3600
+                    if k not in out: out[k] = [k, o / 1000, h / 1000, l / 1000, c / 1000]
+                    else: x = out[k]; x[2] = max(x[2], h / 1000); x[3] = min(x[3], l / 1000); x[4] = c / 1000
+            else:
+                for hr in range(24):
+                    k = int(d0) + hr * 3600
+                    if k <= after_ts or k + 3600 > now: continue
+                    b = _duka_get(f"{base}/{hr:02d}h_ticks.bi5")
+                    if b is None:
+                        gagal = True
+                        break
+                    raw = lzma.decompress(b) if b else b""
+                    bid = [struct.unpack(">3i2f", raw[i * 20:(i + 1) * 20])[2] / 1000 for i in range(len(raw) // 20)]
+                    if bid: out[k] = [k, bid[0], max(bid), min(bid), bid[-1]]
+            if gagal:
+                break
+            day += dt.timedelta(days=1)
+    except Exception as e:
+        print("Cadangan Dukascopy gagal:", e)
+    return [out[k] for k in sorted(out) if k > after_ts and k + 3600 <= now and not (out[k][1] == out[k][2] == out[k][3] == out[k][4])]
+
+
 class GoldEngine:
     """Urutan per candle sama persis dengan backtest:
        1) order terisi?  2) posisi kena SL/TP?  3) jam tutup 23:00  4) jam pasang 07:00"""
-    def __init__(self, state, notify):
+    def __init__(self, state, notify, now=None):
         self.s, self.notify = state, notify
         self.trades = []
+        self.now = now          # waktu nyata (live); None = replay/backtest (tidak ada aturan terlambat)
 
     def record(self, d, e, ex, r0, t0, t1, why, strat="K6"):
         R = (ex - e) * d / r0 if r0 else 0.0
@@ -136,7 +193,10 @@ class GoldEngine:
                 p = s["pos"]; s["pos"] = None
                 self.record(p["d"], p["e"], C[i], p["r0"], p["t0"], t, "ditutup jam 23:00", p.get("strat", "K6"))
         # 4) jam pasang 07:00 WIB
-        if hr == PLACE_HOUR_UTC and s.get("pos") is None:
+        if hr == PLACE_HOUR_UTC and s.get("pos") is None and self.now is not None and self.now - (t + 3600) >= LATE_S:
+            # live: data candle 07:00 baru tersedia >= 10:00 WIB -> sinyal hari ini tidak dikirim & tidak dicatat
+            self.notify("late", t=t)
+        elif hr == PLACE_HOUR_UTC and s.get("pos") is None:
             hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
             r2 = self.R2[i]
             if r2 <= MR_BUY or r2 >= MR_SELL:          # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
@@ -196,7 +256,26 @@ def main():
     try:
         rows = fetch_xau()
     except Exception as e:
-        tg_send(f"⚠️ Bot XAU gagal mengambil data harga: {e}"); sys.exit(1)
+        tg_send(f"⚠️ Bot XAU gagal mengambil data harga Setra: {e}"); rows = []
+    # data macet? (hari bursa: Senin 07:00 s.d. Jumat 23:00 WIB; bot hanya dijadwalkan di jam itu)
+    now_ = time.time()
+    last_ok = rows[-1][0] + 3600 if rows else 0
+    w_now = dt.datetime.fromtimestamp(now_, dt.timezone.utc) + dt.timedelta(hours=7)
+    hari_bursa = w_now.weekday() < 5 and w_now.hour >= 7
+    if hari_bursa and now_ - last_ok > STALE_S and rows:
+        cad = fetch_dukascopy(rows[-1][0])
+        rows = rows + cad
+        tag = f"{last_ok}|{bool(cad)}"          # kirim peringatan sekali per kejadian macet / perubahan status cadangan
+        if state.get("stale_warn") != tag:
+            akhir = (dt.datetime.fromtimestamp(last_ok, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%a %d %b %H:%M WIB")
+            tg_send("⚠️ <b>DATA XAU SETRA MACET</b>\n"
+                    f"Candle terakhir Setra close {akhir}.\n" +
+                    (f"Bot memakai data cadangan Dukascopy (BID, selisih ±0,3 USD) untuk {len(cad)} candle sampai Setra pulih."
+                     if cad else "Data cadangan Dukascopy juga belum tersedia. Sinyal bisa terlambat atau tidak terkirim."))
+            state["stale_warn"] = tag
+    elif state.get("stale_warn") and now_ - last_ok <= STALE_S:
+        tg_send("✅ Data XAU Setra sudah pulih. Bot kembali memakai Setra.")
+        state.pop("stale_warn", None)
     if len(rows) < 100:
         tg_send("⚠️ Bot XAU: data harga tidak cukup."); sys.exit(1)
     first = state.get("last_ts", 0) == 0
@@ -232,7 +311,7 @@ def main():
             except Exception as e:
                 print("Jurnal gagal ditulis:", e)
         base_notify(kind, **k)
-    eng = GoldEngine(state, notify)
+    eng = GoldEngine(state, notify, now=time.time())
     px = eng.run(rows, since)
     t_last = rows[-1][0] + 3600
     # Maksimal 2 bubble: (1) SINYAL order/pembatalan, (2) UPDATE terisi/ditutup/posisi berjalan
@@ -249,7 +328,7 @@ def main():
         buf.append(nb)
         tg_send(nb, chat=target)
         state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
-    for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None),
+    for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None, now=time.time()),
               gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] or ev["skip"] else None):
         if b:
             buf.append(b)
