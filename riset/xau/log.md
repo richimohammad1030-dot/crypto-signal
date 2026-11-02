@@ -234,3 +234,10 @@ aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
   lubang). Perbaikan: hanya jam pasar buka (lewati Sabtu, Minggu < 21:00 UTC, Jumat ≥ 22:00 UTC), file tick per jam bila ≤ 8 jam per
   hari, timeout 60 dtk + log HTTP. Uji: 3 candle (Senin 06:00-08:00 WIB) dalam 66 dtk meski ada 503. API Setra semua timeframe
   masih macet di Sabtu 04:59 WIB.
+
+## 2026-11-02 · SL lebar & lot minimum (pertanyaan pemilik)
+- SL MR 3 ATR hari ini 66,9 USD (ATR naik 16,5 → 22,3 karena gap akhir pekan). Median jarak SL MR: 2024 17 · 2025 30 · 2026 56 USD
+  (p90 2026 108, maks 336). Dengan 0,01 lot (1 oz) modal ±1.100 USD → risiko ±6%/trade; risiko 0,5% butuh modal ±11.200 USD (2026).
+- SL MR 1,5/2/2,5/3 ATR (12 thn): PF 1,07/1,08/1,08/1,07, win 37/42/45/47%, DD 51/42/35/37R, W/L 9/16 · 10/16 · 10/8 · 10/8.
+  SL lebih sempit tidak menyelesaikan masalah lot minimum. **Keputusan pemilik: tetap SL 3 ATR**; saran lot otomatis → ide #36
+  untuk riset Jumat 6 Nov.
