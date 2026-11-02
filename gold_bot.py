@@ -74,17 +74,17 @@ def fetch_xau(n=1000):
     return [dedup[k] for k in sorted(dedup)]
 
 
-def _duka_get(url, timeout=60):
-    for k in range(3):
+def _duka_get(url, timeout=60, coba=6):
+    for k in range(coba):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=timeout) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 return b""
-            print("Dukascopy HTTP", e.code, url[-45:]); time.sleep(3 * (k + 1))
+            print("Dukascopy HTTP", e.code, url[-45:]); time.sleep(2 * (k + 1))
         except Exception as e:
-            print("Dukascopy gagal:", e, url[-45:]); time.sleep(3 * (k + 1))
+            print("Dukascopy gagal:", e, url[-45:]); time.sleep(2 * (k + 1))
     return None
 
 
@@ -92,6 +92,12 @@ def _pasar_buka(k):
     """Jam UTC (open candle k) di mana emas bisa diperdagangkan: tutup Jumat >= 22:00 UTC s.d. Minggu < 21:00 UTC."""
     w = dt.datetime.fromtimestamp(k, dt.timezone.utc)
     return not (w.weekday() == 5 or (w.weekday() == 6 and w.hour < 21) or (w.weekday() == 4 and w.hour >= 22))
+
+
+def _tepi_pekan(k):
+    """Jam yang bisa kosong karena pembukaan/penutupan pasar berganti musim (Minggu 21-22 UTC, Jumat 21 UTC)."""
+    w = dt.datetime.fromtimestamp(k, dt.timezone.utc)
+    return (w.weekday() == 6 and w.hour in (21, 22)) or (w.weekday() == 4 and w.hour == 21)
 
 
 def fetch_dukascopy(after_ts):
@@ -123,6 +129,8 @@ def fetch_dukascopy(after_ts):
             gagal = False
             for k in per_hari[day]:
                 b = _duka_get(f"{base}/{(k - int(d0)) // 3600:02d}h_ticks.bi5")
+                if b is None and _tepi_pekan(k):
+                    continue                 # jam tepi akhir pekan (bisa kosong) gagal -> lewati, bukan lubang data
                 if b is None:
                     gagal = True
                     break
