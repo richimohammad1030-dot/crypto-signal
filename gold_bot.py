@@ -74,55 +74,63 @@ def fetch_xau(n=1000):
     return [dedup[k] for k in sorted(dedup)]
 
 
-def _duka_get(url):
+def _duka_get(url, timeout=60):
     for k in range(3):
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=30) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=timeout) as r:
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 return b""
-            time.sleep(3 * (k + 1))
-        except Exception:
-            time.sleep(3 * (k + 1))
+            print("Dukascopy HTTP", e.code, url[-45:]); time.sleep(3 * (k + 1))
+        except Exception as e:
+            print("Dukascopy gagal:", e, url[-45:]); time.sleep(3 * (k + 1))
     return None
+
+
+def _pasar_buka(k):
+    """Jam UTC (open candle k) di mana emas bisa diperdagangkan: tutup Jumat >= 22:00 UTC s.d. Minggu < 21:00 UTC."""
+    w = dt.datetime.fromtimestamp(k, dt.timezone.utc)
+    return not (w.weekday() == 5 or (w.weekday() == 6 and w.hour < 21) or (w.weekday() == 4 and w.hour >= 22))
 
 
 def fetch_dukascopy(after_ts):
     """CADANGAN saat Setra macet: candle H1 XAU/USD Dukascopy (harga BID) yang sudah close dan open > after_ts.
-    Hari sebelumnya dari file M1 harian; hari berjalan (UTC) dari file tick per jam. Gagal -> list kosong."""
+    Hanya jam pasar buka yang diminta. Hari dengan > 8 jam dibutuhkan (dan sudah lewat) memakai file M1 harian, selain itu
+    file tick per jam. Berhenti di unduhan pertama yang gagal agar tidak ada candle yang terlewat (lubang)."""
     import lzma, struct
-    now = time.time(); out = {}; gagal = False
+    now = time.time(); out = {}
     today = dt.datetime.fromtimestamp(now, dt.timezone.utc).date()
-    day = dt.datetime.fromtimestamp(after_ts, dt.timezone.utc).date()
+    need = [k for k in range(int(after_ts) // 3600 * 3600 + 3600, int(now) // 3600 * 3600, 3600) if k + 3600 <= now and _pasar_buka(k)]
+    per_hari = {}
+    for k in need:
+        per_hari.setdefault(dt.datetime.fromtimestamp(k, dt.timezone.utc).date(), []).append(k)
     try:
-        while day <= today:
+        for day in sorted(per_hari):
             base = f"https://datafeed.dukascopy.com/datafeed/XAUUSD/{day.year}/{day.month - 1:02d}/{day.day:02d}"
             d0 = dt.datetime(day.year, day.month, day.day, tzinfo=dt.timezone.utc).timestamp()
-            if day < today:
+            if day < today and len(per_hari[day]) > 8:
                 b = _duka_get(f"{base}/BID_candles_min_1.bi5")
                 if b is None:
-                    break                    # gagal unduh -> berhenti di sini agar tidak ada candle yang terlewat (lubang)
+                    break
                 raw = lzma.decompress(b) if b else b""
                 for i in range(len(raw) // 24):
                     t, o, c, l, h, v = struct.unpack(">5if", raw[i * 24:(i + 1) * 24])
                     k = int(d0 + t) // 3600 * 3600
                     if k not in out: out[k] = [k, o / 1000, h / 1000, l / 1000, c / 1000]
                     else: x = out[k]; x[2] = max(x[2], h / 1000); x[3] = min(x[3], l / 1000); x[4] = c / 1000
-            else:
-                for hr in range(24):
-                    k = int(d0) + hr * 3600
-                    if k <= after_ts or k + 3600 > now: continue
-                    b = _duka_get(f"{base}/{hr:02d}h_ticks.bi5")
-                    if b is None:
-                        gagal = True
-                        break
-                    raw = lzma.decompress(b) if b else b""
-                    bid = [struct.unpack(">3i2f", raw[i * 20:(i + 1) * 20])[2] / 1000 for i in range(len(raw) // 20)]
-                    if bid: out[k] = [k, bid[0], max(bid), min(bid), bid[-1]]
+                continue
+            gagal = False
+            for k in per_hari[day]:
+                b = _duka_get(f"{base}/{(k - int(d0)) // 3600:02d}h_ticks.bi5")
+                if b is None:
+                    gagal = True
+                    break
+                raw = lzma.decompress(b) if b else b""
+                bid = [struct.unpack(">3i2f", raw[i * 20:(i + 1) * 20])[2] / 1000 for i in range(len(raw) // 20)]
+                if bid: out[k] = [k, bid[0], max(bid), min(bid), bid[-1]]
             if gagal:
                 break
-            day += dt.timedelta(days=1)
     except Exception as e:
         print("Cadangan Dukascopy gagal:", e)
     return [out[k] for k in sorted(out) if k > after_ts and k + 3600 <= now and not (out[k][1] == out[k][2] == out[k][3] == out[k][4])]

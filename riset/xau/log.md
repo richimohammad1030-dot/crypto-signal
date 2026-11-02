@@ -229,3 +229,8 @@ aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
   Replay tetap IDENTIK (aturan terlambat hanya live). Diuji end-to-end pada kondisi nyata pagi ini dan simulasi 10:30 WIB.
 - Temuan sampingan: API Setra (1.000 candle terakhir) tidak memuat 80 candle yang ada di file unduhan riset untuk rentang yang sama →
   ATR live bisa sedikit berbeda dari backtest (pagi ini SL 66,9 vs 71,0 USD). Ide #35.
+- 09:05 WIB: cadangan Dukascopy kosong di GitHub Actions. Penyebab (kesalahan kode): file M1 harian diunduh berurutan mulai
+  Jumat termasuk Sabtu (pasar tutup); Dukascopy lambat (12-17 dtk/file, 503) → satu timeout menghentikan semuanya (aturan tanpa
+  lubang). Perbaikan: hanya jam pasar buka (lewati Sabtu, Minggu < 21:00 UTC, Jumat ≥ 22:00 UTC), file tick per jam bila ≤ 8 jam per
+  hari, timeout 60 dtk + log HTTP. Uji: 3 candle (Senin 06:00-08:00 WIB) dalam 66 dtk meski ada 503. API Setra semua timeframe
+  masih macet di Sabtu 04:59 WIB.
