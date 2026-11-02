@@ -17,11 +17,7 @@
    }
   },
   "ETH": {
-   "pend": [
-    -1,
-    2174.08,
-    2247.846606405946
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -200,20 +196,20 @@
    "pend": [
     -1,
     0.1577,
-    0.1653859175301725
+    0.16714212543157167
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 4.874,
-    "ext": 2.039,
-    "trend": 1.506,
-    "dist": 11.033,
-    "mom20": 11.654,
+    "slpct": 5.987,
+    "ext": 0.672,
+    "trend": 1.185,
+    "dist": 9.913,
+    "mom20": 12.091,
     "rank": 12,
     "btc": 1,
     "skor": 3,
-    "fund": 1.0337330136986302e-05
+    "fund": 1.1223415068493152e-05
    }
   },
   "BCH": {
@@ -283,20 +279,20 @@
    "pend": [
     -1,
     0.8277,
-    0.8797885299705088
+    0.8833335824783346
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 6.293,
-    "ext": 2.964,
-    "trend": 2.353,
-    "dist": 11.212,
-    "mom20": 12.417,
+    "slpct": 6.721,
+    "ext": 2.127,
+    "trend": 2.132,
+    "dist": 11.044,
+    "mom20": 13.89,
     "rank": 17,
     "btc": 1,
     "skor": 2,
-    "fund": 9.606567123287672e-06
+    "fund": 9.791623287671233e-06
    }
   },
   "HBAR": {
@@ -388,18 +384,22 @@
    "pos": null
   },
   "HYPE": {
-   "pend": null,
+   "pend": [
+    1,
+    97.74,
+    91.62491122443632
+   ],
    "pos": null,
-   "conv": "HIGH",
+   "conv": "MEDIUM",
    "feat": {
-    "slpct": 6.622,
-    "ext": 2.233,
-    "trend": 0.316,
-    "dist": 10.186,
-    "mom20": -4.203,
+    "slpct": 6.256,
+    "ext": 4.701,
+    "trend": 2.824,
+    "dist": 11.931,
+    "mom20": 7.171,
     "rank": 6,
-    "btc": 0,
-    "skor": 3
+    "btc": -1,
+    "skor": 1
    }
   },
   "GRAM": {
@@ -726,7 +726,7 @@
    "pos": null
   }
  },
- "last_ts": 1793581200,
+ "last_ts": 1793588400,
  "tg_offset": 608781124,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -736,10 +736,16 @@
  "day_log": {
   "date": "2026-11-02",
   "new": [
-   "ETHUSDT"
+   "ETHUSDT",
+   "HYPEUSDT"
   ],
   "upd": {},
-  "cancel": []
+  "cancel": [
+   [
+    "ETHUSDT",
+    "trend sudah tidak searah (EMA)"
+   ]
+  ]
  },
  "hist": [
   [
