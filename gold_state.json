@@ -1,5 +1,5 @@
 {
- "last_ts": 1793667600,
+ "last_ts": 1793674800,
  "pend": null,
  "pos": null,
  "recap_week": "2026-10-26T00:00:00+07:00",
@@ -117,6 +117,5 @@
   "1793277000|Advance GDP q/q",
   "1793277000|Core PCE Price Index m/m"
  ],
- "recap_month": "2026-10-01T00:00:00+07:00",
- "stale_warn": "1793397600|True"
+ "recap_month": "2026-10-01T00:00:00+07:00"
 }
