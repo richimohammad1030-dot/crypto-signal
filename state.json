@@ -49,13 +49,7 @@
   },
   "XRP": {
    "pend": null,
-   "pos": [
-    -1,
-    1.2546,
-    1.2646,
-    1793304000,
-    0.08711347803757619
-   ],
+   "pos": null,
    "conv": "HIGH",
    "feat": {
     "slpct": 6.944,
@@ -726,7 +720,7 @@
    "pos": null
   }
  },
- "last_ts": 1793703600,
+ "last_ts": 1793710800,
  "tg_offset": 608781124,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -899,6 +893,15 @@
    76500.11,
    77799.29,
    -0.246
+  ],
+  [
+   "XRP",
+   -1,
+   1793304000,
+   1793707200,
+   1.2546,
+   1.2646,
+   -0.115
   ]
  ],
  "digest_key": "2026-11-03-2",
@@ -907,7 +910,8 @@
   "1793210400|Federal Funds Rate",
   "1793212200|FOMC Press Conference",
   "1793277000|Advance GDP q/q",
-  "1793277000|Core PCE Price Index m/m"
+  "1793277000|Core PCE Price Index m/m",
+  "1793718960|Congressional Elections"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00"
 }
