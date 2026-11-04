@@ -102,5 +102,31 @@
   "btc": 1,
   "skor": 4,
   "fund": 1.25e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-11-04 17:00",
+  "sym": "ALGOUSDT",
+  "d": -1,
+  "t0": 1792792800,
+  "t1": 1793786400,
+  "entry": 0.1058,
+  "exit": 0.0955,
+  "R": 1.175,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 1.965,
+  "mae": -0.144,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 7.89,
+  "ext": 5.264,
+  "trend": 1.782,
+  "dist": 0.767,
+  "mom20": 18.314,
+  "rank": 38,
+  "btc": 1,
+  "skor": 0,
+  "fund": 1.25e-05
  }
 ]
