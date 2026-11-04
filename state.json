@@ -720,7 +720,7 @@
    "pos": null
   }
  },
- "last_ts": 1793804400,
+ "last_ts": 1793811600,
  "tg_offset": 608781124,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -728,34 +728,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-10-26T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-04",
-  "new": [
-   "BNBUSDT",
-   "TAOUSDT",
-   "TRXUSDT",
-   "HYPEUSDT",
-   "NEARUSDT",
-   "UNIUSDT",
-   "QNTUSDT",
-   "DOTUSDT",
-   "WLDUSDT",
-   "WLFIUSDT"
-  ],
+  "date": "2026-11-05",
+  "new": [],
   "upd": {},
-  "cancel": [
-   [
-    "SUIUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "BNBUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "DOGEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "cancel": []
  },
  "hist": [
   [
