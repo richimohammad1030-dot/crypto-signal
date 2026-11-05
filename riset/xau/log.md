@@ -335,3 +335,12 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Pola klasik overfit: makin banyak sel → makin bagus di data pemilihan, makin buruk di data baru; trade/mg turun (sel "kosong").
   Pembagian sempit berdasar alasan (ide #40: 1 sel, dialihkan ke K6, uji tetangga) lebih kokoh daripada pembagi penuh.
 - Status `ditolak` (versi otomatis banyak sel). Arah lanjut: penutup celah diuji juga di pasar lain (mis. XAG/USD) sebelum dipasang.
+
+## 5 Nov 2026 — Ide #40b penutup celah sumber edge berbeda (celah_momentum.py) + persiapan uji perak
+- Hari RSI2 71,22..X diberi BUY momentum (SL 3 ATR, TP 2R/tanpa; semua hari / hanya tren naik) vs K6 (ide #40):
+  momentum terbaik X85 tren naik TP2 +6,9 · +21,6 · +13,9 · 12t +11,8 (P uji 0,85) < ide #40 X85 +10,4 · +24,7 · +13,9 · +14,6.
+  Momentum polos lebih buruk (12t +6,8..+9,6). → K6 tetap penutup celah terbaik. #40b `ditolak`.
+- Poin "strategi sumber edge berbeda": bot sudah trade ±4,8 dari 5 hari/mg → hampir tidak ada hari kosong; strategi baru hanya
+  bisa menggantikan sel strategi lain (= pembagi tugas, ide #41) atau membuka posisi ke-2 (ditolak pemilik: maks 1/hari).
+- Uji silang PERAK (XAG/USD) untuk ide #40: Dukascopy tidak bisa dijangkau dari sesi chat 5 Nov 15:20 WIB (connection reset,
+  juga untuk XAU). Skrip siap: riset/unduh_xag.py + riset/xau/eksperimen/uji_xag.py → dijalankan di riset Jumat 6 Nov.

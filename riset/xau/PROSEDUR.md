@@ -51,6 +51,10 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 1. **Uji maju** (selalu): tulis hasil `bayangan.py` (trade, win, total R per strategi menu vs live) dan selisih live vs baseline.
 2. **Jumat 6 Nov 2026 (permintaan pemilik): salah satu dari 2 ide WAJIB ide #36** (saran lot otomatis `XAU_MODAL_USD`; susun rancangan,
    contoh pesan, dan usulan perubahan bot untuk disetujui pemilik; jangan ubah file bot). Hapus catatan ini setelah dikerjakan.
+   **Jumat 6 Nov juga WAJIB (pemilik): uji silang PERAK untuk ide #40** — `python3 riset/unduh_xag.py /tmp/data/xag` lalu
+   `cd riset/xau/eksperimen && python3 uji_xag.py /tmp/data/xag`. Laporkan apakah aturan bot XAU dan ide #40 (X 80/85/90) juga
+   lebih baik di perak pada ketiga periode & biaya 1-3 USD. Ide #40 dianggap lolos bila di perak X85 ≥ baseline perak di ≥ 2 dari
+   3 periode dan 12 thn. Ini pemeriksaan, bukan ide baru (2 ide tetap diuji). Hapus catatan ini setelah dikerjakan.
    Uji 2 ide: ide teratas berstatus `antri` dari `riset/xau/ide.md`, **ditambah 1 ide baru** (ATURAN_BERSAMA bagian A; literatur
    = nilai tambah). Ide yang sudah `gagal` tidak diuji ulang tanpa data baru yang relevan.
 3. Skrip di `riset/xau/eksperimen/<nama-ide>.py`. Pembagian data tetap: **pilih 2015-2021**, **uji 2022 - Jan 2025** (Dukascopy),
