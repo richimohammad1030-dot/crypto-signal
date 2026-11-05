@@ -326,3 +326,12 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   tetapi uji +23,4 (P 0,82), 3,7 trade/mg.
 - Ide #40 = A1 (pilih-saja juga memilih X=85: pilih +10,4 tertinggi). Tahap 2 P 0,87 (X80 0,95), tetangga stabil; Setra tidak
   lebih baik. Risiko: aturan asimetris memihak tren naik emas 12 thn. Status `perlu-data` / menunggu keputusan pemilik.
+
+## 5 Nov 2026 — Ide #41 PEMBAGI TUGAS (strategi saling menutup celah; pembagi.py, gagasan pemilik)
+- Tiap hari (07:00) masuk sel kondisi; tiap sel diberi MR / K6(+susulan) / kosong terbaik di 2015-2021, diuji sesudahnya.
+- R/thn 2015-21 · uji · Setra · 12t (baseline +3,8 · +15,9 · +13,6 · +8,4; 4,8 trade/mg):
+  L1 RSI (7 sel) +11,2 · +12,2 · +6,8 · +10,8 (3,4/mg; P uji 0,43) · L2 RSI×tren (14) +13,8 · +13,3 · -3,8 · +11,0 (P 0,56) ·
+  L3 RSI×tren×ATR (42) +20,6 · +8,5 · +4,4 · +15,0 (P 0,27) · L4 ×hari (202 sel, hanya 2 aktif) P uji 0,03.
+- Pola klasik overfit: makin banyak sel → makin bagus di data pemilihan, makin buruk di data baru; trade/mg turun (sel "kosong").
+  Pembagian sempit berdasar alasan (ide #40: 1 sel, dialihkan ke K6, uji tetangga) lebih kokoh daripada pembagi penuh.
+- Status `ditolak` (versi otomatis banyak sel). Arah lanjut: penutup celah diuji juga di pasar lain (mis. XAG/USD) sebelum dipasang.
