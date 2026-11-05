@@ -58,3 +58,17 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
 - Koin di luar daftar kini: 725 trade, +0,131R/trade (tetap positif). Trade yang dibuat saat koin BELUM 50 besar (daftar tetap):
   234 trade +0,257R. Bias datang terutama dari prioritas slot berdasarkan peringkat hari ini, bukan koin "mati".
 - Kesimpulan: strategi tahan uji, tetapi ekspektasi jujur ±20-28% lebih rendah dan DD bisa ±26R. Angka PIT = patokan ekspektasi.
+
+## 2026-11-06 · Riset mingguan
+- Data 49 koin (HYPE dilewati backtest: data kurang). Funding HL bulan berjalan lengkap (kecuali JST/QNT/NIGHT, tidak ada di HL).
+  Juara v2: 2435 trade, +641,7R, +0,264R/trade, DD 16,3R; rasio 26,9 (2020-2023) / 12,7 (2024-skrg).
+- **Data baru: open interest Binance** (`eksperimen/unduh_oi.py`, arsip harian metrics → OI per jam, 49/49 koin).
+  Arsip mulai Des 2021 untuk sebagian besar koin (BTC Sep 2020); 1796 dari 2435 trade juara punya OI 7 hari.
+- **#4 OI naik vs turun** (gerbang replay penuh; OI tidak tersedia = izinkan): A OI 7 hari naik (semua) rasio -0%/-59%,
+  B OI 7 hari naik (BUY saja) +0%/-55%, C tolak OI 7 hari < -10% +13%/-14% (2/6 tahun), D OI 3 hari naik +3%/-34%.
+  Hanya 2022-2023: C +14%, lainnya -8% s.d. +1%. **Gagal** (periode baru memburuk di semua varian).
+  Diagnostik tidak konsisten antar horizon: BUY OI 7 hari turun +0,31/+0,54R vs naik +0,23/+0,20R, tetapi OI 3 hari naik lebih baik.
+- **#48 [lit] Risiko dikelola volatilitas BTC 30 hari** (Moreira & Muir 2017; ukuran saja, slot tetap): 1/vol rasio -14%/-16%,
+  1/vol² -25%/-15%, vol > 1,25x median → 0,5: -9%/-0%, 1/vol batas 0,25-2: -8%/-19%. **Gagal**. Kuartil vol tertinggi
+  buruk hanya di 2024-skrg (+0,04R), di 2020-2023 +0,35R.
+- Tidak ada ide yang lolos tahap 1 → uji signifikansi dan data terkunci tidak dipakai. Ide baru: #49 (SELL 0,5% bila OI 7 hari turun).

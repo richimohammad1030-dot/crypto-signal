@@ -1,0 +1,55 @@
+<b>RISET CRYPTO</b>
+Jumat, 6 Nov 2026
+────────────────────
+Mode: riset mingguan (bukan review bulanan)
+Data: 49 koin + data baru open interest
+(OI) Binance per jam, mulai Des 2021.
+Juara v2: 2435 trade, +642R, DD 16,3R.
+
+<b>Ide #4 Open interest (OI)</b>
+────────────────────
+Order hanya jika OI mendukung breakout,
+replay penuh, 4 varian.
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        26,9    12,7   16,3
+OI7 naik     26,8    5,3    23,4
+OI7 naik BUY 27,1    5,7    21,9
+OI7 &gt; -10%   30,5    11,0   15,7
+OI3 naik     27,8    8,3    20,0
+</pre>
+Keputusan: <b>GAGAL</b>. Semua varian
+memburuk di 2024-skrg (-14% s.d. -59%).
+Efek OI 3 hari dan 7 hari berlawanan,
+tidak ada pola yang kuat.
+
+<b>Ide #48 Risiko ikut volatilitas</b>
+────────────────────
+Ide baru dari literatur (Moreira &amp;
+Muir 2017): risiko kecil saat BTC
+bergejolak, besar saat tenang.
+<pre>
+Rasio R/DD   lama    baru   DD
+Juara        26,9    12,7   16,3
+1/vol        23,1    10,7   20,5
+1/vol2       20,3    10,8   22,0
+vol tinggi   24,6    12,7   17,6
+</pre>
+Keputusan: <b>GAGAL</b>. Vol tinggi hanya
+buruk di 2024-skrg; risiko besar saat
+tenang menaikkan drawdown.
+
+<b>Kandidat penantang</b>
+────────────────────
+Tidak ada. Bot live tidak diubah.
+Total ide crypto diuji: ±15.
+
+<b>Ide baru</b>
+────────────────────
+#49 Risiko SELL 0,5% bila OI 7 hari
+turun (SELL OI turun -0,01R vs naik
++0,11R di 2024-skrg). Prioritas 3.
+Berikutnya: #19 risiko SELL 0,5%.
+
+Laporan lengkap:
+riset/laporan/crypto/riset-2026-11-06.md

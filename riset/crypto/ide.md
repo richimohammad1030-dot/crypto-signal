@@ -10,7 +10,7 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 1 | Batas posisi searah: maksimal N posisi SELL atau BUY sekaligus (coba N = 4, 5, 6) | 1 | gagal | 23 Okt 2026: N 4/5/6 (slot & pos) memangkas DD tetapi rasio 2024-skrg -20% s.d. -50%, total R -29% s.d. -48% |
 | 2 | Sinyal LOW conviction dilewati atau risiko setengah (replay penuh, slot ikut berubah) | 1 | gagal | 23 Okt 2026: lewati rasio -3%/-5%; risiko 1/2 -1% (lama) / +13% (baru). Tinjau ulang 30 Okt (v2): risiko 1/2 -2%/+4%, tetap gagal |
 | 3 | Filter short lebih ketat: short hanya jika tren BTC juga turun | 2 | gagal | 30 Okt 2026 (v2): A (BTC turun) rasio -37%/-40%, B (blok BTC naik) -8%/-21%, DD naik. Slot terisi BUY lebih lemah |
-| 4 | Open interest Binance (arsip metrics data.binance.vision): breakout dengan OI naik vs turun | 2 | antri | Data baru, belum dipakai bot |
+| 4 | Open interest Binance (arsip metrics data.binance.vision): breakout dengan OI naik vs turun | 2 | gagal | 6 Nov 2026: OI per jam mulai Des 2021 (BTC Sep 2020). 4 gerbang replay penuh: rasio 2024-skrg -14% s.d. -59%. Terbaik (tolak OI 7 hari < -10%) +13% lama / -14% baru, 2/6 tahun |
 | 8 | Ukuran risiko mengikuti jumlah posisi terbuka (risiko per trade turun saat banyak posisi searah) | 3 | antri |  |
 | 9 | Trailing stop 48 / 96 candle vs 72 sekarang | 4 | antri | Parameter inti, butuh bukti sangat kuat |
 | 10 | Model ML (uji ulang bulanan otomatis di laporan angka) | - | perlu-data | Okt 2026: belum mengalahkan label 4 faktor. 30 Okt 2026 (v2): ML terbaik 0,18R vs label 0,32R |
@@ -18,3 +18,5 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 12 | Batas posisi searah hanya untuk SELL (BUY bebas), replay penuh | 3 | antri | Dari ide #1: batas semua arah memotong tren BUY besar di 2024-2026 |
 | 19 | Risiko SELL 0,5% (semua label), BUY tetap 1% — slot tidak berubah | 2 | antri | 30 Okt 2026: SELL 2024-skrg +0,06R/trade, DD 18,3R; filter SELL (#3, #11) gagal karena slot terisi sinyal lebih buruk |
 | 20 | Analisis MEDIUM melemah 2025-2026: faktor mana yang bergeser | 3 | antri | 30 Okt 2026: MEDIUM +0,007R vs LOW +0,045R (2025-2026) |
+| 48 | [lit] Risiko dikelola volatilitas BTC 30 hari (Moreira & Muir 2017): risiko kecil saat vol tinggi | 3 | gagal | 6 Nov 2026: 4 varian (1/vol, 1/vol², ambang 1,25x) rasio -8% s.d. -25% (lama) / 0% s.d. -19% (baru). Q4 vol buruk hanya di 2024-skrg |
+| 49 | Risiko SELL 0,5% bila OI 7 hari turun (ukuran saja, slot tetap) | 3 | antri | 6 Nov 2026 (hipotesis dari data #4): SELL OI turun +0,18R / -0,01R vs OI naik +0,29R / +0,11R (2022-2023 / 2024-skrg) |
