@@ -1,4 +1,4 @@
-# Strategi XAU · juara MULTI-STRATEGI (dipasang 2 Nov 2026; + susulan 6 Nov 2026)
+# Strategi XAU · juara MULTI-STRATEGI (dipasang 2 Nov 2026; + susulan & MR SELL ≥ 85 sejak 6 Nov 2026)
 
 Status: **LIVE mulai sinyal Senin 2 Nov 2026 07:00 WIB** (`gold_bot.py`, workflow `gold.yml`). Risiko **0,5% per trade** (pilihan pemilik).
 Perubahan hanya lewat riset + persetujuan pemilik; mesin bot wajib lolos `riset/replay_xau.py` (identik dengan
@@ -11,7 +11,8 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 
 ## Aturan (maksimal 1 posisi per hari, diputuskan dari candle H1 yang close 07:00 WIB)
 **A. Mean reversion (prioritas)** — RSI(2) close H1 (Wilder, alpha 1/2):
-- RSI(2) ≤ **43,76** → BUY market; RSI(2) ≥ **71,22** → SELL market (ambang = kuantil 35% / 65% hari 2015-2021).
+- RSI(2) ≤ **43,76** → BUY market (kuantil 35% hari 2015-2021); RSI(2) ≥ **85** → SELL market (sejak 6 Nov 2026, ide #40;
+  sebelumnya 71,22 = kuantil 65%). Hari RSI(2) 71,22–85 (jenuh beli ringan, SELL-nya lemah di 3 periode) → K6.
 - Masuk di open candle 07:00-08:00. SL = **3 × ATR(14) H1**. Tanpa TP. Ditutup 23:00 WIB.
 
 **B. Breakout searah tren (K6)** — hanya bila RSI(2) tidak ekstrem:
@@ -43,7 +44,21 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 Per tahun (R): 2015 +2 · 2016 +3 · 2017 +10 · 2018 -4 · 2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14.
 Per strategi (12 thn): MR win 49%, RR 1,11, PF 1,06 · K6 win 37%, RR 1,96, PF 1,13. ±84% trade berasal dari MR.
 
-**Dengan susulan (live 6 Nov 2026)** — sama, tapi urutan ambigu M1 untuk K6 & hari susulan:
+**VERSI LIVE sejak 6 Nov 2026 (susulan + ide #40 MR SELL ≥ 85)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
+| Periode | Trade/mg | MR / K6 / SUS | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2015-2021 | 4,6 | 894 / 425 / 328 | 48% | 1,19 | 1,11 | +10,4 | 20 | 9,6% | +5,0% | 12/10 | 4/7 |
+| 2022 - Jan 2025 | 4,6 | 435 / 192 / 117 | 48% | 1,36 | 1,24 | +24,7 | 25 | 12,0% | +12,6% | 14/9 | 4/4 |
+| Feb 2025 - Okt 2026 | 4,7 | 279 / 79 / 67 | 47% | 1,28 | 1,13 | +13,9 | 18 | 8,6% | +6,8% | 8/9 | 1/2 |
+| 12 tahun | 4,6 | 1.608 / 696 / 512 | 48% | 1,25 | 1,15 | +14,6 | 25 | 12,0% | +7,2% | 14/10 | 8/12 |
+
+Per tahun (R): 2015 -6 · 2016 +28 · 2017 +39 · 2018 -5 · 2019 +15 · 2020 +3 · 2021 -2 · 2022 +30 · 2023 +1 · 2024 +36 · 2025 +35 · 2026 -2.
+Per strategi: MR win 50% PF 1,12 +72R · K6 win 37% PF 1,15 +67R · SUS win 55% PF 1,21 +33R.
+Catatan jujur ide #40: ditemukan dari statistik SEMUA periode (rawan kebetulan); P uji 0,87 (X80 0,95); Setra ≈ sama (+13,9 vs
++13,6); tahun untung 8/12 (sebelumnya 9/12) dan 2026 berjalan -2 vs +8; aturan asimetris memihak tren naik emas. Uji silang
+perak (uji_xag.py) masih riset lanjutan; bayangan "MR SELL lama 71,22" memantau versi sebelumnya.
+
+**Dengan susulan, MR SELL 71,22 (versi 6 Nov pagi, sebelum ide #40)** — sama, tapi urutan ambigu M1 untuk K6 & hari susulan:
 | Periode | Trade/mg | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 2015-2021 | 4,7 | 48% | 1,13 | 1,04 | +3,8 | 25 | 12,2% | +1,6% | 8/8 | 5/7 |

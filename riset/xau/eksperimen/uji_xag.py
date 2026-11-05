@@ -15,11 +15,12 @@ D = m.muat(tmp); T, O, H, L, C = D
 A = np.array(m.atr(list(H), list(L), list(C), 14)); F = m.fitur(D, A)
 print(f"XAG {len(rows)} candle, {m.wib(T[0]):%b %Y} - {m.wib(T[-1]):%b %Y}")
 P4 = (("2015-21", m.PILIH), ("2022-Jan25", m.UJI), ("Feb25-skrg", m.KONF), ("12t", (None, None)))
-VAR = {"BASELINE (aturan bot XAU)": mm.baseline(D, A, F), "MR + K6 saja (tanpa susulan)": mm.baseline(D, A, F, sus=False)}
+VAR = {"BOT LIVE (MR SELL >= 85)": mm.baseline(D, A, F), "MR SELL 71,22 (sblm #40)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D, mr_sell=71.22)),
+       "MR + K6 saja (tanpa susulan)": mm.baseline(D, A, F, sus=False)}
 for X in (80, 85, 90): VAR[f"ide #40 X{X}"] = mm.baseline(D, A, F, sig=mm.sinyal_mr(D, mr_sell=X))
 sig = mm.sinyal_mr(D)
-for st in ("MR", "K6", "SUS"): VAR[f"  {st} saja dlm baseline"] = [x for x in VAR["BASELINE (aturan bot XAU)"] if x["strat"] == st]
-VAR["  MR SELL RSI 71-85 dlm baseline"] = [x for x in VAR["BASELINE (aturan bot XAU)"] if x["strat"] == "MR" and x["d"] == -1
+for st in ("MR", "K6", "SUS"): VAR[f"  {st} saja dlm bot live"] = [x for x in VAR["BOT LIVE (MR SELL >= 85)"] if x["strat"] == st]
+VAR["  MR SELL RSI 71-85 (versi lama)"] = [x for x in VAR["MR SELL 71,22 (sblm #40)"] if x["strat"] == "MR" and x["d"] == -1
                                            and mm.rsi(C, 2)[x["ip"]] < 85]
 for biaya in (2.0, 1.0, 3.0):
     print(f"\n=== biaya {biaya} USD (skala) · R/thn per periode | 12 thn: trade/mg, win, PF, DD")

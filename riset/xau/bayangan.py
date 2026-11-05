@@ -14,6 +14,7 @@ sig30 = mm.sinyal_mr(D, mr_buy=38.49, mr_sell=74.72)   # kuantil 30%/70% 2015-20
 MENU = {
     "BASELINE (live)": mm.baseline(D, A, F),
     "Tanpa susulan": mm.baseline(D, A, F, sus=False),
+    "MR SELL lama 71,22 (sblm #40)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D, mr_sell=71.22)),
     "MR saja": mm.trades_mr(D, A),
     "K6 saja": mm.trades_k6(D, A, F),
     "Juara lama (OCO)": m.potong(m.replay(D, A=A)),

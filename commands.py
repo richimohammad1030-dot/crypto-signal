@@ -166,7 +166,7 @@ Contoh: modal 1.000 USD, risiko 0,5% = 5 USD; jarak SL 50 USD → 5 ÷ 5.000 = 0
 • 23:00 WIB → tutup posisi yang masih terbuka secara manual.
 
 <b>⚠️ Risiko</b>
-Hasil riset 2015-2026 (risiko 0,5%, termasuk susulan): win rate ±48%, profit factor ±1,08, untung 9 dari 12 tahun, drawdown terburuk ±15%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
+Hasil riset 2015-2026 (risiko 0,5%, versi 6 Nov 2026): win rate ±48%, profit factor ±1,15, untung 8 dari 12 tahun, drawdown terburuk ±12%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
 
 BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini

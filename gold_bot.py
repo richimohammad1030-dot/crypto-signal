@@ -3,7 +3,7 @@ Bot sinyal "Gold Daily Straddle" (XAUUSD) -> channel Telegram khusus XAU.
 
 Aturan (versi MULTI-STRATEGI, live mulai 2 Nov 2026; chart H1; riset/xau/STRATEGI.md). Jam sinyal 07:00 & tutup 23:00 WIB
 = aturan tetap pemilik. Maksimal 1 posisi per hari, dipilih jam 07:00:
-A) MEAN REVERSION (prioritas): RSI(2) H1 close 07:00 <= MR_BUY -> BUY market; >= MR_SELL -> SELL market (masuk di open candle
+A) MEAN REVERSION (prioritas): RSI(2) H1 close 07:00 <= MR_BUY (43,76) -> BUY market; >= MR_SELL (85) -> SELL market (masuk di open candle
    berikutnya). SL = 3 x ATR(14) H1, tanpa TP, ditutup 23:00 WIB.
 B) BREAKOUT SEARAH TREN (K6), bila RSI(2) tidak ekstrem:
 - 07:00 WIB (candle H1 yang close 07:00): range = high & low 3 candle H1 terakhir.
@@ -27,7 +27,7 @@ STATE_FILE = os.path.join(HERE, "gold_state.json")
 CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU disimpan oleh pemroses perintah
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
-MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 71.22, 3.0
+MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 85.0, 3.0   # MR_SELL 71,22 -> 85 sejak 6 Nov 2026 (ide #40): RSI 71-85 -> K6
 STALE_S = 2 * 3600     # data dianggap macet bila candle H1 terakhir yang close lebih tua dari 2 jam (hari bursa)
 LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat
 SUS_BUY, SUS_SELL, SUS_SL_ATR, SUS_TP_R = 25.41, 77.10, 3.0, 1.0   # susulan: kuantil 35%/65% RSI(2) jam keputusan 2015-2021

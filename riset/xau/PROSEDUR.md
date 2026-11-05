@@ -6,7 +6,7 @@ Riset tidak pernah mengubah bot live. Perubahan dipasang hanya setelah pemilik s
 Riset crypto & intraday crypto dikerjakan task terpisah. Jangan menyentuh berkas mereka.
 
 **Juara sejak 2 Nov 2026 = multi-strategi** (`riset/xau/STRATEGI.md`, ide #34). Maksimal 1 posisi/hari, keputusan 07:00 WIB:
-mean reversion RSI(2) H1 (≤ 43,76 BUY / ≥ 71,22 SELL market, SL 3 ATR, tanpa TP) diprioritaskan; selain itu breakout K6
+mean reversion RSI(2) H1 (≤ 43,76 BUY / ≥ 85 SELL market sejak 6 Nov 2026 [ide #40, dulu 71,22], SL 3 ATR, tanpa TP) diprioritaskan; selain itu breakout K6
 (1 stop order searah tren EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). Sejak 6 Nov 2026 + **susulan** (ide #37): hari K6 dilewati
 → RSI(2) di jam keputusan pertama 09:00-21:00 WIB (≤ 25,41 / ≥ 77,10 market, SL 3 ATR, TP 1R). Semua ditutup 23:00 WIB. Risiko 0,5%.
 Pantau bayangan "Tanpa susulan" vs BASELINE (susulan lebih buruk di Setra saat dipasang, n 46).
@@ -51,10 +51,10 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 1. **Uji maju** (selalu): tulis hasil `bayangan.py` (trade, win, total R per strategi menu vs live) dan selisih live vs baseline.
 2. **Jumat 6 Nov 2026 (permintaan pemilik): salah satu dari 2 ide WAJIB ide #36** (saran lot otomatis `XAU_MODAL_USD`; susun rancangan,
    contoh pesan, dan usulan perubahan bot untuk disetujui pemilik; jangan ubah file bot). Hapus catatan ini setelah dikerjakan.
-   **Jumat 6 Nov juga WAJIB (pemilik): uji silang PERAK untuk ide #40** — `python3 riset/unduh_xag.py /tmp/data/xag` lalu
+   **Riset lanjutan (pemilik): uji silang PERAK untuk ide #40 (sudah DIPASANG 6 Nov 2026)** — `python3 riset/unduh_xag.py /tmp/data/xag` lalu
    `cd riset/xau/eksperimen && python3 uji_xag.py /tmp/data/xag`. Laporkan apakah aturan bot XAU dan ide #40 (X 80/85/90) juga
-   lebih baik di perak pada ketiga periode & biaya 1-3 USD. Ide #40 dianggap lolos bila di perak X85 ≥ baseline perak di ≥ 2 dari
-   3 periode dan 12 thn. Ini pemeriksaan, bukan ide baru (2 ide tetap diuji). Hapus catatan ini setelah dikerjakan.
+   lebih baik di perak pada ketiga periode & biaya 1-3 USD. Ide #40 dianggap terkonfirmasi bila di perak X85 ≥ MR SELL 71,22 di ≥ 2 dari
+   3 periode dan 12 thn; bila gagal, usulkan ke pemilik kembali ke 71,22. Pemeriksaan, bukan ide baru. Hapus setelah dikerjakan.
    Uji 2 ide: ide teratas berstatus `antri` dari `riset/xau/ide.md`, **ditambah 1 ide baru** (ATURAN_BERSAMA bagian A; literatur
    = nilai tambah). Ide yang sudah `gagal` tidak diuji ulang tanpa data baru yang relevan.
 3. Skrip di `riset/xau/eksperimen/<nama-ide>.py`. Pembagian data tetap: **pilih 2015-2021**, **uji 2022 - Jan 2025** (Dukascopy),

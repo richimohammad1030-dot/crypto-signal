@@ -344,3 +344,10 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   bisa menggantikan sel strategi lain (= pembagi tugas, ide #41) atau membuka posisi ke-2 (ditolak pemilik: maks 1/hari).
 - Uji silang PERAK (XAG/USD) untuk ide #40: Dukascopy tidak bisa dijangkau dari sesi chat 5 Nov 15:20 WIB (connection reset,
   juga untuk XAU). Skrip siap: riset/unduh_xag.py + riset/xau/eksperimen/uji_xag.py → dijalankan di riset Jumat 6 Nov.
+
+## 5 Nov 2026 — Ide #40 DIPASANG (pemilik: "push sekarang dan ubah bot live"; live 6 Nov 2026)
+- gold_bot.py MR_SELL 71,22 → 85 (hari RSI2 71,22-85 → K6, otomatis lewat cabang yang sama). replay_xau: xau.json 413/413
+  (MR 270 K6 76 SUS 67) & xau_panjang 2813/2813 (MR 1597 K6 699 SUS 517) IDENTIK.
+- Ekspektasi baru (STRATEGI.md): 12 thn +14,6 R/thn, PF 1,15, DD 25R (12% @0,5%), CAGR +7,2%, 4,6 trade/mg, 8/12 thn untung.
+  Kelemahan: P uji 0,87; Setra ≈ sama; 2026 berjalan -2 vs +8; asimetris. baseline.json diperbarui (2022+: PF 1,27, DD 18,7R).
+- bayangan.py + menu "MR SELL lama 71,22"; uji_xag.py membandingkan bot live vs 71,22 di perak (riset lanjutan, PROSEDUR).
