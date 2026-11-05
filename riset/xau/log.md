@@ -241,3 +241,20 @@ aturan {RSI2 dulu, RSI2 hanya searah tren, RSI2 hanya lawan tren}.
 - SL MR 1,5/2/2,5/3 ATR (12 thn): PF 1,07/1,08/1,08/1,07, win 37/42/45/47%, DD 51/42/35/37R, W/L 9/16 · 10/16 · 10/8 · 10/8.
   SL lebih sempit tidak menyelesaikan masalah lot minimum. **Keputusan pemilik: tetap SL 3 ATR**; saran lot otomatis → ide #36
   untuk riset Jumat 6 Nov.
+
+## 2026-11-05 · Ide #37 SINYAL SUSULAN pada hari tanpa trade (permintaan pemilik, chat) · `eksperimen/susulan.py`
+Hari tanpa trade = hari K6 dilewati (batas batal tersentuh): 454/3.039 hari (15%, ±0,7/mg); 91% tersentuh sebelum 09:00 WIB.
+Model realistis jadwal bot: keputusan di candle pertama yang close 09:00/11:00/.../21:00 WIB setelah batal; masuk candle berikutnya;
+tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetangga SL × TP), uji 2022-Jan 2025, Setra.
+- S1 ikuti tembusan, S2 fade tembusan palsu, S4 breakout ulang searah tren, S5 straddle OCO range baru: susulan PF < 1 di pilih
+  dan/atau uji; gabungan P_rasio uji vs baseline 0,001-0,28 → GAGAL.
+- **S3 mean reversion RSI(2) di jam keputusan** (ambang kuantil 35% jam keputusan 2015-2021: ≤ 25,41 BUY / ≥ 77,10 SELL, market,
+  SL 3 ATR, TP 1R; ±92% masuk 09:00 WIB): susulan saja PF 1,10 / 1,88 / 0,81 (n 198 / 81 / 46).
+  Gabung baseline: pilih +3,8 vs +2,9 · uji +15,9 vs +9,9 (P_rasio 0,992) · Setra +13,6 vs +15,6 R/thn (DD 21 vs 17R).
+  12 thn: 4,8 trade/mg, win 48%, PF 1,08, +8,4 vs +6,6 R/thn, DD 31 vs 37R (DD 0,5% 14,4% vs 17,2%), W/L 10/9, 9/12 tahun;
+  slip +0,20 USD uji +11,7 vs +6,2. Per tahun gabung: 2015 +7 · 2016 +8 · 2017 +13 · 2018 -7 · 2019 0 · 2020 -4 · 2021 +10 ·
+  2022 +34 · 2023 -10 · 2024 +22 · 2025 +19 · 2026 +8.
+  Tetangga (32 varian, kuantil 35/50% × SL 1-3 × TP 1/2/4/tanpa): gabung uji P 0,88-0,99 SEMUA lebih baik dari baseline;
+  Setra campuran (SL 1-1,5 + TP ≥ 2R lebih baik, SL 3 lebih buruk) — memilih varian menurut Setra = memilih pasca-lihat.
+- Status: lolos tahap 1-2 (uji P 0,99, tetangga stabil); tahap 3 Setra sedikit lebih buruk dari baseline dengan sampel kecil
+  (46 trade) → `perlu-data`. Menunggu keputusan pemilik (pasang langsung vs bayangan dulu; ±0,7 trade/mg → 20 trade ±7 bulan).
