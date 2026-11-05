@@ -88,3 +88,19 @@ def sinyal_connors(D, n=200, b=30.0, kuat=85.0):
             if r >= 100 - b: out[int(i)] = -1
             elif r <= 100 - kuat: out[int(i)] = 1
     return out
+
+
+def sinyal_hibrida(D, n=100, b=30.0, kuat=85.0):
+    """Ide #42b: tren D1 naik (atau MA belum ada) -> sinyal MR live (MR_BUY/MR_SELL gold_bot); tren turun -> cermin Connors
+    (SELL >= 100-b, BUY hanya <= 100-kuat)."""
+    T, C = D[0], D[4]; R2 = rsi(C, gb.MR_N); HR = ((T // 3600) % 24).astype(int)
+    i07 = np.flatnonzero(HR == sm.PLACE); c07 = C[i07]; cs = np.cumsum(np.insert(c07, 0, 0)); out = {}
+    for k, i in enumerate(i07):
+        r = R2[i]
+        if k < n - 1 or c07[k] > (cs[k + 1] - cs[k + 1 - n]) / n:
+            if r <= gb.MR_BUY: out[int(i)] = 1
+            elif r >= gb.MR_SELL: out[int(i)] = -1
+        else:
+            if r >= 100 - b: out[int(i)] = -1
+            elif r <= 100 - kuat: out[int(i)] = 1
+    return out

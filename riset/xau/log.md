@@ -372,3 +372,12 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   "Connors MA200/MA100 (#42)" (multi_mesin.sinyal_connors). Bot live tidak diubah (pemilik: pakai bot sekarang).
 - Antrian lanjutan (Jumat): #43 fade high/low hari sebelumnya (Unger) sebagai sumber edge baru; #44 Connors + saklar ADX
   (atasi 2020); #45 ukuran posisi target-volatilitas agar R tahunan lebih rata; uji silang perak untuk #42.
+
+## 5 Nov 2026 — Ide #42b HIBRIDA bot live + Connors cermin (hibrida.py, permintaan pemilik)
+- Tren D1 naik → aturan MR live persis (≤ 43,76 / ≥ 85); turun → cermin (SELL ≥ 100-b, BUY ≤ 100-kuat); sisanya K6+susulan.
+- R/thn 2015-21 · uji · Setra · 12t | tahun+ | terburuk (live +10,4 · +24,7 · +13,9 · +14,6 | 8/12 | -6):
+  MA100 SELL≥70 BUY≤15 (TERPILIH di pilih) +9,4 · +28,6 · +23,2 · +16,5 | 9/12 | -8 | DD 28R | P uji 0,68, P Setra 0,86
+  MA100 SELL≥70 BUY≤10 +8,6 · +28,8 · +17,9 · +15,2 · MA200 SELL≥70 BUY≤15 +5,8 · +21,4 · +25,4 · +12,8 | 11/12 | -1 | sd 12,7.
+  Cermin dengan SELL ≥ 56,24 (= cermin persis 43,76) buruk (P uji 0,03-0,28).
+- MA100: 2015 +18 (live -6), 2026 +14 (-2), 2020 +2, 2021 -8, 2018 -7. Tidak ada yang P ≥ 0,90 → `perlu-data`; bayangan
+  "Hibrida MA100/MA200 (#42b)" (multi_mesin.sinyal_hibrida). Menunggu keputusan pemilik.
