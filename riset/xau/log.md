@@ -287,3 +287,14 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   0,01-0,56 (tidak ada yang ≥ 0,90). Revenge searah: PF 0,65-0,84 (12 thn), DD naik hingga 78R. Revenge berbalik: bagus HANYA di
   Setra (+20-25 vs +13,6; PF 1,1-1,4) tetapi rugi di 2015-2021 & 2022-Jan 2025 → khas rezim tren 2025-2026, bukan edge.
 - Status: `ditolak`. Tetap maks 1 posisi/hari. "Balik" boleh dicek ulang bila data Setra berlipat (bayangan).
+
+## 5 Nov 2026 — Ide #38b revenge DENGAN DIAGNOSA (revenge_diag.py, koreksi pemilik)
+- Setelah SL (< 23:00), di jam run berikutnya bot menilai kenapa gagal lalu memilih aksi sama/balik/lewati (lot sama, market,
+  SL 3 ATR, tanpa TP). Diagnosa ditetapkan sebelum melihat hasil: strategi gagal (FADE=MR/SUS, K6) × tren EMA200 / kecepatan SL
+  (≤ 2 jam) / harga lanjut vs kembali dari SL / RSI2 / range hari ≥ 2,5 ATR. Aturan per sel dipilih di 2015-2021.
+- Langkah 1: tanda rata-rata R per sel BERBALIK antar periode (mis. FADE gagal → balik: pilih +0,00..+0,05, uji -0,07..-0,22,
+  Setra +0,09..+0,13; FADE → sama kebalikannya). Diagnosa tidak memprediksi arah revenge secara konsisten.
+- Langkah 2 (5 aturan): pilih +4,7..+6,1 vs +3,8 baseline; uji +9,3..+11,1 vs +15,9 (revenge PF 0,66-0,78); Setra +17,9..+21,5
+  vs +13,6; 12 thn +8,1..+9,2 vs +8,4. P uji 0,01-0,08 → GAGAL. Pola: 2015-21 & Setra suka "balik", 2022-Jan 2025 suka "sama"
+  = bergantung rezim; belum ada detektor rezim yang terbukti (lih. ide #29-#33).
+- Status: `ditolak`. Bot tetap maks 1 posisi/hari.
