@@ -6,7 +6,8 @@ Riset tidak pernah mengubah bot live. Perubahan dipasang hanya setelah pemilik s
 Riset crypto & intraday crypto dikerjakan task terpisah. Jangan menyentuh berkas mereka.
 
 **Juara sejak 2 Nov 2026 = multi-strategi** (`riset/xau/STRATEGI.md`, ide #34). Maksimal 1 posisi/hari, keputusan 07:00 WIB:
-mean reversion RSI(2) H1 (≤ 43,76 BUY / ≥ 85 SELL market sejak 6 Nov 2026 [ide #40, dulu 71,22], SL 3 ATR, tanpa TP) diprioritaskan; selain itu breakout K6
+mean reversion RSI(2) H1 (≤ 43,76 BUY / ≥ 85 SELL market sejak 6 Nov 2026 [ide #40, dulu 71,22]; bila tren harian turun [close 07:00 ≤ SMA100]
+cermin: SELL ≥ 70 / BUY ≤ 15 [hibrida #42b]; SL 3 ATR, tanpa TP) diprioritaskan; selain itu breakout K6
 (1 stop order searah tren EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). Sejak 6 Nov 2026 + **susulan** (ide #37): hari K6 dilewati
 → RSI(2) di jam keputusan pertama 09:00-21:00 WIB (≤ 25,41 / ≥ 77,10 market, SL 3 ATR, TP 1R). Semua ditutup 23:00 WIB. Risiko 0,5%.
 Pantau bayangan "Tanpa susulan" vs BASELINE (susulan lebih buruk di Setra saat dipasang, n 46).

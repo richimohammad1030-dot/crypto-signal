@@ -2,7 +2,8 @@
 patokan kesehatan (riset/baseline_xau.py), dan catatan bayangan (riset/xau/bayangan.py).
 Maks 1 posisi/hari, keputusan 07:00 WIB: RSI(2) H1 <= MR_BUY -> BUY market / >= MR_SELL -> SELL market (SL 3 ATR, tanpa TP);
 selain itu K6 (OCO 2 sisi, hari dilewati bila sisi lawan tren EMA200 H1 terisi duluan; SL 1,5 ATR, TP 4R). Tutup 23:00 WIB.
-Sejak 6 Nov 2026 (ide #37): SUSULAN pada hari K6 dilewati - RSI(2) di jam keputusan pertama (close 09:00..21:00 WIB) setelah
+Sejak 6 Nov 2026: hibrida #42b (tren harian SMA100 close 07:00 turun -> cermin SELL >= 70 / BUY <= 15), MR SELL >= 85 (#40),
+SUSULAN (ide #37) pada hari K6 dilewati - RSI(2) di jam keputusan pertama (close 09:00..21:00 WIB) setelah
 batas batal tersentuh <= SUS_BUY / >= SUS_SELL -> market di open berikutnya, SL 3 ATR, TP 1R, tutup 23:00 WIB.
 Konstanta diambil dari gold_bot.py agar bot & riset tidak bisa berbeda diam-diam."""
 import numpy as np
@@ -27,7 +28,7 @@ def sinyal_mr(D, mr_buy=None, mr_sell=None, n=None):
 
 
 def trades_mr(D, A, sig=None, sl=None, tp=None):
-    sig = sinyal_mr(D) if sig is None else sig
+    sig = sinyal_live(D) if sig is None else sig
     return sm.jalan(D, A, lambda i: [(sig[i], "market", None)] if i in sig else None, sl=sl or gb.MR_SL_ATR, tp=tp)
 
 
@@ -42,7 +43,7 @@ def trades_sus(D, A, F, ambigu="buy", sig=None):
     """Susulan (sama persis dengan riset/xau/eksperimen/susulan.py kandidat S3, konstanta dari gold_bot)."""
     T, O, H, L, C = D
     HR = ((T // 3600) % 24).astype(int); R2 = rsi(C, gb.MR_N); jam = set(gb.SUS_JAM_UTC)
-    sig = sinyal_mr(D) if sig is None else sig
+    sig = sinyal_live(D) if sig is None else sig
     out = []
     for x in m.jalankan({"tren_lawan_w": ("ema200", 0.0), "ambigu": ambigu}, D, A, F):
         if x["w"] != 0 or x["ip"] in sig: continue
@@ -59,9 +60,14 @@ def trades_sus(D, A, F, ambigu="buy", sig=None):
     return out
 
 
+def sinyal_live(D):
+    """Sinyal MR bot live (sejak 6 Nov 2026 = hibrida #42b)."""
+    return sinyal_hibrida(D)
+
+
 def baseline(D, A, F, ambigu="buy", mr=None, k6=None, sig=None, sus=None):
     """Trade baseline (= bot live): tiap trade diberi x['strat'] = 'MR' / 'K6' / 'SUS'. sus=False -> tanpa susulan."""
-    sig = sinyal_mr(D) if sig is None else sig
+    sig = sinyal_live(D) if sig is None else sig
     mr = {x["ip"]: x for x in (trades_mr(D, A, sig) if mr is None else mr)}
     k6 = {x["ip"]: x for x in (trades_k6(D, A, F, ambigu) if k6 is None else k6)}
     out = []
@@ -90,9 +96,10 @@ def sinyal_connors(D, n=200, b=30.0, kuat=85.0):
     return out
 
 
-def sinyal_hibrida(D, n=100, b=30.0, kuat=85.0):
+def sinyal_hibrida(D, n=None, b=None, kuat=None):
     """Ide #42b: tren D1 naik (atau MA belum ada) -> sinyal MR live (MR_BUY/MR_SELL gold_bot); tren turun -> cermin Connors
     (SELL >= 100-b, BUY hanya <= 100-kuat)."""
+    n = n or gb.TREND_D1_N; b = 100 - gb.MR_SELL_TURUN if b is None else b; kuat = 100 - gb.MR_BUY_TURUN if kuat is None else kuat
     T, C = D[0], D[4]; R2 = rsi(C, gb.MR_N); HR = ((T // 3600) % 24).astype(int)
     i07 = np.flatnonzero(HR == sm.PLACE); c07 = C[i07]; cs = np.cumsum(np.insert(c07, 0, 0)); out = {}
     for k, i in enumerate(i07):

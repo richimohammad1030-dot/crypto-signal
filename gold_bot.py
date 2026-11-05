@@ -13,6 +13,9 @@ B) BREAKOUT SEARAH TREN (K6), bila RSI(2) tidak ekstrem:
   sama persis dengan OCO 2 sisi yang melewati hari bila sisi lawan tren terisi duluan).
 - SL = 1,5 x ATR(14) dari entry. TP = 4R (6 x ATR).
 - 23:00 WIB: order yang belum terisi dibatalkan, posisi yang masih terbuka ditutup.
+HIBRIDA (ide #42b, live mulai 6 Nov 2026): tren harian = close H1 07:00 vs SMA 100 close 07:00 terakhir (TREND_D1_N).
+   Tren NAIK (atau riwayat < 100 hari) -> ambang A di atas. Tren TURUN -> cermin: SELL bila RSI(2) >= MR_SELL_TURUN (70),
+   BUY hanya bila RSI(2) <= MR_BUY_TURUN (15). Riwayat close 07:00 disimpan di state["c07"] (bibit gold_c07_seed.json).
 C) SUSULAN (ide #37, live mulai 6 Nov 2026), hanya pada hari K6 dilewati (batas batal tersentuh): di candle pertama yang close
    09:00/11:00/.../21:00 WIB sejak batas batal tersentuh, RSI(2) H1 <= SUS_BUY -> BUY market; >= SUS_SELL -> SELL market
    (masuk di open candle berikutnya). Tidak ekstrem -> hari itu tetap tanpa trade (hanya 1 kali keputusan).
@@ -28,6 +31,8 @@ CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU di
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 85.0, 3.0   # MR_SELL 71,22 -> 85 sejak 6 Nov 2026 (ide #40): RSI 71-85 -> K6
+TREND_D1_N, MR_SELL_TURUN, MR_BUY_TURUN = 100, 70.0, 15.0   # hibrida ide #42b (cermin Connors saat tren harian turun)
+C07_SEED = os.path.join(HERE, "gold_c07_seed.json")          # riwayat close 07:00 WIB Setra (bibit SMA 100 hari)
 STALE_S = 2 * 3600     # data dianggap macet bila candle H1 terakhir yang close lebih tua dari 2 jam (hari bursa)
 LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat
 SUS_BUY, SUS_SELL, SUS_SL_ATR, SUS_TP_R = 25.41, 77.10, 3.0, 1.0   # susulan: kuantil 35%/65% RSI(2) jam keputusan 2015-2021
@@ -226,11 +231,15 @@ class GoldEngine:
         elif hr == PLACE_HOUR_UTC and s.get("pos") is None:
             hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
             r2 = self.R2[i]
-            if r2 <= MR_BUY or r2 >= MR_SELL:          # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
+            ma = self.MA.get(t)
+            turun = ma is not None and C[i] <= ma
+            b_, s_ = (MR_BUY_TURUN, MR_SELL_TURUN) if turun else (MR_BUY, MR_SELL)
+            if r2 <= b_ or r2 >= s_:                   # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
                 if MR_SL_ATR * a > 0.5:
-                    d = 1 if r2 <= MR_BUY else -1
+                    d = 1 if r2 <= b_ else -1
                     s["pend"] = {"mode": "MR", "d": d, "dist": MR_SL_ATR * a, "t": t, "rsi": round(r2, 1),
-                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1}
+                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1,
+                                 "d1": -1 if turun else 1, "ma": round(ma, 2) if ma is not None else None}
                     self.notify("order", pend=s["pend"], t=t, price=C[i])
             elif abs(hi - (hi - SL_ATR * a)) > 0.5:    # B) K6; sama dengan backtest: abaikan order dengan SL < 0,5 USD
                 tren = 1 if C[i] > self.E[i] else -1
@@ -256,6 +265,17 @@ class GoldEngine:
         A = atr(H, L, C, ATR_N)
         self.E = ema(C, TREND_EMA)
         self.R2 = rsi(C, MR_N)
+        # SMA 100 close 07:00 WIB (hibrida #42b): riwayat tersimpan (state/bibit) + candle 07:00 di rows; replay = rows saja
+        c07 = {} if self.s.get("replay") else {int(k): v for k, v in (self.s.get("c07") or {}).items()}
+        if not self.s.get("replay") and os.path.exists(C07_SEED):
+            c07 = {**{int(k): v for k, v in json.load(open(C07_SEED)).items()}, **c07}
+        for k in range(len(rows)):
+            if (T[k] // 3600) % 24 == PLACE_HOUR_UTC: c07[int(T[k])] = C[k]
+        ts_ = sorted(c07); vals = [c07[k] for k in ts_]; self.MA = {}
+        for k in range(TREND_D1_N - 1, len(ts_)):
+            self.MA[ts_[k]] = sum(vals[k - TREND_D1_N + 1:k + 1]) / TREND_D1_N
+        if not self.s.get("replay"):
+            self.s["c07"] = {str(k): c07[k] for k in ts_[-150:]}
         start = 250 if self.s.get("replay") else 50
         for i in range(start, len(rows)):
             if T[i] > since:

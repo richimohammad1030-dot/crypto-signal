@@ -143,7 +143,7 @@ PANDUAN_XAU = """<b>📌 PANDUAN ANGGOTA — Bot XAUUSD Intraday (multi-strategi
 
 <b>Cara kerja</b> (sejak 2 Nov 2026)
 Setiap hari bursa pukul 07:00 WIB bot memilih <b>satu</b> strategi. Maksimal 1 posisi per hari, semua selesai paling lambat 23:00 WIB.
-• <b>Mean reversion</b> (paling sering): jika RSI(2) H1 jenuh jual → BUY market, jenuh beli → SELL market. SL = 3 × ATR, tanpa TP, tutup 23:00.
+• <b>Mean reversion</b> (paling sering): jika RSI(2) H1 jenuh jual → BUY market, jenuh beli → SELL market. SL = 3 × ATR, tanpa TP, tutup 23:00. Batas jenuh menyesuaikan tren harian (SMA 100 hari): saat tren turun, SELL lebih mudah dan BUY lebih ketat.
 • <b>Breakout searah tren</b>: jika RSI(2) tidak ekstrem → 1 order stop di batas range 04:00–07:00 searah tren H1 (EMA200), SL & TP 4R. Sisi range seberangnya = <b>batas batal</b>: jika tersentuh lebih dulu, order dibatalkan.
 • <b>Susulan</b> (sejak 6 Nov 2026): pada hari order breakout dibatalkan, bot mengecek RSI(2) H1 <b>sekali</b> di jam bot berikutnya (09:00–21:00 WIB). Jika jenuh jual/beli → BUY/SELL market, SL = 3 × ATR, TP = 1R, tutup 23:00. Jika tidak → hari itu tanpa trade.
 
@@ -166,7 +166,7 @@ Contoh: modal 1.000 USD, risiko 0,5% = 5 USD; jarak SL 50 USD → 5 ÷ 5.000 = 0
 • 23:00 WIB → tutup posisi yang masih terbuka secara manual.
 
 <b>⚠️ Risiko</b>
-Hasil riset 2015-2026 (risiko 0,5%, versi 6 Nov 2026): win rate ±48%, profit factor ±1,15, untung 8 dari 12 tahun, drawdown terburuk ±12%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
+Hasil riset 2015-2026 (risiko 0,5%, versi 6 Nov 2026): win rate ±48%, profit factor ±1,16, untung 9 dari 12 tahun, drawdown terburuk ±13%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
 
 BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini

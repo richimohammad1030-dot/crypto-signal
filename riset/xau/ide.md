@@ -43,4 +43,4 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 43 | Fade tembusan high/low hari sebelumnya (Unger Academy) sebagai sumber edge baru dalam jendela 07-23 | 2 | antri | dari riset literatur #42 |
 | 44 | Connors cermin (#42) + saklar rezim ADX harian (histeresis) untuk tahun seperti 2020 | 2 | antri | dari #42 |
 | 45 | Ukuran posisi target-volatilitas (risiko × ATR median / ATR) agar R tahunan lebih rata | 2 | antri | dari #42 |
-| 42b | Hibrida: tren D1 naik → aturan MR live; turun → Connors cermin (SELL ≥ 70, BUY ≤ 15) | 1 | perlu-data | 5 Nov 2026: MA100 12t +16,5 vs +14,6, uji +28,6 vs +24,7 (P 0,68), Setra +23,2 vs +13,9 (P 0,86), 9/12 thn, 2015 & 2026 untung; MA200 11/12 thn terburuk -1 tetapi 12t +12,8. Bayangan aktif |
+| 42b | Hibrida: tren D1 naik → aturan MR live; turun → Connors cermin (SELL ≥ 70, BUY ≤ 15) | 1 | dipasang | 5 Nov 2026: MA100 12t +16,5 vs +14,6, uji +28,6 vs +24,7 (P 0,68), Setra +23,2 vs +13,9 (P 0,86), 9/12 thn, 2015 & 2026 untung; MA200 11/12 thn terburuk -1 tetapi 12t +12,8. Pemilik pilih MA100: live 6 Nov 2026, replay IDENTIK |

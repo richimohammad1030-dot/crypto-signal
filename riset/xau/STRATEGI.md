@@ -1,4 +1,4 @@
-# Strategi XAU · juara MULTI-STRATEGI (dipasang 2 Nov 2026; + susulan & MR SELL ≥ 85 sejak 6 Nov 2026)
+# Strategi XAU · juara MULTI-STRATEGI HIBRIDA (dipasang 2 Nov 2026; + susulan, MR SELL ≥ 85, hibrida tren harian sejak 6 Nov 2026)
 
 Status: **LIVE mulai sinyal Senin 2 Nov 2026 07:00 WIB** (`gold_bot.py`, workflow `gold.yml`). Risiko **0,5% per trade** (pilihan pemilik).
 Perubahan hanya lewat riset + persetujuan pemilik; mesin bot wajib lolos `riset/replay_xau.py` (identik dengan
@@ -14,6 +14,12 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 - RSI(2) ≤ **43,76** → BUY market (kuantil 35% hari 2015-2021); RSI(2) ≥ **85** → SELL market (sejak 6 Nov 2026, ide #40;
   sebelumnya 71,22 = kuantil 65%). Hari RSI(2) 71,22–85 (jenuh beli ringan, SELL-nya lemah di 3 periode) → K6.
 - Masuk di open candle 07:00-08:00. SL = **3 × ATR(14) H1**. Tanpa TP. Ditutup 23:00 WIB.
+
+**A'. Hibrida tren harian (ide #42b, sejak 6 Nov 2026)** — tren harian = close H1 07:00 vs **SMA 100 close 07:00** terakhir:
+- Tren NAIK (atau riwayat < 100 hari): ambang A di atas (BUY ≤ 43,76, SELL ≥ 85).
+- Tren TURUN: cermin Connors — **SELL bila RSI(2) ≥ 70**, BUY hanya bila RSI(2) ≤ **15**. SL/keluar sama dengan A.
+- Riwayat close 07:00 disimpan bot di `gold_state.json` (`c07`, 150 hari) dengan bibit `gold_c07_seed.json` (Setra Feb 2025 - Okt 2026).
+- Sumber: Connors & Alvarez (2008) RSI(2) + filter MA panjang dan cerminnya untuk short.
 
 **B. Breakout searah tren (K6)** — hanya bila RSI(2) tidak ekstrem:
 - Range = high & low 3 candle H1 (04:00-07:00 WIB). Tren = close 07:00 vs **EMA200 H1**.
@@ -44,7 +50,19 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 Per tahun (R): 2015 +2 · 2016 +3 · 2017 +10 · 2018 -4 · 2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14.
 Per strategi (12 thn): MR win 49%, RR 1,11, PF 1,06 · K6 win 37%, RR 1,96, PF 1,13. ±84% trade berasal dari MR.
 
-**VERSI LIVE sejak 6 Nov 2026 (susulan + ide #40 MR SELL ≥ 85)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
+**VERSI LIVE sejak 6 Nov 2026 (susulan + #40 + HIBRIDA #42b)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
+| Periode | Trade/mg | MR / K6 / SUS | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2015-2021 | 4,6 | 874 / 450 / 321 | 47% | 1,21 | 1,09 | +9,4 | 23 | 11,1% | +4,4% | 8/10 | 5/7 |
+| 2022 - Jan 2025 | 4,6 | 412 / 207 / 125 | 48% | 1,36 | 1,28 | +28,6 | 24 | 11,6% | +14,8% | 14/9 | 3/4 |
+| Feb 2025 - Okt 2026 | 4,7 | 262 / 97 / 67 | 48% | 1,33 | 1,22 | +23,2 | 17 | 8,2% | +11,8% | 8/7 | 2/2 |
+| 12 tahun | 4,6 | 1.548 / 754 / 513 | 48% | 1,27 | 1,16 | +16,5 | 28 | 13,4% | +8,2% | 14/10 | 9/12 |
+
+Per tahun (R): 2015 +18 · 2016 +21 · 2017 +26 · 2018 -7 · 2019 +14 · 2020 +2 · 2021 -8 · 2022 +46 · 2023 -1 · 2024 +34 · 2025 +35 · 2026 +14.
+Catatan jujur #42b: dipilih di 2015-2021 dari 12 varian; P uji 0,68 dan P Setra 0,86 (di bawah syarat 0,90); 2018 & 2021 lebih
+buruk dari versi #40. Bayangan "Tanpa hibrida (#40 saja)" dan "Hibrida MA200" memantau alternatifnya.
+
+**Versi 6 Nov pagi (susulan + ide #40 MR SELL ≥ 85, tanpa hibrida)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
 | Periode | Trade/mg | MR / K6 / SUS | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 2015-2021 | 4,6 | 894 / 425 / 328 | 48% | 1,19 | 1,11 | +10,4 | 20 | 9,6% | +5,0% | 12/10 | 4/7 |

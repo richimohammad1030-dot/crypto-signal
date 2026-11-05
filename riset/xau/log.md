@@ -381,3 +381,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   Cermin dengan SELL ≥ 56,24 (= cermin persis 43,76) buruk (P uji 0,03-0,28).
 - MA100: 2015 +18 (live -6), 2026 +14 (-2), 2020 +2, 2021 -8, 2018 -7. Tidak ada yang P ≥ 0,90 → `perlu-data`; bayangan
   "Hibrida MA100/MA200 (#42b)" (multi_mesin.sinyal_hibrida). Menunggu keputusan pemilik.
+
+## 5 Nov 2026 — Ide #42b HIBRIDA MA100 DIPASANG (pilihan pemilik "1"; live 6 Nov 2026)
+- gold_bot.py: TREND_D1_N 100, MR_SELL_TURUN 70, MR_BUY_TURUN 15; SMA dari close 07:00 (state["c07"] 150 hari + bibit
+  gold_c07_seed.json 450 close Setra Feb 2025-Okt 2026; replay hanya rows). Pend MR + "d1"/"ma"; bubble menampilkan tren harian.
+  multi_mesin.sinyal_live = sinyal_hibrida (konstanta dari gold_bot); baseline default = live.
+- replay_xau: xau.json 413/413 (MR 253 K6 93 SUS 67) & xau_panjang 2811/2811 (MR 1541 K6 753 SUS 517) IDENTIK. Simulasi live
+  (1000 candle + bibit) MA = MA data penuh. baseline.json diperbarui. Ekspektasi 12 thn +16,5 R/thn, PF 1,16, DD 28R, 9/12 thn.
+- Bayangan: "Tanpa hibrida (#40 saja)", "Hibrida MA200 (#42b)", Connors MA100/MA200, MR SELL lama 71,22.

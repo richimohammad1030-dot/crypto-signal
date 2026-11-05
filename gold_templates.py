@@ -97,6 +97,7 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
         L.append(_pre([
             f"RSI(2) H1 07:00 : {p['rsi']:.1f}  ({'jenuh jual' if d == 1 else 'jenuh beli'})",
             f"Harga 07:00     : {fmt(p['px'])}",
+        ] + ([f"Tren harian     : {'TURUN' if p['d1'] == -1 else 'NAIK'} (SMA100 {fmt(p['ma'])})"] if p.get("ma") else []) + [
             "",
             f"{arah} MARKET",
             f"  Entry : ±{fmt(p['px'])} (harga saat ini)",
