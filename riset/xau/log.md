@@ -357,3 +357,18 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   2022 (-4), 2026 (-10). 2026: emas turun dari 5.387 (Mar) ke 3.997 (Okt) → SELL di jenuh beli ringan justru untung tahun ini.
 - Diuji: ambang 85 hanya bila tren D1 (EMA 50/100/200 hari) naik → 12 thn +14,3..+14,9, P uji 0,95-0,97, tetapi 2026 tetap
   -2..-5 → tidak memperbaiki 2026; tidak dipasang (menambah aturan demi 1 tahun = overfit).
+
+## 5 Nov 2026 — Ide #42 "baik tiap tahun, tidak condong BUY" (simetris.py; permintaan pemilik, riset literatur)
+- Sumber: Connors & Alvarez (2008) RSI(2) + filter MA 200 hari & cermin short; RSI adaptif persentil bergulir (TradingView
+  Adaptive RSI / RSI Median Deviation); saklar rezim ADX harian histeresis 20/30 (Top Gun Fast 1, MQL5); Unger Academy (tren &
+  MR emas saling menyeimbangkan; fade high/low hari sebelumnya). Pilih 2015-2021 (skor = R/thn × porsi tahun untung), uji sesudahnya.
+- R/thn 2015-21 · uji · Setra · 12t | tahun+ | terburuk | sd tahunan (bot live: +10,4 · +24,7 · +13,9 · +14,6 | 8/12 | -6 | 17,3):
+  C Connors cermin MA100 b30 kuat85 (TERPILIH di pilih): +9,9 · +24,0 · +22,4 · +15,5 | 9/12 | -14 (2020) | 15,8 | P uji 0,45, P Setra 0,84
+  C MA200 b30 kuat85: +7,5 · +19,8 · +25,9 · +13,5 | 10/12 | -10 (2020) | 12,3 | P uji 0,26, P Setra 0,92
+  C MA50: 12t +12,3, Setra +20,6. Tetangga C (MA 50/100/200) semua Setra +20..+26 vs +13,9; 2015 +11..+16, 2026 +14..+20
+  (bot live -6 / -2). P (persentil bergulir): 12t +8,1..+11,8, buruk. X (ADX): 12t +11,5..+14,6, sd 18-20 (tidak lebih rata).
+- Kesimpulan: Connors cermin = kandidat terbaik untuk tujuan pemilik (tahun turun emas jadi untung, profil tahunan lebih rata),
+  tetapi di 2022-Jan 2025 tidak lebih baik (P 0,26-0,45) dan 2020 rugi -10..-14. Status `perlu-data`; bayangan menu
+  "Connors MA200/MA100 (#42)" (multi_mesin.sinyal_connors). Bot live tidak diubah (pemilik: pakai bot sekarang).
+- Antrian lanjutan (Jumat): #43 fade high/low hari sebelumnya (Unger) sebagai sumber edge baru; #44 Connors + saklar ADX
+  (atasi 2020); #45 ukuran posisi target-volatilitas agar R tahunan lebih rata; uji silang perak untuk #42.

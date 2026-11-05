@@ -15,6 +15,8 @@ MENU = {
     "BASELINE (live)": mm.baseline(D, A, F),
     "Tanpa susulan": mm.baseline(D, A, F, sus=False),
     "MR SELL lama 71,22 (sblm #40)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D, mr_sell=71.22)),
+    "Connors MA200 (#42)": mm.baseline(D, A, F, sig=mm.sinyal_connors(D, 200)),
+    "Connors MA100 (#42)": mm.baseline(D, A, F, sig=mm.sinyal_connors(D, 100)),
     "MR saja": mm.trades_mr(D, A),
     "K6 saja": mm.trades_k6(D, A, F),
     "Juara lama (OCO)": m.potong(m.replay(D, A=A)),

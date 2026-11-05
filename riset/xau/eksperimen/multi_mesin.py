@@ -71,3 +71,20 @@ def baseline(D, A, F, ambigu="buy", mr=None, k6=None, sig=None, sus=None):
     if sus is not False:
         out += trades_sus(D, A, F, ambigu, sig) if sus is None else sus
     return sorted(out, key=lambda x: x["t1"])
+
+
+def sinyal_connors(D, n=200, b=30.0, kuat=85.0):
+    """Ide #42 (Connors cermin): tren D1 (close 07:00 > SMA n hari close 07:00) naik -> BUY RSI2 <= b, SELL hanya RSI2 >= kuat;
+    tren turun -> cermin (SELL >= 100-b, BUY hanya <= 100-kuat)."""
+    T, C = D[0], D[4]; R2 = rsi(C, gb.MR_N); HR = ((T // 3600) % 24).astype(int)
+    i07 = np.flatnonzero(HR == sm.PLACE); c07 = C[i07]; cs = np.cumsum(np.insert(c07, 0, 0)); out = {}
+    for k, i in enumerate(i07):
+        if k < n - 1: continue
+        ma = (cs[k + 1] - cs[k + 1 - n]) / n; r = R2[i]
+        if c07[k] > ma:
+            if r <= b: out[int(i)] = 1
+            elif r >= kuat: out[int(i)] = -1
+        else:
+            if r >= 100 - b: out[int(i)] = -1
+            elif r <= 100 - kuat: out[int(i)] = 1
+    return out
