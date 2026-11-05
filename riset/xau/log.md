@@ -298,3 +298,16 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   vs +13,6; 12 thn +8,1..+9,2 vs +8,4. P uji 0,01-0,08 → GAGAL. Pola: 2015-21 & Setra suka "balik", 2022-Jan 2025 suka "sama"
   = bergantung rezim; belum ada detektor rezim yang terbukti (lih. ide #29-#33).
 - Status: `ditolak`. Bot tetap maks 1 posisi/hari.
+
+## 5 Nov 2026 — Ide #39 SESI TAMBAHAN 23:00-07:00 WIB (sesi2.py, usulan pemilik; sesi 1 tidak diubah)
+- Dekomposisi log-return %/thn (2015-21 / 2022-Jan25 / Setra): sesi 1 07-23 WIB +0,5/+2,9/+3,4; sesi 2 23-07 hari kerja
+  +3,5/+8,8/+15,0 (hampir semua di candle close 06:00 & 07:00 WIB; close 04:00 negatif = rollover); gap akhir pekan ±2,1.
+- Sesi 2 (masuk 23:00, tutup 07:00, lewati malam Jumat, biaya 0,40 + swap long 0/0,3/0,6 USD/oz/malam; 5 arah × SL × TP = 45):
+  di 2015-2021 SEMUA rugi (PF 0,74-0,87 walau swap 0). Swap 0: terbaik "long tren H1 SL 3" gabung 12 thn +9,5 vs +8,4,
+  uji +22,6 vs +15,9 (P 0,95), Setra +24,7 vs +13,6, DD 32R — tetapi pilih -0,1 vs +3,8. Dengan swap 0,6: gabung 12 thn
+  +4,4, pilih -6,5 (P 0,66). MR RSI2 di 23:00 (2 arah / long) rugi di semua periode.
+- Long 05:00→07:00 WIB: Dukascopy +0,52/+0,63 USD kotor (2015-21/2022-25) tetapi Setra -0,03 → efek spread rollover di data BID
+  Dukascopy, bukan edge yang bisa ditradingkan.
+- Kesimpulan: "kenaikan malam" = tren naik emas 2022-2026 + artefak spread, bukan pola yang bertahan; sesi 2 hanya untung di
+  pasar bull dan bergantung swap broker. Status `ditolak` (dicatat: bila pemilik ingin taruhan tren naik jangka panjang,
+  itu keputusan alokasi/investasi, bukan edge intraday).
