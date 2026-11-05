@@ -13,6 +13,11 @@ B) BREAKOUT SEARAH TREN (K6), bila RSI(2) tidak ekstrem:
   sama persis dengan OCO 2 sisi yang melewati hari bila sisi lawan tren terisi duluan).
 - SL = 1,5 x ATR(14) dari entry. TP = 4R (6 x ATR).
 - 23:00 WIB: order yang belum terisi dibatalkan, posisi yang masih terbuka ditutup.
+C) SUSULAN (ide #37, live mulai 6 Nov 2026), hanya pada hari K6 dilewati (batas batal tersentuh): di candle pertama yang close
+   09:00/11:00/.../21:00 WIB sejak batas batal tersentuh, RSI(2) H1 <= SUS_BUY -> BUY market; >= SUS_SELL -> SELL market
+   (masuk di open candle berikutnya). Tidak ekstrem -> hari itu tetap tanpa trade (hanya 1 kali keputusan).
+   SL = 3 x ATR(14) H1, TP = 1R, ditutup 23:00 WIB. Live: keputusan yang baru diproses >= 1 jam setelah candle close
+   tidak dikirim & tidak dicatat (harga masuk sudah lewat).
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
 """
 import json, os, sys, time, urllib.request, datetime as dt
@@ -24,7 +29,10 @@ RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 71.22, 3.0
 STALE_S = 2 * 3600     # data dianggap macet bila candle H1 terakhir yang close lebih tua dari 2 jam (hari bursa)
-LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat   # mean reversion RSI(2); ambang = kuantil 35%/65% 2015-2021 (riset)
+LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat
+SUS_BUY, SUS_SELL, SUS_SL_ATR, SUS_TP_R = 25.41, 77.10, 3.0, 1.0   # susulan: kuantil 35%/65% RSI(2) jam keputusan 2015-2021
+SUS_JAM_UTC = (1, 3, 5, 7, 9, 11, 13)   # jam BUKA candle H1 (UTC) yang close 09:00, 11:00, ..., 21:00 WIB
+SUS_LATE_S = 3600      # keputusan susulan TERLAMBAT bila diproses >= 1 jam setelah candle keputusan close
 PLACE_HOUR_UTC = 23     # jam BUKA candle H1 (UTC) yang close 07:00 WIB
 CLOSE_HOUR_UTC = 15     # jam BUKA candle H1 (UTC) yang close 23:00 WIB
 SYM = "XAUUSD"
@@ -162,15 +170,16 @@ class GoldEngine:
         s = self.s
         t, hr = T[i], (T[i] // 3600) % 24
         pend, pos = s.get("pend"), s.get("pos")
-        # 1a) mean reversion: masuk market di open candle pertama setelah sinyal 07:00
-        if pos is None and pend and pend.get("mode") == "MR":
-            d = pend["d"]; fill = O[i]; slp = fill - d * pend["dist"]
+        # 1a) mean reversion / susulan: masuk market di open candle pertama setelah sinyal
+        if pos is None and pend and pend.get("mode") in ("MR", "SUS"):
+            d, st = pend["d"], pend["mode"]; fill = O[i]; slp = fill - d * pend["dist"]
+            tpp = fill + d * SUS_TP_R * pend["dist"] if st == "SUS" else None
             s["pend"] = None
-            s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": None, "r0": pend["dist"], "t0": t, "strat": "MR"}
-            self.notify("fill", d=d, entry=fill, sl=slp, tp=None, t=t, strat="MR")
+            s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": pend["dist"], "t0": t, "strat": st}
+            self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat=st)
             if (d == 1 and L[i] <= slp) or (d == -1 and H[i] >= slp):
                 s["pos"] = None
-                self.record(d, fill, slp, pend["dist"], t, t, "kena SL di candle yang sama", "MR")
+                self.record(d, fill, slp, pend["dist"], t, t, "kena SL di candle yang sama", st)
         # 1b) order stop K6 terisi? (BUY STOP dicek lebih dulu)
         elif pos is None and pend:
             b, sl_ = pend["buy"], pend["sell"]
@@ -183,6 +192,7 @@ class GoldEngine:
                 # K6: batas batal (sisi lawan tren) tersentuh lebih dulu -> order utama dibatalkan, hari dilewati
                 s["pend"] = None
                 self.notify("skip", d=hit[0], level=(b if hit[0] == 1 else sl_)[0], main=pend["main"], t=t)
+                s["sus_wait"] = True          # C) tunggu jam keputusan susulan berikutnya
                 hit = None
             if hit:
                 d, fill, slp, tpp = hit
@@ -202,6 +212,7 @@ class GoldEngine:
                 s["pos"] = None; self.record(d, pos["e"], pos["tp"], pos["r0"], pos["t0"], t, "kena TP", st)
         # 3) jam tutup 23:00 WIB
         if hr == CLOSE_HOUR_UTC:
+            s.pop("sus_wait", None)
             if s.get("pend"):
                 s["pend"] = None
                 self.notify("expire")
@@ -227,6 +238,18 @@ class GoldEngine:
                              "sell": [lo, lo + SL_ATR * a, lo - RR * SL_ATR * a],
                              "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2), "rsi": round(r2, 1)}
                 self.notify("order", pend=s["pend"], t=t, price=C[i])
+        # 5) susulan: satu kali keputusan di jam keputusan pertama setelah batas batal K6 tersentuh
+        if s.get("sus_wait") and hr in SUS_JAM_UTC and s.get("pos") is None and s.get("pend") is None:
+            s.pop("sus_wait", None)
+            r2, a = self.R2[i], A[i]
+            if (r2 <= SUS_BUY or r2 >= SUS_SELL) and SUS_SL_ATR * a > 0.5:
+                if self.now is not None and self.now - (t + 3600) >= SUS_LATE_S:
+                    self.notify("late", t=t, strat="SUS")
+                else:
+                    d = 1 if r2 <= SUS_BUY else -1
+                    s["pend"] = {"mode": "SUS", "d": d, "dist": SUS_SL_ATR * a, "t": t, "rsi": round(r2, 1),
+                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1}
+                    self.notify("order", pend=s["pend"], t=t, price=C[i])
 
     def run(self, rows, since):
         T = [r[0] for r in rows]; O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]; C = [r[4] for r in rows]
@@ -309,8 +332,8 @@ def main():
     def notify(kind, **k):
         if kind == "order":   # faktor saat order dipasang (dipakai riset)
             p = k["pend"]
-            if p.get("mode") == "MR":
-                state["feat"] = dict(strat="MR", rsi=p["rsi"], atr=round(p["a"], 3),
+            if p.get("mode") in ("MR", "SUS"):
+                state["feat"] = dict(strat=p["mode"], rsi=p["rsi"], atr=round(p["a"], 3),
                                      hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
             else:
                 a = abs(p["buy"][0] - p["buy"][1]) / SL_ATR
@@ -344,8 +367,11 @@ def main():
         buf.append(nb)
         tg_send(nb, chat=target)
         state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
-    for b in (gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None, now=time.time()),
-              gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] or ev["skip"] else None):
+    bub = [gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None, now=time.time()),
+           gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] or ev["skip"] else None]
+    if ev["skip"]:
+        bub.reverse()            # "hari ini dilewati" tampil sebelum sinyal susulan di run yang sama
+    for b in bub:
         if b:
             buf.append(b)
             tg_send(b, chat=target)

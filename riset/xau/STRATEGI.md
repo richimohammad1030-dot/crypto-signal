@@ -1,9 +1,10 @@
-# Strategi XAU · juara MULTI-STRATEGI (dipasang 2 Nov 2026)
+# Strategi XAU · juara MULTI-STRATEGI (dipasang 2 Nov 2026; + susulan 6 Nov 2026)
 
 Status: **LIVE mulai sinyal Senin 2 Nov 2026 07:00 WIB** (`gold_bot.py`, workflow `gold.yml`). Risiko **0,5% per trade** (pilihan pemilik).
 Perubahan hanya lewat riset + persetujuan pemilik; mesin bot wajib lolos `riset/replay_xau.py` (identik dengan
 `riset/xau/eksperimen/multi_mesin.baseline`). Konstanta strategi ada di `gold_bot.py` (dibaca juga oleh riset).
-Riwayat: Gold Daily Straddle OCO 2 sisi (live 18 Okt 2026) → multi-strategi MR + K6 (31 Okt 2026, ide #34).
+Riwayat: Gold Daily Straddle OCO 2 sisi (live 18 Okt 2026) → multi-strategi MR + K6 (31 Okt 2026, ide #34) → + susulan
+(ide #37, live 6 Nov 2026, pilihan pemilik: pasang langsung).
 
 ## Aturan tetap pemilik (tidak boleh diubah)
 Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakter intraday: masuk & selesai di hari yang sama.
@@ -20,9 +21,16 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 - Candle H1 yang menyentuh keduanya: mesin menganggap sisi BUY duluan (ide #23 untuk perbaikan).
 - Order diabaikan bila jarak SL ≤ 0,5 USD.
 
+**C. Susulan (ide #37)** — hanya pada hari K6 dilewati (batas batal tersentuh lebih dulu):
+- Satu kali keputusan di candle H1 pertama yang close **09:00/11:00/.../21:00 WIB** sejak batas batal tersentuh (= jam run bot).
+- RSI(2) ≤ **25,41** → BUY market; ≥ **77,10** → SELL market (kuantil 35%/65% jam keputusan 2015-2021). Tidak ekstrem → tanpa trade.
+- Masuk di open candle berikutnya. SL = **3 × ATR(14) H1** (ATR candle keputusan), **TP = 1R**. Ditutup 23:00 WIB.
+- Jam sinyal 07:00 tetap: susulan hanya pengganti di hari yang order 07:00-nya batal; tetap maks 1 posisi/hari.
+
 ## Data & keterlambatan (live saja; tidak memengaruhi backtest/replay)
 - Data utama Setra. Candle terakhir > 2 jam di hari bursa → cadangan Dukascopy (BID) + peringatan ke pemilik.
 - Candle 07:00 baru diproses ≥ 10:00 WIB → sinyal hari itu TERLAMBAT: tidak dikirim sebagai order dan tidak dicatat.
+- Candle keputusan susulan baru diproses ≥ 1 jam setelah close (candle masuk sudah lewat) → susulan TERLAMBAT, tidak dicatat.
 
 ## Ekspektasi (bersih biaya 0,40 USD; urutan candle ambigu M1 untuk 2022-skrg; risiko 0,5%)
 | Periode | Trade/mg | MR / K6 | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
@@ -34,6 +42,18 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 
 Per tahun (R): 2015 +2 · 2016 +3 · 2017 +10 · 2018 -4 · 2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14.
 Per strategi (12 thn): MR win 49%, RR 1,11, PF 1,06 · K6 win 37%, RR 1,96, PF 1,13. ±84% trade berasal dari MR.
+
+**Dengan susulan (live 6 Nov 2026)** — sama, tapi urutan ambigu M1 untuk K6 & hari susulan:
+| Periode | Trade/mg | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 2015-2021 | 4,7 | 48% | 1,13 | 1,04 | +3,8 | 25 | 12,2% | +1,6% | 8/8 | 5/7 |
+| 2022 - Jan 2025 | 4,8 | 48% | 1,27 | 1,15 | +15,9 | 31 | 14,4% | +7,8% | 8/9 | 3/4 |
+| Feb 2025 - Okt 2026 | 4,8 | 48% | 1,24 | 1,14 | +13,6 | 21 | 10,1% | +6,7% | 10/8 | 2/2 |
+| 12 tahun | 4,8 | 48% | 1,19 | 1,08 | +8,4 | 31 | 14,4% | +3,9% | 10/9 | 9/12 |
+
+Per tahun (R): 2015 +7 · 2016 +8 · 2017 +13 · 2018 -7 · 2019 0 · 2020 -4 · 2021 +10 · 2022 +34 · 2023 -10 · 2024 +22 · 2025 +19 · 2026 +8.
+Susulan sendiri (12 thn): 325 trade, win 56%, RR 0,97, PF 1,21, +21R. Di Setra (n 46) susulan lebih buruk (gabung +13,6 vs +15,6
+R/thn tanpa susulan) → dipantau lewat bayangan "Tanpa susulan"; evaluasi ulang setelah ±20 trade susulan live (±7 bulan).
 
 **Catatan jujur**: aturan dirakit setelah melihat semua periode (ide #34) → belum terbukti di data baru; edge tipis (PF 1,07).
 Penyetelan 324 kombinasi tidak menghasilkan versi yang signifikan lebih baik (P ≤ 0,56). Catatan bayangan semua strategi menu:

@@ -1,4 +1,4 @@
-"""Uji kesetaraan mesin bot XAU live (gold_bot.GoldEngine, via backtest_xau.py) vs mesin riset baseline multi-strategi
+"""Uji kesetaraan mesin bot XAU live (gold_bot.GoldEngine, via backtest_xau.py) vs mesin riset baseline multi-strategi + susulan
 (riset/xau/eksperimen/multi_mesin.baseline; urutan candle ambigu = asumsi bot, BUY duluan). Wajib IDENTIK sebelum dipasang.
 Pemakaian: python riset/replay_xau.py <repo> <xau.json> [<xau_lain.json> ...]"""
 import sys, os, csv, subprocess
@@ -16,8 +16,8 @@ for src in sys.argv[2:]:
     ref = mm.baseline(D, A, F)
     beda = sum(1 for b, r in zip(bot, ref) if int(float(b["t0"])) != int(r["t0"]) or int(b["d"]) != r["d"]
                or abs(float(b["R"]) - r["R"]) > 1e-9 or b.get("strat", r["strat"]) != r["strat"]) + abs(len(bot) - len(ref))
-    nmr = sum(1 for r in ref if r["strat"] == "MR")
-    print(f"{os.path.basename(src)}: bot {len(bot)} trade vs riset {len(ref)} (MR {nmr}, K6 {len(ref) - nmr}) -> {'IDENTIK' if beda == 0 else f'BEDA {beda}'}")
+    per = " ".join(f"{k} {sum(1 for r in ref if r['strat'] == k)}" for k in ("MR", "K6", "SUS"))
+    print(f"{os.path.basename(src)}: bot {len(bot)} trade vs riset {len(ref)} ({per}) -> {'IDENTIK' if beda == 0 else f'BEDA {beda}'}")
     ok &= beda == 0
 print("KESIMPULAN:", "mesin bot = riset baseline" if ok else "BEDA - jangan pasang")
 sys.exit(0 if ok else 1)

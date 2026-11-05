@@ -1,6 +1,6 @@
 """
 Templat pesan Telegram bot XAU — maksimal 2 bubble per run:
-  1) SINYAL : order hari ini (07:00 WIB) / pembatalan order (23:00 WIB)
+  1) SINYAL : order hari ini (07:00 WIB) / sinyal susulan (09:00-21:00 WIB) / pembatalan order (23:00 WIB)
   2) UPDATE : order terisi, posisi ditutup, posisi berjalan
 """
 import datetime as dt
@@ -40,8 +40,8 @@ def _pre(lines):
     return "<pre>" + html.escape("\n".join(lines)) + "</pre>"
 
 
-def _hasil(R):
-    if R >= 3.5:
+def _hasil(R, why=""):
+    if R >= 3.5 or "TP" in why:
         return "🎯 KENA TP"
     if R >= 0.15:
         return "✅ UNTUNG"
@@ -77,7 +77,12 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
     if not ev["order"] and not ev["expire"] and not ev.get("late"):
         return None
     L = [f"🥇 <b>SINYAL {SYM}</b> · XAU Intraday", f"🕐 {_wib(t)}", BAR]
-    if ev.get("late"):
+    if ev.get("late") and ev["late"].get("strat") == "SUS":
+        L += ["⏰ <b>SINYAL SUSULAN TERLAMBAT</b>",
+              f"Data harga jam {_jam(ev['late']['t'] + 3600)} baru tersedia {_jam(now) if now else 'lebih dari 1 jam kemudian'}.",
+              "Sinyal susulan hari ini <b>tidak dikirim dan tidak dicatat</b>.",
+              BAR]
+    elif ev.get("late"):
         L += ["⏰ <b>SINYAL 07:00 TERLAMBAT</b>",
               f"Data harga jam 07:00 baru tersedia {_jam(now) if now else 'setelah 10:00 WIB'}.",
               "Sinyal hari ini <b>tidak dikirim dan tidak dicatat</b>. Tidak ada trade XAU dari bot hari ini.",
@@ -102,6 +107,23 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
               f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
               "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
               f"⚖️ Risiko saran {risk_pct}% modal"]
+    elif ev["order"] and ev["order"]["pend"].get("mode") == "SUS":
+        p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"; jam = _jam(p["t"] + 3600)
+        L.append(f"🔁 <b>SINYAL SUSULAN · {arah} SEKARANG</b> (mean reversion)")
+        L.append(_pre([
+            f"RSI(2) H1 {jam[:5]} : {p['rsi']:.1f}  ({'jenuh jual' if d == 1 else 'jenuh beli'})",
+            f"Harga {jam[:5]}     : {fmt(p['px'])}",
+            "",
+            f"{arah} MARKET",
+            f"  Entry : ±{fmt(p['px'])} (harga saat ini)",
+            f"  SL    : {fmt(p['px'] - d * p['dist'])}  ({'-' if d == 1 else '+'}{fmt(p['dist'])} dari entry)",
+            f"  TP    : {fmt(p['px'] + d * p['dist'])}  ({'+' if d == 1 else '-'}{fmt(p['dist'])} dari entry, 1R)",
+        ]))
+        L += [BAR,
+              "ℹ️ Order utama hari ini sudah dibatalkan; ini satu-satunya sinyal pengganti hari ini.",
+              f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL & TP <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
+              "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
+              f"⚖️ Risiko saran {risk_pct}% modal"]
     elif ev["order"] and ev["order"]["pend"].get("main"):
         p = ev["order"]["pend"]; d = p["main"]
         o = p["buy"] if d == 1 else p["sell"]
@@ -124,7 +146,7 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
         if live_px is not None and (batal - live_px) * d >= 0:
             L.append(f"⚠️ Harga terakhir {fmt(live_px)} sudah di batas batal → <b>jangan pasang</b> order hari ini.")
         L += [BAR,
-              f"🚫 Harga menyentuh <b>{fmt(batal)}</b> sebelum {arah} terisi → <b>batalkan</b> order, hari ini tanpa trade",
+              f"🚫 Harga menyentuh <b>{fmt(batal)}</b> sebelum {arah} terisi → <b>batalkan</b> order (bot bisa mengirim sinyal susulan)",
               "🔔 Saran: pasang price alert di batas batal",
               "🎯 TP = 4R · ⏰ berlaku s.d. <b>23:00 WIB</b>",
               f"⚖️ Risiko saran {risk_pct}% modal"]
@@ -185,8 +207,9 @@ def news_bubble(news, pos, pend, px, now):
         L.append(f"📂 <b>POSISI {SYM} · {'BUY' if pos['d'] == 1 else 'SELL'}</b> · {R:+.2f}R")
         L.append(_pre([f"Entry : {fmt(pos['e'])}"] + ([f"Kini  : {fmt(px)}"] if px else []) +
                       [f"SL    : {fmt(pos['sl'])}", f"TP    : {fmt(pos['tp']) if pos.get('tp') is not None else '- (tutup 23:00)'}"]))
-    elif pend and pend.get("mode") == "MR":
-        L.append(f"⏳ <b>SINYAL {'BUY' if pend['d'] == 1 else 'SELL'} MARKET</b> (mean reversion) baru dikirim")
+    elif pend and pend.get("mode") in ("MR", "SUS"):
+        L.append(f"⏳ <b>SINYAL {'BUY' if pend['d'] == 1 else 'SELL'} MARKET</b> "
+                 f"({'susulan' if pend['mode'] == 'SUS' else 'mean reversion'}) baru dikirim")
     elif pend and pend.get("main"):
         d = pend["main"]
         L.append(f"⏳ <b>ORDER AKTIF</b> · bisa terisi saat news")
@@ -218,24 +241,26 @@ def update_bubble(ev, pos, px, t):
         arah = "BUY STOP" if k["main"] == 1 else "SELL STOP"
         L.append("🚫 <b>HARI INI DILEWATI</b>")
         L.append(_pre([f"Batas batal {fmt(k['level'])} tersentuh lebih dulu ({_jam(k['t'])})"]))
-        L.append(f"👉 <b>Batalkan {arah}</b> yang masih aktif. Tidak ada trade sampai sinyal besok 07:00 WIB.")
+        L.append(f"👉 <b>Batalkan {arah}</b> yang masih aktif. Bot akan mengecek peluang <b>sinyal susulan</b> "
+                 "(sekali, di jam keputusan 09:00–21:00 WIB berikutnya).")
     for k in ev["fill"]:
         sep()
         arah = "BUY" if k["d"] == 1 else "SELL"
         lawan = "SELL STOP" if k["d"] == 1 else "BUY STOP"
-        mr = k.get("strat") == "MR"
-        L.append(f"✅ <b>TERISI · {arah}</b>" + (" (mean reversion)" if mr else ""))
+        mr = k.get("strat") in ("MR", "SUS")
+        L.append(f"✅ <b>TERISI · {arah}</b>" + (" (susulan)" if k.get("strat") == "SUS" else " (mean reversion)" if mr else ""))
         L.append(_pre([f"Entry : {fmt(k['entry'])}  ({_jam(k['t'])})",
                        f"SL    : {fmt(k['sl'])}",
                        f"TP    : {fmt(k['tp']) if k.get('tp') is not None else '- (tutup 23:00)'}"]))
         if mr:
-            L.append("👉 Posisi model dihitung dari harga open 07:00. Pastikan SL di akun Anda terpasang.")
+            L.append(f"👉 Posisi model dihitung dari harga open {_jam(k['t'])}. Pastikan SL"
+                     + (" & TP" if k.get("tp") is not None else "") + " di akun Anda terpasang.")
         else:
             L.append(f"👉 Hapus alert batas batal. Pastikan tidak ada order XAU lain yang aktif (mis. {lawan}).")
     for k in ev["exit"]:
         sep()
         arah = "BUY" if k["d"] == 1 else "SELL"
-        L.append(f"🏁 <b>DITUTUP · {arah}</b> · {_hasil(k['R'])}")
+        L.append(f"🏁 <b>DITUTUP · {arah}</b> · {_hasil(k['R'], k.get('why', ''))}")
         L.append(_pre([f"Entry  : {fmt(k['entry'])}",
                        f"Keluar : {fmt(k['exit'])}  ({k['why']})",
                        f"Gerak  : {(k['exit'] - k['entry']) * k['d']:+.2f} USD",

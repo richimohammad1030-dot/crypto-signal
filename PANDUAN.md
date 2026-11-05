@@ -145,10 +145,12 @@ Strategi: `riset/xau/STRATEGI.md` (sejak 2 Nov 2026). Jam sinyal 07:00 & tutup 2
 - Jadwal: Senin–Jumat setiap 2 jam, 07:00–23:00 WIB (`gold.yml`). 07:00 bot memilih satu strategi:
   **mean reversion** (RSI(2) H1 ekstrem → BUY/SELL market, SL 3 ATR, tanpa TP) atau, bila RSI(2) tidak ekstrem,
   **breakout searah tren** (1 order stop searah EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). 23:00 batalkan/tutup.
+  Sejak 6 Nov 2026: bila order breakout batal, bot sekali mengecek **sinyal susulan** di jam run berikutnya (09:00–21:00 WIB):
+  RSI(2) ekstrem → **🔁 SINYAL SUSULAN** BUY/SELL market, SL 3 ATR, TP 1R. Tetap maks 1 posisi/hari.
 - Cara pasang: mean reversion → buka posisi market + SL sesuai jarak di pesan. Breakout → 1 order stop + SL & TP + price alert di
   batas batal (bot juga mengirim **🚫 HARI INI DILEWATI**, tetapi bot hanya cek tiap 2 jam, jadi andalkan alert).
-- Ekspektasi (riset 2015-2026, bersih biaya 0,40 USD, risiko 0,5%): ±4,2 trade/minggu, win ±47%, PF ±1,07, untung 9 dari 12 tahun,
-  DD terburuk ±17% ekuitas, CAGR ±3% (era 2025-2026 ±8%). Edge tipis. Lihat `riset/xau/log.md`.
+- Ekspektasi (riset 2015-2026 termasuk susulan, bersih biaya 0,40 USD, risiko 0,5%): ±4,8 trade/minggu, win ±48%, PF ±1,08,
+  untung 9 dari 12 tahun, DD terburuk ±14% ekuitas, CAGR ±4% (era 2025-2026 ±7%). Edge tipis. Lihat `riset/xau/log.md`.
 - Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
   Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota
   (**kirim ulang** setelah 2 Nov 2026 agar panduan multi-strategi yang ter-pin).

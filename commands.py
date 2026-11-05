@@ -144,12 +144,14 @@ PANDUAN_XAU = """<b>📌 PANDUAN ANGGOTA — Bot XAUUSD Intraday (multi-strategi
 <b>Cara kerja</b> (sejak 2 Nov 2026)
 Setiap hari bursa pukul 07:00 WIB bot memilih <b>satu</b> strategi. Maksimal 1 posisi per hari, semua selesai paling lambat 23:00 WIB.
 • <b>Mean reversion</b> (paling sering): jika RSI(2) H1 jenuh jual → BUY market, jenuh beli → SELL market. SL = 3 × ATR, tanpa TP, tutup 23:00.
-• <b>Breakout searah tren</b>: jika RSI(2) tidak ekstrem → 1 order stop di batas range 04:00–07:00 searah tren H1 (EMA200), SL & TP 4R. Sisi range seberangnya = <b>batas batal</b>: jika tersentuh lebih dulu, order dibatalkan dan hari itu tanpa trade.
+• <b>Breakout searah tren</b>: jika RSI(2) tidak ekstrem → 1 order stop di batas range 04:00–07:00 searah tren H1 (EMA200), SL & TP 4R. Sisi range seberangnya = <b>batas batal</b>: jika tersentuh lebih dulu, order dibatalkan.
+• <b>Susulan</b> (sejak 6 Nov 2026): pada hari order breakout dibatalkan, bot mengecek RSI(2) H1 <b>sekali</b> di jam bot berikutnya (09:00–21:00 WIB). Jika jenuh jual/beli → BUY/SELL market, SL = 3 × ATR, TP = 1R, tutup 23:00. Jika tidak → hari itu tanpa trade.
 
 <b>Arti pesan</b>
 🌅 ORDER HARI INI · BUY/SELL SEKARANG → masuk di harga pasar, pasang SL sesuai jarak di pesan
 🌅 ORDER HARI INI · BUY/SELL STOP → pasang 1 order stop + SL & TP; pasang price alert di BATAS BATAL
 🚫 HARI INI DILEWATI → batas batal tersentuh lebih dulu → <b>batalkan</b> order
+🔁 SINYAL SUSULAN · BUY/SELL SEKARANG → masuk di harga pasar, pasang SL & TP sesuai jarak di pesan
 ✅ TERISI · 📊 UPDATE POSISI · 🏁 POSISI DITUTUP (🎯 TP · ✅ untung · 🟡 impas · ❌ SL)
 ⏰ 23:00 WIB → tutup posisi yang masih terbuka / batalkan order yang belum terisi
 
@@ -159,11 +161,12 @@ Contoh: modal 1.000 USD, risiko 0,5% = 5 USD; jarak SL 50 USD → 5 ÷ 5.000 = 0
 
 <b>2. Cara pasang (MT4/MT5 & aplikasi broker)</b>
 • Mean reversion: buka posisi market, isi SL sesuai jarak di pesan.
+• Susulan: buka posisi market, isi SL & TP (jarak sama) sesuai pesan.
 • Breakout: pasang Buy Stop / Sell Stop, isi SL & TP, pasang price alert di BATAS BATAL; alert berbunyi sebelum terisi → hapus order.
 • 23:00 WIB → tutup posisi yang masih terbuka secara manual.
 
 <b>⚠️ Risiko</b>
-Hasil riset 2015-2026 (risiko 0,5%): win rate ±47%, profit factor ±1,07, untung 9 dari 12 tahun, drawdown terburuk ±17%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
+Hasil riset 2015-2026 (risiko 0,5%, termasuk susulan): win rate ±48%, profit factor ±1,08, untung 9 dari 12 tahun, drawdown terburuk ±15%. Edge tipis: biaya, spread & slippage bisa memperburuk hasil. Gunakan broker resmi (terdaftar Bappebti/OJK). Bukan saran investasi."""
 
 BANTUAN = """<b>🤖 Perintah bot</b>
 /status — posisi terbuka, order pending, hasil bulan ini
@@ -259,14 +262,14 @@ def build_recap(state, kind="minggu", previous=False, risk_pct=1.0, now=None, fm
               f"📉 Drawdown: {dd:.2f}R · kalah beruntun maks {mstreak}",
               f"📈 Kurva: <code>{_spark(curve)}</code>"]
         # bot XAU multi-strategi: rincian per strategi (label di h[7])
-        nama = {"MR": "Mean reversion", "K6": "Breakout tren"}
+        nama = {"MR": "Mean reversion", "K6": "Breakout tren", "SUS": "Susulan"}
         per = {}
         for h in tr:
             if len(h) > 7 and h[7] in nama:
                 per.setdefault(h[7], []).append(h[6])
         if per:
             L.append("🧩 <b>Per strategi</b>")
-            for k in ("MR", "K6"):
+            for k in ("MR", "K6", "SUS"):
                 if k in per:
                     r = per[k]
                     L.append(f"   {nama[k]}: {len(r)} trade · {r and sum(x >= 0.15 for x in r) / len(r) * 100:.0f}% win · {sum(r):+.2f}R")
@@ -355,10 +358,12 @@ def handle(state, text, last_price, fmt, exit_label, wib):
             p, o = g.get("pos"), g.get("pend")
             if p:
                 tp_ = f"{p['tp']:,.2f}" if p.get("tp") is not None else "- (tutup 23:00)"
-                return (f"🥇 XAU posisi {'BUY' if p['d']==1 else 'SELL'} ({'mean reversion' if p.get('strat') == 'MR' else 'breakout'}) "
+                return (f"🥇 XAU posisi {'BUY' if p['d']==1 else 'SELL'} ({ {'MR': 'mean reversion', 'SUS': 'susulan'}.get(p.get('strat'), 'breakout') }) "
                         f"entry {p['e']:,.2f} · SL {p['sl']:,.2f} · TP {tp_}")
-            if o and o.get("mode") == "MR":
-                return f"🥇 XAU sinyal {'BUY' if o['d']==1 else 'SELL'} market (mean reversion) · SL {o['dist']:,.2f} USD dari entry"
+            if o and o.get("mode") in ("MR", "SUS"):
+                return (f"🥇 XAU sinyal {'BUY' if o['d']==1 else 'SELL'} market "
+                        f"({'susulan' if o['mode'] == 'SUS' else 'mean reversion'}) · SL {o['dist']:,.2f} USD dari entry"
+                        + (" · TP 1R" if o["mode"] == "SUS" else ""))
             if o and o.get("main"):
                 u, bb = (o["buy"], o["sell"]) if o["main"] == 1 else (o["sell"], o["buy"])
                 return (f"🥇 XAU order aktif: {'BUY' if o['main'] == 1 else 'SELL'} STOP {u[0]:,.2f} · SL {u[1]:,.2f} · TP {u[2]:,.2f} · "

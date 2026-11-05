@@ -270,3 +270,12 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (0,5%: 14,4 vs 17,2%); W/L 10/9 vs 10/8; 9/12 thn. Pilih +3,8 vs +2,9; uji +15,9 vs +9,9; Setra +13,6 vs +15,6.
   Susulan sendiri dalam gabungan: 325 trade, win 56%, RR 0,97, PF 1,21, +21R (12 thn).
 - Status tetap `perlu-data`; menunggu keputusan pemilik (pasang vs bayangan).
+
+## 5 Nov 2026 — Susulan S3 DIPASANG (pilihan pemilik: pasang langsung; live 6 Nov 2026)
+- gold_bot.py: langkah 5 GoldEngine (sus_wait setelah "skip", keputusan sekali di jam UTC 1,3,..,13; pend mode "SUS" market,
+  SL 3 ATR, TP 1R, strat "SUS"); SUS_LATE_S 1 jam (live saja). Templat: 🔁 SINYAL SUSULAN, terlambat susulan, urutan bubble
+  (dilewati sebelum susulan). commands.py: rekap per strategi + /status_xau + PANDUAN_XAU. multi_mesin.trades_sus + baseline(sus=).
+- replay_xau: xau.json 425/425 (MR 339 K6 41 SUS 45) IDENTIK; xau_panjang 2906/2906 (MR 2168 K6 413 SUS 325) IDENTIK.
+  (xau_sambung beda 1 = posisi MR terbuka di ujung data 30 Okt, sudah ada sebelum susulan; bukan beda mesin.)
+- Simulasi live per run (28 Okt 2026): 07:09 order K6 → 09:09 dilewati + susulan BUY → 23:09 tutup −0,20R; run 09:09 terlewat → TERLAMBAT.
+- bayangan.py: menu "Tanpa susulan"; baseline_xau.py: patokan kesehatan termasuk susulan.

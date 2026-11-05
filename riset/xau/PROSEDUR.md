@@ -7,7 +7,9 @@ Riset crypto & intraday crypto dikerjakan task terpisah. Jangan menyentuh berkas
 
 **Juara sejak 2 Nov 2026 = multi-strategi** (`riset/xau/STRATEGI.md`, ide #34). Maksimal 1 posisi/hari, keputusan 07:00 WIB:
 mean reversion RSI(2) H1 (≤ 43,76 BUY / ≥ 71,22 SELL market, SL 3 ATR, tanpa TP) diprioritaskan; selain itu breakout K6
-(1 stop order searah tren EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). Semua ditutup 23:00 WIB. Risiko 0,5%.
+(1 stop order searah tren EMA200 H1 + batas batal, SL 1,5 ATR, TP 4R). Sejak 6 Nov 2026 + **susulan** (ide #37): hari K6 dilewati
+→ RSI(2) di jam keputusan pertama 09:00-21:00 WIB (≤ 25,41 / ≥ 77,10 market, SL 3 ATR, TP 1R). Semua ditutup 23:00 WIB. Risiko 0,5%.
+Pantau bayangan "Tanpa susulan" vs BASELINE (susulan lebih buruk di Setra saat dipasang, n 46).
 Edge XAU intraday bergantung rezim (mean reversion kuat saat emas tenang, tren kuat saat volatil) dan tipis (PF ±1,07).
 Jangan memakai kesimpulan riset crypto untuk XAU tanpa diuji ulang dengan data XAU.
 

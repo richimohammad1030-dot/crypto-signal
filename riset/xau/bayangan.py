@@ -1,6 +1,6 @@
 """Catatan BAYANGAN bot XAU (31 Okt 2026): putar ulang semua strategi menu pada data Setra sejak LIVE_START XAU dan bandingkan
 dengan catatan live (gold_state.json hist). Dipakai riset Jumat (uji maju) untuk menilai bobot/penggantian strategi.
-Menu: BASELINE (live), MR saja, K6 saja, juara lama (OCO 2 sisi), PENANTANG (RSI2 kuantil 30% SL 2,5 TP 2R + K6 SL 1,25 tanpa TP).
+Menu: BASELINE (live, MR+K6+susulan sejak 6 Nov 2026), Tanpa susulan (MR+K6), MR saja, K6 saja, juara lama (OCO 2 sisi), PENANTANG (RSI2 kuantil 30% SL 2,5 TP 2R + K6 SL 1,25 tanpa TP).
 Pemakaian: python riset/xau/bayangan.py <repo> <xau_setra.json> <xau_dukascopy.json>"""
 import sys, os, json
 import numpy as np
@@ -13,6 +13,7 @@ mulai = kesehatan.LIVE_START["xau"]
 sig30 = mm.sinyal_mr(D, mr_buy=38.49, mr_sell=74.72)   # kuantil 30%/70% 2015-2021 (multi_setel.py)
 MENU = {
     "BASELINE (live)": mm.baseline(D, A, F),
+    "Tanpa susulan": mm.baseline(D, A, F, sus=False),
     "MR saja": mm.trades_mr(D, A),
     "K6 saja": mm.trades_k6(D, A, F),
     "Juara lama (OCO)": m.potong(m.replay(D, A=A)),
