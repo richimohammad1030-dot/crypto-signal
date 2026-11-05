@@ -152,3 +152,21 @@ Win/kalah beruntun maks 21/8 untuk semua kombinasi teratas. IS rasio: A2+B0,5 3,
 - LIVE_START intraday = 30 Okt 2026 16:00 WIB; baseline.json["intraday"] dibuat ulang dari juara v3.
 - Pemilik meminta riset mingguan tetap berjalan untuk mengoptimalkan v3. Mulai sekarang keputusan intraday wajib memakai uji
   daftar koin sesuai masanya (PROSEDUR langkah 1-3).
+
+## 2026-11-06 · Riset mingguan: I-22 (A-short cermin), I-23 [lit] (dip idiosinkratis)
+Data diperbarui s.d. 6 Nov 2026 ±02:00 WIB (49 koin + BTC, 177 koin tambahan PIT; H1 + funding + 15m, tanpa kegagalan unduh).
+Skrip: `eksperimen/pit_2026-11-06.py` (salinan `orders()` + replay penuh portofolio, PIT = uji utama, daftar tetap = pembanding).
+Juara v3 (data baru) · PIT: 2.965 trade, +0,087R, DD 15,8R, rasio 2,45 · 2020-23 rasio 3,49 · **2024-skrg +0,060R, R/thn +23,6, rasio 1,49**
+(saat dikunci 1,57) · per tahun 38/93/36/25/25/9/32. Daftar tetap: 2.689 trade, +0,096R, rasio 2,90 (2024-skrg 2,17).
+- **I-22 modul A cermin SHORT saat BTC H1 turun** (ditambahkan ke juara; 11 varian PIT): dasar rasio lama 2,80 vs 3,49 (-20%),
+  baru 0,75 vs 1,49 (-50%), 1/7 tahun, tanpa_top2 114 vs 160, P 0,00. Modul A-short 2024-skrg 111 trade **-16,6R** (-0,15R/trade);
+  hanya 2022 terbantu (+45 vs +36). Tetangga (tanpa funding, RSI 90/65 & 97/75, limit 0,25/0,75, hold 3/6 j, SL 2 ATR, TP 1×,
+  peringkat 1-50) semua lebih buruk (rasio baru 0,41-1,12). Daftar tetap: rasio baru 1,01 vs 2,17. **GAGAL**: lonjakan di tren turun
+  tidak berbalik dalam 4 jam seperti dip di tren naik (asimetri long/short), dan order short memakan slot modul B.
+- **I-23 [lit] modul A hanya dip idiosinkratis** (lewati jika RSI2 BTC 15m < 5/10/20/30/50): rasio lama -19% s.d. -55%,
+  baru -23% s.d. -36%, P 0,07-0,32; daftar tetap juga gagal (rasio lama -37% s.d. -55%). **GAGAL**. Di PIT 2024-skrg edge modul A
+  justru terkumpul saat BTC ikut turun (sisa sinyal dengan RSI2 BTC ≥ 50 hanya 54 trade +1,3R), tetapi di daftar tetap polanya
+  terbalik → tidak konsisten, tidak dijadikan ide baru. Sumber: Da, Liu & Schaumburg (2014), "A Closer Look at the Short-Term
+  Return Reversal", Management Science 60(3).
+- Data terkunci tidak dipakai (tidak ada ide lolos tahap 1-2). Total ide intraday bernomor yang sudah diuji: 14 (I-01 s.d. I-23,
+  di luar ±15 jalur fondasi 27 Okt). Kandidat penantang: tidak ada; juara v3 tetap.
