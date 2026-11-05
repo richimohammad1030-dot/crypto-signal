@@ -284,5 +284,30 @@
   "btc": 0,
   "skor": 0,
   "fund": 1.2150375342465754e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-11-05 22:00",
+  "sym": "UNIUSDT",
+  "d": 1,
+  "t0": 1793829600,
+  "t1": 1793890800,
+  "entry": 7.79,
+  "exit": 6.809,
+  "R": -0.935,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 0.029,
+  "mae": -1.147,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 13.467,
+  "ext": 2.907,
+  "trend": 0.491,
+  "dist": 1.853,
+  "mom20": 1.725,
+  "rank": 15,
+  "btc": 0,
+  "skor": 0
  }
 ]
