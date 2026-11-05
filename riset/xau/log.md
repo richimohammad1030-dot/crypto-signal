@@ -311,3 +311,18 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Kesimpulan: "kenaikan malam" = tren naik emas 2022-2026 + artefak spread, bukan pola yang bertahan; sesi 2 hanya untung di
   pasar bull dan bergantung swap broker. Status `ditolak` (dicatat: bila pemilik ingin taruhan tren naik jangka panjang,
   itu keputusan alokasi/investasi, bukan edge intraday).
+
+## 5 Nov 2026 — Statistik lengkap bot live + celah (statistik_live.py, celah_uji.py; permintaan pemilik)
+- Live (MR+K6+SUS, 12 thn, bersih, M1): R/trade +0,015/+0,064/+0,054 (2015-21/2022-Jan25/Setra). MR BUY +0,052 (12t) vs
+  MR SELL -0,010; K6 BUY +0,171 vs K6 SELL -0,064; SUS +0,064 (Setra -0,075). Biaya 0,40 USD = 12,9 / 8,4 / 2,9 R/thn
+  (2015-21 biaya memakan 78% R kotor karena ATR kecil). DD terdalam -30,7R (Mei 2023-Feb 2024); DD sekarang -21,2R sejak
+  Apr 2026 (dasar Agu 2026) belum pulih. Rabu/Kamis terbaik, Selasa terburuk (2/3 periode negatif).
+- Segmen lemah 3/3 periode: K6 SELL; MR SELL RSI 71,22-85; MR ATR rel 1,0-1,25 (tidak monoton = kemungkinan acak).
+  Catatan: ±57 segmen diperiksa → ±7 lemah-3/3 diharapkan secara acak; ditemukan 3 → harus diuji sebagai aturan.
+- Uji aturan (R/thn 2015-21 · uji · Setra · 12t; baseline +3,8 · +15,9 · +13,6 · +8,4):
+  A1 MR SELL ≥ X lalu sisanya K6: X75 +8,0·+17,1·+18,2·+11,9 (P uji 0,61) · X80 +5,6·+26,3·+14,4·+12,3 (0,95) ·
+  X85 +10,4·+24,7·+13,9·+14,6 (0,87; DD 25R) · X90 +6,4·+25,5·+14,3·+12,6 (0,78). Semua tetangga lebih baik, Setra ≈ baseline.
+  A2 (sisanya tanpa trade) lebih lemah (+9,1..+10,6). B K6+susulan hanya tren naik: P uji 0,27 → ditolak. C A1+B: Setra +22,3
+  tetapi uji +23,4 (P 0,82), 3,7 trade/mg.
+- Ide #40 = A1 (pilih-saja juga memilih X=85: pilih +10,4 tertinggi). Tahap 2 P 0,87 (X80 0,95), tetangga stabil; Setra tidak
+  lebih baik. Risiko: aturan asimetris memihak tren naik emas 12 thn. Status `perlu-data` / menunggu keputusan pemilik.
