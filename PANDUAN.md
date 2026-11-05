@@ -169,8 +169,8 @@ Strategi: `riset/intraday/STRATEGI.md` (juara v3: dip 15m hanya koin peringkat 1
 Pesan bot swing kini berlabel 🔵 SWING; pesan bot intraday berlabel 🟠 INTRADAY.
 
 **Jadwal**
-- Bot intraday dijalankan **tiap 15 menit** (cron-job.org menit 01, 16, 31, 46). Pesan dikirim hanya jika ada kejadian,
-  ditambah **ringkasan tiap 2 jam** (jam genap WIB).
+- Bot intraday dijalankan **tiap 15 menit** (cron-job.org menit 01, 16, 31, 46). Pesan dikirim **hanya jika ada kejadian**
+  (sinyal baru, terisi, tutup, batal) plus rekap mingguan/bulanan. Ringkasan rutin 2 jam dihapus 5 Nov 2026.
 - Bot swing tetap menghitung tiap 2 jam. Pesan posisi kini hanya dikirim saat ada kejadian (terisi, geser SL, TP 25%,
   ditutup) dan sebagai **ringkasan tiap 8 jam** (07:00, 15:00, 23:00 WIB). Sinyal order baru/update/batal tetap langsung.
 
@@ -182,7 +182,6 @@ Pesan bot swing kini berlabel 🔵 SWING; pesan bot intraday berlabel 🟠 INTRA
 | ⚡ TUTUP SEKARANG | Tutup posisi di harga pasar dan hapus SL/TP (batas waktu hold: 4 jam untuk dip 15m, 24 jam untuk sinyal pagi). |
 | POSISI SELESAI | TP atau SL sudah tersentuh; tidak perlu tindakan selain mencatat. |
 | BATALKAN ORDER | Hapus limit order di exchange (kadaluarsa atau posisi sudah penuh 3). |
-| RINGKASAN 2 JAM | Posisi terbuka, order menunggu, hasil hari ini. |
 
 Aturan: maks 3 posisi intraday terbuka bersamaan, risiko 1% per trade (variabel `INTRADAY_RISK_PCT`).
 Ukuran posisi pribadi (jika `MODAL_USDT` diisi) dikirim ke chat pribadi pemilik.

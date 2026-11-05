@@ -352,11 +352,9 @@ def main():
     except Exception: pass
     for msg in build_messages(ev, s, now, sb.fmt, prices):
         sb.tg_send(msg, chat=target)
-    # ringkasan tiap 2 jam (jam genap WIB), sekali per jendela
-    w = dt.datetime.fromtimestamp(now, dt.timezone.utc) + dt.timedelta(hours=7)
-    key = f"{w:%Y-%m-%d}-{w.hour // 2}"
-    if s.get("digest") != key:
-        sb.tg_send(build_digest(s, now, sb.fmt, prices), chat=target); s["digest"] = key
+    # 5 Nov 2026 (permintaan pemilik): ringkasan rutin 2 jam DIHAPUS agar tidak terasa spam.
+    # Channel hanya menerima pesan saat ada kejadian (sinyal baru, terisi, tutup, batal) + rekap mingguan/bulanan.
+    # build_digest() tetap ada untuk dipakai ulang bila dibutuhkan.
     # Rekap otomatis ke channel (mingguan setiap Senin, bulanan tanggal 1) + cek kesehatan ke chat pribadi (Lapis 2)
     try:
         send_recaps(s, target, risk_pct)
