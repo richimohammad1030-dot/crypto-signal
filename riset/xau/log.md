@@ -279,3 +279,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (xau_sambung beda 1 = posisi MR terbuka di ujung data 30 Okt, sudah ada sebelum susulan; bukan beda mesin.)
 - Simulasi live per run (28 Okt 2026): 07:09 order K6 → 09:09 dilewati + susulan BUY → 23:09 tutup −0,20R; run 09:09 terlewat → TERLAMBAT.
 - bayangan.py: menu "Tanpa susulan"; baseline_xau.py: patokan kesehatan termasuk susulan.
+
+## 5 Nov 2026 — Ide #38 "revenge" setelah kena SL (revenge.py, pertanyaan pemilik)
+- Posisi ke-2 hari yang sama setelah SL, lot sama; keputusan di jam run berikutnya (close 09:00..21:00 WIB), market, tutup 23:00.
+  942 SL dalam 12 thn, 763 bisa di-revenge. 24 varian (arah sama/balik × syarat tanpa/RSI2 × SL 1,5/3 × TP 1R/2R/tanpa).
+- Hasil gabungan 12 thn: SEMUA di bawah baseline (+8,4 R/thn); terbaik "balik, SL 3, tanpa TP" +7,8 (DD 33R). P uji vs baseline
+  0,01-0,56 (tidak ada yang ≥ 0,90). Revenge searah: PF 0,65-0,84 (12 thn), DD naik hingga 78R. Revenge berbalik: bagus HANYA di
+  Setra (+20-25 vs +13,6; PF 1,1-1,4) tetapi rugi di 2015-2021 & 2022-Jan 2025 → khas rezim tren 2025-2026, bukan edge.
+- Status: `ditolak`. Tetap maks 1 posisi/hari. "Balik" boleh dicek ulang bila data Setra berlipat (bayangan).
