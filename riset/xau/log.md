@@ -258,3 +258,15 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   Setra campuran (SL 1-1,5 + TP ≥ 2R lebih baik, SL 3 lebih buruk) — memilih varian menurut Setra = memilih pasca-lihat.
 - Status: lolos tahap 1-2 (uji P 0,99, tetangga stabil); tahap 3 Setra sedikit lebih buruk dari baseline dengan sampel kecil
   (46 trade) → `perlu-data`. Menunggu keputusan pemilik (pasang langsung vs bayangan dulu; ±0,7 trade/mg → 20 trade ±7 bulan).
+
+## 5 Nov 2026 — Optimasi susulan S3 (susulan_opt.py)
+- Grid 2700 kombinasi: kuantil 0,25-0,50 × SL 1-3 ATR × TP 1/1,5/2/3/tanpa × masuk market/limit 0,25 ATR ×
+  batas keputusan 09:00/≤13:00/≤21:00 WIB × filter tren (tanpa/searah/lawan). Dipilih HANYA di 2015-2021 atas hasil GABUNGAN
+  (MR + K6 + susulan), kriteria pemilik + skor tetangga.
+- 10 teratas pilih semuanya: limit, SL 1 ATR, hanya jam 09:00, searah tren. Di uji 2022-Jan 2025 GAGAL semua
+  (susulan PF 0,67-1,05; P vs baseline 0,14-0,54) → optimasi pilih = overfit, DIBUANG.
+- S3 asli (q35%, market, SL 3, TP 1R, semua jam keputusan ≤21:00 WIB, tanpa filter) tetap kandidat paling kokoh.
+  Gabungan 12 thn vs baseline: 4,8 vs 4,2 trade/mg; win 48 vs 47%; PF 1,08 vs 1,07; +8,4 vs +6,6 R/thn; DD 31 vs 37R
+  (0,5%: 14,4 vs 17,2%); W/L 10/9 vs 10/8; 9/12 thn. Pilih +3,8 vs +2,9; uji +15,9 vs +9,9; Setra +13,6 vs +15,6.
+  Susulan sendiri dalam gabungan: 325 trade, win 56%, RR 0,97, PF 1,21, +21R (12 thn).
+- Status tetap `perlu-data`; menunggu keputusan pemilik (pasang vs bayangan).
