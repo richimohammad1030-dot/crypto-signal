@@ -351,3 +351,9 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Ekspektasi baru (STRATEGI.md): 12 thn +14,6 R/thn, PF 1,15, DD 25R (12% @0,5%), CAGR +7,2%, 4,6 trade/mg, 8/12 thn untung.
   Kelemahan: P uji 0,87; Setra ≈ sama; 2026 berjalan -2 vs +8; asimetris. baseline.json diperbarui (2022+: PF 1,27, DD 18,7R).
 - bayangan.py + menu "MR SELL lama 71,22"; uji_xag.py membandingkan bot live vs 71,22 di perak (riset lanjutan, PROSEDUR).
+
+## 5 Nov 2026 — Kenapa 2026 lebih lemah setelah ide #40 (pertanyaan pemilik)
+- Hari yang berubah (RSI 71,22-85; ±50/thn): versi baru lebih baik 8 dari 12 tahun (+2..+26R), lebih buruk 2015 (-13), 2021 (-12),
+  2022 (-4), 2026 (-10). 2026: emas turun dari 5.387 (Mar) ke 3.997 (Okt) → SELL di jenuh beli ringan justru untung tahun ini.
+- Diuji: ambang 85 hanya bila tren D1 (EMA 50/100/200 hari) naik → 12 thn +14,3..+14,9, P uji 0,95-0,97, tetapi 2026 tetap
+  -2..-5 → tidak memperbaiki 2026; tidak dipasang (menambah aturan demi 1 tahun = overfit).
