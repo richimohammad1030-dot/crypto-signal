@@ -1,0 +1,82 @@
+<b>RISET XAU</b>
+Jumat, 6 Nov 2026
+────────────────────
+Mode: riset mingguan.
+Replay mesin: IDENTIK (Setra 462,
+Dukascopy 2.814 trade).
+
+<b>Temuan: sinyal 2 Nov beda</b>
+────────────────────
+Setra macet Senin pagi, bot pakai
+cadangan Dukascopy: MR BUY (RSI 1,8).
+Data final Setra dan Dukascopy:
+RSI 80,5 = MR SELL (kena SL -1R).
+Live kebetulan untung +0,89R.
+Penyebab di jalur cadangan belum bisa
+direproduksi. Ide baru #47 (prioritas 1).
+
+<b>Uji maju sejak 2 Nov</b>
+────────────────────
+<pre>
+Strategi        Trade  Total R
+Live (bot)        3     -1,11
+Baseline          3     -3,02
+Tanpa hibrida     3     -1,52
+K6 saja           1     +0,49
+Juara lama OCO    4     +5,44
+</pre>
+Baru 3 trade, belum bisa dinilai.
+
+<b>Ide #36 Saran lot</b>
+────────────────────
+SL+biaya per 0,01 lot (2026):
+MR 58, K6 25, SUS 55 USD (median).
+<pre>
+Modal    Kena     Risiko 0,01
+USD      peringat median/maks
+1.000    100%     3,9% / 34%
+5.000     72%     1,0% / 6,7%
+10.000    35%     0,6% / 3,4%
+20.000     6%     0,7% / 1,7%
+</pre>
+0,01 lot &lt;= 0,5% butuh modal
+±10.500 USD (separuh sinyal 2026),
+±21.000 USD (90% sinyal).
+Rancangan, contoh pesan, dan usulan
+perubahan bot ada di laporan.
+Status: <b>menunggu persetujuan</b>.
+
+<b>Ide #46 Keluar MR lebih awal</b>
+────────────────────
+Connors: tutup saat RSI2/SMA5 balik.
+<pre>
+R/thn     Pilih  Uji   Setra 12t
+Juara     +9,4  +28,6 +21,4 +16,2
+E-RSI 90  +4,2  +31,2 +10,7 +12,3
+E-SMA 5   -1,1  +22,4  +9,8  +6,7
+</pre>
+Keputusan: <b>GAGAL</b>. Win naik ke 56%
+tapi RR turun ke 0,9. Untung MR datang
+dari pemenang yang ditahan s.d. 23:00.
+
+<b>Uji perak ide #40</b>
+────────────────────
+<pre>
+R/thn @2USD Pilih  Uji   Baru  12t
+SELL 71,22  -26,0  -7,4 -14,5 -19,4
+SELL 85     -33,0 -15,4  -4,9 -24,2
+</pre>
+X85 lebih baik hanya 1 dari 3
+periode: <b>tidak terkonfirmasi</b>.
+Catatan: seluruh bot rugi di perak
+(PF 0,80), jadi buktinya lemah. SELL
+RSI 71-85 memang negatif di perak;
+yang buruk penggantinya (K6).
+
+<b>Usulan untuk pemilik</b>
+────────────────────
+1. Ide #36 saran lot: setuju/tidak.
+2. Ide #40: kembali ke SELL 71,22
+   (sesuai kriteria) atau tetap 85
+   dan biarkan uji maju memutuskan.
+Bot live tidak diubah.

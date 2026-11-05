@@ -389,3 +389,28 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - replay_xau: xau.json 413/413 (MR 253 K6 93 SUS 67) & xau_panjang 2811/2811 (MR 1541 K6 753 SUS 517) IDENTIK. Simulasi live
   (1000 candle + bibit) MA = MA data penuh. baseline.json diperbarui. Ekspektasi 12 thn +16,5 R/thn, PF 1,16, DD 28R, 9/12 thn.
 - Bayangan: "Tanpa hibrida (#40 saja)", "Hibrida MA200 (#42b)", Connors MA100/MA200, MR SELL lama 71,22.
+
+## 6 Nov 2026 — Riset mingguan (Jumat 6 Nov 2026 WIB)
+- Data: Setra 11.480 candle s.d. 5 Nov 2026 16:00 UTC; Dukascopy 70.043 candle 2015 - 4 Nov 2026 (proxy Dukascopy sering
+  terputus; semua bulan lengkap). replay_xau: xau.json 462/462 (MR 284 K6 106 SUS 72) & xau_panjang 2814/2814 IDENTIK.
+- Uji maju (bayangan.py, sejak 2 Nov 2026, 3 trade): BASELINE -3,02R (3 SL; data final memberi MR SELL 2 Nov) · Tanpa hibrida
+  (#40 saja) -1,52R · K6 saja +0,49R · Juara lama OCO +5,44R (4 trade) · LIVE catatan bot -1,11R kotor (+0,89 / -1 / -1).
+  Terlalu sedikit untuk menilai (syarat ≥ 6 minggu & ≥ 20 trade).
+- TEMUAN: sinyal live 2 Nov 2026 BERBEDA dengan backtest. Setra macet Senin pagi → bot memakai cadangan Dukascopy dan mencatat
+  MR BUY (RSI2 1,8, ATR 22,3, entry 3.898,06). Data final Setra dan Dukascopy memberi RSI2 80,5 pada candle yang sama → MR SELL
+  (-1R). Live kebetulan untung (+0,89R). Penyebab di jalur fetch_dukascopy belum bisa direproduksi (Dukascopy connection reset
+  dari sesi riset). Dicatat sebagai ide #47 (audit cadangan, prioritas 1).
+- Ide #36 saran lot (ide36_lot.py): jarak SL + biaya per 0,01 lot (Setra Feb 2025-skrg) median 39 USD (MR 47, K6 22, SUS 50),
+  p90 77; 2026 median 53 (MR 58, p90 109). Modal 1.000 USD → 100% sinyal butuh peringatan, risiko 0,01 lot median 3,9%
+  (maks 34%); 5.000 → 72% (median 1,0%); 10.000 → 35% (0,6%); 20.000 → 6%; 50.000 → 0,5%. Simulasi majemuk Feb 2025-skrg:
+  ideal 0,5% +26%; lot bulat-bawah + terima lot minimum: 1.000 USD +146% DD 43%, 10.000 +28% DD 7%, 20.000 +23% DD 7%;
+  + lewati: 10.000 +13% (108 sinyal dilewati). Rancangan & usulan perubahan bot di laporan. Status `lolos` (menunggu pemilik).
+- Ide #46 keluar MR lebih awal (Connors; ide46_mr_keluar.py) R/thn 2015-21 · uji · Setra · 12t (BASELINE +9,4 · +28,6 · +21,4 ·
+  +16,2): E-RSI 50/60/70/80/90 -0,4/-1,1/-0,7/+0,9/+4,2 di pilih; terbaik E-RSI 90 +4,2 · +31,2 · +10,7 · +12,3 (P uji 0,89,
+  P Setra 0,09); E-SMA 5/10 -1,1/0,0 di pilih. Win MR naik 49% → 61-64% tetapi RR turun 1,27 → 0,9. GAGAL tahap 1.
+- Uji silang PERAK ide #40 (uji_xag.py, uji_xag_a2.py; 69.916 candle XAG 2015 - Okt 2026, harga x80): seluruh bot rugi di perak
+  (bot live PF 0,80, -22 R/thn @2 USD). X85 vs 71,22 R/thn 2015-21 · uji · Setra · 12t @2 USD: -33,0 · -15,4 · -4,9 · -24,2 vs
+  -26,0 · -7,4 · -14,5 · -19,4 → X85 lebih baik hanya 1/3 periode, 12 thn lebih buruk (juga @1 & @3 USD). Kriteria PROSEDUR
+  (≥ 2/3 periode + 12 thn) GAGAL → usulan ke pemilik: kembali ke 71,22. Nuansa: SELL RSI 71-85 juga negatif di perak (-4,2
+  R/thn, semua periode @2 USD) dan "A2" (hari itu tanpa trade) lebih baik dari keduanya; yang buruk adalah penggantinya (K6/SUS
+  -9,0 R/thn). Karena sistem tidak punya edge di perak, ini bukti lemah; keputusan di pemilik.
