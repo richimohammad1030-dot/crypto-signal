@@ -443,3 +443,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   2018/2021/2023 ±0); Connors MA200 +13,2 · 2 · -10. Memilih menurut kinerja terakhir = terlambat & berganti-ganti (whipsaw).
 - Kesimpulan: adaptasi harus dari KEADAAN PASAR (tren harian, seperti hibrida), bukan dari kinerja terakhir. #49 `ditolak`.
   Hibrida MA200 paling dekat ke target "tanpa tahun minus" (dipilih setelah melihat semua tahun → tetap perlu uji maju).
+
+## 6 Nov 2026 — PROGRAM TAMBAL-CELAH putaran 1 (pemilik: sistem yang untung di SEMUA tahun dulu, lalu optimasi)
+- Bedah celah hibrida MA200 (celah_ma200.py): 2015 -1 (MR-naik -12,4 = MA200 belum terbentuk ±10 bln pertama → efek data awal);
+  2018 +0 & 2021 +0 = rezim mendatar di sekitar MA200 (hanya 39%/30% hari di atas MA200; trade dekat MA 0-2% dan saat sering
+  menyeberang MA rugi di tahun lemah); 2023 +0 = tren kuat (ADX 27) → MR rugi dua arah. Bulan terburuk: 2018-09, 2025-12, 2021-01.
+- Penambal (tambal1.py): zona netral 1% → aturan ketat 2 arah: 11/12 thn+, 2016-2026 semua positif, 12t +14,9, DD 22R;
+  zona 1% → K6 saja: 12t +16,2, Setra +28,7. Zona 2-3% gagal; kemiringan MA200 (10/20/40 hari) lebih buruk (12t +9,5..+11,0).
+- Ide #50 `perlu-data`; #51 data 2004-2014 (unduh terputus, 41 bulan) → putaran berikutnya di riset Jumat (PROSEDUR).
