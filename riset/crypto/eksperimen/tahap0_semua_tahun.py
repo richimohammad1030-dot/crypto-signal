@@ -119,6 +119,24 @@ def year_table(df, col, ycol="year"):
     return t
 
 
+MIN_R_TAHUN = 1.0      # syarat pemilik (6 Nov 2026): setiap tahun kalender R bersih REAL >= +1R
+
+
+def p_minus(df, col="R_REAL", y0=2020, n_boot=20000, seed=1):
+    """Peluang tahun minus (bootstrap trade tahun itu). Informasi risiko, bukan syarat lulus."""
+    rng = np.random.default_rng(seed)
+    out = {}
+    for y, g in df[df.year >= y0].groupby("year"):
+        R = g[col].values
+        out[y] = float((rng.choice(R, (n_boot, len(R))).sum(1) < 0).mean() * 100)
+    return out
+
+
+def lulus(df, col="R_REAL", y0=2020):
+    t = df[df.year >= y0].groupby("year")[col].sum()
+    return bool((t >= MIN_R_TAHUN).all()), float(t.min()), int(t.idxmin())
+
+
 def ringkas_tahun(df, col="R_REAL", y0=2020):
     """Metrik program TAMBAL-CELAH: tahun minus (biasa & tanpa 2% terbaik per tahun), tahun terburuk, total, DD."""
     t = year_table(df[df.year >= y0], col)
@@ -145,5 +163,8 @@ if __name__ == "__main__":
         print(t.round(2).to_string())
         avg = t.loc[[y for y in t.index if 2020 <= y <= 2025], "R"].mean()
         print(f"semua: {df[col].sum():.1f}R · DD {maxdd(df[col].values):.1f}R · rata2 tahunan penuh 2020-2025 {avg:.1f}R")
+    ok, worst, wy = lulus(df)
+    print(f"\nSYARAT (tiap tahun R bersih REAL >= +{MIN_R_TAHUN:.0f}R): {'LULUS' if ok else 'TIDAK LULUS'} · terburuk {wy} {worst:+.1f}R")
+    print("peluang tahun minus (bootstrap, %):", {y: round(v, 1) for y, v in p_minus(df).items()})
     t = year_table(df, "R_REAL", "year_open")
     print("\n== R_REAL per tahun BUKA ==\n", t[["n", "R", "tanpa2", "tanpa2g"]].round(1).to_string())

@@ -101,3 +101,8 @@ Uji signifikansi dan data terkunci tidak dipakai (tidak ada yang lolos tahap 1).
 - L. Connors & C. Alvarez, *Short Term Trading Strategies That Work* (2008) — RSI(2); [LuxAlgo: RSI-2](https://www.luxalgo.com/library/concept/rsi-2/)
 
 Skrip: `riset/crypto/eksperimen/tahap0_semua_tahun.py`, `tahap0_pit.py`, `celah_crypto.py`, `tambal1_choppy.py`.
+
+## Tambahan (6 Nov 2026, 15:30 WIB): keputusan pemilik
+Syarat ditetapkan: **setiap tahun kalender R bersih REAL >= +1R** (daftar tetap). Juara v2 terburuk 2025 +25,6R
+(sesuai masanya +17,5R, KONS +19,7R) → **Tahap 0 LULUS**, program berlaku **OPTIMASI** (lihat PROSEDUR).
+Peluang tahun minus (bootstrap): 2025 9,4%, 2026 1,8%, tahun lain ≤ 0,2% — dipantau, bukan syarat.

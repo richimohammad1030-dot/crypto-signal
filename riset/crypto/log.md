@@ -94,3 +94,11 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
   Rasio lama juga turun di semua 9 varian (11,8-20,9 vs 22,5) → tidak ada ambang yang dipilih.
 - Total ide crypto yang pernah diuji: ±15 (9 di ide.md termasuk #52, #53, + ±6 kelompok uji fondasi/v2; varian putaran ini: 9). Ide baru: #54 TP lebih awal/lebih besar, #55 strategi pelengkap
   mean-reversion (edge berbeda) untuk tahun berombak.
+
+## 2026-11-06 · Keputusan pemilik: syarat Tahap 0 = setiap tahun R bersih REAL >= +1R → LULUS → program OPTIMASI
+- Pemilik menetapkan syarat "semua tahun positif" = tiap tahun kalender R bersih REAL >= +1R (versi "tanpa 2% terbaik" tidak lagi syarat).
+- Juara v2: terburuk 2025 +25,6R (daftar tetap), +17,5R (sesuai masanya), +19,7R (KONS) → **LULUS**. PROGRAM UTAMA di PROSEDUR
+  diganti menjadi OPTIMASI (syarat penantang: tiap tahun >= +1R, DD naik <= 25%, P >= 0,90, pilih 2020-2023 / uji 2024-skrg).
+- Risiko dipantau: peluang tahun minus (bootstrap trade tiap tahun, 20.000x) 2025 9,4% · 2026 1,8% · 2022 0,2% · lainnya 0%.
+  Skrip: `tahap0_semua_tahun.py` kini mencetak baris SYARAT dan peluang tahun minus (`lulus`, `p_minus`).
+- #54 dan #55 tetap antri, kini sebagai jalur optimasi (a, e).
