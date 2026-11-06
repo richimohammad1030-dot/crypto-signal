@@ -20,3 +20,7 @@ Nomor ide tetap mengikuti daftar awal agar rujukan di jurnal riset tidak berubah
 | 20 | Analisis MEDIUM melemah 2025-2026: faktor mana yang bergeser | 3 | antri | 30 Okt 2026: MEDIUM +0,007R vs LOW +0,045R (2025-2026) |
 | 48 | [lit] Risiko dikelola volatilitas BTC 30 hari (Moreira & Muir 2017): risiko kecil saat vol tinggi | 3 | gagal | 6 Nov 2026: 4 varian (1/vol, 1/vol², ambang 1,25x) rasio -8% s.d. -25% (lama) / 0% s.d. -19% (baru). Q4 vol buruk hanya di 2024-skrg |
 | 49 | Risiko SELL 0,5% bila OI 7 hari turun (ukuran saja, slot tetap) | 3 | antri | 6 Nov 2026 (hipotesis dari data #4): SELL OI turun +0,18R / -0,01R vs OI naik +0,29R / +0,11R (2022-2023 / 2024-skrg) |
+| 52 | [lit] Gerbang Efficiency Ratio Kaufman 20 hari (pasar berombak), BUY & SELL, replay penuh | 1 | gagal | 6 Nov 2026 (tambal-celah 1): ambang 0,15-0,35 semua lebih buruk; 2025 tanpa 2% -12 s.d. -34R, 2024 ikut minus |
+| 53 | [lit] Gerbang ADX(14) harian Wilder ≥ ambang, replay penuh | 1 | gagal | 6 Nov 2026: ambang 15-30 total 210-488R (juara 563), tanpa 2% minus di 2025 & 2026 |
+| 54 | TP lebih awal / lebih besar (33-50% di 1R, atau TP kedua 25% di 2-3R): pindahkan untung dari ekor ke trade biasa | 1 | antri | Celah 2025: tanpa 2% terbaik -12,6R; trade untung 2025 rata-rata 0,95R. Metrik: tahun minus tanpa 2% |
+| 55 | [lit] Strategi pelengkap mean-reversion RSI(2) (Connors & Alvarez 2008) di koin besar saat tren lemah — edge berbeda | 2 | antri | Untuk tahun berombak (2025). Uji sebagai portofolio terpisah (slot/risiko sendiri), biaya REAL |

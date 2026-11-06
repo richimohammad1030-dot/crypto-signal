@@ -1,0 +1,76 @@
+<b>RISET CRYPTO · TAHAP 0</b>
+Jumat, 6 Nov 2026
+────────────────────
+Uji "untung di semua tahun" dengan
+biaya nyata: fee taker 0,05% + slip
+0,03%, TP maker 0,02%, funding aktual.
+Biaya rata-rata 0,033R per trade.
+
+<b>Hasil: TIDAK LULUS</b>
+────────────────────
+<pre>
+Thn   Trade  R bersih  Tanpa2%  PF
+2020   304   +112,5    +74,5  2,48
+2021   336   +120,3    +62,1  2,41
+2022   337    +50,1    +24,6  1,52
+2023   371   +102,8    +41,1  1,99
+2024   371   +113,5    +26,5  2,12
+2025   382    +25,6    -12,6  1,23
+2026*  329    +40,8     +8,1  1,42
+Semua 2435   +562,8  DD 17,5R
+</pre>
+*s.d. 5 Nov. Semua tahun untung, tetapi
+2025 minus tanpa 2% trade terbaik, dan
+2026 tipis (+8,1R &lt; 10% rata-rata).
+Kotor +642R, slip 0,10%: +524R.
+
+<b>Koin sesuai masanya</b>
+────────────────────
+Termasuk koin delisting (lebih jujur):
+total +433R, DD 30,8R. Tanpa 2%
+terbaik minus di 2022 (-1,4), 2025
+(-10,0) dan 2026 (-2,6R).
+
+<b>Celah</b>
+────────────────────
+Bukan koin: 40/49 koin positif, tanpa
+8 koin terbaik tiap tahun tetap untung.
+Masalahnya ekor: 2% trade terbaik =
+34-80% R tahunan (2025: 149%).
+2025 = pasar berombak: BUY +0,15R,
+SELL 0,00R, MEDIUM -0,05R, trade untung
+kecil (0,95R vs 1,1-1,4R).
+
+<b>Tambal-celah putaran 1</b>
+────────────────────
+Filter pasar berombak, replay penuh,
+9 varian.
+<pre>
+Varian      Total  Minus  2025 t2%
+Juara       +563     1    -12,6
+ER &gt;= 0,15  +399     3    -12,1
+ER &gt;= 0,25  +322     3    -34,1
+ADX &gt;= 15   +488     2    -13,5
+ADX &gt;= 25   +319     2    -23,9
+</pre>
+(Minus = tahun minus tanpa 2% terbaik.)
+#52 Efficiency Ratio (Kaufman) dan #53
+ADX (Wilder): <b>GAGAL</b>. Semua ambang
+lebih buruk, juga di 2025.
+
+<b>Program berlaku: TAMBAL-CELAH</b>
+────────────────────
+Tertulis di PROSEDUR. Jumat berikutnya
+lanjut otomatis. Kandidat:
+1. #54 TP lebih awal/besar (33-50% di
+   1R atau TP kedua di 2-3R).
+2. #55 strategi pelengkap RSI(2)
+   mean-reversion untuk pasar berombak.
+3. #19 risiko SELL 0,5%.
+
+<b>Perlu keputusan Anda</b>
+────────────────────
+1. Syarat "tanpa 2%": per tahun (ketat,
+   dipakai) atau global (2025 -1,1R)?
+2. Slip 0,03% masih asumsi.
+Bot live tidak diubah.

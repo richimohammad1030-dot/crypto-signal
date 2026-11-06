@@ -72,3 +72,25 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
   1/vol² -25%/-15%, vol > 1,25x median → 0,5: -9%/-0%, 1/vol batas 0,25-2: -8%/-19%. **Gagal**. Kuartil vol tertinggi
   buruk hanya di 2024-skrg (+0,04R), di 2020-2023 +0,35R.
 - Tidak ada ide yang lolos tahap 1 → uji signifikansi dan data terkunci tidak dipakai. Ide baru: #49 (SELL 0,5% bila OI 7 hari turun).
+
+## 2026-11-06 · TAHAP 0 "untung di semua tahun" (permintaan pemilik) → TIDAK LULUS → program TAMBAL-CELAH
+- Skrip: `eksperimen/tahap0_semua_tahun.py` (biaya realistis di atas mesin asli), `eksperimen/tahap0_pit.py`, `eksperimen/celah_crypto.py`.
+  Biaya REAL: entry stop / SL / stagnan taker 0,05% + slip 0,03%, TP 25% maker 0,02%, funding aktual per settlement
+  (Binance, lalu HL setelah arsip habis). Rata-rata per trade: fee 0,019R, funding +0,014R (long +0,025R, short -0,002R);
+  KONS (slip 0,10%) fee 0,035R. Nilai posisi per 1R median 10,3x.
+- Juara v2 daftar tetap (tahun tutup), kotor → REAL: total 641,7 → 562,8R, DD 16,3 → 17,5R. Per tahun REAL
+  2020 +112,5 · 2021 +120,3 · 2022 +50,1 · 2023 +102,8 · 2024 +113,5 · 2025 +25,6 · 2026 +40,8 (s.d. 5 Nov).
+  Tanpa 2% trade terbaik per tahun: 74,5 · 62,1 · 24,6 · 41,1 · 26,5 · **-12,6** · 8,1 (global: 2025 -1,1R). KONS: 2025 -18,4R.
+  Tahun buka (bukan tutup) memberi kesimpulan sama. Des 2019 (5 trade pemanasan) -2,8R, tidak dihitung tahun.
+- Sesuai masanya (226 koin, REAL): total 432,7R, DD 30,8R; per tahun 106,8 · 93,6 · 25,3 · 81,6 · 81,9 · 17,5 · 26,1;
+  tanpa 2% terbaik 2022 -1,4 · 2025 -10,0 · 2026 -2,6R. (Pemakaian review bias koin selamat, bukan uji ide.)
+- Celah: bukan koin (40/49 koin positif, tanpa 8 koin terbaik tiap tahun tetap positif; 2025 hanya 25/44 koin positif)
+  melainkan ekor: 2% trade terbaik = 34-80% R tahunan, 149% di 2025. 2025: BUY +0,15R, SELL 0,00R, MEDIUM -0,05R,
+  trade untung rata-rata 0,95R (tahun lain 1,1-1,4R), bulan terburuk Jan -13,2 / Agu -11,8R. ER 20 hari saat entry tidak
+  berpola (kuartil 0,17-0,29R).
+- **#52 [lit] Efficiency Ratio Kaufman 20 hari ≥ 0,15/0,20/0,25/0,30/0,35** (gerbang replay penuh, R REAL): total 276-399R
+  (juara 563), tahun minus tanpa 2% = 1-3 (juara 1), 2025 tanpa 2% -12,1 s.d. -34,1R, 2024 ikut minus. **Gagal**.
+- **#53 [lit] ADX(14) harian Wilder ≥ 15/20/25/30**: total 210-488R, tahun minus 0-2, tanpa 2% minus 2 (2025 & 2026). **Gagal**.
+  Rasio lama juga turun di semua 9 varian (11,8-20,9 vs 22,5) → tidak ada ambang yang dipilih.
+- Total ide crypto yang pernah diuji: ±15 (9 di ide.md termasuk #52, #53, + ±6 kelompok uji fondasi/v2; varian putaran ini: 9). Ide baru: #54 TP lebih awal/lebih besar, #55 strategi pelengkap
+  mean-reversion (edge berbeda) untuk tahun berombak.

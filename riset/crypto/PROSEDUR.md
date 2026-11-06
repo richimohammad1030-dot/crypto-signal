@@ -31,6 +31,32 @@ Data terkunci / daftar koin sesuai masanya (tahap 3 ATURAN_BERSAMA dan review bu
 `python3 riset/unduh_pit.py /tmp/data`, lalu unduh koin tambahan H1 + funding: `python3 riset/unduh_crypto.py /tmp/data "$(cat /tmp/data/pit/extra.txt)"`;
 jalankan `python3 riset/pit.py swing . /tmp/data` untuk juara, dan versi penantang dengan engine eksperimen.
 
+## PROGRAM UTAMA (pemilik, 6 Nov 2026): TAMBAL-CELAH sampai SEMUA TAHUN POSITIF, baru setelah itu OPTIMASI
+**Tahap 0 (6 Nov 2026) TIDAK LULUS.** `eksperimen/tahap0_semua_tahun.py` (mesin asli + biaya: entry stop & SL/stagnan
+taker 0,05% + slip 0,03%, TP 25% maker 0,02%, funding aktual per settlement; skenario KONS slip 0,10%). Tahun = tahun tutup.
+Juara v2 bersih REAL 2020-2026: semua tahun R > 0 (terburuk 2025 +25,6R), tetapi **tanpa 2% trade terbaik per tahun 2025 -12,6R**
+(global -1,1R); 2026 tipis (+8,1R < 10% rata-rata). Daftar sesuai masanya (`eksperimen/tahap0_pit.py`): tanpa 2% terbaik
+2022 -1,4 · 2025 -10,0 · 2026 -2,6R, DD 30,8R. (Des 2019 = 5 trade pemanasan, tidak dihitung sebagai tahun.)
+
+Syarat lulus (tetap, dari pemilik): setiap tahun kalender penuh/berjalan 2020-skrg R bersih REAL > 0 **dan** tanpa 2% trade
+terbaik (per tahun) > 0, daftar koin tetap. Versi sesuai masanya dicek sekali per penambal yang lolos (= tahap 3 ATURAN_BERSAMA).
+
+Tiap Jumat satu putaran (selain riset mingguan biasa boleh digabung: ide penambal = "ide baru" ATURAN_BERSAMA A):
+1. Data + `python3 riset/crypto/eksperimen/tahap0_semua_tahun.py . /tmp/data` (±1 menit) → tabel per tahun juara.
+2. Bedah celah: `eksperimen/celah_crypto.py . /tmp/data` (per tahun × arah, label, alasan keluar, rezim BTC, vol BTC,
+   return BTC 90 hari, koin penopang/perusak, bulan terburuk, 2% trade terbaik per tahun).
+3. Cari 1-2 ide BARU dari luar (indikator/strategi/literatur, cantumkan sumber) yang khusus menutup celah terbesar.
+   Uji dengan pola `eksperimen/tambal1_choppy.py` (`t0.run_replay(gate)` = replay penuh + `t0.add_costs` + `t0.ringkas_tahun`).
+4. Metrik utama = jumlah tahun minus (biasa & tanpa 2% terbaik) lalu tahun terburuk tanpa 2% terbaik; total R & DD sekunder
+   (DD tidak boleh naik > 25%). Ambang dipilih di 2020-2023 saja; tetangga parameter harus ikut bagus; laporkan jumlah varian.
+5. Penambal yang lolos → signifikansi (ATURAN_BERSAMA B2) → daftar sesuai masanya sekali → uji maju. Catat putaran di log.md.
+Celah terbuka (antrian): **2025** (pasar berombak: BUY +0,15R, SELL 0,00R, MEDIUM -0,05R, trade untung rata-rata 0,95R vs
+1,1-1,4R tahun lain, cut-loss stagnan terbanyak), **2026** tipis, **2022** (BUY -0,04R; minus di daftar sesuai masanya).
+Sifat celah: bukan koin (40/49 koin positif; tanpa 8 koin terbaik pun tiap tahun positif) melainkan **ekor**: 2% trade terbaik
+menopang 34-80% R tahunan (2025: 149%). Penambal putaran 1 (filter pasar berombak #52 ER, #53 ADX) gagal: penambal berikutnya sebaiknya
+mengubah bentuk hasil (ambil untung lebih awal) atau menambah sumber edge berbeda, bukan menyaring entry.
+Optimasi untung (risiko %, vol targeting, Kelly fraksional, jumlah koin, dst.) baru dimulai setelah Tahap 0 lulus.
+
 ## 2. Tentukan mode
 - Jika **Jumat berikutnya sudah masuk bulan baru** (hari ini Jumat terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
