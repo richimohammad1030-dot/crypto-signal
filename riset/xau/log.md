@@ -414,3 +414,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (≥ 2/3 periode + 12 thn) GAGAL → usulan ke pemilik: kembali ke 71,22. Nuansa: SELL RSI 71-85 juga negatif di perak (-4,2
   R/thn, semua periode @2 USD) dan "A2" (hari itu tanpa trade) lebih baik dari keduanya; yang buruk adalah penggantinya (K6/SUS
   -9,0 R/thn). Karena sistem tidak punya edge di perak, ini bukti lemah; keputusan di pemilik.
+
+## 6 Nov 2026 — Ide #48 OCO juara lama sebagai UTAMA + strategi live sebagai tambahan (oco_utama.py, pertanyaan pemilik)
+- Pemicu: bayangan minggu pertama OCO +5,44R (4 trade) vs live -1,11R (3 trade) — sampel terlalu kecil untuk menilai.
+- 12 thn (R/thn 2015-21 · uji · Setra · 12t): OCO saja -25,2 · -0,0 · +29,3 · -10,6 (PF 0,94, DD 226R, kalah beruntun 21,
+  untung 4/12 thn: hanya 2020, 2024, 2025, 2026) vs bot live +9,4 · +28,6 · +23,2 · +16,5.
+- OCO + MR hibrida live: +6,4 (12t), DD 83R; OCO + MR hanya RSI ekstrem (b 5-30): -12,7..-2,7. Semua P uji vs live ≤ 0,08.
+- Kesimpulan: OCO hanya unggul di rezim volatil 2025-2026; menjadikannya utama merugikan 2015-2023. `ditolak`. Bayangan
+  "Juara lama (OCO)" tetap dipantau.
