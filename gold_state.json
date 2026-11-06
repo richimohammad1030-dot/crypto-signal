@@ -1,5 +1,5 @@
 {
- "last_ts": 1793955600,
+ "last_ts": 1793962800,
  "pend": null,
  "pos": {
   "d": 1,
@@ -142,7 +142,10 @@
  "news_sent": [
   "1793277000|Advance GDP q/q",
   "1793277000|Core PCE Price Index m/m",
-  "1793718960|Congressional Elections"
+  "1793718960|Congressional Elections",
+  "1793971800|Average Hourly Earnings m/m",
+  "1793971800|Non-Farm Employment Change",
+  "1793971800|Unemployment Rate"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00",
  "c07": {
