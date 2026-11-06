@@ -451,3 +451,5 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Penambal (tambal1.py): zona netral 1% → aturan ketat 2 arah: 11/12 thn+, 2016-2026 semua positif, 12t +14,9, DD 22R;
   zona 1% → K6 saja: 12t +16,2, Setra +28,7. Zona 2-3% gagal; kemiringan MA200 (10/20/40 hari) lebih buruk (12t +9,5..+11,0).
 - Ide #50 `perlu-data`; #51 data 2004-2014 (unduh terputus, 41 bulan) → putaran berikutnya di riset Jumat (PROSEDUR).
+- 6 Nov 2026 14:50 WIB: data XAU H1 Dukascopy 2004-2014 lengkap (132 bulan, 68.237 candle; 2013-2014 ±5.950/thn) disimpan di
+  riset/data/xau_dukascopy_h1_2004_2014.json.gz (+ riset/gabung_xau_lama.py). Riset Jumat tidak perlu mengunduh.

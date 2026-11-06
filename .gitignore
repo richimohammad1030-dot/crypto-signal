@@ -5,3 +5,4 @@ data/
 !riset/data/
 riset/data/*
 !riset/data/xau_dukascopy_h1.json.gz
+!riset/data/xau_dukascopy_h1_2004_2014.json.gz

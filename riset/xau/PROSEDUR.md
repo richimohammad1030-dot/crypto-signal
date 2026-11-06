@@ -53,8 +53,9 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 Tiap Jumat satu putaran: (a) bedah celah sistem dasar (`eksperimen/celah_ma200.py`: per tahun × komponen, kondisi pasar, bulan
 terburuk); (b) cari 1-2 ide BARU dari luar (indikator/strategi/literatur) yang khusus menutup celah terbesar; (c) uji dengan
 `eksperimen/tambal1.py` sebagai pola; (d) metrik utama = jumlah tahun minus & tahun terburuk (bukan total R), tetangga parameter
-harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum dilihat: XAU 2004-2014 (`riset/unduh_xau_lama.py`,
-lalu sambung dengan data 2015+) dan perak. Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: hibrida MA200 (#42b
+harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum dilihat: XAU 2004-2014 (SUDAH di repo:
+`riset/data/xau_dukascopy_h1_2004_2014.json.gz`; gabung: `python3 riset/gabung_xau_lama.py /tmp/data/xau_sambung.json
+/tmp/data/xau_2004.json`, tanpa unduh) dan perak. Periode 2004-2014 = DATA KONFIRMASI: jangan dipakai memilih parameter. Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: hibrida MA200 (#42b
 varian); kandidat penambal putaran 1: #50. Antrian celah: 2015 (efek data awal MA200 → butuh data lama), rezim mendatar di sekitar
 MA200 (2018/2021), tren kuat ADX tinggi (2023), K6 di tahun tenang (2016/2018).
 1. **Uji maju** (selalu): tulis hasil `bayangan.py` (trade, win, total R per strategi menu vs live) dan selisih live vs baseline.
