@@ -35,7 +35,9 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 - Jam sinyal 07:00 tetap: susulan hanya pengganti di hari yang order 07:00-nya batal; tetap maks 1 posisi/hari.
 
 ## Data & keterlambatan (live saja; tidak memengaruhi backtest/replay)
-- Data utama Setra. Candle terakhir > 2 jam di hari bursa → cadangan Dukascopy (BID) + peringatan ke pemilik.
+- Data utama Setra. Candle di jam pasar tutup/istirahat (17:00 ET, akhir pekan; waktu New York) dibuang (ide #47).
+- Candle terakhir > 2 jam di hari bursa → cadangan Dukascopy (BID) + peringatan ke pemilik. Sejak 6 Nov 2026 (ide #47) 48 jam
+  terakhir Setra DIGANTI Dukascopy (bukan hanya disambung), candle cadangan dicatat di state `cad_log`, dan pesan sinyal diberi tanda.
 - Candle 07:00 baru diproses ≥ 10:00 WIB → sinyal hari itu TERLAMBAT: tidak dikirim sebagai order dan tidak dicatat.
 - Candle keputusan susulan baru diproses ≥ 1 jam setelah close (candle masuk sudah lewat) → susulan TERLAMBAT, tidak dicatat.
 

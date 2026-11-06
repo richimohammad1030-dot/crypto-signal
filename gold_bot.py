@@ -24,6 +24,8 @@ C) SUSULAN (ide #37, live mulai 6 Nov 2026), hanya pada hari K6 dilewati (batas 
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
 """
 import json, os, sys, time, urllib.request, datetime as dt
+from zoneinfo import ZoneInfo
+NY = ZoneInfo("America/New_York")      # jam pasar emas: buka Minggu 18:00 ET, tutup Jumat 17:00 ET, istirahat harian 17:00-18:00 ET
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(HERE, "gold_state.json")
@@ -33,6 +35,7 @@ TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 85.0, 3.0   # MR_SELL 71,22 -> 85 sejak 6 Nov 2026 (ide #40): RSI 71-85 -> K6
 TREND_D1_N, MR_SELL_TURUN, MR_BUY_TURUN = 100, 70.0, 15.0   # hibrida ide #42b (cermin Connors saat tren harian turun)
 C07_SEED = os.path.join(HERE, "gold_c07_seed.json")          # riwayat close 07:00 WIB Setra (bibit SMA 100 hari)
+GANTI_S = 48 * 3600   # saat Setra macet: 48 jam terakhir Setra diganti Dukascopy (ujung data macet bisa berisi candle buruk, ide #47)
 STALE_S = 2 * 3600     # data dianggap macet bila candle H1 terakhir yang close lebih tua dari 2 jam (hari bursa)
 LATE_S = 3 * 3600      # sinyal 07:00 dianggap TERLAMBAT bila baru diproses >= 10:00 WIB (close candle + 3 jam): tidak dicatat
 SUS_BUY, SUS_SELL, SUS_SL_ATR, SUS_TP_R = 25.41, 77.10, 3.0, 1.0   # susulan: kuantil 35%/65% RSI(2) jam keputusan 2015-2021
@@ -77,10 +80,17 @@ def wib(ts):
     return (dt.datetime.fromtimestamp(ts, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%a %d %b %H:%M WIB")
 
 
+def _jam_tutup(k):
+    """Candle H1 (open k, UTC) di jam pasar tutup/istirahat: 17:00 ET tiap hari, Jumat >= 17:00 ET s.d. Minggu < 18:00 ET.
+    Candle seperti ini (mis. Jumat 21:00 UTC di musim panas AS) hanya berisi kuotasi spread lebar -> dibuang (ide #47)."""
+    w = dt.datetime.fromtimestamp(k, dt.timezone.utc).astimezone(NY)
+    return w.hour == 17 or w.weekday() == 5 or (w.weekday() == 4 and w.hour >= 17) or (w.weekday() == 6 and w.hour < 18)
+
+
 def fetch_xau(n=1000):
-    """Candle H1 XAU/USD (Setra/MT5). Return list [open_time_s, o, h, l, c] yang SUDAH close."""
+    """Candle H1 XAU/USD (Setra/MT5). Return list [open_time_s, o, h, l, c] yang SUDAH close (tanpa jam pasar tutup)."""
     d = http_json(f"https://setra.id/api/md/candles?symbol=XAU%2FUSD&tf=1h&limit={n}")
-    rows = [[c["t"] // 1000, c["o"], c["h"], c["l"], c["c"]] for c in d.get("data", [])]
+    rows = [[c["t"] // 1000, c["o"], c["h"], c["l"], c["c"]] for c in d.get("data", []) if not _jam_tutup(c["t"] // 1000)]
     now = time.time()
     rows = [r for r in rows if r[0] + 3600 <= now]          # buang candle yang belum close
     dedup = {r[0]: r for r in rows}
@@ -102,15 +112,14 @@ def _duka_get(url, timeout=60, coba=6):
 
 
 def _pasar_buka(k):
-    """Jam UTC (open candle k) di mana emas bisa diperdagangkan: tutup Jumat >= 22:00 UTC s.d. Minggu < 21:00 UTC."""
-    w = dt.datetime.fromtimestamp(k, dt.timezone.utc)
-    return not (w.weekday() == 5 or (w.weekday() == 6 and w.hour < 21) or (w.weekday() == 4 and w.hour >= 22))
+    """Jam (open candle k) di mana emas diperdagangkan (waktu New York, otomatis ikut pergantian musim)."""
+    return not _jam_tutup(k)
 
 
 def _tepi_pekan(k):
-    """Jam yang bisa kosong karena pembukaan/penutupan pasar berganti musim (Minggu 21-22 UTC, Jumat 21 UTC)."""
-    w = dt.datetime.fromtimestamp(k, dt.timezone.utc)
-    return (w.weekday() == 6 and w.hour in (21, 22)) or (w.weekday() == 4 and w.hour == 21)
+    """Jam yang bisa kosong/tipis: jam pertama setelah buka (18:00 ET) dan jam terakhir sebelum tutup harian (16:00 ET)."""
+    w = dt.datetime.fromtimestamp(k, dt.timezone.utc).astimezone(NY)
+    return w.hour in (16, 18)
 
 
 def fetch_dukascopy(after_ts):
@@ -322,8 +331,17 @@ def main():
     w_now = dt.datetime.fromtimestamp(now_, dt.timezone.utc) + dt.timedelta(hours=7)
     hari_bursa = w_now.weekday() < 5 and w_now.hour >= 7
     if hari_bursa and now_ - last_ok > STALE_S and rows:
-        cad = fetch_dukascopy(rows[-1][0])
-        rows = rows + cad
+        # ide #47: ujung data Setra yang macet bisa berisi candle buruk (2 Nov 2026: candle Jumat 21:00 UTC -> RSI 1,8, data final
+        # 80,3). Ganti GANTI_S terakhir Setra dengan Dukascopy bila cadangan sampai melewati ujung Setra; selain itu sambung saja.
+        dari = rows[-1][0] - GANTI_S
+        cad = fetch_dukascopy(dari)
+        if cad and cad[-1][0] > rows[-1][0] and cad[0][0] <= dari + 24 * 3600:
+            rows = [r for r in rows if r[0] <= dari] + cad
+        else:
+            cad = [c for c in cad if c[0] > rows[-1][0]]
+            rows = rows + cad
+        state["cad_log"] = [[int(c[0])] + [round(v, 3) for v in c[1:]] for c in cad][-30:]   # audit: candle cadangan yang dipakai
+        state["cad_aktif"] = bool(cad)
         tag = f"{last_ok}|{bool(cad)}"          # kirim peringatan sekali per kejadian macet / perubahan status cadangan
         if state.get("stale_warn") != tag:
             akhir = (dt.datetime.fromtimestamp(last_ok, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%a %d %b %H:%M WIB")
@@ -335,6 +353,8 @@ def main():
     elif state.get("stale_warn") and now_ - last_ok <= STALE_S:
         tg_send("✅ Data XAU Setra sudah pulih. Bot kembali memakai Setra.")
         state.pop("stale_warn", None)
+    if not (hari_bursa and now_ - last_ok > STALE_S):
+        state.pop("cad_aktif", None)
     if len(rows) < 100:
         tg_send("⚠️ Bot XAU: data harga tidak cukup."); sys.exit(1)
     first = state.get("last_ts", 0) == 0
@@ -387,6 +407,7 @@ def main():
         buf.append(nb)
         tg_send(nb, chat=target)
         state["news_sent"] = (sent + [f"{n[0]}|{n[1]}" for n in news])[-50:]
+    ev["cadangan"] = bool(state.get("cad_aktif"))
     bub = [gt.signal_bubble(ev, t_last, risk_pct, live_px=px if state.get("pend") else None, now=time.time()),
            gt.update_bubble(ev, state.get("pos"), px, t_last) if state.get("last_ts", 0) > since or ev["fill"] or ev["exit"] or ev["skip"] else None]
     if ev["skip"]:

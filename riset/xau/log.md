@@ -422,3 +422,16 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - OCO + MR hibrida live: +6,4 (12t), DD 83R; OCO + MR hanya RSI ekstrem (b 5-30): -12,7..-2,7. Semua P uji vs live ≤ 0,08.
 - Kesimpulan: OCO hanya unggul di rezim volatil 2025-2026; menjadikannya utama merugikan 2015-2023. `ditolak`. Bayangan
   "Juara lama (OCO)" tetap dipantau.
+
+## 6 Nov 2026 — Ide #47 perbaikan jalur cadangan data (sinyal salah arah Senin 2 Nov)
+- Log GitHub Actions run 2 Nov 02:33 UTC: sinyal MR BUY, close 07:00 = 3.898,06 (= candle Dukascopy Min 23:00 UTC, file tick
+  normal: O 3.869,06 H 3.902,05 L 3.869,06 C 3.898,06), RSI2 1,8, ATR 22,31. State 00:05 & 02:06 UTC: last_ts / stale_warn =
+  candle Setra **Jumat 21:00 UTC** (jam tutup pasar musim panas AS = 17:00 ET), candle yang tidak ada lagi di Setra sekarang.
+  Setra sekarang s.d. Jum 20:00 UTC + Dukascopy Min 23:00 → RSI2 80,3 (SELL). Isi candle buruk tidak bisa direkonstruksi persis
+  (satu candle saja tidak cukup untuk RSI 1,8) → ujung data Setra yang macet tidak bisa dipercaya.
+- Perbaikan gold_bot.py: (1) _jam_tutup (zona America/New_York: 17:00 ET harian, Jumat ≥ 17:00 s.d. Minggu < 18:00) membuang
+  candle Setra & Dukascopy di jam tutup; _pasar_buka/_tepi_pekan ikut ET (otomatis pergantian musim). (2) Setra macet → 48 jam
+  terakhir Setra diganti Dukascopy bila cadangan melewati ujung Setra (selain itu sambung seperti dulu). (3) state cad_log
+  (≤ 30 candle) & cad_aktif; pesan sinyal diberi "ℹ️ data cadangan Dukascopy, cocokkan dengan chart broker".
+- Uji: replay_xau IDENTIK (filter hanya di jalur live; data riset Setra 0 candle jam tutup). Simulasi 2 Nov dengan Dukascopy
+  nyata + candle buruk sintetis: cara lama RSI2 38,0 (BUY, salah), cara baru 79,8 (SELL = data final).

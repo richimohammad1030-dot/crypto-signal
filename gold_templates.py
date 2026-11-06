@@ -87,6 +87,9 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
               f"Data harga jam 07:00 baru tersedia {_jam(now) if now else 'setelah 10:00 WIB'}.",
               "Sinyal hari ini <b>tidak dikirim dan tidak dicatat</b>. Tidak ada trade XAU dari bot hari ini.",
               BAR]
+    if ev.get("cadangan") and ev["order"]:
+        L.append("ℹ️ Sinyal dihitung dari <b>data cadangan Dukascopy</b> (Setra tertunda). Cocokkan harga close di bawah "
+                 "dengan chart broker Anda sebelum masuk.")
     telat = (now - ev["order"]["t"] - 3600) if (ev["order"] and now) else 0
     if telat >= 1800:
         L.append(f"⚠️ Sinyal ini terkirim terlambat ±{telat / 3600:.1f} jam karena data harga tertunda. "
