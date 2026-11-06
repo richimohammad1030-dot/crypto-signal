@@ -55,7 +55,21 @@ terburuk); (b) cari 1-2 ide BARU dari luar (indikator/strategi/literatur) yang k
 `eksperimen/tambal1.py` sebagai pola; (d) metrik utama = jumlah tahun minus & tahun terburuk (bukan total R), tetangga parameter
 harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum dilihat: XAU 2004-2014 (SUDAH di repo:
 `riset/data/xau_dukascopy_h1_2004_2014.json.gz`; gabung: `python3 riset/gabung_xau_lama.py /tmp/data/xau_sambung.json
-/tmp/data/xau_2004.json`, tanpa unduh) dan perak. Periode 2004-2014 = DATA KONFIRMASI: jangan dipakai memilih parameter. Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: hibrida MA200 (#42b
+/tmp/data/xau_2004.json`, tanpa unduh) dan perak.
+
+**PEMBAGIAN DATA 2004-2026 (pemilik, 6 Nov 2026):**
+- LANGKAH 1 (sekali, Jumat 13 Nov 2026): uji APA ADANYA (tanpa ubah parameter) bot live hibrida MA100, hibrida MA200, #40
+  (tanpa hibrida), MR SELL 71,22, dan penambal #50 di **2004-2014** (data yang belum pernah dilihat; 2015-2026 sudah
+  "terkontaminasi" karena dipakai merancang). Tabel per tahun 2004-2014 + tahun minus + terburuk. Ini vonis paling jujur;
+  catat di log bahwa 2004-2014 sudah dipakai setelah langkah ini.
+- LANGKAH 2 (seterusnya, semua ide baru): **walk-forward berlabuh** — pilih parameter hanya dari 2004..Y, uji Y+1..Y+2,
+  geser 2 tahun: pilih ≤2010→uji 2011-12, ≤2012→2013-14, ≤2014→2015-16, ≤2016→2017-18, ≤2018→2019-20, ≤2020→2021-22,
+  ≤2022→2023-24, ≤2024→2025-26. Laporkan tabel per tahun 2011-2026 yang SEMUANYA hasil uji, jumlah tahun minus, tahun
+  terburuk, dan P gabungan semua jendela uji vs sistem dasar (≥ 0,90). Pemilihan di tiap jendela memakai aturan yang sama
+  (skor = tahun minus paling sedikit, lalu R/thn; tetangga parameter harus ikut bagus).
+- Pemeriksaan tambahan: periode Setra Feb 2025-skrg (data broker) dan perak. Uji maju bot live = hakim terakhir.
+- Catatan teknis: indikator lambat (MA200 hari dll.) butuh pemanasan — mulai hitung trade setelah indikator terbentuk.
+ Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: hibrida MA200 (#42b
 varian); kandidat penambal putaran 1: #50. Antrian celah: 2015 (efek data awal MA200 → butuh data lama), rezim mendatar di sekitar
 MA200 (2018/2021), tren kuat ADX tinggi (2023), K6 di tahun tenang (2016/2018).
 1. **Uji maju** (selalu): tulis hasil `bayangan.py` (trade, win, total R per strategi menu vs live) dan selisih live vs baseline.

@@ -453,3 +453,5 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Ide #50 `perlu-data`; #51 data 2004-2014 (unduh terputus, 41 bulan) → putaran berikutnya di riset Jumat (PROSEDUR).
 - 6 Nov 2026 14:50 WIB: data XAU H1 Dukascopy 2004-2014 lengkap (132 bulan, 68.237 candle; 2013-2014 ±5.950/thn) disimpan di
   riset/data/xau_dukascopy_h1_2004_2014.json.gz (+ riset/gabung_xau_lama.py). Riset Jumat tidak perlu mengunduh.
+- 6 Nov 2026: pembagian data baru (pemilik): Langkah 1 uji apa adanya di 2004-2014 (sekali, Jumat 13 Nov); Langkah 2
+  walk-forward berlabuh 2004-2026 (uji per 2 tahun, 2011-2026 semua tahun hasil uji). Ditulis di PROSEDUR.
