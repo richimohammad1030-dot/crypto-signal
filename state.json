@@ -402,19 +402,19 @@
    "pend": [
     -1,
     74.45,
-    82.73663436012801
+    82.06817378070637
    ],
    "pos": null,
-   "conv": "MEDIUM",
+   "conv": "HIGH",
    "feat": {
-    "slpct": 11.13,
-    "ext": 5.951,
-    "trend": 0.795,
-    "dist": 2.906,
-    "mom20": 3.477,
+    "slpct": 10.233,
+    "ext": 5.088,
+    "trend": 1.02,
+    "dist": 4.316,
+    "mom20": 0.532,
     "rank": 6,
     "btc": 1,
-    "skor": 1,
+    "skor": 2,
     "fund": 1.3397979452054794e-05
    }
   },
@@ -469,20 +469,20 @@
    "pend": [
     -1,
     0.869,
-    0.9735379647512348
+    0.961249604624636
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 12.03,
-    "ext": 2.922,
-    "trend": 1.332,
-    "dist": 3.979,
-    "mom20": 20.808,
+    "slpct": 10.616,
+    "ext": 2.329,
+    "trend": 1.504,
+    "dist": 5.377,
+    "mom20": 19.184,
     "rank": 28,
     "btc": 1,
     "skor": 1,
-    "fund": 1.1560964383561645e-05
+    "fund": 1.160024383561644e-05
    }
   },
   "WLD": {
@@ -747,7 +747,7 @@
    "pos": null
   }
  },
- "last_ts": 1793955600,
+ "last_ts": 1793962800,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -1010,7 +1010,10 @@
   "1793212200|FOMC Press Conference",
   "1793277000|Advance GDP q/q",
   "1793277000|Core PCE Price Index m/m",
-  "1793718960|Congressional Elections"
+  "1793718960|Congressional Elections",
+  "1793971800|Average Hourly Earnings m/m",
+  "1793971800|Non-Farm Employment Change",
+  "1793971800|Unemployment Rate"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00"
 }
