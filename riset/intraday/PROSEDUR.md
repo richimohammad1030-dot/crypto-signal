@@ -8,6 +8,34 @@ Perubahan dipasang hanya setelah pemilik setuju di chat. Riset crypto (swing) da
 **Wajib baca dulu `riset/ATURAN_BERSAMA.md`** (sumber ide, uji signifikansi, data terkunci, uji maju). Aturan di sana
 berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1 saja.
 
+## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"
+**Tahap 0 (6 Nov 2026, `eksperimen/tahap0_semua_tahun_2026-11-06.py`): LULUS, tetapi TIPIS.** Juara v3, daftar koin sesuai masanya,
+biaya juara (maker 0,02%, taker 0,07% termasuk slippage, funding): setiap tahun 2020-2026 R bersih > 0, juga tanpa 2% trade terbaik
+(per tahun maupun global). Tahun terburuk **2025 +9,4R** (tanpa 2% terbaik hanya **+1,6R**). Daftar tetap juga lulus (2025 +18,0R).
+**Uji stres eksekusi** (taker 0,12% + limit hanya terisi jika harga menembus 0,05%): **2025 -6,5R**, tanpa 2% terbaik 2024 & 2025
+minus → "semua tahun positif" belum tahan terhadap eksekusi yang sedikit lebih buruk. Celah terbesar: **B-long 2024-2025**
+(+5,7R / -2,8R; koin peringkat 1-10, BTC naik > 10% dalam 30 hari) dan sesi isi 15-20 WIB.
+
+Tiap Jumat satu putaran, jalur bertahap (lanjutkan dari jalur berikutnya yang belum selesai):
+1. Ukuran posisi / volatility targeting — **putaran 1 selesai 6 Nov 2026**: I-25 `uji-maju`, I-08 & I-24 gagal.
+2. Pemilihan koin & sesi (B-long peringkat 1-10, sesi 15-20 WIB, akhir pekan vs hari kerja, peringkat 26-50).
+3. Aturan keluar (terutama B-long yang paling peka biaya eksekusi).
+4. Filter rezim (BTC naik > 10%/30 hari untuk B-long, jarak BTC ke EMA200).
+5. Strategi tambahan dengan sumber edge berbeda (bukan dip/reversal lagi).
+Ide dicari dari literatur/internet bila ada (tandai `[lit]`, cantumkan judul + tautan). Skrip: `eksperimen/opt<N>_*.py`
+(pola: `opt1_ukuran_posisi_2026-11-06.py` untuk bobot pasca-trade; `pit_2026-11-06.py` untuk logika order baru + replay penuh).
+Tabel per tahun dibuat ulang dengan `tahap0_semua_tahun_2026-11-06.py`; bedah kondisi pasar dengan `celah_2026-11-06.py`.
+
+**Syarat LOLOS putaran optimasi** (di atas kriteria langkah 3.4 dan ATURAN_BERSAMA):
+- PIT biaya standar: **tidak ada tahun minus**, juga tanpa 2% trade terbaik per tahun.
+- Drawdown (R) tidak naik > 25% dari juara; rasio R/DD naik ≥ 10% di 2020-2023 **dan** 2024-skrg; **P_rasio ≥ 0,90**.
+- Trade/minggu tidak turun di bawah ±5/minggu per tahun (juara 5,8-14,8) kecuali pemilik setuju.
+- **Pagar stres** (usulan, menunggu persetujuan pemilik): tahun terburuk pada uji stres eksekusi tidak lebih buruk dari juara (-6,5R).
+- Tetangga parameter ikut lolos (mayoritas). Parameter dipilih di 2020-2023; 2024-skrg hanya menguji.
+- Lolos → `uji-maju` (≥ 6 minggu & ≥ 60 trade data baru sejak tanggal lolos), baru diusulkan.
+**Uji maju yang berjalan:** I-25 (bobot dispersi, sejak 6 Nov 2026). Trade juara sama persis; hitung ulang bobot per trade baru
+dengan `opt1_ukuran_posisi_2026-11-06.py` dan bandingkan R berbobot vs juara hanya untuk trade dengan `t` ≥ 2026-11-06.
+
 ## 0. Aturan keras
 - **Jangan ubah** file bot: `signal_bot.py`, `gold_bot.py`, `templates.py`, `gold_templates.py`, `commands.py`,
   `jurnal.py`, `kesehatan.py`, `baseline.json`, file state (`*.json` di root), `.github/`,

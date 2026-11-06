@@ -170,3 +170,29 @@ Juara v3 (data baru) · PIT: 2.965 trade, +0,087R, DD 15,8R, rasio 2,45 · 2020-
   Return Reversal", Management Science 60(3).
 - Data terkunci tidak dipakai (tidak ada ide lolos tahap 1-2). Total ide intraday bernomor yang sudah diuji: 14 (I-01 s.d. I-23,
   di luar ±15 jalur fondasi 27 Okt). Kandidat penantang: tidak ada; juara v3 tetap.
+
+## 2026-11-06 (sore) · TAHAP 0 "untung di semua tahun" + PROGRAM UTAMA OPTIMASI putaran 1 (permintaan pemilik)
+Data diunduh ulang s.d. 6 Nov 2026 ±15:00 WIB (49 koin + 177 koin PIT; H1 + funding + 15m, tanpa kegagalan).
+Skrip: `eksperimen/tahap0_semua_tahun_2026-11-06.py` (tabel per tahun, 4 varian), `celah_2026-11-06.py` (kondisi pasar),
+`opt1_ukuran_posisi_2026-11-06.py` + `opt1b_tetangga_dispersi_2026-11-06.py` (jalur ukuran posisi).
+- **Tahap 0, PIT biaya juara: LULUS tipis.** 2.968 trade, +259,5R, PF 1,28, DD 15,8R, fill 62%. Per tahun (R / tanpa 2% terbaik per tahun):
+  2020 +38,0/+24,0 · 2021 +92,6/+62,7 · 2022 +35,6/+31,2 · 2023 +24,9/+18,1 · 2024 +25,3/+10,6 · **2025 +9,4/+1,6** · 2026 +33,7/+29,3.
+  12 bulan bergulir terendah +5,5R (0 dari 70 jendela minus). Per koin 71/119 positif; tanpa koin terbaik tiap tahun tetap positif (2025 +6R).
+  Daftar tetap: semua tahun positif, 2025 +18,0R (tanpa 2% +10,5).
+- **Uji stres eksekusi** (taker 0,12%, limit/TP harus tembus 0,05%): PIT +155R (-40%), **2025 -6,5R**, tanpa 2% terbaik 2024 -6,3 & 2025 -13,7;
+  daftar tetap 2025 +3,8 (tanpa 2% -3,6). Kesimpulan: edge 2024-2025 (±0,03-0,05R/trade) lebih kecil dari ketidakpastian eksekusi.
+- **Celah:** B-long 2024 +5,7R / 2025 -2,8R (2025: peringkat 1-10 -9,1R, BTC naik > 10%/30 hari -10,0R, Mei 2025 -10,5R);
+  B-short 2022 -6,1R; sesi isi 15-20 WIB +13,5R/442 (stres -12,1R); dispersi rendah avg +0,053R vs tinggi +0,129R; akhir pekan +0,137R vs hari kerja +0,070R.
+- Program ditetapkan **OPTIMASI** (aturan pemilik: lulus → optimasi), dengan usulan pagar stres (lihat PROSEDUR PROGRAM UTAMA).
+- **Putaran 1 · ukuran posisi** (bobot pasca-trade, trade sama; rata-rata bobot 2020-23 = 1):
+  - I-08 risiko per modul (60 kombinasi): terbaik 2020-23 A 1,5 / B-long 0,75 / B-short 0,5 rasio 4,28 (+23%) / 2,06 (+36%), P 0,91, tetapi
+    2025 tanpa 2% terbaik -5R; 6 teratas semuanya ≤ 0 di 2025 tanpa 2% → **GAGAL** (syarat semua tahun).
+  - I-24 [lit] volatility-managed (Moreira & Muir 2017): rasio lama +10..+27%, baru -16..+6%, P ≤ 0,39 → **GAGAL**
+    (sesuai kritik Cederburg dkk. 2020: tidak stabil di luar sampel).
+  - **I-25 [lit] bobot dispersi** (std return 24 jam 25 koin teratas ÷ median 365 hari, batas [0,5; 2]): rasio 3,49 → **4,44** (+27%) lama,
+    1,51 → **1,89** (+25%) baru, P 0,95, DD 15,8 → 17,7R (+12%), DD ekuitas 15,6 → 17,5%, CAGR 1% 45,7 → 54,6% (2024+ 25,6 → 34,7%).
+    Per tahun +48/+114/+22/+27/+34/+13/+41 (2022 turun dari +36), tanpa 2% semua +, stres terburuk -6,5 → 0,0R; daftar tetap rasio baru 2,20 → 3,01.
+    Tetangga: k 0,5/1/1,5 × batas 1,5/2 → 5/6 lolos; jendela 12/48 jam, median 180/730 hari, 48j-top50 lolos; top 10 koin & 12j-top10 gagal,
+    top 50 batas (P 0,90). Risiko terbuka bersamaan maks 4,4% (juara 3%). → **UJI-MAJU** sejak 6 Nov 2026. Data terkunci intraday (PIT) sudah
+    menjadi uji utama sejak v3, jadi tidak ada data baru tersisa selain uji maju.
+- Total ide intraday bernomor yang sudah diuji: 17. Juara v3 tidak berubah.

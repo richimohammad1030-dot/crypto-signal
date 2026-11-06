@@ -1,0 +1,45 @@
+<b>RISET INTRADAY · TAHAP 0</b>
+6 Nov 2026 (sore)
+────────────────────
+Permintaan pemilik: cek "untung di semua tahun" dulu. Data s.d. 6 Nov 15:00 WIB, koin sesuai masanya (PIT), biaya + funding + slippage juara. Juara v3 &amp; bot tidak diubah.
+
+<b>Tahap 0: LULUS, tapi tipis</b>
+────────────────────
+<pre>
+Thn  Trd /mg     R  Win  PF  -2%
+2020 443 10 +38,0 62% 1,28 +24
+2021 770 15 +92,6 63% 1,43 +63
+2022 295  6 +35,6 67% 1,41 +31
+2023 344  7 +24,9 64% 1,22 +18
+2024 495 10 +25,3 62% 1,15 +11
+2025 328  7  +9,4 61% 1,08  +2
+2026 293  7 +33,7 68% 1,38 +29
+</pre>
+-2% = tanpa 2% trade terbaik tahun itu. Semua tahun positif; terburuk 2025. DD 15,8R, RR 0,74, kalah beruntun maks 9.
+Uji stres (slippage +0,05% &amp; limit harus tembus 0,05%): 2025 <b>-6,5R</b>, total -40%. Edge 2024-25 lebih kecil dari ketidakpastian eksekusi.
+Celah: B-long 2025 -2,8R (koin top 10 saat BTC naik &gt;10%/30 hari), B-short 2022 -6,1R, sesi isi 15-20 WIB lemah.
+
+<b>Program: OPTIMASI</b>
+────────────────────
+Syarat: tak ada tahun minus, DD naik maks 25%, P &gt;= 0,90 + usulan pagar stres. Putaran 1 = ukuran posisi:
+<pre>
+Varian       Lama Baru  P   Stres
+Juara        3,49 1,51  -   -6,5
+I-08 /modul  4,28 2,06 0,91 -3,8
+I-24 vol-mgd 4,26 1,45 0,33 -5,7
+I-25 disper  4,44 1,89 0,95  0,0
+</pre>
+Lama/Baru = rasio R/DD 2020-23 / 2024-skrg.
+I-08 risiko per modul: GAGAL (2025 tanpa 2% terbaik -5R).
+I-24 [lit] volatility-managed: GAGAL (tak stabil di 2024+).
+I-25 [lit] bobot risiko ikut dispersi return antar 25 koin teratas (0,5-2x): UJI-MAJU. Semua tahun +, 2025 +13R, CAGR 1% 46% -&gt; 55%, DD ekuitas 15,6% -&gt; 17,5%, tetangga 6/9 lolos. Kelemahan: risiko terbuka maks 4,4%, 2022 turun +36 -&gt; +22R.
+
+<b>Berikutnya</b>
+────────────────────
+1. I-25 uji maju 6 minggu (tanpa ubah bot).
+2. I-26 B-long: kurangi koin top 10 saat BTC naik &gt;10%/30 hari.
+3. I-27 batasi isi di sesi 15-20 WIB.
+
+<b>Butuh persetujuan</b>
+────────────────────
+Pagar stres jadi syarat tetap program optimasi. Belum ada usulan perubahan bot.
