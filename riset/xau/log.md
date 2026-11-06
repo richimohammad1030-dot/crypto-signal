@@ -435,3 +435,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (≤ 30 candle) & cad_aktif; pesan sinyal diberi "ℹ️ data cadangan Dukascopy, cocokkan dengan chart broker".
 - Uji: replay_xau IDENTIK (filter hanya di jalur live; data riset Setra 0 candle jam tutup). Simulasi 2 Nov dengan Dukascopy
   nyata + candle buruk sintetis: cara lama RSI2 38,0 (BUY, salah), cara baru 79,8 (SELL = data final).
+
+## 6 Nov 2026 — Ide #49 meta-strategi ADAPTIF walk-forward (adaptif.py, pemilik: "adaptif di semua kondisi, tanpa tahun minus")
+- Tiap awal bulan pilih strategi menu dengan R bersih terbaik N bulan terakhir (masa lalu saja). N 1/3/6/12, ± syarat > 0.
+- Hasil (R/thn · tahun minus · terburuk): N1 +5,7 · 3 · -17; N3 +8,3 · 4 · -23; N6 +12,8 · 3 · -16; N12 +7,9 · 5 · -13.
+  Semua LEBIH BURUK dari strategi tetap: live hibrida MA100 +16,2 · 3 · -8; hibrida MA200 +12,6 · **1 · -1** (2015 -1;
+  2018/2021/2023 ±0); Connors MA200 +13,2 · 2 · -10. Memilih menurut kinerja terakhir = terlambat & berganti-ganti (whipsaw).
+- Kesimpulan: adaptasi harus dari KEADAAN PASAR (tren harian, seperti hibrida), bukan dari kinerja terakhir. #49 `ditolak`.
+  Hibrida MA200 paling dekat ke target "tanpa tahun minus" (dipilih setelah melihat semua tahun → tetap perlu uji maju).
