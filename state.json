@@ -757,7 +757,7 @@
    "pos": null
   }
  },
- "last_ts": 1794063600,
+ "last_ts": 1794070800,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -765,10 +765,8 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-10-26T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-07",
-  "new": [
-   "SHIBUSDT"
-  ],
+  "date": "2026-11-08",
+  "new": [],
   "upd": {},
   "cancel": []
  },
