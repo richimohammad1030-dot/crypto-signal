@@ -309,5 +309,31 @@
   "rank": 15,
   "btc": 0,
   "skor": 0
+ },
+ {
+  "waktu_tutup_wib": "2026-11-07 22:00",
+  "sym": "TAOUSDT",
+  "d": -1,
+  "t0": 1793890800,
+  "t1": 1794063600,
+  "entry": 217.8,
+  "exit": 222.5,
+  "R": -0.23,
+  "alasan": "cut-loss stagnan",
+  "label": "MEDIUM",
+  "mfe": 0.279,
+  "mae": -0.475,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 9.383,
+  "ext": 0.688,
+  "trend": 1.696,
+  "dist": 6.576,
+  "mom20": 18.513,
+  "rank": 20,
+  "btc": 0,
+  "skor": 0,
+  "fund": 1.25e-05
  }
 ]
