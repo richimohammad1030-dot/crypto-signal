@@ -40,5 +40,19 @@
   "R_kotor": 0.667,
   "alasan": "TP",
   "versi": "intraday-v3"
+ },
+ {
+  "waktu_tutup_wib": "2026-11-07 07:30",
+  "sym": "HYPEUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1793925000,
+  "t1": 1794011400,
+  "entry": 77.83332952625038,
+  "exit": 78.72,
+  "R": -0.534,
+  "R_kotor": -0.495,
+  "alasan": "WAKTU",
+  "versi": "intraday-v3"
  }
 ]
