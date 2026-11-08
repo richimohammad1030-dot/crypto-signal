@@ -769,30 +769,18 @@
    "pos": null
   }
  },
- "last_ts": 1794150000,
+ "last_ts": 1794157200,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
  "gold_channel_id": -1004324140827,
  "gold_channel_title": "Market Call XAU",
- "recap_week": "2026-10-26T00:00:00+07:00",
+ "recap_week": "2026-11-02T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-08",
-  "new": [
-   "AAVEUSDT",
-   "PUMPUSDT"
-  ],
+  "date": "2026-11-09",
+  "new": [],
   "upd": {},
-  "cancel": [
-   [
-    "SHIBUSDT",
-    "funding rate tidak positif (filter SELL)"
-   ],
-   [
-    "AAVEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "cancel": []
  },
  "hist": [
   [
