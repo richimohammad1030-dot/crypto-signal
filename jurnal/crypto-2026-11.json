@@ -361,5 +361,31 @@
   "btc": 0,
   "skor": -1,
   "fund": 4.711245205479452e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-11-09 22:00",
+  "sym": "ONDOUSDT",
+  "d": -1,
+  "t0": 1793901600,
+  "t1": 1794236400,
+  "entry": 0.3611,
+  "exit": 0.3801,
+  "R": -0.351,
+  "alasan": "kena SL",
+  "label": "LOW",
+  "mfe": 0.337,
+  "mae": -0.509,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 14.974,
+  "ext": 4.601,
+  "trend": 0.526,
+  "dist": 1.672,
+  "mom20": 18.583,
+  "rank": 25,
+  "btc": 1,
+  "skor": -1,
+  "fund": 1.2413034246575344e-05
  }
 ]
