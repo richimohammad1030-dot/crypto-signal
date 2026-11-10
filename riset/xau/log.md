@@ -504,3 +504,13 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   V1 (kombinasi mengganti MR) lebih buruk. Celah tersisa: 2005-06 & 2013-14 (rezim bearish/transisi emas), 2018, 2021.
 - Status #58 `perlu-data` (dipilih setelah melihat semua periode integrasi; keluarga konsisten). Lanjut riset Jumat: P vs live,
   walk-forward, tambal-celah 2005-06 & 2013-14.
+
+## 10 Nov 2026 — OPTIMASI #58 & DIPASANG (pemilik: "optimasikan ... jika iya terapkan ke bot live"; live 11 Nov 2026)
+- optimasi58.py: 15.540 sistem (kombinasi 2-4 dari 16 komponen × SL 1,5/2/2,5/3 × TP 1/1,5/2/3/tanpa) sebagai V2 lengkap,
+  dipilih HANYA di 2015-2021. Uji pembanding: 30 teratas 27% mengalahkan live di 2005-14 & uji & Setra vs 5% semua.
+- Terpilih: Alligator + MACD + RSI2 (≤30/≥70), SL 1,5 ATR, tanpa TP. Sistem: 2005-14 +12,7 vs +8,6 · 2015-21 +15,1 vs +10,8 ·
+  uji +29,0 vs +28,6 · Setra +29,2 vs +23,2 · 2005-26 +17,1 vs +13,3; DD 52 vs 56R; 6 vs 7 tahun minus. P 0,83/0,75/0,29/0,89.
+- gold_bot.py: smma(), self.AL/self.MH, kombo(), mode "KOMBO" (prioritas di jam 07:00). multi_mesin: sinyal_kombo, sinyal_live =
+  hibrida + kombo, trades_live_mr (strat0), baseline default = live. replay_xau: xau.json 415/415 (KOMBO 52 MR 215 K6 87 SUS 61),
+  xau_panjang 2841/2841 (KOMBO 416) IDENTIK. Simulasi pesan 27 Okt (KOMBO BUY RSI 10,6 → +3,18R). baseline.json diperbarui.
+  Bayangan: "Tanpa kombinasi (hibrida 6 Nov)".

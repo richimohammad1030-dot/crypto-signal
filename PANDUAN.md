@@ -150,8 +150,9 @@ Strategi: `riset/xau/STRATEGI.md` (sejak 2 Nov 2026). Jam sinyal 07:00 & tutup 2
   RSI(2) ekstrem → **🔁 SINYAL SUSULAN** BUY/SELL market, SL 3 ATR, TP 1R. Tetap maks 1 posisi/hari.
 - Cara pasang: mean reversion → buka posisi market + SL sesuai jarak di pesan. Breakout → 1 order stop + SL & TP + price alert di
   batas batal (bot juga mengirim **🚫 HARI INI DILEWATI**, tetapi bot hanya cek tiap 2 jam, jadi andalkan alert).
-- Ekspektasi (riset 2015-2026, versi 6 Nov 2026 hibrida, bersih biaya 0,40 USD, risiko 0,5%): ±4,6 trade/minggu, win ±48%,
-  PF ±1,16, untung 9 dari 12 tahun, DD terburuk ±13% ekuitas, CAGR ±8% (era 2025-2026 ±12%). Edge tipis. Lihat `riset/xau/log.md`.
+- Sejak 11 Nov 2026 prioritas pertama jam 07:00 = **kombinasi** Alligator + MACD + RSI(2) sepakat (koreksi dalam tren) → market,
+  SL 1,5 ATR, tanpa TP. Ekspektasi (riset 2005-2026, bersih biaya, risiko 0,5%): ±4,6 trade/minggu, win ±46%, PF ±1,16,
+  untung 16 dari 22 tahun, DD terburuk ±24% ekuitas, CAGR ±8%. Edge tipis. Lihat `riset/xau/log.md`.
 - Channel: buat channel baru yang **namanya mengandung "XAU", "Gold", atau "Emas"**, jadikan bot admin (Post & Pin Messages).
   Bot otomatis mengenalinya sebagai channel XAU (±2 jam), lalu kirim `/kirim_panduan_xau` untuk pin panduan anggota
   (**kirim ulang** setelah 2 Nov 2026 agar panduan multi-strategi yang ter-pin).

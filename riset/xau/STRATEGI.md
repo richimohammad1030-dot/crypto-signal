@@ -10,6 +10,10 @@ Riwayat: Gold Daily Straddle OCO 2 sisi (live 18 Okt 2026) → multi-strategi MR
 Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakter intraday: masuk & selesai di hari yang sama.
 
 ## Aturan (maksimal 1 posisi per hari, diputuskan dari candle H1 yang close 07:00 WIB)
+**0. KOMBINASI (ide #58, sejak 11 Nov 2026, prioritas utama)** — Alligator (SMMA 13/8/5 harga median, tergeser 8/5/3), histogram
+MACD 12/26/9, dan RSI(2) (≤ 30 BUY / ≥ 70 SELL) SEPAKAT arah → market di open berikutnya, SL **1,5 × ATR(14)**, tanpa TP, tutup
+23:00. Hari kombinasi: MR & K6 tidak dipasang. Dipilih dari 15.540 sistem hanya di 2015-2021 (optimasi58.py).
+
 **A. Mean reversion (prioritas)** — RSI(2) close H1 (Wilder, alpha 1/2):
 - RSI(2) ≤ **43,76** → BUY market (kuantil 35% hari 2015-2021); RSI(2) ≥ **85** → SELL market (sejak 6 Nov 2026, ide #40;
   sebelumnya 71,22 = kuantil 65%). Hari RSI(2) 71,22–85 (jenuh beli ringan, SELL-nya lemah di 3 periode) → K6.
@@ -52,7 +56,20 @@ Sinyal dikirim **07:00 WIB**; semua order & posisi ditutup **23:00 WIB**. Karakt
 Per tahun (R): 2015 +2 · 2016 +3 · 2017 +10 · 2018 -4 · 2019 -5 · 2020 +4 · 2021 +10 · 2022 +28 · 2023 -24 · 2024 +24 · 2025 +16 · 2026 +14.
 Per strategi (12 thn): MR win 49%, RR 1,11, PF 1,06 · K6 win 37%, RR 1,96, PF 1,13. ±84% trade berasal dari MR.
 
-**VERSI LIVE sejak 6 Nov 2026 (susulan + #40 + HIBRIDA #42b)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
+**VERSI LIVE sejak 11 Nov 2026 (KOMBINASI #58 + hibrida + susulan)** — data 2004-2026 (Dukascopy + Setra), bersih, risiko 0,5%:
+| Periode | R/thn baru | R/thn versi 6 Nov | P baru lebih baik |
+|---|---|---|---|
+| 2005-2014 (data baru) | +12,7 | +8,6 | 0,83 |
+| 2015-2021 (pemilihan) | +15,1 | +10,8 | 0,75 |
+| 2022 - Jan 2025 | +29,0 | +28,6 | 0,29 |
+| Feb 2025 - Okt 2026 (Setra) | +29,2 | +23,2 | 0,89 |
+| 2005-2026 | +17,1 (CAGR +8,4%) | +13,3 (+6,5%) | – |
+2005-2026: 4,6 trade/mg, win 46%, RR 1,36, PF 1,16, DD 52R (23,5% @0,5%; versi 6 Nov 56R/25%), W/L 14/15, 6/22 tahun minus.
+Per tahun: 05 -3 · 06 -19 · 07 +13 · 08 +24 · 09 +46 · 10 +47 · 11 +34 · 12 +22 · 13 -14 · 14 -24 · 15 +30 · 16 +34 · 17 +27 ·
+18 -5 · 19 +14 · 20 +14 · 21 -8 · 22 +40 · 23 +3 · 24 +41 · 25 +31 · 26 +26. Catatan jujur: tidak ada P ≥ 0,90; DD 22 tahun jauh
+lebih dalam dari angka 2015-2026 yang dikutip sebelumnya (vonis 2005-2014 menunjukkan bot live lama juga 7/22 tahun minus).
+
+**Versi 6 Nov 2026 (susulan + #40 + HIBRIDA #42b)** — bersih biaya, urutan ambigu M1, risiko 0,5%:
 | Periode | Trade/mg | MR / K6 / SUS | Win | RR | PF | R/thn | DD R | DD% | CAGR | W/L maks | Tahun+ |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 2015-2021 | 4,6 | 874 / 450 / 321 | 47% | 1,21 | 1,09 | +9,4 | 23 | 11,1% | +4,4% | 8/10 | 5/7 |

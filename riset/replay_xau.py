@@ -16,7 +16,7 @@ for src in sys.argv[2:]:
     ref = mm.baseline(D, A, F)
     beda = sum(1 for b, r in zip(bot, ref) if int(float(b["t0"])) != int(r["t0"]) or int(b["d"]) != r["d"]
                or abs(float(b["R"]) - r["R"]) > 1e-9 or b.get("strat", r["strat"]) != r["strat"]) + abs(len(bot) - len(ref))
-    per = " ".join(f"{k} {sum(1 for r in ref if r['strat'] == k)}" for k in ("MR", "K6", "SUS"))
+    per = " ".join(f"{k} {sum(1 for r in ref if r['strat'] == k)}" for k in ("KOMBO", "MR", "K6", "SUS"))
     print(f"{os.path.basename(src)}: bot {len(bot)} trade vs riset {len(ref)} ({per}) -> {'IDENTIK' if beda == 0 else f'BEDA {beda}'}")
     ok &= beda == 0
 print("KESIMPULAN:", "mesin bot = riset baseline" if ok else "BEDA - jangan pasang")

@@ -14,6 +14,7 @@ sig30 = mm.sinyal_mr(D, mr_buy=38.49, mr_sell=74.72)   # kuantil 30%/70% 2015-20
 MENU = {
     "BASELINE (live)": mm.baseline(D, A, F),
     "Tanpa susulan": mm.baseline(D, A, F, sus=False),
+    "Tanpa kombinasi (hibrida 6 Nov)": mm.baseline(D, A, F, sig=mm.sinyal_hibrida(D)),
     "Tanpa hibrida (#40 saja)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D)),
     "MR SELL lama 71,22 (sblm #40)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D, mr_sell=71.22)),
     "Connors MA200 (#42)": mm.baseline(D, A, F, sig=mm.sinyal_connors(D, 200)),

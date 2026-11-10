@@ -111,6 +111,23 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
               f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
               "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
               f"⚖️ Risiko saran {risk_pct}% modal"]
+    elif ev["order"] and ev["order"]["pend"].get("mode") == "KOMBO":
+        p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"
+        L.append(f"🌅 <b>ORDER HARI INI · {arah} SEKARANG</b> (kombinasi Alligator + MACD + RSI)")
+        L.append(_pre([
+            f"Alligator & MACD : tren {'NAIK' if d == 1 else 'TURUN'}",
+            f"RSI(2) H1 07:00  : {p['rsi']:.1f}  ({'koreksi dalam tren naik' if d == 1 else 'pantulan dalam tren turun'})",
+            f"Harga 07:00      : {fmt(p['px'])}",
+            "",
+            f"{arah} MARKET",
+            f"  Entry : ±{fmt(p['px'])} (harga saat ini)",
+            f"  SL    : {fmt(p['px'] - d * p['dist'])}  ({'-' if d == 1 else '+'}{fmt(p['dist'])} dari entry)",
+            "  TP    : tidak ada, tutup 23:00",
+        ]))
+        L += [BAR,
+              f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
+              "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
+              f"⚖️ Risiko saran {risk_pct}% modal"]
     elif ev["order"] and ev["order"]["pend"].get("mode") == "SUS":
         p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"; jam = _jam(p["t"] + 3600)
         L.append(f"🔁 <b>SINYAL SUSULAN · {arah} SEKARANG</b> (mean reversion)")
@@ -211,9 +228,9 @@ def news_bubble(news, pos, pend, px, now):
         L.append(f"📂 <b>POSISI {SYM} · {'BUY' if pos['d'] == 1 else 'SELL'}</b> · {R:+.2f}R")
         L.append(_pre([f"Entry : {fmt(pos['e'])}"] + ([f"Kini  : {fmt(px)}"] if px else []) +
                       [f"SL    : {fmt(pos['sl'])}", f"TP    : {fmt(pos['tp']) if pos.get('tp') is not None else '- (tutup 23:00)'}"]))
-    elif pend and pend.get("mode") in ("MR", "SUS"):
+    elif pend and pend.get("mode") in ("MR", "SUS", "KOMBO"):
         L.append(f"⏳ <b>SINYAL {'BUY' if pend['d'] == 1 else 'SELL'} MARKET</b> "
-                 f"({'susulan' if pend['mode'] == 'SUS' else 'mean reversion'}) baru dikirim")
+                 f"({ {'SUS': 'susulan', 'KOMBO': 'kombinasi'}.get(pend['mode'], 'mean reversion') }) baru dikirim")
     elif pend and pend.get("main"):
         d = pend["main"]
         L.append(f"⏳ <b>ORDER AKTIF</b> · bisa terisi saat news")
@@ -251,8 +268,8 @@ def update_bubble(ev, pos, px, t):
         sep()
         arah = "BUY" if k["d"] == 1 else "SELL"
         lawan = "SELL STOP" if k["d"] == 1 else "BUY STOP"
-        mr = k.get("strat") in ("MR", "SUS")
-        L.append(f"✅ <b>TERISI · {arah}</b>" + (" (susulan)" if k.get("strat") == "SUS" else " (mean reversion)" if mr else ""))
+        mr = k.get("strat") in ("MR", "SUS", "KOMBO")
+        L.append(f"✅ <b>TERISI · {arah}</b>" + {"SUS": " (susulan)", "KOMBO": " (kombinasi)", "MR": " (mean reversion)"}.get(k.get("strat"), ""))
         L.append(_pre([f"Entry : {fmt(k['entry'])}  ({_jam(k['t'])})",
                        f"SL    : {fmt(k['sl'])}",
                        f"TP    : {fmt(k['tp']) if k.get('tp') is not None else '- (tutup 23:00)'}"]))

@@ -60,20 +60,52 @@ def trades_sus(D, A, F, ambigu="buy", sig=None):
     return out
 
 
+def _smma(x, n):
+    o = np.empty(len(x)); o[0] = x[0]
+    for i in range(1, len(x)): o[i] = (o[i - 1] * (n - 1) + x[i]) / n
+    return o
+
+
+def sinyal_kombo(D):
+    """Ide #58 (live 11 Nov 2026): Alligator (SMMA 13/8/5 harga median, tergeser 8/5/3) + histogram MACD 12/26/9 + RSI(2)
+    <= KOMBO_RSI_BUY / >= KOMBO_RSI_SELL sepakat pada candle 07:00 -> arah. Konstanta dari gold_bot."""
+    T, O, H, L, C = D; HR = ((T // 3600) % 24).astype(int); R2 = rsi(C, gb.MR_N); mp = (H + L) / 2
+    s13, s8, s5 = _smma(mp, 13), _smma(mp, 8), _smma(mp, 5)
+    e = lambda x, n: np.array(gb.ema(list(x), n))
+    mac = e(C, 12) - e(C, 26); mh = mac - e(mac, 9); out = {}
+    for i in np.flatnonzero(HR == sm.PLACE):
+        if i < 8: continue
+        jaw, teeth, lips = s13[i - 8], s8[i - 5], s5[i - 3]
+        alg = 1 if lips > teeth > jaw else -1 if lips < teeth < jaw else 0
+        mc = 1 if mh[i] > 0 else -1
+        rs = 1 if R2[i] <= gb.KOMBO_RSI_BUY else -1 if R2[i] >= gb.KOMBO_RSI_SELL else 0
+        if alg != 0 and alg == mc == rs: out[int(i)] = alg
+    return out
+
+
 def sinyal_live(D):
-    """Sinyal MR bot live (sejak 6 Nov 2026 = hibrida #42b)."""
-    return sinyal_hibrida(D)
+    """Sinyal pagi bot live: kombinasi #58 (prioritas) lalu MR hibrida #42b."""
+    return {**sinyal_hibrida(D), **sinyal_kombo(D)}
+
+
+def trades_live_mr(D, A):
+    """Trade pagi bot live: hari kombinasi -> SL KOMBO_SL_ATR (strat KOMBO); hari MR hibrida lain -> SL MR_SL_ATR (strat MR)."""
+    sk = sinyal_kombo(D); sh = {i: d for i, d in sinyal_hibrida(D).items() if i not in sk}
+    out = [dict(x, strat0="KOMBO") for x in trades_mr(D, A, sk, sl=gb.KOMBO_SL_ATR)]
+    return out + [dict(x, strat0="MR") for x in trades_mr(D, A, sh)]
 
 
 def baseline(D, A, F, ambigu="buy", mr=None, k6=None, sig=None, sus=None):
     """Trade baseline (= bot live): tiap trade diberi x['strat'] = 'MR' / 'K6' / 'SUS'. sus=False -> tanpa susulan."""
+    if sig is None and mr is None:
+        mr = trades_live_mr(D, A)
     sig = sinyal_live(D) if sig is None else sig
     mr = {x["ip"]: x for x in (trades_mr(D, A, sig) if mr is None else mr)}
     k6 = {x["ip"]: x for x in (trades_k6(D, A, F, ambigu) if k6 is None else k6)}
     out = []
     for i in sorted(set(mr) | set(k6)):
         x = mr.get(i) if i in sig else k6.get(i)
-        if x: out.append(dict(x, strat="MR" if i in sig else "K6"))
+        if x: out.append(dict(x, strat=x.get("strat0", "MR") if i in sig else "K6"))
     if sus is not False:
         out += trades_sus(D, A, F, ambigu, sig) if sus is None else sus
     return sorted(out, key=lambda x: x["t1"])

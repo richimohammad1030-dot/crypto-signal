@@ -21,6 +21,9 @@ C) SUSULAN (ide #37, live mulai 6 Nov 2026), hanya pada hari K6 dilewati (batas 
    (masuk di open candle berikutnya). Tidak ekstrem -> hari itu tetap tanpa trade (hanya 1 kali keputusan).
    SL = 3 x ATR(14) H1, TP = 1R, ditutup 23:00 WIB. Live: keputusan yang baru diproses >= 1 jam setelah candle close
    tidak dikirim & tidak dicatat (harga masuk sudah lewat).
+0) KOMBINASI (ide #58, live mulai 11 Nov 2026, PRIORITAS UTAMA): pada candle 07:00, bila Alligator (SMMA 13/8/5 tergeser 8/5/3),
+   histogram MACD 12/26/9, dan RSI(2) (<= 30 BUY / >= 70 SELL) sepakat arah -> market, SL 1,5 x ATR(14), tanpa TP, tutup 23:00.
+   Hari kombinasi: MR & K6 tidak dipasang.
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
 """
 import json, os, sys, time, urllib.request, datetime as dt
@@ -33,6 +36,7 @@ CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU di
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 85.0, 3.0   # MR_SELL 71,22 -> 85 sejak 6 Nov 2026 (ide #40): RSI 71-85 -> K6
+KOMBO_RSI_BUY, KOMBO_RSI_SELL, KOMBO_SL_ATR = 30.0, 70.0, 1.5   # ide #58 kombinasi Alligator + MACD + RSI(2) (prioritas utama)
 TREND_D1_N, MR_SELL_TURUN, MR_BUY_TURUN = 100, 70.0, 15.0   # hibrida ide #42b (cermin Connors saat tren harian turun)
 C07_SEED = os.path.join(HERE, "gold_c07_seed.json")          # riwayat close 07:00 WIB Setra (bibit SMA 100 hari)
 GANTI_S = 48 * 3600   # saat Setra macet: 48 jam terakhir Setra diganti Dukascopy (ujung data macet bisa berisi candle buruk, ide #47)
@@ -57,6 +61,15 @@ def ema(x, n):
     for v in x:
         e = v if e is None else e + k * (v - e)
         out.append(e)
+    return out
+
+
+def smma(x, n):
+    """SMMA (Wilder/Alligator), nilai awal = data pertama; sama dengan riset/xau/eksperimen/pustaka.smma."""
+    out, v = [], None
+    for z in x:
+        v = z if v is None else (v * (n - 1) + z) / n
+        out.append(v)
     return out
 
 
@@ -185,7 +198,7 @@ class GoldEngine:
         t, hr = T[i], (T[i] // 3600) % 24
         pend, pos = s.get("pend"), s.get("pos")
         # 1a) mean reversion / susulan: masuk market di open candle pertama setelah sinyal
-        if pos is None and pend and pend.get("mode") in ("MR", "SUS"):
+        if pos is None and pend and pend.get("mode") in ("MR", "SUS", "KOMBO"):
             d, st = pend["d"], pend["mode"]; fill = O[i]; slp = fill - d * pend["dist"]
             tpp = fill + d * SUS_TP_R * pend["dist"] if st == "SUS" else None
             s["pend"] = None
@@ -243,7 +256,13 @@ class GoldEngine:
             ma = self.MA.get(t)
             turun = ma is not None and C[i] <= ma
             b_, s_ = (MR_BUY_TURUN, MR_SELL_TURUN) if turun else (MR_BUY, MR_SELL)
-            if r2 <= b_ or r2 >= s_:                   # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
+            kd = self.kombo(i)
+            if kd:                                     # 0) KOMBINASI Alligator + MACD + RSI(2) sepakat (ide #58), prioritas utama
+                if KOMBO_SL_ATR * a > 0.5:
+                    s["pend"] = {"mode": "KOMBO", "d": kd, "dist": KOMBO_SL_ATR * a, "t": t, "rsi": round(r2, 1),
+                                 "px": C[i], "a": a, "macd": round(self.MH[i], 3), "tren": 1 if C[i] > self.E[i] else -1}
+                    self.notify("order", pend=s["pend"], t=t, price=C[i])
+            elif r2 <= b_ or r2 >= s_:                   # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
                 if MR_SL_ATR * a > 0.5:
                     d = 1 if r2 <= b_ else -1
                     s["pend"] = {"mode": "MR", "d": d, "dist": MR_SL_ATR * a, "t": t, "rsi": round(r2, 1),
@@ -269,11 +288,27 @@ class GoldEngine:
                                  "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1}
                     self.notify("order", pend=s["pend"], t=t, price=C[i])
 
+    def kombo(self, i):
+        """Arah kombinasi #58 bila Alligator, MACD, dan RSI(2) 30/70 sepakat; selain itu 0."""
+        if i < 8:
+            return 0
+        jaw, teeth, lips = self.AL[0][i - 8], self.AL[1][i - 5], self.AL[2][i - 3]
+        alg = 1 if lips > teeth > jaw else -1 if lips < teeth < jaw else 0
+        mac = 1 if self.MH[i] > 0 else -1
+        r = self.R2[i]
+        rs = 1 if r <= KOMBO_RSI_BUY else -1 if r >= KOMBO_RSI_SELL else 0
+        return alg if alg != 0 and alg == mac == rs else 0
+
     def run(self, rows, since):
         T = [r[0] for r in rows]; O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]; C = [r[4] for r in rows]
         A = atr(H, L, C, ATR_N)
         self.E = ema(C, TREND_EMA)
         self.R2 = rsi(C, MR_N)
+        # ide #58: Alligator (SMMA 13/8/5 harga median, tergeser 8/5/3) + histogram MACD 12/26/9
+        mp = [(h + l) / 2 for h, l in zip(H, L)]
+        self.AL = (smma(mp, 13), smma(mp, 8), smma(mp, 5))
+        m_ = [a_ - b_ for a_, b_ in zip(ema(C, 12), ema(C, 26))]
+        self.MH = [a_ - b_ for a_, b_ in zip(m_, ema(m_, 9))]
         # SMA 100 close 07:00 WIB (hibrida #42b): riwayat tersimpan (state/bibit) + candle 07:00 di rows; replay = rows saja
         c07 = {} if self.s.get("replay") else {int(k): v for k, v in (self.s.get("c07") or {}).items()}
         if not self.s.get("replay") and os.path.exists(C07_SEED):
@@ -372,7 +407,7 @@ def main():
     def notify(kind, **k):
         if kind == "order":   # faktor saat order dipasang (dipakai riset)
             p = k["pend"]
-            if p.get("mode") in ("MR", "SUS"):
+            if p.get("mode") in ("MR", "SUS", "KOMBO"):
                 state["feat"] = dict(strat=p["mode"], rsi=p["rsi"], atr=round(p["a"], 3),
                                      hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
             else:
