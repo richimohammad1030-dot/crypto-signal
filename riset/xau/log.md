@@ -487,3 +487,20 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Belum diuji (riset lanjutan): volume profile ASLI (butuh volume tick Dukascopy, unduh ulang), Elliott wave (tidak bisa
   dimesinkan secara pasti; hanya proksi swing/fraktal). Antrian: #55 diagnosa kenapa pengikut tren gagal 2022-Jan25 di hari
   pengisi (rezim suku bunga/ATR?), #56 bollinger squeeze sebagai strategi tambahan hari tanpa sinyal, #57 volume tick.
+
+## 10 Nov 2026 — Ide #58 KOMBINASI 2-4 indikator klasik (kombinasi.py, kombinasi_integrasi.py; gagasan pemilik)
+- 16 komponen suara (ALG, ST, ICH, SAR, MACD, HA, TPO ikut/fade, BB fade, stoch fade, turtle soup, PDH/PDL soup, RSI2 30/70
+  fade, EMA200, D1 SMA100, CLV) × kombinasi 2-4 yang SEPAKAT × SL 1/2 × TP 0,5/1/2/tanpa. Pilih 2015-21; konfirmasi 2004-14,
+  2022-Jan25, Setra; uji pembanding = porsi lolos 100 teratas vs semua.
+- PENGISI hari batal: 0% (100 teratas) vs 2% (semua) → tidak ada edge (konsisten dengan #53/#54).
+- MANDIRI 07:00: 100 teratas 34% lolos vs 8% semua (4×) → ada informasi nyata. Pola: RSI2 jenuh (≤30/≥70) + konfirmasi tren
+  (Alligator/MACD/SAR/EMA200) + CLV = beli koreksi dalam tren / jual pantulan dalam tren. Mis. ALG+RSIf+CLV SL2 TP2 untung di
+  keempat periode (+6,5/+5,1/+6,0/+3,3 R/thn).
+- **VONIS PERTAMA BOT LIVE DI 2005-2014 (data baru, apa adanya):** +8,6 R/thn tetapi 2005 -6, 2006 -14, 2013 -24, 2014 -16;
+  2005-2026: +13,3 R/thn, DD 56R, 7/22 tahun minus, terburuk -24. (Langkah 1 PROSEDUR sebagian sudah dikerjakan di sini.)
+- Integrasi V2 (kombinasi dulu → MR live → K6 + susulan): semua 18 varian V2 > bot live di 2005-2026 (+13,3..+16,7 R/thn).
+  Terbaik ALG+MACD+RSIf SL2 tanpa TP: +12,4 · +14,2 · +28,8 · +29,0 (2005-14 · 2015-21 · uji · Setra), 2005-26 +16,6, DD 46R
+  (live 56R), 6/22 thn minus, terburuk -17 (live -24). 907 hari kombinasi, 650 tumpang tindih dgn hari MR live.
+  V1 (kombinasi mengganti MR) lebih buruk. Celah tersisa: 2005-06 & 2013-14 (rezim bearish/transisi emas), 2018, 2021.
+- Status #58 `perlu-data` (dipilih setelah melihat semua periode integrasi; keluarga konsisten). Lanjut riset Jumat: P vs live,
+  walk-forward, tambal-celah 2005-06 & 2013-14.
