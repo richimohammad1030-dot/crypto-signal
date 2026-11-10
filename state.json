@@ -45,12 +45,14 @@
    }
   },
   "BNB": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     673.31,
-    712.0000112210334
+    712.0000112210334,
+    1794326400,
+    38.6900112210335
    ],
-   "pos": null,
    "conv": "HIGH",
    "feat": {
     "slpct": 5.746,
@@ -119,12 +121,14 @@
    }
   },
   "ZEC": {
-   "pend": [
+   "pend": null,
+   "pos": [
     -1,
     1075.9,
-    1303.2912506065556
+    1303.2912506065556,
+    1794326400,
+    227.39125060655556
    ],
-   "pos": null,
    "conv": "MEDIUM",
    "feat": {
     "slpct": 21.135,
@@ -772,7 +776,7 @@
    "pos": null
   }
  },
- "last_ts": 1794322800,
+ "last_ts": 1794330000,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -780,11 +784,8 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-11-02T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-10",
-  "new": [
-   "XRPUSDT",
-   "ZECUSDT"
-  ],
+  "date": "2026-11-11",
+  "new": [],
   "upd": {},
   "cancel": []
  },
