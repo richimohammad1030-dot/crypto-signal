@@ -522,3 +522,15 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   live +6,6 (sama), tetapi 2005-14 +6,6 vs +8,2 dan 2022-Jan25 -0,5 vs +1,9 → lebih buruk. Breakeven memangkas win jadi 31-35%.
   TP keras 2-5R lebih buruk di 2005-21. Kesimpulan: keluar jam 23:00 tanpa TP tetap terbaik; `ditolak` (TP 10R boleh dipasang
   sebagai pengaman, efeknya nol).
+
+## 10 Nov 2026 — Tambal-celah putaran 2 pada sistem live baru (celah_live.py, tambal2.py)
+- Tahun minus 2005-2026: 2005 -3, 2006 -19, 2013 -14, 2014 -24, 2018 -5, 2021 -8. Penyumbang: K6 (BUY -43R, SELL -22R di tahun
+  minus vs +144R/+49R tahun lain); SUS-BUY -17R total 22 thn (rugi juga di tahun biasa); KOMBO & MR relatif aman. Tahun minus =
+  emas anjlok (2013 -28%) atau mendatar/berganti arah (2014, 2018, 2021: 12-20 kali ganti tren harian).
+- Penambal (18 varian): K6 hanya bila H1 searah D1 SMA100 → 4/22 minus (2005 +2, 2013 +1) TETAPI 2018 -10, 2021 -15 & total
+  +15,4 vs +17,0; tetangga SMA50/200 tetap 6/22. Filter ATR rendah, tanpa susulan BUY (+17,7, DD 43R, tetap 6 minus), gabungan
+  (4-7 minus). TIDAK ADA yang memperbaiki kedua paruh (2005-15 & 2016-26) sekaligus → rugi hanya dipindah antar tahun. Tidak dipasang.
+- Hitungan statistik: rata +0,071R/trade × 239 trade/thn = +17,0 R/thn, simpangan tahunan 19,4R → peluang tahun minus 19%
+  (≈ 4,2 dari 22 walau edge stabil sempurna). Agar ≤ 1 tahun minus dari 22 butuh edge/trade ≈ 2× (+0,14R) atau variansi jauh
+  lebih kecil. Fokus berikutnya: menaikkan edge per trade (bukan filter tahun), mis. membuang komponen ber-edge rendah & menambah
+  komponen ber-edge tinggi, dan sizing yang mengecilkan variansi.
