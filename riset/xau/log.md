@@ -465,3 +465,12 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Pengisi saja (218 hari, ±0,35 trade/mg): IKUT SL2 2015-21 win 48% PF 1,28 tetapi 2022-Jan25 PF 0,88 dan Setra PF 0,77
   (-1,0 & -1,5 R/thn); OCO & TP 1,5 sama polanya → untung hanya di periode pemilihan. Status `perlu-data`/keputusan pemilik:
   100% cakupan bisa dipenuhi dengan biaya kecil di era terbaru, bukan peningkatan.
+
+## 10 Nov 2026 — Ide #53 PENGISI BEBAS hari batal tanpa S3 (pengisi_bebas.py, pemilik: riset bebas & kreatif)
+- 457 hari pengisi 2004-2026. Aturan "jika fitur > median maka arah A selain itu B" (10 fitur × 6 arah × 6 arah) + 6 aturan
+  tetap × SL 1/1,5/2/3 × TP 0,3/0,5/0,75/1/1,5/2/tanpa = 8.568 kombinasi. Pilih 2015-21; konfirmasi 2004-14 (data baru) & 2022+.
+- 15 teratas pilih (+0,33..+0,54 R/trade, semua SL 1 ATR tanpa TP, win 33-38%) RUGI di 2004-14 (-0,09..-0,46) dan 2022+.
+  Dari 200 teratas: positif di 2004-14 48, 2022-Jan25 20, Setra 51, KETIGANYA 0. Semua kombinasi: positif 22% (2004-14),
+  13% (2015-21), 14% (2022-Jan25), 42% (Setra). TP kecil (win tinggi) kalah oleh biaya.
+- Kesimpulan: hari "order batal + RSI tidak ekstrem" tidak punya edge yang bisa ditemukan dari fitur harga; memaksa sinyal di
+  hari ini = membayar biaya. `ditolak`. 2004-2014 dipakai sebagai konfirmasi (tidak untuk memilih).
