@@ -474,3 +474,16 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   13% (2015-21), 14% (2022-Jan25), 42% (Setra). TP kecil (win tinggi) kalah oleh biaya.
 - Kesimpulan: hari "order batal + RSI tidak ekstrem" tidak punya edge yang bisa ditemukan dari fitur harga; memaksa sinyal di
   hari ini = membayar biaya. `ditolak`. 2004-2014 dipakai sebagai konfirmasi (tidak untuk memilih).
+
+## 10 Nov 2026 — Ide #54 PUSTAKA STRATEGI KLASIK (pustaka.py; pemilik: keluar dari RSI/EMA)
+- 20 strategi (inside bar, turtle soup, fraktal Bill Williams, alligator, fibonacci 61,8, profil waktu TPO/POC sbg proksi volume
+  profile [3 varian], donchian, NR7, bollinger fade & squeeze, supertrend, pivot R1/S1, PDH/PDL soup, heikin-ashi, MACD,
+  ichimoku, parabolic SAR, stochastic) × SL 1/2 ATR × TP 0,5/1/2/tanpa; pilih 2015-21; konfirmasi 2004-14, 2022-Jan25, Setra.
+- PENGISI hari batal: 0/20 untung di semua periode. Pengikut tren (alligator, supertrend, ichimoku, TPO terima di luar VA
+  [PF 1,92, cakupan 20%]) untung di 2004-14, 2015-21 & Setra tetapi RUGI di 2022-Jan25 (-2,2..-7,2 R/thn).
+- MANDIRI jam 07:00: 1/20 — bollinger fade (close di luar pita 2σ → lawan, SL 2 ATR tanpa TP) +1,8/+1,9/+1,7/+7,5, PF 1,43,
+  tetapi hanya 4% hari dan 91% sudah = hari MR live searah (strategi sama, bukan sumber baru). Bollinger squeeze OCO 3/4
+  periode (+7,3/+5,9/+0,5/-3,6). Turtle soup 3/4. Lainnya rugi di ≥ 2 periode (fibonacci, pivot, stochastic, NR7 terburuk).
+- Belum diuji (riset lanjutan): volume profile ASLI (butuh volume tick Dukascopy, unduh ulang), Elliott wave (tidak bisa
+  dimesinkan secara pasti; hanya proksi swing/fraktal). Antrian: #55 diagnosa kenapa pengikut tren gagal 2022-Jan25 di hari
+  pengisi (rezim suku bunga/ATR?), #56 bollinger squeeze sebagai strategi tambahan hari tanpa sinyal, #57 volume tick.
