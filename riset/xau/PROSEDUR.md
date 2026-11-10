@@ -70,8 +70,11 @@ harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum diliha
 - Pemeriksaan tambahan: periode Setra Feb 2025-skrg (data broker) dan perak. Uji maju bot live = hakim terakhir.
 - Catatan teknis: indikator lambat (MA200 hari dll.) butuh pemanasan — mulai hitung trade setelah indikator terbentuk.
  Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: bot live hibrida MA100 (vonis 2005-2014: 7/22 tahun minus, lihat log 10 Nov); kandidat terkuat: #58 V2
-(kombinasi RSI2+tren+CLV); penambal #50. Antrian celah: 2015 (efek data awal MA200 → butuh data lama), rezim mendatar di sekitar
-MA200 (2018/2021), tren kuat ADX tinggi (2023), K6 di tahun tenang (2016/2018).
+(kombinasi RSI2+tren+CLV); penambal #50. ARAH UTAMA SEJAK 10 Nov 2026 (log "Tambal-celah putaran 2"): menambal per tahun hanya memindahkan rugi; peluang tahun minus
+dengan edge +0,071R/trade × 239 trade/thn ≈ 19% (±4 dari 22 tahun walau stabil). Fokus = NAIKKAN EDGE PER TRADE / turunkan
+variansi tahunan: (1) buang/perkecil komponen ber-edge ±0 (mis. susulan BUY -17R/22 thn), (2) perbesar porsi komponen ber-edge
+tinggi (kombinasi #58), (3) ukuran posisi per komponen sebanding edge-nya, (4) cari komponen baru ber-edge ≥ +0,15R/trade.
+Ukuran sukses: rata R/trade, simpangan R tahunan, jumlah tahun minus 2005-2026, P vs live.
 1. **Uji maju** (selalu): tulis hasil `bayangan.py` (trade, win, total R per strategi menu vs live) dan selisih live vs baseline.
 2. Uji 2 ide: ide teratas berstatus `antri` dari `riset/xau/ide.md`, **ditambah 1 ide baru** (ATURAN_BERSAMA bagian A; literatur
    = nilai tambah). Ide yang sudah `gagal` tidak diuji ulang tanpa data baru yang relevan.
