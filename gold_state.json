@@ -1,5 +1,5 @@
 {
- "last_ts": 1794301200,
+ "last_ts": 1794308400,
  "pend": null,
  "pos": null,
  "recap_week": "2026-11-02T00:00:00+07:00",
@@ -159,7 +159,9 @@
   "1793718960|Congressional Elections",
   "1793971800|Average Hourly Earnings m/m",
   "1793971800|Non-Farm Employment Change",
-  "1793971800|Unemployment Rate"
+  "1793971800|Unemployment Rate",
+  "1794317400|CPI m/m",
+  "1794317400|Core CPI m/m"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00",
  "c07": {
