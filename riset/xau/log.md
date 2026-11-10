@@ -455,3 +455,13 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   riset/data/xau_dukascopy_h1_2004_2014.json.gz (+ riset/gabung_xau_lama.py). Riset Jumat tidak perlu mengunduh.
 - 6 Nov 2026: pembagian data baru (pemilik): Langkah 1 uji apa adanya di 2004-2014 (sekali, Jumat 13 Nov); Langkah 2
   walk-forward berlabuh 2004-2026 (uji per 2 tahun, 2011-2026 semua tahun hasil uji). Ditulis di PROSEDUR.
+
+## 10 Nov 2026 — Ide #52 SUSULAN WAJIB (tiap hari order pagi batal harus ada sinyal; susulan_wajib.py, permintaan pemilik)
+- Pemicu: Selasa 10 Nov K6 BUY STOP batal (batas 4.133,25 tersentuh candle 07-08), keputusan susulan 09:00 RSI2 41,0 → tanpa
+  susulan (sesuai aturan; bot & replay sama). Fakta: susulan S3 live sudah muncul di 70% hari batal (513/731, 12 thn).
+- 200 varian (S3 + pengisi / satu strategi untuk semua hari batal; pengisi MR50/IKUT/FADE/D1/OCO × SL × TP), dipilih 2015-21.
+  Terbaik: S3 + IKUT (arah tembusan, market) SL 2 ATR tanpa TP: gabung 12t +17,5 vs +16,5, pilih +12,0 vs +9,4, uji +27,6
+  vs +28,6, Setra +21,8 vs +23,2, 10/12 thn, P uji 0,28 / Setra 0,33. S3 + OCO SL 1,5: 12t +17,9, uji +24,4, Setra +23,7.
+- Pengisi saja (218 hari, ±0,35 trade/mg): IKUT SL2 2015-21 win 48% PF 1,28 tetapi 2022-Jan25 PF 0,88 dan Setra PF 0,77
+  (-1,0 & -1,5 R/thn); OCO & TP 1,5 sama polanya → untung hanya di periode pemilihan. Status `perlu-data`/keputusan pemilik:
+  100% cakupan bisa dipenuhi dengan biaya kecil di era terbaru, bukan peningkatan.
