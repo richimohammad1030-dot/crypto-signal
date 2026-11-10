@@ -387,5 +387,31 @@
   "btc": 1,
   "skor": -1,
   "fund": 1.2413034246575344e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-11-10 09:00",
+  "sym": "GRAMUSDT",
+  "d": -1,
+  "t0": 1792713600,
+  "t1": 1794276000,
+  "entry": 1.303,
+  "exit": 1.111,
+  "R": 2.165,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 4.136,
+  "mae": -0.346,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 5.771,
+  "ext": 4.639,
+  "trend": 1.476,
+  "dist": 1.277,
+  "mom20": 12.275,
+  "rank": 18,
+  "btc": 1,
+  "skor": 1,
+  "fund": 4.9027904109589044e-06
  }
 ]
