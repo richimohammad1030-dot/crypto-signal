@@ -514,3 +514,11 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   hibrida + kombo, trades_live_mr (strat0), baseline default = live. replay_xau: xau.json 415/415 (KOMBO 52 MR 215 K6 87 SUS 61),
   xau_panjang 2841/2841 (KOMBO 416) IDENTIK. Simulasi pesan 27 Okt (KOMBO BUY RSI 10,6 → +3,18R). baseline.json diperbarui.
   Bayangan: "Tanpa kombinasi (hibrida 6 Nov)".
+
+## 10 Nov 2026 — Ide #59 cara keluar trade KOMBINASI (kombo_keluar.py; pertanyaan pemilik: TP 1:10 / trailing SL)
+- 907 trade kombinasi 2005-2026. MFE intraday (gerak menguntungkan maks sebelum 23:00): median 1,12R, p90 3,43R, maks 10,3R;
+  ≥ 3R 13,7%, ≥ 5R 2,6%, ≥ 10R 0,11% (1 trade) → TP 10R praktis = tanpa TP (hasil identik kecuali +0,3 R/thn di 2015-21).
+- Trailing SL (1-3 ATR, segera / setelah +1R, ± breakeven, ± TP 10R; 33 varian): terbaik di pilih trail 3 ATR + TP10 +6,6 vs
+  live +6,6 (sama), tetapi 2005-14 +6,6 vs +8,2 dan 2022-Jan25 -0,5 vs +1,9 → lebih buruk. Breakeven memangkas win jadi 31-35%.
+  TP keras 2-5R lebih buruk di 2005-21. Kesimpulan: keluar jam 23:00 tanpa TP tetap terbaik; `ditolak` (TP 10R boleh dipasang
+  sebagai pengaman, efeknya nol).
