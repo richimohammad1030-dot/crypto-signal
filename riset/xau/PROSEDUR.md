@@ -59,9 +59,11 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
    (normal atau tidak). CELAH berulang (≥ 2 SL komponen & kondisi sama dalam 4 minggu, di atas porsi historis) → buka ide baru.
 3. **Akumulasi live vs bayangan** (bayangan.py) — penilaian strategi hanya dari akumulasi ≥ 4-8 minggu.
 4. **Satu putaran perbaikan** (arah utama di bawah) dengan walk-forward 2004-2026.
+4b. **Satu langkah KURIKULUM SKILL** (`riset/KURIKULUM_SKILL.md`; XAU: skill 1 SNR). Kerjakan tahap berikutnya dari skill
+   aktif, perbarui tabel Status di kurikulum, dan tulis di ringkasan `🎓 SKILL ...: LULUS TAHAP n` bila lulus (atau progres).
 5. **Gerbang pasang:** perbaikan teknis (bug/data/pesan) boleh diusulkan dipasang minggu itu juga. Perubahan STRATEGI wajib
    P ≥ 0,90 walk-forward + replay IDENTIK + bayangan ≥ 4 minggu; maksimal 1 perubahan strategi per bulan.
-6. **Ringkasan Telegram** berbagian: Kesehatan · Penyebab SL · Live vs bayangan · Riset · Usulan (butuh "pasang"/"tidak" pemilik).
+6. **Ringkasan Telegram** berbagian: Kesehatan · Penyebab SL · Live vs bayangan · Riset · Skill · Usulan (butuh "pasang"/"tidak" pemilik).
 **PROGRAM UTAMA (pemilik, 6 Nov 2026): TAMBAL-CELAH sampai TIDAK ADA TAHUN MINUS, baru setelah itu optimasi besar untung.**
 Tiap Jumat satu putaran: (a) bedah celah sistem dasar (`eksperimen/celah_ma200.py`: per tahun × komponen, kondisi pasar, bulan
 terburuk); (b) cari 1-2 ide BARU dari luar (indikator/strategi/literatur) yang khusus menutup celah terbesar; (c) uji dengan

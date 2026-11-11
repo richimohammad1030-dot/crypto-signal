@@ -541,3 +541,10 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - riset/xau/sebab_sl.py: klasifikasi SL = DATA / NEWS / LONJAKAN / CELAH + pembanding historis 2005-2026. Uji 14 hari: 4 Nov MR
   SELL (LONJAKAN 3,1 ATR), 5 Nov MR SELL (LONJAKAN 2,5 ATR; news minggu lalu tidak tersedia di kalender minggu berjalan),
   11 Nov KOMBO SELL (CELAH: searah tren H1, ATR rel 1,05; historis KOMBO searah tren SL 48% dari 623 → kerugian normal).
+
+## 11 Nov 2026 — Kurikulum skill (pemilik): riset/KURIKULUM_SKILL.md
+- Tiap skill: tahap 0 definisi mesin → tahap 1 PAHAM (nyata vs acak, P ≥ 0,90 di 2004-14 & 2015-26) → tahap 2 BISA MEMAKAI
+  (memperbaiki sistem walk-forward) → tahap 3 LIVE. Notif ringkasan Jumat "🎓 SKILL ...: LULUS TAHAP n".
+- Skill 1 XAU = SNR (default pemilik: 4 jenis — swing fraktal, high/low hari & minggu sebelumnya, angka bulat, zona
+  supply-demand; level H4 & D1, keputusan H1). Mulai Jumat 13 Nov. Antrian: struktur pasar, price action di level, sesi &
+  likuiditas, volume, news, antar-pasar, konfluensi MTF. PROSEDUR langkah 4b.
