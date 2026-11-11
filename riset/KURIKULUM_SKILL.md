@@ -45,9 +45,9 @@ Pilihan pemilik (11 Nov): semua jenis diuji; level dari H4 & D1, dipakai untuk k
 7. Antar-pasar (indeks dolar, perak, imbal hasil — bila datanya bisa diperoleh)
 8. Konfluensi multi-timeframe (gabungan skill yang sudah lulus)
 
-## Status
-| Bot | Skill aktif | Tahap | Catatan |
-|---|---|---|---|
-| XAU | 1 · SNR | 0 (mulai Jumat 13 Nov 2026) | |
-| Crypto swing | – | – | dikelola di chat crypto |
-| Intraday | – | – | dikelola di chat crypto |
+## Status (dicatat di folder riset masing-masing bot; workflow laporan hanya menyalin riset/<bot>/ ke main)
+| Bot | File status | Keadaan 11 Nov 2026 |
+|---|---|---|
+| XAU | `riset/xau/SKILL.md` | skill 1 SNR, tahap 0 mulai Jumat 13 Nov |
+| Crypto swing | `riset/crypto/KURIKULUM.md` | skill 1 SNR (lihat file) |
+| Intraday | `riset/intraday/PROSEDUR.md` bagian SKILL | skill 1 SNR: tahap 1 PAHAM lulus untuk jenis PERIODE (11 Nov) |
