@@ -82,5 +82,19 @@
   "R_kotor": -1.0,
   "alasan": "SL",
   "versi": "intraday-v3"
+ },
+ {
+  "waktu_tutup_wib": "2026-11-11 09:15",
+  "sym": "UNIUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1794360600,
+  "t1": 1794363300,
+  "entry": 6.790687473564745,
+  "exit": 6.671,
+  "R": 0.652,
+  "R_kotor": 0.667,
+  "alasan": "TP",
+  "versi": "intraday-v3"
  }
 ]
