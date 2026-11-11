@@ -22,7 +22,49 @@ SKEN = {"REAL": dict(taker=0.0005, slip=0.0003, maker=0.0002),
         "KONS": dict(taker=0.0005, slip=0.0010, maker=0.0002)}
 
 
-def run_replay(gate=None):
+def hl_sejak(coin, start_s):
+    """Funding Hyperliquid per jam sejak start_s (sumber bot live)."""
+    import urllib.request
+    out, start = [], int(start_s) * 1000
+    for _ in range(20):
+        body = json.dumps({"type": "fundingHistory", "coin": rp.sb.HL_NAME.get(coin, coin), "startTime": start}).encode()
+        try:
+            req = urllib.request.Request("https://api.hyperliquid.xyz/info", data=body, headers={"Content-Type": "application/json"})
+            d = json.load(urllib.request.urlopen(req, timeout=60))
+        except Exception:
+            time.sleep(3); continue
+        if not d: break
+        out += [[x["time"] // 1000, float(x["fundingRate"])] for x in d]
+        if len(d) < 500: break
+        start = d[-1]["time"] + 1
+    time.sleep(0.4)
+    return out
+
+
+def lengkapi_hl(sejak):
+    """Lengkapi rp.FUND_HL (di memori) sejak waktu `sejak` agar replay periode live memakai sumber funding bot."""
+    for c in rp.DATA:
+        ts, rs = rp.FUND_HL.get(c, ([], []))
+        if not ts or ts[0] > sejak:
+            h = hl_sejak(c, sejak)
+            if h:
+                m = dict(zip(ts, rs)); m.update({tt: r for tt, r in h})
+                k = sorted(m); rp.FUND_HL[c] = (k, [m[tt] for tt in k])
+
+
+def funding_hl_dulu(coin, t):
+    """Sumber funding seperti bot LIVE: Hyperliquid (rata 72 jam, >= 24 titik) bila ada, selain itu arsip Binance.
+    Dipakai untuk cek kesehatan live = replay (11 Nov 2026: replay Binance-dulu beda tanda funding di POL/ALGO)."""
+    ts, rs = rp.FUND_HL.get(coin, ([], []))
+    a, b = bisect.bisect_right(ts, t - 72 * 3600), bisect.bisect_right(ts, t)
+    if b - a >= 24:
+        return sum(rs[a:b]) / (b - a)
+    ts, rs = rp.FUND.get(coin, ([], []))
+    a, b = bisect.bisect_right(ts, t - 72 * 3600), bisect.bisect_right(ts, t)
+    return sum(rs[a:b]) / (b - a) if b - a >= 6 else None
+
+
+def run_replay(gate=None, fund_fn=None):
     """Replay mesin asli dengan notifier yang mencatat detail fill / TP sebagian / keluar.
     gate(coin, i, D, d, entry, sl, t) -> bool (opsional, replay penuh: slot ikut berubah, lihat _replay.py)."""
     sb = rp.sb
@@ -41,9 +83,9 @@ def run_replay(gate=None):
 
     state = {"coins": {}, "last_ts": 0, "replay": True}
     if gate is None:
-        eng = sb.Engine(state, rp.funding_fn, notify)
+        eng = sb.Engine(state, fund_fn or rp.funding_fn, notify)
     else:
-        eng = rp.make_engine_cls()(state, rp.funding_fn, notify)
+        eng = rp.make_engine_cls()(state, fund_fn or rp.funding_fn, notify)
         eng.gate = gate
     eng.run(rp.DATA, 0)
     return pd.DataFrame(rows), eng.open_count()
@@ -71,7 +113,7 @@ def add_costs(df):
             ts = ft[j]
             k = bisect.bisect_right(T, ts) - 1
             px = C[k] if k >= 0 else x.e
-            frac = 0.75 if (x.t_part is not None and not pd.isna(x.t_part) and ts >= x.t_part) else 1.0
+            frac = (1 - rp.sb.TP1_FRAC) if (x.t_part is not None and not pd.isna(x.t_part) and ts >= x.t_part) else 1.0
             f += frac * fr[j] * x.d * px / x.r0       # positif = biaya
         fund_R.append(f)
         notional.append(x.e / x.r0)                  # nilai posisi per 1R saat entry
@@ -79,8 +121,9 @@ def add_costs(df):
     has_part = df.px_part.notna()
     for k, s in SKEN.items():
         ent = (s["taker"] + s["slip"]) * df.e / df.r0
-        part = np.where(has_part, 0.25 * s["maker"] * df.px_part.fillna(0) / df.r0, 0.0)
-        rest = np.where(has_part, 0.75, 1.0) * (s["taker"] + s["slip"]) * df.ex / df.r0
+        fr = rp.sb.TP1_FRAC                                    # porsi TP sebagian (0,25 di bot v2)
+        part = np.where(has_part, fr * s["maker"] * df.px_part.fillna(0) / df.r0, 0.0)
+        rest = np.where(has_part, 1 - fr, 1.0) * (s["taker"] + s["slip"]) * df.ex / df.r0
         df[f"fee_{k}"] = ent + part + rest
         df[f"R_{k}"] = df.R - df[f"fee_{k}"] - df.fund_R
     df["R_KOTOR"] = df.R

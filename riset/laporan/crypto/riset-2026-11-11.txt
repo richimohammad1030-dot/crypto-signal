@@ -1,0 +1,75 @@
+<b>RISET CRYPTO · EVALUASI</b>
+Rabu, 11 Nov 2026
+────────────────────
+Penerapan update riset XAU: evaluasi,
+siklus Jumat, pembagian data, skill.
+
+<b>Evaluasi bot live v2</b>
+────────────────────
+R bersih (fee, slip, funding).
+<pre>
+Thn  Trade  R bersih  PF   Win
+2020  304    +112,5  2,48  47%
+2021  336    +120,3  2,41  42%
+2022  337     +50,1  1,52  39%
+2023  371    +102,8  1,99  39%
+2024  371    +113,5  2,12  43%
+2025  382     +25,6  1,23  39%
+2026* 334     +42,0  1,42  37%
+</pre>
+*s.d. 10 Nov. Tahun minus: tidak ada.
++0,23R/trade, RR 2,7, DD 17,5R (pulih
+56 hari), di bawah puncak terlama 142
+hari. Biaya = 12% edge kotor (2025 22%).
+BUY PF 2,14 · SELL PF 1,45.
+
+<b>Peluang tahun minus</b>
+────────────────────
+Rata 2020-25: 1,4%/thn. Tetapi bila
+edge tetap di level 2025-skrg: ±18%.
+Edge turun sejak 2025 → fokus naikkan
+edge per trade.
+
+<b>Data konfirmasi 2017-2019</b>
+────────────────────
+Data belum pernah dipakai merancang.
+<pre>
+               2018    2019
+Bot persis     -1,9   +51,5
+SELL diizinkan +81,2  +87,9
+</pre>
+2018 minus hanya karena arsip funding
+belum ada (SELL terblokir). Edge tren
+terkonfirmasi, SELL 2018 +83R.
+
+<b>Kesehatan</b>
+────────────────────
+Live 24 trade -1,33R vs replay -1,95R
+sejak 24 Okt. Selisih trade: sumber
+funding riset (Binance) beda dgn bot
+(Hyperliquid) + slot HYPE. Bukan bug
+bot; alat riset diperbaiki.
+
+<b>Penyebab SL (5-11 Nov)</b>
+────────────────────
+2 SL: XLM SELL (DATA, efek slot HYPE),
+UNI BUY (LONJAKAN 4,7 ATR, pasar).
+Tidak ada celah berulang.
+
+<b>Live vs bayangan</b>
+────────────────────
+Semua menu -1,4 s.d. -2,2R, live
+-1,33R. Terlalu dini menilai.
+
+<b>Skill</b>
+────────────────────
+SNR tahap 0 (definisi mesin) selesai.
+Tahap 1 PAHAM: Jumat 13 Nov.
+
+<b>Usulan</b>
+────────────────────
+1. Teknis: backtest riset pakai
+   funding Hyperliquid seperti bot.
+2. Status skill crypto di
+   riset/crypto/KURIKULUM.md.
+Strategi bot: tidak ada perubahan.

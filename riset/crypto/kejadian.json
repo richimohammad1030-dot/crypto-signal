@@ -1,0 +1,11 @@
+{
+  "_catatan": "Kejadian besar crypto (UTC, tingkat hari) untuk kategori NEWS di riset/crypto/sebab_sl.py. Ditambah manual tiap Jumat bila ada kejadian besar (crash/likuidasi massal, hack bursa besar, keputusan regulasi besar, delisting). Format: [tanggal_awal, tanggal_akhir, keterangan].",
+  "kejadian": [
+    ["2020-03-12", "2020-03-13", "Crash COVID (Black Thursday), likuidasi massal"],
+    ["2021-05-19", "2021-05-19", "Crash 19 Mei 2021, likuidasi massal"],
+    ["2022-05-09", "2022-05-13", "Runtuhnya LUNA/UST"],
+    ["2022-11-08", "2022-11-11", "Runtuhnya FTX"],
+    ["2024-08-05", "2024-08-05", "Crash pasar global (unwinding carry trade yen)"],
+    ["2025-10-10", "2025-10-11", "Likuidasi massal setelah pengumuman tarif AS"]
+  ]
+}

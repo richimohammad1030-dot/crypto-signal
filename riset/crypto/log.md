@@ -102,3 +102,33 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
 - Risiko dipantau: peluang tahun minus (bootstrap trade tiap tahun, 20.000x) 2025 9,4% · 2026 1,8% · 2022 0,2% · lainnya 0%.
   Skrip: `tahap0_semua_tahun.py` kini mencetak baris SYARAT dan peluang tahun minus (`lulus`, `p_minus`).
 - #54 dan #55 tetap antri, kini sebagai jalur optimasi (a, e).
+
+## 2026-11-11 · UPDATE dari riset XAU (pemilik): evaluasi, siklus Jumat, pembagian data, arah riset, kurikulum skill
+- **Evaluasi bot live v2** (`eksperimen/evaluasi_live.py`, daftar tetap, R bersih REAL, data s.d. 10 Nov): 2.435 trade 2020-skrg,
+  355/thn, win 40,8%, RR 2,68, PF 1,85, +0,233R/trade, +82,6R/thn, DD 17,5R, kalah beruntun maks 25, bulan positif 60%.
+  2020-2023 +0,29R/trade PF 2,07 vs 2024-skrg +0,17R PF 1,58. Tahun minus: tidak ada (terburuk 2025 +25,6R, PF 1,23).
+  BUY +0,32R/trade (PF 2,14) vs SELL +0,12R (PF 1,45); SELL minus di 2021 (-0,7R) & 2025 (-0,9R), BUY minus di 2022 (-6,6R).
+  41/49 koin positif. DD terdalam 17,5R (1 Okt → 9 Nov 2024, pulih 26 Nov 2024, 56 hari); di bawah puncak terlama 142 hari
+  (24 Des 2024 → 15 Mei 2025). Biaya 0,032R/trade = 12% edge kotor (2025: 22%). Ekuitas risiko 1% majemuk (posisi paralel
+  diabaikan): CAGR ±120%, MaxDD 16,2%.
+- **Peluang tahun minus** (Φ(-rata/simpangan) R tahunan, cara log XAU 10 Nov): daftar tetap 2020-25 rata +87,5, sd 39,6 → 1,4%;
+  sesuai masanya 2018-25 rata +72,2, sd 30,6 → 0,9%; iid per trade 0,23%. **Bila edge tetap di level 2025-skrg (28-36R/thn) → ±18%/thn.**
+- **Kesehatan live vs replay** (`riset/crypto/sebab_sl.py`): sejak v2 (24 Okt) live 24 trade -1,33R kotor, replay 25 trade -1,95R.
+  Replay lama (funding Binance) beda tanda funding di POL/ALGO → 6 trade live tanpa pasangan; replay funding HL-dulu (sumber bot)
+  → 3 (sisa = slot posisi HYPE live yang tidak ada di replay). Bukan bug bot; alat riset diperbaiki (#60), #63 antri.
+- **Penyebab SL 7 hari** (5-11 Nov): 12 trade -0,86R, SL 2: XLM SELL 4 Nov (DATA: tidak ada di replay, efek slot HYPE),
+  UNI BUY 5 Nov (LONJAKAN 4,7 ATR, BTC 5,2 ATR = pasar). Tidak ada CELAH berulang (28 hari).
+- **Bayangan** (`riset/crypto/bayangan.py`) sejak 24 Okt: v2 -1,95 · tanpa stagnan -1,79 · tanpa TP25 -2,19 · v1 -1,96 ·
+  SELL 0,5% -2,11 · LOW 1/2 -1,40R kotor; live -1,33R. Terlalu sedikit untuk menilai (butuh ≥ 4-8 minggu).
+- **LANGKAH 1 data konfirmasi** (`eksperimen/unduh_lama.py`, `tahap0_lama.py`): spot Binance Agu 2017 - Sep 2019 + snapshot CMC
+  bulanan (60 koin ber-data, sesuai masanya; BCC/VEN duplikat dibuang). Vonis APA ADANYA Nov 2017 - Nov 2019:
+  A aturan bot persis: 2017 +4,5 · 2018 **-1,9** · 2019 +51,5R (hanya BUY: arsip funding belum ada → SELL terblokir).
+  B SELL diizinkan bila funding tak diketahui: 2018 +81,2 (SELL +83,0R, 117 trade) · 2019 +87,9R, +0,35R/trade, DD 16,8R.
+  C daftar bot sekarang (bias): 2018 -1,5 · 2019 +56,4R. Kesimpulan: edge tren terkonfirmasi di data baru termasuk bear 2018;
+  2018 minus di A = artefak data funding, bukan strategi. 2017-2019 kini sudah dipakai (ikut walk-forward).
+- **Walk-forward** (`eksperimen/_wf.py`): sistem dasar juara v2 sesuai masanya 2018-skrg 2.974 trade +614,5R DD 24,2R; per tahun
+  2018 +81 · 2019 +90 · 2020 +83 · 2021 +95 · 2022 +34 · 2023 +100 · 2024 +80 · 2025 +15 · 2026 +37R. Tidak ada tahun < +1R.
+- **Kurikulum skill SNR** (`riset/crypto/KURIKULUM.md`, `eksperimen/skill_snr.py`): tahap 0 definisi mesin selesai (4 jenis zona,
+  tanpa melihat masa depan); tahap 1 PAHAM Jumat 13 Nov.
+- PROSEDUR: SIKLUS JUMAT, PEMBAGIAN DATA, ARAH RISET ditambahkan. Ide baru #60-#63. Catatan penomoran: XAU memakai #52-#59 pada
+  10 Nov sementara crypto #52-#55 (6 Nov) — nomor bentrok; rujukan crypto tetap di log/ide crypto, penomoran baru mulai #60.
