@@ -196,3 +196,39 @@ Skrip: `eksperimen/tahap0_semua_tahun_2026-11-06.py` (tabel per tahun, 4 varian)
     top 50 batas (P 0,90). Risiko terbuka bersamaan maks 4,4% (juara 3%). → **UJI-MAJU** sejak 6 Nov 2026. Data terkunci intraday (PIT) sudah
     menjadi uji utama sejak v3, jadi tidak ada data baru tersisa selain uji maju.
 - Total ide intraday bernomor yang sudah diuji: 17. Juara v3 tidak berubah.
+
+## 2026-11-11 · UPDATE pemilik dari riset XAU: siklus Jumat, pembagian data, arah, kurikulum skill + evaluasi lengkap
+Data diperbarui s.d. 11 Nov 2026 ±18:00 WIB (49 koin + 177 koin PIT) + data baru 2017-08 s.d. 2019-12 (150 koin, `eksperimen/unduh_2018.py`).
+Hasil riset crypto swing 11 Nov belum ada di `riset/crypto/log.md` saat dikerjakan (entri terakhir 6 Nov) → tidak ada yang dipakai.
+- **Evaluasi lengkap juara v3** (`eksperimen/evaluasi_2026-11-11.py`, PIT biaya juara): 2.972 trade, 8,5/mg, +259,4R, +0,087R/trade,
+  win 63,3%, RR 0,74, PF 1,28, DD 15,8R, beruntun 21/9, CAGR 1% 45,5%, DD ekuitas 15,6%. 2020-23 +0,103R/tr rasio 3,50 ·
+  2024-skrg +0,061R/tr rasio 1,51. Per tahun +38/+93/+36/+25/+25/+9/+34 (tanpa 2% terbaik terendah 2025 +1,6). A-long +0,124 ·
+  B-long +0,080 · B-short +0,054R/tr. Jam isi terbaik 04-07 & 21-22 WIB (sedikit trade), lemah 15 & 17 WIB (-2,2/-10,3R).
+  DD terdalam 15,8R (10 Mar → 18 Sep 2024, pulih 3 Okt 2024: 207 hari); 13,6R 2025 (8 Apr → 16 Jun, pulih 27 Okt: 202 hari).
+  Biaya: kotor +322,7R, fee+slip -55,8R (-0,019R/trade = 17% edge kotor; 2025 42%), funding -7,5R (-0,0025R/trade, 2%).
+  Peluang tahun minus 2020-26: normal dari R tahunan 6,6% (rata 39,5, sd 26,3) · iid per trade 0,8% · bootstrap bulan 2,2%;
+  era 2024+ ±5%. Daftar tetap: semua tahun +, 2025 +18,0R, DD 13,3R.
+- **VONIS APA ADANYA Mar 2018 - Feb 2020** (data belum pernah dilihat, `eksperimen/vonis_2018_2026-11-11.py`; funding & B-short tidak
+  ada sebelum Sep 2019): PIT 575 trade, +12,7R, +0,022R/trade, PF 1,07, DD 16,9R · **2018 +12,8 · 2019 -5,6 · Jan-Feb 2020 +5,5** ·
+  stres: 2019 -17,2R, total -3,7R · daftar tetap 374 trade +14,1R (2019 +5,8, Jan-Feb 2020 -1,5). 2019: A-long -2,4, B-long -3,3R,
+  Juni -5,5R, rugi XRP/LTC/XLM; 12 bulan bergulir terendah -11,3R. R tahunan 2018-2026 rata +31, sd 28 → peluang tahun minus ±13%/thn.
+  Periode 2018-Feb 2020 kini terpakai sekali untuk vonis; selanjutnya hanya konfirmasi ide yang sudah lolos walk-forward.
+- **Konfirmasi I-25** (sekali): GAGAL — 2018 +9,2 vs +12,8, 2019 -10,3 vs -5,6, total +4,1 vs +12,7R, DD 25,7 vs 17,9R. Uji maju dihentikan.
+- **Arah** (aturan pemilik): belum semua tahun untung (2019 di data konfirmasi) → **NAIKKAN EDGE PER TRADE / turunkan variansi**
+  (usulan; PROSEDUR ARAH UTAMA). Program OPTIMASI 6 Nov menjadi daftar ide dengan ukuran sukses R/trade & variansi.
+- **Siklus Jumat** dipasang di PROSEDUR + `riset/intraday/sebab_sl.py` + `riset/intraday/bayangan.py`. Minggu ini (7 hari): 7 trade
+  live tutup, +1,68R, 1 SL = RENDER B-short 9 Nov (CELAH; B-short, BTC searah, ATR rel tinggi; historis kondisi sama SL 32% dari 145 =
+  porsi modul → normal). 14 hari: + PEPE A-long 30 Okt (LONJAKAN 3,5 ATR, BTC ikut). Kesetaraan sejak v3: live 9 trade +2,98R vs
+  replay 9 +2,48R; 1 beda = HYPE B-short 6 Nov live (-0,53R WAKTU) vs replay ADA (-1,04R SL): replay melewati HYPE karena data 15m
+  < 5.000 candle (listing spot 24 Sep 2026) → keterbatasan replay, bukan bug bot (hilang sendiri ±16 Nov).
+- **Putaran riset (pustaka + KOMBINASI, walk-forward 2 tahun)** `eksperimen/kombinasi_2026-11-11.py`: 16 komponen H1 × 1-4 sepakat ×
+  4 lingkup = 10.064 kombinasi (filter pasca-trade). Gabungan uji 2022-26: R/trade +0,093 vs +0,073 tetapi R 95 vs 129; uji pembanding
+  20 teratas 0%/60%/40% vs semua 81%/8%/60% → **gagal (I-29)**. Temuan pustaka: B-long + Alligator H1 searah +0,118R vs -0,018R
+  (6/7 tahun) → **I-28** antri (replay penuh). D1 SMA100 searah justru lebih buruk (1/7 tahun) untuk B-long & B-short.
+- **KURIKULUM SKILL intraday · SNR** (`eksperimen/skill_snr_2026-11-11.py`; 25 koin bot, H1, level H4/D1, 2020-22 & 2023-26):
+  Tahap 0 definisi 4 jenis selesai. Tahap 1 PAHAM (pantul vs level acak bergeser 0,5-2 ATR D1, bootstrap bulan):
+  PERIODE (high/low hari & minggu) pantul 33,5-35,7% vs acak 36,1-38,3% (lift -1,7 s.d. -3,8 poin; tembus lebih sering) P(beda) ≥ 0,99
+  di 4 sel → **LULUS TAHAP 1 (efek: level lebih sering DITEMBUS)**; SWING-D1 lift -0,8 s.d. -2,2 (P ≥ 0,95 di 4 sel) → lulus, efek sama;
+  SWING-H4 -0,4 poin (nyata tetapi sangat kecil); BULAT & SD tidak konsisten → belum. Lanjut: tahap 1b (lanjutan setelah tembus) &
+  tahap 2 (I-30). Status juga perlu dicatat di tabel `riset/KURIKULUM_SKILL.md` (berkas di luar riset/intraday; perlu disalin manual).
+- Total ide intraday bernomor diuji: 18 (+ I-29; I-25 kini gagal). Juara v3 & bot tidak diubah.

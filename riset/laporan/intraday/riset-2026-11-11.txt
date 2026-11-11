@@ -1,0 +1,55 @@
+<b>RISET INTRADAY</b>
+11 Nov 2026 · update siklus Jumat
+────────────────────
+Juara v3 &amp; bot tidak diubah. Data s.d. 11 Nov + data baru 2018-2019.
+
+<b>Evaluasi juara (koin sesuai masanya)</b>
+────────────────────
+<pre>
+Thn  Trd /mg     R  R/tr  PF  -2%
+2020 443 10 +38,0 +,086 1,28 +24
+2021 770 15 +92,6 +,120 1,43 +63
+2022 295  6 +35,6 +,121 1,41 +31
+2023 344  7 +24,9 +,072 1,22 +18
+2024 495 10 +25,3 +,051 1,15 +11
+2025 328  7  +9,4 +,029 1,08  +2
+2026 297  7 +33,5 +,113 1,37 +29
+</pre>
+Win 63%, RR 0,74, DD 15,8R (pulih 207 hari), kalah beruntun maks 9. A-long +0,124R/trade, B-long +0,080, B-short +0,054. Jam isi 17 WIB rugi (-10R). Biaya = 17% edge kotor (2025: 42%).
+
+<b>Vonis data belum pernah dilihat</b>
+────────────────────
+<pre>
+Mar18-Feb20  2018  2019 2020  R/tr
+Juara       +12,8  -5,6 +5,5 +,022
+Stres       +10,5 -17,2 +3,0 -,006
+</pre>
+Edge di luar data perancangan jauh lebih kecil. Peluang tahun minus ±13%/thn (2020-26 saja ±7%). I-25 gagal konfirmasi (2019 -10,3R) -&gt; uji maju dihentikan.
+
+<b>Kesehatan</b>
+────────────────────
+Sejak v3: live 9 trade +2,98R, replay +2,48R. Beda 1 (HYPE vs ADA 6 Nov): replay melewati koin baru listing (&lt;52 hari data). Bukan bug bot.
+
+<b>Penyebab SL</b>
+────────────────────
+7 hari: 1 SL. RENDER B-short 9 Nov = CELAH, porsi SL historis kondisi sama 32% (normal). 14 hari: PEPE 30 Okt = LONJAKAN (BTC ikut).
+
+<b>Live vs bayangan</b>
+────────────────────
+W44 +0,65 · W45 +2,06 · W46 +0,27R. Terlalu sedikit untuk menilai.
+
+<b>Riset</b>
+────────────────────
+I-29 kombinasi 2-4 dari 16 indikator klasik, walk-forward 2 tahun: R/trade uji +0,093 vs +0,073 tapi R total 95 vs 129, uji pembanding tak konsisten -&gt; GAGAL.
+Temuan: B-long saat Alligator H1 searah +0,118 vs -0,018R/trade (6/7 tahun) -&gt; I-28 diuji penuh Jumat.
+
+<b>Skill</b>
+────────────────────
+🎓 SKILL SNR: LULUS TAHAP 1 (PAHAM)
+High/low hari &amp; minggu sebelumnya dan swing D1 lebih sering DITEMBUS dari level acak (2-4 poin, P &gt;= 0,95, 2020-22 &amp; 2023-26, dua arah). Angka bulat &amp; supply-demand tidak beda dari acak. Berikutnya: tahap 2.
+
+<b>Usulan (butuh jawaban)</b>
+────────────────────
+1. Arah riset: NAIKKAN EDGE PER TRADE (2019 minus). Setuju?
+2. 2018-Feb 2020 jadi periode konfirmasi tetap.
+Tidak ada perubahan bot.

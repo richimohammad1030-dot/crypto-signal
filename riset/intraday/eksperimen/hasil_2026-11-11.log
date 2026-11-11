@@ -1,0 +1,553 @@
+
+================ PIT biaya juara (UJI UTAMA) ================
+SEMUA  n=2972 R=+259.4 avg=+0.087 win=63.3% RR=0.74 PF=1.28 DD=15.8R beruntun 21/9 tanpa2%=+161.0 fill=62%
+tahun     n  tr/mg       R     avg   win%    RR    PF    DD  mb/kb  -2%thn -2%glob
+2020    443   10.4   +38.0  +0.086   62.1  0.78  1.28  14.4   13/9   +24.0   +21.7
+2021    770   14.8   +92.6  +0.120   62.5  0.86  1.43   6.4   13/7   +62.7   +36.2
+2022    295    5.8   +35.6  +0.121   66.8   0.7  1.41   6.8   12/6   +31.2   +34.4
+2023    344    6.8   +24.9  +0.072   64.0  0.69  1.22   9.4   14/7   +18.1   +20.5
+2024    495    9.8   +25.3  +0.051   62.2   0.7  1.15  15.8   21/6   +10.6   +10.6
+2025    328    6.5    +9.4  +0.029   61.0  0.69  1.08  13.6   12/8    +1.6    +4.2
+2026    297    6.6   +33.5  +0.113   67.3  0.67  1.37   5.2   12/6   +29.2   +33.5
+tahun minus: - · tanpa 2% (per tahun): - · tanpa 2% (global): - · tahun terburuk 2025 (+9.4R)
+-- per tahun × modul (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+A-long         +19.2/129   +45.5/382     +2.2/33     +8.6/54   +16.7/129     +2.7/32     +3.3/36   +98.2/795
+B-long         +14.5/276   +42.1/279   +39.5/165   +12.9/267    +5.7/288    -2.8/205   +22.2/197 +134.1/1677
+B-short          +4.3/38    +5.0/109     -6.1/97     +3.5/23     +2.9/78     +9.5/91     +8.0/64   +27.0/500
+-- per tahun × arah (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+long           +33.7/405   +87.6/661   +41.7/198   +21.5/321   +22.4/417    -0.1/237   +25.5/233 +232.3/2472
+short            +4.3/38    +5.0/109     -6.1/97     +3.5/23     +2.9/78     +9.5/91     +8.0/64   +27.0/500
+-- per tahun × sesi isi (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+02-07 sepi       +5.8/31    +14.6/88      +0.2/7     +1.0/11     +7.1/33      +1.2/8      -0.3/8   +29.7/186
+07-15 Asia     +25.7/281   +51.1/448   +32.0/239   +25.1/246   +11.6/342    +6.3/263   +28.4/238 +180.2/2057
+15-20 Eropa      +2.4/86    +8.8/111     +1.4/34     -4.8/63     -3.4/67     +3.9/45     +5.3/36   +13.5/442
+20-02 AS         +4.2/45   +18.1/123     +2.0/15     +3.7/24    +10.0/53     -2.0/12     +0.1/15   +36.0/287
+-- per tahun × keluar (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+SL            -122.4/119  -180.9/176    -82.4/80  -109.6/106  -153.9/149  -115.8/112    -84.8/82  -849.9/824
+TP            +138.1/202  +204.0/276  +116.0/178  +119.7/184  +154.4/229  +123.3/185  +114.7/176 +970.2/1430
+WAKTU          +22.3/122   +69.5/318     +2.1/37    +14.9/54   +24.7/117     +1.9/31     +3.6/39  +139.0/718
+-- per koin: 119 koin, 71 positif · terburuk: FIL -7.0/39, ALGO -6.3/16, HBAR -4.7/36, RENDER -2.9/11, NEO -2.7/19, BNB -2.6/52, REN -2.1/2, FORM -2.1/2 · terbaik: ADA +30.6/164, ETH +22.3/127, LINK +21.8/120, UNI +21.0/88, XRP +20.7/163, DOT +17.6/84, BTC +14.3/84, NEAR +13.4/65
+   tanpa 3 koin terbaik: total +184.6R
+   per tahun tanpa koin terbaik tahun itu: 2020:+31 2021:+77 2022:+28 2023:+19 2024:+16 2025:+6 2026:+25
+-- bulan: 81 bulan, positif 56 (69%) · 6 terburuk: 2025-01 -8.4, 2025-05 -8.2, 2020-05 -5.6, 2022-06 -5.5, 2023-07 -5.1, 2024-07 -4.5
+-- 12 bulan bergulir terendah: berakhir 2024-10 +5.5R · jendela 12 bln minus: 0/70
+-- per periode --
+2020-2023          n=1852 /mg=9.3 R=+191.2 R/tr=+0.103 win=63.3% RR=0.78 PF=1.35 DD=14.4 R/thn=50.3 rasio=3.5 beruntun 14/9 fill=62.3%
+2024-skrg          n=1120 /mg=7.5 R=+68.2 R/tr=+0.061 win=63.2% RR=0.69 PF=1.18 DD=15.8 R/thn=23.9 rasio=1.51 beruntun 21/8 fill=61.4%
+live v3 (30 Okt+)  n=9 /mg=5.6 R=+2.5 R/tr=+0.275 win=77.8% RR=0.63 PF=2.19 DD=1.0 R/thn=24.8 rasio=23.85 beruntun 4/1 fill=69.2%
+semua              n=2972 /mg=8.5 R=+259.4 R/tr=+0.087 win=63.3% RR=0.74 PF=1.28 DD=15.8 R/thn=38.9 rasio=2.45 beruntun 21/9 fill=62.0%
+-- per modul (semua): R/tr, win, RR, PF --
+A-long   n=795 R=+98.2 R/tr=+0.124 win=58.0% RR=1.13 PF=1.56 DD=5.7 beruntun 14/8
+B-long   n=1677 R=+134.1 R/tr=+0.08 win=65.8% RR=0.64 PF=1.23 DD=22.2 beruntun 20/8
+B-short  n=500 R=+27.0 R/tr=+0.054 win=63.2% RR=0.67 PF=1.15 DD=12.0 beruntun 19/7
+-- per jam isi WIB (n / R / R/tr / win) --
+00 n=  47 R=   +3.1 R/tr=+0.067 win=57.4%
+01 n=  50 R=   +6.7 R/tr=+0.134 win=60.0%
+02 n=  45 R=   +2.1 R/tr=+0.047 win=57.8%
+03 n=  31 R=   +0.6 R/tr=+0.019 win=54.8%
+04 n=  42 R=   +9.0 R/tr=+0.215 win=66.7%
+05 n=  31 R=   +7.2 R/tr=+0.231 win=58.1%
+06 n=  37 R=  +10.7 R/tr=+0.290 win=70.3%
+07 n= 549 R=  +72.0 R/tr=+0.131 win=67.9%
+08 n= 469 R=  +30.8 R/tr=+0.066 win=64.0%
+09 n= 277 R=  +20.0 R/tr=+0.072 win=65.0%
+10 n= 213 R=   +7.9 R/tr=+0.037 win=63.8%
+11 n= 165 R=  +18.0 R/tr=+0.109 win=67.3%
+12 n= 146 R=  +13.6 R/tr=+0.093 win=64.4%
+13 n= 129 R=   +8.3 R/tr=+0.064 win=61.2%
+14 n= 109 R=   +9.6 R/tr=+0.088 win=64.2%
+15 n= 105 R=   -2.2 R/tr=-0.021 win=56.2%
+16 n= 100 R=   +9.6 R/tr=+0.096 win=62.0%
+17 n= 102 R=  -10.3 R/tr=-0.101 win=52.0%
+18 n=  99 R=  +11.6 R/tr=+0.117 win=64.6%
+19 n=  36 R=   +4.9 R/tr=+0.136 win=58.3%
+20 n=  33 R=   +2.7 R/tr=+0.082 win=36.4%
+21 n=  59 R=  +15.6 R/tr=+0.264 win=61.0%
+22 n=  51 R=   +9.5 R/tr=+0.186 win=62.7%
+23 n=  47 R=   -1.6 R/tr=-0.033 win=57.4%
+-- per koin (119 koin; ≥ 20 trade) --
+ADA     n= 164 R= +30.6 R/tr=+0.187 win=70.1% PF=1.68
+ETH     n= 127 R= +22.3 R/tr=+0.176 win=70.9% PF=1.64
+LINK    n= 120 R= +21.8 R/tr=+0.182 win=69.2% PF=1.69
+UNI     n=  88 R= +21.0 R/tr=+0.239 win=70.5% PF=2.17
+XRP     n= 163 R= +20.7 R/tr=+0.127 win=66.3% PF=1.45
+DOT     n=  84 R= +17.6 R/tr=+0.210 win=69.0% PF=1.78
+BTC     n=  84 R= +14.3 R/tr=+0.171 win=69.0% PF=1.59
+NEAR    n=  65 R= +13.4 R/tr=+0.206 win=69.2% PF=1.86
+ZEC     n=  49 R= +13.0 R/tr=+0.265 win=71.4% PF=2.18
+ATOM    n=  39 R= +10.6 R/tr=+0.271 win=74.4% PF=2.8
+SUI     n=  43 R=  +9.2 R/tr=+0.213 win=74.4% PF=1.93
+PEPE    n=  41 R=  +9.1 R/tr=+0.222 win=70.7% PF=1.95
+SOL     n= 139 R=  +8.1 R/tr=+0.058 win=62.6% PF=1.17
+XMR     n=  22 R=  +8.1 R/tr=+0.366 win=77.3% PF=3.14
+ICP     n=  62 R=  +7.3 R/tr=+0.117 win=62.9% PF=1.43
+TAO     n=  31 R=  +7.3 R/tr=+0.235 win=74.2% PF=2.06
+STX     n=  28 R=  +7.2 R/tr=+0.257 win=75.0% PF=2.1
+DOGE    n= 177 R=  +5.1 R/tr=+0.029 win=59.3% PF=1.08
+APT     n=  35 R=  +4.7 R/tr=+0.136 win=65.7% PF=1.49
+MATIC   n=  38 R=  +4.7 R/tr=+0.124 win=65.8% PF=1.44
+GRT     n=  21 R=  +3.6 R/tr=+0.171 win=71.4% PF=1.58
+ETC     n=  38 R=  +3.5 R/tr=+0.092 win=63.2% PF=1.29
+VET     n=  60 R=  +3.0 R/tr=+0.049 win=60.0% PF=1.16
+LTC     n=  77 R=  +2.7 R/tr=+0.035 win=62.3% PF=1.1
+LUNA    n=  28 R=  +2.4 R/tr=+0.087 win=60.7% PF=1.32
+XLM     n=  67 R=  +2.1 R/tr=+0.031 win=61.2% PF=1.11
+BCH     n=  95 R=  +0.6 R/tr=+0.006 win=60.0% PF=1.02
+XTZ     n=  49 R=  +0.5 R/tr=+0.011 win=55.1% PF=1.03
+IOTA    n=  20 R=  +0.4 R/tr=+0.019 win=60.0% PF=1.06
+SHIB    n=  78 R=  -0.6 R/tr=-0.008 win=59.0% PF=0.98
+AAVE    n=  46 R=  -0.9 R/tr=-0.019 win=54.3% PF=0.95
+AVAX    n=  66 R=  -1.0 R/tr=-0.014 win=57.6% PF=0.96
+THETA   n=  37 R=  -1.6 R/tr=-0.044 win=51.4% PF=0.88
+TRX     n=  28 R=  -1.7 R/tr=-0.061 win=46.4% PF=0.83
+BNB     n=  52 R=  -2.6 R/tr=-0.050 win=59.6% PF=0.87
+HBAR    n=  36 R=  -4.7 R/tr=-0.131 win=47.2% PF=0.72
+FIL     n=  39 R=  -7.0 R/tr=-0.179 win=48.7% PF=0.59
+-- 5 drawdown terdalam (R, harian) --
+DD 15.8R puncak 2024-03-10 dasar 2024-09-18 pulih 2024-10-03 · turun 192 hari, pulih 15 hari, total 207 hari
+DD 14.4R puncak 2020-04-09 dasar 2020-06-28 pulih 2020-08-17 · turun 80 hari, pulih 50 hari, total 130 hari
+DD 13.6R puncak 2025-04-08 dasar 2025-06-16 pulih 2025-10-27 · turun 69 hari, pulih 133 hari, total 202 hari
+DD 13.5R puncak 2023-11-13 dasar 2024-01-07 pulih 2024-02-07 · turun 55 hari, pulih 31 hari, total 86 hari
+DD 11.6R puncak 2025-01-06 dasar 2025-02-05 pulih 2025-04-08 · turun 30 hari, pulih 62 hari, total 92 hari
+CAGR risiko 1% 45.5% · DD ekuitas 15.6%
+-- biaya: R kotor +322.7 · fee+slip -55.8 (-0.0188R/trade) · funding -7.5 (-0.0025R/trade) · bersih +259.4
+   fee = 17% edge kotor · funding = +2% edge kotor · cek selisih bersih +0.0000
+   A-long   kotor +0.1442 fee -0.0155 funding -0.0052 bersih +0.1235 R/trade
+   B-long   kotor +0.1022 fee -0.0199 funding -0.0023 bersih +0.0800 R/trade
+   B-short  kotor +0.0733 fee -0.0204 funding +0.0011 bersih +0.0541 R/trade
+   2020 kotor  +47.1 fee   -8.1 funding  -1.0 bersih  +38.0
+   2021 kotor +109.2 fee  -12.0 funding  -4.6 bersih  +92.6
+   2022 kotor  +41.4 fee   -5.6 funding  -0.1 bersih  +35.6
+   2023 kotor  +32.6 fee   -7.2 funding  -0.5 bersih  +24.9
+   2024 kotor  +36.1 fee   -9.7 funding  -1.2 bersih  +25.3
+   2025 kotor  +16.5 fee   -7.0 funding  -0.1 bersih   +9.4
+   2026 kotor  +39.7 fee   -6.1 funding  -0.1 bersih  +33.5
+-- peluang tahun minus: {'R_thn_rata': np.float64(39.5), 'R_thn_sd': np.float64(26.3), 'p_normal_tahunan': 6.6, 'R_trade': 0.0873, 'sd_trade': 0.771, 'trade_thn': 445, 'p_iid': 0.8, 'p_bootstrap_bulan': 2.2, 'edge_2x_untuk_p5': 1.09}
+
+================ TETAP = koin bot live (pembanding) ================
+SEMUA  n=2696 R=+258.4 avg=+0.096 win=63.9% RR=0.74 PF=1.31 DD=13.3R beruntun 19/8 tanpa2%=+171.5 fill=62%
+tahun     n  tr/mg       R     avg   win%    RR    PF    DD  mb/kb  -2%thn -2%glob
+2020    327    7.6   +39.4  +0.120   64.5  0.78  1.42  10.3   17/7   +27.9   +22.6
+2021    681   13.1   +72.0  +0.106   62.6  0.82  1.37  11.3   19/5   +46.2   +28.3
+2022    264    5.3   +34.4  +0.130   67.8  0.69  1.45   7.4   15/6   +30.9   +34.4
+2023    317    6.2   +29.5  +0.093   64.7  0.71  1.29   9.9   12/6   +22.1   +23.8
+2024    464    9.2   +25.9  +0.056   61.4  0.74  1.17  13.1   11/8   +12.1   +13.1
+2025    335    6.7   +18.0  +0.054   62.1   0.7  1.15  13.3   12/8   +10.5   +14.0
+2026    308    6.9   +39.3  +0.128   67.9  0.68  1.43   7.7   10/7   +31.5   +35.3
+tahun minus: - · tanpa 2% (per tahun): - · tanpa 2% (global): - · tahun terburuk 2025 (+18.0R)
+-- per tahun × modul (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+A-long         +18.8/106   +45.6/333     -0.9/31     +2.8/57   +13.0/132     +2.7/42     +9.5/44   +91.7/745
+B-long         +17.0/192   +22.6/253   +38.2/144   +22.4/241   +11.2/262    +5.0/206   +20.0/200 +136.5/1498
+B-short          +3.5/29     +3.8/95     -3.0/89     +4.2/19     +1.7/70    +10.2/87     +9.8/64   +30.2/453
+-- per tahun × arah (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+long           +35.8/298   +68.2/586   +37.3/175   +25.2/298   +24.3/394    +7.8/248   +29.5/244 +228.2/2243
+short            +3.5/29     +3.8/95     -3.0/89     +4.2/19     +1.7/70    +10.2/87     +9.8/64   +30.2/453
+-- per tahun × sesi isi (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+02-07 sepi       +2.2/27    +18.9/83     +0.5/10      +1.5/9     +8.7/35      +1.1/8      +0.3/9   +33.2/181
+07-15 Asia     +21.3/196   +29.9/375   +31.9/214   +22.2/221   +12.9/311    +9.0/267   +28.3/239 +155.4/1823
+15-20 Eropa     +11.1/72     +6.2/99     +2.7/29     +4.5/61     -1.7/68     +8.9/40     +9.3/41   +40.9/410
+20-02 AS         +4.8/32   +17.1/124     -0.7/11     +1.3/26     +6.0/50     -1.0/20     +1.5/19   +28.9/282
+-- per tahun × keluar (R bersih / n) --
+                    2020        2021        2022        2023        2024        2025        2026       total
+SL              -84.5/82  -165.5/161    -71.2/69    -95.1/92  -134.1/130  -110.5/107    -84.9/82  -746.0/723
+TP            +102.4/147  +171.1/236  +105.6/162  +112.1/172  +142.1/210  +125.9/189  +120.0/180 +879.1/1296
+WAKTU           +21.5/98   +66.4/284     -0.0/33    +12.5/53   +18.0/124     +2.6/39     +4.2/46  +125.2/677
+-- per koin: 48 koin, 31 positif · terburuk: BNB -6.9/75, FIL -5.3/15, JST -5.3/16, ETC -4.0/12, LTC -3.5/52, PUMP -2.6/14, ALGO -2.2/20, SKY -1.8/5 · terbaik: ZEC +36.8/191, XRP +28.0/177, ETH +25.9/128, LINK +25.6/161, UNI +21.9/86, NEAR +21.1/168, ADA +21.1/111, SOL +15.9/174
+   tanpa 3 koin terbaik: total +167.7R
+   per tahun tanpa koin terbaik tahun itu: 2020:+33 2021:+60 2022:+21 2023:+21 2024:+16 2025:+9 2026:+31
+-- bulan: 81 bulan, positif 56 (69%) · 6 terburuk: 2025-01 -10.1, 2023-07 -7.6, 2022-06 -6.8, 2025-07 -5.5, 2024-08 -5.4, 2026-04 -5.2
+-- 12 bulan bergulir terendah: berakhir 2024-08 +6.2R · jendela 12 bln minus: 0/70
+-- per periode --
+2020-2023          n=1589 /mg=8.0 R=+175.2 R/tr=+0.11 win=64.3% RR=0.77 PF=1.38 DD=11.3 R/thn=46.1 rasio=4.07 beruntun 19/7 fill=61.8%
+2024-skrg          n=1107 /mg=7.4 R=+83.2 R/tr=+0.075 win=63.4% RR=0.71 PF=1.23 DD=13.3 R/thn=29.1 rasio=2.19 beruntun 12/8 fill=62.0%
+live v3 (30 Okt+)  n=9 /mg=5.6 R=+2.5 R/tr=+0.275 win=77.8% RR=0.63 PF=2.19 DD=1.0 R/thn=24.8 rasio=23.85 beruntun 4/1 fill=69.2%
+semua              n=2696 /mg=7.7 R=+258.4 R/tr=+0.096 win=63.9% RR=0.74 PF=1.31 DD=13.3 R/thn=38.7 rasio=2.9 beruntun 19/8 fill=61.9%
+-- per modul (semua): R/tr, win, RR, PF --
+A-long   n=745 R=+91.7 R/tr=+0.123 win=58.4% RR=1.13 PF=1.59 DD=5.3 beruntun 13/7
+B-long   n=1498 R=+136.5 R/tr=+0.091 win=66.7% RR=0.63 PF=1.27 DD=17.3 beruntun 22/8
+B-short  n=453 R=+30.2 R/tr=+0.067 win=63.8% RR=0.68 PF=1.2 DD=13.9 beruntun 18/9
+-- per jam isi WIB (n / R / R/tr / win) --
+00 n=  39 R=   -3.1 R/tr=-0.079 win=51.3%
+01 n=  44 R=   +5.0 R/tr=+0.114 win=56.8%
+02 n=  40 R=   +5.6 R/tr=+0.139 win=70.0%
+03 n=  32 R=   +7.5 R/tr=+0.236 win=62.5%
+04 n=  42 R=   +6.3 R/tr=+0.150 win=61.9%
+05 n=  34 R=   +7.0 R/tr=+0.207 win=58.8%
+06 n=  33 R=   +6.7 R/tr=+0.204 win=63.6%
+07 n= 466 R=  +50.0 R/tr=+0.107 win=67.0%
+08 n= 419 R=  +22.4 R/tr=+0.054 win=64.0%
+09 n= 252 R=  +15.4 R/tr=+0.061 win=63.9%
+10 n= 190 R=   +3.3 R/tr=+0.018 win=62.6%
+11 n= 142 R=   +9.3 R/tr=+0.066 win=64.8%
+12 n= 133 R=  +22.6 R/tr=+0.170 win=69.9%
+13 n= 126 R=  +15.3 R/tr=+0.121 win=63.5%
+14 n=  95 R=  +17.2 R/tr=+0.181 win=70.5%
+15 n=  99 R=   +7.2 R/tr=+0.073 win=62.6%
+16 n=  99 R=  +19.6 R/tr=+0.198 win=68.7%
+17 n=  85 R=   -3.6 R/tr=-0.042 win=56.5%
+18 n=  90 R=  +12.5 R/tr=+0.139 win=65.6%
+19 n=  37 R=   +5.2 R/tr=+0.139 win=51.4%
+20 n=  37 R=   +4.1 R/tr=+0.112 win=45.9%
+21 n=  67 R=  +11.1 R/tr=+0.166 win=58.2%
+22 n=  53 R=  +10.7 R/tr=+0.202 win=64.2%
+23 n=  42 R=   +1.0 R/tr=+0.023 win=59.5%
+-- per koin (48 koin; ≥ 20 trade) --
+ZEC     n= 191 R= +36.8 R/tr=+0.193 win=69.6% PF=1.74
+XRP     n= 177 R= +28.0 R/tr=+0.158 win=68.9% PF=1.59
+ETH     n= 128 R= +25.9 R/tr=+0.202 win=71.9% PF=1.77
+LINK    n= 161 R= +25.6 R/tr=+0.159 win=68.3% PF=1.56
+UNI     n=  86 R= +21.9 R/tr=+0.254 win=70.9% PF=2.36
+NEAR    n= 168 R= +21.1 R/tr=+0.126 win=66.1% PF=1.47
+ADA     n= 111 R= +21.1 R/tr=+0.190 win=68.5% PF=1.7
+SOL     n= 174 R= +15.9 R/tr=+0.091 win=63.8% PF=1.29
+BTC     n=  83 R= +13.7 R/tr=+0.165 win=68.7% PF=1.56
+QNT     n=  31 R= +10.3 R/tr=+0.332 win=74.2% PF=2.88
+TAO     n=  44 R= +10.0 R/tr=+0.228 win=75.0% PF=2.07
+SUI     n=  60 R=  +8.5 R/tr=+0.141 win=66.7% PF=1.53
+BCH     n=  75 R=  +8.5 R/tr=+0.113 win=66.7% PF=1.37
+DOGE    n= 197 R=  +7.3 R/tr=+0.037 win=59.9% PF=1.11
+PEPE    n=  22 R=  +6.0 R/tr=+0.271 win=77.3% PF=2.15
+AVAX    n=  97 R=  +4.7 R/tr=+0.049 win=57.7% PF=1.16
+ENA     n=  72 R=  +4.3 R/tr=+0.059 win=51.4% PF=1.23
+INJ     n=  32 R=  +4.2 R/tr=+0.132 win=68.8% PF=1.41
+WLD     n=  30 R=  +1.7 R/tr=+0.057 win=63.3% PF=1.16
+AAVE    n=  79 R=  +1.1 R/tr=+0.014 win=54.4% PF=1.04
+TRX     n=  55 R=  +0.8 R/tr=+0.014 win=60.0% PF=1.04
+XLM     n=  74 R=  +0.0 R/tr=+0.000 win=59.5% PF=1.0
+HBAR    n= 100 R=  -0.3 R/tr=-0.003 win=57.0% PF=0.99
+ARB     n=  22 R=  -0.8 R/tr=-0.038 win=59.1% PF=0.91
+ICP     n=  31 R=  -0.8 R/tr=-0.027 win=58.1% PF=0.93
+SHIB    n=  78 R=  -1.2 R/tr=-0.015 win=55.1% PF=0.95
+ALGO    n=  20 R=  -2.2 R/tr=-0.108 win=55.0% PF=0.77
+LTC     n=  52 R=  -3.5 R/tr=-0.067 win=53.8% PF=0.84
+BNB     n=  75 R=  -6.9 R/tr=-0.092 win=57.3% PF=0.79
+-- 5 drawdown terdalam (R, harian) --
+DD 13.3R puncak 2025-04-08 dasar 2025-07-24 pulih 2025-10-06 · turun 107 hari, pulih 74 hari, total 181 hari
+DD 13.1R puncak 2024-07-17 dasar 2024-09-08 pulih 2024-09-27 · turun 53 hari, pulih 19 hari, total 72 hari
+DD 11.8R puncak 2025-01-06 dasar 2025-02-26 pulih 2025-04-08 · turun 51 hari, pulih 41 hari, total 92 hari
+DD 11.3R puncak 2021-02-12 dasar 2021-03-10 pulih 2021-04-20 · turun 26 hari, pulih 41 hari, total 67 hari
+DD 10.8R puncak 2023-11-06 dasar 2024-01-07 pulih 2024-02-17 · turun 62 hari, pulih 41 hari, total 103 hari
+CAGR risiko 1% 45.5% · DD ekuitas 12.8%
+-- biaya: R kotor +314.7 · fee+slip -50.2 (-0.0186R/trade) · funding -6.1 (-0.0023R/trade) · bersih +258.4
+   fee = 16% edge kotor · funding = +2% edge kotor · cek selisih bersih +0.0000
+   A-long   kotor +0.1423 fee -0.0151 funding -0.0041 bersih +0.1231 R/trade
+   B-long   kotor +0.1133 fee -0.0198 funding -0.0024 bersih +0.0911 R/trade
+   B-short  kotor +0.0862 fee -0.0206 funding +0.0012 bersih +0.0667 R/trade
+   2020 kotor  +46.1 fee   -5.9 funding  -0.8 bersih  +39.4
+   2021 kotor  +86.4 fee  -10.6 funding  -3.8 bersih  +72.0
+   2022 kotor  +39.6 fee   -5.1 funding  -0.1 bersih  +34.4
+   2023 kotor  +36.2 fee   -6.3 funding  -0.4 bersih  +29.5
+   2024 kotor  +35.8 fee   -8.9 funding  -0.9 bersih  +25.9
+   2025 kotor  +24.9 fee   -6.9 funding  +0.0 bersih  +18.0
+   2026 kotor  +45.8 fee   -6.4 funding  -0.1 bersih  +39.3
+-- peluang tahun minus: {'R_thn_rata': np.float64(39.7), 'R_thn_sd': np.float64(17.6), 'p_normal_tahunan': 1.2, 'R_trade': 0.0958, 'sd_trade': 0.762, 'trade_thn': 404, 'p_iid': 0.6, 'p_bootstrap_bulan': 2.5, 'edge_2x_untuk_p5': 0.73}
+
+koin terpakai: 43 · trade 575
+
+================ PIT 2018-Feb 2020 biaya juara ================
+SEMUA  n=575 R=+12.7 avg=+0.022 win=59.8% RR=0.72 PF=1.07 DD=16.9R beruntun 13/7 tanpa2%=-5.3 fill=62%
+tahun     n  tr/mg       R     avg   win%    RR    PF    DD  mb/kb  -2%thn -2%glob
+2018    147    3.7   +12.8  +0.087   63.9  0.74  1.32   5.4   12/6    +9.6    +9.6
+2019    327    6.4    -5.6  -0.017   56.9  0.72  0.95  16.9   13/7   -16.2   -18.3
+2020    101   13.5    +5.5  +0.054   63.4  0.67  1.17   4.8    8/4    +2.7    +3.5
+tahun minus: [2019] · tanpa 2% (per tahun): [2019] · tanpa 2% (global): [2019] · tahun terburuk 2019 (-5.6R)
+-- per tahun × modul (R bersih / n) --
+                    2018        2019        2020       total
+A-long           +8.9/59    -2.4/129     +2.4/27    +8.9/215
+B-long           +4.0/88    -3.3/198     -1.2/65    -0.5/351
+B-short           +0.0/0      +0.0/0      +4.2/9      +4.2/9
+-- per tahun × arah (R bersih / n) --
+                    2018        2019        2020       total
+long           +12.8/147    -5.6/327     +1.2/92    +8.4/566
+short             +0.0/0      +0.0/0      +4.2/9      +4.2/9
+-- per tahun × sesi isi (R bersih / n) --
+                    2018        2019        2020       total
+02-07 sepi       +1.7/16     +1.2/41      -1.7/8     +1.3/65
+07-15 Asia       +2.8/94    -2.7/197     +3.9/68    +4.0/359
+15-20 Eropa      +1.5/11     -2.8/61     +1.3/15     -0.1/87
+20-02 AS         +6.8/26     -1.3/28     +2.0/10     +7.5/64
+-- per tahun × keluar (R bersih / n) --
+                    2018        2019        2020       total
+SL              -33.0/32  -105.8/103    -31.0/30  -169.8/165
+TP              +37.9/56   +83.8/120    +32.4/48  +154.2/224
+WAKTU            +7.8/59   +16.3/104     +4.1/23   +28.3/186
+-- per koin: 43 koin, 24 positif · terburuk: XRP -5.6/30, WAVES -4.9/11, LTC -4.0/38, XLM -3.5/23, ETC -3.2/8, THETA -2.4/4, BNB -1.6/35, HOT -1.3/8 · terbaik: ETH +5.8/36, LINK +5.3/36, ICX +4.4/13, ONT +3.9/26, IOST +3.7/5, IOTA +3.2/17, XTZ +3.0/11, EOS +2.8/35
+   tanpa 3 koin terbaik: total -2.8R
+   per tahun tanpa koin terbaik tahun itu: 2018:+7 2019:-12 2020:+2
+-- bulan: 24 bulan, positif 12 (50%) · 6 terburuk: 2019-06 -5.5, 2019-03 -3.2, 2018-05 -2.8, 2019-09 -1.8, 2019-05 -1.7, 2020-01 -1.7
+-- 12 bulan bergulir terendah: berakhir 2019-09 -11.3R · jendela 12 bln minus: 8/13
+
+koin terpakai: 16 · trade 374
+
+================ TETAP (koin bot) 2018-Feb 2020 ================
+SEMUA  n=374 R=+14.1 avg=+0.038 win=59.6% RR=0.75 PF=1.11 DD=12.1R beruntun 10/7 tanpa2%=+1.1 fill=63%
+tahun     n  tr/mg       R     avg   win%    RR    PF    DD  mb/kb  -2%thn -2%glob
+2018     96    2.4    +9.9  +0.103   64.6  0.73  1.34   9.1   10/7    +7.9    +6.2
+2019    196    3.9    +5.8  +0.030   59.2  0.75  1.08   7.3    8/5    +0.4    +0.4
+2020     82   10.7    -1.5  -0.019   54.9  0.78  0.95   9.4    6/5    -3.5    -5.5
+tahun minus: [2020] · tanpa 2% (per tahun): [2020] · tanpa 2% (global): [2020] · tahun terburuk 2020 (-1.5R)
+-- per tahun × modul (R bersih / n) --
+                    2018        2019        2020       total
+A-long           +8.2/31     +3.9/57     +4.0/21   +16.0/109
+B-long           +1.7/65    +1.9/139     -6.8/54    -3.2/258
+B-short           +0.0/0      +0.0/0      +1.2/7      +1.2/7
+-- per tahun × arah (R bersih / n) --
+                    2018        2019        2020       total
+long             +9.9/96    +5.8/196     -2.8/75   +12.9/367
+short             +0.0/0      +0.0/0      +1.2/7      +1.2/7
+-- per tahun × sesi isi (R bersih / n) --
+                    2018        2019        2020       total
+02-07 sepi       +4.2/14     -3.1/20      -0.0/3     +1.0/37
+07-15 Asia       +3.1/66    -0.0/134     -2.7/57    +0.4/257
+15-20 Eropa       +1.9/6     +4.0/31     +0.3/11     +6.2/48
+20-02 AS         +0.7/10     +4.9/11     +0.9/11     +6.5/32
+-- per tahun × keluar (R bersih / n) --
+                    2018        2019        2020       total
+SL              -24.7/24    -63.8/62    -30.2/29  -118.6/115
+TP              +28.1/41    +59.5/87    +25.9/36  +113.6/164
+WAKTU            +6.5/31    +10.0/47     +2.7/17    +19.2/95
+-- per koin: 16 koin, 9 positif · terburuk: XLM -3.4/23, BCH -2.7/6, XRP -2.5/25, LTC -2.2/26, BNB -1.8/53, ETC -1.2/6, BTC -1.0/20, ATOM +0.3/3 · terbaik: LINK +7.0/43, HBAR +5.0/13, ZEC +5.0/28, ETH +4.5/34, ADA +2.9/32, TRX +1.6/45, ALGO +1.5/10, DOGE +1.2/7
+   tanpa 3 koin terbaik: total -2.9R
+   per tahun tanpa koin terbaik tahun itu: 2018:+3 2019:-1 2020:-5
+-- bulan: 23 bulan, positif 13 (57%) · 6 terburuk: 2020-01 -5.7, 2018-09 -3.4, 2018-08 -3.2, 2019-06 -3.2, 2019-09 -1.0, 2019-04 -1.0
+-- 12 bulan bergulir terendah: berakhir 2019-08 -1.1R · jendela 12 bln minus: 1/12
+
+koin terpakai: 43 · trade 570
+
+================ PIT 2018-Feb 2020 STRES eksekusi ================
+SEMUA  n=570 R=-3.7 avg=-0.006 win=58.2% RR=0.7 PF=0.98 DD=27.2R beruntun 12/8 tanpa2%=-21.6 fill=62%
+tahun     n  tr/mg       R     avg   win%    RR    PF    DD  mb/kb  -2%thn -2%glob
+2018    146    3.7   +10.5  +0.072   63.0  0.74  1.25   5.9   12/8    +7.3    +7.3
+2019    323    6.3   -17.2  -0.053   54.8  0.71  0.86  26.1   11/7   -27.8   -29.9
+2020    101   13.5    +3.0  +0.030   62.4  0.66  1.09   5.8    8/4    +0.3    +1.0
+tahun minus: [2019] · tanpa 2% (per tahun): [2019] · tanpa 2% (global): [2019] · tahun terburuk 2019 (-17.2R)
+-- per tahun × modul (R bersih / n) --
+                    2018        2019        2020       total
+A-long           +7.8/59    -7.2/126     +2.2/27    +2.8/212
+B-long           +2.7/87   -10.0/197     -3.4/65   -10.7/349
+B-short           +0.0/0      +0.0/0      +4.2/9      +4.2/9
+-- per tahun × arah (R bersih / n) --
+                    2018        2019        2020       total
+long           +10.5/146   -17.2/323     -1.2/92    -7.9/561
+short             +0.0/0      +0.0/0      +4.2/9      +4.2/9
+-- per tahun × sesi isi (R bersih / n) --
+                    2018        2019        2020       total
+02-07 sepi       +1.4/15     +0.7/40      -1.7/8     +0.4/63
+07-15 Asia       +2.2/94   -12.7/195     +1.7/68    -8.8/357
+15-20 Eropa      +0.4/11     -3.7/60     +1.1/15     -2.1/86
+20-02 AS         +6.5/26     -1.5/28     +1.9/10     +6.9/64
+-- per tahun × keluar (R bersih / n) --
+                    2018        2019        2020       total
+SL              -33.5/32  -112.6/108    -32.6/31  -178.7/171
+TP              +37.3/55   +81.5/116    +31.7/47  +150.6/218
+WAKTU            +6.7/59    +13.8/99     +3.9/23   +24.5/181
+-- per koin: 43 koin, 23 positif · terburuk: XRP -8.2/29, XLM -5.2/24, WAVES -5.0/11, LTC -4.4/38, ETC -3.3/8, EOS -2.9/34, THETA -2.1/4, BNB -1.9/35 · terbaik: ETH +5.2/35, LINK +4.7/34, ICX +4.3/13, ONT +3.9/26, IOST +3.7/5, IOTA +3.1/17, BCH +2.4/14, ZRX +1.3/2
+   tanpa 3 koin terbaik: total -17.9R
+   per tahun tanpa koin terbaik tahun itu: 2018:+5 2019:-23 2020:-0
+-- bulan: 24 bulan, positif 11 (46%) · 6 terburuk: 2019-06 -10.1, 2020-01 -3.9, 2019-05 -3.8, 2019-03 -3.6, 2019-10 -3.4, 2018-05 -2.9
+-- 12 bulan bergulir terendah: berakhir 2019-10 -23.2R · jendela 12 bln minus: 9/13
+normalisasi (rata-rata bobot 2020-2023) 1.352
+STANDAR 2018: juara +12.8 vs I-25 +9.2 (n 147) · 2019: juara -5.6 vs I-25 -10.3 (n 327) · 2020: juara +5.5 vs I-25 +5.2 (n 101) · total +12.7 vs +4.1 · DD 17.9 vs 25.7R
+STRES 2018: juara +10.5 vs I-25 +6.6 (n 146) · 2019: juara -17.2 vs I-25 -24.3 (n 323) · 2020: juara +3.0 vs I-25 +2.9 (n 101) · total -3.7 vs -14.9 · DD 28.7 vs 39.1R
+2972 trade, 119 koin, suara terisi 100%
+kombinasi dinilai: 10064
+
+### pilih<=2021 → uji 2022-2023: lolos syarat pilih 3244 · porsi menang di uji: 20 teratas 0% · 100 teratas 4% · semua 81%
+  semua    ST+VOLx                pilih R/tr +0.151 (juara +0.108) n 696/1213 · UJI R/tr +0.099 vs +0.095, R +35.8 vs +60.6, n 361/639
+  semua    ST+EMA+VOLx            pilih R/tr +0.151 (juara +0.108) n 696/1213 · UJI R/tr +0.099 vs +0.095, R +35.8 vs +60.6, n 361/639
+  semua    ST+BTC+VOLx            pilih R/tr +0.151 (juara +0.108) n 696/1213 · UJI R/tr +0.099 vs +0.095, R +35.8 vs +60.6, n 361/639
+  semua    ST+EMA+BTC+VOLx        pilih R/tr +0.151 (juara +0.108) n 696/1213 · UJI R/tr +0.099 vs +0.095, R +35.8 vs +60.6, n 361/639
+  semua    ALG+ST+ICH             pilih R/tr +0.144 (juara +0.108) n 770/1213 · UJI R/tr +0.088 vs +0.095, R +32.7 vs +60.6, n 372/639
+  semua    ALG+ST+ICH+BTC         pilih R/tr +0.144 (juara +0.108) n 770/1213 · UJI R/tr +0.088 vs +0.095, R +32.7 vs +60.6, n 372/639
+  semua    ALG+ST+ICH+EMA         pilih R/tr +0.144 (juara +0.108) n 765/1213 · UJI R/tr +0.088 vs +0.095, R +32.7 vs +60.6, n 372/639
+  semua    ST+ICH                 pilih R/tr +0.141 (juara +0.108) n 794/1213 · UJI R/tr +0.090 vs +0.095, R +34.2 vs +60.6, n 382/639
+
+### pilih<=2023 → uji 2024-2025: lolos syarat pilih 3033 · porsi menang di uji: 20 teratas 60% · 100 teratas 20% · semua 8%
+  semua    VOLx                   pilih R/tr +0.127 (juara +0.103) n 1229/1852 · UJI R/tr +0.065 vs +0.042, R +33.2 vs +34.7, n 509/823
+  semua    EMA+VOLx               pilih R/tr +0.127 (juara +0.103) n 1229/1852 · UJI R/tr +0.065 vs +0.042, R +33.2 vs +34.7, n 509/823
+  semua    BTC+VOLx               pilih R/tr +0.127 (juara +0.103) n 1229/1852 · UJI R/tr +0.065 vs +0.042, R +33.2 vs +34.7, n 509/823
+  semua    EMA+BTC+VOLx           pilih R/tr +0.127 (juara +0.103) n 1229/1852 · UJI R/tr +0.065 vs +0.042, R +33.2 vs +34.7, n 509/823
+  semua    ST                     pilih R/tr +0.122 (juara +0.103) n 1533/1852 · UJI R/tr +0.054 vs +0.042, R +34.2 vs +34.7, n 636/823
+  semua    ST+BTC                 pilih R/tr +0.122 (juara +0.103) n 1533/1852 · UJI R/tr +0.054 vs +0.042, R +34.2 vs +34.7, n 636/823
+  B-short  SAR+VOLx               pilih R/tr +0.121 (juara +0.103) n 1674/1852 · UJI R/tr +0.041 vs +0.042, R +28.3 vs +34.7, n 697/823
+  B-short  SAR+EMA+VOLx           pilih R/tr +0.121 (juara +0.103) n 1674/1852 · UJI R/tr +0.041 vs +0.042, R +28.3 vs +34.7, n 697/823
+
+### pilih<=2025 → uji 2026-2026: lolos syarat pilih 1465 · porsi menang di uji: 20 teratas 40% · 100 teratas 45% · semua 60%
+  semua    ST+VOLx                pilih R/tr +0.125 (juara +0.084) n 1455/2675 · UJI R/tr +0.169 vs +0.113, R +26.3 vs +33.5, n 155/297
+  semua    ST+EMA+VOLx            pilih R/tr +0.125 (juara +0.084) n 1455/2675 · UJI R/tr +0.169 vs +0.113, R +26.3 vs +33.5, n 155/297
+  semua    ST+BTC+VOLx            pilih R/tr +0.125 (juara +0.084) n 1455/2675 · UJI R/tr +0.169 vs +0.113, R +26.3 vs +33.5, n 155/297
+  semua    ST+EMA+BTC+VOLx        pilih R/tr +0.125 (juara +0.084) n 1455/2675 · UJI R/tr +0.169 vs +0.113, R +26.3 vs +33.5, n 155/297
+  semua    ALG+ICH                pilih R/tr +0.116 (juara +0.084) n 1681/2675 · UJI R/tr +0.177 vs +0.113, R +28.8 vs +33.5, n 163/297
+  semua    ALG+ICH+BTC            pilih R/tr +0.116 (juara +0.084) n 1681/2675 · UJI R/tr +0.177 vs +0.113, R +28.8 vs +33.5, n 163/297
+  semua    ALG+ICH+EMA            pilih R/tr +0.116 (juara +0.084) n 1675/2675 · UJI R/tr +0.177 vs +0.113, R +28.8 vs +33.5, n 163/297
+  semua    ALG+ICH+EMA+BTC        pilih R/tr +0.116 (juara +0.084) n 1675/2675 · UJI R/tr +0.177 vs +0.113, R +28.8 vs +33.5, n 163/297
+
+### Gabungan walk-forward (aturan terpilih tiap jendela; tahun 2022-2026 semua hasil uji)
+  pilih<=2021: ('semua', 'ST+VOLx') → uji 2022-2023 R +35.8 vs juara +60.6 · R/tr +0.099 vs +0.095 · per tahun [np.float64(15.3), np.float64(20.5)]
+  pilih<=2023: ('semua', 'VOLx') → uji 2024-2025 R +33.2 vs juara +34.7 · R/tr +0.065 vs +0.042 · per tahun [np.float64(24.8), np.float64(8.3)]
+  pilih<=2025: ('semua', 'ST+VOLx') → uji 2026-2026 R +26.3 vs juara +33.5 · R/tr +0.169 vs +0.113 · per tahun [np.float64(26.3)]
+  total 2022-2026: R +95.3 vs +128.8 · R/tr +0.093 vs +0.073 · n 1025/1759
+
+### Pustaka: tiap komponen, R/trade saat SETUJU vs TIDAK (semua trade; per lingkup)
+  semua: ALG +0.102/+0.035 (2327, 6/7) · ST +0.101/+0.031 (2393, 4/7) · ICH +0.113/+0.038 (1953, 6/7) · SAR +0.096/+0.074 (1773, 5/7) · MACD +0.118/+0.053 (1564, 6/7) · HA +0.099/+0.076 (1413, 5/7) · D1 +0.061/+0.174 (2284, 1/7) · CLV +0.101/+0.053 (2138, 5/7) · RSIf +0.089/+0.087 (875, 3/7) · BBf +0.204/+0.085 (54, 4/7) · STf +0.188/+0.076 (289, 4/7) · SOUP +0.101/+0.087 (56, 4/7) · DON +0.128/+0.086 (86, 3/7) · VOLx +0.115/+0.036 (1933, 7/7)
+  A: ALG +0.121/+0.167 (755, 2/7) · ST +0.123/+0.131 (732, 3/7) · ICH +0.143/+0.067 (594, 6/7) · SAR +0.133/+0.108 (506, 3/7) · MACD +0.154/+0.079 (468, 5/7) · HA +0.140/+0.108 (392, 4/7) · D1 +0.126/+0.111 (681, 4/7) · CLV +0.142/+0.039 (653, 4/7) · RSIf +0.097/+0.142 (327, 3/7) · STf +0.151/+0.122 (48, 1/7) · VOLx +0.124/+0.120 (660, 2/7)
+  B-long: ALG +0.118/-0.018 (1208, 6/7) · ST +0.102/+0.012 (1274, 4/7) · ICH +0.107/+0.036 (1036, 5/7) · SAR +0.095/+0.060 (959, 3/7) · MACD +0.126/+0.037 (811, 5/7) · HA +0.084/+0.076 (789, 4/7) · D1 +0.050/+0.166 (1242, 1/7) · CLV +0.094/+0.049 (1142, 4/7) · RSIf +0.097/+0.074 (445, 3/7) · BBf +0.209/+0.077 (38, 3/7) · STf +0.198/+0.066 (173, 4/7) · SOUP +0.015/+0.082 (45, 3/7) · DON +0.094/+0.080 (56, 3/7) · VOLx +0.095/+0.055 (1033, 5/7)
+  B-short: ALG +0.008/+0.177 (364, 2/7) · ST +0.057/+0.043 (387, 3/7) · ICH +0.077/+0.012 (323, 5/7) · SAR +0.042/+0.073 (308, 3/7) · MACD +0.036/+0.078 (285, 3/7) · HA +0.081/+0.031 (232, 4/7) · D1 -0.022/+0.252 (361, 1/7) · CLV +0.044/+0.075 (343, 4/7) · RSIf +0.028/+0.061 (103, 3/7) · STf +0.188/+0.033 (68, 5/7) · VOLx +0.171/-0.054 (240, 6/7)
+BTC: 53390 level
+ETH: 36363 level
+BNB: 49137 level
+XRP: 45598 level
+SOL: 35070 level
+TRX: 47498 level
+ZEC: 46128 level
+DOGE: 48639 level
+LINK: 44558 level
+ADA: 47140 level
+NEAR: 36270 level
+XLM: 45907 level
+BCH: 42085 level
+LTC: 55180 level
+UNI: 46619 level
+AVAX: 38082 level
+SUI: 25595 level
+HBAR: 51002 level
+TAO: 15223 level
+SHIB: 37844 level
+ENA: 18902 level
+AAVE: 43747 level
+QNT: 36101 level
+
+SWING-H4: belum
+  2020-22 support    n=223604 pantul  37.4% vs acak  37.8% (lift  -0.4) · tembus  62.3% vs  61.9% · P 0.04
+  2020-22 resistance n=211442 pantul  36.5% vs acak  36.9% (lift  -0.4) · tembus  63.2% vs  62.8% · P 0.04
+  2023-26 support    n=377605 pantul  36.7% vs acak  37.1% (lift  -0.4) · tembus  63.0% vs  62.5% · P 0.03
+  2023-26 resistance n=366286 pantul  36.0% vs acak  36.3% (lift  -0.4) · tembus  63.7% vs  63.3% · P 0.00
+
+SWING-D1: belum
+  2020-22 support    n= 25022 pantul  36.1% vs acak  37.4% (lift  -1.3) · tembus  63.7% vs  62.3% · P 0.01
+  2020-22 resistance n= 23928 pantul  36.3% vs acak  37.0% (lift  -0.8) · tembus  63.5% vs  62.7% · P 0.05
+  2023-26 support    n= 42525 pantul  35.3% vs acak  37.5% (lift  -2.2) · tembus  64.3% vs  62.2% · P 0.00
+  2023-26 resistance n= 40384 pantul  35.2% vs acak  36.3% (lift  -1.2) · tembus  64.5% vs  63.4% · P 0.00
+
+PERIODE: belum
+  2020-22 support    n= 15324 pantul  34.0% vs acak  37.8% (lift  -3.8) · tembus  65.8% vs  62.0% · P 0.00
+  2020-22 resistance n= 15149 pantul  34.0% vs acak  37.3% (lift  -3.2) · tembus  65.8% vs  62.4% · P 0.00
+  2023-26 support    n= 25711 pantul  34.8% vs acak  37.4% (lift  -2.7) · tembus  64.9% vs  62.1% · P 0.00
+  2023-26 resistance n= 24107 pantul  34.3% vs acak  36.2% (lift  -1.9) · tembus  65.4% vs  63.4% · P 0.00
+
+BULAT: belum
+  2020-22 support    n=413537 pantul  37.8% vs acak  37.9% (lift  -0.1) · tembus  61.9% vs  61.8% · P 0.16
+  2020-22 resistance n=388369 pantul  36.9% vs acak  36.9% (lift  +0.0) · tembus  62.8% vs  62.8% · P 0.67
+  2023-26 support    n=601716 pantul  37.3% vs acak  37.4% (lift  -0.1) · tembus  62.3% vs  62.3% · P 0.09
+  2023-26 resistance n=586862 pantul  36.6% vs acak  36.5% (lift  +0.1) · tembus  63.0% vs  63.2% · P 0.98
+
+SD: belum
+  2020-22 support    n=  5638 pantul  38.7% vs acak  38.3% (lift  +0.4) · tembus  60.8% vs  61.4% · P 0.73
+  2020-22 resistance n=  5278 pantul  37.0% vs acak  36.5% (lift  +0.5) · tembus  62.7% vs  63.2% · P 0.69
+  2023-26 support    n= 10998 pantul  37.4% vs acak  36.3% (lift  +1.1) · tembus  62.2% vs  63.4% · P 0.97
+  2023-26 resistance n= 10637 pantul  36.4% vs acak  36.0% (lift  +0.4) · tembus  63.1% vs  63.6% · P 0.72
+
+BULAT-0,01u: belum
+  2020-22 support    n=265790 pantul  37.8% vs acak  37.9% (lift  -0.1) · tembus  61.9% vs  61.9% · P 0.20
+  2020-22 resistance n=249646 pantul  36.9% vs acak  36.9% (lift  +0.0) · tembus  62.8% vs  62.8% · P 0.50
+  2023-26 support    n=386944 pantul  37.4% vs acak  37.4% (lift  -0.1) · tembus  62.3% vs  62.2% · P 0.12
+  2023-26 resistance n=376902 pantul  36.6% vs acak  36.5% (lift  +0.1) · tembus  63.1% vs  63.2% · P 0.94
+
+BULAT-0,025u: belum
+  2020-22 support    n= 88629 pantul  37.8% vs acak  37.9% (lift  -0.0) · tembus  61.9% vs  61.8% · P 0.44
+  2020-22 resistance n= 83240 pantul  37.0% vs acak  36.9% (lift  +0.1) · tembus  62.7% vs  62.8% · P 0.80
+  2023-26 support    n=128998 pantul  37.6% vs acak  37.4% (lift  +0.3) · tembus  62.0% vs  62.3% · P 1.00
+  2023-26 resistance n=126028 pantul  36.8% vs acak  36.4% (lift  +0.4) · tembus  62.9% vs  63.2% · P 1.00
+
+BULAT-0,05u: belum
+  2020-22 support    n= 29470 pantul  38.0% vs acak  37.9% (lift  +0.1) · tembus  61.7% vs  61.8% · P 0.68
+  2020-22 resistance n= 27827 pantul  37.7% vs acak  36.7% (lift  +1.0) · tembus  62.0% vs  63.0% · P 1.00
+  2023-26 support    n= 42822 pantul  37.4% vs acak  37.4% (lift  +0.0) · tembus  62.3% vs  62.3% · P 0.53
+  2023-26 resistance n= 42176 pantul  37.0% vs acak  36.6% (lift  +0.5) · tembus  62.6% vs  63.1% · P 0.99
+
+BULAT-0,1u: belum
+  2020-22 support    n= 29648 pantul  37.5% vs acak  38.0% (lift  -0.5) · tembus  62.3% vs  61.7% · P 0.02
+  2020-22 resistance n= 27656 pantul  36.3% vs acak  37.1% (lift  -0.8) · tembus  63.4% vs  62.6% · P 0.00
+  2023-26 support    n= 42952 pantul  36.2% vs acak  37.5% (lift  -1.3) · tembus  63.4% vs  62.2% · P 0.00
+  2023-26 resistance n= 41756 pantul  36.0% vs acak  36.7% (lift  -0.7) · tembus  63.7% vs  63.0% · P 0.00
+
+PERIODE-hari: belum
+  2020-22 support    n= 11467 pantul  33.5% vs acak  37.3% (lift  -3.7) · tembus  66.3% vs  62.4% · P 0.00
+  2020-22 resistance n= 11405 pantul  34.2% vs acak  37.5% (lift  -3.3) · tembus  65.7% vs  62.1% · P 0.00
+  2023-26 support    n= 19394 pantul  34.5% vs acak  37.2% (lift  -2.7) · tembus  65.2% vs  62.4% · P 0.00
+  2023-26 resistance n= 18161 pantul  34.4% vs acak  36.1% (lift  -1.7) · tembus  65.4% vs  63.6% · P 0.00
+
+PERIODE-minggu: belum
+  2020-22 support    n=  3857 pantul  35.3% vs acak  38.3% (lift  -3.0) · tembus  64.5% vs  61.4% · P 0.00
+  2020-22 resistance n=  3744 pantul  33.7% vs acak  37.0% (lift  -3.2) · tembus  66.1% vs  62.9% · P 0.00
+  2023-26 support    n=  6317 pantul  35.7% vs acak  37.8% (lift  -2.1) · tembus  64.0% vs  61.9% · P 0.00
+  2023-26 resistance n=  5946 pantul  34.1% vs acak  36.3% (lift  -2.2) · tembus  65.5% vs  63.3% · P 0.01
+
+SD-demand: belum
+  2020-22 support    n=  3247 pantul  39.1% vs acak  38.9% (lift  +0.1) · tembus  60.5% vs  60.7% · P 0.58
+  2020-22 resistance n=  2257 pantul  37.2% vs acak  36.8% (lift  +0.4) · tembus  62.4% vs  62.9% · P 0.63
+  2023-26 support    n=  6504 pantul  37.1% vs acak  36.8% (lift  +0.3) · tembus  62.5% vs  62.8% · P 0.64
+  2023-26 resistance n=  4635 pantul  37.5% vs acak  36.1% (lift  +1.4) · tembus  62.0% vs  63.5% · P 0.98
+
+SD-supply: belum
+  2020-22 support    n=  2391 pantul  38.3% vs acak  37.7% (lift  +0.6) · tembus  61.4% vs  62.1% · P 0.68
+  2020-22 resistance n=  3021 pantul  36.8% vs acak  36.2% (lift  +0.6) · tembus  62.9% vs  63.5% · P 0.71
+  2023-26 support    n=  4494 pantul  37.9% vs acak  35.7% (lift  +2.1) · tembus  61.7% vs  63.9% · P 1.00
+  2023-26 resistance n=  6002 pantul  35.6% vs acak  36.0% (lift  -0.4) · tembus  64.0% vs  63.7% · P 0.31
+
+SWING-D1-n2: belum
+  2020-22 support    n= 12439 pantul  36.6% vs acak  37.3% (lift  -0.7) · tembus  63.1% vs  62.4% · P 0.13
+  2020-22 resistance n= 11953 pantul  36.1% vs acak  37.0% (lift  -0.9) · tembus  63.7% vs  62.7% · P 0.03
+  2023-26 support    n= 21210 pantul  35.3% vs acak  37.7% (lift  -2.3) · tembus  64.3% vs  62.0% · P 0.00
+  2023-26 resistance n= 20183 pantul  35.2% vs acak  36.3% (lift  -1.1) · tembus  64.4% vs  63.3% · P 0.00
+
+SWING-D1-n3: belum
+  2020-22 support    n=  8064 pantul  35.7% vs acak  37.6% (lift  -1.9) · tembus  64.1% vs  62.1% · P 0.00
+  2020-22 resistance n=  7720 pantul  36.1% vs acak  37.0% (lift  -0.9) · tembus  63.6% vs  62.7% · P 0.06
+  2023-26 support    n= 14095 pantul  35.3% vs acak  37.3% (lift  -2.0) · tembus  64.3% vs  62.4% · P 0.00
+  2023-26 resistance n= 13317 pantul  35.0% vs acak  36.2% (lift  -1.2) · tembus  64.7% vs  63.5% · P 0.00
+
+SWING-D1-n5: belum
+  2020-22 support    n=  4519 pantul  35.2% vs acak  37.1% (lift  -1.9) · tembus  64.6% vs  62.6% · P 0.01
+  2020-22 resistance n=  4255 pantul  37.0% vs acak  37.2% (lift  -0.2) · tembus  62.7% vs  62.5% · P 0.37
+  2023-26 support    n=  7220 pantul  35.4% vs acak  37.6% (lift  -2.2) · tembus  64.2% vs  62.1% · P 0.00
+  2023-26 resistance n=  6884 pantul  35.3% vs acak  36.3% (lift  -1.0) · tembus  64.2% vs  63.3% · P 0.07
+
+SWING-H4-n2: belum
+  2020-22 support    n=107698 pantul  37.5% vs acak  37.8% (lift  -0.4) · tembus  62.3% vs  61.9% · P 0.06
+  2020-22 resistance n=101812 pantul  36.6% vs acak  36.9% (lift  -0.3) · tembus  63.1% vs  62.7% · P 0.04
+  2023-26 support    n=181135 pantul  36.8% vs acak  37.1% (lift  -0.3) · tembus  62.8% vs  62.6% · P 0.08
+  2023-26 resistance n=175781 pantul  36.0% vs acak  36.3% (lift  -0.3) · tembus  63.7% vs  63.3% · P 0.03
+
+SWING-H4-n3: belum
+  2020-22 support    n= 72609 pantul  37.3% vs acak  37.8% (lift  -0.5) · tembus  62.4% vs  62.0% · P 0.04
+  2020-22 resistance n= 68671 pantul  36.6% vs acak  36.9% (lift  -0.3) · tembus  63.1% vs  62.8% · P 0.08
+  2023-26 support    n=122461 pantul  36.7% vs acak  37.1% (lift  -0.4) · tembus  63.0% vs  62.5% · P 0.03
+  2023-26 resistance n=118906 pantul  36.0% vs acak  36.5% (lift  -0.5) · tembus  63.7% vs  63.2% · P 0.00
+
+SWING-H4-n5: belum
+  2020-22 support    n= 43297 pantul  37.3% vs acak  37.7% (lift  -0.4) · tembus  62.4% vs  62.0% · P 0.09
+  2020-22 resistance n= 40959 pantul  36.4% vs acak  36.8% (lift  -0.5) · tembus  63.4% vs  62.9% · P 0.08
+  2023-26 support    n= 74009 pantul  36.5% vs acak  37.2% (lift  -0.7) · tembus  63.2% vs  62.5% · P 0.01
+  2023-26 resistance n= 71599 pantul  35.7% vs acak  36.2% (lift  -0.5) · tembus  64.0% vs  63.5% · P 0.01
+Trade live tutup 7 hari terakhir: 7 · SL: 1 · total +1.68R
+Kesetaraan sejak 2026-10-30T09:00 UTC: live 9 trade (+2.98R) · replay 9 trade (+2.48R) · beda 1 · hanya replay 1
+  BEDA HYPE B-short isi Fri 06 Nov 07:30 live WAKTU -0.53R · replay tidak ada
+  HANYA REPLAY ADA B-short isi Fri 06 Nov 07:30 SL -1.04R
+- RENDER B-short isi Mon 09 Nov 07:45 @ 1.55471 SL Mon 09 Nov 09:45 -1.04R → CELAH: B-short, BTC searah, ATR rel tinggi, SL setelah 2.0 jam · historis kondisi sama: SL 32% dari 145 (modul 32%) → NORMAL
+Ringkasan penyebab SL: CELAH 1
+Tindakan: NEWS = aman; LONJAKAN = catat; DATA & CELAH = wajib dianalisa di laporan (pola berulang -> ide baru).
+Sejak 30 Oct 2026 16:00 WIB · normalisasi bobot I-25 = 1.425
+minggu    live n  live R replay n replay R  I-25 R
+2026-W44       1   +0.65        1    +0.65   +0.00
+2026-W45       5   +2.06        5    +1.56   +0.59
+2026-W46       3   +0.27        3    +0.27   +1.00
+total          9   +2.98        9    +2.48   +1.60
+Uji maju I-25 sejak 6 Nov: 7 trade · juara +1.17R · I-25 +1.60R · bobot rata-rata 0.88 · syarat usulan: >= 6 minggu & >= 60 trade
