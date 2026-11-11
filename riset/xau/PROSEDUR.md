@@ -49,6 +49,19 @@ Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan
+**SIKLUS JUMAT (pemilik, 11 Nov 2026) — urutan wajib, laporan dengan bagian tetap:**
+1. **Kesehatan minggu ini** (bukan menilai strategi; ±5 trade terlalu sedikit): sinyal live = replay data final? data Setra
+   macet/cadangan dipakai? sinyal terlambat? selisih live vs backtest minggu itu.
+2. **Penyebab SL minggu ini:** `python3 riset/xau/sebab_sl.py . /tmp/data/xau.json 7 /tmp/data/xau_2004.json` (perbarui
+   VERSI_SEJAK di skrip tiap aturan bot berubah). Kategori: NEWS (event USD high-impact 60 mnt sebelum masuk s.d. SL) = aman ·
+   LONJAKAN (candle SL ≥ 2,5 ATR tanpa news) = dicatat · DATA (live ≠ replay) = WAJIB dianalisa sebagai bug · CELAH (salah
+   analisa) = WAJIB dianalisa: komponen, arah vs tren, ATR, dan bandingkan dengan porsi SL historis komponen di kondisi sama
+   (normal atau tidak). CELAH berulang (≥ 2 SL komponen & kondisi sama dalam 4 minggu, di atas porsi historis) → buka ide baru.
+3. **Akumulasi live vs bayangan** (bayangan.py) — penilaian strategi hanya dari akumulasi ≥ 4-8 minggu.
+4. **Satu putaran perbaikan** (arah utama di bawah) dengan walk-forward 2004-2026.
+5. **Gerbang pasang:** perbaikan teknis (bug/data/pesan) boleh diusulkan dipasang minggu itu juga. Perubahan STRATEGI wajib
+   P ≥ 0,90 walk-forward + replay IDENTIK + bayangan ≥ 4 minggu; maksimal 1 perubahan strategi per bulan.
+6. **Ringkasan Telegram** berbagian: Kesehatan · Penyebab SL · Live vs bayangan · Riset · Usulan (butuh "pasang"/"tidak" pemilik).
 **PROGRAM UTAMA (pemilik, 6 Nov 2026): TAMBAL-CELAH sampai TIDAK ADA TAHUN MINUS, baru setelah itu optimasi besar untung.**
 Tiap Jumat satu putaran: (a) bedah celah sistem dasar (`eksperimen/celah_ma200.py`: per tahun × komponen, kondisi pasar, bulan
 terburuk); (b) cari 1-2 ide BARU dari luar (indikator/strategi/literatur) yang khusus menutup celah terbesar; (c) uji dengan

@@ -534,3 +534,10 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (≈ 4,2 dari 22 walau edge stabil sempurna). Agar ≤ 1 tahun minus dari 22 butuh edge/trade ≈ 2× (+0,14R) atau variansi jauh
   lebih kecil. Fokus berikutnya: menaikkan edge per trade (bukan filter tahun), mis. membuang komponen ber-edge rendah & menambah
   komponen ber-edge tinggi, dan sizing yang mengecilkan variansi.
+
+## 11 Nov 2026 — Siklus Jumat & evaluasi penyebab SL (pemilik)
+- PROSEDUR: siklus Jumat 6 langkah (kesehatan, penyebab SL, live vs bayangan, 1 putaran riset, gerbang pasang, ringkasan
+  berbagian); perubahan strategi maks 1/bulan dengan P ≥ 0,90 + bayangan ≥ 4 minggu.
+- riset/xau/sebab_sl.py: klasifikasi SL = DATA / NEWS / LONJAKAN / CELAH + pembanding historis 2005-2026. Uji 14 hari: 4 Nov MR
+  SELL (LONJAKAN 3,1 ATR), 5 Nov MR SELL (LONJAKAN 2,5 ATR; news minggu lalu tidak tersedia di kalender minggu berjalan),
+  11 Nov KOMBO SELL (CELAH: searah tren H1, ATR rel 1,05; historis KOMBO searah tren SL 48% dari 623 → kerugian normal).
