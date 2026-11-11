@@ -96,5 +96,19 @@
   "R_kotor": 0.667,
   "alasan": "TP",
   "versi": "intraday-v3"
+ },
+ {
+  "waktu_tutup_wib": "2026-11-11 14:15",
+  "sym": "NEARUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1794359700,
+  "t1": 1794381300,
+  "entry": 3.6604293653914386,
+  "exit": 3.586,
+  "R": 0.654,
+  "R_kotor": 0.667,
+  "alasan": "TP",
+  "versi": "intraday-v3"
  }
 ]
