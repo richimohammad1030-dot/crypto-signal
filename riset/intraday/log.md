@@ -232,3 +232,22 @@ Hasil riset crypto swing 11 Nov belum ada di `riset/crypto/log.md` saat dikerjak
   SWING-H4 -0,4 poin (nyata tetapi sangat kecil); BULAT & SD tidak konsisten → belum. Lanjut: tahap 1b (lanjutan setelah tembus) &
   tahap 2 (I-30). Status juga perlu dicatat di tabel `riset/KURIKULUM_SKILL.md` (berkas di luar riset/intraday; perlu disalin manual).
 - Total ide intraday bernomor diuji: 18 (+ I-29; I-25 kini gagal). Juara v3 & bot tidak diubah.
+
+## 2026-11-13 · riset mingguan (siklus Jumat)
+Data diunduh ulang s.d. 13 Nov 2026 ±01:40 WIB (49 koin + 177 koin PIT; H1 + funding + 15m, tanpa kegagalan). Laporan:
+`riset/laporan/intraday/riset-2026-11-13.md`; keluaran mentah `eksperimen/hasil_2026-11-13.log`.
+- **Juara v3 PIT**: 2.973 trade, +0,0875R/trade, DD 15,8R; 2020-23 rasio 3,49 · 2024-skrg 1,52; per tahun +38/+93/+36/+25/+25/+9/+34.
+  Daftar tetap 2.697 trade, rasio 2,91 (2024-skrg 2,20).
+- **Kesehatan**: live sejak v3 10 trade +3,64R vs replay 10 +3,13R; beda tetap HYPE 6 Nov (koin baru listing, keterbatasan replay).
+  7 hari: 8 trade +2,33R, 1 SL (RENDER B-short 9 Nov, CELAH, porsi kondisi sama 32% = normal). Tidak ada CELAH berulang.
+  Bayangan W44 +0,65 · W45 +2,06 (replay +1,56) · W46 +0,92 (+0,93). Semua trade live B-short.
+- **I-28** (B-long + Alligator H1 searah), walk-forward 2 tahun, replay penuh PIT (`eksperimen/wf_b_filter_2026-11-13.py`), 5 varian:
+  terpilih LS-bukanlawan (≤2021, ≤2023), L-bukanlawan (≤2025). Uji 2022-26 R +126,2 vs +129,4, R/tr +0,075 vs +0,074, DD 13,3 vs 15,8,
+  per tahun +29,9/+28,8/+29,2/+14,0/+24,3 vs +35,6/+24,9/+25,3/+9,4/+34,2; P_rasio 0,49 → **GAGAL**.
+- **I-33** [lit] (baru; momentum BTC 24 jam untuk modul B, x 0-5%): walk-forward memilih off di ketiga jendela → **GAGAL**.
+  x=0% menurunkan R/trade (+0,080) dan B-short (+0,027R). Sumber: Wen dkk. (2022) NAJEF 62:101733; Gao dkk. (2018) JFE 129(2).
+- **Skill SNR tahap 1b** (`eksperimen/skill_snr_1b_2026-11-13.py`): PERIODE tembusan lanjut +1 ATR lebih sering dari acak
+  (2020-22 +3,4/+2,9 poin, 2023-26 +2,8/+1,1, P 1,00/1,00/1,00/0,96) → **LULUS TAHAP 1b**; drift 12 jam tidak konsisten (tembus atas
+  lebih lemah dari acak, P 0,10). SWING-D1 3/4 sel (belum). Langkah berikut: tahap 2 = I-30 (filter risiko order limit di level PERIODE).
+  Status perlu dicatat juga di tabel `riset/KURIKULUM_SKILL.md` (di luar riset/intraday; salin manual).
+- Data konfirmasi 2018-Feb 2020 tidak dipakai (tidak ada ide yang lolos walk-forward). Total ide bernomor diuji: 20. Juara v3 & bot tidak diubah.

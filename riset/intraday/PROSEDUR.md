@@ -64,7 +64,9 @@ berlaku di atas kriteria LOLOS di bawah: lolos kriteria di bawah = lolos tahap 1
 Skill aktif: **1 · SNR**. Status: Tahap 0 (definisi mesin) selesai 11 Nov 2026; **Tahap 1 PAHAM: LULUS untuk jenis PERIODE**
 (high/low hari & minggu sebelumnya) dan SWING-D1 — efeknya kebalikan teori klasik: level lebih sering DITEMBUS dari level acak
 (P ≥ 0,95 di 2020-22 & 2023-26, kedua arah). Swing H4 nyata tetapi sangat kecil (±0,4 poin); angka bulat & supply-demand belum.
-Langkah berikutnya: Tahap 1b (apakah tembusan diikuti lanjutan?) lalu Tahap 2 BISA MEMAKAI (filter order limit B/A di dekat level
+**Tahap 1b LULUS 13 Nov 2026 untuk PERIODE**: tembusan lebih sering lanjut +1 ATR dari acak (+1..+3 poin, P ≥ 0,96, kedua periode & arah),
+tetapi drift 12 jam tidak konsisten (`eksperimen/skill_snr_1b_2026-11-13.py`) → pakai sebagai filter risiko, bukan strategi tembus.
+Langkah berikutnya: Tahap 2 BISA MEMAKAI (filter order limit B/A di dekat level
 PERIODE, SL di balik level, strategi tembus mandiri) dengan walk-forward. Skrip: `eksperimen/skill_snr_2026-11-11.py`.
 
 ## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"

@@ -1,0 +1,97 @@
+# 13 Nov 2026 · data s.d. 13 Nov ±01:40 WIB
+## pit_intraday.py (juara)
+INTRADAY · parameter: juara
+  tetap           semua    n= 2697 win 63.9% avg +0.0961R R/thn  +38.8 DD  13.3R rasio  2.91 fill 61.9%
+  tetap           2020-23  n= 1589 win 64.3% avg +0.1102R R/thn  +45.9 DD  11.3R rasio  4.05 fill 61.8%
+  tetap           2024-    n= 1108 win 63.4% avg +0.0757R R/thn  +29.3 DD  13.3R rasio  2.20 fill 62.0%
+                  per tahun 2020:+39 2021:+72 2022:+34 2023:+29 2024:+26 2025:+18 2026:+40
+  sesuai masanya  semua    n= 2973 win 63.3% avg +0.0875R R/thn  +38.9 DD  15.8R rasio  2.46 fill 62.0%
+  sesuai masanya  2020-23  n= 1852 win 63.3% avg +0.1032R R/thn  +50.1 DD  14.4R rasio  3.49 fill 62.3%
+  sesuai masanya  2024-    n= 1121 win 63.2% avg +0.0614R R/thn  +24.0 DD  15.8R rasio  1.52 fill 61.5%
+                  per tahun 2020:+38 2021:+93 2022:+36 2023:+25 2024:+25 2025:+9 2026:+34
+  trade di koin yang TIDAK ada di daftar sekarang: 698 · +42.0R · avg +0.060R
+
+## wf_b_filter_2026-11-13.py (I-28, I-33)
+koin dimuat 226
+order A: 1716
+I-28 off            n=2973 R/tr +0.0875 R +260.0 DD 15.8 tahun {2020: 38.0, 2021: 92.6, 2022: 35.6, 2023: 24.9, 2024: 25.3, 2025: 9.4, 2026: 34.2} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (501, 27.7, 0.055)}
+I-28 L-ketat        n=2849 R/tr +0.0884 R +251.7 DD 13.4 tahun {2020: 40.8, 2021: 94.1, 2022: 15.3, 2023: 18.7, 2024: 38.2, 2025: 19.8, 2026: 24.7} grup {'A': (797, 92.5, 0.116), 'B-long': (1551, 131.5, 0.085), 'B-short': (501, 27.7, 0.055)}
+I-28 L-bukanlawan   n=2894 R/tr +0.0908 R +262.8 DD 13.3 tahun {2020: 41.2, 2021: 93.8, 2022: 29.4, 2023: 27.5, 2024: 29.8, 2025: 16.9, 2026: 24.3} grup {'A': (792, 98.4, 0.124), 'B-long': (1601, 136.7, 0.085), 'B-short': (501, 27.7, 0.055)}
+I-28 LS-ketat       n=2758 R/tr +0.0846 R +233.4 DD 16.8 tahun {2020: 41.7, 2021: 93.0, 2022: 15.3, 2023: 17.4, 2024: 30.5, 2025: 15.3, 2026: 20.3} grup {'A': (797, 92.5, 0.116), 'B-long': (1551, 131.5, 0.085), 'B-short': (410, 9.4, 0.023)}
+I-28 LS-bukanlawan  n=2850 R/tr +0.0909 R +259.1 DD 14.0 tahun {2020: 40.5, 2021: 95.1, 2022: 29.9, 2023: 28.8, 2024: 29.2, 2025: 14.0, 2026: 21.6} grup {'A': (792, 98.4, 0.124), 'B-long': (1601, 136.7, 0.085), 'B-short': (457, 24.0, 0.052)}
+I-33 x=0%           n=2334 R/tr +0.0800 R +186.7 DD 12.3 tahun {2020: 31.9, 2021: 68.4, 2022: 15.4, 2023: 15.0, 2024: 27.7, 2025: 13.3, 2026: 14.9} grup {'A': (867, 90.7, 0.105), 'B-long': (1070, 85.4, 0.08), 'B-short': (397, 10.5, 0.027)}
+I-33 x=1%           n=2687 R/tr +0.0853 R +229.1 DD 14.5 tahun {2020: 44.9, 2021: 77.6, 2022: 23.9, 2023: 22.9, 2024: 30.7, 2025: 4.6, 2026: 24.5} grup {'A': (829, 87.6, 0.106), 'B-long': (1411, 129.0, 0.091), 'B-short': (447, 12.5, 0.028)}
+I-33 x=2%           n=2846 R/tr +0.0871 R +247.8 DD 14.3 tahun {2020: 40.2, 2021: 82.6, 2022: 27.7, 2023: 24.2, 2024: 35.1, 2025: 5.7, 2026: 32.3} grup {'A': (813, 91.7, 0.113), 'B-long': (1572, 139.5, 0.089), 'B-short': (461, 16.6, 0.036)}
+I-33 x=3%           n=2923 R/tr +0.0852 R +249.0 DD 16.3 tahun {2020: 31.5, 2021: 85.8, 2022: 34.2, 2023: 25.1, 2024: 30.1, 2025: 8.2, 2026: 34.2} grup {'A': (803, 96.5, 0.12), 'B-long': (1642, 129.8, 0.079), 'B-short': (478, 22.7, 0.048)}
+I-33 x=5%           n=2960 R/tr +0.0877 R +259.5 DD 16.3 tahun {2020: 33.5, 2021: 94.7, 2022: 35.6, 2023: 24.9, 2024: 27.3, 2025: 9.4, 2026: 34.2} grup {'A': (796, 100.2, 0.126), 'B-long': (1668, 133.3, 0.08), 'B-short': (496, 26.1, 0.053)}
+
+######## I-28 walk-forward
+  pilih<=2021: skor LS-bukanlawan (0 minus, +67.8R/thn) · L-bukanlawan (0 minus, +67.5R/thn) · L-ketat (0 minus, +67.4R/thn) · LS-ketat (0 minus, +67.3R/thn) · off (0 minus, +65.3R/thn) -> PILIH LS-bukanlawan
+  pilih<=2023: skor LS-bukanlawan (0 minus, +48.6R/thn) · L-bukanlawan (0 minus, +48.0R/thn) · off (0 minus, +47.8R/thn) · L-ketat (0 minus, +42.2R/thn) · LS-ketat (0 minus, +41.9R/thn) -> PILIH LS-bukanlawan
+  pilih<=2025: skor L-bukanlawan (0 minus, +39.8R/thn) · LS-bukanlawan (0 minus, +39.6R/thn) · L-ketat (0 minus, +37.8R/thn) · off (0 minus, +37.6R/thn) · LS-ketat (0 minus, +35.5R/thn) -> PILIH L-bukanlawan
+  tahun  aturan          n     R      R/tr   | juara n     R      R/tr
+  2022  LS-bukanlawan   276  +29.9 +0.108 |  295  +35.6 +0.121
+  2023  LS-bukanlawan   335  +28.8 +0.086 |  344  +24.9 +0.072
+  2024  LS-bukanlawan   480  +29.2 +0.061 |  495  +25.3 +0.051
+  2025  LS-bukanlawan   304  +14.0 +0.046 |  328   +9.4 +0.029
+  2026  L-bukanlawan    288  +24.3 +0.085 |  298  +34.2 +0.115
+  GABUNGAN UJI 2022-2026: penantang n 1683 R +126.2 R/tr +0.0750 DD 13.3 tanpa2% 84.9 minus 0 | juara n 1760 R +129.4 R/tr +0.0735 DD 15.8 tanpa2% 86.6 minus 0
+  signifikansi (2022-skrg): {'hari': 1777, 'bulan': 59, 'juara': {'R_thn': 26.6, 'DD': 15.84, 'rasio': 8.17}, 'penantang': {'R_thn': 25.94, 'DD': 13.33, 'rasio': 9.47}, 'P_R_lebih_baik': 0.427, 'P_rasio_lebih_baik': 0.485, 'selisih_R_thn_90': [-6.61, 5.11]}
+  pembanding kriteria lama (semua varian, seluruh periode):
+    off            n 2973 fill 62.0 R/tr +0.0875 R/thn 38.9 DD 15.8 rasio L 3.49 B 1.52 tanpa2% 161.7
+    L-ketat        n 2849 fill 63.0 R/tr +0.0884 R/thn 37.7 DD 13.4 rasio L 3.9 B 2.15 tanpa2% 156.5
+    L-bukanlawan   n 2894 fill 62.1 R/tr +0.0908 R/thn 39.3 DD 13.3 rasio L 3.79 B 2.03 tanpa2% 166.7
+    LS-ketat       n 2758 fill 64.0 R/tr +0.0846 R/thn 34.9 DD 16.8 rasio L 3.69 B 1.38 tanpa2% 139.3
+    LS-bukanlawan  n 2850 fill 62.7 R/tr +0.0909 R/thn 38.8 DD 14.0 rasio L 3.65 B 1.69 tanpa2% 163.0
+
+######## I-33 walk-forward
+  pilih<=2021: skor off (0 minus, +65.3R/thn) · x=5% (0 minus, +64.1R/thn) · x=2% (0 minus, +61.4R/thn) · x=1% (0 minus, +61.2R/thn) · x=3% (0 minus, +58.6R/thn) · x=0% (0 minus, +50.2R/thn) -> PILIH off
+  pilih<=2023: skor off (0 minus, +47.8R/thn) · x=5% (0 minus, +47.2R/thn) · x=3% (0 minus, +44.1R/thn) · x=2% (0 minus, +43.7R/thn) · x=1% (0 minus, +42.3R/thn) · x=0% (0 minus, +32.7R/thn) -> PILIH off
+  pilih<=2025: skor off (0 minus, +37.6R/thn) · x=5% (0 minus, +37.6R/thn) · x=2% (0 minus, +35.9R/thn) · x=3% (0 minus, +35.8R/thn) · x=1% (0 minus, +34.1R/thn) · x=0% (0 minus, +28.6R/thn) -> PILIH off
+  tahun  aturan          n     R      R/tr   | juara n     R      R/tr
+  2022  off             295  +35.6 +0.121 |  295  +35.6 +0.121
+  2023  off             344  +24.9 +0.072 |  344  +24.9 +0.072
+  2024  off             495  +25.3 +0.051 |  495  +25.3 +0.051
+  2025  off             328   +9.4 +0.029 |  328   +9.4 +0.029
+  2026  off             298  +34.2 +0.115 |  298  +34.2 +0.115
+  GABUNGAN UJI 2022-2026: penantang n 1760 R +129.4 R/tr +0.0735 DD 15.8 tanpa2% 86.6 minus 0 | juara n 1760 R +129.4 R/tr +0.0735 DD 15.8 tanpa2% 86.6 minus 0
+  signifikansi (2022-skrg): {'hari': 1777, 'bulan': 59, 'juara': {'R_thn': 26.6, 'DD': 15.84, 'rasio': 8.17}, 'penantang': {'R_thn': 26.6, 'DD': 15.84, 'rasio': 8.17}, 'P_R_lebih_baik': 0.5, 'P_rasio_lebih_baik': 0.5, 'selisih_R_thn_90': [0.0, 0.0]}
+  pembanding kriteria lama (semua varian, seluruh periode):
+    off            n 2973 fill 62.0 R/tr +0.0875 R/thn 38.9 DD 15.8 rasio L 3.49 B 1.52 tanpa2% 161.7
+    x=0%           n 2334 fill 63.8 R/tr +0.0800 R/thn 28.0 DD 12.3 rasio L 3.23 B 1.59 tanpa2% 101.9
+    x=1%           n 2687 fill 63.0 R/tr +0.0853 R/thn 34.3 DD 14.5 rasio L 4.58 B 1.44 tanpa2% 136.7
+    x=2%           n 2846 fill 62.3 R/tr +0.0871 R/thn 37.1 DD 14.3 rasio L 4.08 B 1.79 tanpa2% 151.9
+    x=3%           n 2923 fill 62.3 R/tr +0.0852 R/thn 37.3 DD 16.3 rasio L 2.84 B 1.83 tanpa2% 150.9
+    x=5%           n 2960 fill 62.1 R/tr +0.0877 R/thn 38.9 DD 16.3 rasio L 3.03 B 1.56 tanpa2% 160.3
+
+## skill_snr_1b_2026-11-13.py
+
+PERIODE: LULUS TAHAP 1b (tembusan diikuti lanjutan)
+  2020-22 tembus-bawah   n= 10622 lanjut  44.4% vs acak  41.1% (lift  +3.4, P 1.00) · gagal  55.1% vs  58.3% · ret12 +0.042 vs -0.062 ATR (P 0.99)
+  2020-22 tembus-atas    n=  9929 lanjut  48.4% vs acak  45.5% (lift  +2.9, P 1.00) · gagal  51.1% vs  53.9% · ret12 +0.110 vs +0.170 ATR (P 0.10)
+  2023-26 tembus-bawah   n= 16964 lanjut  45.2% vs acak  42.4% (lift  +2.8, P 1.00) · gagal  54.1% vs  56.7% · ret12 -0.040 vs -0.086 ATR (P 0.90)
+  2023-26 tembus-atas    n= 15823 lanjut  47.7% vs acak  46.7% (lift  +1.1, P 0.96) · gagal  51.7% vs  52.6% · ret12 +0.120 vs +0.165 ATR (P 0.10)
+
+SWING-D1: belum / tidak konsisten
+  2020-22 tembus-bawah   n= 16465 lanjut  43.5% vs acak  41.8% (lift  +1.7, P 1.00) · gagal  55.8% vs  57.7% · ret12 +0.072 vs -0.009 ATR (P 0.99)
+  2020-22 tembus-atas    n= 14523 lanjut  47.0% vs acak  45.2% (lift  +1.8, P 1.00) · gagal  52.4% vs  54.1% · ret12 +0.137 vs +0.081 ATR (P 0.95)
+  2023-26 tembus-bawah   n= 27631 lanjut  44.1% vs acak  42.5% (lift  +1.6, P 1.00) · gagal  55.0% vs  56.7% · ret12 -0.049 vs -0.052 ATR (P 0.57)
+  2023-26 tembus-atas    n= 25292 lanjut  47.2% vs acak  46.6% (lift  +0.6, P 0.86) · gagal  52.1% vs  52.6% · ret12 +0.158 vs +0.155 ATR (P 0.53)
+
+## sebab_sl.py 7 hari
+Trade live tutup 7 hari terakhir: 8 · SL: 1 · total +2.33R
+Kesetaraan sejak 2026-10-30T09:00 UTC: live 10 trade (+3.64R) · replay 10 trade (+3.13R) · beda 1 · hanya replay 1
+  BEDA HYPE B-short isi Fri 06 Nov 07:30 live WAKTU -0.53R · replay tidak ada
+  HANYA REPLAY ADA B-short isi Fri 06 Nov 07:30 SL -1.04R
+- RENDER B-short isi Mon 09 Nov 07:45 @ 1.55471 SL Mon 09 Nov 09:45 -1.04R → CELAH: B-short, BTC searah, ATR rel tinggi, SL setelah 2.0 jam · historis kondisi sama: SL 32% dari 145 (modul 32%) → NORMAL
+Ringkasan penyebab SL: CELAH 1
+Tindakan: NEWS = aman; LONJAKAN = catat; DATA & CELAH = wajib dianalisa di laporan (pola berulang -> ide baru).
+
+## bayangan.py
+Sejak 30 Oct 2026 16:00 WIB · normalisasi bobot I-25 = 1.425
+minggu    live n  live R replay n replay R  I-25 R
+2026-W44       1   +0.65        1    +0.65   +0.00
+2026-W45       5   +2.06        5    +1.56   +0.59
+2026-W46       4   +0.92        4    +0.93   +1.56
+total         10   +3.64       10    +3.13   +2.16
+Uji maju I-25 sejak 6 Nov: 8 trade · juara +1.83R · I-25 +2.16R · bobot rata-rata 0.87 · syarat usulan: >= 6 minggu & >= 60 trade

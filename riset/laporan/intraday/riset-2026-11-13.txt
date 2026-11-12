@@ -1,0 +1,55 @@
+<b>RISET INTRADAY</b>
+13 Nov 2026 · riset mingguan
+────────────────────
+Juara v3 &amp; bot tidak diubah. Data s.d. 13 Nov, lengkap.
+
+<b>Juara (koin sesuai masanya)</b>
+────────────────────
+<pre>
+Periode    Trd  R/tr   DD rasio
+2020-23   1852 +,103 14,4  3,49
+2024-skrg 1121 +,061 15,8  1,52
+Per thn: +38 +93 +36 +25 +25 +9 +34
+</pre>
+
+<b>Kesehatan</b>
+────────────────────
+Sejak v3: live 10 trade +3,64R, replay +3,13R. Beda tetap 1 (HYPE 6 Nov, koin baru listing, keterbatasan replay; hilang ±16 Nov). Waktu isi live = replay, data lengkap.
+
+<b>Penyebab SL</b>
+────────────────────
+7 hari: 8 trade +2,33R, 1 SL. RENDER B-short 9 Nov = CELAH, porsi SL kondisi sama 32% (normal). Tidak ada pola berulang.
+
+<b>Live vs bayangan</b>
+────────────────────
+<pre>
+Minggu  live    replay
+W44     +0,65   +0,65
+W45     +2,06   +1,56
+W46     +0,92   +0,93
+</pre>
+Semua trade live = B-short (BTC turun). Terlalu sedikit untuk menilai.
+
+<b>Riset (walk-forward, replay penuh)</b>
+────────────────────
+I-28 B-long hanya bila Alligator H1 searah:
+<pre>
+Uji 2022-26  pen.    juara
+R           +126,2  +129,4
+R/trade     +0,075  +0,074
+DD            13,3    15,8
+P rasio       0,49
+</pre>
+Efek pasca-trade hilang setelah replay penuh; untung 2023-25 dibayar 2022 &amp; 2026 -&gt; GAGAL.
+I-33 [lit] momentum BTC 24 jam untuk modul B: walk-forward memilih "tanpa filter" di ketiga jendela -&gt; GAGAL.
+Total ide diuji: 20.
+
+<b>Skill</b>
+────────────────────
+🎓 SKILL SNR: LULUS TAHAP 1b (PAHAM)
+Tembusan high/low hari &amp; minggu sebelumnya lebih sering lanjut +1 ATR dari level acak (+1 s.d. +3 poin, P &gt;= 0,96, dua periode, dua arah). Tapi drift 12 jam tidak konsisten -&gt; pakai sebagai filter risiko order limit (I-30), bukan strategi tembus.
+
+<b>Usulan</b>
+────────────────────
+Tidak ada perubahan bot. Usulan 11 Nov (arah naikkan edge per trade, 2018-Feb 2020 jadi periode konfirmasi) masih menunggu jawaban.
+Jumat depan: I-30 (SNR tahap 2).
