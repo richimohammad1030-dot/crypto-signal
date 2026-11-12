@@ -132,3 +132,34 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
   tanpa melihat masa depan); tahap 1 PAHAM Jumat 13 Nov.
 - PROSEDUR: SIKLUS JUMAT, PEMBAGIAN DATA, ARAH RISET ditambahkan. Ide baru #60-#63. Catatan penomoran: XAU memakai #52-#59 pada
   10 Nov sementara crypto #52-#55 (6 Nov) — nomor bentrok; rujukan crypto tetap di log/ide crypto, penomoran baru mulai #60.
+
+## 2026-11-13 · RISET MINGGUAN (siklus Jumat) · #54 TP sebagian · #67 SL impas setelah TP1 · skill SNR tahap 1
+- Mode: riset mingguan (Jumat berikutnya 20 Nov masih November; review bulanan = 27 Nov). Data: unduh_crypto (49 koin + 177 koin
+  tambahan sesuai masanya), unduh_pit (snapshot CMC 86 bulan), unduh_lama (112 bulan, 60 koin ber-candle sebelum Okt 2019).
+  Sistem dasar `_wf.py` direproduksi persis (+614,5R, DD 24,2R, 2.975 trade 2018-skrg).
+- **Kesehatan**: sejak v2 (24 Okt) live 24 trade -1,33R vs replay 25 trade -1,95R kotor; 3 trade live tanpa pasangan (ZRO, NEAR, XLM SELL)
+  = sama dengan 11 Nov (efek slot HYPE, #63). Tidak ada trade tutup sejak 10 Nov; 10 posisi SELL terbuka (slot penuh: BTC ETH BNB XRP ZEC
+  ENA HYPE PUMP DOT WLD). 100 run workflow terakhir (12 Nov) semua sukses; state diperbarui tiap 2 jam. Tidak ada temuan DATA baru.
+- **Penyebab SL 7 hari**: 5 trade +1,23R, SL 0, cut-loss stagnan 1 (TAO SELL -0,23R). Tidak ada CELAH berulang (28 hari, semua P >= 0,11).
+  kejadian.json tidak ditambah (tidak ada SL minggu ini).
+- **Bayangan** (data s.d. 10 Nov, sama dengan minggu lalu karena tidak ada trade baru): v2 -1,95 · tanpa stagnan -1,79 · tanpa TP25 -2,19 ·
+  v1 -1,96 · SELL 0,5% -2,11 · LOW 1/2 -1,40R kotor; live -1,33R. Akumulasi 3 minggu, belum bisa menilai.
+- **#54 TP sebagian** (`eksperimen/ide54_67_keluar.py`, walk-forward berlabuh sesuai masanya, R bersih REAL, replay penuh):
+  10 varian + juara: porsi {25, 33, 50}% × jarak {0,75; 1,0; 1,5}R, dan bertingkat 25%@1R + 25%@2R / @3R.
+  Rata 2020-skrg R/thn (DD): juara 63,4 (24,2) · 25%@1,5R 65,0 (26,0) · 33%@1R 60,4 (23,1) · 50%@1R 54,1 (20,8) · 50%@1,5R 57,4 (24,3) ·
+  25+25%@2R 56,5 (22,7) · 25+25%@3R 59,8 (22,9). Rasio lama 2020-23 / baru 2024-skrg: juara 12,9 / 6,6; tidak ada varian >= +10% di keduanya.
+  WF memilih 25%@1,5R di keempat jendela → uji tersambung 2020 +84,9 · 21 +98,4 · 22 +36,4 · 23 +101,9 · 24 +81,5 · 25 +17,1 · 26 +35,3R;
+  R/thn +1,7 tetapi DD +7%; signifikansi P_R 0,93, **P_rasio 0,16** → **GAGAL**. Tetangga (33%@1,5R) lebih rendah dari juara.
+  Temuan sampingan: porsi TP besar menurunkan ketergantungan ekor (tanpa 2% terbaik 123 → 148-166R) dan simpangan R tahunan 35 → 26,
+  peluang tahun minus Φ 2,6% → 1,1-1,2% (50%@1R, 25+25%@2R), tetapi R/thn -11 s.d. -15% → bukan optimasi; dicatat sebagai #68 (pilihan pemilik).
+  Catatan biaya bertingkat: fee maker & porsi funding memakai porsi TP1 0,25 (sedikit konservatif).
+- **#67 (ide baru) SL pindah ke impas / -0,5R setelah TP1**: impas R/thn 60,9, DD 20,4R (-16%), rasio lama 15,3 (+19%) baru 6,1 (-8%),
+  tanpa 2% 104 vs 123R; -0,5R R/thn 63,3, DD 23,0, rasio +4% / +3%. WF memilih juara di 2021 & 2023, -0,5R di 2019 & 2025;
+  P_rasio 0,36 → **GAGAL** (SL 8 ATR yang lebar memang perlu ruang; impas memotong tren yang sempat koreksi).
+- **Skill SNR tahap 1 PAHAM** (`eksperimen/skill_snr_tahap1.py`, 11 koin sejak 2017-18): **LULUS untuk PERIODE & SWING-D1** dengan efek
+  kebalikan teori klasik — level lebih sering DITEMBUS dari level acak (PERIODE pantul 31-34% vs 36-37%, P >= 0,97 di 4 sel; SWING-D1
+  P >= 0,90, tipis di 2017-19 resistance 0,904). Cocok dengan intraday (11 Nov) dan dengan edge breakout bot. SWING-H4, BULAT: tidak/sangat
+  kecil; SD pantul hanya 2020-26 (belum). Berikutnya tahap 1b (lanjutan setelah tembus) & tahap 2 di walk-forward.
+- Total ide crypto yang pernah diuji: ±17 (ditambah #54, #67); varian dinilai putaran ini: 12 + juara. Ide baru: #67 (gagal), #68 (antri, prioritas 3).
+  Penomoran: XAU sudah memakai #64-#66 → crypto lanjut #67.
+- Strategi bot: tidak ada perubahan. Tidak ada kandidat penantang.

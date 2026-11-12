@@ -1,0 +1,61 @@
+<b>RISET CRYPTO</b>
+Jumat, 13 Nov 2026 · riset mingguan
+────────────────────
+
+<b>Kesehatan</b>
+────────────────────
+Live 24 trade -1,33R vs replay -1,95R
+sejak 24 Okt; selisih sama dgn minggu
+lalu (efek slot HYPE). Belum ada trade
+tutup sejak 10 Nov; 10 posisi SELL
+terbuka. Workflow semua sukses.
+
+<b>Penyebab SL (6-12 Nov)</b>
+────────────────────
+5 trade +1,23R · SL 0 · stagnan 1
+(TAO). Tidak ada celah berulang.
+
+<b>Live vs bayangan</b>
+────────────────────
+Belum berubah (tidak ada trade baru):
+semua menu -1,4 s.d. -2,2R, live
+-1,33R. Terlalu dini menilai.
+
+<b>Riset (walk-forward 2018-skrg)</b>
+────────────────────
+#54 TP sebagian (10 varian):
+<pre>
+Varian       R/thn   DD  P(minus)
+Juara 25%@1R  63,4 24,2   2,6%
+25% @1,5R     65,0 26,0   2,3%
+50% @1R       54,1 20,8   1,2%
+25%@1+25%@2R  56,5 22,7   1,1%
+</pre>
+WF pilih 25%@1,5R: R/thn +1,7 tapi
+DD naik 7%, P rasio 0,16 → GAGAL.
+TP besar = hasil tahunan lebih stabil
+tapi untung -15% (dicatat #68).
+
+#67 SL impas setelah TP1 (ide baru):
+DD 20,4R tapi R/thn -2,4; P 0,36
+→ GAGAL. SL lebar memang perlu ruang.
+Total ide crypto diuji: ±17.
+
+<b>Skill</b>
+────────────────────
+🎓 SKILL SNR: LULUS TAHAP 1 (PAHAM)
+untuk high/low hari-minggu lalu dan
+swing D1. Di crypto level ini justru
+lebih sering DITEMBUS daripada level
+acak (pantul 31-35% vs 36-37%), di
+2017-19 dan 2020-26. Cocok dgn edge
+breakout bot. Angka bulat &amp; swing H4
+tidak nyata. Berikutnya: tahap 2
+(dipakai sbg filter/SL di WF).
+
+<b>Usulan</b>
+────────────────────
+Strategi bot: tidak ada perubahan.
+Tidak ada kandidat penantang.
+Usulan teknis #60 (funding riset)
+masih menunggu jawaban.
