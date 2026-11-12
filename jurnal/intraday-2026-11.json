@@ -110,5 +110,19 @@
   "R_kotor": 0.667,
   "alasan": "TP",
   "versi": "intraday-v3"
+ },
+ {
+  "waktu_tutup_wib": "2026-11-12 19:15",
+  "sym": "ZECUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1794443400,
+  "t1": 1794485700,
+  "entry": 991.614630335975,
+  "exit": 964.21,
+  "R": 0.657,
+  "R_kotor": 0.667,
+  "alasan": "TP",
+  "versi": "intraday-v3"
  }
 ]
