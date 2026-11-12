@@ -1,0 +1,83 @@
+<b>RISET XAU</b>
+Jumat, 13 Nov 2026
+────────────────────
+Mode: riset mingguan.
+
+<b>Kesehatan</b>
+────────────────────
+Replay IDENTIK (Setra 464, Dukascopy
+2.842 trade). 5 hari minggu ini, sinyal
+live = replay data final. Setra lancar,
+tanpa data cadangan, tanpa sinyal
+terlambat. Minggu ini -0,71R.
+Catatan: Dukascopy menolak unduhan
+riset (429), data Nov dari Setra.
+
+<b>Penyebab SL</b>
+────────────────────
+<pre>
+11 Nov KOMBO SELL  CELAH normal
+  searah tren H1, SL hist 48%
+12 Nov MR BUY      CELAH normal
+  tren turun RSI 10,9, hist 30%
+</pre>
+Tidak ada pola berulang.
+
+<b>Live vs bayangan (sejak 2 Nov)</b>
+────────────────────
+<pre>
+Menu             Trade  Total R
+Live (bot)         7    -1,82
+Baseline           7    -3,79
+Tanpa kombinasi    7    -2,06
+Tanpa hibrida      7    -1,10
+K6 saja            2    +2,24
+OCO lama           9    +9,61
+</pre>
+Baru 2 minggu, belum bisa dinilai.
+
+<b>Riset</b>
+────────────────────
+Vonis data baru 2005-2014 (sekali):
+<pre>
+Versi        R/thn minus terburuk
+Bot live     +12,7  4/10   -24
+Hibrida MA200 +7,7  5/10   -25
+#40 saja      +9,6  5/10   -14
+SELL 71,22    +9,4  3/10    -8
+#50 zona 1%  +10,4  5/10   -15
+</pre>
+Bot live tetap terbaik. #50 dan
+MA200 yang 0 tahun minus di
+2015-2026 jadi 5/10: menambal per
+tahun = overfit. #50 GAGAL.
+
+Walk-forward 2011-2026 (vs live
++16,4 R/thn, R/DD 5,03):
+<pre>
+Ide              R/thn terburuk P
+#64 bobot komp.  +18,0  -44  0,17
+#45 target-vol   +17,5  -35  0,35
+#66 tanpa hibr.  +11,6  -14  0,10
+</pre>
+Ketiganya GAGAL (syarat P 0,90).
+Edge komponen berganti antar
+periode; hanya KOMBO BUY stabil
+(+0,17..+0,31R/trade) -&gt; ide #65.
+Total ide XAU diuji: 42.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR: LULUS TAHAP 0 (definisi
+mesin). Bot kini bisa mengenali
+swing H4/D1, high/low hari &amp;
+minggu lalu, angka bulat, dan zona
+supply-demand tanpa melihat masa
+depan (0 pelanggaran). Tahap 1
+(PAHAM vs level acak) 20 Nov.
+
+<b>Usulan</b>
+────────────────────
+Tidak ada perubahan strategi.
+Masih menunggu "pasang"/"tidak":
+#36 saran lot otomatis.

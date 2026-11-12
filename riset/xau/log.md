@@ -548,3 +548,38 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Skill 1 XAU = SNR (default pemilik: 4 jenis — swing fraktal, high/low hari & minggu sebelumnya, angka bulat, zona
   supply-demand; level H4 & D1, keputusan H1). Mulai Jumat 13 Nov. Antrian: struktur pasar, price action di level, sesi &
   likuiditas, volume, news, antar-pasar, konfluensi MTF. PROSEDUR langkah 4b.
+
+## 13 Nov 2026 — Riset Jumat (siklus Jumat; mode mingguan)
+- Data: Setra 11.475 candle s.d. 12 Nov 16:00 UTC. Dukascopy bulan Nov 2026 GAGAL diunduh (HTTP 429 / tunnel ditutup proxy) →
+  xau_panjang dirakit dari cache bulanan s.d. 30 Okt 2026 (69.973 candle; cukup untuk replay & walk-forward). Data 2004-2026 =
+  138.411 candle (bibit 2004-2014 + Dukascopy s.d. Jan 2025 + Setra sejak Feb 2025).
+- Replay IDENTIK: Setra 464/464 (KOMBO 64 MR 237 K6 98 SUS 65), Dukascopy 2.842/2.842.
+- Kesehatan minggu 6-12 Nov: 5 trade live (6 Nov MR BUY -0,47 · 9 Nov K6 BUY +1,76 · 11 Nov KOMBO SELL -1 · 12 Nov MR BUY -1;
+  10 Nov tanpa trade) = replay data final persis (arah, entry, exit). Tidak ada cad_log/cadangan Dukascopy, tidak ada sinyal
+  terlambat. Minggu ini -0,71R kotor.
+- Penyebab SL (sebab_sl.py): 11 Nov KOMBO SELL = CELAH (searah tren H1, ATR rel 1,05; historis KOMBO searah tren SL 48% dari 626 →
+  normal); 12 Nov MR BUY = CELAH (RSI2 10,9 saat tren harian turun [cermin BUY ≤ 15], lawan tren H1, ATR rel 0,83; historis MR lawan
+  tren SL 30% dari 1.132 → normal). Tidak ada pola CELAH berulang (≥ 2 SL komponen & kondisi sama dalam 4 minggu: tidak).
+- Bayangan sejak 2 Nov (biaya 0,40): BASELINE 7 trade -3,79R (2 Nov replay = KOMBO SELL -1, live = MR BUY +0,89 karena data cadangan
+  #47); live catatan bot -1,82R kotor; Tanpa kombinasi -2,06; Tanpa hibrida -1,10; K6 saja +2,24 (2); OCO lama +9,61 (9). 2 minggu =
+  terlalu sedikit untuk menilai.
+- **LANGKAH 1 pembagian data (sekali, langkah1_2004.py): uji APA ADANYA 2005-2014.** R/thn · tahun minus/10 · terburuk · DD:
+  bot live +12,7 · 4 · -24 · 52R; hibrida MA100 tanpa kombinasi +8,6 · 4 · -24 · 56; hibrida MA200 +7,7 · 5 · -25 · 63; #40 tanpa
+  hibrida +9,6 · 5 · -14 · 43; MR SELL 71,22 +9,4 · **3** · **-8** · **24**; #50 zona 1% ketat +10,4 · 5 · -15 · 43; #50 → K6 +9,6 · 5 · -17 · 50.
+  Hibrida MA200 & #50 yang 0/12 tahun minus di 2015-2026 jatuh ke 5/10 di data baru → penambal per tahun = overfit (#50 GAGAL).
+  Bot live tetap R/thn tertinggi di data baru. **2004-2014 SUDAH DILIHAT sejak hari ini** (hanya walk-forward/konfirmasi).
+- Putaran riset (walk-forward berlabuh, wf_bobot.py; uji 2011-2026 semua tahun hasil uji; sistem live +16,4 R/thn, 4/16 minus,
+  terburuk -24, R/DD 5,03):
+  · #64 (baru) bobot risiko per komponen (strategi × arah) dari edge masa lalu: +18,0 R/thn tetapi terburuk -44, DD 80R, P rasio 0,17
+    (P1 0,19 · P2 0,29 · P3 0,09) → GAGAL. Sebab: edge komponen berganti tanda antar periode (K6 BUY -0,03/+0,13/+0,48; K6 SELL
+    +0,19/-0,11/+0,05; SUS SELL -0,04/+0,10/+0,10), pembobotan mengejar masa lalu.
+  · #45 (antri) target-volatilitas: WF memilih vt 0,5-2 tiap jendela: +17,5, terburuk -35, P 0,35; kebalikan (besar saat volatil)
+    inv 0,75-1,25 terburuk -19 sd 18,8 tetapi P 0,40 → GAGAL.
+  · #66 (baru, dipicu Langkah 1) KOMBO + MR tanpa hibrida 71,22: 2005-26 +11,6, terburuk -14, DD 34R, tetap 6/22 minus; P 0,52 /
+    0,10 (2011-26) / 0,21 (Setra) → GAGAL; versi 85: P 0,45/0,41/0,10 → GAGAL.
+  · Satu-satunya komponen ber-edge stabil di ketiga periode: KOMBO BUY +0,26/+0,17/+0,31 R/trade (n 201/93/71) → ide #65 antri
+    (dipilih setelah melihat semua periode → wajib walk-forward).
+- SKILL 1 SNR tahap 0 (skill_snr.py): 4 jenis pengenal (swing fraktal 2/3/5 H4 & D1 dengan zona versi tanpa-masa-depan, PDH/PDL &
+  PWH/PWL, angka bulat 10/25/50/100, supply-demand H4 & D1 dengan status segar) + definisi sentuhan. Cek tanpa-masa-depan 0/2.218
+  pelanggaran. Zona/thn: swing H4 210-463, D1 36-85; supdem 3-8; sentuhan ±77 per hari bursa (bulat10 & swing H4 terbanyak).
+  LULUS TAHAP 0. Tahap 1 (PAHAM vs level acak, P ≥ 0,90 di 2004-14 & 2015-26) Jumat berikutnya.

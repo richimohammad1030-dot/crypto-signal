@@ -34,6 +34,8 @@ Jangan memakai kesimpulan riset crypto untuk XAU tanpa diuji ulang dengan data X
 pip install -q --break-system-packages numpy pandas scipy
 python3 riset/unduh_xau.py /tmp/data                       # Setra (data bot), sejak Feb 2025
 python3 riset/unduh_xau_panjang.py /tmp/data 2015         # Dukascopy 2015-skrg (bibit di riset/data/, hanya bulan baru diunduh)
+# Dukascopy 429/terputus (13 Nov 2026): rakit /tmp/data/xau_panjang.json dari cache bulanan /tmp/data/dukascopy/*.json (buang o=h=l=c)
+# lalu xau_sambung.json = Dukascopy < Feb 2025 + Setra >= Feb 2025, dan xau_2004.json via gabung_xau_lama.py
 python3 riset/replay_xau.py . /tmp/data/xau.json /tmp/data/xau_panjang.json   # wajib IDENTIK; jika BEDA laporkan sebagai temuan utama
 python3 riset/xau/bayangan.py . /tmp/data/xau.json /tmp/data/xau_panjang.json # uji maju: live vs menu strategi sejak 2 Nov 2026
 ```
@@ -73,7 +75,7 @@ harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum diliha
 /tmp/data/xau_2004.json`, tanpa unduh) dan perak.
 
 **PEMBAGIAN DATA 2004-2026 (pemilik, 6 Nov 2026):**
-- LANGKAH 1 (sekali, Jumat 13 Nov 2026): uji APA ADANYA (tanpa ubah parameter) bot live hibrida MA100, hibrida MA200, #40
+- LANGKAH 1 (SELESAI 13 Nov 2026, `eksperimen/langkah1_2004.py`; hasil di log 13 Nov — 2004-2014 kini SUDAH DILIHAT): uji APA ADANYA (tanpa ubah parameter) bot live hibrida MA100, hibrida MA200, #40
   (tanpa hibrida), MR SELL 71,22, dan penambal #50 di **2004-2014** (data yang belum pernah dilihat; 2015-2026 sudah
   "terkontaminasi" karena dipakai merancang). Tabel per tahun 2004-2014 + tahun minus + terburuk. Ini vonis paling jujur;
   catat di log bahwa 2004-2014 sudah dipakai setelah langkah ini.
@@ -85,7 +87,7 @@ harus ikut bagus; (e) penambal yang lolos dikonfirmasi di data yang belum diliha
 - Pemeriksaan tambahan: periode Setra Feb 2025-skrg (data broker) dan perak. Uji maju bot live = hakim terakhir.
 - Catatan teknis: indikator lambat (MA200 hari dll.) butuh pemanasan — mulai hitung trade setelah indikator terbentuk.
  Catat putaran & celah tersisa di log.md. Sistem dasar sekarang: bot live hibrida MA100 (vonis 2005-2014: 7/22 tahun minus, lihat log 10 Nov); kandidat terkuat: #58 V2
-(kombinasi RSI2+tren+CLV); penambal #50. ARAH UTAMA SEJAK 10 Nov 2026 (log "Tambal-celah putaran 2"): menambal per tahun hanya memindahkan rugi; peluang tahun minus
+(kombinasi RSI2+tren+CLV; DIPASANG 11 Nov). Penambal #50 GAGAL di 2005-2014 (13 Nov). ARAH UTAMA SEJAK 10 Nov 2026 (log "Tambal-celah putaran 2"): menambal per tahun hanya memindahkan rugi; peluang tahun minus
 dengan edge +0,071R/trade × 239 trade/thn ≈ 19% (±4 dari 22 tahun walau stabil). Fokus = NAIKKAN EDGE PER TRADE / turunkan
 variansi tahunan: (1) buang/perkecil komponen ber-edge ±0 (mis. susulan BUY -17R/22 thn), (2) perbesar porsi komponen ber-edge
 tinggi (kombinasi #58), (3) ukuran posisi per komponen sebanding edge-nya, (4) cari komponen baru ber-edge ≥ +0,15R/trade.
