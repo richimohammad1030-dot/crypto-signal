@@ -14,10 +14,22 @@ def get(u):
                 return r.read()
         except urllib.error.HTTPError as e:
             if e.code == 404: return b""
-            time.sleep(5 * (t + 1))
+            time.sleep(15 * (t + 1))
         except Exception:
-            time.sleep(5 * (t + 1))
+            time.sleep(15 * (t + 1))
     return None
+
+def day_rows(d):
+    b = get(f"https://datafeed.dukascopy.com/datafeed/XAUUSD/{d.year}/{d.month - 1:02d}/{d.day:02d}/BID_candles_min_1.bi5")
+    time.sleep(1.0)                                              # laju tetap agar tidak kena batas Dukascopy
+    if b is None: return None
+    if not b: return []
+    raw = lzma.decompress(b); day0 = int(dt.datetime(d.year, d.month, d.day, tzinfo=dt.timezone.utc).timestamp()); out = []
+    for i in range(len(raw) // 24):
+        t, o, c, l, h, v = struct.unpack(">5if", raw[i * 24:(i + 1) * 24])
+        if o == h == l == c and v == 0: continue
+        out.append(f"{day0 + t},{o},{h},{l},{c}")
+    return out
 
 today = dt.datetime.now(dt.timezone.utc).date()
 for m in range(1, 13):
@@ -26,18 +38,16 @@ for m in range(1, 13):
     name = f"xau_m1_{Y}-{m:02d}.csv.gz"
     if os.path.exists(f"{REPO}/{name}"): continue
     if (time.time() - T0) / 60 > BATAS_MENIT: print("batas waktu, lanjut di run berikutnya"); break
-    d = first; rows = []; gagal = []
-    while d.month == m:
-        if d.weekday() != 5:
-            b = get(f"https://datafeed.dukascopy.com/datafeed/XAUUSD/{Y}/{m - 1:02d}/{d.day:02d}/BID_candles_min_1.bi5")
-            if b is None: gagal.append(str(d))
-            elif b:
-                raw = lzma.decompress(b); day0 = int(dt.datetime(Y, m, d.day, tzinfo=dt.timezone.utc).timestamp())
-                for i in range(len(raw) // 24):
-                    t, o, c, l, h, v = struct.unpack(">5if", raw[i * 24:(i + 1) * 24])
-                    if o == h == l == c and v == 0: continue
-                    rows.append(f"{day0 + t},{o},{h},{l},{c}")
-        d += dt.timedelta(days=1)
+    days = [first + dt.timedelta(days=k) for k in range(31) if (first + dt.timedelta(days=k)).month == m and (first + dt.timedelta(days=k)).weekday() != 5]
+    got = {}
+    for putaran in range(4):                                     # hari yang gagal dicoba ulang di putaran berikutnya
+        for d in days:
+            if d not in got:
+                r = day_rows(d)
+                if r is not None: got[d] = r
+        if len(got) == len(days): break
+        time.sleep(60)
+    gagal = [str(d) for d in days if d not in got]; rows = [x for d in days if d in got for x in got[d]]
     if gagal: print(Y, m, "gagal", gagal); continue                # bulan tidak lengkap tidak disimpan
     with gzip.open(f"{OUT}/{name}", "wt") as f: f.write("\n".join(rows))
     print(name, len(rows), f"{(time.time() - T0) / 60:.1f} mnt", flush=True)
