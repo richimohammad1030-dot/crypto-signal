@@ -1,0 +1,43 @@
+name: Unduh Data XAU M1 (riset momentum)
+
+# Hanya berjalan di branch data. Mengunduh M1 Dukascopy 2020-sekarang per tahun (paralel),
+# lalu menyimpannya ke riset/data/m1/ di branch yang sama. Tidak menyentuh main maupun bot live.
+on:
+  push:
+    branches: ["claude/data-xau-m1"]
+    paths: ["riset/momentum/unduh_m1_dukascopy.py", ".github/workflows/unduh-xau-m1.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unduh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        tahun: [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python riset/momentum/unduh_m1_dukascopy.py ${{ matrix.tahun }} out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "m1-${{ matrix.tahun }}", path: out/ }
+
+  simpan:
+    needs: unduh
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: dl, pattern: "m1-*", merge-multiple: true }
+      - run: |
+          mkdir -p riset/data/m1 && cp dl/*.csv.gz riset/data/m1/ && ls -la riset/data/m1
+          git config user.name "github-actions[bot]"; git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add riset/data/m1 && git commit -m "Data XAU M1 Dukascopy 2020-sekarang (riset momentum)" && git push || echo "tidak ada perubahan"
