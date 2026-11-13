@@ -1,5 +1,5 @@
 {
- "last_ts": 1794560400,
+ "last_ts": 1794567600,
  "pend": null,
  "pos": {
   "d": -1,
@@ -187,7 +187,9 @@
   "1793971800|Non-Farm Employment Change",
   "1793971800|Unemployment Rate",
   "1794317400|CPI m/m",
-  "1794317400|Core CPI m/m"
+  "1794317400|Core CPI m/m",
+  "1794576600|Core PPI m/m",
+  "1794576600|PPI m/m"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00",
  "c07": {
