@@ -17,14 +17,14 @@ jobs:
     timeout-minutes: 90
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 3
       matrix:
         tahun: [2020, 2021, 2022, 2023, 2024, 2025, 2026]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: python riset/momentum/unduh_m1_dukascopy.py ${{ matrix.tahun }} out
+      - run: python riset/momentum/unduh_m1_dukascopy.py ${{ matrix.tahun }} out riset/data/m1
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: "m1-${{ matrix.tahun }}", path: out/ }
@@ -38,6 +38,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with: { path: dl, pattern: "m1-*", merge-multiple: true }
       - run: |
-          mkdir -p riset/data/m1 && cp dl/*.csv.gz riset/data/m1/ && ls -la riset/data/m1
+          mkdir -p riset/data/m1 && (cp dl/*.csv.gz riset/data/m1/ || true) && ls riset/data/m1 | wc -l
           git config user.name "github-actions[bot]"; git config user.email "github-actions[bot]@users.noreply.github.com"
           git add riset/data/m1 && git commit -m "Data XAU M1 Dukascopy 2020-sekarang (riset momentum)" && git push || echo "tidak ada perubahan"
