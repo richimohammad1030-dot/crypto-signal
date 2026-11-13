@@ -6,7 +6,8 @@ Pemakaian: python backtest_momentum.py <folder_m1>  (berisi xau_m1_<tahun>.csv.g
 import glob, gzip, itertools, sys
 import numpy as np, pandas as pd
 
-SPREAD = 0.30
+SPREAD = float(__import__('os').environ.get('SPREAD', 0.30))
+STRICT = __import__('os').environ.get('STRICT', '1') == '1'   # 1 = tanpa bias urutan harga di bar M1 tempat order terisi
 FOLDER = sys.argv[1]
 
 # ---------- data ----------
@@ -45,8 +46,8 @@ def lvl(i, d, f):
 
 from numba import njit
 
-@njit(cache=True)
-def _run(sig, T5, H, L, rng, IEND, day_end, T1, O1, H1, L1, mode_close, ef, tp_f, cancel_f, max_bars, spread):
+@njit
+def _run(sig, T5, H, L, rng, IEND, day_end, T1, O1, H1, L1, mode_close, ef, tp_f, cancel_f, max_bars, spread, strict):
     n = 0; outt = np.zeros(len(sig)); outd = np.zeros(len(sig)); outr = np.zeros(len(sig)); busy = -1
     for i in range(len(sig)):
         d = sig[i]
@@ -86,7 +87,8 @@ def _run(sig, T5, H, L, rng, IEND, day_end, T1, O1, H1, L1, mode_close, ef, tp_f
             if (d == 1 and lb <= sl) or (d == -1 and hb >= sl):
                 res = -1.0; break
             if (d == 1 and hb >= tp) or (d == -1 and lb <= tp):
-                res = (tp - e) * d / risk; break
+                if not (strict and k == t_in and not mode_close):   # strict: bar M1 tempat order terisi, urutan harga tidak diketahui -> TP tidak dihitung
+                    res = (tp - e) * d / risk; break
             k += 1
         if res == 1e9: continue
         kk = min(k, len(T1) - 1)
@@ -100,7 +102,7 @@ def run(sig, entry, tp_f, cancel_f, max_bars):
     max_bars: umur posisi (candle M5), None = sampai 24:00 WIB. SL & TP di bar M1 yang sama = SL."""
     mc = entry == "close"
     t, d, r = _run(sig.astype(np.int64), T5, H, L, rng, IEND.astype(np.int64), day_end, T1, O1, H1, L1,
-                   mc, 0.0 if mc else float(entry), float(tp_f), float(cancel_f), int(max_bars or 0), SPREAD)
+                   mc, 0.0 if mc else float(entry), float(tp_f), float(cancel_f), int(max_bars or 0), SPREAD, STRICT)
     return pd.DataFrame(dict(t=t, d=d, r=r))
 
 def stats(df):
