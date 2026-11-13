@@ -439,5 +439,31 @@
   "btc": 0,
   "skor": 0,
   "fund": 1.0272319178082192e-05
+ },
+ {
+  "waktu_tutup_wib": "2026-11-13 19:00",
+  "sym": "HYPEUSDT",
+  "d": -1,
+  "t0": 1794171600,
+  "t1": 1794571200,
+  "entry": 74.45,
+  "exit": 74.4,
+  "R": 0.259,
+  "alasan": "kena SL",
+  "label": "HIGH",
+  "mfe": 1.188,
+  "mae": -0.565,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 5.538,
+  "ext": 8.207,
+  "trend": 3.37,
+  "dist": 4.56,
+  "mom20": 1.196,
+  "rank": 6,
+  "btc": 1,
+  "skor": 2,
+  "fund": 1.2297205479452055e-05
  }
 ]
