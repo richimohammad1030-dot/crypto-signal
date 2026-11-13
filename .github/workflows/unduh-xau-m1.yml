@@ -40,4 +40,4 @@ jobs:
       - run: |
           mkdir -p riset/data/m1 && (cp dl/*.csv.gz riset/data/m1/ || true) && ls riset/data/m1 | wc -l
           git config user.name "github-actions[bot]"; git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add riset/data/m1 && git commit -m "Data XAU M1 Dukascopy 2020-sekarang (riset momentum)" && git push || echo "tidak ada perubahan"
+          git add -f riset/data/m1 && git commit -m "Data XAU M1 Dukascopy 2020-sekarang (riset momentum)" && git push || echo "tidak ada perubahan"
