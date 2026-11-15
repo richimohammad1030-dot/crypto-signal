@@ -830,15 +830,15 @@
    "pos": null
   }
  },
- "last_ts": 1794754800,
+ "last_ts": 1794758400,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
  "gold_channel_id": -1004324140827,
  "gold_channel_title": "Market Call XAU",
- "recap_week": "2026-11-02T00:00:00+07:00",
+ "recap_week": "2026-11-09T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-15",
+  "date": "2026-11-16",
   "new": [],
   "upd": {},
   "cancel": []
