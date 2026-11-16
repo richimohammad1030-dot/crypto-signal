@@ -830,7 +830,7 @@
    "pos": null
   }
  },
- "last_ts": 1794826800,
+ "last_ts": 1794834000,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -1147,7 +1147,8 @@
   "1794317400|CPI m/m",
   "1794317400|Core CPI m/m",
   "1794576600|Core PPI m/m",
-  "1794576600|PPI m/m"
+  "1794576600|PPI m/m",
+  "1794848400|Fed Chairman Warsh Speaks"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00"
 }
