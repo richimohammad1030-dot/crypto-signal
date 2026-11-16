@@ -830,7 +830,7 @@
    "pos": null
   }
  },
- "last_ts": 1794808800,
+ "last_ts": 1794812400,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -1133,7 +1133,7 @@
    0.259
   ]
  ],
- "digest_key": "2026-11-16-1",
+ "digest_key": "2026-11-16-2",
  "news_sent": [
   "1793210400|FOMC Statement",
   "1793210400|Federal Funds Rate",
