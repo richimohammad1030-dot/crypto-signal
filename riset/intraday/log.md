@@ -251,3 +251,24 @@ Data diunduh ulang s.d. 13 Nov 2026 ±01:40 WIB (49 koin + 177 koin PIT; H1 + fu
   lebih lemah dari acak, P 0,10). SWING-D1 3/4 sel (belum). Langkah berikut: tahap 2 = I-30 (filter risiko order limit di level PERIODE).
   Status perlu dicatat juga di tabel `riset/KURIKULUM_SKILL.md` (di luar riset/intraday; salin manual).
 - Data konfirmasi 2018-Feb 2020 tidak dipakai (tidak ada ide yang lolos walk-forward). Total ide bernomor diuji: 20. Juara v3 & bot tidak diubah.
+
+## 2026-11-20 · riset mingguan (siklus Jumat)
+Data diunduh ulang s.d. 20 Nov 2026 ±01:45 WIB (50 koin + 177 koin PIT; H1 + funding + 15m, tanpa kegagalan). Laporan:
+`riset/laporan/intraday/riset-2026-11-20.md`; keluaran mentah `eksperimen/hasil_2026-11-20.log`.
+- **Juara v3 PIT**: 2.978 trade, +0,0870R/trade, DD 15,8R; 2020-23 rasio 3,49 · 2024-skrg 1,49; per tahun +38/+93/+36/+25/+25/+9/+33.
+  Daftar tetap 2.702 trade, rasio 2,89 (2024-skrg 2,16).
+- **Kesehatan**: live sejak v3 14 trade +3,27R vs replay 15 +2,13R. Beda baru ASTER B-short 16 Nov (hanya replay, -0,65R): riwayat
+  `intraday_state.json` menunjukkan live mengirim SOL/HYPE/TAO (batas 3 order menunggu), replay tidak memuat HYPE → ASTER masuk.
+  Koreksi catatan 11/13 Nov: yang membatasi HYPE adalah data **H1 (1.352 < 1.400 candle)**, bukan 15m → beda hilang ±22 Nov.
+  Keterbatasan replay, bukan bug. 7 hari: 4 trade -0,37R, 1 SL ETH B-short 15 Nov = LONJAKAN (2,8 ATR, pasar). CELAH berulang
+  B-short/searah/ATR tinggi 2/6 (33%) vs historis 32% = normal. Bayangan W47 live -0,63 (1) vs replay -1,27 (2).
+- **I-30** (skill SNR tahap 2; `eksperimen/wf_snr_akhirpekan_2026-11-20.py`), 15 varian lewat/antara/dekat × A/B/AB, walk-forward
+  replay penuh PIT: terpilih antara-B → dekat0.25-B → dekat0.5-B. Uji 2022-26 R +133,0 vs +128,4, R/tr +0,079 vs +0,073, DD 14,2 vs
+  15,8, per tahun +32,2/+22,4/+32,7/+24,1/+21,6 vs +35,6/+24,9/+25,3/+9,4/+33,2; P_rasio 0,68 → **GAGAL**. Filter di modul A selalu
+  merusak; "antara" (SL di balik level) merusak 2024+. Pasca-hoc: dekat0.25-B & dekat0.5-B tetap P_rasio 0,91, lewat-B 0,76 (DD 11,7)
+  → dicatat **I-35 perlu-data** (dinilai hanya di data baru sejak 20 Nov, tanpa status uji-maju).
+- **I-34** [lit] (baru; hari dalam seminggu/akhir pekan, 6 varian): walk-forward B-tanpaMin → off → off; uji 2022-26 R +117,1 vs +128,4,
+  P_rasio 0,14 → **GAGAL**. Akhir pekan justru menguntungkan (tanpa B Sabtu B-short 0R). Sumber: Caporale & Plastun (2019) FRL 31:258-269;
+  Aharon & Qadan (2019) FRL 31:415-424.
+- **Skill SNR tahap 2**: belum lulus. Status perlu dicatat juga di `riset/KURIKULUM_SKILL.md` (di luar riset/intraday; salin manual).
+- Data konfirmasi 2018-Feb 2020 tidak dipakai. Total ide bernomor diuji: 22. Juara v3 & bot tidak diubah. Jumat depan = review bulanan.

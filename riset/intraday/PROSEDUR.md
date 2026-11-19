@@ -68,6 +68,8 @@ Skill aktif: **1 · SNR**. Status: Tahap 0 (definisi mesin) selesai 11 Nov 2026;
 tetapi drift 12 jam tidak konsisten (`eksperimen/skill_snr_1b_2026-11-13.py`) → pakai sebagai filter risiko, bukan strategi tembus.
 Langkah berikutnya: Tahap 2 BISA MEMAKAI (filter order limit B/A di dekat level
 PERIODE, SL di balik level, strategi tembus mandiri) dengan walk-forward. Skrip: `eksperimen/skill_snr_2026-11-11.py`.
+**20 Nov 2026 tahap 2 (filter order, I-30): belum lulus** (walk-forward P_rasio 0,68; filter di modul B membantu, di A merusak,
+SL di balik level merusak). Filter B dipantau sebagai I-35 di data baru saja. Berikutnya: SWING-D1 atau tunggu data baru.
 
 ## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"
 **UPDATE 11 Nov 2026:** vonis data 2018-2019 (belum pernah dilihat) → 2019 minus → arah sekarang NAIKKAN EDGE PER TRADE (lihat

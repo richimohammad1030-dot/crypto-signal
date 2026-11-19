@@ -1,0 +1,132 @@
+koin dimuat 226
+order A 1716 · B 42972
+I-30 off             order A 1716 B 42972 n=2978 R/tr +0.0870 R +259.0 DD 15.8 tahun {2020: 38.0, 2021: 92.6, 2022: 35.6, 2023: 24.9, 2024: 25.3, 2025: 9.4, 2026: 33.2} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (506, 26.7, 0.053)}
+I-30 lewat-A         order A 1643 B 42972 n=2951 R/tr +0.0841 R +248.3 DD 15.4 tahun {2020: 39.2, 2021: 80.9, 2022: 36.3, 2023: 24.9, 2024: 25.0, 2025: 10.1, 2026: 31.9} grup {'A': (765, 85.6, 0.112), 'B-long': (1680, 136.0, 0.081), 'B-short': (506, 26.7, 0.053)}
+I-30 lewat-B         order A 1716 B 34969 n=2876 R/tr +0.0955 R +274.8 DD 12.2 tahun {2020: 39.5, 2021: 93.3, 2022: 30.0, 2023: 29.4, 2024: 35.8, 2025: 16.8, 2026: 29.9} grup {'A': (797, 101.0, 0.127), 'B-long': (1603, 144.1, 0.09), 'B-short': (476, 29.7, 0.062)}
+I-30 lewat-AB        order A 1643 B 34969 n=2848 R/tr +0.0928 R +264.4 DD 12.2 tahun {2020: 40.7, 2021: 81.6, 2022: 30.7, 2023: 29.7, 2024: 35.5, 2025: 17.5, 2026: 28.6} grup {'A': (766, 88.7, 0.116), 'B-long': (1606, 146.0, 0.091), 'B-short': (476, 29.7, 0.062)}
+I-30 antara-A        order A 1126 B 42972 n=2755 R/tr +0.0798 R +219.8 DD 20.4 tahun {2020: 20.6, 2021: 80.6, 2022: 37.3, 2023: 24.5, 2024: 13.5, 2025: 10.1, 2026: 33.2} grup {'A': (549, 53.4, 0.097), 'B-long': (1700, 139.6, 0.082), 'B-short': (506, 26.7, 0.053)}
+I-30 antara-B        order A 1716 B 26458 n=2735 R/tr +0.0891 R +243.8 DD 16.4 tahun {2020: 48.2, 2021: 90.1, 2022: 32.2, 2023: 22.4, 2024: 19.8, 2025: 2.9, 2026: 28.1} grup {'A': (806, 105.5, 0.131), 'B-long': (1494, 113.6, 0.076), 'B-short': (435, 24.6, 0.057)}
+I-30 antara-AB       order A 1126 B 26458 n=2507 R/tr +0.0810 R +203.0 DD 16.1 tahun {2020: 26.8, 2021: 75.1, 2022: 34.5, 2023: 23.7, 2024: 10.9, 2025: 3.8, 2026: 28.1} grup {'A': (553, 60.2, 0.109), 'B-long': (1519, 118.3, 0.078), 'B-short': (435, 24.6, 0.057)}
+I-30 dekat0.25-A     order A 1632 B 42972 n=2939 R/tr +0.0863 R +253.6 DD 16.7 tahun {2020: 39.8, 2021: 86.2, 2022: 35.6, 2023: 24.4, 2024: 24.2, 2025: 10.3, 2026: 33.0} grup {'A': (756, 92.8, 0.123), 'B-long': (1677, 134.1, 0.08), 'B-short': (506, 26.7, 0.053)}
+I-30 dekat0.25-B     order A 1716 B 37687 n=2948 R/tr +0.0944 R +278.3 DD 14.2 tahun {2020: 45.8, 2021: 87.0, 2022: 34.8, 2023: 26.4, 2024: 32.7, 2025: 24.1, 2026: 27.5} grup {'A': (796, 99.2, 0.125), 'B-long': (1659, 153.3, 0.092), 'B-short': (493, 25.8, 0.052)}
+I-30 dekat0.25-AB    order A 1632 B 37687 n=2908 R/tr +0.0937 R +272.6 DD 14.8 tahun {2020: 47.5, 2021: 80.4, 2022: 34.8, 2023: 25.9, 2024: 31.6, 2025: 25.0, 2026: 27.3} grup {'A': (756, 93.5, 0.124), 'B-long': (1659, 153.2, 0.092), 'B-short': (493, 25.8, 0.052)}
+I-30 dekat0.5-A      order A 1542 B 42972 n=2911 R/tr +0.0821 R +239.0 DD 15.4 tahun {2020: 35.8, 2021: 76.6, 2022: 36.2, 2023: 24.2, 2024: 24.8, 2025: 10.1, 2026: 31.3} grup {'A': (725, 76.3, 0.105), 'B-long': (1680, 136.0, 0.081), 'B-short': (506, 26.7, 0.053)}
+I-30 dekat0.5-B      order A 1716 B 32828 n=2867 R/tr +0.0958 R +274.5 DD 12.3 tahun {2020: 42.2, 2021: 82.3, 2022: 38.3, 2023: 23.3, 2024: 36.3, 2025: 30.6, 2026: 21.6} grup {'A': (799, 102.1, 0.128), 'B-long': (1592, 136.0, 0.085), 'B-short': (476, 36.5, 0.077)}
+I-30 dekat0.5-AB     order A 1542 B 32828 n=2798 R/tr +0.0905 R +253.1 DD 11.6 tahun {2020: 39.3, 2021: 67.4, 2022: 38.8, 2023: 21.4, 2024: 35.9, 2025: 30.6, 2026: 19.7} grup {'A': (729, 80.1, 0.11), 'B-long': (1593, 136.6, 0.086), 'B-short': (476, 36.5, 0.077)}
+I-30 dekat1.0-A      order A 1359 B 42972 n=2853 R/tr +0.0887 R +253.0 DD 16.6 tahun {2020: 40.0, 2021: 80.4, 2022: 37.2, 2023: 25.5, 2024: 26.1, 2025: 11.3, 2026: 32.4} grup {'A': (659, 84.4, 0.128), 'B-long': (1688, 141.8, 0.084), 'B-short': (506, 26.7, 0.053)}
+I-30 dekat1.0-B      order A 1716 B 24770 n=2688 R/tr +0.0953 R +256.1 DD 15.7 tahun {2020: 44.8, 2021: 80.8, 2022: 20.4, 2023: 26.8, 2024: 26.4, 2025: 25.8, 2026: 31.1} grup {'A': (812, 101.3, 0.125), 'B-long': (1463, 132.5, 0.091), 'B-short': (413, 22.3, 0.054)}
+I-30 dekat1.0-AB     order A 1359 B 24770 n=2552 R/tr +0.0951 R +242.7 DD 16.4 tahun {2020: 45.0, 2021: 62.8, 2022: 21.4, 2023: 25.7, 2024: 29.0, 2025: 28.8, 2026: 29.9} grup {'A': (672, 87.6, 0.13), 'B-long': (1467, 132.8, 0.091), 'B-short': (413, 22.3, 0.054)}
+I-34 B-tanpaSab      order A 1716 B 36660 n=2725 R/tr +0.0732 R +199.4 DD 19.3 tahun {2020: 25.6, 2021: 73.7, 2022: 24.3, 2023: 16.9, 2024: 20.2, 2025: 6.2, 2026: 32.6} grup {'A': (821, 97.4, 0.119), 'B-long': (1475, 101.9, 0.069), 'B-short': (429, -0.0, -0.0)}
+I-34 B-tanpaMin      order A 1716 B 37854 n=2734 R/tr +0.0926 R +253.1 DD 18.2 tahun {2020: 50.6, 2021: 85.9, 2022: 28.0, 2023: 21.3, 2024: 20.3, 2025: 10.7, 2026: 36.4} grup {'A': (826, 99.0, 0.12), 'B-long': (1446, 121.7, 0.084), 'B-short': (462, 32.4, 0.07)}
+I-34 B-tanpaSabMin   order A 1716 B 31479 n=2480 R/tr +0.0778 R +192.8 DD 19.0 tahun {2020: 38.2, 2021: 65.9, 2022: 16.6, 2023: 14.9, 2024: 16.2, 2025: 7.6, 2026: 33.5} grup {'A': (852, 98.3, 0.115), 'B-long': (1243, 88.8, 0.071), 'B-short': (385, 5.7, 0.015)}
+I-34 B-tanpaSen      order A 1716 B 37656 n=2727 R/tr +0.0887 R +241.8 DD 12.9 tahun {2020: 35.7, 2021: 80.2, 2022: 25.3, 2023: 26.7, 2024: 29.3, 2025: 9.6, 2026: 35.2} grup {'A': (834, 88.3, 0.106), 'B-long': (1430, 133.4, 0.093), 'B-short': (463, 20.1, 0.043)}
+I-34 A-tanpaSabMin   order A 1226 B 42972 n=2775 R/tr +0.0787 R +218.5 DD 15.8 tahun {2020: 33.2, 2021: 74.3, 2022: 34.7, 2023: 22.3, 2024: 18.2, 2025: 6.4, 2026: 29.3} grup {'A': (583, 56.2, 0.096), 'B-long': (1686, 135.6, 0.08), 'B-short': (506, 26.7, 0.053)}
+I-34 AB-tanpaSabMin  order A 1226 B 31479 n=2210 R/tr +0.0680 R +150.2 DD 19.0 tahun {2020: 31.1, 2021: 47.8, 2022: 15.4, 2023: 12.1, 2024: 9.7, 2025: 4.6, 2026: 29.4} grup {'A': (582, 55.6, 0.096), 'B-long': (1243, 88.8, 0.071), 'B-short': (385, 5.7, 0.015)}
+
+######## I-30 walk-forward
+  pilih<=2021: skor antara-B (0 minus, +69.2R/thn) · lewat-B (0 minus, +66.4R/thn) · dekat0.25-B (0 minus, +66.4R/thn) · off (0 minus, +65.3R/thn) · dekat0.25-AB (0 minus, +64.0R/thn) · dekat0.25-A (0 minus, +63.0R/thn) · dekat1.0-B (0 minus, +62.8R/thn) · dekat0.5-B (0 minus, +62.2R/thn) -> PILIH antara-B
+  pilih<=2023: skor dekat0.25-B (0 minus, +48.5R/thn) · antara-B (0 minus, +48.2R/thn) · lewat-B (0 minus, +48.0R/thn) · off (0 minus, +47.8R/thn) · dekat0.25-AB (0 minus, +47.1R/thn) · dekat0.5-B (0 minus, +46.5R/thn) · dekat0.25-A (0 minus, +46.5R/thn) · dekat1.0-A (0 minus, +45.8R/thn) -> PILIH dekat0.25-B
+  pilih<=2025: skor dekat0.5-B (0 minus, +42.2R/thn) · dekat0.25-B (0 minus, +41.8R/thn) · dekat0.25-AB (0 minus, +40.9R/thn) · lewat-B (0 minus, +40.8R/thn) · lewat-AB (0 minus, +39.3R/thn) · dekat0.5-AB (0 minus, +38.9R/thn) · off (0 minus, +37.6R/thn) · dekat1.0-B (0 minus, +37.5R/thn) -> PILIH dekat0.5-B
+  tahun  aturan           n     R      R/tr   | juara n     R      R/tr
+  2022  antara-B         267  +32.2 +0.121 |  295  +35.6 +0.121
+  2023  antara-B         311  +22.4 +0.072 |  344  +24.9 +0.072
+  2024  dekat0.25-B      498  +32.7 +0.066 |  495  +25.3 +0.051
+  2025  dekat0.25-B      322  +24.1 +0.075 |  328   +9.4 +0.029
+  2026  dekat0.5-B       278  +21.6 +0.078 |  303  +33.2 +0.109
+  GABUNGAN UJI 2022-2026: penantang n 1676 R +133.0 R/tr +0.0794 DD 14.2 tanpa2% 91.4 minus 0 | juara n 1765 R +128.4 R/tr +0.0728 DD 15.8 tanpa2% 85.6 minus 0
+  signifikansi (2022-skrg): {'hari': 1782, 'bulan': 59, 'juara': {'R_thn': 26.32, 'DD': 15.84, 'rasio': 8.11}, 'penantang': {'R_thn': 27.27, 'DD': 14.21, 'rasio': 9.36}, 'P_R_lebih_baik': 0.619, 'P_rasio_lebih_baik': 0.68, 'selisih_R_thn_90': [-4.24, 6.16]}
+  pembanding kriteria lama (semua varian, seluruh periode):
+    off             n 2978 fill 62.0 R/tr +0.0870 R/thn 38.7 DD 15.8 rasio L 3.49 B 1.49 tanpa2% 160.7 grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (506, 26.7, 0.053)}
+    lewat-A         n 2951 fill 61.9 R/tr +0.0841 R/thn 37.1 DD 15.4 rasio L 3.35 B 1.51 tanpa2% 152.3 grup {'A': (765, 85.6, 0.112), 'B-long': (1680, 136.0, 0.081), 'B-short': (506, 26.7, 0.053)}
+    lewat-B         n 2876 fill 62.5 R/tr +0.0955 R/thn 41.1 DD 12.2 rasio L 4.13 B 2.82 tanpa2% 178.7 grup {'A': (797, 101.0, 0.127), 'B-long': (1603, 144.1, 0.09), 'B-short': (476, 29.7, 0.062)}
+    lewat-AB        n 2848 fill 62.4 R/tr +0.0928 R/thn 39.5 DD 12.2 rasio L 3.92 B 2.79 tanpa2% 171.6 grup {'A': (766, 88.7, 0.116), 'B-long': (1606, 146.0, 0.091), 'B-short': (476, 29.7, 0.062)}
+    antara-A        n 2755 fill 62.2 R/tr +0.0798 R/thn 32.8 DD 20.4 rasio L 2.45 B 0.97 tanpa2% 141.3 grup {'A': (549, 53.4, 0.097), 'B-long': (1700, 139.6, 0.082), 'B-short': (506, 26.7, 0.053)}
+    antara-B        n 2735 fill 62.3 R/tr +0.0891 R/thn 36.4 DD 16.4 rasio L 6.83 B 1.08 tanpa2% 147.4 grup {'A': (806, 105.5, 0.131), 'B-long': (1494, 113.6, 0.076), 'B-short': (435, 24.6, 0.057)}
+    antara-AB       n 2507 fill 62.8 R/tr +0.0810 R/thn 30.3 DD 16.1 rasio L 4.41 B 0.93 tanpa2% 125.7 grup {'A': (553, 60.2, 0.109), 'B-long': (1519, 118.3, 0.078), 'B-short': (435, 24.6, 0.057)}
+    dekat0.25-A     n 2939 fill 61.8 R/tr +0.0863 R/thn 37.9 DD 16.7 rasio L 3.34 B 1.41 tanpa2% 158.0 grup {'A': (756, 92.8, 0.123), 'B-long': (1677, 134.1, 0.08), 'B-short': (506, 26.7, 0.053)}
+    dekat0.25-B     n 2948 fill 62.6 R/tr +0.0944 R/thn 41.6 DD 14.2 rasio L 4.39 B 2.06 tanpa2% 181.0 grup {'A': (796, 99.2, 0.125), 'B-long': (1659, 153.3, 0.092), 'B-short': (493, 25.8, 0.052)}
+    dekat0.25-AB    n 2908 fill 62.5 R/tr +0.0937 R/thn 40.7 DD 14.8 rasio L 4.11 B 1.97 tanpa2% 177.0 grup {'A': (756, 93.5, 0.124), 'B-long': (1659, 153.2, 0.092), 'B-short': (493, 25.8, 0.052)}
+    dekat0.5-A      n 2911 fill 61.8 R/tr +0.0821 R/thn 35.7 DD 15.4 rasio L 3.1 B 1.49 tanpa2% 147.8 grup {'A': (725, 76.3, 0.105), 'B-long': (1680, 136.0, 0.081), 'B-short': (506, 26.7, 0.053)}
+    dekat0.5-B      n 2867 fill 62.8 R/tr +0.0958 R/thn 41.0 DD 12.3 rasio L 5.05 B 2.5 tanpa2% 178.4 grup {'A': (799, 102.1, 0.128), 'B-long': (1592, 136.0, 0.085), 'B-short': (476, 36.5, 0.077)}
+    dekat0.5-AB     n 2798 fill 62.7 R/tr +0.0905 R/thn 37.8 DD 11.6 rasio L 4.38 B 2.57 tanpa2% 164.1 grup {'A': (729, 80.1, 0.11), 'B-long': (1593, 136.6, 0.086), 'B-short': (476, 36.5, 0.077)}
+    dekat1.0-A      n 2853 fill 62.0 R/tr +0.0887 R/thn 37.8 DD 16.6 rasio L 3.11 B 1.46 tanpa2% 162.6 grup {'A': (659, 84.4, 0.128), 'B-long': (1688, 141.8, 0.084), 'B-short': (506, 26.7, 0.053)}
+    dekat1.0-B      n 2688 fill 64.6 R/tr +0.0953 R/thn 38.3 DD 15.7 rasio L 3.74 B 1.85 tanpa2% 163.1 grup {'A': (812, 101.3, 0.125), 'B-long': (1463, 132.5, 0.091), 'B-short': (413, 22.3, 0.054)}
+    dekat1.0-AB     n 2552 fill 64.7 R/tr +0.0951 R/thn 36.3 DD 16.4 rasio L 3.48 B 1.86 tanpa2% 157.1 grup {'A': (672, 87.6, 0.13), 'B-long': (1467, 132.8, 0.091), 'B-short': (413, 22.3, 0.054)}
+
+######## I-34 walk-forward
+  pilih<=2021: skor B-tanpaMin (0 minus, +68.2R/thn) · off (0 minus, +65.3R/thn) · B-tanpaSen (0 minus, +58.0R/thn) · A-tanpaSabMin (0 minus, +53.8R/thn) · B-tanpaSabMin (0 minus, +52.1R/thn) · B-tanpaSab (0 minus, +49.7R/thn) · AB-tanpaSabMin (0 minus, +39.5R/thn) -> PILIH B-tanpaMin
+  pilih<=2023: skor off (0 minus, +47.8R/thn) · B-tanpaMin (0 minus, +46.5R/thn) · B-tanpaSen (0 minus, +42.0R/thn) · A-tanpaSabMin (0 minus, +41.1R/thn) · B-tanpaSab (0 minus, +35.1R/thn) · B-tanpaSabMin (0 minus, +33.9R/thn) · AB-tanpaSabMin (0 minus, +26.6R/thn) -> PILIH off
+  pilih<=2025: skor off (0 minus, +37.6R/thn) · B-tanpaMin (0 minus, +36.1R/thn) · B-tanpaSen (0 minus, +34.5R/thn) · A-tanpaSabMin (0 minus, +31.5R/thn) · B-tanpaSab (0 minus, +27.8R/thn) · B-tanpaSabMin (0 minus, +26.6R/thn) · AB-tanpaSabMin (0 minus, +20.1R/thn) -> PILIH off
+  tahun  aturan           n     R      R/tr   | juara n     R      R/tr
+  2022  B-tanpaMin       260  +28.0 +0.108 |  295  +35.6 +0.121
+  2023  B-tanpaMin       306  +21.3 +0.070 |  344  +24.9 +0.072
+  2024  off              495  +25.3 +0.051 |  495  +25.3 +0.051
+  2025  off              328   +9.4 +0.029 |  328   +9.4 +0.029
+  2026  off              303  +33.2 +0.109 |  303  +33.2 +0.109
+  GABUNGAN UJI 2022-2026: penantang n 1692 R +117.1 R/tr +0.0692 DD 15.8 tanpa2% 75.4 minus 0 | juara n 1765 R +128.4 R/tr +0.0728 DD 15.8 tanpa2% 85.6 minus 0
+  signifikansi (2022-skrg): {'hari': 1782, 'bulan': 59, 'juara': {'R_thn': 26.32, 'DD': 15.84, 'rasio': 8.11}, 'penantang': {'R_thn': 24.0, 'DD': 15.84, 'rasio': 7.39}, 'P_R_lebih_baik': 0.041, 'P_rasio_lebih_baik': 0.135, 'selisih_R_thn_90': [-4.47, -0.13]}
+  pembanding kriteria lama (semua varian, seluruh periode):
+    off             n 2978 fill 62.0 R/tr +0.0870 R/thn 38.7 DD 15.8 rasio L 3.49 B 1.49 tanpa2% 160.7 grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (506, 26.7, 0.053)}
+    B-tanpaSab      n 2725 fill 63.5 R/tr +0.0732 R/thn 29.8 DD 19.3 rasio L 1.99 B 1.06 tanpa2% 105.8 grup {'A': (821, 97.4, 0.119), 'B-long': (1475, 101.9, 0.069), 'B-short': (429, -0.0, -0.0)}
+    B-tanpaMin      n 2734 fill 61.8 R/tr +0.0926 R/thn 37.8 DD 18.2 rasio L 5.26 B 1.29 tanpa2% 158.3 grup {'A': (826, 99.0, 0.12), 'B-long': (1446, 121.7, 0.084), 'B-short': (462, 32.4, 0.07)}
+    B-tanpaSabMin   n 2480 fill 63.4 R/tr +0.0778 R/thn 28.8 DD 19.0 rasio L 3.47 B 1.05 tanpa2% 103.4 grup {'A': (852, 98.3, 0.115), 'B-long': (1243, 88.8, 0.071), 'B-short': (385, 5.7, 0.015)}
+    B-tanpaSen      n 2727 fill 61.7 R/tr +0.0887 R/thn 36.1 DD 12.9 rasio L 4.86 B 1.99 tanpa2% 148.9 grup {'A': (834, 88.3, 0.106), 'B-long': (1430, 133.4, 0.093), 'B-short': (463, 20.1, 0.043)}
+    A-tanpaSabMin   n 2775 fill 61.9 R/tr +0.0787 R/thn 32.6 DD 15.8 rasio L 2.91 B 1.18 tanpa2% 133.6 grup {'A': (583, 56.2, 0.096), 'B-long': (1686, 135.6, 0.08), 'B-short': (506, 26.7, 0.053)}
+    AB-tanpaSabMin  n 2210 fill 63.5 R/tr +0.0680 R/thn 22.4 DD 19.0 rasio L 2.62 B 0.8 tanpa2% 76.7 grup {'A': (582, 55.6, 0.096), 'B-long': (1243, 88.8, 0.071), 'B-short': (385, 5.7, 0.015)}
+
+######## info pasca-hoc: varian tetap vs juara, 2022-skrg (P bootstrap bulan)
+  I-30 lewat-A         R/thn +26.3 vs +26.3 DD 15.43 vs 15.84 P_R 0.434 P_rasio 0.454
+  I-30 lewat-B         R/thn +29.1 vs +26.3 DD 11.72 vs 15.84 P_R 0.77 P_rasio 0.757
+  I-30 lewat-AB        R/thn +29.1 vs +26.3 DD 11.39 vs 15.84 P_R 0.77 P_rasio 0.754
+  I-30 antara-A        R/thn +24.3 vs +26.3 DD 20.36 vs 15.84 P_R 0.096 P_rasio 0.162
+  I-30 antara-B        R/thn +21.6 vs +26.3 DD 16.38 vs 15.84 P_R 0.087 P_rasio 0.18
+  I-30 antara-AB       R/thn +20.7 vs +26.3 DD 16.06 vs 15.84 P_R 0.064 P_rasio 0.15
+  I-30 dekat0.25-A     R/thn +26.1 vs +26.3 DD 16.67 vs 15.84 P_R 0.354 P_rasio 0.431
+  I-30 dekat0.25-B     R/thn +29.8 vs +26.3 DD 14.21 vs 15.84 P_R 0.928 P_rasio 0.905
+  I-30 dekat0.25-AB    R/thn +29.6 vs +26.3 DD 14.81 vs 15.84 P_R 0.921 P_rasio 0.899
+  I-30 dekat0.5-A      R/thn +25.9 vs +26.3 DD 15.38 vs 15.84 P_R 0.289 P_rasio 0.33
+  I-30 dekat0.5-B      R/thn +30.8 vs +26.3 DD 12.32 vs 15.84 P_R 0.892 P_rasio 0.907
+  I-30 dekat0.5-AB     R/thn +30.0 vs +26.3 DD 11.64 vs 15.84 P_R 0.851 P_rasio 0.881
+  I-30 dekat1.0-A      R/thn +27.2 vs +26.3 DD 16.57 vs 15.84 P_R 0.724 P_rasio 0.543
+  I-30 dekat1.0-B      R/thn +26.8 vs +26.3 DD 15.67 vs 15.84 P_R 0.539 P_rasio 0.612
+  I-30 dekat1.0-AB     R/thn +27.6 vs +26.3 DD 16.38 vs 15.84 P_R 0.606 P_rasio 0.681
+  I-34 B-tanpaSab      R/thn +20.5 vs +26.3 DD 19.27 vs 15.84 P_R 0.012 P_rasio 0.131
+  I-34 B-tanpaMin      R/thn +23.9 vs +26.3 DD 18.21 vs 15.84 P_R 0.124 P_rasio 0.337
+  I-34 B-tanpaSabMin   R/thn +18.2 vs +26.3 DD 19.0 vs 15.84 P_R 0.008 P_rasio 0.123
+  I-34 B-tanpaSen      R/thn +25.8 vs +26.3 DD 12.93 vs 15.84 P_R 0.434 P_rasio 0.567
+  I-34 A-tanpaSabMin   R/thn +22.7 vs +26.3 DD 15.84 vs 15.84 P_R 0.0 P_rasio 0.0
+  I-34 AB-tanpaSabMin  R/thn +14.6 vs +26.3 DD 19.05 vs 15.84 P_R 0.0 P_rasio 0.028
+DONE
+
+## juara PIT (pit_intraday.py)
+INTRADAY · parameter: juara
+  tetap           semua    n= 2702 win 63.9% avg +0.0955R R/thn  +38.5 DD  13.3R rasio  2.89 fill 61.9%
+  tetap           2020-23  n= 1589 win 64.3% avg +0.1102R R/thn  +45.9 DD  11.3R rasio  4.05 fill 61.8%
+  tetap           2024-    n= 1113 win 63.3% avg +0.0745R R/thn  +28.8 DD  13.3R rasio  2.16 fill 62.0%
+                  per tahun 2020:+39 2021:+72 2022:+34 2023:+29 2024:+26 2025:+18 2026:+39
+  sesuai masanya  semua    n= 2978 win 63.3% avg +0.0870R R/thn  +38.7 DD  15.8R rasio  2.44 fill 62.0%
+  sesuai masanya  2020-23  n= 1852 win 63.3% avg +0.1032R R/thn  +50.1 DD  14.4R rasio  3.49 fill 62.3%
+  sesuai masanya  2024-    n= 1126 win 63.1% avg +0.0603R R/thn  +23.6 DD  15.8R rasio  1.49 fill 61.4%
+                  per tahun 2020:+38 2021:+93 2022:+36 2023:+25 2024:+25 2025:+9 2026:+33
+  trade di koin yang TIDAK ada di daftar sekarang: 698 · +42.0R · avg +0.060R
+
+## sebab_sl.py 7
+Trade live tutup 7 hari terakhir: 4 · SL: 1 · total -0.37R
+Kesetaraan sejak 2026-10-30T09:00 UTC: live 14 trade (+3.27R) · replay 15 trade (+2.13R) · beda 1 · hanya replay 2
+  BEDA HYPE B-short isi Fri 06 Nov 07:30 live WAKTU -0.53R · replay tidak ada
+  HANYA REPLAY ADA B-short isi Fri 06 Nov 07:30 SL -1.04R
+  HANYA REPLAY ASTER B-short isi Mon 16 Nov 10:15 WAKTU -0.65R
+- ETH B-short isi Sun 15 Nov 09:15 @ 1798.7 SL Sun 15 Nov 16:15 -1.04R → LONJAKAN: candle SL 2.8 ATR · BTC ikut (pasar)
+Ringkasan penyebab SL: LONJAKAN 1
+CELAH berulang 28 hari: ('B-short', 'searah', 'tinggi') · 2 SL dari 6 trade (33%) vs historis 32% (n 145) → masih dalam batas historis
+Tindakan: NEWS = aman; LONJAKAN = catat; DATA & CELAH = wajib dianalisa di laporan (pola berulang -> ide baru).
+
+## bayangan.py
+Sejak 30 Oct 2026 16:00 WIB · normalisasi bobot I-25 = 1.425
+minggu    live n  live R replay n replay R  I-25 R
+2026-W44       1   +0.65        1    +0.65   +0.00
+2026-W45       5   +2.06        5    +1.56   +0.59
+2026-W46       7   +1.19        7    +1.19   +1.50
+2026-W47       1   -0.63        2    -1.27   -1.15
+total         14   +3.27       15    +2.13   +0.94
+Uji maju I-25 sejak 6 Nov: 13 trade · juara +0.83R · I-25 +0.94R · bobot rata-rata 0.88 · syarat usulan: >= 6 minggu & >= 60 trade

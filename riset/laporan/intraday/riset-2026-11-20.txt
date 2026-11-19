@@ -1,0 +1,55 @@
+<b>RISET INTRADAY</b>
+20 Nov 2026 · riset mingguan
+────────────────────
+Juara v3 &amp; bot tidak diubah. Data s.d. 20 Nov, lengkap.
+
+<b>Juara (koin sesuai masanya)</b>
+────────────────────
+<pre>
+Periode    Trd  R/tr   DD rasio
+2020-23   1852 +,103 14,4  3,49
+2024-skrg 1126 +,060 15,8  1,49
+Per thn: +38 +93 +36 +25 +25 +9 +33
+</pre>
+
+<b>Kesehatan</b>
+────────────────────
+Sejak v3: live 14 trade +3,27R, replay 15 +2,13R. Beda baru: ASTER 16 Nov hanya di replay. Penyebab: replay belum memuat HYPE (H1 baru 1.352 candle, batas 1.400), jadi ASTER naik ke 3 order teratas; live kirim SOL/HYPE/TAO. Keterbatasan replay, bukan bug; hilang ±22 Nov.
+
+<b>Penyebab SL</b>
+────────────────────
+7 hari: 4 trade -0,37R, 1 SL. ETH B-short 15 Nov = LONJAKAN 2,8 ATR, BTC ikut (pasar). Pola B-short 2/6 SL (33%) vs historis 32% = normal.
+
+<b>Live vs bayangan</b>
+────────────────────
+<pre>
+Minggu  live    replay
+W45     +2,06   +1,56
+W46     +1,19   +1,19
+W47     -0,63   -1,27
+Total   +3,27   +2,13
+</pre>
+Semua trade live = B-short. Terlalu sedikit untuk menilai.
+
+<b>Riset (walk-forward, replay penuh)</b>
+────────────────────
+I-30 SNR tahap 2: lewati order limit di dekat high/low hari &amp; minggu sebelumnya (15 varian, modul A/B):
+<pre>
+Uji 2022-26  pen.    juara
+R           +133,0  +128,4
+R/trade     +0,079  +0,073
+DD            14,2    15,8
+P rasio       0,68
+</pre>
+P &lt; 0,70 -&gt; GAGAL. Pola: filter di modul B memperbaiki R/trade &amp; DD, di modul A selalu merusak. Varian B dicatat sebagai I-35 (pantau di data baru saja).
+I-34 [lit] efek akhir pekan / hari dalam seminggu: P rasio 0,14 -&gt; GAGAL. Akhir pekan justru menguntungkan.
+Total ide diuji: 22.
+
+<b>Skill</b>
+────────────────────
+SNR tahap 2 (BISA MEMAKAI): belum lulus. Level hari/minggu berguna sebagai filter risiko modul B, belum cukup kuat di walk-forward.
+
+<b>Usulan</b>
+────────────────────
+Tidak ada perubahan bot. Usulan 11 Nov (arah naikkan edge per trade) masih menunggu jawaban.
+Jumat depan 27 Nov: REVIEW BULANAN.
