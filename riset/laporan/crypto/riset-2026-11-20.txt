@@ -1,0 +1,68 @@
+<b>RISET CRYPTO</b>
+Jumat, 20 Nov 2026 · riset mingguan
+────────────────────
+
+<b>Kesehatan</b>
+────────────────────
+Live 28 trade +1,29R vs replay 29
+trade +2,14R kotor sejak 24 Okt.
+Baru: SOL SELL live, DOGE &amp; ETC
+SELL hanya di replay = efek slot
+HYPE (bukan bug). Data &amp; workflow
+semua sukses.
+
+<b>Penyebab SL (13-19 Nov)</b>
+────────────────────
+4 trade +2,62R · SL 0 · stagnan 0.
+Tidak ada celah berulang.
+
+<b>Live vs bayangan</b>
+────────────────────
+<pre>
+v2 (replay)     +1,68R bersih
+Tanpa stagnan   +2,92R
+v1              +2,78R
+SELL 0,5%       -0,34R
+LOW 1/2         +2,28R
+Live (kotor)    +1,29R
+</pre>
+±3,5 minggu, belum bisa menilai.
+
+<b>Riset (walk-forward 2018-skrg)</b>
+────────────────────
+#61 Filter funding &gt; 0 utk SELL:
+<pre>
+Varian      R/thn   DD  2026
+Juara &gt;0     63,7 24,2  +40
+MATI         60,9 28,3  +11
+&gt; +0,01%     60,1 25,1   +7
+&gt; -0,003%    61,3 31,8  +27
+</pre>
+WF: R/thn 53,6, P rasio 0,11
+→ GAGAL. Filter tetap berguna.
+
+#69 Piramida Turtle (ide baru):
+tambah 50% posisi saat +2R.
+R/thn 74,5 vs 63,7 tapi DD +14%,
+P rasio 0,56 → GAGAL. Hanya
+menambah risiko; 2025 lebih buruk
+(+8,8 vs +15,5R), makin bergantung
+trade terbesar.
+Total ide crypto diuji: ±19.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR tahap 1b: BELUM (1/3).
+Setelah level ditembus, harga tidak
+melaju lebih jauh dibanding tembus
+level acak. Level sering ditembus,
+tapi tidak memberi info arah.
+Berikutnya: tahap 2 (SL di balik
+level, prioritas slot).
+
+<b>Usulan</b>
+────────────────────
+Strategi bot: tidak ada perubahan.
+Tidak ada kandidat penantang.
+Teknis #60 (funding riset) masih
+menunggu jawaban.

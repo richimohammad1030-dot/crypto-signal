@@ -163,3 +163,35 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
 - Total ide crypto yang pernah diuji: ±17 (ditambah #54, #67); varian dinilai putaran ini: 12 + juara. Ide baru: #67 (gagal), #68 (antri, prioritas 3).
   Penomoran: XAU sudah memakai #64-#66 → crypto lanjut #67.
 - Strategi bot: tidak ada perubahan. Tidak ada kandidat penantang.
+
+## 2026-11-20 · RISET MINGGUAN (siklus Jumat) · #61 filter funding SELL · #69 piramida · skill SNR tahap 1b
+- Mode: riset mingguan (Jumat berikutnya 27 Nov masih November → 27 Nov = REVIEW BULANAN). Data s.d. 19 Nov: unduh_crypto 50 koin
+  (tanpa gagal) + 177 koin tambahan sesuai masanya, unduh_pit 86 bulan, unduh_lama. Sistem dasar `_wf.py`: 2.978 trade 2018-skrg
+  +617,0R, DD 24,2R; 2026 kini +39,6R (minggu lalu +37).
+- **Kesehatan**: sejak v2 (24 Okt) live 28 trade +1,29R kotor vs replay 29 trade +2,14R kotor (+1,68R bersih). 5 trade live tanpa pasangan:
+  ZRO, NEAR, XLM (lama), HYPE SELL 9-13 Nov (+0,26R, koin tidak di replay) dan **SOL SELL 14-18 Nov (+0,61R, baru)**; replay tanpa pasangan
+  live: JUP, FIL, SUI, TAO (lama), **DOGE SELL fill 6 Nov (+1,38R) & ETC SELL fill 12 Nov (+0,97R)**. Dicek waktu fill replay: DOGE & ETC terisi
+  saat slot live penuh (live memegang posisi rantai HYPE/XLM/NEAR, HYPE 9-13 Nov); SOL live terisi 14 Nov tepat setelah slot HYPE kosong,
+  sementara slot replay sudah penuh oleh DOGE & ETC → rantai slot HYPE (#63), bukan bug data. Workflow 100 run terakhir (19 Nov) semua sukses.
+- **Penyebab SL 7 hari** (13-19 Nov): 4 trade +2,62R (HYPE, ZEC, XRP, SOL; semua SL trailing di untung), SL 0, stagnan 0. Tidak ada CELAH
+  berulang (28 hari, semua P >= 0,11). kejadian.json tidak ditambah.
+- **Bayangan** (data s.d. 18 Nov, ±3,5 minggu): v2 +1,68R bersih (kotor +2,14) · tanpa stagnan +2,92 · tanpa TP25 +1,46 · v1 +2,78 ·
+  #19 SELL 0,5% -0,34 · LOW 1/2 +2,28R; live +1,29R kotor. Masih terlalu sedikit (butuh 4-8 minggu).
+- **#61 filter funding > 0 untuk SELL** (`eksperimen/ide61_69.py`, WF sesuai masanya, replay penuh, ambang per 8 jam, HL × 8):
+  juara (> 0) R/thn 2020-skrg 63,7 DD 24,2 · MATI 60,9 / 28,3 (rasio lama 11,0 vs 12,9, baru 4,6 vs 6,7; 2022 +25, 2026 +11 vs +40) ·
+  > -0,01% 58,9 / 31,0 · > -0,003% 61,3 / 31,8 · > +0,003% 63,4 / 31,4 · > +0,01% 60,1 / 25,1 (SELL 441 vs 1.122; 2022 +10, 2026 +7).
+  WF memilih juara (≤2019), >+0,01% (≤2021), >+0,003% (≤2023), MATI (≤2025) → uji tersambung R/thn 53,6, 2022 +9,6, 2026 +11,3;
+  P_R 0,04, **P_rasio 0,11 → GAGAL**. Filter funding tetap berguna (terutama 2022 & 2026); ambang 0 sudah di puncak (tetangga lebih buruk).
+  Catatan: 2018 SELL bagus terjadi tanpa arsip funding (diizinkan di semua varian) → tidak menguji filter di 2018.
+- **#69 (ide baru, [lit] piramida Turtle, C. Faith "Way of the Turtle" 2007)**: tambah f × ukuran awal saat posisi mencapai +L R (stop order,
+  ikut SL trailing, tanpa slot baru; biaya taker+slip & funding porsi tambahan). R/thn (DD): +25%@2R 69,1 (25,9) · +50%@2R 74,5 (27,6) ·
+  +25%@3R 66,3 (25,7) · +50%@3R 68,9 (27,1). Tambahan terpicu di 20% trade (@2R; trade itu rata +2,05R). WF memilih +50%@2R di 4 jendela:
+  2020 +98 · 21 +121 · 22 +22 · 23 +125 · 24 +96 · 25 +8,8 · 26 +52R; R/thn +10,8 (P_R 0,97) tetapi DD +14%, **P_rasio 0,56 → GAGAL**
+  (rasio R/DD 18,9 vs 18,4 = setara menaikkan risiko). Ditandai: memperburuk 2025 (+8,8 vs +15,5) dan ketergantungan ekor (tanpa 2% terbaik
+  44 vs 126R), simpangan R tahunan 35 → 50.
+- **Skill SNR tahap 1b** (`eksperimen/skill_snr_tahap1b.py`): lanjutan 1/3/5 hari setelah tembus level nyata vs acak. **BELUM**: tembusan
+  level nyata tidak diikuti lanjutan lebih besar dari tembusan level acak (PERIODE tembus atas 2020-26 +0,15 vs +0,21 ATR D1, P 0,01;
+  SWING-D1 hanya 2017-19 tembus atas P 0,95; sel lain 0,03-0,95 tidak konsisten). Lanjutan = arus tren umum, bukan sifat level.
+  Berikutnya tahap 2 (ii) SL di balik level & (iii) prioritas slot (KURIKULUM.md).
+- Total ide crypto yang pernah diuji: ±19 (ditambah #61, #69); varian dinilai putaran ini: 9 + juara. Ide baru: #69 (gagal).
+- Strategi bot: tidak ada perubahan. Tidak ada kandidat penantang.
