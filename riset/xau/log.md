@@ -583,3 +583,25 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   PWH/PWL, angka bulat 10/25/50/100, supply-demand H4 & D1 dengan status segar) + definisi sentuhan. Cek tanpa-masa-depan 0/2.218
   pelanggaran. Zona/thn: swing H4 210-463, D1 36-85; supdem 3-8; sentuhan ±77 per hari bursa (bulat10 & swing H4 terbanyak).
   LULUS TAHAP 0. Tahap 1 (PAHAM vs level acak, P ≥ 0,90 di 2004-14 & 2015-26) Jumat berikutnya.
+
+## 20 Nov 2026 — Riset Jumat (siklus Jumat; mode mingguan)
+- Data: Setra 11.470 candle s.d. 19 Nov 16:00 UTC. Dukascopy GAGAL lagi (tunnel proxy ditutup, 13+ koneksi) → xau_panjang dari
+  cache bulanan s.d. 30 Okt 2026 (69.973 candle). Data 2004-2026 = 138.526 candle (Setra sejak Feb 2025).
+- Replay IDENTIK: Setra 463/463 (KOMBO 63 MR 236 K6 98 SUS 66; jendela unduhan Setra bergeser), Dukascopy 2.842/2.842.
+- Kesehatan minggu 13-19 Nov: 5 trade live = replay data final persis (13 Nov SUS SELL +0,64 · 16 Nov MR SELL +0,85 · 17 Nov MR SELL
+  -0,26 [cermin tren turun, RSI 74,1] · 18 Nov K6 SELL TP +4,00 · 19 Nov KOMBO SELL +2,49). Tanpa cad_log/cadangan, tanpa sinyal
+  terlambat. Minggu ini +7,72R kotor, 0 SL (emas turun ±4.070 → 3.670).
+- Penyebab SL: tidak ada SL minggu ini.
+- Bayangan sejak 2 Nov (biaya 0,40; 12 trade): BASELINE +3,88 · live catatan bot +5,90 kotor · Tanpa kombinasi +4,36 · Tanpa
+  susulan +3,25 · Tanpa hibrida +0,61 · MR SELL 71,22 -1,17 · K6 saja +6,64 (4) · OCO lama +11,45 (14). 3 minggu = belum dinilai.
+- Putaran ARAH UTAMA (ide65_67.py, WF berlabuh, uji 2011-2026; live +16,9 R/thn, 4/16 minus, terburuk -24, DD 52R, R/DD 5,18):
+  · #65 (antri) KOMBO BUY bobot {1;1,25;1,5;2}: WF pilih ×2 di semua jendela → +18,7, R/DD 5,92, terburuk -26, P 0,64 (tetap 0,62-0,69;
+    Setra 0,84-0,87) → GAGAL (arah konsisten, tidak signifikan).
+  · #67 (baru) KOMBO SUSULAN di jam keputusan hari K6 dilewati: WF pilih A (ganti S3) di semua jendela → +17,2, terburuk -17, DD 45R,
+    R/trade +0,082, 4,0/mg; P 0,54 (2005-26 0,65), Setra 0,92 → GAGAL (P utama < 0,70). SUSK SELL +0,08/+0,15/+0,65 R/trade stabil,
+    SUSK BUY tidak (+0,04/-0,38/+0,34); S3 BUY 22 thn -0,041 → ide #68 antri (pasca-lihat, wajib WF).
+- SKILL 1 SNR tahap 1 PAHAM putaran 1 (skill_snr_t1.py): BELUM LULUS. 548.400 sentuhan vs level acak (waktu acak tahun sama, jarak
+  & lebar sama): peluang pantul nyata ≈ acak di semua jenis (lift -5..+5 poin); 0/18 jenis-tf lulus 4 sel. Terdekat SUPPLY H4
+  (P 1,00/0,81/0,99/0,95). PDH/PDL & angka bulat tidak lebih baik dari acak; tembusan zona kuat tidak diikuti lanjutan.
+  Pelajaran: SNR klasik di H1 XAU (dengan ukuran ATR) hampir tidak berbeda dari level sembarang. Putaran 2: supply-demand.
+- Total ide XAU diuji: 44.

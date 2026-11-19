@@ -1,0 +1,74 @@
+<b>RISET XAU</b>
+Jumat, 20 Nov 2026
+────────────────────
+Mode: riset mingguan.
+
+<b>Kesehatan</b>
+────────────────────
+Replay IDENTIK (Setra 463, Dukascopy
+2.842 trade). 5 trade minggu ini =
+replay data final. Setra lancar,
+tanpa data cadangan, tanpa sinyal
+terlambat. Minggu ini +7,72R:
+<pre>
+13 Nov SUS SELL     +0,64
+16 Nov MR SELL      +0,85
+17 Nov MR SELL      -0,26
+18 Nov K6 SELL TP   +4,00
+19 Nov KOMBO SELL   +2,49
+</pre>
+Catatan: Dukascopy masih menolak
+unduhan riset; data Nov dari Setra.
+
+<b>Penyebab SL</b>
+────────────────────
+Tidak ada SL minggu ini.
+
+<b>Live vs bayangan (sejak 2 Nov)</b>
+────────────────────
+<pre>
+Menu             Trade  Total R
+Live (bot)        12    +5,90
+Baseline          12    +3,88
+Tanpa kombinasi   12    +4,36
+Tanpa hibrida     11    +0,61
+K6 saja            4    +6,64
+OCO lama          14   +11,45
+</pre>
+Baru 3 minggu, belum bisa dinilai.
+
+<b>Riset</b>
+────────────────────
+Walk-forward 2011-2026 (live +16,9
+R/thn, terburuk -24, DD 52R):
+<pre>
+Ide              R/thn terb.  P
+#65 KOMBO BUY x2 +18,7  -26  0,64
+#67 KOMBO susul. +17,2  -17  0,54
+</pre>
+Keduanya GAGAL (syarat P 0,90).
+#67 (aturan KOMBO di jam susulan
+ganti S3) menurunkan DD 52-&gt;45R
+dan Setra P 0,92, tapi tidak
+merata antar tahun. Versi SELL
+saja stabil di 3 periode -&gt; ide
+#68 antri. Total ide diuji: 44.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR tahap 1 (PAHAM): BELUM
+LULUS (putaran 1 dari 3).
+548 ribu sentuhan level dibanding
+level acak: peluang pantul hampir
+sama (selisih -1..+2 poin). Swing,
+high/low kemarin dan angka bulat
+tidak lebih baik dari acak. Hanya
+zona SUPPLY H4 yang nyata di 3
+dari 4 uji. Putaran 2 (27 Nov):
+fokus supply-demand.
+
+<b>Usulan</b>
+────────────────────
+Tidak ada perubahan strategi.
+Masih menunggu "pasang"/"tidak":
+#36 saran lot otomatis.
