@@ -45,11 +45,11 @@ def _exit_be(P, side, i, k, sl, tp, e, end, px_fill, be=0.0):
     if be <= 0: return _orig_exit(P, side, i, k, sl, tp, e, end, px_fill)
     risk = abs(px_fill - sl); trig = px_fill + side * be * risk
     # cari titik pemicu BE dulu (berhenti di SL/TP bila lebih dulu)
-    x, why = _orig_exit(P, side, i, k, sl, trig, e, end, px_fill)
-    if why != "tp": return x, why
+    x, why, tx = _orig_exit(P, side, i, k, sl, trig, e, end, px_fill)
+    if why != "tp": return x, why, tx
     # dari candle pemicu: lanjut dengan SL = entry (konservatif: mulai candle berikutnya)
     j = next((q for q in range(i, e) if (P.h[q] >= trig if side > 0 else P.l[q] <= trig)), None)
-    if j is None or j + 1 >= e or P.t[j + 1] >= end: return P.c[min(j or i, e - 1)], "close"
+    if j is None or j + 1 >= e or P.t[j + 1] >= end: q = min(j or i, e - 1); return P.c[q], "close", int(P.t[q])
     return _orig_exit(P, side, j + 1, 0, px_fill, tp, e, end, P.o[j + 1])
 
 def simulate_be(P, orders, d):

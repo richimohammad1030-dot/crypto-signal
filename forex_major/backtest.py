@@ -113,17 +113,17 @@ def find_exit(P, side, i, k, sl, tp, e, end, px_fill):
         if P.t[j] >= end: break
         pt = path(P, j); start = k if j == i else 0; last = j
         if j > i:   # gap saat buka candle
-            if (side > 0 and pt[0] <= sl) or (side < 0 and pt[0] >= sl): return pt[0], "sl"
-            if (side > 0 and pt[0] >= tp) or (side < 0 and pt[0] <= tp): return pt[0], "tp"
+            if (side > 0 and pt[0] <= sl) or (side < 0 and pt[0] >= sl): return pt[0], "sl", int(P.t[j])
+            if (side > 0 and pt[0] >= tp) or (side < 0 and pt[0] <= tp): return pt[0], "tp", int(P.t[j])
         for m in range(max(start, 1), 4):  # segmen k = dari pt[k-1] ke pt[k]
             a, b = pt[m - 1], pt[m]
             if j == i and m == start and k > 0: a = px_fill    # mulai dari titik isi, bukan awal segmen
             lo, hi = min(a, b), max(a, b)
             hs = lo <= sl <= hi; ht = lo <= tp <= hi
-            if hs and ht: return (sl, "sl") if abs(sl - a) <= abs(tp - a) else (tp, "tp")
-            if hs: return sl, "sl"
-            if ht: return tp, "tp"
-    return P.c[last], "close"
+            if hs and ht: return (sl, "sl", int(P.t[j])) if abs(sl - a) <= abs(tp - a) else (tp, "tp", int(P.t[j]))
+            if hs: return sl, "sl", int(P.t[j])
+            if ht: return tp, "tp", int(P.t[j])
+    return P.c[last], "close", int(P.t[last])
 
 
 def simulate_pair(P, orders, d):
@@ -145,9 +145,9 @@ def simulate_pair(P, orders, d):
         else: sl, tp = od["sl"], od["tp"]
         risk = abs(px - sl)
         if risk <= 0 or (side > 0 and px <= sl) or (side < 0 and px >= sl): continue
-        xp, why = find_exit(P, side, i, k, sl, tp, e, end, px)
+        xp, why, tx = find_exit(P, side, i, k, sl, tp, e, end, px)
         R = side * (xp - px) / risk - P.spread / risk
-        trades.append(dict(t=int(P.t[i]), pair=P.name, strat=od["strat"], side=side, R=R, why=why, risk_pips=risk / P.pip))
+        trades.append(dict(t=int(P.t[i]), t_exit=tx, pair=P.name, strat=od["strat"], side=side, R=R, why=why, risk_pips=risk / P.pip, entry=px, sl=sl, tp=tp))
     return trades
 
 
