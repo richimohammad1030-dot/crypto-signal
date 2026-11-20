@@ -1,7 +1,7 @@
 name: FX Major - Unduh Data
 
-# Pemilik, 20 Nov 2026: data M5 riset bot FX MAJOR (EURUSD, GBPUSD, USDJPY, AUDUSD) sejak 2015.
-# Dukascopy utama, Setra cadangan. Dijalankan manual; tidak menyentuh bot live.
+# Pemilik, 20 Nov 2026: data H1 riset bot FX MAJOR (EURUSD, GBPUSD, USDJPY, AUDUSD) sejak 2015.
+# Sumber Dukascopy (file H1 bulanan). Satu job per pair (paralel). Dijalankan manual; tidak menyentuh bot live.
 on:
   workflow_dispatch:
     inputs:
@@ -12,26 +12,27 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: fx-data
-  cancel-in-progress: false
-
 jobs:
   unduh:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        pair: [EURUSD, GBPUSD, USDJPY, AUDUSD]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Unduh data
-        run: python forex_major/unduh_data.py ${{ github.event.inputs.tahun_mulai }}
+        run: python forex_major/unduh_data.py ${{ github.event.inputs.tahun_mulai }} ${{ matrix.pair }}
       - name: Simpan ke repo
         if: always()
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           git add forex_major/data
-          git commit -m "fx major: data M5" || exit 0
-          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+          git commit -m "fx major: data H1 ${{ matrix.pair }}" || exit 0
+          for i in 1 2 3 4 5 6; do git pull --rebase -q && git push -q && break; sleep $((RANDOM % 10 + 5)); done

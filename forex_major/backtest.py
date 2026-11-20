@@ -1,4 +1,4 @@
-"""Backtest bot FX MAJOR (EURUSD, GBPUSD, USDJPY, AUDUSD) di data M5 BID.
+"""Backtest bot FX MAJOR (EURUSD, GBPUSD, USDJPY, AUDUSD) di data H1 BID (Dukascopy).
 Aturan tetap (pemilik, 20 Nov 2026): intraday, sinyal pagi 07:00 WIB (+ sinyal susulan), semua ditutup 23:00 WIB,
 risiko 0,5%/trade, maks 4 posisi/hari, maks 1 posisi/pair/hari, maks 2 posisi searah USD/hari.
 Waktu: WIB = UTC+7. Hari trading = 00:00-16:00 UTC (07:00-23:00 WIB).
@@ -42,7 +42,7 @@ class Pair:
 
 def load(pair):
     rows = []
-    for f in sorted(glob.glob(f"{ROOT}/data/{pair}_m5_*.json.gz")):
+    for f in sorted(glob.glob(f"{ROOT}/data/{pair}_h1_*.json.gz")):
         rows += json.load(gzip.open(f, "rt"))
     return Pair(pair, rows) if rows else None
 
@@ -204,7 +204,7 @@ def s1_asian_breakout(P, tp_r=1.5, min_atr=0.15, max_atr=0.8):
         sl_ = P.day_slice(d)
         if sl_ is None or j < 20: continue
         s, e = sl_; t0 = d * 86400; m = (P.t[s:e] < t0 + 7 * 3600)
-        if m.sum() < 60: continue
+        if m.sum() < 5: continue
         hi, lo = P.h[s:e][m].max(), P.l[s:e][m].min(); rng = hi - lo
         if not (min_atr * A[j] <= rng <= max_atr * A[j]): continue
         mid = (hi + lo) / 2; buf = 2 * P.pip; on = t0 + 7 * 3600
