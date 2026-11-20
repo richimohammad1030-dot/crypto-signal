@@ -4,7 +4,7 @@ Keluaran: forex_major/data_setra/<PAIR>_<tf>.json.gz  isi [[open_s, o, h, l, c],
 Pemakaian: python forex_major/unduh_setra.py [tf ...]   (default 1h 15m)"""
 import gzip, json, os, sys, time, urllib.request
 ROOT = os.path.dirname(os.path.abspath(__file__)); OUT = f"{ROOT}/data_setra"; os.makedirs(OUT, exist_ok=True)
-PAIRS = ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD"]; TFS = sys.argv[1:] or ["1h", "15m"]
+PAIRS = os.environ.get("FX_PAIRS", "EURUSD,GBPUSD,USDJPY,AUDUSD").split(","); TFS = sys.argv[1:] or ["1h", "15m"]
 STEP = {"5m": 300, "15m": 900, "1h": 3600}
 
 def get(u):

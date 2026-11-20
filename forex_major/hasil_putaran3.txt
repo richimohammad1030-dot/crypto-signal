@@ -1,0 +1,14 @@
+
+N3: 43 lolos dari 54
+   PF IS 1.35 (+112R) | OOS 1.16 (+26R) | Setra 1.19 (+10R) | WR 47% | 1.9/mgg | tahun+ 7/12 {'ema_n': 50, 'slm': 0.4, 'tpm': 1.6, 'trend': True}
+   PF IS 1.44 (+170R) | OOS 1.14 (+29R) | Setra 1.30 (+20R) | WR 44% | 1.9/mgg | tahun+ 7/12 {'ema_n': 50, 'slm': 0.3, 'tpm': 1.6, 'trend': True}
+   PF IS 1.30 (+97R) | OOS 1.14 (+23R) | Setra 1.20 (+11R) | WR 47% | 1.9/mgg | tahun+ 7/12 {'ema_n': 50, 'slm': 0.4, 'tpm': 1.2, 'trend': True}
+
+N4: 0 lolos dari 27
+
+N5: 0 lolos dari 108
+
+N6: 0 lolos dari 6
+
+=== KOMBINASI (target >= 4 trade/minggu) ===
+0 kombinasi memenuhi >= 4/mgg dan lolos semua uji

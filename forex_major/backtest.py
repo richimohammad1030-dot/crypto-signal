@@ -9,8 +9,8 @@ import numpy as np
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PAIRS = ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD"]
-PIP = {"EURUSD": 1e-4, "GBPUSD": 1e-4, "USDJPY": 1e-2, "AUDUSD": 1e-4}
-SPREAD = {"EURUSD": 1.5, "GBPUSD": 2.0, "USDJPY": 1.5, "AUDUSD": 1.8}     # pip, konservatif
+PIP = {"EURUSD": 1e-4, "GBPUSD": 1e-4, "USDJPY": 1e-2, "AUDUSD": 1e-4, "USDCAD": 1e-4, "USDCHF": 1e-4, "NZDUSD": 1e-4}
+SPREAD = {"EURUSD": 1.5, "GBPUSD": 2.0, "USDJPY": 1.5, "AUDUSD": 1.8, "USDCAD": 2.0, "USDCHF": 2.0, "NZDUSD": 2.2}     # pip, konservatif
 RISK = 0.005; MAX_DAY = 4; MAX_USD_SAME = 2
 DAY_END = 16 * 3600                                                     # 23:00 WIB
 
