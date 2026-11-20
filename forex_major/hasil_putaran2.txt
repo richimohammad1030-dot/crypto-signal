@@ -1,0 +1,30 @@
+
+S8: 0 varian lolos dari 162
+  gagal PF IS 1.011 (0.9R) | OOS 1.371 (12.2R) | Setra 2.354 (10.8R) | WR 48% | 0.32/mgg | tahun+ 7/12 | {'body': 0.7, 'rng': 0.35, 'entry': 'limit', 'tp': 1.5, 'trend': 'against'}
+  gagal PF IS 0.85 (-26.9R) | OOS 1.185 (14.3R) | Setra 1.53 (13.3R) | WR 45% | 0.66/mgg | tahun+ 7/12 | {'body': 0.7, 'rng': 0.25, 'entry': 'limit', 'tp': 1.5, 'trend': 'against'}
+  gagal PF IS 0.925 (-14.4R) | OOS 1.143 (12.6R) | Setra 1.459 (13.6R) | WR 39% | 0.66/mgg | tahun+ 5/12 | {'body': 0.7, 'rng': 0.25, 'entry': 'limit', 'tp': 2.0, 'trend': 'against'}
+
+S2: 0 varian lolos dari 144
+  gagal PF IS 0.878 (-58.0R) | OOS 1.082 (15.9R) | Setra 1.01 (0.9R) | WR 48% | 2.59/mgg | tahun+ 5/12 | {'lv': 5, 'mr_sl': 0.6, 'mr_tp': 1.0, 'bo_sl': 0.5, 'bo_tp': 1.0, 'mode': 'mr'}
+  gagal PF IS 0.878 (-58.0R) | OOS 1.082 (15.9R) | Setra 1.01 (0.9R) | WR 48% | 2.59/mgg | tahun+ 5/12 | {'lv': 5, 'mr_sl': 0.6, 'mr_tp': 1.0, 'bo_sl': 0.5, 'bo_tp': 1.5, 'mode': 'mr'}
+  gagal PF IS 0.878 (-58.0R) | OOS 1.082 (15.9R) | Setra 1.01 (0.9R) | WR 48% | 2.59/mgg | tahun+ 5/12 | {'lv': 5, 'mr_sl': 0.6, 'mr_tp': 1.0, 'bo_sl': 0.75, 'bo_tp': 1.0, 'mode': 'mr'}
+
+S6: 0 varian lolos dari 24
+  gagal PF IS 0.882 (-224.7R) | OOS 0.955 (-36.4R) | Setra 0.967 (-11.1R) | WR 41% | 7.86/mgg | tahun+ 2/12 | {'kc': 2.0, 'slm': 1.5, 'tpm': 3.0, 'h1': 13}
+  gagal PF IS 0.853 (-221.1R) | OOS 0.941 (-38.9R) | Setra 0.974 (-7.0R) | WR 33% | 4.88/mgg | tahun+ 1/12 | {'kc': 1.5, 'slm': 1.0, 'tpm': 3.0, 'h1': 13}
+  gagal PF IS 0.876 (-300.7R) | OOS 0.937 (-66.3R) | Setra 0.946 (-23.9R) | WR 33% | 7.86/mgg | tahun+ 0/12 | {'kc': 2.0, 'slm': 1.0, 'tpm': 3.0, 'h1': 13}
+
+N1: 0 varian lolos dari 9
+  gagal PF IS 0.64 (-90.3R) | OOS 1.029 (2.7R) | Setra 0.749 (-9.3R) | WR 34% | 0.82/mgg | tahun+ 5/12 | {'k': 0.9, 'tp': 'half'}
+  gagal PF IS 0.705 (-146.9R) | OOS 1.021 (4.0R) | Setra 0.777 (-17.4R) | WR 36% | 1.69/mgg | tahun+ 2/12 | {'k': 0.7, 'tp': 'half'}
+  gagal PF IS 0.691 (-300.9R) | OOS 0.988 (-4.7R) | Setra 0.995 (-0.7R) | WR 39% | 3.5/mgg | tahun+ 2/12 | {'k': 0.5, 'tp': 'half'}
+
+N2: 0 varian lolos dari 12
+  gagal PF IS 0.939 (-36.1R) | OOS 0.932 (-20.0R) | Setra 0.692 (-39.6R) | WR 48% | 3.87/mgg | tahun+ 5/12 | {'pct': 0.15, 'slm': 0.6, 'tpm': 0.75}
+  gagal PF IS 0.95 (-27.5R) | OOS 0.911 (-25.3R) | Setra 0.725 (-34.8R) | WR 52% | 3.87/mgg | tahun+ 5/12 | {'pct': 0.15, 'slm': 0.6, 'tpm': 0.5}
+  gagal PF IS 0.903 (-81.0R) | OOS 0.904 (-39.7R) | Setra 0.674 (-59.3R) | WR 43% | 3.87/mgg | tahun+ 4/12 | {'pct': 0.15, 'slm': 0.4, 'tpm': 0.75}
+
+N3: 4 varian lolos dari 6
+  LOLOS PF IS 1.347 (112.1R) | OOS 1.155 (25.8R) | Setra 1.186 (10.0R) | WR 47% | 1.9/mgg | tahun+ 7/12 | {'slm': 0.4, 'tpm': 1.6}
+  LOLOS PF IS 1.301 (97.4R) | OOS 1.136 (22.6R) | Setra 1.204 (11.0R) | WR 47% | 1.9/mgg | tahun+ 7/12 | {'slm': 0.4, 'tpm': 1.2}
+  LOLOS PF IS 1.275 (88.5R) | OOS 1.11 (18.2R) | Setra 1.239 (12.9R) | WR 48% | 1.9/mgg | tahun+ 7/12 | {'slm': 0.4, 'tpm': 0.8}
