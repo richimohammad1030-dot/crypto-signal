@@ -2,7 +2,7 @@
 Aturan tetap (pemilik, 20 Nov 2026): intraday, sinyal pagi 07:00 WIB (+ sinyal susulan), semua ditutup 23:00 WIB,
 risiko 0,5%/trade, maks 4 posisi/hari, maks 1 posisi/pair/hari, maks 2 posisi searah USD/hari.
 Waktu: WIB = UTC+7. Hari trading = 00:00-16:00 UTC (07:00-23:00 WIB).
-Biaya: spread konservatif dikurangkan dari tiap trade (dalam R). SL & TP di candle yang sama -> dianggap SL.
+Biaya: spread konservatif dikurangkan dari tiap trade (dalam R). Urutan dalam candle: jalur OHLC standar.
 Pemakaian: python forex_major/backtest.py [strategi ...]   (tanpa argumen = semua)"""
 import gzip, glob, json, os, sys, math, time
 import numpy as np
@@ -82,76 +82,72 @@ def order(pair, strat, side, kind, price, sl, tp, t_on, oco=None, t_off=None):
     return dict(pair=pair, strat=strat, side=side, kind=kind, price=price, sl=sl, tp=tp, t_on=t_on, oco=oco, t_off=t_off)
 
 
-def simulate_pair(P, orders, d):
-    """Simulasi order satu pair satu hari. Kembalikan daftar trade (waktu isi, ...)."""
-    sl_ = P.day_slice(d)
-    if sl_ is None: return []
-    s, e = sl_; end = d * 86400 + DAY_END
-    trades = []; dead = set()
-    for od in sorted(orders, key=lambda x: x["t_on"]):
-        key = od["oco"]
-        if key is not None and key in dead: continue
-        risk = abs(od["price"] - od["sl"]) if od["kind"] != "market" else None
-        filled = None; t_off = min(od["t_off"] or end, end)
-        i0 = s + np.searchsorted(P.t[s:e], od["t_on"])
-        for i in range(i0, e):
-            if P.t[i] >= t_off: break
-            side = od["side"]
-            if od["kind"] == "market":
-                px = P.o[i]; filled = (i, px); break
-            if od["kind"] == "stop":
-                if (side > 0 and P.h[i] >= od["price"]) or (side < 0 and P.l[i] <= od["price"]):
-                    px = max(od["price"], P.o[i]) if side > 0 else min(od["price"], P.o[i]); filled = (i, px); break
-            else:  # limit
-                if (side > 0 and P.l[i] <= od["price"]) or (side < 0 and P.h[i] >= od["price"]):
-                    px = min(od["price"], P.o[i]) if side > 0 else max(od["price"], P.o[i]); filled = (i, px); break
-        if filled is None: continue
-        if key is not None:
-            # OCO: kaki lain hanya batal bila kaki ini terisi lebih dulu
-            others = [x for x in orders if x is not od and x["oco"] == key]
-            dead.add(key)
-            # cek apakah kaki lain sebenarnya terisi lebih awal -> dihitung di iterasi lain; sederhana: pilih yang terisi duluan
-            for x in others:
-                fx = first_fill(P, x, s, e, min(x["t_off"] or end, end))
-                if fx is not None and fx < filled[0]:
-                    od = x; filled = (fx, fill_price(P, x, fx)); break
-        i, px = filled; side = od["side"]; sl, tp = od["sl"], od["tp"]
-        if od["kind"] == "market":
-            # SL/TP relatif ditentukan strategi sebagai jarak bila market
-            pass
-        risk = abs(px - sl)
-        if risk <= 0: continue
-        exit_px, exit_i, why = None, None, "close"
-        for j in range(i, e):
-            if P.t[j] >= end: break
-            hit_sl = (P.l[j] <= sl) if side > 0 else (P.h[j] >= sl)
-            hit_tp = (P.h[j] >= tp) if side > 0 else (P.l[j] <= tp)
-            if j == i and od["kind"] != "market":
-                # candle pengisian: hanya SL yang dihitung (konservatif)
-                hit_tp = hit_tp and not hit_sl and ((P.c[j] >= tp) if side > 0 else (P.c[j] <= tp))
-            if hit_sl: exit_px, exit_i, why = sl, j, "sl"; break
-            if hit_tp: exit_px, exit_i, why = tp, j, "tp"; break
-            exit_i = j
-        if exit_px is None: exit_px = P.c[exit_i]
-        R = side * (exit_px - px) / risk - P.spread / risk
-        trades.append(dict(t=int(P.t[i]), pair=P.name, strat=od["strat"], side=side, R=R, why=why, risk_pips=risk / P.pip))
-    return trades
+def path(P, i):
+    """Jalur harga dalam candle: naik O-L-H-C, turun O-H-L-C (asumsi standar OHLC)."""
+    return (P.o[i], P.l[i], P.h[i], P.c[i]) if P.c[i] >= P.o[i] else (P.o[i], P.h[i], P.l[i], P.c[i])
 
 
-def first_fill(P, od, s, e, t_off):
-    i0 = s + np.searchsorted(P.t[s:e], od["t_on"])
+def find_fill(P, od, s, e, end):
+    """Cari titik isi pertama: (indeks candle, indeks segmen jalur, harga isi) atau None."""
+    t_off = min(od["t_off"] or end, end); i0 = s + np.searchsorted(P.t[s:e], od["t_on"])
+    side, px, kind = od["side"], od["price"], od["kind"]
     for i in range(i0, e):
         if P.t[i] >= t_off: return None
-        if od["kind"] == "market": return i
-        if od["kind"] == "stop" and ((od["side"] > 0 and P.h[i] >= od["price"]) or (od["side"] < 0 and P.l[i] <= od["price"])): return i
-        if od["kind"] == "limit" and ((od["side"] > 0 and P.l[i] <= od["price"]) or (od["side"] < 0 and P.h[i] >= od["price"])): return i
+        if kind == "market": return (i, 0, P.o[i])
+        pt = path(P, i)
+        if kind == "stop":
+            if (side > 0 and pt[0] >= px) or (side < 0 and pt[0] <= px): return (i, 0, pt[0])   # gap
+        else:
+            if (side > 0 and pt[0] <= px) or (side < 0 and pt[0] >= px): return (i, 0, pt[0])
+        for k in range(3):
+            lo, hi = min(pt[k], pt[k + 1]), max(pt[k], pt[k + 1])
+            if lo <= px <= hi: return (i, k + 1, px)
     return None
 
 
-def fill_price(P, od, i):
-    if od["kind"] == "market": return P.o[i]
-    if od["kind"] == "stop": return max(od["price"], P.o[i]) if od["side"] > 0 else min(od["price"], P.o[i])
-    return min(od["price"], P.o[i]) if od["side"] > 0 else max(od["price"], P.o[i])
+def find_exit(P, side, i, k, sl, tp, e, end, px_fill):
+    """Jalan dari titik isi (candle i, segmen k): kembalikan (harga keluar, alasan)."""
+    last = i
+    for j in range(i, e):
+        if P.t[j] >= end: break
+        pt = path(P, j); start = k if j == i else 0; last = j
+        if j > i:   # gap saat buka candle
+            if (side > 0 and pt[0] <= sl) or (side < 0 and pt[0] >= sl): return pt[0], "sl"
+            if (side > 0 and pt[0] >= tp) or (side < 0 and pt[0] <= tp): return pt[0], "tp"
+        for m in range(max(start, 1), 4):  # segmen k = dari pt[k-1] ke pt[k]
+            a, b = pt[m - 1], pt[m]
+            if j == i and m == start and k > 0: a = px_fill    # mulai dari titik isi, bukan awal segmen
+            lo, hi = min(a, b), max(a, b)
+            hs = lo <= sl <= hi; ht = lo <= tp <= hi
+            if hs and ht: return (sl, "sl") if abs(sl - a) <= abs(tp - a) else (tp, "tp")
+            if hs: return sl, "sl"
+            if ht: return tp, "tp"
+    return P.c[last], "close"
+
+
+def simulate_pair(P, orders, d):
+    """Simulasi order satu pair satu hari. OCO: kaki yang terisi lebih dulu menang, kaki lain batal."""
+    sl_ = P.day_slice(d)
+    if sl_ is None: return []
+    s, e = sl_; end = d * 86400 + DAY_END; trades = []
+    groups = {}
+    for od in orders: groups.setdefault(od["oco"] if od["oco"] is not None else id(od), []).append(od)
+    for legs in groups.values():
+        best = None
+        for od in legs:
+            f = find_fill(P, od, s, e, end)
+            if f and (best is None or (f[0], f[1]) < (best[1][0], best[1][1])): best = (od, f)
+        if best is None: continue
+        od, (i, k, px) = best; side = od["side"]
+        if od["kind"] == "market":       # SL/TP market: jaga jarak relatif terhadap harga acuan
+            sl, tp = od["sl"] - od["price"] + px, od["tp"] - od["price"] + px
+        else: sl, tp = od["sl"], od["tp"]
+        risk = abs(px - sl)
+        if risk <= 0 or (side > 0 and px <= sl) or (side < 0 and px >= sl): continue
+        xp, why = find_exit(P, side, i, k, sl, tp, e, end, px)
+        R = side * (xp - px) / risk - P.spread / risk
+        trades.append(dict(t=int(P.t[i]), pair=P.name, strat=od["strat"], side=side, R=R, why=why, risk_pips=risk / P.pip))
+    return trades
 
 
 def portfolio(trades):
