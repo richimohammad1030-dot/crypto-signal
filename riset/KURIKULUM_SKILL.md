@@ -22,7 +22,7 @@ masing-masing (status mereka dicatat di log riset masing-masing).
 
 ## PROGRAM KILAT (pemilik, 20 Nov 2026) — mengalahkan "satu langkah per Jumat" dan "pemilik memilih setelah 3 gagal"
 Tujuan: skill cepat dikuasai lalu dipakai di bot live, agar banyak skill berikutnya bisa dipelajari.
-1. **Skill dikerjakan PERTAMA di setiap sesi riset** (tiap bot 2 sesi/minggu, ATURAN_BERSAMA E.5) dan **boleh beberapa tahap
+1. **Skill dikerjakan PERTAMA di setiap sesi riset** (tiap bot 2 sesi/minggu sampai 4 Des 2026, lalu 1 sesi/minggu; ATURAN_BERSAMA E.5) dan **boleh beberapa tahap
    dalam satu sesi**: tahap 1 menguji SEMUA jenis/varian sekaligus; jenis yang lulus langsung masuk tahap 2 di sesi yang sama.
 2. **Tahap 1 PAHAM = perilaku beda nyata dari acak, KE ARAH MANA PUN** (lebih sering pantul ATAU lebih sering tembus /
    lanjut). Pelajaran lintas bot wajib dipakai: di crypto & intraday level PERIODE/SWING-D1 terbukti lebih sering DITEMBUS;

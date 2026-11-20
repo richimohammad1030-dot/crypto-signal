@@ -5,7 +5,7 @@ Instruksi untuk routine **"Riset Bot Crypto"** (Selasa & Jumat 02:59 WIB).
 > **PERCEPATAN (pemilik, 20 Nov 2026) — baca `riset/ATURAN_BERSAMA.md` bagian E; mengalahkan langkah lama di bawah yang bertentangan.**
 > (1) Kesehatan, penyebab SL, live vs bayangan, replay kesetaraan → **baca `riset/harian/crypto.md`** (rutinitas harian GitHub
 > Actions); jalankan ulang hanya bila tertulis GAGAL/BEDA atau lebih tua dari 36 jam. (2) Urutan sesi: SKILL program kilat
-> (`riset/KURIKULUM_SKILL.md`) → saringan cepat 10-20 ide → 2-3 teratas ke uji penuh (minimal 1 sumber edge baru) → laporan.
+> (`riset/KURIKULUM_SKILL.md`) → saringan cepat maks 10 ide → 2-3 teratas ke uji penuh (minimal 1 sumber edge baru) → laporan.
 > (3) Kata "Jumat" di bawah = "sesi riset"; **review bulanan = sesi terakhir bot ini di bulan berjalan** (sesi berikutnya jatuh
 > di bulan baru). (4) Ide berstatus `kandidat` langsung ditambahkan ke MENU `riset/crypto/bayangan.py`.
 Tujuan: menemukan perbaikan bot crypto yang terbukti dengan data, lalu **mengusulkannya** ke pemilik.

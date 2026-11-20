@@ -75,7 +75,7 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    Kesehatan · Penyebab SL · Live vs bayangan, dan **tidak menjalankan ulang** langkah itu kecuali tertulis GAGAL/BEDA atau
    hasilnya lebih tua dari 36 jam. Unduhan data untuk eksperimen tetap boleh (XAU: bibit Dukascopy di `riset/data/` kini
    diperbarui otomatis tiap bulan penuh; bulan berjalan dari Setra). Arsip 21 hari: `riset/harian/arsip/`.
-2. **Saringan cepat (tiap sesi 10-20 ide/varian)**: semua ide dari ide.md + ide baru diuji kasar dulu di **periode pilih saja**
+2. **Saringan cepat (tiap sesi MAKSIMAL 10 ide/varian, satu skrip saringan per sesi — hemat token)**: semua ide dari ide.md + ide baru diuji kasar dulu di **periode pilih saja**
    (XAU ≤ 2014 + walk-forward jendela pertama; crypto/intraday ≤ 2021), metrik: R/trade, tahun minus, DD, jumlah trade.
    Hanya **2-3 teratas** yang lanjut ke tahap B penuh (walk-forward + signifikansi + data terkunci). Ide yang gugur di
    saringan berstatus `disaring` (boleh diuji lagi bila ada data/definisi baru). **Semua ide yang disaring ikut dihitung**
@@ -89,8 +89,9 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    hanya diuji bila datang dari CELAH berulang (sebab_sl) atau skill yang sudah lulus tahap 1.
    **"Tahun minus" juga dinilai di level PORTOFOLIO 3 bot** (`riset/portofolio.py`, risiko sesuai bot live): sumber edge baru
    dinilai dari sumbangannya pada tahun minus & DD portofolio, bukan hanya botnya sendiri.
-5. **Jadwal bergilir, tiap bot 2 sesi/minggu** (bukan lagi semua Jumat): XAU Senin & Kamis · crypto Selasa & Jumat ·
-   intraday Rabu & Sabtu (dini hari, setelah rutinitas harian). **Review bulanan = sesi terakhir bot itu di bulan berjalan**
+5. **Jadwal bergilir, tiap bot 2 sesi/minggu HANYA SAMPAI 4 Des 2026** (masa kilat SNR): XAU Senin & Kamis · crypto Selasa &
+   Jumat · intraday Rabu & Sabtu. **Mulai 5 Des 2026 kembali 1 sesi/minggu per bot** (XAU Senin · crypto Selasa · intraday
+   Rabu) untuk hemat token (pemilik, 20 Nov). Laporan ringkas: tabel + kesimpulan, tanpa mengulang isi riset/harian. **Review bulanan = sesi terakhir bot itu di bulan berjalan**
    (sesi berikutnya bot itu jatuh di bulan baru). Gerbang pasang tetap maksimal 1 perubahan strategi per bulan per bot.
 6. **Kurikulum skill = PROGRAM KILAT** (lihat `riset/KURIKULUM_SKILL.md` bagian "Program kilat"): dikerjakan PERTAMA di setiap
    sesi, boleh beberapa tahap per sesi, batas waktu per tahap 3 sesi lalu otomatis pindah definisi/skill.
