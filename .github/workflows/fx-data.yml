@@ -8,6 +8,9 @@ on:
       tahun_mulai:
         description: "Tahun mulai"
         default: "2015"
+      pairs:
+        description: "Daftar pair (JSON)"
+        default: '["EURUSD","GBPUSD","USDJPY","AUDUSD"]'
 
 permissions:
   contents: write
@@ -20,7 +23,7 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        pair: [EURUSD, GBPUSD, USDJPY, AUDUSD]
+        pair: ${{ fromJSON(github.event.inputs.pairs) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
