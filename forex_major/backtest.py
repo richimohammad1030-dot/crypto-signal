@@ -42,7 +42,8 @@ class Pair:
 
 def load(pair):
     rows = []
-    for f in sorted(glob.glob(f"{ROOT}/data/{pair}_h1_*.json.gz")):
+    # FX_DATA: pola file, mis. "data_setra/{pair}_1h.json.gz" (default: Dukascopy H1)
+    for f in sorted(glob.glob(f"{ROOT}/" + os.environ.get("FX_DATA", "data/{pair}_h1_*.json.gz").format(pair=pair))):
         rows += json.load(gzip.open(f, "rt"))
     return Pair(pair, rows) if rows else None
 
@@ -361,4 +362,4 @@ if __name__ == "__main__":
                   f"tahun+={m['pos_years']}/{m['n_years']} {m['years']}", flush=True)
         else:
             print(f"{n}: tidak ada trade")
-    json.dump(res, open(f"{ROOT}/hasil_backtest.json", "w"), indent=1, default=str)
+    json.dump(res, open(f"{ROOT}/" + os.environ.get("FX_OUT", "hasil_backtest.json"), "w"), indent=1, default=str)
