@@ -1,0 +1,34 @@
+name: FX Major - Unduh Data M5 (latar belakang)
+
+# Pemilik, 20 Nov 2026: M5 Dukascopy 6 tahun terakhir untuk validasi presisi bot FX MAJOR.
+# Lambat (dibatasi Dukascopy) -> satu job per pair-tahun, paralel. Tidak menyentuh bot live.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  unduh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        pair: [EURUSD, GBPUSD, USDJPY, AUDUSD]
+        tahun: [2020, 2021, 2022, 2023, 2024, 2025, 2026]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unduh
+        run: python forex_major/unduh_m5.py ${{ matrix.pair }} ${{ matrix.tahun }}
+      - name: Simpan ke repo
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -f forex_major/data_m5
+          git commit -q -m "fx major: data M5 ${{ matrix.pair }} ${{ matrix.tahun }}" || exit 0
+          for i in $(seq 1 12); do git pull --rebase -q && git push -q && break; sleep $((RANDOM % 20 + 5)); done
