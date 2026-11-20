@@ -20,6 +20,33 @@ masing-masing (status mereka dicatat di log riset masing-masing).
   memilih: lanjut dengan definisi baru atau pindah skill.
 - Semua hasil (termasuk yang gagal) dicatat di log & ide riset bot terkait; skrip di `riset/<bot>/eksperimen/skill_<nama>*.py`.
 
+## PROGRAM KILAT (pemilik, 20 Nov 2026) — mengalahkan "satu langkah per Jumat" dan "pemilik memilih setelah 3 gagal"
+Tujuan: skill cepat dikuasai lalu dipakai di bot live, agar banyak skill berikutnya bisa dipelajari.
+1. **Skill dikerjakan PERTAMA di setiap sesi riset** (tiap bot 2 sesi/minggu, ATURAN_BERSAMA E.5) dan **boleh beberapa tahap
+   dalam satu sesi**: tahap 1 menguji SEMUA jenis/varian sekaligus; jenis yang lulus langsung masuk tahap 2 di sesi yang sama.
+2. **Tahap 1 PAHAM = perilaku beda nyata dari acak, KE ARAH MANA PUN** (lebih sering pantul ATAU lebih sering tembus /
+   lanjut). Pelajaran lintas bot wajib dipakai: di crypto & intraday level PERIODE/SWING-D1 terbukti lebih sering DITEMBUS;
+   XAU dan bot lain wajib menguji arah tembus juga, bukan hanya pantul.
+3. **Tahap 2 lewat saringan cepat**: semua cara pakai (filter, SL/TP di level, prioritas, strategi mandiri) × varian disaring
+   di periode pilih (ATURAN_BERSAMA E.2), 2 teratas ke walk-forward penuh. P ≥ 0,90 → LULUS; P 0,50-0,70 arah konsisten →
+   `kandidat` dan **langsung masuk MENU bayangan** (dipantau rutinitas harian tiap hari).
+4. **Batas waktu: 3 sesi per tahap** (± 1,5 minggu). Gagal 3 sesi → sekali definisi baru terbaik; bila tetap gagal → skill
+   DITUTUP dengan status `📕 DIPELAJARI: tidak berguna untuk bot ini` (itu juga pengetahuan) dan **otomatis pindah ke skill
+   berikutnya tanpa menunggu pemilik** (pemilik boleh membatalkan lewat chat).
+5. **Tahap 3 LIVE**: lulus tahap 2 → masuk bayangan hari itu juga → setelah ≥ 4 minggu bayangan + replay IDENTIK, usulan pasang
+   dikirim di ringkasan Telegram (pemilik boleh memutuskan lebih cepat setelah membaca bukti). Skill yang sedang di bayangan
+   tidak menghalangi skill berikutnya dimulai.
+6. **Target SNR**: setiap bot sudah LULUS tahap 2 (masuk bayangan) atau DITUTUP paling lambat **Jumat 4 Des 2026**.
+   Langkah berikut per bot (20 Nov):
+   - XAU: tahap 1 putaran 2 = supply-demand (segar, sentuhan pertama, konfluensi) DAN uji arah TEMBUS untuk semua jenis
+     (swing D1/H4, PDH/PDL, PWH/PWL); jenis yang lulus → tahap 2 di sesi yang sama (filter KOMBO/MR/K6, SL di balik level,
+     strategi tembus/pantul mandiri 07:00-21:00).
+   - Crypto swing: tahap 1b sudah menjawab (tembusan tidak memberi info arah) → jangan ulang 1b; langsung tahap 2 di `_wf.py`:
+     (ii) SL di balik SWING-D1/PERIODE vs SL 8 ATR, (iii) prioritas slot sinyal yang baru menembus PWH/PWL, (i) filter
+     entry dekat level lawan.
+   - Intraday: I-35 (filter modul B dekat level PERIODE, P_rasio 0,91 pasca-hoc / 0,68 WF) → status `kandidat`, masuk bayangan;
+     tahap 2 putaran 2 = SWING-D1 dengan saringan semua cara pakai.
+
 ## Skill 1 · SNR (support & resistance) — AKTIF untuk XAU
 Pilihan pemilik (11 Nov): semua jenis diuji; level dari H4 & D1, dipakai untuk keputusan di H1.
 - **Tahap 0 · Pengenal (4 jenis):**

@@ -1,0 +1,45 @@
+name: Rutinitas Harian Riset
+
+# Pemilik, 20 Nov 2026: rutinitas riset (unduh data, replay kesetaraan, penyebab SL, bayangan) dipindah dari sesi Claude ke sini
+# agar sesi riset dipakai penuh untuk menguji ide. Hasil: riset/harian/<bot>.md. Peringatan (replay BEDA / langkah gagal)
+# dikirim ke chat pribadi pemilik. Juga memperbarui bibit Dukascopy XAU di riset/data tiap ada bulan penuh baru.
+on:
+  schedule:
+    - cron: "47 16 * * *"      # tiap hari 23:47 WIB (setelah tutup XAU 23:00)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: riset-harian
+  cancel-in-progress: false
+
+jobs:
+  harian:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pasang pustaka
+        run: pip install -q numpy pandas scipy
+      - name: Jalankan rutinitas (XAU, crypto, intraday)
+        run: python riset/harian.py . /tmp/data xau crypto intraday
+      - name: Kirim peringatan bila ada
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -f riset/harian/PERINGATAN.txt ]; then
+            python -c "import signal_bot as s; s.tg_send(open('riset/harian/PERINGATAN.txt').read()[:3900])"
+          fi
+      - name: Simpan hasil
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add -A riset/harian riset/data/xau_dukascopy_h1.json.gz
+          git diff --cached --quiet || git commit -m "rutinitas harian riset $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done

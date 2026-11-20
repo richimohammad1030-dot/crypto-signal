@@ -1,6 +1,13 @@
 # Prosedur riset · XAU
 
-Instruksi untuk scheduled task **"Riset Bot XAU"** (setiap Jumat 00:18 WIB).
+Instruksi untuk scheduled task **"Riset Bot XAU"** (Senin & Kamis 02:18 WIB).
+
+> **PERCEPATAN (pemilik, 20 Nov 2026) — baca `riset/ATURAN_BERSAMA.md` bagian E; mengalahkan langkah lama di bawah yang bertentangan.**
+> (1) Kesehatan, penyebab SL, live vs bayangan, replay kesetaraan → **baca `riset/harian/xau.md`** (rutinitas harian GitHub
+> Actions); jalankan ulang hanya bila tertulis GAGAL/BEDA atau lebih tua dari 36 jam. (2) Urutan sesi: SKILL program kilat
+> (`riset/KURIKULUM_SKILL.md`) → saringan cepat 10-20 ide → 2-3 teratas ke uji penuh (minimal 1 sumber edge baru) → laporan.
+> (3) Kata "Jumat" di bawah = "sesi riset"; **review bulanan = sesi terakhir bot ini di bulan berjalan** (sesi berikutnya jatuh
+> di bulan baru). (4) Ide berstatus `kandidat` langsung ditambahkan ke MENU `riset/xau/bayangan.py`.
 Tujuan: menemukan perbaikan bot XAU intraday multi-strategi yang terbukti dengan data, lalu **mengusulkannya** ke pemilik.
 Riset tidak pernah mengubah bot live. Perubahan dipasang hanya setelah pemilik setuju di chat.
 Riset crypto & intraday crypto dikerjakan task terpisah. Jangan menyentuh berkas mereka.
@@ -47,7 +54,7 @@ Mesin riset: `riset/xau/eksperimen/audit_mesin.py` (OCO/K6, fitur), `strat_mesin
 Jika unduhan gagal, tetap buat laporan yang menjelaskan kegagalannya.
 
 ## 2. Tentukan mode
-- Jika **Jumat berikutnya sudah masuk bulan baru** (hari ini Jumat terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
+- Jika **sesi berikutnya bot ini sudah masuk bulan baru** (sesi terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan
@@ -104,7 +111,7 @@ Ukuran sukses: rata R/trade, simpangan R tahunan, jumlah tahun minus 2005-2026, 
    ≥ 6 minggu & ≥ 20 trade (tambahkan ke menu `bayangan.py`) sebelum diusulkan. Selain itu **GAGAL** (catat alasannya).
 6. Catat di `riset/xau/log.md` dan perbarui `riset/xau/ide.md` (penomoran lanjut dari nomor tertinggi XAU maupun crypto).
 
-## 4. Review bulanan (hanya Jumat terakhir bulan ini)
+## 4. Review bulanan (hanya sesi terakhir bot ini di bulan berjalan)
 Tambahan selain langkah 3:
 1. Statistik juara terbaru per periode + per strategi (MR vs K6), per kuartal, alasan keluar (SL / TP / tutup 23:00).
 2. Live (`gold_state.json` field `hist`, label strategi di indeks 7; `jurnal/xau-*.json`) vs backtest sejak `LIVE_START` XAU

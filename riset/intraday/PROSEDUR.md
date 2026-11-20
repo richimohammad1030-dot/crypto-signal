@@ -1,6 +1,13 @@
 # Prosedur riset · INTRADAY
 
-Instruksi untuk routine **"Riset Bot Intraday"** (setiap Jumat 01:37 WIB).
+Instruksi untuk routine **"Riset Bot Intraday"** (Rabu & Sabtu 03:37 WIB).
+
+> **PERCEPATAN (pemilik, 20 Nov 2026) — baca `riset/ATURAN_BERSAMA.md` bagian E; mengalahkan langkah lama di bawah yang bertentangan.**
+> (1) Kesehatan, penyebab SL, live vs bayangan, replay kesetaraan → **baca `riset/harian/intraday.md`** (rutinitas harian GitHub
+> Actions); jalankan ulang hanya bila tertulis GAGAL/BEDA atau lebih tua dari 36 jam. (2) Urutan sesi: SKILL program kilat
+> (`riset/KURIKULUM_SKILL.md`) → saringan cepat 10-20 ide → 2-3 teratas ke uji penuh (minimal 1 sumber edge baru) → laporan.
+> (3) Kata "Jumat" di bawah = "sesi riset"; **review bulanan = sesi terakhir bot ini di bulan berjalan** (sesi berikutnya jatuh
+> di bulan baru). (4) Ide berstatus `kandidat` langsung ditambahkan ke MENU `riset/intraday/bayangan.py`.
 Tujuan: menemukan perbaikan strategi intraday yang terbukti dengan data, lalu **mengusulkannya** ke pemilik.
 Routine tidak pernah mengubah juara (`PARAM` di `riset/backtest_intraday.py`) maupun bot live.
 Perubahan dipasang hanya setelah pemilik setuju di chat. Riset crypto (swing) dan XAU dikerjakan routine terpisah.
@@ -143,7 +150,7 @@ Data terkunci / daftar koin sesuai masanya (tahap 3 ATURAN_BERSAMA dan review bu
 jalankan `python3 riset/pit_intraday.py . /tmp/data` untuk juara vs penantang (parameter lewat argumen JSON).
 
 ## 2. Tentukan mode
-- Jika **Jumat berikutnya sudah masuk bulan baru** (hari ini Jumat terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
+- Jika **sesi berikutnya bot ini sudah masuk bulan baru** (sesi terakhir bulan ini) → **REVIEW BULANAN** (langkah 3 + 4).
 - Selain itu → **RISET MINGGUAN** (langkah 3 saja).
 
 ## 3. Riset mingguan: uji 1-2 ide
@@ -170,7 +177,7 @@ jalankan `python3 riset/pit_intraday.py . /tmp/data` untuk juara vs penantang (p
 5. Catat di `riset/intraday/log.md` (tanggal, ide, angka utama, keputusan) dan perbarui status di `riset/intraday/ide.md`.
    Tambahkan ide baru ke `riset/intraday/ide.md` dengan status `antri` (lanjutkan penomoran I-xx).
 
-## 4. Review bulanan (hanya Jumat terakhir bulan ini)
+## 4. Review bulanan (hanya sesi terakhir bot ini di bulan berjalan)
 Tambahan selain langkah 3:
 1. Statistik juara terbaru per tahun, per modul (A, B-long, B-short), per cara keluar (TP/RSI/SL/WAKTU).
 2. Cek kesehatan edge: R/trade 6 bulan terakhir vs rata-rata 2024-sekarang. Jika 6 bulan terakhir negatif,
