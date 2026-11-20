@@ -7,7 +7,7 @@ Bot sinyal FX MAJOR (EURUSD, GBPUSD, USDJPY, AUDUSD, USDCAD, USDCHF, NZDUSD) -> 
   Semua ditutup 23:00 WIB. Risiko 0,75%/posisi.
 Mesin = forex_major/fx_live.py (fungsi backtest yang sama -> live identik dengan riset). Tiap run: unduh H1 Setra 7 pair,
 hitung ulang hari ini dari awal, kirim kejadian yang belum pernah dikirim (kunci di fx_state.json["sent"]).
-Tujuan pesan: FX_TUJUAN=kanal -> channel XAU (state.json gold_channel_id); selain itu chat pribadi pemilik (uji maju).
+Tujuan pesan: FX_TUJUAN=kanal (bawaan workflow sejak 20 Nov 2026) -> channel XAU (state.json gold_channel_id); selain itu chat pribadi.
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
 """
 import datetime as dt, json, os, sys, time, urllib.request

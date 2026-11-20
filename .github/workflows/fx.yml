@@ -3,7 +3,7 @@ name: Sinyal FX Major
 # Bot FX MAJOR (pemilik, 20 Nov 2026): 7 pair, UTAMA 07:00 WIB + SUSULAN 15:00 WIB + LANJUT setelah TP, tutup 23:00 WIB.
 # Jalan tiap jam Senin-Jumat 07:39 s.d. 23:39 WIB. Pemicu tambahan (lebih tepat waktu) boleh dari cron-job.org via
 # workflow_dispatch. Run ganda aman: kejadian yang sudah dikirim dicatat di fx_state.json.
-# Tujuan pesan: variabel repo FX_TUJUAN=kanal -> channel XAU; kosong -> chat pribadi pemilik (uji maju).
+# Tujuan pesan (pemilik, 20 Nov 2026): langsung ke channel XAU. Variabel repo FX_TUJUAN=pribadi -> chat pribadi pemilik.
 on:
   workflow_dispatch: {}
   schedule:
@@ -32,7 +32,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           FX_RISK_PCT: ${{ vars.FX_RISK_PCT }}
-          FX_TUJUAN: ${{ vars.FX_TUJUAN }}
+          FX_TUJUAN: ${{ vars.FX_TUJUAN || 'kanal' }}
         run: python fx_bot.py
       - name: Simpan state
         if: always()

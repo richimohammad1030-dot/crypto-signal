@@ -188,3 +188,11 @@ Aturan: maks 3 posisi intraday terbuka bersamaan, risiko 1% per trade (variabel 
 Ukuran posisi pribadi (jika `MODAL_USDT` diisi) dikirim ke chat pribadi pemilik.
 Uji kesetaraan mesin bot vs backtest: `python riset/replay_intraday.py . <data_dir>` (2020-2026: 4.883 dari 4.886 trade identik;
 selisih 3 trade di celah data Binance 2020-2021).
+
+## Bot FX MAJOR · pemicu cron-job.org (20 Nov 2026)
+- Bot FX (`fx.yml`) jalan **tiap jam** Senin-Jumat. Jadwal GitHub hanya cadangan (menit 39, sering telat); pemicu utama dari
+  cron-job.org di **menit 05** (07:05 s.d. 23:05 WIB), sama caranya dengan job XAU/intraday:
+  URL `https://api.github.com/repos/richimohammad1030-dot/crypto-signal/actions/workflows/fx.yml/dispatches`, metode POST,
+  header `Authorization: Bearer <token GitHub yang sama dengan job XAU>`, `Accept: application/vnd.github+json`,
+  body `{"ref":"main"}`, zona waktu Asia/Jakarta, Senin-Jumat jam 7-23 menit 5. Run ganda aman (tidak ada pesan dobel).
+- Sinyal dikirim ke channel XAU dengan label [FX MAJOR]. Kembali ke chat pribadi: variabel repo `FX_TUJUAN` = `pribadi`.
