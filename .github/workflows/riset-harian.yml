@@ -26,8 +26,8 @@ jobs:
           python-version: "3.12"
       - name: Pasang pustaka
         run: pip install -q numpy pandas scipy
-      - name: Jalankan rutinitas (XAU, crypto, intraday)
-        run: python riset/harian.py . /tmp/data xau crypto intraday
+      - name: Jalankan rutinitas (XAU, crypto, intraday, FX)
+        run: python riset/harian.py . /tmp/data xau crypto intraday fx
       - name: Kirim peringatan bila ada
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

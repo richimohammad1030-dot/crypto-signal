@@ -7,6 +7,7 @@ Per bot (urutan; satu langkah gagal tidak menghentikan langkah lain, kegagalan d
              -> sebab_sl 7 hari -> bayangan
   crypto   : unduh H1 + funding koin bot -> sebab_sl 7 hari -> bayangan
   intraday : unduh 15 menit koin bot -> sebab_sl 7 hari -> bayangan
+  fx       : riset/fx/harian_fx.py (replay IDENTIK, penyebab SL 7 hari + kesehatan, bayangan)
 Keluaran: riset/harian/<bot>.md (terbaru) + riset/harian/arsip/<bot>-YYYY-MM-DD.md (disimpan 21 hari),
           riset/harian/PERINGATAN.txt bila ada replay BEDA / langkah gagal (workflow mengirimnya ke Telegram pribadi pemilik).
 Pemakaian: python riset/harian.py <repo> <data_dir> [xau crypto intraday]"""
@@ -110,9 +111,18 @@ def intraday(C):
     return bag
 
 
+def fx():
+    """Bot FX MAJOR (live 20 Nov 2026): replay kesetaraan + penyebab SL 7 hari + kesehatan + bayangan (riset/fx/harian_fx.py)."""
+    r, ok = jalan("Replay · penyebab SL · kesehatan · bayangan", ["riset/fx/harian_fx.py", ".", "7"], 1800)
+    if not ok: peringatan.append("FX: rutinitas harian gagal")
+    elif "BEDA" in r: peringatan.append("FX: replay TIDAK IDENTIK — cek riset/harian/fx.md")
+    if "PERINGATAN" in r: peringatan.append("FX: drawdown live melebihi backtest")
+    return [r]
+
+
 C = coins() if {"crypto", "intraday"} & set(BOTS) else ""
 for bot in BOTS:
-    bag = {"xau": xau, "crypto": lambda: crypto(C), "intraday": lambda: intraday(C)}[bot]()
+    bag = {"xau": xau, "crypto": lambda: crypto(C), "intraday": lambda: intraday(C), "fx": fx}[bot]()
     teks = (f"# Rutinitas harian {bot.upper()} · {now.strftime('%a %d %b %Y %H:%M')} WIB\n"
             f"Dibuat otomatis oleh riset/harian.py (GitHub Actions). Sesi riset: baca ini, JANGAN ulangi langkahnya kecuali ada GAGAL.\n\n"
             + "\n".join(bag))

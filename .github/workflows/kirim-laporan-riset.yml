@@ -6,8 +6,8 @@ name: Kirim Laporan Riset
 # Kode bot dan folder riset bot lain tidak pernah ikut tersalin.
 on:
   push:
-    branches: ["claude/riset-crypto-**", "claude/riset-xau-**", "claude/riset-intraday-**"]
-    paths: ["riset/laporan/crypto/**", "riset/laporan/xau/**", "riset/laporan/intraday/**"]
+    branches: ["claude/riset-crypto-**", "claude/riset-xau-**", "claude/riset-intraday-**", "claude/riset-fx-**"]
+    paths: ["riset/laporan/crypto/**", "riset/laporan/xau/**", "riset/laporan/intraday/**", "riset/laporan/fx/**"]
 
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          BOT=$(echo "${GITHUB_REF#refs/heads/}" | sed -E 's#^claude/riset-(crypto|xau|intraday)-.*#\1#')
+          BOT=$(echo "${GITHUB_REF#refs/heads/}" | sed -E 's#^claude/riset-(crypto|xau|intraday|fx)-.*#\1#')
           F=$(git diff --name-only origin/main...HEAD -- "riset/laporan/$BOT/*.txt" | sort | tail -1)
           if [ -z "$F" ]; then echo "Tidak ada ringkasan baru"; exit 0; fi
           python -c "
@@ -47,8 +47,8 @@ jobs:
           git config user.email "signal-bot@users.noreply.github.com"
           git checkout -q main
           git pull -q --rebase origin main
-          BOT=$(echo "$BR" | sed -E 's#^claude/riset-(crypto|xau|intraday)-.*#\1#')
-          case "$BOT" in crypto|xau|intraday) ;; *) echo "Branch tidak dikenal: $BR"; exit 1;; esac
+          BOT=$(echo "$BR" | sed -E 's#^claude/riset-(crypto|xau|intraday|fx)-.*#\1#')
+          case "$BOT" in crypto|xau|intraday|fx) ;; *) echo "Branch tidak dikenal: $BR"; exit 1;; esac
           git checkout "origin/$BR" -- "riset/$BOT" 2>/dev/null || true
           git checkout "origin/$BR" -- "riset/laporan/$BOT" 2>/dev/null || true
           git add "riset/$BOT" "riset/laporan/$BOT" 2>/dev/null || true
