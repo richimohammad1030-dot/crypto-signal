@@ -50,7 +50,7 @@ def year(pair, y):
     p = f"{OUT}/{pair}_h1_{y}.json.gz"
     if os.path.exists(p) and y < NOW.year: return f"{pair} {y}: sudah ada"
     ms = [m for m in range(1, 13) if (y, m) <= (NOW.year, NOW.month)]
-    with ThreadPoolExecutor(3) as ex: res = list(ex.map(lambda m: month(pair, y, m), ms))
+    with ThreadPoolExecutor(12) as ex: res = list(ex.map(lambda m: month(pair, y, m), ms))
     gagal = sum(r is None for r in res); rows = [b for r in res if r for b in r]
     if not rows: return f"{pair} {y}: KOSONG"
     nd = 3 if pair.endswith("JPY") else 5
