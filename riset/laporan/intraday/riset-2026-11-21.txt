@@ -1,0 +1,37 @@
+<b>RISET INTRADAY</b>
+Sabtu 21 Nov 2026 · riset biasa
+────────────────────
+<b>Kesehatan &amp; SL (harian 20 Nov)</b>
+────────────────────
+<pre>7 hari: 4 trade -0,37R, 1 SL
+ETH B-short 15 Nov = LONJAKAN
+CELAH berulang: normal (33/32%)
+Beda HYPE/ASTER: batas replay</pre>
+<b>Live vs bayangan</b>
+────────────────────
+<pre>W47 live -0,63 | replay -1,27
+Baru di bayangan: I-35, I-36</pre>
+<b>Skill SNR tahap 2 (sesi 2/3)</b>
+────────────────────
+<pre>I-36 SWING-D1 filter order B
+WF 2022-26 R +137,7 vs +128,4
+R/tr +0,080 vs +0,073
+DD 15,9 vs 15,8 | 4/5 thn lebih
+P_rasio 0,825 (&lt; 0,90)
+-&gt; KANDIDAT, masuk bayangan
+Tembus mandiri: GAGAL total</pre>
+Belum lulus. Sesi 3/3 Rabu: definisi terakhir (B-long saja / fade); bila gagal, SNR ditutup dan pindah ke skill struktur pasar.
+<b>Riset (saringan 10 varian)</b>
+────────────────────
+<pre>Edge baru I-37 TEMBUS (stop di
+high/low hari/minggu/swing):
+-0,35..-0,51R/trade tiap tahun
+-&gt; GAGAL (WF pilih off)
+I-04 rem 2 SL/hari: disaring
+I-06 B-short tanpa funding:
+  disaring
+Ide baru: I-38 fade tembusan,
+  I-39 filter level B-long saja</pre>
+<b>Usulan</b>
+────────────────────
+Tidak ada usulan pasang. Kandidat I-35 &amp; I-36 dipantau otomatis di data baru (min 6 minggu). Juara v3 tidak diubah. Review bulanan: Sabtu 28 Nov.

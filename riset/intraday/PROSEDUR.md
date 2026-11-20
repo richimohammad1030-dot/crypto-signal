@@ -77,6 +77,11 @@ Langkah berikutnya: Tahap 2 BISA MEMAKAI (filter order limit B/A di dekat level
 PERIODE, SL di balik level, strategi tembus mandiri) dengan walk-forward. Skrip: `eksperimen/skill_snr_2026-11-11.py`.
 **20 Nov 2026 tahap 2 (filter order, I-30): belum lulus** (walk-forward P_rasio 0,68; filter di modul B membantu, di A merusak,
 SL di balik level merusak). Filter B dipantau sebagai I-35 di data baru saja. Berikutnya: SWING-D1 atau tunggu data baru.
+**21 Nov 2026 tahap 2 putaran 2 (sesi 2/3): belum lulus.** SWING-D1 filter B (I-36) walk-forward P_rasio 0,825 (4/5 tahun lebih
+baik) → `kandidat`, masuk bayangan (I36). Strategi TEMBUS mandiri (I-37: stop di PDH/PDL, PWH/PWL, SWING-D1) gagal total (-0,35R/trade):
+lift tembus relatif ≠ edge absolut. I-35 masuk bayangan (I35a/I35b). **Sesi 3/3 (Rabu 25 Nov):** satu definisi baru terbaik =
+filter gabungan PERIODE ∪ SWING-D1 untuk B-long saja (I-39) dan/atau fade tembusan (I-38); bila tetap < 0,90 → SNR intraday
+DITUTUP sebagai skill aktif (kandidat I-35/I-36 tetap dipantau di bayangan) dan pindah ke skill 2 (struktur pasar).
 
 ## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"
 **UPDATE 11 Nov 2026:** vonis data 2018-2019 (belum pernah dilihat) → 2019 minus → arah sekarang NAIKKAN EDGE PER TRADE (lihat

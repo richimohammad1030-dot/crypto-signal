@@ -272,3 +272,24 @@ Data diunduh ulang s.d. 20 Nov 2026 ±01:45 WIB (50 koin + 177 koin PIT; H1 + fu
   Aharon & Qadan (2019) FRL 31:415-424.
 - **Skill SNR tahap 2**: belum lulus. Status perlu dicatat juga di `riset/KURIKULUM_SKILL.md` (di luar riset/intraday; salin manual).
 - Data konfirmasi 2018-Feb 2020 tidak dipakai. Total ide bernomor diuji: 22. Juara v3 & bot tidak diubah. Jumat depan = review bulanan.
+
+## 2026-11-21 · riset (PERCEPATAN E, sesi Sabtu)
+Data diunduh ulang s.d. 21 Nov 2026 ±04:15 WIB (50 koin bot + koin PIT, 226 koin dimuat; tanpa kegagalan). Laporan:
+`riset/laporan/intraday/riset-2026-11-21.md`; keluaran mentah `eksperimen/hasil_2026-11-21.log`. Mode: riset biasa (sesi berikutnya
+Rabu 25 Nov masih November; review bulanan = Sabtu 28 Nov).
+- **Rutinitas** dibaca dari `riset/harian/intraday.md` (20 Nov, semua OK, < 36 jam): 7 hari 4 trade -0,37R, 1 SL LONJAKAN (ETH 15 Nov,
+  pasar); CELAH berulang B-short/searah/ATR tinggi 33% vs historis 32% = normal; kesetaraan beda HYPE/ASTER = keterbatasan replay.
+- **Juara v3 PIT**: 2.978 trade, +0,0870R/trade, DD 15,8R; per tahun +38/+93/+36/+25/+25/+9/+33 (sama dengan 20 Nov).
+- **bayangan.py**: ditambah kandidat I-35 (I35a dekat0.25-B, I35b dekat0.5-B; sejak 20 Nov) dan I-36 (I36 SWING-D1 dekat0.5-B; sejak
+  21 Nov), replay penuh daftar bot. Cek: tanpa filter = replay juara identik (2.702 trade, +258,05R).
+- **Saringan ≤2021 (10 varian, `eksperimen/saringan_2026-11-21.py`)**, rasio R/DD sistem (juara 5,00): SW-dekat0.5-B 6,38 ·
+  SW-dekat0.25-B 5,81 · SW-lewat-B 4,51 · I-06 3,87 · I-04 3,86 · T-minggu-1.5 0,36 · T-minggu-1.0 0,12 · T-hari-1.0/1.5 & T-swing -0,52.
+  Ke uji penuh: SNR-SWING + TEMBUS (sumber edge baru wajib).
+- **I-36** (skill SNR tahap 2 putaran 2, SWING-D1 filter B): walk-forward dekat0.25-B → dekat0.25-B → dekat0.5-B; uji 2022-26 R +137,7
+  vs +128,4, R/tr +0,080 vs +0,073, DD 15,9 vs 15,8, per tahun +34,8/+27,1/+29,4/+11,7/+34,8 vs +35,6/+24,9/+25,3/+9,4/+33,2;
+  P_R 0,79 · P_rasio 0,825 → **kandidat** (bayangan). Pasca-hoc tetap dekat0.5-B P_rasio 0,92 (tidak dipakai untuk keputusan).
+- **I-37** (SUMBER EDGE BARU, modul TEMBUS stop OCO di level PERIODE/SWING-D1, slot sendiri): walk-forward memilih off di ketiga
+  jendela; modul sendiri -0,35..-0,51R/trade tiap tahun 2020-26 → **GAGAL**. Pelajaran: lift tembus relatif ≠ edge absolut.
+- **I-04** (rem harian 2 SL) & **I-06** (B-short tanpa funding) → **disaring** (lebih buruk dari juara di periode pilih).
+- Ide baru antri: I-38 (fade tembusan, cermin I-37), I-39 (filter level hanya B-long).
+- Total ide bernomor diuji: 26 (+ 10 varian saringan hari ini). Juara v3 & bot tidak diubah.
