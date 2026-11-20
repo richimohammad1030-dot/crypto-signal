@@ -1,34 +1,34 @@
-# Rutinitas harian CRYPTO · Fri 20 Nov 2026 09:04 WIB
+# Rutinitas harian CRYPTO · Fri 20 Nov 2026 09:34 WIB
 Dibuat otomatis oleh riset/harian.py (GitHub Actions). Sesi riset: baca ini, JANGAN ulangi langkahnya kecuali ada GAGAL.
 
-### Unduh H1 + funding OK (2.6 mnt)
+### Unduh H1 + funding OK (1.1 mnt)
 ```
-BTC     candle  62536 (mulai 2019-10) · funding  7488
 ETH     candle  62536 (mulai 2019-10) · funding  7488
+BTC     candle  62536 (mulai 2019-10) · funding  7488
 BNB     candle  62536 (mulai 2019-10) · funding  7367
 XRP     candle  62536 (mulai 2019-10) · funding  7472
 SOL     candle  54986 (mulai 2020-08) · funding  6793
 TRX     candle  62536 (mulai 2019-10) · funding  7445
 HYPE    candle   1360 (mulai 2026-09) · funding  3116
-ZEC     candle  62536 (mulai 2019-10) · funding  7385
 DOGE    candle  62536 (mulai 2019-10) · funding  6914
+ZEC     candle  62536 (mulai 2019-10) · funding  7385
 LINK    candle  62536 (mulai 2019-10) · funding  7439
 ADA     candle  62536 (mulai 2019-10) · funding  7432
 NEAR    candle  53451 (mulai 2020-10) · funding  6625
 XLM     candle  62536 (mulai 2019-10) · funding  7432
-BCH     candle  61138 (mulai 2019-11) · funding  7488
 LTC     candle  62536 (mulai 2019-10) · funding  7463
+BCH     candle  61138 (mulai 2019-11) · funding  7488
 UNI     candle  54101 (mulai 2020-09) · funding  6707
 AVAX    candle  53978 (mulai 2020-09) · funding  6691
 SUI     candle  31119 (mulai 2023-05) · funding  3832
 GRAM    candle   3379 (mulai 2026-07) · funding   730
-HBAR    candle  62536 (mulai 2019-10) · funding  6164
 TAO     candle  22863 (mulai 2024-04) · funding  5599
+HBAR    candle  62536 (mulai 2019-10) · funding  6164
 SHIB    candle  48465 (mulai 2021-05) · funding  6001
 ENA     candle  23083 (mulai 2024-04) · funding  5653
 AAVE    candle  53429 (mulai 2020-10) · funding  6620
-QNT     candle  46550 (mulai 2021-07) · funding  4418
 ONDO    candle  14101 (mulai 2025-04) · funding  6091
+QNT     candle  46550 (mulai 2021-07) · funding  4418
 PUMP    candle  10431 (mulai 2025-09) · funding  3278
 ASTER   candle   9831 (mulai 2025-10) · funding  2444
 DOT     candle  54801 (mulai 2020-08) · funding  6791
@@ -45,8 +45,8 @@ ALGO    candle  62536 (mulai 2019-10) · funding  7032
 POL     candle  19145 (mulai 2024-09) · funding  4669
 JUP     candle  24563 (mulai 2024-01) · funding  6022
 RENDER  candle  20323 (mulai 2024-07) · funding  4964
-ATOM    candle  62536 (mulai 2019-10) · funding  7378
 FIL     candle  53415 (mulai 2020-10) · funding  6620
+ATOM    candle  62536 (mulai 2019-10) · funding  7378
 INJ     candle  53284 (mulai 2020-10) · funding  4612
 AERO    candle   3011 (mulai 2026-07) · funding  4177
 ZRO     candle  21182 (mulai 2024-06) · funding  5179
@@ -55,7 +55,7 @@ NIGHT   candle   6084 (mulai 2026-03) · funding  1952
 APT     candle  35833 (mulai 2022-10) · funding  4423
 ```
 
-### Penyebab SL 7 hari + kesehatan OK (4.6 mnt)
+### Penyebab SL 7 hari + kesehatan OK (4.0 mnt)
 ```
 KESEHATAN sejak Sat 24 Oct 00:00: live 28 trade +1.29R kotor · replay 29 trade +2.14R kotor (+1.68R bersih) · live tanpa pasangan/beda R: 5
   - ZRO SELL tutup Thu 29 Oct 19:00 R live -0.18 → tidak ada di replay
@@ -80,7 +80,7 @@ Kelompok 28 hari (arah, label, BTC): SL/trade live vs historis · P binomial (�
 Tindakan: NEWS = aman; LONJAKAN = catat; DATA & CELAH = analisa di laporan; CELAH berulang → ide baru di ide.md.
 ```
 
-### Bayangan OK (5.0 mnt)
+### Bayangan OK (4.3 mnt)
 ```
 Sejak 24 Oct 2026 (data s.d. 18 Nov 2026), R per 1R risiko:
   BASELINE (v2 live)   trade  29 · win  41% · kotor  +2.14R · bersih  +1.68R

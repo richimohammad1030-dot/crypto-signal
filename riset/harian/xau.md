@@ -1,14 +1,14 @@
-# Rutinitas harian XAU · Fri 20 Nov 2026 09:32 WIB
+# Rutinitas harian XAU · Fri 20 Nov 2026 09:34 WIB
 Dibuat otomatis oleh riset/harian.py (GitHub Actions). Sesi riset: baca ini, JANGAN ulangi langkahnya kecuali ada GAGAL.
 
-### Unduh Setra OK (0.0 mnt)
+### Unduh Setra OK (0.2 mnt)
 ```
-XAU candle: 11471 mulai 2024-12-11 s.d. 2026-11-20 01:00
-```
-
-### Unduh Dukascopy OK (uji pertama 20 Nov: diunduh 09:05 WIB, 14,1 mnt; xau_panjang s.d. 19 Nov)
+XAU candle: 11470 mulai 2024-12-11 s.d. 2026-11-20 01:00
 ```
 
+### Unduh Dukascopy OK (17.1 mnt)
+```
+XAU Dukascopy candle: 70296 mulai 2015-01-01 s.d. 2026-11-19 23:00
 ```
 
 ### Gabung 2004-skrg OK (0.0 mnt)
@@ -28,7 +28,7 @@ KESIMPULAN: mesin bot = riset baseline
 Trade 7 hari terakhir: 4 · SL: 0 · total +7.08R
 ```
 
-### Bayangan (live vs menu) OK (0.1 mnt)
+### Bayangan (live vs menu) OK (0.0 mnt)
 ```
 Sejak 02 Nov 2026 (biaya 0,40 USD/trade):
   BASELINE (live)    trade  13 · win   38% · total  +3.16R
