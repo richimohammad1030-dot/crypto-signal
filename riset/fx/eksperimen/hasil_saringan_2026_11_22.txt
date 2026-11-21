@@ -1,0 +1,39 @@
+data 1s | periode 2015-01-01 .. 2022-12-31
+JUARA 3 bot : n 1362 | +0.126R/tr | PF 1.33 | +171.7R | DD  36.1 | WR 43% | 3.26/mgg | th- 1/8 terburuk -1.0 {2015: np.float64(22.5), 2016: np.float64(30.6), 2017: np.float64(29.4), 2018: np.float64(-1.0), 2019: np.float64(2.8), 2020: np.float64(25.6), 2021: np.float64(11.5), 2022: np.float64(50.3)}
+  UTAMA     : n  369 | +0.069R/tr | PF 1.20 |  +25.4R | DD  12.1 | WR 21% | 0.88/mgg | th- 3/8 terburuk -2.1
+  SUSULAN   : n  922 | +0.141R/tr | PF 1.34 | +130.2R | DD  35.7 | WR 49% | 2.21/mgg | th- 1/8 terburuk -2.4
+  LANJUT    : n   71 | +0.226R/tr | PF 1.92 |  +16.1R | DD   3.6 | WR 72% | 0.17/mgg | th- 2/8 terburuk -1.1
+
+| ide | arus sendiri | GABUNG juara+ide |
+1 BALAS struktur (balik, SL ekstrem hari, TP 1R)
+   sendiri: n  140 | -0.129R/tr | PF 0.74 |  -18.0R | DD  21.9 | WR 46% | 0.34/mgg | th- 7/8 terburuk -5.9
+   gabung : n 1502 | +0.102R/tr | PF 1.26 | +153.7R | DD  39.0 | WR 43% | 3.60/mgg | th- 1/8 terburuk -2.8  (R/DD 3.94 vs juara 4.75)
+2 BALAS palsu (SL<=2j & MFE<0,3R, balik 0,3/0,45)
+   sendiri: n   71 | -0.182R/tr | PF 0.70 |  -12.9R | DD  13.3 | WR 39% | 0.17/mgg | th- 5/8 terburuk -5.5
+   gabung : n 1433 | +0.111R/tr | PF 1.28 | +158.8R | DD  32.6 | WR 43% | 3.43/mgg | th- 0/8 terburuk +1.2  (R/DD 4.87 vs juara 4.75)
+3 BALAS tembus ulang ekstrem (searah, 0,3/0,6)
+   sendiri: n   81 | +0.246R/tr | PF 1.57 |  +20.0R | DD   7.0 | WR 52% | 0.19/mgg | th- 2/8 terburuk -5.2
+   gabung : n 1443 | +0.133R/tr | PF 1.34 | +191.7R | DD  38.3 | WR 43% | 3.46/mgg | th- 1/8 terburuk -6.2  (R/DD 5.01 vs juara 4.75)
+4 Level bulan lalu (pair-hari kosong) [ide 7]
+   sendiri: n  361 | -0.045R/tr | PF 0.89 |  -16.3R | DD  24.0 | WR 25% | 0.86/mgg | th- 5/8 terburuk -10.2
+   gabung : n 1723 | +0.090R/tr | PF 1.23 | +155.4R | DD  50.0 | WR 39% | 4.13/mgg | th- 2/8 terburuk -11.2  (R/DD 3.11 vs juara 4.75)
+5 Range minggu berjalan Rabu-Jumat (pair-hari kosong)
+   sendiri: n  813 | -0.071R/tr | PF 0.82 |  -58.0R | DD  67.4 | WR 25% | 1.95/mgg | th- 6/8 terburuk -21.6
+   gabung : n 2175 | +0.052R/tr | PF 1.13 | +113.7R | DD  51.4 | WR 36% | 5.21/mgg | th- 2/8 terburuk -11.2  (R/DD 2.21 vs juara 4.75)
+6 Pasang ulang setelah BE (stop di entry)
+   sendiri: n  151 | +0.006R/tr | PF 1.02 |   +0.9R | DD  12.9 | WR 31% | 0.36/mgg | th- 5/8 terburuk -5.8
+   gabung : n 1513 | +0.114R/tr | PF 1.30 | +172.6R | DD  34.5 | WR 42% | 3.62/mgg | th- 1/8 terburuk -3.5  (R/DD 5.00 vs juara 4.75)
+7 UTAMA maks 3 posisi/hari
+   sendiri: n 1366 | +0.125R/tr | PF 1.32 | +170.2R | DD  35.5 | WR 43% | 3.27/mgg | th- 1/8 terburuk -1.0
+   gabung : n 1366 | +0.125R/tr | PF 1.32 | +170.2R | DD  35.5 | WR 43% | 3.27/mgg | th- 1/8 terburuk -1.0  (R/DD 4.79 vs juara 4.75)
+9 Akhir bulan fade USD MTD (London fix) [lit]
+   sendiri: n  589 | -0.029R/tr | PF 0.92 |  -17.1R | DD  44.1 | WR 48% | 1.41/mgg | th- 5/8 terburuk -17.7
+   gabung : n 1951 | +0.079R/tr | PF 1.21 | +154.6R | DD  49.1 | WR 44% | 4.67/mgg | th- 2/8 terburuk -18.6  (R/DD 3.15 vs juara 4.75)
+10 Momentum keranjang USD 20 hari, 2 pair terkuat [lit]
+   sendiri: n  804 | +0.005R/tr | PF 1.01 |   +3.8R | DD  40.7 | WR 44% | 1.93/mgg | th- 4/8 terburuk -18.0
+   gabung : n 2166 | +0.081R/tr | PF 1.20 | +175.6R | DD  50.7 | WR 43% | 5.19/mgg | th- 2/8 terburuk -12.1  (R/DD 3.46 vs juara 4.75)
+8 Risiko per rezim vol ATR14/ATR100 [ide 11]
+   sendiri: n 1362 | +0.117R/tr | PF 1.32 | +159.0R | DD  38.6 | WR 43% | 3.26/mgg | th- 1/8 terburuk -5.2
+   gabung : n 1362 | +0.117R/tr | PF 1.32 | +159.0R | DD  38.6 | WR 43% | 3.26/mgg | th- 1/8 terburuk -5.2  (R/DD 4.11 vs juara 4.75)
+
+selesai 3s

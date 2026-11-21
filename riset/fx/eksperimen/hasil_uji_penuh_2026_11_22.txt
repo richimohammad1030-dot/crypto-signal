@@ -1,0 +1,123 @@
+
+## Uji penuh ide 13 BALAS tembus ulang ekstrem (searah 0,3/0,6)
+
+### IS Dukascopy (2015-05 .. 2022-12)
+juara    : n 1362 | +0.126R/tr | PF 1.33 | +171.7R | DD  36.1 | WR 43% | 3.40/mgg | th- 1/8 terburuk -1.0
+BALAS    : n   81 | +0.246R/tr | PF 1.57 |  +20.0R | DD   7.0 | WR 52% | 0.20/mgg | th- 2/8 terburuk -5.2
+gabung   : n 1443 | +0.133R/tr | PF 1.34 | +191.7R | DD  38.3 | WR 43% | 3.61/mgg | th- 1/8 terburuk -6.2
+
+### OOS Dukascopy (2023-01 .. 2026-11)
+juara    : n  732 | +0.074R/tr | PF 1.17 |  +54.3R | DD  32.7 | WR 40% | 3.61/mgg | th- 1/4 terburuk -7.7
+BALAS    : n   41 | -0.070R/tr | PF 0.85 |   -2.9R | DD   9.4 | WR 41% | 0.20/mgg | th- 2/4 terburuk -5.8
+gabung   : n  773 | +0.066R/tr | PF 1.15 |  +51.4R | DD  32.5 | WR 40% | 3.81/mgg | th- 1/4 terburuk -5.4
+
+### Seluruh Dukascopy (2015-05 .. 2026-11)
+juara    : n 2094 | +0.108R/tr | PF 1.27 | +226.0R | DD  36.1 | WR 42% | 3.47/mgg | th- 2/12 terburuk -7.7
+BALAS    : n  122 | +0.140R/tr | PF 1.31 |  +17.1R | DD   9.4 | WR 48% | 0.20/mgg | th- 4/12 terburuk -5.8
+gabung   : n 2216 | +0.110R/tr | PF 1.27 | +243.0R | DD  38.3 | WR 42% | 3.68/mgg | th- 2/12 terburuk -6.2
+Per tahun (R) juara | ide | gabung: 2015 +22.5|+4.4|+26.9 · 2016 +30.6|+1.9|+32.5 · 2017 +29.4|+4.0|+33.3 · 2018 -1.0|-5.2|-6.2 · 2019 +2.8|+7.9|+10.8 · 2020 +25.6|+3.4|+29.0 · 2021 +11.5|+4.3|+15.8 · 2022 +50.3|-0.8|+49.5 · 2023 -7.7|+2.3|-5.4 · 2024 +8.8|+3.1|+11.9 · 2025 +20.7|-5.8|+14.9 · 2026 +32.4|-2.5|+29.9
+Korelasi R harian ide vs juara: +0.03
+Per pair: {'EURUSD': -1.6, 'GBPUSD': 6.1, 'USDJPY': 3.8, 'AUDUSD': 0.2, 'USDCAD': 6.0, 'USDCHF': 0.1, 'NZDUSD': 2.4}
+Signifikansi IS: P_rasio 0.719 · P_R 0.971 · R/thn 22.38 -> 24.98 · rasio 4.75 -> 5.03 · selisih R/thn 90% [0.32, 4.91]
+Signifikansi OOS 2023-26: P_rasio 0.274 · P_R 0.358 · R/thn 13.96 -> 13.23 · rasio 1.72 -> 1.6 · selisih R/thn 90% [-3.94, 2.58]
+Signifikansi Seluruh: P_rasio 0.581 · P_R 0.898 · R/thn 19.55 -> 21.03 · rasio 6.25 -> 6.38 · selisih R/thn 90% [-0.44, 3.4]
+
+### Setra (sekali) (2025-05 .. 2026-11)
+juara    : n  241 | +0.153R/tr | PF 1.37 |  +36.9R | DD  11.5 | WR 43% | 3.08/mgg | th- 0/2 terburuk +8.7
+BALAS    : n   16 | -0.548R/tr | PF 0.20 |   -8.8R | DD   8.8 | WR 19% | 0.20/mgg | th- 2/2 terburuk -4.8
+gabung   : n  257 | +0.109R/tr | PF 1.25 |  +28.1R | DD  12.8 | WR 42% | 3.29/mgg | th- 0/2 terburuk +4.8
+
+### H1 4 pair (2020-06 .. 2026-11)
+juara    : n  689 | +0.119R/tr | PF 1.30 |  +81.9R | DD  18.4 | WR 42% | 2.04/mgg | th- 1/7 terburuk -7.3
+BALAS    : n   46 | +0.016R/tr | PF 1.03 |   +0.7R | DD   6.7 | WR 43% | 0.14/mgg | th- 3/7 terburuk -5.2
+gabung   : n  735 | +0.112R/tr | PF 1.28 |  +82.6R | DD  22.5 | WR 42% | 2.18/mgg | th- 1/7 terburuk -12.5
+
+### M5 4 pair (2020-06 .. 2026-11)
+juara    : n  706 | +0.115R/tr | PF 1.30 |  +81.1R | DD  21.8 | WR 42% | 2.09/mgg | th- 1/7 terburuk -2.5
+BALAS    : n   51 | -0.171R/tr | PF 0.70 |   -8.7R | DD  13.8 | WR 35% | 0.15/mgg | th- 4/7 terburuk -7.3
+gabung   : n  757 | +0.096R/tr | PF 1.24 |  +72.4R | DD  28.9 | WR 41% | 2.24/mgg | th- 1/7 terburuk -9.8
+Kepekaan (IS | OOS PF):
+  SL 0.2 TP 0.4 buf 0: IS PF 1.68 +0.327R n 81 | OOS PF 0.94 -0.031R n 41
+  SL 0.3 TP 0.45 buf 0: IS PF 1.43 +0.179R n 81 | OOS PF 0.85 -0.068R n 41
+  SL 0.3 TP 0.9 buf 0: IS PF 1.58 +0.253R n 81 | OOS PF 0.76 -0.116R n 41
+  SL 0.4 TP 0.6 buf 0: IS PF 1.53 +0.178R n 81 | OOS PF 0.76 -0.095R n 41
+  SL 0.4 TP 0.8 buf 0: IS PF 1.58 +0.195R n 81 | OOS PF 0.63 -0.148R n 41
+  SL 0.3 TP 0.6 buf 0.05: IS PF 1.49 +0.213R n 75 | OOS PF 0.82 -0.082R n 36
+
+## Uji penuh ide 14 Pasang ulang setelah BE (stop di entry)
+
+### IS Dukascopy (2015-05 .. 2022-12)
+juara    : n 1362 | +0.126R/tr | PF 1.33 | +171.7R | DD  36.1 | WR 43% | 3.40/mgg | th- 1/8 terburuk -1.0
+BALAS    : n  151 | +0.006R/tr | PF 1.02 |   +0.9R | DD  12.9 | WR 31% | 0.38/mgg | th- 5/8 terburuk -5.8
+gabung   : n 1513 | +0.114R/tr | PF 1.30 | +172.6R | DD  34.5 | WR 42% | 3.78/mgg | th- 1/8 terburuk -3.5
+
+### OOS Dukascopy (2023-01 .. 2026-11)
+juara    : n  732 | +0.074R/tr | PF 1.17 |  +54.3R | DD  32.7 | WR 40% | 3.61/mgg | th- 1/4 terburuk -7.7
+BALAS    : n   81 | +0.229R/tr | PF 1.68 |  +18.6R | DD   4.2 | WR 38% | 0.40/mgg | th- 2/4 terburuk -1.5
+gabung   : n  813 | +0.090R/tr | PF 1.21 |  +72.8R | DD  33.0 | WR 40% | 4.01/mgg | th- 1/4 terburuk -9.2
+
+### Seluruh Dukascopy (2015-05 .. 2026-11)
+juara    : n 2094 | +0.108R/tr | PF 1.27 | +226.0R | DD  36.1 | WR 42% | 3.47/mgg | th- 2/12 terburuk -7.7
+BALAS    : n  232 | +0.084R/tr | PF 1.22 |  +19.5R | DD  12.9 | WR 34% | 0.38/mgg | th- 7/12 terburuk -5.8
+gabung   : n 2326 | +0.106R/tr | PF 1.26 | +245.5R | DD  34.5 | WR 41% | 3.86/mgg | th- 2/12 terburuk -9.2
+Per tahun (R) juara | ide | gabung: 2015 +22.5|-2.3|+20.2 · 2016 +30.6|-0.8|+29.8 · 2017 +29.4|+7.1|+36.5 · 2018 -1.0|-2.5|-3.5 · 2019 +2.8|+1.6|+4.5 · 2020 +25.6|-0.7|+24.9 · 2021 +11.5|-5.8|+5.8 · 2022 +50.3|+4.3|+54.6 · 2023 -7.7|-1.5|-9.2 · 2024 +8.8|+16.1|+24.9 · 2025 +20.7|+5.2|+25.9 · 2026 +32.4|-1.2|+31.2
+Korelasi R harian ide vs juara: +0.02
+Per pair: {'EURUSD': -3.4, 'GBPUSD': -0.2, 'USDJPY': 1.4, 'AUDUSD': 17.8, 'USDCAD': -5.8, 'USDCHF': 0.3, 'NZDUSD': 9.5}
+Signifikansi IS: P_rasio 0.324 · P_R 0.522 · R/thn 22.38 -> 22.5 · rasio 4.75 -> 5.16 · selisih R/thn 90% [-2.71, 3.19]
+Signifikansi OOS 2023-26: P_rasio 0.944 · P_R 0.972 · R/thn 13.96 -> 18.75 · rasio 1.72 -> 2.28 · selisih R/thn 90% [0.63, 9.18]
+Signifikansi Seluruh: P_rasio 0.646 · P_R 0.870 · R/thn 19.55 -> 21.24 · rasio 6.25 -> 7.34 · selisih R/thn 90% [-0.68, 4.17]
+
+### Setra (sekali) (2025-05 .. 2026-11)
+juara    : n  241 | +0.153R/tr | PF 1.37 |  +36.9R | DD  11.5 | WR 43% | 3.08/mgg | th- 0/2 terburuk +8.7
+BALAS    : n   27 | +0.057R/tr | PF 1.17 |   +1.5R | DD   4.5 | WR 33% | 0.35/mgg | th- 1/2 terburuk -2.3
+gabung   : n  268 | +0.143R/tr | PF 1.35 |  +38.4R | DD  12.7 | WR 42% | 3.43/mgg | th- 0/2 terburuk +12.6
+
+### H1 4 pair (2020-06 .. 2026-11)
+juara    : n  689 | +0.119R/tr | PF 1.30 |  +81.9R | DD  18.4 | WR 42% | 2.04/mgg | th- 1/7 terburuk -7.3
+BALAS    : n   81 | +0.034R/tr | PF 1.08 |   +2.7R | DD   8.6 | WR 33% | 0.24/mgg | th- 4/7 terburuk -5.5
+gabung   : n  770 | +0.110R/tr | PF 1.28 |  +84.7R | DD  19.1 | WR 41% | 2.28/mgg | th- 2/7 terburuk -4.6
+
+### M5 4 pair (2020-06 .. 2026-11)
+juara    : n  706 | +0.115R/tr | PF 1.30 |  +81.1R | DD  21.8 | WR 42% | 2.09/mgg | th- 1/7 terburuk -2.5
+BALAS    : n   88 | -0.030R/tr | PF 0.93 |   -2.6R | DD  11.1 | WR 28% | 0.26/mgg | th- 4/7 terburuk -6.6
+gabung   : n  794 | +0.099R/tr | PF 1.26 |  +78.5R | DD  20.2 | WR 40% | 2.35/mgg | th- 3/7 terburuk -3.6
+
+## Uji penuh ide 15 BALAS breakout palsu (balik 0,3/0,45)
+
+### IS Dukascopy (2015-05 .. 2022-12)
+juara    : n 1362 | +0.126R/tr | PF 1.33 | +171.7R | DD  36.1 | WR 43% | 3.40/mgg | th- 1/8 terburuk -1.0
+BALAS    : n   71 | -0.182R/tr | PF 0.70 |  -12.9R | DD  13.3 | WR 39% | 0.18/mgg | th- 5/8 terburuk -5.5
+gabung   : n 1433 | +0.111R/tr | PF 1.28 | +158.8R | DD  32.6 | WR 43% | 3.58/mgg | th- 0/8 terburuk +1.2
+
+### OOS Dukascopy (2023-01 .. 2026-11)
+juara    : n  732 | +0.074R/tr | PF 1.17 |  +54.3R | DD  32.7 | WR 40% | 3.61/mgg | th- 1/4 terburuk -7.7
+BALAS    : n   37 | -0.074R/tr | PF 0.87 |   -2.7R | DD   9.5 | WR 43% | 0.18/mgg | th- 1/4 terburuk -8.0
+gabung   : n  769 | +0.067R/tr | PF 1.15 |  +51.5R | DD  31.5 | WR 40% | 3.79/mgg | th- 1/4 terburuk -6.5
+
+### Seluruh Dukascopy (2015-05 .. 2026-11)
+juara    : n 2094 | +0.108R/tr | PF 1.27 | +226.0R | DD  36.1 | WR 42% | 3.47/mgg | th- 2/12 terburuk -7.7
+BALAS    : n  108 | -0.145R/tr | PF 0.76 |  -15.6R | DD  20.2 | WR 41% | 0.18/mgg | th- 6/12 terburuk -8.0
+gabung   : n 2202 | +0.096R/tr | PF 1.23 | +210.3R | DD  32.6 | WR 42% | 3.65/mgg | th- 1/12 terburuk -6.5
+Per tahun (R) juara | ide | gabung: 2015 +22.5|-3.8|+18.7 · 2016 +30.6|-3.4|+27.1 · 2017 +29.4|+0.6|+29.9 · 2018 -1.0|+2.2|+1.2 · 2019 +2.8|-0.3|+2.5 · 2020 +25.6|-5.5|+20.1 · 2021 +11.5|+0.1|+11.7 · 2022 +50.3|-2.7|+47.5 · 2023 -7.7|+1.2|-6.5 · 2024 +8.8|+0.6|+9.4 · 2025 +20.7|-8.0|+12.7 · 2026 +32.4|+3.5|+35.9
+Korelasi R harian ide vs juara: -0.00
+Per pair: {'EURUSD': -5.5, 'GBPUSD': -6.5, 'USDJPY': -2.2, 'AUDUSD': 3.6, 'USDCAD': -6.9, 'USDCHF': 3.4, 'NZDUSD': -1.5}
+Signifikansi IS: P_rasio 0.161 · P_R 0.055 · R/thn 22.38 -> 20.7 · rasio 4.75 -> 4.87 · selisih R/thn 90% [-3.48, 0.07]
+Signifikansi OOS 2023-26: P_rasio 0.403 · P_R 0.341 · R/thn 13.96 -> 13.26 · rasio 1.72 -> 1.69 · selisih R/thn 90% [-3.54, 2.03]
+Signifikansi Seluruh: P_rasio 0.213 · P_R 0.076 · R/thn 19.55 -> 18.2 · rasio 6.25 -> 6.46 · selisih R/thn 90% [-2.88, 0.18]
+
+### Setra (sekali) (2025-05 .. 2026-11)
+juara    : n  241 | +0.153R/tr | PF 1.37 |  +36.9R | DD  11.5 | WR 43% | 3.08/mgg | th- 0/2 terburuk +8.7
+BALAS    : n   18 | +0.330R/tr | PF 1.81 |   +5.9R | DD   2.8 | WR 56% | 0.23/mgg | th- 1/2 terburuk -2.1
+gabung   : n  259 | +0.165R/tr | PF 1.40 |  +42.8R | DD  12.1 | WR 44% | 3.31/mgg | th- 0/2 terburuk +6.7
+
+### H1 4 pair (2020-06 .. 2026-11)
+juara    : n  689 | +0.119R/tr | PF 1.30 |  +81.9R | DD  18.4 | WR 42% | 2.04/mgg | th- 1/7 terburuk -7.3
+BALAS    : n   40 | -0.194R/tr | PF 0.71 |   -7.8R | DD  12.0 | WR 35% | 0.12/mgg | th- 4/7 terburuk -7.6
+gabung   : n  729 | +0.102R/tr | PF 1.25 |  +74.1R | DD  23.7 | WR 41% | 2.16/mgg | th- 1/7 terburuk -14.9
+
+### M5 4 pair (2020-06 .. 2026-11)
+juara    : n  706 | +0.115R/tr | PF 1.30 |  +81.1R | DD  21.8 | WR 42% | 2.09/mgg | th- 1/7 terburuk -2.5
+BALAS    : n   54 | -0.192R/tr | PF 0.71 |  -10.4R | DD  14.9 | WR 35% | 0.16/mgg | th- 5/7 terburuk -7.2
+gabung   : n  760 | +0.093R/tr | PF 1.23 |  +70.8R | DD  26.9 | WR 41% | 2.25/mgg | th- 1/7 terburuk -9.7
+
+selesai 10s

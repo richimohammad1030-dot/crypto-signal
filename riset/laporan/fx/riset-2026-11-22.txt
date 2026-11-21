@@ -1,0 +1,28 @@
+RISET FX MAJOR · Minggu 22 Nov 2026 (riset biasa; review bulanan 29 Nov)
+
+Rutinitas harian (21 Nov): replay IDENTIK (live baru 1 hari, 0 trade), tidak ada SL, belum ada data kesehatan.
+
+Threshold pemilik (juara 2015-2026, direproduksi persis +226R DD 36R PF 1,27):
+- Trade/mgg 3,47 (target 4) -> belum
+- Tahun minus 2/12 (2018 -1R, 2023 -8R) -> belum
+- Pertumbuhan ~14,7%/thn di risiko 0,75% -> tercapai
+
+Saringan 10 ide (IS 2015-2022):
+- 4 sumber edge baru (level bulan lalu, range minggu berjalan, akhir bulan London fix, momentum keranjang USD): semua PF 0,82-1,01 -> disaring
+- UTAMA maks 3/hari, risiko per rezim vol: tidak membantu -> disaring
+- BALAS struktur (balik): PF 0,74 -> disaring
+- 3 teratas (R/DD gabungan) -> uji penuh
+
+Uji penuh (IS / OOS 23-26 / Setra / M5):
+- BALAS tembus ulang ekstrem (searah): PF 1,57 / 0,85 / 0,20 / 0,70 -> GAGAL (kebetulan IS)
+- Pasang ulang setelah BE: PF 1,02 / 1,68 / 1,17 / 0,93 -> GAGAL (IS nol, untung OOS hanya AUD/NZD 2024)
+- BALAS breakout palsu (balik): PF 0,70 / 0,87 / 1,81 / 0,71 -> GAGAL
+
+Kesimpulan:
+- BALAS setelah SL: 3 definisi baru tanpa edge yang tahan uji -> tidak diusulkan (tanpa edge = martingale).
+- Semua cara menambah frekuensi yang diuji punya PF < 1; target 4/mgg belum bisa dicapai tanpa merusak edge.
+- Tidak ada usulan, tidak ada kandidat baru; MENU bayangan tetap (sudah 3 kandidat = batas).
+- Total ide/varian FX diuji: ~1.410.
+
+Minggu depan (review bulanan): bedah tahun minus 2018 & 2023 per bot/pair; cari arus frekuensi yang PF > 1 sendiri.
+Laporan lengkap: riset/laporan/fx/riset-2026-11-22.md
