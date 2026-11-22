@@ -543,5 +543,31 @@
   "btc": 1,
   "skor": 1,
   "fund": 3.916678082191781e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-11-23 02:00",
+  "sym": "HYPEUSDT",
+  "d": -1,
+  "t0": 1795201200,
+  "t1": 1795374000,
+  "entry": 60.03,
+  "exit": 62.42,
+  "R": -0.245,
+  "alasan": "cut-loss stagnan",
+  "label": "MEDIUM",
+  "mfe": 0.434,
+  "mae": -0.343,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 16.237,
+  "ext": 5.953,
+  "trend": 1.321,
+  "dist": 1.289,
+  "mom20": 29.656,
+  "rank": 6,
+  "btc": 1,
+  "skor": 0,
+  "fund": 9.424067123287671e-06
  }
 ]
