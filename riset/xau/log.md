@@ -605,3 +605,33 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
   (P 1,00/0,81/0,99/0,95). PDH/PDL & angka bulat tidak lebih baik dari acak; tembusan zona kuat tidak diikuti lanjutan.
   Pelajaran: SNR klasik di H1 XAU (dengan ukuran ATR) hampir tidak berbeda dari level sembarang. Putaran 2: supply-demand.
 - Total ide XAU diuji: 44.
+
+## 23 Nov 2026 — Sesi riset Senin (PERCEPATAN; mode riset biasa, sesi berikut 26 Nov masih November)
+- **Rutinitas harian (riset/harian/xau.md 22 Nov 04:54) menulis Replay GAGAL: Setra BEDA 25 (452 vs 457), Dukascopy IDENTIK
+  2.855/2.855 → dijalankan ulang.** Unduh Setra ulang (11.354 candle s.d. 20 Nov 21:00 UTC) tetap BEDA 25. Penyebab: **API Setra
+  (unduhan riset DAN endpoint live limit=1000) kini tidak memuat candle Senin 00:00-16:00 UTC (07:00-23:00 WIB) untuk 7 Senin
+  5 Okt - 16 Nov 2026** (unduhan 20-21 Nov masih lengkap: 463/463 IDENTIK). Data dipotong sebelum 5 Okt: IDENTIK 185/185.
+  Lubang Oktober diisi Dukascopy (bibit riset/data s.d. 30 Okt): sisa beda 1 trade (3 Nov K6, sehari setelah Senin 2 Nov yang
+  belum bisa diisi; Dukascopy Nov tidak terjangkau: tunnel proxy ditutup). Kesimpulan: **mesin bot = riset; BEDA = lubang data
+  Setra** (kedua mesin menangani candle hilang berbeda). Dampak live: jendela 48 jam terakhir sudah Dukascopy (#47), tetapi
+  EMA200 H1 / Alligator / MACD bot dihitung di 1.000 candle Setra berlubang. Ide #77 (perbaikan teknis, butuh persetujuan).
+- Penyebab SL 7 hari: 20 Nov MR BUY -1R; harian 22 Nov menulis DATA (replay tanpa trade = efek lubang), arsip 21 Nov (data
+  lengkap) = CELAH normal (MR BUY lawan tren H1, ATR rel 1,35, SL setelah 2 jam; historis MR lawan tren SL 30% dari 1.133).
+- Bayangan sejak 2 Nov (harian 22 Nov; dihitung di data Setra berlubang → baca hati-hati): BASELINE 13 trade +3,13R, live catatan
+  bot +4,90R kotor, Tanpa susulan +4,59, K6 saja +8,56 (10), OCO lama +12,17. 3 minggu = belum dinilai.
+- SKILL SNR tahap 1 putaran 2 (skill_snr_t1b.py): **LULUS (PANTUL)** untuk SWING-sendiri (lift +1,6..+3,7 poin, P ≥ 0,98, 4 sel,
+  3 horizon) & konfluensi ≥ 3 jenis (+0,9..+1,9). Jebakan yang dibuang: pembanding acak tanpa syarat konfluensi memberi lift
+  palsu ±10-20 poin (sendiri = candle kecil, konfluensi = candle besar). SUPDEM segar, PDH/PDL, PWH/PWL, bulat tidak lulus; tidak
+  ada jenis yang konsisten lebih sering DITEMBUS.
+- SKILL tahap 2 putaran 1 + saringan cepat (saringan_1123.py, 10 ide/varian, hanya 2005-2014; live +12,7 R/thn, 4/10 minus, DD 52R):
+  #68 +13,9 (DD 49) · #43 TS-PD -0,068R/trade · #70 TS-PW -0,120 · #71 SWEEP-ASIA -0,063 · **#72 BRK-PD +0,055, 3/10 minus** ·
+  #73 BRK-ASIA +0,022 · #56 BB-SQZ -0,015 · #74 RANGE-FADE -0,326 · #75 SNR-FILTER +7,3 R/thn · #76 SNR-PANTUL -0,099 (win 62%).
+  Pola: FADE level rugi, IKUT tembusan untung (sesuai pelajaran lintas bot).
+- Uji penuh (uji_1123.py, WF berlabuh, uji 2011-2026; live +16,4 R/thn, 4/16 minus, terburuk -24, DD 52R, R/DD 5,05):
+  · #72 BRK-PD (SUMBER EDGE BARU) di slot susulan: WF pilih "ganti S3" 7/8 jendela → +16,6, DD 38R, terburuk -19, sd 17,7,
+    R/DD 6,93, minus 5/16, P 0,52; tidak konsisten (2015-18 & 2023 lebih buruk) → GAGAL. Mandiri +0,038R/trade, 9/22 minus.
+  · #73 BRK-ASIA: WF P 0,39 → GAGAL. · #68 KOMBO-SUS-SELL: WF P 0,39 (tetap 0,57, Setra 0,96) → GAGAL.
+  Tidak ada kandidat baru → MENU bayangan.py tidak berubah.
+- Data penelitian: xau_2004 = bibit 2004-14 + Dukascopy bibit s.d. 30 Okt + Setra (lubang Okt diisi Dukascopy, Nov 2/9/16 masih
+  berlubang; dampak kecil pada 2026).
+- Total ide XAU diuji: 54 (+10 saringan).

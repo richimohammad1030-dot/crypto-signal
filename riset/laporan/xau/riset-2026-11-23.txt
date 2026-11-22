@@ -1,0 +1,78 @@
+<b>RISET XAU</b>
+Senin, 23 Nov 2026
+────────────────────
+Mode: riset biasa.
+
+<b>Kesehatan</b>
+────────────────────
+Replay harian 22 Nov: Setra BEDA 25
+(Dukascopy IDENTIK 2.855). Sebab:
+API Setra (juga endpoint live) kini
+TIDAK memuat candle Senin 07:00-23:00
+WIB untuk 7 Senin (5 Okt - 16 Nov).
+<pre>
+Uji                    Hasil
+Data sblm 5 Okt        IDENTIK 185
+Lubang Okt diisi Duka  beda 1 (3 Nov)
+</pre>
+Mesin bot = riset; yang rusak data.
+Dampak live: EMA200/Alligator/MACD
+dihitung di data berlubang (48 jam
+terakhir sudah Dukascopy).
+
+<b>Penyebab SL</b>
+────────────────────
+20 Nov MR BUY -1R: CELAH normal (lawan
+tren H1, historis SL 30%). Harian
+menulis DATA karena lubang Setra.
+
+<b>Live vs bayangan (sejak 2 Nov)</b>
+────────────────────
+<pre>
+Menu             Trade  Total R
+Live (bot)        13    +4,90
+Baseline          13    +3,13
+Tanpa susulan     11    +4,59
+K6 saja           10    +8,56
+OCO lama          12   +12,17
+</pre>
+Belum bisa dinilai (3 minggu).
+
+<b>Riset</b>
+────────────────────
+Saringan 10 ide (2005-14): semua FADE
+level rugi; IKUT tembusan untung.
+Uji penuh WF 2011-26 (live +16,4,
+DD 52R):
+<pre>
+Ide            R/thn  DD    P
+#72 BRK-PD     +16,6  38  0,52
+#73 BRK-ASIA   +15,7  40  0,39
+#68 KOMBO-SELL +16,2  49  0,39
+</pre>
+Ketiganya GAGAL. #72 (ikut tembus
+PDH/PDL, sumber edge baru) memangkas
+DD tapi tidak konsisten antar tahun.
+Tidak ada kandidat bayangan baru.
+Total ide diuji: 54.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR: LULUS TAHAP 1 (PAHAM)
+Harga lebih sering memantul di level
+swing yang berdiri sendiri (+2-4
+poin vs acak) dan di konfluensi 3+
+jenis, konsisten 2004-14 dan 2015-26.
+Efeknya kecil. Supply-demand, PDH/PDL
+dan angka bulat tidak beda dari acak.
+Tahap 2 putaran 1: filter &amp; pantul
+mandiri gugur. Kamis: SL di balik
+zona.
+
+<b>Usulan</b>
+────────────────────
+#77 perbaikan data (teknis): bot
+mengisi candle Setra yang hilang
+dengan Dukascopy di seluruh jendela,
+rutinitas harian juga sebelum replay.
+Balas "pasang" / "tidak".
