@@ -569,5 +569,31 @@
   "btc": 1,
   "skor": 0,
   "fund": 9.424067123287671e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-11-23 12:00",
+  "sym": "PUMPUSDT",
+  "d": -1,
+  "t0": 1794171600,
+  "t1": 1795410000,
+  "entry": 0.003568,
+  "exit": 0.002607,
+  "R": 1.884,
+  "alasan": "kena SL",
+  "label": "MEDIUM",
+  "mfe": 3.135,
+  "mae": -0.381,
+  "tp_sebagian": 0.25,
+  "R_tp_sebagian": 1.0,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 12.363,
+  "ext": 5.284,
+  "trend": 2.274,
+  "dist": 2.757,
+  "mom20": 13.988,
+  "rank": 26,
+  "btc": 1,
+  "skor": 0,
+  "fund": 2.3061041095890413e-06
  }
 ]
