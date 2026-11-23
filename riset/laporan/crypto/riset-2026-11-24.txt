@@ -1,0 +1,66 @@
+<b>RISET CRYPTO</b>
+Selasa, 24 Nov 2026 · riset biasa
+────────────────────
+
+<b>Kesehatan</b>
+────────────────────
+Dari rutinitas harian 23 Nov: semua OK.
+<pre>live 29 trade +1,04R kotor
+replay 30 trade +1,86R kotor
+selisih = rantai slot HYPE (#63)</pre>
+Replay hari ini: 7 SELL (BTC ETH BNB
+DOT ENA LTC ZEC) tutup SL trailing
+23 Nov 20:00 WIB, +11R bersih.
+
+<b>Penyebab SL</b>
+────────────────────
+7 hari: 0 SL, 1 stagnan. Tidak ada CELAH.
+
+<b>Live vs bayangan</b>
+────────────────────
+<pre>v2 live      +1,38R bersih
+tanpa stagn  +2,92R
+v1           +2,78R
+LOW 1/2      +1,98R
+SELL 0,5%    -0,49R</pre>
+±4 minggu, belum menilai.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR tahap 2 putaran 1: BELUM.
+<pre>saringan 2018-21  rasio R/DD
+juara              20,8
+SL balik swing      7,1
+SL balik PWL/PWH   20,4
+SL geser pivot     15,9
+prio tembus PW     25,7
+prio tembus PD     22,8
+filter lawan 1ATR  16,2
+filter lawan 2ATR  17,9</pre>
+Prioritas slot tembus PWH/PWL ke WF:
+<pre>R/thn 59,9 vs 65,6
+DD    26,2 vs 24,2
+2026  +19,6 vs +52,6R
+P_rasio 0,12 -&gt; GAGAL</pre>
+Level SNR tidak memperbaiki entry, SL,
+atau slot breakout 20 hari. Putaran 2
+(27 Nov): trailing di balik swing D1 &amp;
+strategi mandiri tembus PWH/PWL.
+
+<b>Riset</b>
+────────────────────
+Edge baru #55 RSI(2) mean-reversion
+(Connors), portofolio terpisah:
+<pre>10/90  -0,04R/trade -49R
+beli10 -0,01R/trade  -8R
+5/95   -0,04R/trade -23R
+korelasi vs juara -0,3..-0,4
+WF P_rasio 0,36 -&gt; GAGAL</pre>
+Win 62% tapi rugi besar &gt; untung kecil.
+10 varian disaring, 3 ke uji penuh.
+Tidak ada kandidat bayangan baru.
+
+<b>Usulan</b>
+────────────────────
+Tidak ada. Bot tidak berubah.
+Jumat 27 Nov = REVIEW BULANAN.

@@ -195,3 +195,32 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
   Berikutnya tahap 2 (ii) SL di balik level & (iii) prioritas slot (KURIKULUM.md).
 - Total ide crypto yang pernah diuji: ±19 (ditambah #61, #69); varian dinilai putaran ini: 9 + juara. Ide baru: #69 (gagal).
 - Strategi bot: tidak ada perubahan. Tidak ada kandidat penantang.
+
+## 2026-11-24 · RISET (PERCEPATAN, Selasa) · skill SNR tahap 2 putaran 1 · #55 RSI(2) · saringan 10 varian
+- Mode: riset biasa (sesi crypto berikutnya Jumat 27 Nov masih November → 27 Nov = REVIEW BULANAN). Kesehatan/SL/bayangan DIBACA dari
+  `riset/harian/crypto.md` (Sen 23 Nov 05:03 WIB, ±22 jam, semua OK) — tidak dijalankan ulang.
+- Data: unduh_crypto 50 koin + 177 tambahan (tanpa gagal), unduh_pit 86 bulan, unduh_lama 112 bulan. Sistem dasar `_wf.py`: 2.987 trade
+  +629,9R, DD 24,2R; 2026 kini +52,6R (20 Nov +39,6): replay menutup 7 SELL besar (BTC ETH BNB DOT ENA LTC ZEC) 23 Nov 13:00 UTC di SL
+  trailing, total ±+11R bersih.
+- Skrip `eksperimen/sesi_2026_11_24.py` (satu skrip saringan, 10 varian + juara; saringan = periode pilih 2018-2021 saja):
+  | varian | R/trade | R/thn | DD | rasio | catatan seluruh periode |
+  |---|---|---|---|---|---|
+  | juara | 0,292 | 87,2 | 16,8 | 20,8 | +630R DD 24,2 |
+  | S1 SL di balik SWING-D1 | 0,236 | 75,7 | 42,4 | 7,1 | +733R DD 45,2 |
+  | S2 SL di balik PWL/PWH | 0,175 | 50,4 | 9,9 | 20,4 | +364R |
+  | S3 SL 8 ATR digeser ke pivot 6-11 ATR | 0,278 | 83,1 | 20,9 | 15,9 | +614R |
+  | S4 prioritas slot tembus PWH/PWL | 0,307 | 93,6 | 14,5 | **25,7** | +615R, 2026 +20 |
+  | S5 prioritas slot tembus PDH/PDL | 0,288 | 87,0 | 15,2 | **22,8** | +606R, 2026 +26 |
+  | S6 filter pivot lawan ≤ 1 ATR D1 | 0,261 | 64,2 | 15,9 | 16,2 | +327R |
+  | S7 filter pivot lawan ≤ 2 ATR D1 | 0,293 | 51,4 | 11,5 | 17,9 | +256R |
+  | R1 RSI2 10/90 + juara | 0,202 | 83,1 | 18,4 | 18,0 | RSI2 mandiri -49R |
+  | R2 RSI2 beli<10 + juara | 0,246 | 88,6 | 16,9 | 21,0 | RSI2 mandiri -8R |
+  | R3 RSI2 5/95 + juara | 0,241 | 86,3 | 17,8 | 19,4 | RSI2 mandiri -23R |
+- Tahap B (WF penuh + signifikansi 2020-skrg): **prioritas slot (S4/S5)** WF memilih juara (≤2019) lalu S4 di 3 jendela → 2020 +83 · 21 +95 ·
+  22 +33 · 23 +94 · 24 +79 · 25 +15 · 26 +20R; R/thn 59,9 vs 65,6, DD 26,2 vs 24,2, P_R 0,10, **P_rasio 0,12 → GAGAL (#79)**.
+  P(tahun minus) 2026 13% vs 0,4%. **#55 RSI(2) (sumber edge baru)**: WF memilih R2 di 2 jendela → R/thn 63,6 vs 65,6, P_rasio 0,36 → **GAGAL**;
+  korelasi bulanan -0,3 s.d. -0,4 dengan juara (lindung nilai bagus) tetapi edge sendiri negatif setelah biaya (win 61-62%, rugi besar).
+- SKILL SNR tahap 2 putaran 1: **BELUM** (semua cara pakai gagal/disaring: #79, #80, #81). Putaran 2 (27 Nov): trailing ke balik SWING-D1 baru
+  & strategi mandiri tembus PWH/PWL (portofolio terpisah).
+- Total ide crypto yang pernah diuji: ±23 (+ #55, #79, #80, #81); varian dinilai sesi ini: 10 + juara (saringan), 3 ke tahap B.
+- Tidak ada kandidat → MENU bayangan tidak berubah. Strategi bot: tidak ada perubahan. Tidak ada usulan pasang.
