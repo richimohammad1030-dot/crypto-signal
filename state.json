@@ -755,7 +755,7 @@
    }
   }
  },
- "last_ts": 1795446000,
+ "last_ts": 1795453200,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -763,30 +763,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-11-16T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-23",
-  "new": [
-   "DOGEUSDT",
-   "HYPEUSDT",
-   "BTCUSDT",
-   "ENAUSDT",
-   "PUMPUSDT",
-   "ASTERUSDT",
-   "JSTUSDT",
-   "RENDERUSDT",
-   "ZROUSDT",
-   "NIGHTUSDT"
-  ],
+  "date": "2026-11-24",
+  "new": [],
   "upd": {},
-  "cancel": [
-   [
-    "HYPEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "DOGEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "cancel": []
  },
  "hist": [
   [
