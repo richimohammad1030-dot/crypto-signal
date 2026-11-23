@@ -1,19 +1,23 @@
 {
  "coins": {
   "BTC": {
-   "pend": null,
+   "pend": [
+    -1,
+    55130.0,
+    61320.036593532495
+   ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 7.469,
-    "ext": 3.347,
-    "trend": 0.304,
-    "dist": 1.134,
-    "mom20": 6.4,
+    "slpct": 11.228,
+    "ext": 0.064,
+    "trend": 2.182,
+    "dist": 10.039,
+    "mom20": 19.038,
     "rank": 0,
     "btc": 1,
-    "skor": 4,
-    "fund": 1.0698339726027398e-05
+    "skor": 3,
+    "fund": 3.2621465753424657e-06
    }
   },
   "ETH": {
@@ -113,11 +117,7 @@
    }
   },
   "DOGE": {
-   "pend": [
-    -1,
-    0.05077,
-    0.054441008258229284
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -324,19 +324,23 @@
    }
   },
   "ENA": {
-   "pend": null,
+   "pend": [
+    -1,
+    0.0897,
+    0.10883998431010856
+   ],
    "pos": null,
-   "conv": "LOW",
+   "conv": "MEDIUM",
    "feat": {
-    "slpct": 14.407,
-    "ext": 1.811,
-    "trend": 1.537,
-    "dist": 4.555,
-    "mom20": 12.955,
+    "slpct": 21.338,
+    "ext": 0.673,
+    "trend": 2.82,
+    "dist": 7.816,
+    "mom20": 37.05,
     "rank": 22,
-    "btc": 0,
-    "skor": -1,
-    "fund": 1.25e-05
+    "btc": 1,
+    "skor": 0,
+    "fund": 9.786768493150686e-06
    }
   },
   "QNT": {
@@ -387,11 +391,7 @@
    }
   },
   "HYPE": {
-   "pend": [
-    -1,
-    55.8,
-    61.43294792641318
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -423,34 +423,43 @@
    }
   },
   "PUMP": {
-   "pend": null,
+   "pend": [
+    -1,
+    0.002185,
+    0.002679211599892165
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 12.363,
-    "ext": 5.284,
-    "trend": 2.274,
-    "dist": 2.757,
-    "mom20": 13.988,
+    "slpct": 22.618,
+    "ext": 0.159,
+    "trend": 2.37,
+    "dist": 7.932,
+    "mom20": 37.31,
     "rank": 26,
     "btc": 1,
     "skor": 0,
-    "fund": 2.3061041095890413e-06
+    "fund": 5.492658904109589e-06
    }
   },
   "ASTER": {
-   "pend": null,
+   "pend": [
+    -1,
+    0.4672,
+    0.5255295702203694
+   ],
    "pos": null,
-   "conv": "HIGH",
+   "conv": "MEDIUM",
    "feat": {
-    "slpct": 5.467,
-    "ext": 0.087,
-    "trend": 0.515,
-    "dist": 9.666,
-    "mom20": -4.417,
+    "slpct": 12.485,
+    "ext": 1.613,
+    "trend": 3.028,
+    "dist": 7.173,
+    "mom20": 26.102,
     "rank": 27,
     "btc": 1,
-    "skor": 2
+    "skor": 1,
+    "fund": 4.564064383561644e-06
    }
   },
   "DOT": {
@@ -573,15 +582,19 @@
    "pos": null
   },
   "JST": {
-   "pend": null,
+   "pend": [
+    1,
+    0.14853,
+    0.14368930955484593
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 2.631,
-    "ext": 3.282,
-    "trend": 0.728,
-    "dist": 3.355,
-    "mom20": -0.548,
+    "slpct": 3.259,
+    "ext": 1.673,
+    "trend": 0.882,
+    "dist": 4.297,
+    "mom20": 2.826,
     "rank": 37,
     "btc": -1,
     "skor": 0
@@ -624,19 +637,23 @@
    "pos": null
   },
   "RENDER": {
-   "pend": null,
+   "pend": [
+    -1,
+    1.19,
+    1.359749907055419
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 10.952,
-    "ext": 1.747,
-    "trend": 1.605,
-    "dist": 2.712,
-    "mom20": 6.783,
+    "slpct": 14.265,
+    "ext": 0.049,
+    "trend": 1.464,
+    "dist": 8.342,
+    "mom20": 10.243,
     "rank": 41,
-    "btc": 0,
+    "btc": 1,
     "skor": 0,
-    "fund": 1.2150375342465754e-05
+    "fund": 9.136669863013698e-06
    }
   },
   "ATOM": {
@@ -691,19 +708,23 @@
    }
   },
   "ZRO": {
-   "pend": null,
+   "pend": [
+    -1,
+    1.062,
+    1.2698952443043787
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 17.065,
-    "ext": 2.991,
-    "trend": 0.988,
-    "dist": 2.281,
-    "mom20": 12.939,
+    "slpct": 19.576,
+    "ext": 1.893,
+    "trend": 2.77,
+    "dist": 7.196,
+    "mom20": 34.09,
     "rank": 46,
     "btc": 1,
     "skor": 0,
-    "fund": 1.5339830136986302e-05
+    "fund": 6.315853424657534e-06
    }
   },
   "CAKE": {
@@ -715,11 +736,26 @@
    "pos": null
   },
   "NIGHT": {
-   "pend": null,
-   "pos": null
+   "pend": [
+    1,
+    0.05216,
+    0.04273205033691929
+   ],
+   "pos": null,
+   "conv": "LOW",
+   "feat": {
+    "slpct": 18.075,
+    "ext": 3.749,
+    "trend": 0.607,
+    "dist": 1.875,
+    "mom20": 16.379,
+    "rank": 49,
+    "btc": -1,
+    "skor": -2
+   }
   }
  },
- "last_ts": 1795442400,
+ "last_ts": 1795446000,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -730,10 +766,27 @@
   "date": "2026-11-23",
   "new": [
    "DOGEUSDT",
-   "HYPEUSDT"
+   "HYPEUSDT",
+   "BTCUSDT",
+   "ENAUSDT",
+   "PUMPUSDT",
+   "ASTERUSDT",
+   "JSTUSDT",
+   "RENDERUSDT",
+   "ZROUSDT",
+   "NIGHTUSDT"
   ],
   "upd": {},
-  "cancel": []
+  "cancel": [
+   [
+    "HYPEUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "DOGEUSDT",
+    "trend sudah tidak searah (EMA)"
+   ]
+  ]
  },
  "hist": [
   [
@@ -1142,7 +1195,7 @@
    1.892
   ]
  ],
- "digest_key": "2026-11-23-2",
+ "digest_key": "2026-11-24-0",
  "news_sent": [
   "1793210400|FOMC Statement",
   "1793210400|Federal Funds Rate",
