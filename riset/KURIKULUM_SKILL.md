@@ -46,6 +46,20 @@ Tujuan: skill cepat dikuasai lalu dipakai di bot live, agar banyak skill berikut
      entry dekat level lawan.
    - Intraday: I-35 (filter modul B dekat level PERIODE, P_rasio 0,91 pasca-hoc / 0,68 WF) → status `kandidat`, masuk bayangan;
      tahap 2 putaran 2 = SWING-D1 dengan saringan semua cara pakai.
+   - FX major (masuk 23 Nov): lihat bagian "FX MAJOR" di bawah; target SNR FX = Minggu 20 Des 2026.
+
+## PENERAPAN SKILL KE BOT LIVE (pemilik, 23 Nov 2026) — berlaku semua bot
+1. Skill yang LULUS tahap 1, 2 dan 3 **langsung diusulkan dipasang** sebagai tambahan pada strategi live (bot sekarang +
+   skill). Karena mengubah strategi, **wajib persetujuan pemilik**; usulan di ringkasan Telegram memuat: cara pakai skill,
+   hasil walk-forward, bayangan ≥ 4 minggu, replay IDENTIK, dan versi lama yang disimpan untuk kembali.
+2. Setelah dipasang: bandingkan "bot + skill" vs "bot tanpa skill" (bayangan versi lama tetap jalan di MENU) tiap sesi riset,
+   minimal 4 minggu / 20 trade, plus backtest penuh.
+3. Bila hasilnya LEBIH BURUK: skill **tidak langsung dicabut**. Riset berikutnya mengoptimasi strategi DENGAN skill itu
+   (menyesuaikan entry, SL/TP, filter atau jadwal strategi agar cocok dengan skill) — skill dianggap pengetahuan permanen
+   yang tidak tergantikan oleh edge tunggal. Versi hasil optimasi tetap wajib lolos gerbang yang sama (walk-forward
+   P ≥ 0,90, tanpa menambah tahun minus) dan persetujuan pemilik.
+4. Pengaman: bila setelah 3 sesi optimasi tetap lebih buruk dan drawdown live melewati batas bot, usulkan kembali ke versi lama
+   sementara (keputusan pemilik) sambil optimasi berlanjut di bayangan.
 
 ## Skill 1 · SNR (support & resistance) — AKTIF untuk XAU
 Pilihan pemilik (11 Nov): semua jenis diuji; level dari H4 & D1, dipakai untuk keputusan di H1.
@@ -63,6 +77,15 @@ Pilihan pemilik (11 Nov): semua jenis diuji; level dari H4 & D1, dipakai untuk k
   dalam ≤ 1 ATR; (ii) SL di balik zona terdekat (vs SL ATR); (iii) strategi mandiri pantul/tembus zona di jam 07:00-21:00.
 - **Tahap 3**: bayangan & usulan pasang.
 
+## FX MAJOR · Skill 1 SNR (mulai 23 Nov 2026)
+Status di `riset/fx/SKILL.md`. Data: Dukascopy H1 2015-2026 7 pair (periode uji "paham" = 2015-2020 DAN 2021-2026), level dari
+H4 (dibentuk dari H1) & D1, keputusan H1, hari 07:00-07:00 WIB. Angka bulat per pair: 00/50 pip (JPY: 0,50/1,00).
+Pelajaran bot lain WAJIB dipakai (hemat sesi): pembanding acak yang ADIL (candle acak juga menyentuh level nyata lain — XAU
+23 Nov), uji arah pantul DAN tembus, konfluensi ≥ 2/≥ 3 jenis, hasil per pair & gabungan.
+Catatan: UTAMA & SUSULAN FX sudah berbasis level minggu lalu (PWH/PWL) — tahap 2 menguji SNR sebagai filter/SL/TP pada level
+itu (mis. zona lawan di jalur TP, konfluensi level minggu lalu + swing D1, SL di balik zona), bukan hanya strategi mandiri.
+FX 1 sesi/minggu (Minggu) → boleh beberapa tahap per sesi; batas 3 sesi per tahap tetap berlaku.
+
 ## Antrian skill berikutnya (urutan usulan, pemilik boleh mengubah)
 2. Struktur pasar (higher high/low, break of structure, change of character)
 3. Price action di level (pin bar, engulfing, inside bar tepat di zona SNR)
@@ -78,3 +101,4 @@ Pilihan pemilik (11 Nov): semua jenis diuji; level dari H4 & D1, dipakai untuk k
 | XAU | `riset/xau/SKILL.md` | skill 1 SNR, tahap 0 mulai Jumat 13 Nov |
 | Crypto swing | `riset/crypto/KURIKULUM.md` | skill 1 SNR (lihat file) |
 | Intraday | `riset/intraday/PROSEDUR.md` bagian SKILL | skill 1 SNR: tahap 1 PAHAM lulus untuk jenis PERIODE (11 Nov) |
+| FX major | `riset/fx/SKILL.md` | skill 1 SNR, tahap 0+1 mulai sesi Minggu 29 Nov 2026 |

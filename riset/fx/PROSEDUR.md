@@ -24,6 +24,9 @@ Celah berulang di penyebab SL (≥ 3 kali kategori sama) → jadikan ide.
 - Spread: `riset_putaran6.py` memasang spread asli Exness (+0,2 pip). Jangan memakai spread lebih kecil.
 
 ## 3. Sesi
+0. **SKILL dulu** (`riset/KURIKULUM_SKILL.md`: PROGRAM KILAT, PENERAPAN SKILL, bagian FX MAJOR). Kerjakan langkah skill aktif
+   pertama di setiap sesi (boleh beberapa tahap), skrip `riset/fx/eksperimen/skill_snr*.py`, status di `riset/fx/SKILL.md`,
+   bagian tetap "Skill" di ringkasan Telegram (`🎓 SKILL SNR: LULUS TAHAP n` / `📕 BELUM LULUS`).
 1. Saringan cepat maks 10 ide/varian (satu skrip) pada IS 2015-2022 saja. Templat cepat (juara 3 bot direproduksi persis, ±3 dtk):
    `riset/fx/eksperimen/saringan_2026_11_22.py` (`juara()`, `gen_after()` untuk pemicu setelah SL/BE, `ystat()`); uji penuh: `uji_penuh_2026_11_22.py`.
 2. 2-3 teratas → uji penuh: IS, OOS 2023-2026, Setra, per tahun, gabungan 3 bot (`fx_live.all_days` dengan juara diganti),
