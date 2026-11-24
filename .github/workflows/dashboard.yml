@@ -10,11 +10,11 @@ on:
     types: [completed]
   push:
     branches: [main]
-    paths: ["riset/**", "docs/**"]
+    paths: ["riset/**", "docs/index.html"]
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -37,9 +37,21 @@ jobs:
           python-version: "3.12"
       - name: Bangun data
         run: python riset/dashboard/bangun.py . _site
+      - name: Simpan data.json ke repo (dibaca halaman Netlify lewat raw.githubusercontent)
+        run: |
+          cp _site/data.json docs/data.json
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add docs/data.json
+          git diff --cached --quiet || git commit -q -m "dashboard data $(date -u +%Y-%m-%dT%H:%M)"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+      # GitHub Pages opsional (aktif bila pemilik menyalakan Settings > Pages > GitHub Actions)
       - uses: actions/configure-pages@v5
+        continue-on-error: true
       - uses: actions/upload-pages-artifact@v3
+        continue-on-error: true
         with:
           path: _site
       - id: deploy
         uses: actions/deploy-pages@v4
+        continue-on-error: true

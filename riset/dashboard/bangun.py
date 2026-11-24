@@ -98,5 +98,5 @@ data["ringkas"] = dict(lolos=n_now, lolos_awal=a0, lolos_maks=9 * len(BOTS),
 os.makedirs(OUT, exist_ok=True)
 json.dump(data, open(os.path.join(OUT, "data.json"), "w"), ensure_ascii=False, default=str)
 for f in glob.glob(os.path.join(REPO, "docs", "*")):
-    if os.path.isfile(f): shutil.copy(f, OUT)
+    if os.path.isfile(f) and not f.endswith("data.json"): shutil.copy(f, OUT)
 print(f"data.json: {len(json.dumps(data, default=str)) // 1024} KB · progres {data['ringkas']['persen']}% · varian {tot_var}")

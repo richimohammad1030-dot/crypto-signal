@@ -111,7 +111,8 @@ function lalu(t){var m=Math.round((Date.now()-t)/60000);if(m<1)return 'baru saja
 var tip=document.getElementById('tip');
 function pasangTip(node,teks){node.addEventListener('mousemove',function(e){tip.style.display='block';tip.textContent=teks;tip.style.left=Math.min(e.clientX+10,innerWidth-160)+'px';tip.style.top=(e.clientY-30)+'px'});node.addEventListener('mouseleave',function(){tip.style.display='none'});node.addEventListener('touchstart',function(e){tip.style.display='block';tip.textContent=teks;var t=e.touches[0];tip.style.left=Math.min(t.clientX,innerWidth-160)+'px';tip.style.top=(t.clientY-40)+'px';setTimeout(function(){tip.style.display='none'},1800)},{passive:true})}
 
-function muat(){fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){D=d;gambar()}).catch(function(){document.getElementById('segar').textContent='gagal memuat data, mencoba lagi…'})}
+var SUMBER=/github\.io$/.test(location.hostname)?'data.json':'https://raw.githubusercontent.com/richimohammad1030-dot/crypto-signal/main/docs/data.json';
+function muat(){fetch(SUMBER+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){D=d;gambar()}).catch(function(){document.getElementById('segar').textContent='gagal memuat data, mencoba lagi…'})}
 
 function semuaBlocker(){var L=[];(D.milestone.blocker||[]).forEach(function(x){L.push(x)});Object.keys(D.bot).forEach(function(b){(D.bot[b].status.blocker||[]).forEach(function(x){L.push(x)})});return L}
 function itemMinggu(w){var L=(w.item||[]).map(function(i){return {bot:i.bot,teks:i.teks,status:i.status}});Object.keys(D.bot).forEach(function(b){(D.bot[b].status.item||[]).forEach(function(i){if(i.minggu===w.mulai)L.push({bot:b,teks:i.teks,status:i.status})})});return L}
