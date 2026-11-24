@@ -208,5 +208,19 @@
   "R_kotor": 0.667,
   "alasan": "TP",
   "versi": "intraday-v3"
+ },
+ {
+  "waktu_tutup_wib": "2026-11-24 10:00",
+  "sym": "XRPUSDT",
+  "modul": "B",
+  "d": -1,
+  "t0": 1795483800,
+  "t1": 1795489200,
+  "entry": 0.9544608423058675,
+  "exit": 0.9406,
+  "R": 0.648,
+  "R_kotor": 0.667,
+  "alasan": "TP",
+  "versi": "intraday-v3"
  }
 ]
