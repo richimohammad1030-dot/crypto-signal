@@ -114,5 +114,16 @@
    2018
   ],
   "status": "penantang"
+ },
+ "X006 kombo2.0 mr3.0 k61.25 + monitorPF 365h <1.0 strat": {
+  "sejak": "2026-11-24",
+  "is_": 0.5042125539375533,
+  "oos": 1.1834900663671297,
+  "minus": [
+   2005,
+   2013,
+   2021
+  ],
+  "status": "penantang"
  }
 }
