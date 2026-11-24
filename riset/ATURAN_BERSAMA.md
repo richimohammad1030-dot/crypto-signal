@@ -95,3 +95,18 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    (sesi berikutnya bot itu jatuh di bulan baru). Gerbang pasang tetap maksimal 1 perubahan strategi per bulan per bot.
 6. **Kurikulum skill = PROGRAM KILAT** (lihat `riset/KURIKULUM_SKILL.md` bagian "Program kilat"): dikerjakan PERTAMA di setiap
    sesi, boleh beberapa tahap per sesi, batas waktu per tahap 3 sesi lalu otomatis pindah definisi/skill.
+
+## F. MILESTONE & SARINGAN MASSAL (pemilik, 24 Nov 2026) — berlaku semua bot, mengalahkan aturan lama yang bertentangan
+1. Arah kerja = `riset/MILESTONE_2026.md` (target T1-T9 per bot, tenggat 31 Des 2026). Tiap sesi memilih pekerjaan yang paling
+   memperkecil celah ke target dan menambah satu baris di `riset/<bot>/RAPOR.md`. Ringkasan Telegram punya bagian tetap
+   "Milestone" (✅/❌ T1-T9 versi terbaik + celah yang dikerjakan).
+2. Saringan massal: workflow `saringan-malam.yml` (01:17 WIB) menjalankan bank ide `riset/massal/<bot>.py` tanpa token dan
+   menulis `riset/<bot>/massal/terbaru.md` + `penantang.json`. Sesi riset TIDAK lagi menulis skrip saringan dari nol:
+   a) baca `terbaru.md`; b) 1-3 penantang teratas → walk-forward + P_rasio + Setra (gerbang lama tetap); lolos/kandidat →
+      MENU bayangan; c) tambah ≥ 1 KELUARGA baru (10-500 varian) ke `riset/massal/<bot>.py` yang menyerang celah target
+      terbesar — malam itu juga diuji otomatis; d) keluarga wajib memakai `ke_inti`/`inti.nilai` agar penilaian sama.
+3. Penantang = lolos `inti.penantang` (IS lebih baik dari juara pada tahun minus / rasio ≥ 1,25x, OOS PF > 1,1, tidak menambah
+   tahun minus OOS). Penantang BUKAN usulan live. Gerbang live tetap: P_rasio ≥ 0,90 + uji maju (pemilik boleh mempersingkat).
+4. Banyak varian = banyak lolos kebetulan: utamakan penantang yang tetangga parameternya juga lolos, dan keluarga dengan alasan
+   (literatur/celah nyata), bukan grid acak.
+5. Perubahan risiko per trade (mis. naik agar T5 ≥ 10%/thn tercapai dengan DD ≤ 20%) hanya usulan; keputusan pemilik.

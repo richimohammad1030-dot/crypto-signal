@@ -1,0 +1,69 @@
+name: Saringan Massal Malam
+
+# Pemilik, 24 Nov 2026 (riset/MILESTONE_2026.md): ratusan-ribuan varian dari bank ide (riset/massal/<bot>.py) diuji tiap
+# malam di sini TANPA token. Sesi riset Claude membaca riset/<bot>/massal/terbaru.md, menilai penantang, dan menambah ide baru
+# ke bank. Ringkasan dikirim ke chat pribadi pemilik.
+on:
+  schedule:
+    - cron: "17 18 * * *"      # tiap hari 01:17 WIB (setelah rutinitas harian 23:47)
+  workflow_dispatch:
+    inputs:
+      semua:
+        description: "Uji ulang semua keluarga (abaikan sudah.json)"
+        default: "tidak"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: saringan-malam
+  cancel-in-progress: false
+
+jobs:
+  saring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pasang pustaka
+        run: pip install -q numpy pandas scipy
+      - name: Cache data crypto
+        uses: actions/cache@v4
+        with:
+          path: /tmp/data
+          key: saringan-data-${{ github.run_id }}
+          restore-keys: saringan-data-
+      - name: Data crypto (H1 + funding + 15 menit, inkremental)
+        continue-on-error: true
+        run: |
+          C=$(python -c "import signal_bot as s; print(' '.join(s.COINS))")
+          timeout 45m python riset/unduh_crypto.py /tmp/data "$C" > /dev/null
+          timeout 45m python riset/unduh_intraday.py /tmp/data "$C" > /dev/null
+      - name: Data XAU terbaru (Setra)
+        continue-on-error: true
+        run: python riset/unduh_xau.py /tmp/data
+      - name: Saringan per bot
+        run: |
+          FLAG=""; [ "${{ github.event.inputs.semua }}" = "ya" ] && FLAG="--semua"
+          : > /tmp/ringkas.txt
+          for b in xau fx intraday crypto; do
+            if [ -f riset/massal/$b.py ]; then
+              timeout 80m python riset/massal/jalan.py $b /tmp/data 70 $FLAG || echo "⚠️ saringan $b gagal" >> /tmp/ringkas.txt
+              [ -f /tmp/saringan_$b.txt ] && cat /tmp/saringan_$b.txt >> /tmp/ringkas.txt
+            fi
+          done
+      - name: Kirim ringkasan
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -c "import signal_bot as s; t=open('/tmp/ringkas.txt').read().strip(); t and s.tg_send(t[:3900])"
+      - name: Simpan hasil
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          git add -A riset/*/massal
+          git diff --cached --quiet || git commit -m "saringan massal $(date -u +%Y-%m-%d)"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done

@@ -1,5 +1,7 @@
 # Prosedur riset · XAU
 
+> **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/xau/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/xau.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/xau/RAPOR.md`.
+
 Instruksi untuk scheduled task **"Riset Bot XAU"** (Senin & Kamis 02:18 WIB).
 
 > **PERCEPATAN (pemilik, 20 Nov 2026) — baca `riset/ATURAN_BERSAMA.md` bagian E; mengalahkan langkah lama di bawah yang bertentangan.**

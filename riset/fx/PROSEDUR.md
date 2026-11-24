@@ -1,5 +1,7 @@
 # Prosedur riset · FX MAJOR
 
+> **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/fx/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/fx.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/fx/RAPOR.md`.
+
 Instruksi untuk scheduled task **"Riset Bot FX"** (Minggu dini hari, 1×/minggu). Wajib baca dulu `riset/ATURAN_BERSAMA.md`
 (bagian B & E) dan `riset/fx/STRATEGI.md`.
 

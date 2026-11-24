@@ -1,5 +1,7 @@
 # Prosedur riset · CRYPTO
 
+> **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/crypto/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/crypto.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/crypto/RAPOR.md`.
+
 Instruksi untuk routine **"Riset Bot Crypto"** (Selasa & Jumat 02:59 WIB).
 
 > **PERCEPATAN (pemilik, 20 Nov 2026) — baca `riset/ATURAN_BERSAMA.md` bagian E; mengalahkan langkah lama di bawah yang bertentangan.**
