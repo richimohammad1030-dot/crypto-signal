@@ -181,6 +181,16 @@ def run():
             if k not in sent and not diam:
                 hist.append([t["pair"], t["side"], t["t"], t["t_exit"], round(float(t["entry"]), 6), round(float(exit_px(t)), 6), round(float(t["R"]), 3), bot])
             send(k, T.keluar(F.NAMA[bot], t, exit_px(t), risk))
+    # 6b) update posisi berjalan tiap 2 jam (candle close 09:00, 11:00, ..., 21:00 WIB), seperti bot XAU
+    jam_wib = ((last + 3600) // 3600 + 7) % 24
+    if not selesai and jam_wib in (9, 11, 13, 15, 17, 19, 21):
+        buka = []
+        for bot in ("N3", "SUS", "B3"):
+            for t in r["trades"][bot]:
+                if t["why"] != "close": continue
+                sl = t["entry"] if bot == "N3" and be_aktif(Pm[t["pair"]], t, last) is not None else t["sl"]
+                buka.append((F.NAMA[bot], t, now_px[t["pair"]], sl))
+        if buka: send(f"RUN|{d}|{jam_wib}", T.berjalan(last + 3600, buka, risk))
     if selesai and any(r["trades"].values()):
         send(f"TUTUP|{d}", T.info("TUTUP HARIAN", d * 86400 + 16 * 3600, ["🔚 Semua order & posisi FX MAJOR hari ini ditutup"]))
     # 7) rekap mingguan Jumat 23:00 (+ cadangan Senin) & bulanan

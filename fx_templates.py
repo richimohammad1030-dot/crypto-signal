@@ -126,3 +126,18 @@ def keluar(bot, t, exit_px, risk):
 
 def info(name, t, lines):
     return "\n".join(_title(name, t) + lines)
+
+
+def berjalan(ts, posisi, risk):
+    """posisi: list (bot, trade, harga_sekarang, sl_sekarang)."""
+    L = _title("UPDATE POSISI BERJALAN", ts); rows = []; tot = 0.0
+    for bot, t, now, sl in posisi:
+        p = t["pair"]; s = t["side"]; r0 = abs(t["entry"] - t["sl"]); R = s * (now - t["entry"]) / r0; tot += R
+        rows += [f"{'🟢' if R >= 0 else '🔴'} {p:<7} {('BUY' if s > 0 else 'SELL') + ' · ' + bot:<14}",
+                 f"   Entry : {px(p, t['entry'])}  ({jam(t['t'])})",
+                 f"   Harga : {px(p, now)}  ({pip(p, (now - t['entry']) * s, 0)})",
+                 f"   SL    : {px(p, sl)}{'  (di entry)' if abs(sl - t['entry']) < 1e-9 else ''} · TP {px(p, t['tp'])}",
+                 f"   Float : {_rp(f'{R:+.2f}')}R  (≈ {_rp(f'{R * risk:+.2f}')}%)", ""]
+    L.append(_pre(rows[:-1]))
+    L += [LINE, f"📊 Total berjalan: <b>{_rp(f'{tot:+.2f}')}R</b> · ⏰ ditutup paling lambat 23:00 WIB"]
+    return "\n".join(L)
