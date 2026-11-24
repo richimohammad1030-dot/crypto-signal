@@ -21,3 +21,7 @@ KANDIDAT: bodi >= $4, ekor W1, sinyal 07-14 WIB, bukan pucuk (|close-EMA50| <= 2
 n 756 (0,44/hari), WR 51%, PF 1,21, +45R, DD 14R, kalah beruntun 8, per tahun 20:+1 21:-1 22:+3 23:-2 24:+1 25:+8 26:+34.
 Ketahanan: semua tetangga PF 1,06-1,37 (jam 07-12: 1,37; bodi $5: 1,31; spread $0,50: 1,14). Profit tetap terkumpul di 2026.
 Risiko pemilihan berlebih (2160 percobaan): wajib divalidasi Strategy Tester MT5 (tick nyata) + demo sebelum live.
+
+**24 Nov 2026 - frekuensi & SL/TP tetap 1:1:** kandidat Asia (bodi $4) di 2026 = 2,0 trade/hari (rata-rata 7 tahun 0,44/hari karena 2020-24 sepi).
+SL=TP tetap 1:1: $1 (100 pip) median PF 0,45 (spread $0,30 = 30% TP), $2 0,72, $3 0,82, $5 0,90, $10 0,94 -> tidak ada yang layak.
+Tambah sesi = tambah sinyal tapi edge turun: bodi $4 Asia 07-16 2,5/hari PF2026 1,26; Asia+NY 3,3/hari PF 1,04 (7 thn); semua jam 4,9/hari PF 1,00.

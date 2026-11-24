@@ -68,7 +68,8 @@ def sim(sig, T5, H, L, rng, ATR, IEND, DAYEND, T1, O1, H1, L1, spread,
                 j += 1
             if t_in < 0: continue
         if sl_mode == 0: sl = tip - d * sl_v * rng[i]
-        else: sl = e - d * sl_v * ATR[i]
+        elif sl_mode == 1: sl = e - d * sl_v * ATR[i]
+        else: sl = e - d * sl_v                    # sl_mode 2: SL dolar tetap
         risk = (e - sl) * d
         if risk <= 0: continue
         if tp_mode == 0: tp = tip - d * tp_v * rng[i]
