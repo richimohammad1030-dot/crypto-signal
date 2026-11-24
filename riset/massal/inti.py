@@ -54,6 +54,23 @@ def monitor_ekuitas(trades, n=20, w_turun=0.5):
     return sorted(out, key=lambda x: x["t1"])
 
 
+def jeda_beruntun(trades, k=5, sampai="menang_bayangan"):
+    """T7: setelah k kalah berturut-turut (trade yang sudah tutup), trade berikutnya DILEWATI sampai satu trade bayangan
+    (yang dilewati tetap dihitung di belakang layar) menang. Tanpa melihat masa depan: status dihitung dari trade tutup < t0."""
+    semua = sorted(trades, key=lambda x: x["t0"]); tutup = sorted(semua, key=lambda x: x["t1"])
+    out, ambil, j, runtun, jeda = [], set(), 0, 0, False
+    for x in semua:
+        while j < len(tutup) and tutup[j]["t1"] < x["t0"]:
+            y = tutup[j]; j += 1
+            if id(y) in ambil:
+                runtun = runtun + 1 if y["r"] < 0 else 0
+                if runtun >= k: jeda = True
+            elif jeda and y["r"] > 0:
+                jeda, runtun = False, 0
+        if not jeda: ambil.add(id(x)); out.append(x)
+    return sorted(out, key=lambda x: x["t1"])
+
+
 # ---------------- penilaian ----------------
 def nilai(trades, risiko, a=None, b=None, minggu_min=0.0):
     tr = sorted([x for x in trades if (a is None or x["t0"] >= ts(a)) and (b is None or x["t0"] < ts(b))], key=lambda x: x["t1"])
@@ -130,6 +147,19 @@ def tulis(bot, folder, hasil, juara, periode, catatan=""):
         lama.setdefault(h[0], dict(sejak=tgl, is_=h[1]["rasio"], oos=h[2]["rasio"], minus=h[3]["minus"] if h[3] else None,
                                    status="penantang"))
     json.dump(lama, open(os.path.join(folder, "penantang.json"), "w"), indent=1, ensure_ascii=False)
+    def kecil(h):
+        return dict(nama=h[0], **{k: ({kk: vv for kk, vv in v.items() if kk != "thn"} if isinstance(v, dict) and v else v)
+                                  for k, v in (("is_", h[1]), ("oos", h[2]))}, semua=h[3])
+    json.dump(dict(tanggal=tgl, n_varian=len(hasil), n_penantang=len(pen), juara=kecil(juara),
+                   penantang=[kecil(h) for h in pen[:5]], teratas=[kecil(h) for h in urut[:5]]),
+              open(os.path.join(folder, "ringkas.json"), "w"), indent=1, default=float)
+    p_riw = os.path.join(folder, "riwayat.json")
+    riw = json.load(open(p_riw)) if os.path.exists(p_riw) else []
+    best = urut[0] if urut else None
+    riw.append(dict(tanggal=tgl, n_varian=len(hasil), n_penantang=len(pen),
+                    terbaik=dict(nama=best[0], minus=len(best[3]["minus"]) if best[3] else None, pf=best[3]["pf"] if best[3] else None,
+                                 rasio=best[3]["rasio"] if best[3] else None) if best else None))
+    json.dump(riw[-120:], open(p_riw, "w"), indent=1, default=float)
     ring = (f"🔬 Saringan malam {bot.upper()}: {len(hasil)} varian · penantang baru {len(pen)}\n"
             f"Juara: {baris(juara[3]).split(' | ')[0]} thn minus, PF {juara[3]['pf']:.2f}, {juara[3]['persen']:+.1f}%/thn, DD {juara[3]['dd']:.0f}%\n")
     if pen:

@@ -64,7 +64,15 @@ def IM004_param(M):
         yield f"IM004 CAP{cap}", M.trades(CAP=cap, PEND=max(cap, 3))
 
 
-KELUARGA = [IM001_monitor_pf, IM002_kurva_ekuitas, IM003_bobot_modul, IM004_param]
+def IM005_jeda_beruntun(M):
+    """T7 kalah beruntun: berhenti setelah k kalah beruntun sampai trade bayangan menang (+ kombinasi monitor PF)."""
+    base = M.trades()
+    for k in (3, 4, 5, 6, 7, 8):
+        yield f"IM005 jeda setelah {k} kalah", inti.jeda_beruntun(base, k)
+        yield f"IM005 jeda {k} + monitorPF 365h <1.0", inti.jeda_beruntun(inti.monitor_pf(base, 365, 1.0, 0.0, 20), k)
+
+
+KELUARGA = [IM001_monitor_pf, IM002_kurva_ekuitas, IM003_bobot_modul, IM004_param, IM005_jeda_beruntun]
 
 
 def juara(M):

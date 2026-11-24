@@ -107,7 +107,15 @@ def X006_kombinasi_adaptif(M):
             yield f"X006 kombo{ks} mr{ms} k6{k6s} + monitorPF {hari}h <{amb} strat", inti.monitor_pf(base, hari, amb, 0.0, 20, "strat")
 
 
-KELUARGA = [X001_komponen, X002_monitor_pf, X003_monitor_ekuitas, X004_bobot_strategi, X005_filter_vol, X006_kombinasi_adaptif]
+def X007_jeda_beruntun(M):
+    """T7 kalah beruntun: berhenti setelah k kalah beruntun sampai trade bayangan menang (+ kombinasi monitor PF)."""
+    base = ke_inti(M.trades())
+    for k in (3, 4, 5, 6, 7, 8):
+        yield f"X007 jeda setelah {k} kalah", inti.jeda_beruntun(base, k)
+        yield f"X007 jeda {k} + monitorPF 365h <1.0", inti.jeda_beruntun(inti.monitor_pf(base, 365, 1.0, 0.0, 20), k)
+
+
+KELUARGA = [X001_komponen, X002_monitor_pf, X003_monitor_ekuitas, X004_bobot_strategi, X005_filter_vol, X006_kombinasi_adaptif, X007_jeda_beruntun]
 
 
 def juara(M):

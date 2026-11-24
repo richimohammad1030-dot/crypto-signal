@@ -1,0 +1,45 @@
+name: Dashboard Monitoring
+
+# Pemilik, 24 Nov 2026: dashboard realtime pekerjaan riset (GitHub Pages). Dibangun ulang tiap 30 menit dan setelah
+# rutinitas harian, saringan massal, dan penyalinan laporan riset. Sumber: riset/dashboard/bangun.py + docs/index.html.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_run:
+    workflows: ["Saringan Massal Malam", "Rutinitas Harian Riset", "Kirim Laporan Riset"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: ["riset/**", "docs/**"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  bangun:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 300
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bangun data
+        run: python riset/dashboard/bangun.py . _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

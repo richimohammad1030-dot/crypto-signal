@@ -12,7 +12,7 @@ dengan menambah satu baris di `riset/<bot>/RAPOR.md` (file di folder bot ikut te
 | T4 | Win rate | ≥ 40% |
 | T5 | Pertumbuhan | Rata-rata ≥ 10%/thn per bot (tanpa compounding, % ekuitas pada risiko live) |
 | T6 | Drawdown | DD ekuitas maks ≤ 20% |
-| T7 | Kalah beruntun | ≤ 10 trade berturut-turut |
+| T7 | Kalah beruntun | ≤ 10 trade berturut-turut — berlaku juga untuk crypto (keputusan pemilik 24 Nov) |
 | T8 | Frekuensi | XAU ≥ 3 trade/mgg · FX ≥ 3/mgg · crypto & intraday sesuai aturan bot |
 | T9 | Lolos data baru | Hasil OOS & Setra tidak jauh di bawah backtest (P_rasio, ATURAN_BERSAMA) |
 

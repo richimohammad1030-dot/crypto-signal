@@ -110,3 +110,8 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
 4. Banyak varian = banyak lolos kebetulan: utamakan penantang yang tetangga parameternya juga lolos, dan keluarga dengan alasan
    (literatur/celah nyata), bukan grid acak.
 5. Perubahan risiko per trade (mis. naik agar T5 ≥ 10%/thn tercapai dengan DD ≤ 20%) hanya usulan; keputusan pemilik.
+6. **Dashboard** (`docs/` → GitHub Pages, dibangun `riset/dashboard/bangun.py` tiap 30 menit): tiap sesi WAJIB memperbarui
+   `riset/<bot>/status.json` — `item` (status selesai/jalan/belum), `skill`, `t2`/`t9` bila terbukti, `keyakinan` (jujur),
+   `fokus`, `sesi_terakhir`, dan `blocker`. Keputusan yang butuh pemilik = blocker `menunggu` (+ disebut di ringkasan Telegram);
+   pemilik menjawab di chat project Trading Bot. Rencana global & blocker lintas bot: `riset/milestone.json` (diubah dari chat
+   project, bukan sesi bot).

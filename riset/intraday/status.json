@@ -1,0 +1,26 @@
+{
+ "nama": "Crypto intraday",
+ "risiko": 1.0,
+ "t2": false,
+ "t9": true,
+ "keyakinan": 90,
+ "fokus": "Pasang monitor edge (T2)",
+ "skill": {
+  "nama": "SNR",
+  "tahap": 2,
+  "putaran": "2/3",
+  "status": "Kandidat I-35 & I-36 di bayangan; strategi tembus gagal.",
+  "berikutnya": "Rabu 25 Nov: sesi terakhir, lalu tutup atau lulus",
+  "batas": "2026-12-04"
+ },
+ "item": [
+  {
+   "minggu": "2026-12-08",
+   "teks": "Monitor edge lolos walk-forward",
+   "status": "belum"
+  }
+ ],
+ "blocker": [],
+ "sesi_terakhir": null,
+ "_catatan": "Status intraday untuk dashboard. Diperbarui sesi riset intraday (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+}

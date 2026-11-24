@@ -1,0 +1,36 @@
+{
+ "nama": "FX major",
+ "risiko": 0.75,
+ "t2": false,
+ "t9": null,
+ "keyakinan": 55,
+ "fokus": "Tahun minus OOS 2023-26, DD 23% → ≤ 20%",
+ "skill": {
+  "nama": "SNR",
+  "tahap": 0,
+  "putaran": "0/3",
+  "status": "Baru masuk kurikulum 23 Nov.",
+  "berikutnya": "Minggu 29 Nov: tahap 0 + 1",
+  "batas": "2026-12-20"
+ },
+ "item": [
+  {
+   "minggu": "2026-11-24",
+   "teks": "SNR tahap 0-1 (Minggu 29 Nov)",
+   "status": "belum"
+  },
+  {
+   "minggu": "2026-12-08",
+   "teks": "Tanpa tahun minus OOS & DD ≤ 20%",
+   "status": "belum"
+  },
+  {
+   "minggu": "2026-12-15",
+   "teks": "SNR FX lulus/tutup (20 Des)",
+   "status": "belum"
+  }
+ ],
+ "blocker": [],
+ "sesi_terakhir": null,
+ "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+}

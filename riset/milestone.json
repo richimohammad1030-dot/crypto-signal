@@ -1,0 +1,200 @@
+{
+ "_catatan": "Rencana GLOBAL (target, minggu, blocker lintas bot, jadwal). Status per bot ada di riset/<bot>/status.json (diperbarui sesi bot itu). Dibaca riset/dashboard/bangun.py.",
+ "diperbarui": "2026-11-24T16:30:00+07:00",
+ "mulai": "2026-11-24",
+ "tenggat": "2026-12-31",
+ "target": [
+  {
+   "id": "T1",
+   "nama": "Tanpa tahun minus",
+   "ukuran": "Tiap tahun kalender ≥ 0 (minimal impas) setelah biaya"
+  },
+  {
+   "id": "T2",
+   "nama": "Adaptif terhadap edge",
+   "ukuran": "Lolos walk-forward + monitor edge (risiko turun bila PF 12 bln < 1)"
+  },
+  {
+   "id": "T3",
+   "nama": "Profit factor > 1,1",
+   "ukuran": "Seluruh periode, juga OOS & data baru"
+  },
+  {
+   "id": "T4",
+   "nama": "Win rate ≥ 40%",
+   "ukuran": "Seluruh periode"
+  },
+  {
+   "id": "T5",
+   "nama": "Pertumbuhan ≥ 10%/thn",
+   "ukuran": "Per bot, pada risiko live"
+  },
+  {
+   "id": "T6",
+   "nama": "Drawdown ≤ 20%",
+   "ukuran": "Ekuitas, pada risiko live"
+  },
+  {
+   "id": "T7",
+   "nama": "Kalah beruntun ≤ 10",
+   "ukuran": "Semua bot, termasuk crypto (keputusan pemilik 24 Nov)"
+  },
+  {
+   "id": "T8",
+   "nama": "Frekuensi minimum",
+   "ukuran": "XAU & FX ≥ 3 trade/mgg; crypto & intraday sesuai aturan"
+  },
+  {
+   "id": "T9",
+   "nama": "Lolos data baru",
+   "ukuran": "OOS & Setra tidak jauh di bawah backtest (P_rasio)"
+  }
+ ],
+ "bot": {
+  "xau": {
+   "nama": "XAU (emas)",
+   "risiko": 0.5
+  },
+  "crypto": {
+   "nama": "Crypto swing",
+   "risiko": 1.0
+  },
+  "intraday": {
+   "nama": "Crypto intraday",
+   "risiko": 1.0
+  },
+  "fx": {
+   "nama": "FX major",
+   "risiko": 0.75
+  }
+ },
+ "keyakinan_semua": 10,
+ "minggu": [
+  {
+   "mulai": "2026-11-24",
+   "selesai": "2026-11-30",
+   "judul": "Fondasi kerja cepat",
+   "item": [
+    {
+     "bot": "semua",
+     "teks": "Mesin saringan massal malam 4 bot",
+     "status": "selesai"
+    },
+    {
+     "bot": "semua",
+     "teks": "Dashboard monitoring realtime",
+     "status": "selesai"
+    },
+    {
+     "bot": "semua",
+     "teks": "Keluarga ide pemotong kalah beruntun (T7)",
+     "status": "selesai"
+    }
+   ]
+  },
+  {
+   "mulai": "2026-12-01",
+   "selesai": "2026-12-07",
+   "judul": "Penantang di bayangan",
+   "item": [
+    {
+     "bot": "semua",
+     "teks": "Tiap bot ≥ 1 penantang di bayangan",
+     "status": "belum"
+    },
+    {
+     "bot": "semua",
+     "teks": "SNR XAU/crypto/intraday lulus atau ditutup (4 Des)",
+     "status": "belum"
+    },
+    {
+     "bot": "semua",
+     "teks": "Desain monitor edge T2 final",
+     "status": "belum"
+    }
+   ]
+  },
+  {
+   "mulai": "2026-12-08",
+   "selesai": "2026-12-14",
+   "judul": "Serang celah",
+   "item": []
+  },
+  {
+   "mulai": "2026-12-15",
+   "selesai": "2026-12-21",
+   "judul": "Uji penuh",
+   "item": [
+    {
+     "bot": "semua",
+     "teks": "Walk-forward + P_rasio + Setra semua kandidat",
+     "status": "belum"
+    },
+    {
+     "bot": "semua",
+     "teks": "Tiap bot punya versi lolos T1-T9",
+     "status": "belum"
+    }
+   ]
+  },
+  {
+   "mulai": "2026-12-22",
+   "selesai": "2026-12-31",
+   "judul": "Usulan ke pemilik",
+   "item": [
+    {
+     "bot": "semua",
+     "teks": "Paket usulan + rapor lengkap",
+     "status": "belum"
+    },
+    {
+     "bot": "semua",
+     "teks": "MILESTONE: semua bot lolos di backtest+WF & di bayangan",
+     "status": "belum"
+    }
+   ]
+  }
+ ],
+ "blocker": [
+  {
+   "id": "B3",
+   "bot": "semua",
+   "judul": "Pasang monitor edge (T2) di bot live",
+   "detail": "Mengubah strategi live → wajib persetujuan. Diajukan ±15 Des dengan bukti WF.",
+   "sejak": "2026-11-24",
+   "status": "akan_datang"
+  }
+ ],
+ "jadwal": [
+  {
+   "apa": "Rutinitas harian (replay, penyebab SL, bayangan)",
+   "kapan": "Tiap hari 23:47 WIB"
+  },
+  {
+   "apa": "Saringan massal 4 bot",
+   "kapan": "Tiap hari 01:17 WIB"
+  },
+  {
+   "apa": "Sesi riset XAU",
+   "kapan": "Senin & Kamis"
+  },
+  {
+   "apa": "Sesi riset crypto swing",
+   "kapan": "Selasa & Jumat"
+  },
+  {
+   "apa": "Sesi riset intraday",
+   "kapan": "Rabu & Sabtu"
+  },
+  {
+   "apa": "Sesi riset FX",
+   "kapan": "Minggu"
+  }
+ ],
+ "awal_lolos": {
+  "xau": 3,
+  "fx": 4,
+  "crypto": 6,
+  "intraday": 8
+ }
+}

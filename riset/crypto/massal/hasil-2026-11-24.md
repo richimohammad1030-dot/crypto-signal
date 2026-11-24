@@ -1,6 +1,6 @@
 # Saringan massal CRYPTO · 2026-11-24
 Durasi 0.4 mnt. Keluarga baru/kedaluwarsa saja (lihat sudah.json).
-IS ('2020-01-01', '2024-01-01') · OOS ('2024-01-01', None). Varian diuji malam ini: 131. PENANTANG: 0 (unik) (lolos syarat inti.penantang; belum usulan — wajib WF + P_rasio + bayangan).
+IS ('2020-01-01', '2024-01-01') · OOS ('2024-01-01', None). Varian diuji malam ini: 143. PENANTANG: 0 (unik) (lolos syarat inti.penantang; belum usulan — wajib WF + P_rasio + bayangan).
 
 ## Juara
 | Varian | minus IS | PF | WR | %/thn | DD | beruntun | rasio | %/thn @DD20 | target | OOS minus | PF | WR | %/thn | DD | beruntun | rasio | %/thn @DD20 | target |

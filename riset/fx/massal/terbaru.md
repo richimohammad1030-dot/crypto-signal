@@ -1,6 +1,6 @@
 # Saringan massal FX · 2026-11-24
-Durasi 1.6 mnt. Keluarga baru/kedaluwarsa saja (lihat sudah.json).
-IS ('2015-06-01', '2023-01-01') · OOS ('2023-01-01', None). Varian diuji malam ini: 231. PENANTANG: 39 (unik) (lolos syarat inti.penantang; belum usulan — wajib WF + P_rasio + bayangan).
+Durasi 1.1 mnt. Keluarga baru/kedaluwarsa saja (lihat sudah.json).
+IS ('2015-06-01', '2023-01-01') · OOS ('2023-01-01', None). Varian diuji malam ini: 243. PENANTANG: 39 (unik) (lolos syarat inti.penantang; belum usulan — wajib WF + P_rasio + bayangan).
 
 ## Juara
 | Varian | minus IS | PF | WR | %/thn | DD | beruntun | rasio | %/thn @DD20 | target | OOS minus | PF | WR | %/thn | DD | beruntun | rasio | %/thn @DD20 | target |

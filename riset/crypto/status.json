@@ -1,0 +1,35 @@
+{
+ "nama": "Crypto swing",
+ "risiko": 1.0,
+ "t2": false,
+ "t9": null,
+ "keyakinan": 25,
+ "fokus": "Kalah beruntun 25 → ≤ 10 (tetap, keputusan pemilik). Jeda-setelah-kalah hanya → 16-22 karena posisi bersamaan; butuh ide struktural",
+ "skill": {
+  "nama": "SNR",
+  "tahap": 2,
+  "putaran": "0/3",
+  "status": "Tahap 1 lulus (level lebih sering ditembus). 1b: tembusan tanpa info arah.",
+  "berikutnya": "Jumat 27 Nov: SL di balik level, prioritas slot",
+  "batas": "2026-12-04"
+ },
+ "item": [
+  {
+   "minggu": "2026-12-08",
+   "teks": "Kalah beruntun ≤ 10",
+   "status": "belum"
+  }
+ ],
+ "blocker": [
+  {
+   "id": "B1",
+   "bot": "crypto",
+   "judul": "Target kalah beruntun crypto",
+   "detail": "Diputuskan pemilik 24 Nov: tetap ≤ 10.",
+   "sejak": "2026-11-24",
+   "status": "selesai"
+  }
+ ],
+ "sesi_terakhir": null,
+ "_catatan": "Status crypto untuk dashboard. Diperbarui sesi riset crypto (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+}

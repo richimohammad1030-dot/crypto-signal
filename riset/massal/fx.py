@@ -82,7 +82,15 @@ def F006_pair(M):
         yield f"F006 tanpa {p}", [x for x in base if x["pair"] != p]
 
 
-KELUARGA = [F001_monitor_pf, F002_kurva_ekuitas, F003_bobot_bot, F004_utama, F005_susulan, F006_pair]
+def F007_jeda_beruntun(M):
+    """T7 kalah beruntun: berhenti setelah k kalah beruntun sampai trade bayangan menang (+ kombinasi monitor PF)."""
+    base = M.tiga()
+    for k in (3, 4, 5, 6, 7, 8):
+        yield f"F007 jeda setelah {k} kalah", inti.jeda_beruntun(base, k)
+        yield f"F007 jeda {k} + monitorPF 365h <1.0", inti.jeda_beruntun(inti.monitor_pf(base, 365, 1.0, 0.0, 20), k)
+
+
+KELUARGA = [F001_monitor_pf, F002_kurva_ekuitas, F003_bobot_bot, F004_utama, F005_susulan, F006_pair, F007_jeda_beruntun]
 
 
 def juara(M):

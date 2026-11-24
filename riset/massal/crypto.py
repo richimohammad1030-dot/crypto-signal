@@ -47,7 +47,15 @@ def CM003_bobot_arah(M):
         if (a, b) != (1.0, 1.0): yield f"CM003 bobot BUY{a} SELL{b}", bobot(M.base, dict(BUY=a, SELL=b))
 
 
-KELUARGA = [CM001_monitor_pf, CM002_kurva_ekuitas, CM003_bobot_arah]
+def CM004_jeda_beruntun(M):
+    """T7 kalah beruntun: berhenti setelah k kalah beruntun sampai trade bayangan menang (+ kombinasi monitor PF)."""
+    base = M.base
+    for k in (3, 4, 5, 6, 7, 8):
+        yield f"CM004 jeda setelah {k} kalah", inti.jeda_beruntun(base, k)
+        yield f"CM004 jeda {k} + monitorPF 365h <1.0", inti.jeda_beruntun(inti.monitor_pf(base, 365, 1.0, 0.0, 20), k)
+
+
+KELUARGA = [CM001_monitor_pf, CM002_kurva_ekuitas, CM003_bobot_arah, CM004_jeda_beruntun]
 
 
 def juara(M):
