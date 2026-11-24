@@ -4,23 +4,44 @@
  "t2": false,
  "t9": true,
  "keyakinan": 90,
- "fokus": "Pasang monitor edge (T2)",
+ "fokus": "T2: usulan monitor edge (PF 365 hari tingkat bot < 1 → risiko 0,5%) menunggu pemilik; skill 2 struktur pasar tahap 1",
  "skill": {
-  "nama": "SNR",
-  "tahap": 2,
-  "putaran": "2/3",
-  "status": "Kandidat I-35 & I-36 di bayangan; strategi tembus gagal.",
-  "berikutnya": "Rabu 25 Nov: sesi terakhir, lalu tutup atau lulus",
+  "nama": "Struktur pasar (skill 2)",
+  "tahap": 1,
+  "putaran": "0/3",
+  "status": "SNR DITUTUP 25 Nov (📕 dipelajari: level = zona whipsaw; kandidat I-35/I-36 tetap di bayangan). Struktur pasar: definisi tahap 0 selesai.",
+  "berikutnya": "Sabtu 28 Nov: tahap 1 PAHAM BOS/CHoCH H1 (I-41) + review bulanan",
   "batas": "2026-12-04"
  },
  "item": [
   {
+   "minggu": "2026-11-23",
+   "teks": "Monitor edge diuji walk-forward (netral, tidak merusak)",
+   "status": "selesai"
+  },
+  {
+   "minggu": "2026-11-23",
+   "teks": "Skill SNR: lulus atau tutup",
+   "status": "selesai"
+  },
+  {
+   "minggu": "2026-11-30",
+   "teks": "Konfirmasi monitor T2 di data 2018-2019 + review bulanan",
+   "status": "belum"
+  },
+  {
    "minggu": "2026-12-08",
-   "teks": "Monitor edge lolos walk-forward",
+   "teks": "Monitor edge dipasang (persetujuan pemilik)",
    "status": "belum"
   }
  ],
- "blocker": [],
- "sesi_terakhir": null,
+ "blocker": [
+  {
+   "teks": "Pasang monitor edge T2 di intraday_bot: risiko 0,5% bila PF trade tutup 365 hari < 1,0 (min 20 trade). WF 2022-26 identik juara (tidak pernah aktif), murni pengaman. Jawab: pasang / tidak.",
+   "status": "menunggu",
+   "sejak": "2026-11-25"
+  }
+ ],
+ "sesi_terakhir": "2026-11-25",
  "_catatan": "Status intraday untuk dashboard. Diperbarui sesi riset intraday (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
 }

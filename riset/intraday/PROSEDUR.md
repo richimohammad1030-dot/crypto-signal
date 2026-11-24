@@ -84,6 +84,19 @@ baik) → `kandidat`, masuk bayangan (I36). Strategi TEMBUS mandiri (I-37: stop 
 lift tembus relatif ≠ edge absolut. I-35 masuk bayangan (I35a/I35b). **Sesi 3/3 (Rabu 25 Nov):** satu definisi baru terbaik =
 filter gabungan PERIODE ∪ SWING-D1 untuk B-long saja (I-39) dan/atau fade tembusan (I-38); bila tetap < 0,90 → SNR intraday
 DITUTUP sebagai skill aktif (kandidat I-35/I-36 tetap dipantau di bayangan) dan pindah ke skill 2 (struktur pasar).
+**25 Nov 2026 sesi 3/3: SKILL 1 SNR DITUTUP — 📕 DIPELAJARI** (`eksperimen/sesi_2026-11-25.py`). I-39 (filter PERIODE ∪ SWING-D1
+hanya B-long) walk-forward P_rasio 0,671, 3/5 tahun lebih baik, DD 17,9 vs 15,8 → gagal; I-38 (fade tembusan, slot sendiri) -0,15..
+-0,42R/trade setiap tahun → gagal. Pengetahuan: level hari/minggu/swing D1 di crypto 15m lebih sering DITEMBUS dan tembusan lebih
+sering lanjut dari acak, tetapi braket 1:1 di sekitar level rugi ke DUA arah (tembus I-37 & fade I-38 ±-0,15..-0,20R/trade) → zona
+level = zona whipsaw; satu-satunya pemakaian yang menjanjikan = menghindari order limit B tepat di level (I-35/I-36 di bayangan).
+**Skill aktif berikutnya: 2 · STRUKTUR PASAR** (otomatis, KURIKULUM program kilat 4). Tahap 0 (definisi mesin, 25 Nov):
+per koin di H1 (dan D1 dari H1), pivot fraktal n = 3 (aktif setelah 3 candle kanan close). Struktur NAIK = dua swing high terakhir
+naik (HH) dan dua swing low terakhir naik (HL); TURUN = LH + LL; selain itu ACAK. Peristiwa: BOS = close H1 melewati swing high
+terakhir saat struktur NAIK (atau swing low saat TURUN) = lanjutan; CHoCH = close melewati swing low terakhir saat struktur NAIK
+(atau swing high saat TURUN) = pembalikan. Tahap 1 PAHAM (sesi berikutnya): return maju 4/12/24 jam (dalam ATR H1) dan peluang
++1 ATR sebelum -1 ATR setelah BOS/CHoCH vs waktu acak dengan struktur sama (pembanding adil: candle acak yang juga close melewati
+pivot lain yang bukan pivot terakhir), kedua arah, 2020-22 DAN 2023-26, P ≥ 0,90 bootstrap blok bulanan. Lulus → tahap 2: filter
+order B/A (lewati B-long setelah CHoCH turun, dsb.).
 
 ## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"
 **UPDATE 11 Nov 2026:** vonis data 2018-2019 (belum pernah dilihat) → 2019 minus → arah sekarang NAIKKAN EDGE PER TRADE (lihat

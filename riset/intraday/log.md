@@ -293,3 +293,28 @@ Rabu 25 Nov masih November; review bulanan = Sabtu 28 Nov).
 - **I-04** (rem harian 2 SL) & **I-06** (B-short tanpa funding) → **disaring** (lebih buruk dari juara di periode pilih).
 - Ide baru antri: I-38 (fade tembusan, cermin I-37), I-39 (filter level hanya B-long).
 - Total ide bernomor diuji: 26 (+ 10 varian saringan hari ini). Juara v3 & bot tidak diubah.
+
+## 2026-11-25 · riset (PERCEPATAN E + MILESTONE F, sesi Rabu)
+Data diunduh ulang s.d. 25 Nov 2026 ±04:00 WIB (koin bot + 177 koin PIT, 227 koin dimuat; tanpa kegagalan). Laporan:
+`riset/laporan/intraday/riset-2026-11-25.md`; keluaran mentah `eksperimen/hasil_2026-11-25.log`. Mode: riset biasa (Sabtu 28 Nov
+masih November = review bulanan).
+- **Rutinitas** dibaca dari `riset/harian/intraday.md` (24 Nov 10:04 WIB, < 36 jam, semua OK): 7 hari 3 trade +1,95R, 0 SL;
+  kesetaraan sejak v3 live 17 trade +5,22R vs replay 17 +5,24R, beda 0. Bayangan: kandidat I-35/I-36 = juara (3 trade +1,95R).
+- **Saringan massal** (`massal/terbaru.md` 24 Nov, 173 varian): 0 penantang. Teratas IM001 monitorPF koin 90 h (IS rasio 4,56 vs 3,72,
+  OOS sama dengan juara).
+- **Juara v3 PIT**: 2.980 trade, +0,0880R/trade, DD 15,8R, kalah beruntun 9; per tahun +38,0/+92,6/+35,6/+24,9/+25,3/+9,4/+36,3.
+- **Saringan ≤2021 (10 varian, `eksperimen/sesi_2026-11-25.py`)**, rasio R/DD (juara 5,00): L-PS-0.5 8,81 · M-bot-365 7,18 ·
+  L-PS-0.25 7,03 · L-SW-0.5 6,72 · M-modul-365 5,41 · M-koin-90 5,02 · F-minggu 0,03 · F-hari-cermin -0,23 · F-hari-semua -0,32 ·
+  F-hari-0.5 -0,42. Ke uji penuh: ketiga keluarga (skill sesi 3/3, sumber edge baru, celah T2).
+- **I-39** (skill SNR definisi terakhir, filter level B-long saja): WF L-PS-0.25 → L-SW-0.5 → L-PS-0.25; uji 2022-26 R +132,2 vs +131,5,
+  R/tr +0,077 vs +0,074, DD 17,9 vs 15,8; per tahun +32,9/+27,3/+26,9/+15,1/+30,1 vs +35,6/+24,9/+25,3/+9,4/+36,3; P_R 0,53 ·
+  P_rasio 0,671, jendela 1 & 3 lebih buruk → **GAGAL**.
+- **I-38** (SUMBER EDGE BARU, fade tembusan, slot sendiri): WF off di ketiga jendela; modul F -0,15..-0,42R/trade, minus tiap tahun,
+  korelasi bulanan vs juara +0,02..+0,07 → **GAGAL**. Tembus (I-37) dan fade sama-sama rugi = whipsaw di level.
+- **SKILL 1 SNR DITUTUP** (3 sesi tahap 2 + definisi terakhir gagal): 📕 DIPELAJARI. Skill aktif berikutnya: 2 STRUKTUR PASAR, tahap 0
+  ditulis di PROSEDUR (BOS/CHoCH H1, fraktal n=3); tahap 1 = I-41.
+- **I-40 MILESTONE T2** (monitor PF, bobot 0,5, pasca-trade = tepat): bot-365 aktif hanya 2020 (awal data, 158 trade, R 38,0 → 34,6,
+  DD ≤2021 14,4 → 9,8), tidak pernah aktif 2021-26 → WF identik juara (P_rasio 0,50); per modul merusak (P 0,04); per koin 90 h ±tidak
+  pernah aktif. → T2 bot-365 = pengaman netral, usulan pasang ke pemilik (perubahan bot, persetujuan). Konfirmasi 2018-19 belum.
+- Keluarga massal baru IM006 (monitor per modul 5×3×3 = 45 varian) dititipkan di `riset/intraday/massal_usulan.py` (sesi tidak boleh
+  menulis `riset/massal/`). Total ide bernomor diuji: 29 (+ 10 varian hari ini). Juara v3 & bot tidak diubah.

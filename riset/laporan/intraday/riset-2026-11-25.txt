@@ -1,0 +1,34 @@
+<b>RISET INTRADAY</b>
+Rabu 25 Nov 2026 · riset biasa
+────────────────────
+<b>Kesehatan &amp; SL (harian 24 Nov)</b>
+────────────────────
+<pre>7 hari: 3 trade +1,95R, 0 SL
+Live = replay: 17/17, beda 0
+Bayangan I-35/I-36 = juara
+Massal 24 Nov: 0 penantang</pre>
+<b>📕 SKILL SNR: DITUTUP (DIPELAJARI)</b>
+────────────────────
+<pre>Definisi terakhir I-39 (filter
+level hanya B-long):
+WF 2022-26 R +132,2 vs +131,5
+DD 17,9 vs 15,8
+P_rasio 0,671 -&gt; GAGAL</pre>
+Pelajaran: level hari/minggu/swing lebih sering ditembus, tetapi tembus maupun fade sama-sama rugi (zona whipsaw). Kandidat I-35/I-36 tetap di bayangan. Skill berikutnya: STRUKTUR PASAR (BOS/CHoCH H1), tahap 1 Sabtu.
+<b>Riset (saringan 10 varian)</b>
+────────────────────
+<pre>Edge baru I-38 FADE tembusan:
+-0,15..-0,42R/trade tiap thn
+-&gt; GAGAL (WF pilih off)
+T2 monitor PF 365h bot (I-40):
+aktif hanya 2020, 2021-26 tdk
+-&gt; WF identik juara, pengaman
+Monitor per modul: merusak</pre>
+<b>Milestone (juara v3)</b>
+────────────────────
+<pre>T1 T3 T4 T5 T6 T7 T8 T9: lolos
+T2: belum (usulan siap)
+Celah dikerjakan: T2</pre>
+<b>Usulan</b>
+────────────────────
+Pasang monitor edge T2: risiko 0,5% bila PF trade tutup 365 hari &lt; 1,0 (min 20 trade). Netral di walk-forward, murni pengaman. Jawab "pasang" / "tidak". Juara v3 tidak diubah. Sabtu 28 Nov: review bulanan + konfirmasi 2018-19.
