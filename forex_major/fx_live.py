@@ -59,3 +59,20 @@ def all_days(data):
         r = day(data, d)
         for k, v in r["trades"].items(): tr += v
     return sorted(tr, key=lambda x: x["t"])
+
+
+# ---------------- Label conviction (riset 24 Nov 2026, Dukascopy 2015-2026, semua bot) ----------------
+# Skor = rezim tenang (ATR14/ATR100 D1 < 0,9) +1 · berlawanan tren besar (sisi vs close kemarin terhadap EMA200 D1) +1
+#        · pair (EURUSD/USDJPY +1, USDCAD -1). HIGH >= 2 · MEDIUM 1 · LOW <= 0.
+# R rata-rata/trade IS 2015-22 / OOS 2023-26: HIGH +0,24/+0,20 · MEDIUM +0,15/+0,04 · LOW +0,01/-0,04 (29% / 40% / 31% sinyal).
+# Semua sinyal tetap sah; label hanya kualitas historis setup (sama seperti bot crypto).
+CONV_PAIR = {"EURUSD": 1, "USDJPY": 1, "USDCAD": -1}
+
+
+def conviction(P, d, side):
+    idx, D = B.prev_daily(P); j = idx.get(d)
+    if j is None or j < 210: return None, {}
+    A, A100, E200 = B.atr(D), B.atr(D, 100), B.ema(D["c"], 200)
+    f = dict(vol=round(float(A[j] / A100[j]), 3), tren200=side * (1 if D["c"][j] > E200[j] else -1), pair=CONV_PAIR.get(P.name, 0))
+    s = (1 if f["vol"] < 0.9 else 0) + (1 if f["tren200"] == -1 else 0) + f["pair"]; f["skor"] = s
+    return ("HIGH" if s >= 2 else "LOW" if s <= 0 else "MEDIUM"), f

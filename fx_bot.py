@@ -24,7 +24,7 @@ HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
 BULAN = ["", "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
 BAR = "━━━━━━━━━━━━━━━━━━━━"
 TAG = "🌐 <b>[FX MAJOR]</b>"
-HIST_DAYS = 230          # riwayat H1 yang diunduh (>= 110 hari bursa untuk ATR & level minggu lalu)
+HIST_DAYS = 420          # riwayat H1 yang diunduh (>= 210 hari bursa: EMA200 D1 untuk label conviction)
 
 
 def fetch(pair, days=HIST_DAYS):
@@ -132,40 +132,42 @@ def run():
     selesai = last >= d * 86400 + 15 * 3600              # candle 22:00-23:00 WIB sudah close
     Pm = {P.name: P for P in data}
 
+    import fx_templates as T
+    now_px = {P.name: float(P.c[-1]) for P in data}
+    conv = {}
+    for bot in ("N3", "SUS", "B3"):
+        for p, lst in r["orders"][bot].items():
+            for o in lst: conv.setdefault((p, o["side"]), F.conviction(Pm[p], d, o["side"])[0])
+    cv = lambda t: conv.get((t["pair"], t["side"]))
     # 1) sinyal UTAMA (sekali per hari)
     if r["orders"]["N3"]:
-        send(f"SIG|N3|{d}", msg_signal("SINYAL UTAMA · 07:00 WIB", r["orders"]["N3"], d, [
-            "📌 Pasang semua pending order di atas. Per pair OCO: bila satu terisi, <b>batalkan sisi lawannya</b>.",
-            "⏳ Berlaku s/d <b>14:00 WIB</b>. Maks <b>2 posisi</b>/hari, 1 per pair, maks 2 searah USD.",
-            "🛡 Saat untung +0,5R: geser SL ke harga entry.",
-            f"💰 Risiko {str(risk).replace('.', ',')}% per posisi · semua ditutup 23:00 WIB."]))
+        send(f"SIG|N3|{d}", T.signal("SINYAL UTAMA · 07:00", d * 86400, r["orders"]["N3"], now_px, conv, "14:00 WIB",
+             ["🛡 Untung +0,5R → geser SL ke entry",
+              "📦 Maks <b>2 posisi</b>/hari · 1 per pair · maks 2 searah USD"], risk))
     # 2) terisi + kuota
     for bot in ("N3", "SUS", "B3"):
         for t in r["trades"][bot]:
-            send(f"FILL|{key(t)}", f"{TAG} ✅ <b>TERISI · {F.NAMA[bot]}</b>\n<b>{t['pair']} {arah(t['side'])}</b> @ <code>{px(t['pair'], t['entry'])}</code>"
-                 f" ({wib(t['t'])})\nSL <code>{px(t['pair'], t['sl'])}</code> · TP <code>{px(t['pair'], t['tp'])}</code>"
-                 + ("\n↪️ Batalkan order sisi lawan di pair ini." if bot != "B3" else ""))
+            send(f"FILL|{key(t)}", T.fill(F.NAMA[bot], t, cv(t)))
     if len(r["trades"]["N3"]) >= 2:
-        send(f"KUOTA|{d}", f"{TAG} 🔒 Kuota 2 posisi UTAMA hari ini terpenuhi → <b>batalkan semua order UTAMA lain</b>.")
+        send(f"KUOTA|{d}", T.info("KUOTA UTAMA PENUH", last + 3600, ["🔒 2 posisi UTAMA hari ini sudah terisi → <b>batalkan semua order UTAMA lain</b>"]))
     blok = [t for t in r["raw_utama"] if key(t) not in {key(x) for x in r["trades"]["N3"]}]
     for t in blok:
         if len(r["trades"]["N3"]) < 2:
-            send(f"BLOK|{key(t)}", f"{TAG} ⛔ {t['pair']} {arah(t['side'])} (UTAMA) <b>tidak diambil</b>: sudah ada 2 posisi searah USD. Batalkan order {t['pair']}.")
+            send(f"BLOK|{key(t)}", T.info("ORDER TIDAK DIAMBIL", last + 3600, [f"⛔ {t['pair']} {arah(t['side'])} (UTAMA): sudah ada 2 posisi searah USD → batalkan order {t['pair']}"]))
     # 3) kadaluarsa UTAMA 14:00 WIB
     if r["orders"]["N3"] and last >= d * 86400 + 6 * 3600:
         isi = {t["pair"] for t in r["trades"]["N3"]}
         sisa = [p for p in r["orders"]["N3"] if p not in isi]
-        if sisa: send(f"EXP|N3|{d}", f"{TAG} ⌛ 14:00 WIB: order UTAMA yang belum terisi <b>dibatalkan</b> ({', '.join(sorted(sisa))}).")
+        if sisa: send(f"EXP|N3|{d}", T.info("ORDER UTAMA KADALUARSA", d * 86400 + 7 * 3600,
+                      [f"⌛ Batalkan order UTAMA yang belum terisi: <b>{', '.join(sorted(sisa))}</b>", "🔁 Sinyal susulan dikirim setelah candle 15:00 WIB"]))
     # 4) sinyal SUSULAN (15:00 WIB)
     if r["orders"]["SUS"]:
-        send(f"SIG|SUS|{d}", msg_signal("SINYAL SUSULAN · 15:00 WIB", r["orders"]["SUS"], d, [
-            "📌 Untuk pair yang order UTAMA-nya tidak terisi. Per pair OCO.",
-            f"⏳ Berlaku s/d <b>23:00 WIB</b>. Risiko {str(risk).replace('.', ',')}% per posisi."]))
+        send(f"SIG|SUS|{d}", T.signal("SINYAL SUSULAN · 15:00", d * 86400 + 8 * 3600, r["orders"]["SUS"], now_px, conv, "23:00 WIB",
+             ["🔁 Pengganti order UTAMA yang tidak terisi (level minggu lalu dipasang ulang)"], risk))
     # 5) LANJUT (market setelah TP)
     for pair, lst in r["orders"]["B3"].items():
         for o in lst:
-            send(f"SIG|B3|{pair}|{o['t_on']}", f"{TAG} 🔁 <b>SINYAL LANJUT</b> (setelah TP)\n<b>{pair} {arah(o['side'])} MARKET</b> sekarang"
-                 f"\nSL <code>{px(pair, o['sl'])}</code> · TP <code>{px(pair, o['tp'])}</code> (jarak dari harga acuan <code>{px(pair, o['price'])}</code>)")
+            send(f"SIG|B3|{pair}|{o['t_on']}", T.lanjut(dict(o), o["t_on"], now_px[pair], conv.get((pair, o["side"])), risk))
     # 6) BE, keluar, tutup 23:00
     hist = state.setdefault("hist", [])
     for bot in ("N3", "SUS", "B3"):
@@ -173,16 +175,14 @@ def run():
             if bot == "N3":
                 tb = be_aktif(Pm[t["pair"]], t, min(last, t["t_exit"]) if t["why"] != "close" or selesai else last)
                 if tb is not None and (t["why"] == "close" or t["t_exit"] > tb):
-                    send(f"BE|{key(t)}", f"{TAG} 🛡 {t['pair']} {arah(t['side'])} (UTAMA) untung +0,5R → <b>geser SL ke entry</b> <code>{px(t['pair'], t['entry'])}</code>.")
+                    send(f"BE|{key(t)}", T.be(F.NAMA[bot], t, tb + 3600))
             if t["why"] == "close" and not selesai: continue          # masih terbuka
-            hasil = "🎯 KENA TP" if t["why"] == "tp" else "❌ KENA SL" if t["R"] <= -0.5 else "🟡 IMPAS (SL di entry)" if t["why"] == "sl" else "⏹ DITUTUP 23:00"
             k = f"EXIT|{key(t)}"
             if k not in sent and not diam:
                 hist.append([t["pair"], t["side"], t["t"], t["t_exit"], round(float(t["entry"]), 6), round(float(exit_px(t)), 6), round(float(t["R"]), 3), bot])
-            send(k, f"{TAG} {hasil} · {F.NAMA[bot]}\n<b>{t['pair']} {arah(t['side'])}</b> {px(t['pair'], t['entry'])} → {px(t['pair'], exit_px(t))}"
-                    f"\nHasil <b>{t['R']:+.2f}R</b> (≈ {t['R'] * risk:+.2f}%)")
+            send(k, T.keluar(F.NAMA[bot], t, exit_px(t), risk))
     if selesai and any(r["trades"].values()):
-        send(f"TUTUP|{d}", f"{TAG} 🔚 23:00 WIB: semua order & posisi FX hari ini ditutup.")
+        send(f"TUTUP|{d}", T.info("TUTUP HARIAN", d * 86400 + 16 * 3600, ["🔚 Semua order & posisi FX MAJOR hari ini ditutup"]))
     # 7) rekap mingguan Jumat 23:00 (+ cadangan Senin) & bulanan
     now_wib = dt.datetime.now(commands.WIB)
     this_wk, _ = commands.period_bounds("minggu", now_wib); wk, _ = commands.period_bounds("minggu", now_wib, previous=True)

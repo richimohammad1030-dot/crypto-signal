@@ -30,3 +30,9 @@ Senin: tanpa sinyal (breakout level minggu lalu di hari Senin terbukti sering pa
 Asian breakout, Trinity H4, NR/ORB Crabel, turtle soup harian & mingguan, squeeze BB/KC, trend pullback, momentum London,
 RSI2 (harian & H1, termasuk susulan gaya XAU 0/192), fade NY, momentum kemarin, Donchian 2-20 hari, fade Senin, musiman jam
 (Breedon-Ranaldo), PENGISI hari tanpa entry (fade Asia, balik ke tengah range), BALAS setelah SL (0/48 & 0/58; PF ≈ 1,0).
+
+## Label conviction (24 Nov 2026, di pesan sinyal)
+Skor = rezim tenang (ATR14/ATR100 D1 < 0,9) +1 · berlawanan tren besar (sisi order vs close kemarin terhadap EMA200 D1) +1 ·
+pair (EURUSD/USDJPY +1, USDCAD −1). HIGH ≥ 2 · MEDIUM 1 · LOW ≤ 0 (`forex_major/fx_live.conviction`).
+R/trade IS 2015-22 / OOS 2023-26 (semua bot): HIGH +0,24/+0,20 · MEDIUM +0,15/+0,04 · LOW +0,01/−0,04 (29/40/31% sinyal).
+Catatan jujur: faktor pair ikut melihat OOS → label = kualitas historis, bukan filter. Semua sinyal tetap dikirim.
