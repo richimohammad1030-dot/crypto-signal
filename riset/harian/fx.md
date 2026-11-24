@@ -1,9 +1,9 @@
-# Rutinitas harian FX · Mon 23 Nov 2026 05:03 WIB
+# Rutinitas harian FX · Tue 24 Nov 2026 10:04 WIB
 Dibuat otomatis oleh riset/harian.py (GitHub Actions). Sesi riset: baca ini, JANGAN ulangi langkahnya kecuali ada GAGAL.
 
-### Replay · penyebab SL · kesehatan · bayangan OK (1.1 mnt)
+### Replay · penyebab SL · kesehatan · bayangan OK (1.0 mnt)
 ```
-Live sejak 20 Nov 2026 · 1 hari bursa selesai · trade live tercatat 0
+Live sejak 20 Nov 2026 · 2 hari bursa selesai · trade live tercatat 0
 
 ## 1. Replay kesetaraan (wajib IDENTIK)
 live 0 trade · replay 0 trade -> IDENTIK
