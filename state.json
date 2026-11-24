@@ -765,7 +765,7 @@
    }
   }
  },
- "last_ts": 1795532400,
+ "last_ts": 1795539600,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -773,19 +773,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-11-16T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-24",
-  "new": [
-   "XRPUSDT",
-   "HYPEUSDT",
-   "ZECUSDT"
-  ],
+  "date": "2026-11-25",
+  "new": [],
   "upd": {},
-  "cancel": [
-   [
-    "XRPUSDT",
-    "funding rate tidak positif (filter SELL)"
-   ]
-  ]
+  "cancel": []
  },
  "hist": [
   [
