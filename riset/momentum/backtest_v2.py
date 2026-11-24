@@ -40,7 +40,7 @@ def sim(sig, T5, H, L, rng, ATR, IEND, DAYEND, T1, O1, H1, L1, spread,
         market, ef, sl_mode, sl_v, tp_mode, tp_v, max_bars):
     """market=1: masuk di open bar M1 setelah candle close. market=0: limit di fibo ef.
     sl_mode 0: SL di fibo sl_v candle; 1: SL = sl_v x ATR dari harga entry.
-    tp_mode 0: TP di fibo tp_v (negatif = ekstensi); 1: TP = tp_v x jarak risiko."""
+    tp_mode 0: TP di fibo tp_v (negatif = ekstensi); 1: TP = tp_v x jarak risiko; 2: TP = tp_v dolar."""
     n = 0; ot = np.zeros(len(sig)); od = np.zeros(len(sig)); orr = np.zeros(len(sig)); busy = -1
     for i in range(len(sig)):
         d = sig[i]
@@ -56,7 +56,7 @@ def sim(sig, T5, H, L, rng, ATR, IEND, DAYEND, T1, O1, H1, L1, spread,
         else:
             lim = tip - d * ef * rng[i]
             tp_pre = tip - d * tp_v * rng[i] if tp_mode == 0 else 1e18 * d
-            while j < len(T1) and T1[j] < DAYEND[i]:
+            while j < len(T1) and T1[j] < end_t:          # limit hanya berlaku selama umur maksimal
                 if d == 1:
                     if L1[j] + spread <= lim:
                         t_in = j; e = min(lim, O1[j] + spread); break
@@ -72,7 +72,8 @@ def sim(sig, T5, H, L, rng, ATR, IEND, DAYEND, T1, O1, H1, L1, spread,
         risk = (e - sl) * d
         if risk <= 0: continue
         if tp_mode == 0: tp = tip - d * tp_v * rng[i]
-        else: tp = e + d * tp_v * risk
+        elif tp_mode == 1: tp = e + d * tp_v * risk
+        else: tp = e + d * tp_v                    # tp_mode 2: TP dolar tetap
         if (tp - e) * d <= 0: continue
         k = t_in; res = 1e9
         while k < len(T1):

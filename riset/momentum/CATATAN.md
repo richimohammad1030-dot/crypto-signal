@@ -13,3 +13,11 @@ Kesimpulan: pullback + TP ujung ekor + SL fibo 74,5% (RR ~0,46) tidak punya edge
 Terbaik Opsi 2: bodi $4, market di open berikutnya, SL 2xATR14, TP 3R, tahan s/d 24:00 WIB: n 2390 (1,4/hari), WR 31,5%, PF 1,02, +36R,
 DD 51R, kalah beruntun 16, 6/7 tahun positif. Spread $0,24: PF 1,04 (+61R). Spread 0: PF 1,10. Edge setara nol (wajar terjadi
 secara kebetulan dari 456 percobaan). Kesimpulan: momentum candle M5 XAU sebagai sinyal tunggal tidak punya edge yang layak.
+
+**24 Nov 2026 - v3, aturan dari video Rizky Aditama (backtest_v3.py, tanpa bias, spread $0,30, data 2020-01..2026-11 lengkap):**
+2160 kombinasi (bodi x ekor x sesi x lokasi x manajemen). Sesi Asia jelas terbaik (median PF 1,00; 269 dari 351 kombinasi PF>1).
+London/NY/semua jam: median PF 0,87-0,92. Ekor W1 (sisi asal < sisi tujuan) > W0 lama. Entry market + SL lebar > limit 23,6%.
+KANDIDAT: bodi >= $4, ekor W1, sinyal 07-14 WIB, bukan pucuk (|close-EMA50| <= 2 ATR), market di open berikutnya, SL 3xATR14, TP 1,5R, maks 1 jam:
+n 756 (0,44/hari), WR 51%, PF 1,21, +45R, DD 14R, kalah beruntun 8, per tahun 20:+1 21:-1 22:+3 23:-2 24:+1 25:+8 26:+34.
+Ketahanan: semua tetangga PF 1,06-1,37 (jam 07-12: 1,37; bodi $5: 1,31; spread $0,50: 1,14). Profit tetap terkumpul di 2026.
+Risiko pemilihan berlebih (2160 percobaan): wajib divalidasi Strategy Tester MT5 (tick nyata) + demo sebelum live.
