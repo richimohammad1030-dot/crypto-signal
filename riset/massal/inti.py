@@ -150,8 +150,14 @@ def tulis(bot, folder, hasil, juara, periode, catatan=""):
     def kecil(h):
         return dict(nama=h[0], **{k: ({kk: vv for kk, vv in v.items() if kk != "thn"} if isinstance(v, dict) and v else v)
                                   for k, v in (("is_", h[1]), ("oos", h[2]))}, semua=h[3])
+    # penantang terbaik DIGABUNG dengan run sebelumnya: malam yang hanya menguji keluarga baru tidak menghapus temuan lama
+    p_ring = os.path.join(folder, "ringkas.json")
+    lama_r = json.load(open(p_ring)) if os.path.exists(p_ring) else {}
+    gab = {x["nama"]: x for x in (lama_r.get("penantang") or [])}
+    for h in pen[:5]: gab[h[0]] = kecil(h)
+    kunci2 = lambda x: (len(x["is_"]["minus"]), -x["is_"]["n_lolos"], -x["is_"]["rasio"]) if x.get("is_") else (99, 0, 0)
     json.dump(dict(tanggal=tgl, n_varian=len(hasil), n_penantang=len(pen), juara=kecil(juara),
-                   penantang=[kecil(h) for h in pen[:5]], teratas=[kecil(h) for h in urut[:5]]),
+                   penantang=sorted(gab.values(), key=kunci2)[:5], teratas=[kecil(h) for h in urut[:5]]),
               open(os.path.join(folder, "ringkas.json"), "w"), indent=1, default=float)
     p_riw = os.path.join(folder, "riwayat.json")
     riw = json.load(open(p_riw)) if os.path.exists(p_riw) else []
