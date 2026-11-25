@@ -1,5 +1,5 @@
 {
- "last_ts": 1795597200,
+ "last_ts": 1795604400,
  "pend": null,
  "pos": null,
  "recap_week": "2026-11-16T00:00:00+07:00",
@@ -276,7 +276,9 @@
   "1794576600|PPI m/m",
   "1794922200|Core Retail Sales m/m",
   "1794922200|Retail Sales m/m",
-  "1795028400|FOMC Meeting Minutes"
+  "1795028400|FOMC Meeting Minutes",
+  "1795613400|Core PCE Price Index m/m",
+  "1795613400|Prelim GDP q/q"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00",
  "c07": {
