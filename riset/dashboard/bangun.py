@@ -73,6 +73,8 @@ data = dict(dibangun=now.isoformat(timespec="seconds"), milestone=M,
 tot_var = tot_pen = 0; persen = []
 for b in BOTS:
     st = baca_json(os.path.join(REPO, "riset", b, "status.json"), {})
+    for x in st.get("blocker", []):            # blocker dari sesi tanpa format lengkap tetap tampil benar
+        x.setdefault("bot", b); x.setdefault("judul", x.get("teks", "Keputusan")); x.setdefault("detail", x.get("teks", "")); x.setdefault("id", "-")
     fol = os.path.join(REPO, "riset", b, "massal")
     ring = baca_json(os.path.join(fol, "ringkas.json")); riw = baca_json(os.path.join(fol, "riwayat.json"), [])
     pen = baca_json(os.path.join(fol, "penantang.json"), {})

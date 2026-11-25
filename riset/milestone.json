@@ -160,9 +160,9 @@
    "id": "B3",
    "bot": "semua",
    "judul": "Pasang monitor edge (T2) di bot live",
-   "detail": "Mengubah strategi live → wajib persetujuan. Diajukan ±15 Des dengan bukti WF.",
+   "detail": "Disetujui di muka oleh pemilik 25 Nov, BERSYARAT per bot: monitor edge lolos walk-forward (netral atau lebih baik), P_rasio tidak memburuk, replay identik. Intraday sudah terpasang 25 Nov.",
    "sejak": "2026-11-24",
-   "status": "akan_datang"
+   "status": "disetujui"
   }
  ],
  "jadwal": [

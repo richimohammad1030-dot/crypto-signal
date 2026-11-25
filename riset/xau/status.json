@@ -30,9 +30,9 @@
    "id": "B2",
    "bot": "xau",
    "judul": "Kenaikan risiko XAU 0,5% → ±0,8%",
-   "detail": "Cara paling realistis mencapai 10%/thn dengan DD ≤ 20% setelah monitor edge memotong DD. Diajukan setelah varian lolos WF.",
+   "detail": "Disetujui di muka oleh pemilik 25 Nov, BERSYARAT: versi XAU dengan monitor edge lolos walk-forward + P_rasio dan DD ≤ 20% pada risiko baru. Sesi XAU boleh langsung memasang setelah syarat terbukti, lalu melapor.",
    "sejak": "2026-11-24",
-   "status": "akan_datang"
+   "status": "disetujui"
   }
  ],
  "sesi_terakhir": null,

@@ -115,3 +115,9 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    `fokus`, `sesi_terakhir`, dan `blocker`. Keputusan yang butuh pemilik = blocker `menunggu` (+ disebut di ringkasan Telegram);
    pemilik menjawab di chat project Trading Bot. Rencana global & blocker lintas bot: `riset/milestone.json` (diubah dari chat
    project, bukan sesi bot).
+7. **Format blocker** di `status.json`: `{"id","bot","judul","detail","sejak","status"}` dengan status `menunggu` /
+   `akan_datang` / `disetujui` (disetujui bersyarat, belum dikerjakan) / `selesai`.
+8. **Persetujuan di muka (pemilik, 25 Nov 2026):** (a) monitor edge T2 di semua bot — boleh langsung dipasang sesi bot itu bila
+   lolos walk-forward (netral/lebih baik), P_rasio tidak memburuk, dan replay identik; (b) risiko XAU 0,5% → ±0,8% — boleh
+   dipasang bila versi dengan monitor edge lolos WF + P_rasio dan DD ≤ 20% pada risiko baru. Setelah memasang: tulis di
+   ringkasan Telegram, ubah blocker jadi `selesai`. Perubahan strategi lain tetap butuh persetujuan.

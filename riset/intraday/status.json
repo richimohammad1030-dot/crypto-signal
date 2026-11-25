@@ -1,10 +1,10 @@
 {
  "nama": "Crypto intraday",
  "risiko": 1.0,
- "t2": false,
+ "t2": true,
  "t9": true,
- "keyakinan": 90,
- "fokus": "T2: usulan monitor edge (PF 365 hari tingkat bot < 1 → risiko 0,5%) menunggu pemilik; skill 2 struktur pasar tahap 1",
+ "keyakinan": 95,
+ "fokus": "Semua target lolos di backtest; konfirmasi 2018-19 (review 28 Nov) dan jaga live = replay",
  "skill": {
   "nama": "Struktur pasar (skill 2)",
   "tahap": 1,
@@ -32,14 +32,17 @@
   {
    "minggu": "2026-12-08",
    "teks": "Monitor edge dipasang (persetujuan pemilik)",
-   "status": "belum"
+   "status": "selesai"
   }
  ],
  "blocker": [
   {
-   "teks": "Pasang monitor edge T2 di intraday_bot: risiko 0,5% bila PF trade tutup 365 hari < 1,0 (min 20 trade). WF 2022-26 identik juara (tidak pernah aktif), murni pengaman. Jawab: pasang / tidak.",
-   "status": "menunggu",
-   "sejak": "2026-11-25"
+   "id": "B4",
+   "bot": "intraday",
+   "judul": "Pasang monitor edge (T2) di bot intraday",
+   "detail": "Disetujui pemilik 25 Nov, terpasang di intraday_bot.py: risiko 50% bila PF trade tutup 365 hari < 1,0 (min 20 trade). Sekarang normal (PF 2,40).",
+   "sejak": "2026-11-25",
+   "status": "selesai"
   }
  ],
  "sesi_terakhir": "2026-11-25",

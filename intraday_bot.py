@@ -289,6 +289,20 @@ def send_recaps(s, target, risk_pct):
         s["recap_month"] = mo.isoformat(); health(mo, commands.period_bounds("bulan", now_wib)[0], "Bulan")
 
 
+# ======================================================================= monitor edge (T2)
+MON_HARI, MON_PF, MON_MIN, MON_W = 365, 1.0, 20, 0.5     # pemilik setujui 25 Nov 2026 (riset intraday I-40)
+
+
+def monitor_edge(hist, now):
+    """T2 milestone: faktor risiko 0,5 bila PF (R bersih) trade yang SUDAH TUTUP dalam 365 hari terakhir < 1,0
+    dengan minimal 20 trade; selain itu 1,0. Tidak mengubah sinyal, entry, SL, TP. hist: [.., t_exit (idx 4), .., R bersih (idx 7)]."""
+    r = [h[7] for h in hist if now - MON_HARI * 86400 <= h[4] < now]
+    pos, neg = sum(x for x in r if x > 0), -sum(x for x in r if x < 0)
+    pf = pos / neg if neg > 0 else None
+    aktif = len(r) >= MON_MIN and pf is not None and pf < MON_PF
+    return (MON_W if aktif else 1.0), pf, len(r)
+
+
 # ======================================================================= main
 def main():
     import signal_bot as sb, jurnal
@@ -350,7 +364,18 @@ def main():
     target = None
     try: target = json.load(open(os.path.join(HERE, "state.json"))).get("channel_id")   # channel yang sama dengan bot swing
     except Exception: pass
+    faktor, pf_mon, n_mon = monitor_edge(s.get("hist", []), now)
+    lama = s.get("monitor", {}).get("faktor", 1.0)
+    s["monitor"] = {"faktor": faktor, "pf": round(pf_mon, 3) if pf_mon is not None else None, "n": n_mon, "t": int(now)}
+    if faktor != lama:                  # beri tahu channel & pemilik hanya saat status berubah
+        teks = (f"{TAG} · 🛡️ <b>Monitor edge {'AKTIF' if faktor < 1 else 'NORMAL'}</b>\n"
+                + (f"Profit factor 365 hari terakhir {pf_mon:.2f} (< {MON_PF:g}, {n_mon} trade). Sementara gunakan "
+                   f"{faktor * 100:.0f}% dari risiko biasa per trade sampai edge pulih." if faktor < 1 else
+                   "Edge pulih. Risiko per trade kembali normal (100%)."))
+        sb.tg_send(teks, chat=target); sb.tg_send(teks)
     for msg in build_messages(ev, s, now, sb.fmt, prices):
+        if faktor < 1 and "SINYAL BARU" in msg:
+            msg += f"\n🛡️ Monitor edge aktif: gunakan {faktor * 100:.0f}% dari risiko biasa."
         sb.tg_send(msg, chat=target)
     # 5 Nov 2026 (permintaan pemilik): ringkasan rutin 2 jam DIHAPUS agar tidak terasa spam.
     # Channel hanya menerima pesan saat ada kejadian (sinyal baru, terisi, tutup, batal) + rekap mingguan/bulanan.
@@ -365,9 +390,9 @@ def main():
         priv = []
         for k, o, t, _ in ev:
             if k == "order":
-                risk = modal * risk_pct / 100; qty = risk / o["r0"]
+                risk = modal * risk_pct * faktor / 100; qty = risk / o["r0"]
                 priv.append(f"• {o['c']}USDT {'BUY' if o['d'] == 1 else 'SELL'} LIMIT {sb.fmt(o['lim'])}: ±{qty:.6g} koin (±{qty * o['lim']:,.0f} USDT, risiko {risk:,.2f} USDT)")
-        if priv: sb.tg_send(f"🔒 🟠 <b>Ukuran posisi intraday</b> (modal {modal:,.0f} USDT, risiko {risk_pct}%)\n" + "\n".join(priv))
+        if priv: sb.tg_send(f"🔒 🟠 <b>Ukuran posisi intraday</b> (modal {modal:,.0f} USDT, risiko {risk_pct * faktor:g}%{' · monitor edge aktif' if faktor < 1 else ''})\n" + "\n".join(priv))
     if errors: print("Data gagal:", ", ".join(errors))
     json.dump(s, open(STATE_FILE, "w"), indent=1)
     print(f"candle {wib(times[0])} s.d. {wib(times[-1])} · kejadian {len(ev)} · posisi {len(eng.live('open'))} · order {len(eng.live('pend'))}")

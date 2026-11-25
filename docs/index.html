@@ -68,7 +68,7 @@ button{font:inherit;color:inherit}
 .kp.menunggu{background:color-mix(in srgb,var(--kritis) 12%,var(--lantai));box-shadow:inset 0 0 0 1.5px var(--kritis)}
 .kp.menunggu .ik{background:var(--kritis);color:#fff}
 .kp.akan_datang .ik{background:var(--waspada);color:#fff}
-.kp.selesai{opacity:.7}.kp.selesai .ik{background:var(--baik);color:#fff}
+.kp.selesai{opacity:.7}.kp.selesai .ik,.kp.disetujui .ik{background:var(--baik);color:#fff}
 .kp b{display:block;font-weight:600}
 .kp .ik svg{width:13px;height:13px}
 .kosong-pesan{padding:12px 14px;border-radius:var(--r-kecil);background:var(--lantai2);color:var(--tinta2)}
@@ -248,12 +248,12 @@ function infoSumur(b,t){var v=D.bot[b],m=v.massal||{},j=(m.juara||{}).semua,p=((
   x.appendChild(el('b',null,namaBot(b)+', '+t+' '+PENDEK[t]));
   var nj=nilaiT(j,t),np=nilaiT(p,t);x.appendChild(el('div',null,nj?('Juara live: '+nj+(np?'. Penantang terbaik: '+np:'')+'.'):(t==='T2'?'Monitor edge belum dipasang di bot live.':'Dinilai saat uji walk-forward dan data baru.')))}
 
-function gambarKeputusan(){var c=$('keputusan');c.textContent='';var urut={menunggu:0,akan_datang:1,selesai:2};
+function gambarKeputusan(){var c=$('keputusan');c.textContent='';var urut={menunggu:0,akan_datang:1,disetujui:2,selesai:3};
   var L=blockerSemua().sort(function(a,b){return (urut[a.status]||9)-(urut[b.status]||9)});
   if(!L.some(function(x){return x.status==='menunggu'}))c.appendChild(el('div','kosong-pesan','Tidak ada yang menunggu jawaban Anda sekarang.'));
-  L.forEach(function(x){var k=el('div','kp '+x.status);var ik=el('div','ik');ik.innerHTML=x.status==='menunggu'?IK.seru:x.status==='selesai'?IK.cek:IK.jam;k.appendChild(ik);
-    var t=el('div');t.appendChild(el('b',null,x.judul));var label=x.status==='menunggu'?'Menunggu jawaban':x.status==='akan_datang'?'Akan diajukan':'Sudah diputuskan';
-    t.appendChild(el('div','kecil redup',label+', '+(x.bot==='semua'?'semua bot':namaBot(x.bot))));t.appendChild(el('div','kecil',x.detail));k.appendChild(t);c.appendChild(k)})}
+  L.forEach(function(x){var k=el('div','kp '+x.status);var ik=el('div','ik');ik.innerHTML=x.status==='menunggu'?IK.seru:(x.status==='selesai'||x.status==='disetujui')?IK.cek:IK.jam;k.appendChild(ik);
+    var t=el('div');t.appendChild(el('b',null,x.judul||x.teks||'Keputusan'));var label=x.status==='menunggu'?'Menunggu jawaban':x.status==='akan_datang'?'Akan diajukan':x.status==='disetujui'?'Disetujui, dikerjakan setelah syaratnya terbukti':'Sudah selesai';
+    t.appendChild(el('div','kecil redup',label+(x.bot?', '+(x.bot==='semua'?'semua bot':namaBot(x.bot)):'')));if(x.detail||(x.judul&&x.teks))t.appendChild(el('div','kecil',x.detail||x.teks));k.appendChild(t);c.appendChild(k)})}
 
 function gambarRencana(){var o=$('rencana');o.textContent='';var sekarang=Date.now();
   (D.milestone.minggu||[]).forEach(function(w,k){var it=itemMinggu(w),sel=it.filter(function(i){return i.status==='selesai'}).length;
