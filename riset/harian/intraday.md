@@ -1,67 +1,67 @@
-# Rutinitas harian INTRADAY · Tue 24 Nov 2026 10:04 WIB
+# Rutinitas harian INTRADAY · Wed 25 Nov 2026 08:06 WIB
 Dibuat otomatis oleh riset/harian.py (GitHub Actions). Sesi riset: baca ini, JANGAN ulangi langkahnya kecuali ada GAGAL.
 
-### Unduh 15 menit OK (2.9 mnt)
+### Unduh 15 menit OK (2.8 mnt)
 ```
-ETH     candle 15m  241685
-BNB     candle 15m  241685
-BTC     candle 15m  241685
-XRP     candle 15m  241685
-SOL     candle 15m  220312
-TRX     candle 15m  241685
-HYPE    candle 15m    5825
-DOGE    candle 15m  241685
-ZEC     candle 15m  241685
-LINK    candle 15m  241685
-NEAR    candle 15m  214172
-ADA     candle 15m  241685
-XLM     candle 15m  241685
-BCH     candle 15m  241686
-LTC     candle 15m  241686
-UNI     candle 15m  216773
-SUI     candle 15m  124862
-AVAX    candle 15m  216279
-GRAM    candle 15m   13902
-TAO     candle 15m   91838
-HBAR    candle 15m  241686
-SHIB    candle 15m  194243
-ENA     candle 15m   92718
-AAVE    candle 15m  214085
-QNT     candle 15m  186583
-ONDO    candle 15m   56790
-PUMP    candle 15m   42108
-ASTER   candle 15m   39710
-DOT     candle 15m  219573
-WLFI    candle 15m   43066
-WLD     candle 15m  117002
-SKY     candle 15m   41550
-PEPE    candle 15m  124646
-ICP     candle 15m  194187
-ARB     candle 15m  128781
-MORPHO  candle 15m   39986
-ETC     candle 15m  241686
-JST     candle 15m  220313
-ALGO    candle 15m  241686
-POL     candle 15m   76966
-JUP     candle 15m   98638
-RENDER  candle 15m   81678
-ATOM    candle 15m  241686
-FIL     candle 15m  214029
-AERO    candle 15m   12430
-INJ     candle 15m  213505
-ZRO     candle 15m   85114
-NIGHT   candle 15m   24720
-APT     candle 15m  143717
-CAKE    candle 15m  201909
+BNB     candle 15m  241773
+ETH     candle 15m  241773
+BTC     candle 15m  241773
+SOL     candle 15m  220400
+XRP     candle 15m  241773
+TRX     candle 15m  241773
+HYPE    candle 15m    5913
+ZEC     candle 15m  241773
+DOGE    candle 15m  241773
+LINK    candle 15m  241773
+ADA     candle 15m  241773
+NEAR    candle 15m  214260
+XLM     candle 15m  241773
+BCH     candle 15m  241773
+LTC     candle 15m  241773
+UNI     candle 15m  216860
+SUI     candle 15m  124949
+AVAX    candle 15m  216366
+GRAM    candle 15m   13989
+TAO     candle 15m   91925
+HBAR    candle 15m  241773
+SHIB    candle 15m  194330
+ENA     candle 15m   92805
+AAVE    candle 15m  214172
+ONDO    candle 15m   56877
+QNT     candle 15m  186670
+PUMP    candle 15m   42195
+ASTER   candle 15m   39797
+DOT     candle 15m  219660
+WLD     candle 15m  117089
+WLFI    candle 15m   43153
+SKY     candle 15m   41637
+PEPE    candle 15m  124733
+ICP     candle 15m  194274
+ARB     candle 15m  128868
+MORPHO  candle 15m   40073
+ETC     candle 15m  241773
+JST     candle 15m  220400
+ALGO    candle 15m  241773
+POL     candle 15m   77053
+JUP     candle 15m   98725
+RENDER  candle 15m   81765
+ATOM    candle 15m  241773
+FIL     candle 15m  214116
+INJ     candle 15m  213592
+AERO    candle 15m   12517
+ZRO     candle 15m   85201
+CAKE    candle 15m  201996
+APT     candle 15m  143804
+NIGHT   candle 15m   24807
 ```
 
-### Penyebab SL 7 hari + kesetaraan OK (1.6 mnt)
+### Penyebab SL 7 hari + kesetaraan OK (1.2 mnt)
 ```
 Trade live tutup 7 hari terakhir: 3 · SL: 0 · total +1.95R
 Kesetaraan sejak 2026-10-30T09:00 UTC: live 17 trade (+5.22R) · replay 17 trade (+5.24R) · beda 0 · hanya replay 0
 ```
 
-### Bayangan OK (1.6 mnt)
+### Bayangan OK (1.2 mnt)
 ```
 Sejak 30 Oct 2026 16:00 WIB · normalisasi bobot I-25 = 1.425
 minggu    live n  live R replay n replay R  I-25 R  I35a R  I35b R   I36 R
