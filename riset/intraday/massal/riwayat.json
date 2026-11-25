@@ -15,5 +15,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-25",
+  "n_varian": 173,
+  "n_penantang": 0,
+  "terbaik": {
+   "nama": "IM001 monitorPF 90h <1.1 w0.0 koin n20",
+   "minus": 0,
+   "pf": 1.333898214224512,
+   "rasio": 3.0012675770814043
+  }
  }
 ]

@@ -15,5 +15,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-25",
+  "n_varian": 1363,
+  "n_penantang": 116,
+  "terbaik": {
+   "nama": "X001 kombo2.0 mr2.5/tp2.0 k61.5/tpNone sus0",
+   "minus": 3,
+   "pf": 1.178930974932306,
+   "rasio": 0.46206565930631416
+  }
  }
 ]
