@@ -765,7 +765,7 @@
    }
   }
  },
- "last_ts": 1795597200,
+ "last_ts": 1795600800,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -1203,7 +1203,9 @@
   "1794848400|Fed Chairman Warsh Speaks",
   "1794922200|Core Retail Sales m/m",
   "1794922200|Retail Sales m/m",
-  "1795028400|FOMC Meeting Minutes"
+  "1795028400|FOMC Meeting Minutes",
+  "1795613400|Core PCE Price Index m/m",
+  "1795613400|Prelim GDP q/q"
  ],
  "recap_month": "2026-10-01T00:00:00+07:00"
 }
