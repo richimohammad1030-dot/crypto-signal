@@ -3,26 +3,31 @@
  "risiko": 0.5,
  "t2": false,
  "t9": null,
- "keyakinan": 30,
- "fokus": "Tahun minus (IS 3 tersisa), pertumbuhan 8,5%→10%, DD, beruntun 15",
+ "keyakinan": 25,
+ "fokus": "Tahun minus & DD: monitor edge (T2) gagal WF; SNR tahap 2 putaran 3 (30 Nov) lalu skill 2",
  "skill": {
   "nama": "SNR",
   "tahap": 2,
-  "putaran": "1/3",
-  "status": "Tahap 1 PAHAM lulus 23 Nov (pantul di swing & konfluensi ≥3). Tahap 2 putaran 1 gagal.",
-  "berikutnya": "Kamis 26 Nov: SL di balik zona, TP di zona lawan",
+  "putaran": "2/3",
+  "status": "Tahap 1 PAHAM lulus 23 Nov. Tahap 2 putaran 1 & 2 gagal (SL zona P 0,35; filter/TP zona gugur).",
+  "berikutnya": "Senin 30 Nov: putaran 3 = MR/KOMBO hanya di lokasi pantul (zona support di belakang); gagal → skill ditutup",
   "batas": "2026-12-04"
  },
  "item": [
   {
    "minggu": "2026-11-24",
    "teks": "Keluarga ide khusus tahun minus (2005/06/13/14/18/21)",
-   "status": "belum"
+   "status": "jalan"
   },
   {
    "minggu": "2026-12-08",
    "teks": "Varian dengan tahun minus ≤ 1",
    "status": "belum"
+  },
+  {
+   "minggu": "2026-11-24",
+   "teks": "Keluarga X008 TOM ke bank massal (perlu disalin ke riset/massal/xau.py)",
+   "status": "jalan"
   }
  ],
  "blocker": [
@@ -30,11 +35,19 @@
    "id": "B2",
    "bot": "xau",
    "judul": "Kenaikan risiko XAU 0,5% → ±0,8%",
-   "detail": "Disetujui di muka oleh pemilik 25 Nov, BERSYARAT: versi XAU dengan monitor edge lolos walk-forward + P_rasio dan DD ≤ 20% pada risiko baru. Sesi XAU boleh langsung memasang setelah syarat terbukti, lalu melapor.",
+   "detail": "Disetujui di muka oleh pemilik 25 Nov, BERSYARAT: versi XAU dengan monitor edge lolos walk-forward + P_rasio dan DD ≤ 20% pada risiko baru. Sesi XAU boleh langsung memasang setelah syarat terbukti, lalu melapor. 26 Nov: BELUM terpenuhi — monitor edge WF P 0,16 (a priori 365h P 0,59); X006 tetap @0,8% DD 19,8% tetapi R/thn lebih buruk di 4/8 jendela.",
    "sejak": "2026-11-24",
    "status": "disetujui"
+  },
+  {
+   "id": "B-XAU-BANK",
+   "bot": "xau",
+   "judul": "Salin keluarga X008 TOM ke bank massal",
+   "detail": "Sesi XAU hanya boleh menulis riset/xau/; riset/massal/xau.py tidak tersalin ke main. Keluarga baru ada di riset/xau/massal/keluarga_usulan.py — mohon disalin/di-import dari chat project agar saringan malam menjalankannya (dan izinkan sesi XAU menulis bank).",
+   "sejak": "2026-11-26",
+   "status": "menunggu"
   }
  ],
- "sesi_terakhir": null,
+ "sesi_terakhir": "2026-11-26",
  "_catatan": "Status xau untuk dashboard. Diperbarui sesi riset xau (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
 }

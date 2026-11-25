@@ -635,3 +635,32 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Data penelitian: xau_2004 = bibit 2004-14 + Dukascopy bibit s.d. 30 Okt + Setra (lubang Okt diisi Dukascopy, Nov 2/9/16 masih
   berlubang; dampak kecil pada 2026).
 - Total ide XAU diuji: 54 (+10 saringan).
+
+## 26 Nov 2026 — Sesi riset Kamis (PERCEPATAN + MILESTONE; mode riset biasa, sesi berikut Senin 30 Nov masih November)
+- Rutinitas harian (riset/harian/xau.md 25 Nov 08:06, ±18 jam): semua OK, replay IDENTIK (Setra 463/463, Dukascopy 2.857/2.857)
+  → tidak dijalankan ulang. Cek lokal sesi ini (Setra s.d. 25 Nov 18:00 UTC): replay IDENTIK 463/463 & 2.842/2.842.
+- Penyebab SL 7 hari (harian): 3 SL, semua CELAH MR (20 Nov MR BUY lawan tren H1 · 23 Nov MR SELL searah · 24 Nov MR BUY lawan
+  tren -0,92R). Data lokal: 25 Nov K6 SELL juga SL. **CELAH BERULANG**: MR BUY lawan tren H1 (close < EMA200 H1) 4 trade sejak
+  29 Okt (30 Okt, 12 Nov, 20 Nov SL; 24 Nov -0,92R) vs SL historis 30%. Statistik 2005-2026 (pasca-lihat, ATR rel = ATR/rata 20
+  hari): MR BUY lawan tren di ATR rel 1,0-1,3 negatif di 3 periode (-0,045/-0,065/-0,342 R/trade, n 85/39/39); ATR rel < 1 justru
+  terbaik (+0,10..+0,22). → ide #90 antri (wajib WF; bucket rawan kebetulan).
+- Bayangan sejak 2 Nov (harian 25 Nov; 15 trade): BASELINE +0,94R · live catatan bot +2,98R kotor · Tanpa kombinasi +1,42 ·
+  Tanpa susulan +0,31 · Tanpa hibrida -2,38 · MR saja -4,93 (12) · K6 saja +5,63 (5) · OCO lama +11,24 (17). 3,5 minggu = belum dinilai.
+- SKILL SNR tahap 2 putaran 2/3 + saringan cepat (saringan_1126.py, 8 ide/varian, 2005-2014; juara +12,7 R/thn, 4/10 minus, DD 52R):
+  1 SNR-SL-ZONA +12,6 (3/10, DD 45R) · 2 SL-KETAT +12,8 (3/10, DD 54) · 3 SL-D1 +12,1 (DD 44) · 4 FILTER konfluensi ≥ 3 lawan +8,6
+  (lewati 307) · 5 TP-K6 di zona lawan +8,3 · 6 MOM-INTRA [lit Gao dkk 2018] -0,015R/trade · 7 **TOM-BUY [lit Ariel 1987]
+  +0,106R/trade** (BUY semua hari -0,023 → lift +0,13) · 8 BOS-H4 n 40, -0,002.
+- Uji penuh (uji_1126.py, WF berlabuh, uji 2011-2026; mesin massal: live +17,7 R/thn, 4/16 minus, terburuk -24, DD 52R):
+  · A SNR SL zona: WF pilih KETAT 8/8 jendela → +19,7 R/thn tetapi terburuk -31, DD 57R, P 0,35 (tetap ZONA P 0,28 walau DD 43R
+    & 2005-26 DD 20,7% vs 23,5%) → GAGAL. **SKILL SNR tahap 2 putaran 2 BELUM LULUS.**
+  · B TOM (SUMBER EDGE BARU, korelasi +0,12): mandiri 2005-26 +0,074R/trade, stabil +0,106/+0,035/+0,118 per periode, tetapi 9/22
+    tahun minus. Integrasi (maks 1 posisi/hari) WF P 0,19 (pilihan berganti TA/TC/dasar/TB/TD); tetap TD (lewati SELL hari TOM)
+    P 0,77, 3/16 minus, Setra 0,99 (sudah dilihat) → GAGAL sebagai tambahan bot; edge disimpan sebagai keluarga X008 bank massal.
+  · C T2 MONITOR EDGE (penantang massal X006/X002): WF dari 89 varian P 0,16 (+11,1 R/thn, 3,0/mg); varian a priori (PF 365 hari
+    < 1,0 per strategi, w 0) P 0,59, 3/16 minus, terburuk -16, DD 30R, @0,8% DD 22,4%; X006 tetap @0,8%: DD 19,8%, +12,1%/thn,
+    beruntun 10, 2/16 minus, P 0,63 — tetapi R/thn lebih buruk di 4/8 jendela (tidak konsisten) → bukan kandidat. Syarat blocker
+    B2 (monitor lolos WF + P_rasio) dan persetujuan muka (a) BELUM terpenuhi → tidak ada yang dipasang.
+  Tidak ada kandidat baru → MENU bayangan.py tidak berubah.
+- Bank massal: keluarga X008 TOM (60 varian, 7 lolos inti.penantang lokal) di riset/xau/massal/keluarga_usulan.py — sesi XAU
+  tidak berwenang menulis riset/massal/xau.py → perlu disalin pemilik/chat project agar jalan di saringan malam.
+- Total ide XAU diuji: 63 (+8 saringan, +1 WF monitor). Saringan massal: 1.363 varian (25 Nov).
