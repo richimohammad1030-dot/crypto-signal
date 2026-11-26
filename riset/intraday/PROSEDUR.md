@@ -1,5 +1,7 @@
 # Prosedur riset · INTRADAY
 
+> **26 Nov 2026 (ATURAN_BERSAMA G):** semua uji wajib anti-optimis (urutan candle terburuk, biaya + STRES, fill realistis, tanpa lihat masa depan, validasi timeframe kecil). Penyebab SL wajib dianalisis → hipotesis mitigasi → keluarga di `riset/intraday/massal/keluarga_usulan.py` (otomatis diuji malam itu) → catat di `status.json` `mitigasi_sl`.
+
 > **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/intraday/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/intraday.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/intraday/RAPOR.md`.
 
 Instruksi untuk routine **"Riset Bot Intraday"** (Rabu & Sabtu 03:37 WIB).

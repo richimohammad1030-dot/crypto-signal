@@ -32,5 +32,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-26",
+  "n_varian": 143,
+  "n_penantang": 0,
+  "terbaik": {
+   "nama": "CM002 kurva-ekuitas n20 w0.5",
+   "minus": 0,
+   "pf": 1.8404675794793168,
+   "rasio": 4.7181575395762145
+  }
  }
 ]

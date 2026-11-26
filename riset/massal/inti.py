@@ -109,8 +109,10 @@ def kunci(s):
 def penantang(si, so, ji, jo):
     if not (si and so and ji and jo): return False
     lebih_baik = len(si["minus"]) < len(ji["minus"]) or (len(si["minus"]) == len(ji["minus"]) and si["rasio"] >= 1.25 * ji["rasio"])
+    # anti-optimis (pemilik, 26 Nov 2026): OOS harus tetap untung setelah biaya tambahan STRES R/trade (slip/urutan candle)
+    tahan = (so.get("stres") or {}).get("pf", 0) > 1.0
     return (lebih_baik and si["n_lolos"] >= ji["n_lolos"] and so["pf"] > TARGET["pf"] and len(so["minus"]) <= len(jo["minus"])
-            and so["rasio"] >= 0.8 * jo["rasio"])
+            and so["rasio"] >= 0.8 * jo["rasio"] and tahan)
 
 
 def id_varian(nama):
@@ -120,7 +122,8 @@ def id_varian(nama):
 def baris(s):
     if not s: return "– | – | – | – | – | – | –"
     return (f"{len(s['minus'])} | {s['pf']:.2f} | {s['wr']*100:.0f}% | {s['persen']:+.1f}% | {s['dd']:.1f}% | {s['beruntun']} | "
-            f"{s['rasio']:.2f} | {s['persen20']:+.1f}% @{s['risiko20']:.2f}% | {s['n_lolos']}/7")
+            f"{s['rasio']:.2f} | {s['persen20']:+.1f}% @{s['risiko20']:.2f}% | {s['n_lolos']}/7"
+            + (f" · stres PF {s['stres']['pf']:.2f}" if s.get("stres") else ""))
 
 
 def tulis(bot, folder, hasil, juara, periode, catatan=""):

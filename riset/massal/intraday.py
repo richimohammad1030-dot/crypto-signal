@@ -10,6 +10,7 @@ import inti
 
 RISIKO = 1.0
 MINGGU_MIN = 3.0
+STRES = 0.03                       # biaya tambahan R/trade untuk uji anti-optimis (FX lebih besar: H1 lebih optimis dari M5)
 PERIODE = (("2020-03-01", "2024-01-01"), ("2024-01-01", None))
 
 

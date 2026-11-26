@@ -1,5 +1,7 @@
 # Prosedur riset · CRYPTO
 
+> **26 Nov 2026 (ATURAN_BERSAMA G):** semua uji wajib anti-optimis (urutan candle terburuk, biaya + STRES, fill realistis, tanpa lihat masa depan, validasi timeframe kecil). Penyebab SL wajib dianalisis → hipotesis mitigasi → keluarga di `riset/crypto/massal/keluarga_usulan.py` (otomatis diuji malam itu) → catat di `status.json` `mitigasi_sl`.
+
 > **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/crypto/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/crypto.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/crypto/RAPOR.md`.
 
 Instruksi untuk routine **"Riset Bot Crypto"** (Selasa & Jumat 02:59 WIB).

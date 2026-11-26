@@ -12,6 +12,7 @@ import inti
 
 RISIKO = FL.RISK_PCT
 MINGGU_MIN = 3.0
+STRES = 0.05                       # biaya tambahan R/trade untuk uji anti-optimis (FX lebih besar: H1 lebih optimis dari M5)
 PERIODE = (("2015-06-01", "2023-01-01"), ("2023-01-01", None))
 
 

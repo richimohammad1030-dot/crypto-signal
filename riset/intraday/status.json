@@ -46,5 +46,6 @@
   }
  ],
  "sesi_terakhir": "2026-11-25",
- "_catatan": "Status intraday untuk dashboard. Diperbarui sesi riset intraday (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+ "_catatan": "Status intraday untuk dashboard. Diperbarui sesi riset intraday (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
+ "mitigasi_sl": []
 }

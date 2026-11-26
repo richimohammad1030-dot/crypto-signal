@@ -11,7 +11,8 @@ import inti
 gb = m.gb
 
 RISIKO = 0.5                       # risiko live (%)
-MINGGU_MIN = 3.0                   # T8 XAU
+MINGGU_MIN = 3.0
+STRES = 0.03                       # biaya tambahan R/trade untuk uji anti-optimis (FX lebih besar: H1 lebih optimis dari M5)                   # T8 XAU
 PERIODE = (("2005-01-01", "2022-01-01"), ("2022-01-01", None))   # IS, OOS
 BIAYA = 0.40
 

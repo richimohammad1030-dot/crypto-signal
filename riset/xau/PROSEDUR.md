@@ -1,5 +1,7 @@
 # Prosedur riset · XAU
 
+> **26 Nov 2026 (ATURAN_BERSAMA G):** semua uji wajib anti-optimis (urutan candle terburuk, biaya + STRES, fill realistis, tanpa lihat masa depan, validasi timeframe kecil). Penyebab SL wajib dianalisis → hipotesis mitigasi → keluarga di `riset/xau/massal/keluarga_usulan.py` (otomatis diuji malam itu) → catat di `status.json` `mitigasi_sl`.
+
 > **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/xau/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/xau.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/xau/RAPOR.md`.
 
 Instruksi untuk scheduled task **"Riset Bot XAU"** (Senin & Kamis 02:18 WIB).

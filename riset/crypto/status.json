@@ -31,5 +31,6 @@
   }
  ],
  "sesi_terakhir": null,
- "_catatan": "Status crypto untuk dashboard. Diperbarui sesi riset crypto (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+ "_catatan": "Status crypto untuk dashboard. Diperbarui sesi riset crypto (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
+ "mitigasi_sl": []
 }

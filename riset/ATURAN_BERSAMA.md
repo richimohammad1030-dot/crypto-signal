@@ -121,3 +121,32 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    lolos walk-forward (netral/lebih baik), P_rasio tidak memburuk, dan replay identik; (b) risiko XAU 0,5% → ±0,8% — boleh
    dipasang bila versi dengan monitor edge lolos WF + P_rasio dan DD ≤ 20% pada risiko baru. Setelah memasang: tulis di
    ringkasan Telegram, ubah blocker jadi `selesai`. Perubahan strategi lain tetap butuh persetujuan.
+
+## G. ANTI-OPTIMIS & MITIGASI SL (pemilik, 26 Nov 2026) — berlaku SEMUA bot, mengalahkan aturan lama yang bertentangan
+Pelajaran riset momentum XAU (Nov 2026): backtest menghitung TP di bar M1 tempat limit terisi (urutan harga di dalam candle
+tidak diketahui) → PF 1,36 di backtest, PF 0,80 di MT5 tick nyata. Hasil +240R tidak nyata. Agar tidak terulang di bot mana pun:
+1. **Urutan harga di dalam candle**: bila satu candle bisa menyentuh SL dan TP (atau entry lalu TP) → anggap yang TERBURUK
+   (SL dulu; TP tidak dihitung di candle tempat order terisi). Kandidat final wajib dicek ulang di timeframe lebih kecil
+   (XAU M1, FX M5, crypto 15m/1m) — selisih besar = tanda bias.
+2. **Biaya nyata + uji stres**: spread/komisi/funding asli, slip; penantang wajib tetap PF > 1,0 di OOS setelah biaya tambahan
+   `STRES` R/trade (riset/massal/<bot>.py: XAU 0,03 · FX 0,05 · crypto 0,03 · intraday 0,03). Laporkan hasil normal DAN stres.
+3. **Pengisian order realistis**: limit terisi hanya bila harga MELEWATI level (bukan sekadar menyentuh) untuk sisi yang kena
+   spread; market masuk di open candle berikutnya + slip; tidak ada entry di harga yang sudah lewat.
+4. **Tanpa melihat masa depan**: sinyal hanya dari candle yang sudah close; indikator/ambang/kuantil dihitung dari data sebelum
+   periode uji; zona waktu dicek (WIB vs UTC); daftar koin sesuai masanya (riset/pit.py).
+5. **Bias seleksi**: makin banyak varian diuji makin besar peluang lolos kebetulan → wajib OOS + walk-forward + P_rasio ≥ 0,90,
+   tetangga parameter juga lolos, dan sebut jumlah varian yang diuji di laporan. Hasil terbaik IS tidak pernah dilaporkan
+   sebagai ekspektasi.
+6. **Validasi silang**: sebelum live, kandidat XAU/FX dicocokkan dengan MT5 Strategy Tester (tick nyata, dijalankan pemilik)
+   atau minimal replay identik; setelah live, live vs bayangan dipantau. Beda > 20% PF = berhenti dan cari biasnya dulu.
+7. **Bahasa laporan**: angka backtest = "batas atas". Klaim edge tanpa poin 1-6 dilarang; bila ragu, tulis "belum terbukti".
+
+**Mitigasi penyebab SL** — penyebab SL tidak cukup DISEBUT, wajib DIANALISIS dan DIMITIGASI:
+a) Tiap sesi: kelompokkan SL 7 hari (riset/harian/<bot>.md) + seluruh SL backtest per kategori; cari pola (rezim, jam, hari,
+   arah, jarak SL, news, volatilitas) dan bandingkan dengan trade menang pada kondisi sama (apakah filter akan ikut membuang
+   pemenang?).
+b) Kategori berulang (≥ 3 kali dalam 7 hari, atau kategori SL terbesar di backtest) → WAJIB jadi hipotesis mitigasi + keluarga
+   baru di `riset/<bot>/massal/keluarga_usulan.py` pada sesi yang sama, diuji dengan aturan anti-optimis di atas.
+c) Catat di `riset/<bot>/status.json` → `mitigasi_sl`: [{"penyebab","jumlah","analisis","mitigasi","uji","status"}] dengan status
+   `dianalisis` / `diuji` / `lolos` (masuk bayangan) / `ditolak` (alasan) / `dipasang`. Dashboard menampilkannya.
+d) Mitigasi yang lolos mengikuti gerbang biasa; yang ditolak tetap dicatat agar tidak diuji ulang tanpa definisi baru.

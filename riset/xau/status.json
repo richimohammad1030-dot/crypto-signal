@@ -43,11 +43,12 @@
    "id": "B-XAU-BANK",
    "bot": "xau",
    "judul": "Salin keluarga X008 TOM ke bank massal",
-   "detail": "Sesi XAU hanya boleh menulis riset/xau/; riset/massal/xau.py tidak tersalin ke main. Keluarga baru ada di riset/xau/massal/keluarga_usulan.py — mohon disalin/di-import dari chat project agar saringan malam menjalankannya (dan izinkan sesi XAU menulis bank).",
+   "detail": "Disetujui 26 Nov. Bank massal kini otomatis memuat riset/<bot>/massal/keluarga_usulan.py tiap malam (semua bot) — sesi tidak perlu minta salin lagi. X008 TOM sudah diuji: 60 varian, belum lolos gerbang penantang.",
    "sejak": "2026-11-26",
-   "status": "menunggu"
+   "status": "selesai"
   }
  ],
  "sesi_terakhir": "2026-11-26",
- "_catatan": "Status xau untuk dashboard. Diperbarui sesi riset xau (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+ "_catatan": "Status xau untuk dashboard. Diperbarui sesi riset xau (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
+ "mitigasi_sl": []
 }

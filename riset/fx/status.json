@@ -32,5 +32,6 @@
  ],
  "blocker": [],
  "sesi_terakhir": null,
- "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai."
+ "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
+ "mitigasi_sl": []
 }
