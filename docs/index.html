@@ -142,6 +142,17 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 .jadwal span:last-child{color:var(--redup);text-align:right}
 .galat{padding:14px;border-radius:var(--r-kecil);background:color-mix(in srgb,var(--kritis) 14%,var(--lantai));margin-bottom:12px;display:none}
 /* perjalanan skill */
+.lomba{display:grid;grid-template-columns:22px 70px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--garis)}
+.lomba:first-of-type{border-top:0}
+.lomba .no{font:800 16px var(--f-tampil);color:var(--redup)}
+.lomba.unggul .no{color:var(--w)}
+.lomba .nm{font-weight:600}
+.lomba .trek svg{display:block;width:100%;overflow:visible}
+.lomba .ring{font-size:12.5px;color:var(--redup);white-space:nowrap}
+.lomba .ring b{color:var(--tinta);font:700 14px var(--f-tampil)}
+.kaki{margin-top:6px}
+@media(max-width:560px){.lomba{grid-template-columns:20px 1fr auto;gap:4px 8px}.lomba .trek{grid-column:1/-1;order:5}}
+
 .papan{display:grid;gap:8px;margin-bottom:14px}
 .peringkat{display:grid;grid-template-columns:28px 92px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:var(--r-kecil);background:var(--lantai2)}
 .peringkat .no{font:800 18px var(--f-tampil);color:var(--redup)}
@@ -213,10 +224,10 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
   </section>
 
   <section class="blok" style="margin-top:16px"><h2>Perjalanan skill</h2>
-    <p class="kecil redup" style="margin:-4px 0 12px">Tiap titik satu skill analisa teknikal. Titik penuh berarti lulus bisa memakai, cincin menunjukkan tahap skill yang sedang dipelajari.</p>
+    <p class="kecil redup" style="margin:-4px 0 12px">Urutan = bot yang paling jauh menguasai skill. Tiap titik satu skill; titik bercincin = sedang dipelajari.</p>
     <div class="papan" id="papan"></div>
     <div id="jejak"></div>
-    <div class="info" id="infoKur">Ketuk titik untuk melihat skill, target dorong, dan estimasi realistisnya.</div>
+    <div class="info" id="infoKur" style="margin-top:10px">Ketuk titik untuk melihat skill dan perkiraan selesainya.</div>
   </section>
 
   <div class="susun">
@@ -313,31 +324,22 @@ function gambarKur(){var k=$('kur');if(!k)return;k.textContent='';k.appendChild(
 
 function bln(d){return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'2-digit'})}
 function gambarJejak(){var pp=$('papan'),jj=$('jejak');if(!pp)return;pp.textContent='';jj.textContent='';var sk=(D.kurikulum||{}).skill||[];
-  if(!URUT.some(function(b){return D.bot[b]&&D.bot[b].checkpoint})){pp.appendChild(el('div','kosong-pesan kecil','Data perjalanan skill sedang diperbarui. Bagian ini muncul otomatis dalam beberapa menit.'));return}
+  if(!URUT.some(function(b){return D.bot[b]&&D.bot[b].checkpoint})){jj.appendChild(el('div','kosong-pesan kecil','Data perjalanan skill sedang diperbarui. Bagian ini muncul otomatis dalam beberapa menit.'));return}
   var urut=URUT.filter(function(b){return D.bot[b]&&D.bot[b].checkpoint}).sort(function(a,b){var A=D.bot[a].checkpoint,B=D.bot[b].checkpoint;return (B.skor-A.skor)||(B.per_minggu-A.per_minggu)});
-  urut.forEach(function(b,i){var c=D.bot[b].checkpoint,d2=urut[1]&&D.bot[urut[1]].checkpoint,r=el('div','peringkat'+(i===0&&c.skor>0&&(!d2||c.skor>d2.skor)?' pertama':''));r.style.setProperty('--w',warna(b));r.appendChild(el('span','no',String(i+1)));
-    var nm=el('span','nm');nm.appendChild(el('i'));nm.appendChild(document.createTextNode(SINGKAT[b]));r.appendChild(nm);var rl=el('div','rel');var ri=el('i');rl.appendChild(ri);r.appendChild(rl);setTimeout(function(){ri.style.width=Math.max(2,100*c.skor/c.total)+'%'},60+i*120);
-    var k=el('div','kanan');k.appendChild(el('b',null,f(c.skor,1)+' / '+c.total+' skill'));var dua=urut[1]&&D.bot[urut[1]].checkpoint,unggul=i===0&&c.skor>0&&(!dua||c.skor>dua.skor);k.appendChild(document.createTextNode((unggul?'Paling cepat, ':i===0&&c.skor>0?'Seri di depan, ':'')+f(c.per_minggu,2)+' skill/minggu'));r.appendChild(k);pp.appendChild(r)});
-  var cs=getComputedStyle(document.documentElement),cGaris=cs.getPropertyValue('--garis').trim(),cLantai=cs.getPropertyValue('--lantai').trim(),cRedup=cs.getPropertyValue('--redup').trim(),cKritis=cs.getPropertyValue('--kritis').trim();
-  URUT.forEach(function(b){var v=D.bot[b];if(!v||!v.checkpoint)return;var kur=(v.status||{}).kurikulum||[],c=v.checkpoint,warnaB=cs.getPropertyValue('--b-'+b).trim();
-    var box=el('div','jejak-bot');var kp=el('div','jejak-kepala');var kini=kur.find(function(e){return e.status==='belajar'})||kur.find(function(e){return !e.t2&&e.status!=='ditutup'});
-    kp.appendChild(el('b',null,namaBot(b)));kp.appendChild(el('span','kecil redup',kini?'Sekarang: skill '+kini.no+' '+(skillDef(kini.no).nama||kini.kode)+(kini.mulai?', tahap '+kini.tahap:', belum dimulai'):'Semua skill selesai'));box.appendChild(kp);
-    var wad=el('div','jejak');box.appendChild(wad);jj.appendChild(box);var W=Math.max(300,wad.clientWidth||jj.clientWidth||600),H=46,pad=12,n=sk.length,dx=(W-2*pad)/(n-1),y=22,rr=Math.min(10,dx*.36);
-    var ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 '+W+' '+H);
-    function L(x1,x2,col,w){var l=document.createElementNS(ns,'line');l.setAttribute('x1',x1);l.setAttribute('x2',x2);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('stroke',col);l.setAttribute('stroke-width',w);l.setAttribute('stroke-linecap','round');svg.appendChild(l);return l}
-    L(pad,W-pad,cGaris,4);var maju=0;kur.forEach(function(e,i){var pr=(e.t2||e.status==='ditutup')?1:e.t1?0.4:e.mulai?0.1:0;if(pr>0)maju=i+pr});
-    var isi=L(pad,pad,warnaB,4);setTimeout(function(){isi.setAttribute('x2',pad+Math.min(maju,n-1)*dx);isi.style.transition='all 1.2s cubic-bezier(.2,.8,.2,1)'},80);
-    sk.forEach(function(d,i){var e=kur.find(function(x){return x.no===d.no})||{no:d.no,status:'belum',tahap:0},x=pad+i*dx,g=document.createElementNS(ns,'g');g.setAttribute('tabindex','0');g.style.cursor='pointer';
-      var lulus=e.t2||e.status==='ditutup',aktif=e.status==='belajar',telat=e.label==='terlambat';
-      var cir=document.createElementNS(ns,'circle');cir.setAttribute('cx',x);cir.setAttribute('cy',y);cir.setAttribute('r',rr);cir.setAttribute('fill',lulus?(e.status==='ditutup'?cRedup:warnaB):cLantai);cir.setAttribute('stroke',aktif?(telat?cKritis:warnaB):lulus?warnaB:cGaris);cir.setAttribute('stroke-width',aktif?3:2);g.appendChild(cir);
-      if(aktif){var fr=(e.tahap||0)/3,arc=document.createElementNS(ns,'circle');arc.setAttribute('cx',x);arc.setAttribute('cy',y);arc.setAttribute('r',rr-4);arc.setAttribute('fill','none');arc.setAttribute('stroke',warnaB);arc.setAttribute('stroke-width',3.5);var keliling=2*Math.PI*(rr-4);arc.setAttribute('stroke-dasharray',(keliling*fr)+' '+keliling);arc.setAttribute('transform','rotate(-90 '+x+' '+y+')');g.appendChild(arc)}
-      if(lulus){var t=document.createElementNS(ns,'path');t.setAttribute('d','M'+(x-rr*.45)+' '+(y+.5)+' l'+(rr*.3)+' '+(rr*.32)+' l'+(rr*.6)+' -'+(rr*.68));t.setAttribute('stroke','#fff');t.setAttribute('stroke-width',2);t.setAttribute('fill','none');t.setAttribute('stroke-linecap','round');g.appendChild(t)}
-      if(e.kecepatan&&e.kecepatan>=1.25){var z=document.createElementNS(ns,'text');z.setAttribute('x',x+rr*.6);z.setAttribute('y',y-rr*.6);z.setAttribute('font-size',11);z.textContent='⚡';g.appendChild(z)}
-      if(n<=13&&(dx>=24||i%2===0)){var tl=document.createElementNS(ns,'text');tl.setAttribute('x',x);tl.setAttribute('y',H-1);tl.setAttribute('text-anchor','middle');tl.setAttribute('class','lbl');tl.setAttribute('fill',cRedup);tl.setAttribute('font-size',10);tl.textContent=String(d.no);g.appendChild(tl)}
+  var cs=getComputedStyle(document.documentElement),cGaris=cs.getPropertyValue('--garis').trim(),cLantai=cs.getPropertyValue('--lantai').trim(),cKritis=cs.getPropertyValue('--kritis').trim(),cRedup=cs.getPropertyValue('--redup').trim();
+  urut.forEach(function(b,ri){var v=D.bot[b],kur=(v.status||{}).kurikulum||[],c=v.checkpoint,wb=cs.getPropertyValue('--b-'+b).trim(),d2=urut[1]&&D.bot[urut[1]].checkpoint,unggul=ri===0&&c.skor>0&&(!d2||c.skor>d2.skor);
+    var row=el('div','lomba'+(unggul?' unggul':''));row.style.setProperty('--w',wb);row.appendChild(el('span','no',String(ri+1)));var nm=el('span','nm',SINGKAT[b]);row.appendChild(nm);
+    var wad=el('div','trek');row.appendChild(wad);var sm=el('span','ring');sm.appendChild(el('b',null,f(c.skor,1)+'/'+c.total));sm.appendChild(document.createTextNode(' · '+new Date(c.selesai_real).toLocaleDateString('id-ID',{month:'short',year:'2-digit'})));row.appendChild(sm);jj.appendChild(row);
+    var W=Math.max(220,wad.clientWidth||400),H=26,pad=9,n=sk.length,dx=(W-2*pad)/(n-1),y=13,rr=Math.min(7,dx*.32),ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    function L(x2,col){var l=document.createElementNS(ns,'line');l.setAttribute('x1',pad);l.setAttribute('x2',x2);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('stroke',col);l.setAttribute('stroke-width',3);l.setAttribute('stroke-linecap','round');svg.appendChild(l);return l}
+    L(W-pad,cGaris);var maju=0;kur.forEach(function(e,i){var pr=(e.t2||e.status==='ditutup')?1:e.t1?0.4:e.mulai?0.1:0;if(pr>0)maju=i+pr});var isi=L(pad,wb);setTimeout(function(){isi.style.transition='all 1.2s cubic-bezier(.2,.8,.2,1)';isi.setAttribute('x2',pad+Math.min(maju,n-1)*dx)},80+ri*120);
+    sk.forEach(function(d,i){var e=kur.find(function(x){return x.no===d.no})||{no:d.no,status:'belum',tahap:0},x=pad+i*dx,lulus=e.t2||e.status==='ditutup',aktif=e.status==='belajar',g=document.createElementNS(ns,'g');g.setAttribute('tabindex','0');g.style.cursor='pointer';
+      var ci=document.createElementNS(ns,'circle');ci.setAttribute('cx',x);ci.setAttribute('cy',y);ci.setAttribute('r',aktif?rr+1:rr*.8);ci.setAttribute('fill',lulus?wb:aktif?cLantai:cLantai);ci.setAttribute('stroke',aktif?(e.label==='terlambat'?cKritis:wb):lulus?wb:cGaris);ci.setAttribute('stroke-width',aktif?3:1.5);g.appendChild(ci);
+      if(e.kecepatan&&e.kecepatan>=1.25){var z=document.createElementNS(ns,'text');z.setAttribute('x',x);z.setAttribute('y',y-rr-2);z.setAttribute('text-anchor','middle');z.setAttribute('font-size',9);z.textContent='⚡';g.appendChild(z)}
       var tx=teksSkill(b,e)+(e.cp_dorong?' Target dorong '+bln(e.cp_dorong)+', estimasi realistis '+bln(e.cp_real)+'.':'');tip(g,tx);
-      g.addEventListener('click',function(){var x2=$('infoKur');x2.textContent='';x2.appendChild(el('b',null,(d.nama)+' · '+namaBot(b)));x2.appendChild(el('div',null,tx));if(d.mencegah)x2.appendChild(el('div','kecil','Mencegah: '+d.mencegah));if(d.menambah)x2.appendChild(el('div','kecil','Menambah: '+d.menambah))});svg.appendChild(g)});
-    wad.appendChild(svg);var t2=el('div','tgl2');var s1=el('span');s1.appendChild(document.createTextNode('Selesai: dorong '));s1.appendChild(el('b',null,bln(c.selesai_dorong)));s1.appendChild(document.createTextNode(', realistis '));s1.appendChild(el('b',null,bln(c.selesai_real)));t2.appendChild(s1);wad.appendChild(t2)});
-  var c0=D.bot[URUT[0]].checkpoint;if(c0)jj.appendChild(el('div','kecil redup','Estimasi realistis memakai '+c0.dasar_real+'; berubah otomatis begitu bot mulai lulus skill. Target dorong memakai target ketat tiap skill.'))}
+      g.addEventListener('click',function(){var x2=$('infoKur');x2.textContent='';x2.appendChild(el('b',null,d.no+'. '+d.nama+' · '+namaBot(b)));x2.appendChild(el('div',null,tx));if(d.mencegah)x2.appendChild(el('div','kecil','Mencegah: '+d.mencegah));if(d.menambah)x2.appendChild(el('div','kecil','Menambah: '+d.menambah))});svg.appendChild(g)});
+    wad.appendChild(svg)});
+  var c0=D.bot[URUT[0]].checkpoint;jj.appendChild(el('div','kecil redup kaki','Angka = skill dikuasai dari 13, bulan = estimasi realistis semua selesai.'))}
 
 function gambarKeputusan(){var c=$('keputusan');c.textContent='';var urut={menunggu:0,akan_datang:1,disetujui:2,selesai:3};
   var L=blockerSemua().sort(function(a,b){return (urut[a.status]||9)-(urut[b.status]||9)});
