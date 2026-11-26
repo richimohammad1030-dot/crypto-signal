@@ -1,0 +1,3 @@
+⚠️ RUTINITAS HARIAN RISET 2026-11-26
+• XAU: unduh Dukascopy gagal (dipakai bibit riset/data + cache)
+Rincian: riset/harian/
