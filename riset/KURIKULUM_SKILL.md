@@ -112,3 +112,24 @@ FX 1 sesi/minggu (Minggu) → boleh beberapa tahap per sesi; batas 3 sesi per ta
 - Gerbang tahap 2 TIDAK dilonggarkan (P ≥ 0,90 walk-forward + aturan anti-optimis ATURAN_BERSAMA G). Kalau sampai 31 Des tetap
   gagal di satu bot, laporkan jujur cara pakai terbaik + P-nya; jangan memaksakan lolos.
 - Skill 2 (struktur pasar) boleh mulai paralel hanya bila tidak mengurangi sesi SNR.
+
+## KURIKULUM 10 SKILL + ATURAN PERCEPATAN (pemilik, 26 Nov 2026) — mengalahkan "Antrian skill berikutnya" di atas
+Daftar & target waktu: `riset/kurikulum.json` (SNR → struktur pasar → price action di level → sesi & likuiditas → rezim
+volatilitas → volume & aliran order → kalender & news → musiman → antar-pasar → manajemen posisi).
+1. **Target ketat per skill** (hari kalender sejak mulai): tahap 0+1 PAHAM ≤ 4 hari · tahap 2 BISA MEMAKAI ≤ 10-14 hari
+   (`target_hari` tiap skill). Total 10 skill ≤ ±4,5 bulan bila tepat target. Tahap 3 (bayangan ≥ 28 hari → live) berjalan
+   PARALEL dan tidak menahan skill berikutnya. Pengecualian: SNR (T10) batas tahap 2 = 31 Des 2026.
+2. **Selesai cepat = langsung lanjut**: begitu skill lulus tahap 2 (masuk bayangan) — atau bila SNR bot itu sudah sampai
+   tahap 3 sebelum akhir tahun — sesi yang sama/berikutnya LANGSUNG memulai skill berikutnya di `kurikulum.json`. Tidak menunggu
+   batas waktu, tidak menunggu bot lain. Tiap bot maju dengan kecepatannya sendiri; skill bisa dipelajari tidak urut bila datanya
+   belum ada (mis. volume FX), catat alasannya.
+3. **Lewat batas**: skill yang melewati `target_hari` = status TERLAMBAT (merah di dashboard). Wajib definisi/cara pakai baru
+   (keluarga di `riset/<bot>/massal/keluarga_usulan.py`) dengan tambahan maks 7 hari; tetap gagal → `ditutup` dengan catatan
+   "dipelajari: tidak berguna untuk bot ini" dan pindah ke skill berikutnya. SNR tidak ditutup sebelum 31 Des.
+4. **Penanda kecepatan** (dicatat otomatis dashboard dari tanggal di `status.json` → `kurikulum`): kecepatan = target_hari ÷
+   hari aktual sampai lulus tahap 2. ≥ 2× = "kilat", ≥ 1,25× = "cepat", ≥ 1× = "tepat waktu", < 1× = "terlambat".
+   Bot/skill yang kilat dicatat di laporan sebagai bahan eksplorasi: apa yang membuatnya cepat (data, mesin, sifat pasar).
+5. **Tiap sesi WAJIB memperbarui** `riset/<bot>/status.json` → `kurikulum[i]`: `status` (belum/belajar/bayangan/live/ditutup),
+   `tahap`, tanggal `mulai`, `t1` (lulus paham), `t2` (lulus bisa memakai), `t3` (live), `catatan` singkat. Juga `skill` (skill
+   aktif) agar kartu skill dashboard ikut berubah.
+6. Gerbang tiap tahap tetap sama ketat (P ≥ 0,90 + ATURAN_BERSAMA G). Cepat tidak boleh berarti longgar.

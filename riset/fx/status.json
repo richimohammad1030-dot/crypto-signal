@@ -33,5 +33,117 @@
  "blocker": [],
  "sesi_terakhir": null,
  "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
- "mitigasi_sl": []
+ "mitigasi_sl": [],
+ "kurikulum": [
+  {
+   "no": 1,
+   "kode": "SNR",
+   "status": "belajar",
+   "tahap": 0,
+   "mulai": "2026-11-29",
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": "Dijadwalkan mulai Minggu 29 Nov"
+  },
+  {
+   "no": 2,
+   "kode": "STRUKTUR",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 3,
+   "kode": "PA",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 4,
+   "kode": "LIKUIDITAS",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 5,
+   "kode": "REZIM",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 6,
+   "kode": "VOLUME",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 7,
+   "kode": "NEWS",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 8,
+   "kode": "MUSIMAN",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 9,
+   "kode": "ANTARPASAR",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 10,
+   "kode": "POSISI",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  }
+ ]
 }

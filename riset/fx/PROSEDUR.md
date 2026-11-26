@@ -1,5 +1,7 @@
 # Prosedur riset · FX MAJOR
 
+> **26 Nov 2026 (KURIKULUM_SKILL: 10 skill + percepatan):** skill lulus tahap 2 → sesi itu juga mulai skill berikutnya di `riset/kurikulum.json`, tanpa menunggu batas. Perbarui `status.json` → `kurikulum` (status, tahap, tanggal mulai/t1/t2/t3) tiap sesi.
+
 > **26 Nov 2026 (ATURAN_BERSAMA G):** semua uji wajib anti-optimis (urutan candle terburuk, biaya + STRES, fill realistis, tanpa lihat masa depan, validasi timeframe kecil). Penyebab SL wajib dianalisis → hipotesis mitigasi → keluarga di `riset/fx/massal/keluarga_usulan.py` (otomatis diuji malam itu) → catat di `status.json` `mitigasi_sl`.
 
 > **24 Nov 2026 (ATURAN_BERSAMA F):** sesi dimulai dengan `riset/MILESTONE_2026.md` + `riset/fx/massal/terbaru.md`. Saringan dikerjakan GitHub Actions dari bank ide `riset/massal/fx.py`; sesi menilai penantang (WF + P_rasio) dan menambah ≥ 1 keluarga baru ke bank. Tutup sesi dengan baris baru di `riset/fx/RAPOR.md`.

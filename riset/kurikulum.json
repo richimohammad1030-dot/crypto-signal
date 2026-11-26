@@ -1,0 +1,16 @@
+{
+ "_catatan": "Kurikulum skill semua bot (pemilik, 26 Nov 2026). Target per skill = hari kalender dari mulai sampai LULUS TAHAP 2 (bisa memakai). Tahap 3 (bayangan >= 28 hari -> live) berjalan paralel dan TIDAK menahan skill berikutnya. Status per bot ada di riset/<bot>/status.json -> kurikulum. Dibaca riset/dashboard/bangun.py.",
+ "target_tahap": {"t1": 4, "t2": 14, "bayangan": 28},
+ "skill": [
+  {"no": 1, "kode": "SNR", "nama": "Support & resistance", "isi": "Swing fraktal H4/D1, high/low hari & minggu lalu, angka bulat, supply-demand; pantul vs tembus", "target_hari": 14, "catatan": "Pengecualian T10: batas lulus tahap 2 = 31 Des 2026 untuk semua bot"},
+  {"no": 2, "kode": "STRUKTUR", "nama": "Struktur pasar", "isi": "Higher high/low, break of structure, change of character; tren vs koreksi", "target_hari": 14},
+  {"no": 3, "kode": "PA", "nama": "Price action di level", "isi": "Pin bar, engulfing, inside bar, fakey tepat di zona SNR/struktur", "target_hari": 12},
+  {"no": 4, "kode": "LIKUIDITAS", "nama": "Sesi & likuiditas", "isi": "Range Asia, buka London/NY, sapuan likuiditas di atas/bawah high-low", "target_hari": 12},
+  {"no": 5, "kode": "REZIM", "nama": "Rezim volatilitas", "isi": "Deteksi tren/sideways/volatil dengan ATR, ADX, efisiensi harga; pilih strategi per rezim", "target_hari": 12},
+  {"no": 6, "kode": "VOLUME", "nama": "Volume & aliran order", "isi": "Volume tick, volume profile; crypto: taker buy/sell, open interest, funding", "target_hari": 14},
+  {"no": 7, "kode": "NEWS", "nama": "Kalender & news", "isi": "Perilaku sebelum/sesudah rilis berdampak tinggi (USD, FOMC, CPI); hindari atau manfaatkan", "target_hari": 12},
+  {"no": 8, "kode": "MUSIMAN", "nama": "Musiman & kalender", "isi": "Pergantian bulan (TOM), hari dalam minggu, bulan dalam tahun, akhir kuartal", "target_hari": 10},
+  {"no": 9, "kode": "ANTARPASAR", "nama": "Antar-pasar", "isi": "Indeks dolar, imbal hasil, perak, dominasi BTC; korelasi dan divergensi", "target_hari": 14},
+  {"no": 10, "kode": "POSISI", "nama": "Manajemen posisi", "isi": "Exit dinamis, trailing, partial TP, ukuran posisi dari kualitas sinyal; menggabungkan skill yang sudah lulus", "target_hari": 14}
+ ]
+}

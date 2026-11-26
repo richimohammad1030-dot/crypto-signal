@@ -98,6 +98,32 @@ data["ringkas"] = dict(lolos=n_now, lolos_awal=a0, lolos_maks=10 * len(BOTS),
                        kemajuan=round(100 * max(n_now - a0, 0) / max(10 * len(BOTS) - a0, 1), 1),varian_total=tot_var, penantang_total=tot_pen, persen=round(sum(persen) / len(persen), 1) if persen else 0,
                        blocker_menunggu=sum(1 for b in BOTS for x in data["bot"][b]["status"].get("blocker", []) if x.get("status") == "menunggu")
                        + sum(1 for x in M.get("blocker", []) if x.get("status") == "menunggu"))
+# ---- kurikulum skill: kecepatan & proyeksi (KURIKULUM_SKILL.md, 26 Nov 2026)
+K = baca_json(os.path.join(REPO, "riset", "kurikulum.json"), {"skill": []})
+data["kurikulum"] = K
+hari_ini = now.date()
+def hari(a, b): return (dt.date.fromisoformat(b) - dt.date.fromisoformat(a)).days
+for b in BOTS:
+    kur = data["bot"][b]["status"].get("kurikulum") or []; tgt = {x["no"]: x for x in K.get("skill", [])}; selesai = []
+    for e in kur:
+        t = tgt.get(e["no"], {}); th = t.get("target_hari", 14)
+        if e.get("no") == 1: th = max(th, hari(e["mulai"], "2026-12-31")) if e.get("mulai") else th   # pengecualian SNR (T10)
+        e["target_hari"] = th; e["nama"] = t.get("nama", e.get("kode"))
+        if e.get("mulai"):
+            e["batas"] = (dt.date.fromisoformat(e["mulai"]) + dt.timedelta(days=th)).isoformat()
+            akhir = e.get("t2") or hari_ini.isoformat(); e["hari"] = max(hari(e["mulai"], akhir), 0)
+            if e.get("t2"):
+                e["kecepatan"] = round(th / max(e["hari"], 1), 2); selesai.append(e["hari"])
+                e["label"] = "kilat" if e["kecepatan"] >= 2 else "cepat" if e["kecepatan"] >= 1.25 else "tepat waktu" if e["kecepatan"] >= 1 else "terlambat"
+            elif e.get("status") in ("belajar",):
+                e["label"] = "terlambat" if hari_ini.isoformat() > e["batas"] else "berjalan"
+    sisa = [e for e in kur if not e.get("t2") and e.get("status") != "ditutup"]
+    rata = (sum(selesai) / len(selesai)) if selesai else None
+    langkah = rata if rata else 14
+    proy = hari_ini + dt.timedelta(days=round(langkah * len(sisa)))
+    data["bot"][b]["kurikulum_ringkas"] = dict(lulus=len([e for e in kur if e.get("t2")]), total=len(kur), rata_hari=rata,
+                                               proyeksi=proy.isoformat(), dasar="rata-rata aktual" if rata else "target 14 hari/skill",
+                                               live=len([e for e in kur if e.get("t3")]))
 os.makedirs(OUT, exist_ok=True)
 json.dump(data, open(os.path.join(OUT, "data.json"), "w"), ensure_ascii=False, default=str)
 for f in glob.glob(os.path.join(REPO, "docs", "*")):
