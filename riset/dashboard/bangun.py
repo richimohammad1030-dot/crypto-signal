@@ -117,6 +117,27 @@ for b in BOTS:
                 e["label"] = "kilat" if e["kecepatan"] >= 2 else "cepat" if e["kecepatan"] >= 1.25 else "tepat waktu" if e["kecepatan"] >= 1 else "terlambat"
             elif e.get("status") in ("belajar",):
                 e["label"] = "terlambat" if hari_ini.isoformat() > e["batas"] else "berjalan"
+    # checkpoint: tanggal selesai tiap skill menurut TARGET DORONG vs ESTIMASI REALISTIS (dari kecepatan aktual)
+    REAL_DEFAULT = 25                                   # hari/skill bila belum ada skill lulus (data SNR: tahap 2 > 2 minggu)
+    real = max(round(sum(selesai) / len(selesai)), 7) if selesai else REAL_DEFAULT
+    cur_d = cur_r = hari_ini; skor = 0.0; mulai_awal = None
+    for e in kur:
+        if e.get("mulai"): mulai_awal = min(mulai_awal or e["mulai"], e["mulai"])
+        if e.get("t2") or e.get("status") == "ditutup":
+            e["cp_dorong"] = e["cp_real"] = e.get("t2") or e.get("batas"); skor += 1; continue
+        th = tgt.get(e["no"], {}).get("target_hari", 14)       # target dorong asli (SNR: 14 hari, bukan batas T10)
+        if e.get("mulai"):
+            m0 = dt.date.fromisoformat(e["mulai"])
+            dorong = max(m0 + dt.timedelta(days=th), hari_ini); realistis = max(m0 + dt.timedelta(days=max(real, th)), hari_ini + dt.timedelta(days=3))
+            skor += 0.4 if e.get("t1") else 0.1
+        else:
+            dorong = cur_d + dt.timedelta(days=th); realistis = cur_r + dt.timedelta(days=max(real, th))
+        cur_d, cur_r = dorong, realistis
+        e["cp_dorong"], e["cp_real"] = dorong.isoformat(), realistis.isoformat()
+    minggu = max((hari_ini - dt.date.fromisoformat(mulai_awal)).days / 7, 1) if mulai_awal else None
+    data["bot"][b]["checkpoint"] = dict(skor=round(skor, 2), total=len(kur), per_minggu=round(skor / minggu, 3) if minggu else 0,
+                                        selesai_dorong=cur_d.isoformat(), selesai_real=cur_r.isoformat(), real_hari=real,
+                                        dasar_real="rata-rata aktual bot" if selesai else f"perkiraan {REAL_DEFAULT} hari/skill (data SNR)")
     sisa = [e for e in kur if not e.get("t2") and e.get("status") != "ditutup"]
     rata = (sum(selesai) / len(selesai)) if selesai else None
     langkah = rata if rata else 14
