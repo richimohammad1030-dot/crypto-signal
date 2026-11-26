@@ -803,5 +803,31 @@
   "btc": 0,
   "skor": -1,
   "fund": 2.0931273972602743e-06
+ },
+ {
+  "waktu_tutup_wib": "2026-11-26 07:00",
+  "sym": "ZECUSDT",
+  "d": -1,
+  "t0": 1795615200,
+  "t1": 1795651200,
+  "entry": 679.48,
+  "exit": 783.5495366076492,
+  "R": -1.0,
+  "alasan": "kena SL",
+  "label": "LOW",
+  "mfe": 0.047,
+  "mae": -1.052,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 15.316,
+  "ext": 7.659,
+  "trend": 3.555,
+  "dist": 3.1,
+  "mom20": 45.45,
+  "rank": 7,
+  "btc": 1,
+  "skor": -1,
+  "fund": 8.220267123287673e-06
  }
 ]
