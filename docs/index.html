@@ -313,6 +313,7 @@ function gambarKur(){var k=$('kur');if(!k)return;k.textContent='';k.appendChild(
 
 function bln(d){return new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'2-digit'})}
 function gambarJejak(){var pp=$('papan'),jj=$('jejak');if(!pp)return;pp.textContent='';jj.textContent='';var sk=(D.kurikulum||{}).skill||[];
+  if(!URUT.some(function(b){return D.bot[b]&&D.bot[b].checkpoint})){pp.appendChild(el('div','kosong-pesan kecil','Data perjalanan skill sedang diperbarui. Bagian ini muncul otomatis dalam beberapa menit.'));return}
   var urut=URUT.filter(function(b){return D.bot[b]&&D.bot[b].checkpoint}).sort(function(a,b){var A=D.bot[a].checkpoint,B=D.bot[b].checkpoint;return (B.skor-A.skor)||(B.per_minggu-A.per_minggu)});
   urut.forEach(function(b,i){var c=D.bot[b].checkpoint,d2=urut[1]&&D.bot[urut[1]].checkpoint,r=el('div','peringkat'+(i===0&&c.skor>0&&(!d2||c.skor>d2.skor)?' pertama':''));r.style.setProperty('--w',warna(b));r.appendChild(el('span','no',String(i+1)));
     var nm=el('span','nm');nm.appendChild(el('i'));nm.appendChild(document.createTextNode(SINGKAT[b]));r.appendChild(nm);var rl=el('div','rel');var ri=el('i');rl.appendChild(ri);r.appendChild(rl);setTimeout(function(){ri.style.width=Math.max(2,100*c.skor/c.total)+'%'},60+i*120);
