@@ -142,7 +142,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 .jadwal span:last-child{color:var(--redup);text-align:right}
 .galat{padding:14px;border-radius:var(--r-kecil);background:color-mix(in srgb,var(--kritis) 14%,var(--lantai));margin-bottom:12px;display:none}
 /* kurikulum skill */
-.kur{display:grid;grid-template-columns:86px repeat(10,minmax(0,1fr)) auto;gap:8px 5px;align-items:center}
+.kur{display:grid;grid-template-columns:86px repeat(var(--n,13),minmax(0,1fr)) auto;gap:8px 5px;align-items:center}
 .kur .kol{font:600 11.5px/1 var(--f-tampil);color:var(--redup);text-align:center}
 .kur .nama{font-size:13.5px;font-weight:600}
 .sel-k{height:34px;border-radius:7px;background:var(--sumur);display:grid;grid-template-rows:repeat(3,1fr);gap:2px;padding:3px;border:0;cursor:pointer;position:relative}
@@ -164,7 +164,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 .lbl-k.kilat,.lbl-k.cepat{background:color-mix(in srgb,var(--waspada) 22%,var(--lantai));color:var(--tinta)}
 .lbl-k.terlambat{background:color-mix(in srgb,var(--kritis) 18%,var(--lantai));color:var(--kritis)}
 .lbl-k.lulus{background:color-mix(in srgb,var(--baik) 18%,var(--lantai));color:var(--baik)}
-@media(max-width:560px){.kur{grid-template-columns:54px repeat(10,minmax(0,1fr));gap:6px 3px}.kur .proy{grid-column:2/-1;text-align:left;padding:0 0 4px}.sel-k{height:28px}}
+@media(max-width:560px){.kur{grid-template-columns:46px repeat(var(--n,13),minmax(0,1fr));gap:6px 2px}.kur .proy{grid-column:2/-1;text-align:left;padding:0 0 4px}.sel-k{height:28px}}
 @media(max-width:560px){.kisi{grid-template-columns:54px repeat(10,minmax(0,1fr));gap:5px 2px}.kisi .nama{font-size:12px}.kisi .nama i{display:none}.laju-baris{grid-template-columns:96px 1fr 40px}.angka-kecil b{font-size:17px}.bot-kepala .angka{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.sumur.anim{transform:none;opacity:1}}
 </style>
@@ -194,7 +194,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
   </section>
 
   <section class="blok" style="margin-top:16px"><h2>Kurikulum skill</h2>
-    <p class="kecil redup" style="margin:-4px 0 12px">Sepuluh skill, tiap kotak satu skill. Tiga segmen terisi berurutan: paham, bisa memakai, live. Bot yang lulus cepat langsung lanjut ke skill berikutnya.</p>
+    <p class="kecil redup" style="margin:-4px 0 12px">Skill analisa teknikal untuk mempertajam strategi, tiap kotak satu skill. Tiga segmen terisi berurutan: paham, bisa memakai, live. Bot yang lulus cepat langsung lanjut ke skill berikutnya.</p>
     <div class="kur" id="kur"></div>
     <div class="legenda"><span><i class="m garis" style="border-radius:4px;border-style:solid"></i>Skill yang sedang dipelajari</span><span><i class="m" style="border-radius:4px;background:var(--kritis)"></i>Lewat batas waktu</span><span><b style="color:var(--waspada)">⚡</b> Lulus lebih cepat dari target</span></div>
     <div class="info" id="infoKur">Ketuk kotak untuk melihat detail skill.</div>
@@ -222,7 +222,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 (function(){
 var SUMBER=/github\.io$/.test(location.hostname)?'data.json':'https://raw.githubusercontent.com/richimohammad1030-dot/crypto-signal/main/docs/data.json';
 var URUT=['xau','fx','crypto','intraday'];
-var SINGKAT={xau:'XAU',fx:'FX',crypto:'Swing',intraday:'Intraday'};
+var SINGKAT={xau:'XAU',fx:'FX',crypto:'Swing',intraday:(innerWidth<560?'Intra':'Intraday')};
 var PENDEK={T1:'Tanpa tahun minus',T2:'Adaptif terhadap edge',T3:'Profit factor > 1,1',T4:'Win rate ≥ 40%',T5:'Tumbuh ≥ 10%/thn',T6:'Drawdown ≤ 20%',T7:'Kalah beruntun ≤ 10',T8:'Frekuensi minimum',T9:'Lolos data baru',T10:'Skill SNR bisa dipakai'};
 var IK={cek:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>',
  seru:'<svg viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="3" width="2" height="7" rx="1"/><circle cx="8" cy="12.5" r="1.2"/></svg>',
@@ -283,13 +283,13 @@ function infoSumur(b,t){var lt0=D.bot[b].lolos_terbaik[t],v=D.bot[b],m=v.massal|
 function skillDef(no){return ((D.kurikulum||{}).skill||[]).find(function(x){return x.no===no})||{}}
 function teksSkill(b,e){var d=skillDef(e.no),st={belum:'Belum dimulai',belajar:'Sedang dipelajari',bayangan:'Lulus bisa memakai, di bayangan',live:'Live',ditutup:'Ditutup'}[e.status]||e.status;
   var t=namaBot(b)+', skill '+e.no+' '+(d.nama||e.kode)+': '+st;if(e.mulai)t+='. Hari ke-'+(e.hari||0)+' dari target '+e.target_hari+' hari';if(e.kecepatan)t+='. Kecepatan '+f(e.kecepatan,1)+'× ('+e.label+')';else if(e.label==='terlambat')t+='. Lewat batas';return t+'.'}
-function gambarKur(){var k=$('kur');if(!k)return;k.textContent='';k.appendChild(el('div'));var sk=(D.kurikulum||{}).skill||[];
+function gambarKur(){var k=$('kur');if(!k)return;k.textContent='';k.appendChild(el('div'));var sk=(D.kurikulum||{}).skill||[];k.style.setProperty('--n',sk.length);
   sk.forEach(function(x){var c=el('div','kol',String(x.no));c.title=x.nama;k.appendChild(c)});k.appendChild(el('div','proy'));
   URUT.forEach(function(b){var v=D.bot[b];if(!v)return;var kur=(v.status||{}).kurikulum||[];var n=el('div','nama',SINGKAT[b]);k.appendChild(n);
     sk.forEach(function(x){var e=kur.find(function(y){return y.no===x.no})||{no:x.no,status:'belum',tahap:0};var lit=e.t3?3:e.t2?2:e.t1?1:0;
       var c=el('button','sel-k'+(e.status==='belajar'?' kini':'')+(e.label==='terlambat'?' telat':'')+(e.status==='ditutup'?' tutup':''));c.style.setProperty('--w',warna(b));
       for(var i=3;i>=1;i--){c.appendChild(el('i',i<=lit?'on':''))}if(e.kecepatan&&e.kecepatan>=1.25)c.appendChild(el('span','kilat','⚡'));
-      var tx=teksSkill(b,e);c.setAttribute('aria-label',tx);tip(c,tx);c.onclick=function(){var x2=$('infoKur');x2.textContent='';x2.appendChild(el('b',null,(skillDef(e.no).nama||e.kode)+' · '+namaBot(b)));x2.appendChild(el('div',null,tx));if(skillDef(e.no).isi)x2.appendChild(el('div','kecil redup',skillDef(e.no).isi))};k.appendChild(c)});
+      var tx=teksSkill(b,e);c.setAttribute('aria-label',tx);tip(c,tx);c.onclick=function(){var x2=$('infoKur');x2.textContent='';x2.appendChild(el('b',null,(skillDef(e.no).nama||e.kode)+' · '+namaBot(b)));x2.appendChild(el('div',null,tx));var sd=skillDef(e.no);if(sd.mencegah)x2.appendChild(el('div','kecil','Mencegah: '+sd.mencegah));if(sd.menambah)x2.appendChild(el('div','kecil','Menambah: '+sd.menambah));if(sd.isi)x2.appendChild(el('div','kecil redup',sd.isi))};k.appendChild(c)});
     var r=v.kurikulum_ringkas||{};var p=el('div','proy');var bb=el('b',null,(r.lulus||0)+'/'+(r.total||10));p.appendChild(bb);p.appendChild(document.createTextNode(' lulus · proyeksi selesai '+(r.proyeksi?new Date(r.proyeksi).toLocaleDateString('id-ID',{month:'short',year:'numeric'}):'–')));k.appendChild(p)})}
 
 function gambarKeputusan(){var c=$('keputusan');c.textContent='';var urut={menunggu:0,akan_datang:1,disetujui:2,selesai:3};
@@ -339,7 +339,7 @@ function gambarBot(){var b=aktif,v=D.bot[b],st=v.status||{},m=v.massal||{},j=(m.
   grafikTahun(kanan,j&&j.thn,'Hasil per tahun, juara live');if(p)grafikTahun(kanan,p.thn,'Hasil per tahun, versi terbaik');
   var sk=st.skill;if(sk){kiri.appendChild(el('h3',null,'Skill '+sk.nama+', putaran '+(sk.putaran||'–')));var th=el('div','tahap');['Definisi','Paham','Bisa memakai','Live'].forEach(function(nm,i){var d=el('div',i<sk.tahap?'lulus':i===sk.tahap?'kini':'');d.appendChild(el('b',null,String(i)));d.appendChild(document.createTextNode(nm));th.appendChild(d)});kiri.appendChild(th);
     kiri.appendChild(el('div','kecil',sk.status||''));kiri.appendChild(el('div','kecil redup','Berikutnya: '+(sk.berikutnya||'–')+'. Batas '+(sk.batas?tgl(sk.batas):'–')+'.'))}
-  var kurB=st.kurikulum||[];if(kurB.length){kiri.appendChild(el('h3',null,'Kurikulum 10 skill'));var rk=v.kurikulum_ringkas||{};kiri.appendChild(el('div','kecil redup',(rk.lulus||0)+' skill lulus bisa memakai, '+(rk.live||0)+' live. Proyeksi semua selesai '+(rk.proyeksi?tgl(rk.proyeksi)+' '+new Date(rk.proyeksi).getFullYear():'–')+' ('+(rk.dasar||'')+').'));
+  var kurB=st.kurikulum||[];if(kurB.length){kiri.appendChild(el('h3',null,'Kurikulum skill teknikal'));var rk=v.kurikulum_ringkas||{};kiri.appendChild(el('div','kecil redup',(rk.lulus||0)+' skill lulus bisa memakai, '+(rk.live||0)+' live. Proyeksi semua selesai '+(rk.proyeksi?tgl(rk.proyeksi)+' '+new Date(rk.proyeksi).getFullYear():'–')+' ('+(rk.dasar||'')+').'));
     var dk=el('div','daftar-k');kurB.forEach(function(e){var d=skillDef(e.no),r=el('div');r.appendChild(el('span','no',String(e.no)));var m=el('div');m.appendChild(el('div',null,d.nama||e.kode));
       if(e.mulai){var rl=el('div','rel'+(e.label==='terlambat'?' telat':''));var ri=el('i');rl.appendChild(ri);m.appendChild(rl);(function(ri,p){setTimeout(function(){ri.style.width=p+'%'},40)})(ri,Math.min(100,100*(e.hari||0)/(e.target_hari||14)));m.appendChild(el('div','kecil redup','Mulai '+tgl(e.mulai)+(e.t2?', lulus '+tgl(e.t2):', batas '+tgl(e.batas))+' · hari ke-'+(e.hari||0)+'/'+e.target_hari))}
       r.appendChild(m);var lab=e.kecepatan?(e.kecepatan>=2?'⚡ kilat ':e.kecepatan>=1.25?'⚡ cepat ':'')+f(e.kecepatan,1)+'×':e.status==='belajar'?(e.label==='terlambat'?'Terlambat':'Belajar, tahap '+e.tahap):e.status==='ditutup'?'Ditutup':'Belum';

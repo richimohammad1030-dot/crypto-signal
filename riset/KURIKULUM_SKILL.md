@@ -22,7 +22,7 @@ masing-masing (status mereka dicatat di log riset masing-masing).
 
 ## PROGRAM KILAT (pemilik, 20 Nov 2026) — mengalahkan "satu langkah per Jumat" dan "pemilik memilih setelah 3 gagal"
 Tujuan: skill cepat dikuasai lalu dipakai di bot live, agar banyak skill berikutnya bisa dipelajari.
-1. **Skill dikerjakan PERTAMA di setiap sesi riset** (tiap bot 2 sesi/minggu sampai 4 Des 2026, lalu 1 sesi/minggu; ATURAN_BERSAMA E.5) dan **boleh beberapa tahap
+1. **Skill dikerjakan PERTAMA di setiap sesi riset** (XAU, crypto, intraday 2 sesi/minggu PERMANEN — keputusan pemilik 26 Nov 2026; ATURAN_BERSAMA E.5) dan **boleh beberapa tahap
    dalam satu sesi**: tahap 1 menguji SEMUA jenis/varian sekaligus; jenis yang lulus langsung masuk tahap 2 di sesi yang sama.
 2. **Tahap 1 PAHAM = perilaku beda nyata dari acak, KE ARAH MANA PUN** (lebih sering pantul ATAU lebih sering tembus /
    lanjut). Pelajaran lintas bot wajib dipakai: di crypto & intraday level PERIODE/SWING-D1 terbukti lebih sering DITEMBUS;
@@ -113,11 +113,16 @@ FX 1 sesi/minggu (Minggu) → boleh beberapa tahap per sesi; batas 3 sesi per ta
   gagal di satu bot, laporkan jujur cara pakai terbaik + P-nya; jangan memaksakan lolos.
 - Skill 2 (struktur pasar) boleh mulai paralel hanya bila tidak mengurangi sesi SNR.
 
-## KURIKULUM 10 SKILL + ATURAN PERCEPATAN (pemilik, 26 Nov 2026) — mengalahkan "Antrian skill berikutnya" di atas
-Daftar & target waktu: `riset/kurikulum.json` (SNR → struktur pasar → price action di level → sesi & likuiditas → rezim
-volatilitas → volume & aliran order → kalender & news → musiman → antar-pasar → manajemen posisi).
+## KURIKULUM SKILL TEKNIKAL + ATURAN PERCEPATAN (pemilik, 26 Nov 2026, revisi) — mengalahkan "Antrian skill berikutnya" di atas
+Inti (pemilik): skill = kemampuan ANALISA TEKNIKAL yang mempertajam strategi yang ada — entry lebih presisi, SL lebih jarang,
+TP lebih tepat. Bukan strategi baru. Daftar 13 skill & target waktu di `riset/kurikulum.json`: SNR → struktur pasar
+(BOS/CHoCH, SBR/RBS) → price action konfirmasi → Fibonacci → supply-demand/order block/FVG → trendline & channel → moving
+average dinamis → divergence & momentum → volume (profile, VWAP, OBV) → pola chart → likuiditas & sesi → Elliott wave →
+konfluensi multi-timeframe. Tiap skill punya `mencegah` (kesalahan/penyebab SL yang dihindari) dan `menambah` (presisi).
+**Tahap 2 wajib diukur terhadap penyebab SL juara**: berapa SL yang akan dicegah skill itu vs berapa trade menang yang ikut
+hilang (ATURAN_BERSAMA G — mitigasi SL), plus efek pada presisi entry (MAE, jarak SL) dan TP (MFE yang tertangkap).
 1. **Target ketat per skill** (hari kalender sejak mulai): tahap 0+1 PAHAM ≤ 4 hari · tahap 2 BISA MEMAKAI ≤ 10-14 hari
-   (`target_hari` tiap skill). Total 10 skill ≤ ±4,5 bulan bila tepat target. Tahap 3 (bayangan ≥ 28 hari → live) berjalan
+   (`target_hari` tiap skill). Total 13 skill ≤ ±5,5 bulan bila tepat target (lebih cepat bila lulus cepat). Tahap 3 (bayangan ≥ 28 hari → live) berjalan
    PARALEL dan tidak menahan skill berikutnya. Pengecualian: SNR (T10) batas tahap 2 = 31 Des 2026.
 2. **Selesai cepat = langsung lanjut**: begitu skill lulus tahap 2 (masuk bayangan) — atau bila SNR bot itu sudah sampai
    tahap 3 sebelum akhir tahun — sesi yang sama/berikutnya LANGSUNG memulai skill berikutnya di `kurikulum.json`. Tidak menunggu

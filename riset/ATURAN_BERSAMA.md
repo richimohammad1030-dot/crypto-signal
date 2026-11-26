@@ -89,9 +89,7 @@ juara (filter/bobot/TP/SL) yang secara statistik hampir mustahil lolos P_rasio �
    hanya diuji bila datang dari CELAH berulang (sebab_sl) atau skill yang sudah lulus tahap 1.
    **"Tahun minus" juga dinilai di level PORTOFOLIO 3 bot** (`riset/portofolio.py`, risiko sesuai bot live): sumber edge baru
    dinilai dari sumbangannya pada tahun minus & DD portofolio, bukan hanya botnya sendiri.
-5. **Jadwal bergilir, tiap bot 2 sesi/minggu HANYA SAMPAI 4 Des 2026** (masa kilat SNR): XAU Senin & Kamis · crypto Selasa &
-   Jumat · intraday Rabu & Sabtu. **Mulai 5 Des 2026 kembali 1 sesi/minggu per bot** (XAU Senin · crypto Selasa · intraday
-   Rabu) untuk hemat token (pemilik, 20 Nov). Laporan ringkas: tabel + kesimpulan, tanpa mengulang isi riset/harian. **Review bulanan = sesi terakhir bot itu di bulan berjalan**
+5. **Jadwal bergilir PERMANEN 2 sesi/minggu** (pemilik 26 Nov 2026, menggantikan rencana kembali ke 1x/minggu): XAU Senin & Kamis · crypto Selasa & Jumat · intraday Rabu & Sabtu · FX Minggu. Laporan ringkas: tabel + kesimpulan, tanpa mengulang isi riset/harian. **Review bulanan = sesi terakhir bot itu di bulan berjalan**
    (sesi berikutnya bot itu jatuh di bulan baru). Gerbang pasang tetap maksimal 1 perubahan strategi per bulan per bot.
 6. **Kurikulum skill = PROGRAM KILAT** (lihat `riset/KURIKULUM_SKILL.md` bagian "Program kilat"): dikerjakan PERTAMA di setiap
    sesi, boleh beberapa tahap per sesi, batas waktu per tahap 3 sesi lalu otomatis pindah definisi/skill.

@@ -84,7 +84,7 @@
   },
   {
    "no": 4,
-   "kode": "LIKUIDITAS",
+   "kode": "FIBO",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -95,7 +95,7 @@
   },
   {
    "no": 5,
-   "kode": "REZIM",
+   "kode": "ZONA",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -106,7 +106,7 @@
   },
   {
    "no": 6,
-   "kode": "VOLUME",
+   "kode": "TRENDLINE",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -117,7 +117,7 @@
   },
   {
    "no": 7,
-   "kode": "NEWS",
+   "kode": "MA",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -128,7 +128,7 @@
   },
   {
    "no": 8,
-   "kode": "MUSIMAN",
+   "kode": "DIVERGENCE",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -139,7 +139,7 @@
   },
   {
    "no": 9,
-   "kode": "ANTARPASAR",
+   "kode": "VOLUME",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
@@ -150,7 +150,40 @@
   },
   {
    "no": 10,
-   "kode": "POSISI",
+   "kode": "POLA",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 11,
+   "kode": "LIKUIDITAS",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 12,
+   "kode": "ELLIOTT",
+   "status": "belum",
+   "tahap": 0,
+   "mulai": null,
+   "t1": null,
+   "t2": null,
+   "t3": null,
+   "catatan": ""
+  },
+  {
+   "no": 13,
+   "kode": "MTF",
    "status": "belum",
    "tahap": 0,
    "mulai": null,
