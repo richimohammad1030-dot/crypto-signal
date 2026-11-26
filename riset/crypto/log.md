@@ -224,3 +224,22 @@ Aturan baru: `riset/ATURAN_BERSAMA.md`. Data koin sesuai masanya: `riset/unduh_p
   & strategi mandiri tembus PWH/PWL (portofolio terpisah).
 - Total ide crypto yang pernah diuji: ±23 (+ #55, #79, #80, #81); varian dinilai sesi ini: 10 + juara (saringan), 3 ke tahap B.
 - Tidak ada kandidat → MENU bayangan tidak berubah. Strategi bot: tidak ada perubahan. Tidak ada usulan pasang.
+
+## 2026-11-27 · REVIEW BULANAN (sesi terakhir November) · MILESTONE T7 · skill SNR tahap 2 putaran 2
+Skrip: `eksperimen/runtun_sl.py`, `sesi_2026_11_27_t7.py` (keluarga CM005-CM008), `sesi_2026_11_27_t7wf.py` (WF T7),
+`sesi_2026_11_27.py` (SNR putaran 2). Keluarga baru `massal/keluarga_usulan.py` (CM005-CM008, ±100 varian replay mesin asli).
+- Kesehatan/SL/bayangan dari riset/harian/crypto.md (26 Nov 07:41, OK). Review: live 40 trade +14,3R vs backtest 43 trade +14,6R
+  kotor sejak 24 Okt; selisih = rantai slot (HYPE, ZRO masih terbuka live). SL baru setelah laporan harian: ZEC SELL & JST BUY 26 Nov (-1R, ada di replay).
+- **Analisis runtun/SL (ATURAN G)**: 2020-skrg kalah = 743 stagnan (-272R) · 550 rugi kecil trailing (-228R) · 171 SL penuh (-172R).
+  20 runtun >= 11, isinya ±55% stagnan, tersebar 5-12 hari (klaster harian maks 6); dihitung per hari pun runtun 15 → T7 bukan
+  masalah satu hari pembalikan, tetapi WR 40% × ±350 trade/thn. Jalan keluar: struktur keluar (trade yang sempat untung jangan berakhir rugi).
+- **#91 TP sebagian awal**: TP67%@0,3-0,4R → WR 62-66%, runtun 9 (IS & OOS, juga sesuai masanya), 7/7 target. WF (aturan pilih T7)
+  memilih TP67%@0,4R 4/4 jendela: 2020-26 +38,7%/thn PF 1,54 DD 13,8% runtun 9 vs juara +66,2%/thn PF 1,65 DD 21,9% runtun 18.
+  P_rasio 0,64 → **kandidat** (MENU bayangan K1). Biaya: R/thn -42%; stres +0,03R → 2025 minus. Tetangga (0,25-0,4R × 67-75%) semua runtun 9.
+  Limit 'lewat 0,02R' (TP0,67@0,3R): R/thn -6%, tetap 7/7.
+- **SNR tahap 2 putaran 2 BELUM**: trailing di balik SWING-D1/PWL (T1-T4) dan TP di pivot lawan (T5) gagal; T3 WF P_rasio 0,20 (2022 -3,7R).
+  Strategi mandiri tembus PWH/PWL disaring (korelasi +0,63/+0,75 dengan juara). Putaran 3 (Selasa 1 Des) = definisi baru: SNR dipakai
+  pada kandidat #91 (TP sebagian di level lawan yang dekat, 0,25-0,6R) dan level timeframe lain.
+- Review bulanan: label HIGH > MEDIUM > LOW masih benar seluruh periode, tetapi 2025-26 MEDIUM +0,03R < LOW +0,06R (urutan rusak di
+  rezim baru). ML WF: label 4 faktor tetap terbaik (selisih HIGH-LOW 0,33R vs model 0,05-0,17). Bias koin selamat: sesuai masanya
+  2020-26 +457R vs daftar tetap +582R (-21%), DD 24,2 vs 17,5R. Tanpa usulan pasang.

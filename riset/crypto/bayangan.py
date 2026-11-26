@@ -12,7 +12,7 @@ import tahap0_semua_tahun as t0, kesehatan
 rp = t0.rp; rp.load(REPO, DATA_DIR); sb = rp.sb
 mulai = kesehatan.LIVE_START["crypto"]
 t0.lengkapi_hl(mulai - 10 * 86400)
-ASLI = dict(STAG_DAYS=sb.STAG_DAYS, TP1_FRAC=sb.TP1_FRAC)
+ASLI = dict(STAG_DAYS=sb.STAG_DAYS, TP1_FRAC=sb.TP1_FRAC, TP1_R=sb.TP1_R)
 
 
 def jalan(**ubah):
@@ -31,6 +31,8 @@ MENU = {"BASELINE (v2 live)": base,
         "v1 (tanpa keduanya)": jalan(STAG_DAYS=1e9, TP1_FRAC=0.0),
         "#19 SELL 0,5%": skala(base, np.where(base.d == -1, 0.5, 1.0))}
 b2 = base[base.t_exit >= mulai].copy()
+# KANDIDAT (ATURAN_BERSAMA E.3, maks 3): dinilai HANYA pada trade yang dibuka sejak tanggal masuk
+KANDIDAT = {"K1 T7 TP67%@0,4R": ("2026-11-27", jalan(TP1_R=0.4, TP1_FRAC=0.67))}   # 27 Nov: WF P_rasio 0,64, runtun 9, 7/7 target
 MENU["LOW risiko 1/2"] = skala(base, np.where([lab(r) == "LOW" if r.t_exit >= mulai else False for r in base.itertuples()], 0.5, 1.0))
 live = []
 for f in sorted(glob.glob(os.path.join(REPO, "jurnal", "crypto-*.json"))): live += json.load(open(f))
@@ -41,3 +43,8 @@ for nm, df in MENU.items():
     d = df[df.t_exit >= mulai]
     print(f"  {nm:<20} trade {len(d):>3} · win {np.mean(d.R_KOTOR > 0) * 100 if len(d) else 0:3.0f}% · kotor {d.R_KOTOR.sum():+6.2f}R · bersih {d.R_REAL.sum():+6.2f}R")
 print(f"  {'LIVE (jurnal bot)':<20} trade {len(live):>3} · win {np.mean([x['R'] > 0 for x in live]) * 100:3.0f}% · kotor {sum(x['R'] for x in live):+6.2f}R")
+for nm, (tgl, df) in KANDIDAT.items():
+    t_in = pd.Timestamp(tgl, tz="Asia/Jakarta").timestamp()
+    d, j = df[df.t_fill >= t_in], base[base.t_fill >= t_in]
+    print(f"  KANDIDAT {nm} sejak {tgl}: trade {len(d)} · win {np.mean(d.R_REAL > 0) * 100 if len(d) else 0:3.0f}% · bersih {d.R_REAL.sum():+6.2f}R"
+          f" · juara pada periode sama: trade {len(j)} · bersih {j.R_REAL.sum():+6.2f}R")

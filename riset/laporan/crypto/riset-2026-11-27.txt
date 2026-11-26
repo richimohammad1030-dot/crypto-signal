@@ -1,0 +1,88 @@
+<b>REVIEW BULANAN CRYPTO</b>
+Jumat, 27 Nov 2026 · fokus T7
+────────────────────
+
+<b>Kesehatan</b>
+────────────────────
+Harian 26 Nov: semua OK.
+<pre>live 40 trade +14,3R kotor
+replay 43 trade +14,6R kotor
+selisih = rantai slot HYPE, ZRO</pre>
+
+<b>Penyebab SL</b>
+────────────────────
+7 hari: 0 SL. Sesudahnya 2 SL (ZEC
+SELL, JST BUY 26 Nov), live = replay.
+Backtest 2020-skrg, kalah terbesar:
+<pre>stagnan     743 trade  -272R
+rugi kecil  550 trade  -228R
+SL penuh    171 trade  -172R</pre>
+Runtun 11+ = ±55% stagnan, tersebar
+5-12 hari (bukan 1 hari pembalikan).
+Stagnan diubah (19 varian): DITOLAK.
+
+<b>Live vs bayangan</b>
+────────────────────
+<pre>v2 live      +12,9R bersih
+tanpa TP25%  +15,1R
+v1           +12,9R
+LOW 1/2      +12,3R
+SELL 0,5%    +4,7R</pre>
+±5 minggu, belum menilai.
+
+<b>Riset · T7 kalah beruntun</b>
+────────────────────
+Ide #91: TP sebagian 67% di +0,4R
+(juara 25% di 1R). 82 varian, lalu
+walk-forward sesuai masanya 2020-26:
+<pre>         kandidat  juara
+PF        1,54     1,65
+WR        62%      39%
+%/thn     +38,7    +66,2
+DD        13,8%    21,9%
+runtun    9        18
+target    7/7      4/7
+P_rasio   0,64</pre>
+WF pilih varian sama 4/4 jendela,
+tetangga juga runtun 9. Kelemahan:
+untung -42%, stres +0,03R -&gt; 2025
+minus. Status KANDIDAT -&gt; bayangan K1
+sejak hari ini. Bukan usulan pasang.
+
+<b>Skill</b>
+────────────────────
+SKILL SNR tahap 2 putaran 2: BELUM.
+<pre>saringan 2018-21  rasio R/DD
+juara                20,8
+trail balik swing    16,3
+trail swing + 72     18,8
+trail ke PWL/PWH     22,6
+TP di pivot lawan    21,3
+tembus PW mandiri    3,9-9,9</pre>
+WF trail PWL/PWH: 2022 -3,7R,
+P_rasio 0,20. TP pivot tidak pernah
+dipilih. Putaran 3 (1 Des): SNR pada
+kandidat #91 (TP di level lawan).
+
+<b>Review bulanan</b>
+────────────────────
+<pre>label seluruh data H&gt;M&gt;L ok
+2025-26 MEDIUM +0,03 &lt; LOW +0,06
+ML WF: label 4 faktor tetap
+terbaik (selisih 0,33R)
+bias koin selamat -21%
+SELL 2024+ +0,09R/trade</pre>
+
+<b>Milestone</b>
+────────────────────
+<pre>juara    T1+ T3+ T4- T5+ T6- T7-
+kandidat T1+ T3+ T4+ T5+ T6+ T7+
+T2 -, T8 +, T9 belum (bayangan)</pre>
+
+<b>Usulan / keputusan</b>
+────────────────────
+Bot tidak berubah. Butuh keputusan
+(blocker B2): terima kandidat #91
+(runtun 9, untung lebih kecil) untuk
+bayangan 4-6 minggu lalu usulan,
+atau longgarkan T7 crypto?

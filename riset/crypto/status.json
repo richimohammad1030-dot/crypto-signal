@@ -3,21 +3,31 @@
  "risiko": 1.0,
  "t2": false,
  "t9": null,
- "keyakinan": 25,
- "fokus": "Kalah beruntun 25 → ≤ 10 (tetap, keputusan pemilik). Jeda-setelah-kalah hanya → 16-22 karena posisi bersamaan; butuh ide struktural",
+ "keyakinan": 40,
+ "fokus": "T7 kalah beruntun: kandidat #91 (TP 67% di +0,4R) runtun 9 & 7/7 target di WF, tetapi R/thn -42% → keputusan pemilik; bayangan K1 sejak 27 Nov",
  "skill": {
   "nama": "SNR",
   "tahap": 2,
-  "putaran": "0/3",
-  "status": "Tahap 1 lulus (level lebih sering ditembus). 1b: tembusan tanpa info arah.",
-  "berikutnya": "Jumat 27 Nov: SL di balik level, prioritas slot",
+  "putaran": "2/3",
+  "status": "Tahap 2 putaran 2 gagal (trailing/TP di level, tembus PW mandiri). Putaran 3 = definisi baru: SNR pada kandidat T7.",
+  "berikutnya": "Selasa 1 Des: TP sebagian di level lawan terdekat (0,25-0,6R) pada kandidat #91; konfluensi >= 2 jenis",
   "batas": "2026-12-31"
  },
  "item": [
   {
    "minggu": "2026-12-08",
    "teks": "Kalah beruntun ≤ 10",
-   "status": "belum"
+   "status": "jalan"
+  },
+  {
+   "minggu": "2026-12-08",
+   "teks": "Kandidat T7 #91 di bayangan ≥ 4 minggu + cek 15m",
+   "status": "jalan"
+  },
+  {
+   "minggu": "2026-12-31",
+   "teks": "SNR lulus tahap 2 (T10)",
+   "status": "jalan"
   }
  ],
  "blocker": [
@@ -28,11 +38,44 @@
    "detail": "Diputuskan pemilik 24 Nov: tetap ≤ 10.",
    "sejak": "2026-11-24",
    "status": "selesai"
+  },
+  {
+   "id": "B2",
+   "bot": "crypto",
+   "judul": "Trade-off T7 vs untung (kandidat #91)",
+   "detail": "TP 67% di +0,4R: WF 2020-26 runtun 9, WR 62%, DD 13,8%, 7/7 target, tetapi +38,7%/thn vs juara +66,2%/thn (P_rasio 0,64, gerbang live 0,90 tidak lolos). Pilih: (a) terima T7 dengan untung lebih kecil → lanjut bayangan 4-6 minggu lalu usulan, (b) T7 dilonggarkan untuk crypto, (c) cari jalan lain (tidak ada di 180+ varian sejauh ini).",
+   "sejak": "2026-11-27",
+   "status": "menunggu"
   }
  ],
- "sesi_terakhir": null,
+ "sesi_terakhir": "2026-11-27",
  "_catatan": "Status crypto untuk dashboard. Diperbarui sesi riset crypto (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
- "mitigasi_sl": [],
+ "mitigasi_sl": [
+  {
+   "penyebab": "Cut-loss stagnan (kategori kalah terbesar backtest)",
+   "jumlah": "743 trade · -272R (2020-skrg); 7 hari: 1",
+   "analisis": "±55% isi runtun >= 11; trade breakout yang tidak berlanjut dalam 2 hari. Membandingkan: stagnan dilonggarkan → trade itu sebagian jadi SL penuh (DD OOS 20-23%)",
+   "mitigasi": "CM006 umur 1-4 hari × ambang -0,1..-0,5R, tanpa stagnan",
+   "uji": "26 varian replay daftar tetap 27 Nov",
+   "status": "ditolak"
+  },
+  {
+   "penyebab": "Rugi kecil trailing setelah sempat untung + runtun kalah (T7)",
+   "jumlah": "550 trade · -228R; runtun maks 25 (IS) / 19 (OOS)",
+   "analisis": "Trade sempat bergerak +0,3-1R lalu trailing 72 candle menutup sedikit rugi; tersebar, bukan klaster satu hari",
+   "mitigasi": "#91 TP sebagian 67% di +0,4R (CM008)",
+   "uji": "WF sesuai masanya 27 Nov: runtun 9, 7/7 target, P_rasio 0,64",
+   "status": "lolos"
+  },
+  {
+   "penyebab": "SL penuh",
+   "jumlah": "171 trade · -172R; 7 hari: 0 (26 Nov: ZEC SELL, JST BUY)",
+   "analisis": "7% trade/thn stabil 2020-26; tidak ada CELAH berulang (P binomial >= 0,11)",
+   "mitigasi": "- (porsi normal)",
+   "uji": "sebab_sl harian",
+   "status": "dianalisis"
+  }
+ ],
  "kurikulum": [
   {
    "no": 1,
@@ -43,7 +86,7 @@
    "t1": "2026-11-13",
    "t2": null,
    "t3": null,
-   "catatan": "Tahap 1 lulus (level lebih sering ditembus). 1b: tembusan tanpa info arah."
+   "catatan": "Tahap 1 lulus 13 Nov. Tahap 2 putaran 1-2 gagal (SL/filter/prioritas/trailing/TP di level). Putaran 3 1 Des: definisi baru (SNR pada kandidat T7)."
   },
   {
    "no": 2,
