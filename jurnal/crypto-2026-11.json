@@ -854,5 +854,31 @@
   "rank": 37,
   "btc": -1,
   "skor": -1
+ },
+ {
+  "waktu_tutup_wib": "2026-11-27 02:00",
+  "sym": "ZROUSDT",
+  "d": -1,
+  "t0": 1795510800,
+  "t1": 1795719600,
+  "entry": 1.062,
+  "exit": 1.108,
+  "R": -0.247,
+  "alasan": "cut-loss stagnan",
+  "label": "LOW",
+  "mfe": 0.676,
+  "mae": -0.36,
+  "tp_sebagian": 0,
+  "R_tp_sebagian": null,
+  "versi": "v2-stagnan-tp25",
+  "slpct": 17.543,
+  "ext": 5.813,
+  "trend": 3.019,
+  "dist": 3.435,
+  "mom20": 40.021,
+  "rank": 46,
+  "btc": 1,
+  "skor": -2,
+  "fund": 6.5246027397260276e-06
  }
 ]
