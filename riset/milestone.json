@@ -48,6 +48,11 @@
    "id": "T9",
    "nama": "Lolos data baru",
    "ukuran": "OOS & Setra tidak jauh di bawah backtest (P_rasio)"
+  },
+  {
+   "id": "T10",
+   "nama": "Skill SNR bisa dipakai",
+   "ukuran": "SNR lulus tahap 2 (BISA MEMAKAI) di tiap bot paling lambat 31 Des; tahap 3 (live) target 2027"
   }
  ],
  "bot": {
@@ -104,7 +109,7 @@
     },
     {
      "bot": "semua",
-     "teks": "SNR XAU/crypto/intraday lulus atau ditutup (4 Des)",
+     "teks": "SNR: tiap bot punya ≥ 1 cara pakai berstatus kandidat (bayangan)",
      "status": "belum"
     },
     {
@@ -142,6 +147,11 @@
    "selesai": "2026-12-31",
    "judul": "Usulan ke pemilik",
    "item": [
+    {
+     "bot": "semua",
+     "teks": "SNR lulus tahap 2 di keempat bot (T10)",
+     "status": "belum"
+    },
     {
      "bot": "semua",
      "teks": "Paket usulan + rapor lengkap",

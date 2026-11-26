@@ -86,15 +86,16 @@ for b in BOTS:
         s = (v or {}).get("semua") or {}
         l = dict(s.get("lolos") or {})
         l["T2"] = bool(st.get("t2")); l["T9"] = bool(st.get("t9"))
-        return {k: bool(l.get(k)) for k in [f"T{i}" for i in range(1, 10)]}
+        l["T10"] = (st.get("skill") or {}).get("tahap", 0) >= 3        # SNR lulus tahap 2 = sedang di tahap 3
+        return {k: bool(l.get(k)) for k in [f"T{i}" for i in range(1, 11)]}
     lj, lt = lolos((ring or {}).get("juara")), lolos(terbaik)
-    p = round(100 * sum(lt.values()) / 9, 1); persen.append(p)
+    p = round(100 * sum(lt.values()) / 10, 1); persen.append(p)
     data["bot"][b] = dict(status=st, rapor=rapor(b), massal=ring, riwayat=riw, n_varian_total=nv, n_penantang=len(pen),
                           penantang_nama=list(pen)[-10:], harian=harian(b), laporan=laporan(b), lolos_juara=lj, lolos_terbaik=lt,
                           terbaik_nama=(terbaik or {}).get("nama"), persen=p)
 awal = M.get("awal_lolos", {}); a0 = sum(awal.get(b, 0) for b in BOTS); n_now = sum(sum(data["bot"][b]["lolos_terbaik"].values()) for b in BOTS)
-data["ringkas"] = dict(lolos=n_now, lolos_awal=a0, lolos_maks=9 * len(BOTS),
-                       kemajuan=round(100 * max(n_now - a0, 0) / max(9 * len(BOTS) - a0, 1), 1),varian_total=tot_var, penantang_total=tot_pen, persen=round(sum(persen) / len(persen), 1) if persen else 0,
+data["ringkas"] = dict(lolos=n_now, lolos_awal=a0, lolos_maks=10 * len(BOTS),
+                       kemajuan=round(100 * max(n_now - a0, 0) / max(10 * len(BOTS) - a0, 1), 1),varian_total=tot_var, penantang_total=tot_pen, persen=round(sum(persen) / len(persen), 1) if persen else 0,
                        blocker_menunggu=sum(1 for b in BOTS for x in data["bot"][b]["status"].get("blocker", []) if x.get("status") == "menunggu")
                        + sum(1 for x in M.get("blocker", []) if x.get("status") == "menunggu"))
 os.makedirs(OUT, exist_ok=True)

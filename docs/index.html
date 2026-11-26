@@ -38,7 +38,7 @@ button{font:inherit;color:inherit}
 .rel i{display:block;height:100%;border-radius:8px;background:var(--tinta);width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
 .rel.kerja i{background:var(--baik)}
 .laju-catat{font-size:13.5px;margin-top:2px}
-.kisi{display:grid;grid-template-columns:86px repeat(9,minmax(0,1fr));gap:6px 4px;align-items:center}
+.kisi{display:grid;grid-template-columns:86px repeat(10,minmax(0,1fr));gap:6px 4px;align-items:center}
 .kisi .kol{font:600 12px/1 var(--f-tampil);color:var(--redup);text-align:center;padding-bottom:4px}
 .kisi .nama{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden}
 .kisi .nama i{width:9px;height:9px;border-radius:3px;flex:none}
@@ -141,7 +141,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 .jadwal div:first-child{border-top:0}
 .jadwal span:last-child{color:var(--redup);text-align:right}
 .galat{padding:14px;border-radius:var(--r-kecil);background:color-mix(in srgb,var(--kritis) 14%,var(--lantai));margin-bottom:12px;display:none}
-@media(max-width:560px){.kisi{grid-template-columns:62px repeat(9,minmax(0,1fr));gap:5px 3px}.kisi .nama{font-size:12px}.kisi .nama i{display:none}.laju-baris{grid-template-columns:96px 1fr 40px}.angka-kecil b{font-size:17px}.bot-kepala .angka{font-size:28px}}
+@media(max-width:560px){.kisi{grid-template-columns:54px repeat(10,minmax(0,1fr));gap:5px 2px}.kisi .nama{font-size:12px}.kisi .nama i{display:none}.laju-baris{grid-template-columns:96px 1fr 40px}.angka-kecil b{font-size:17px}.bot-kepala .angka{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.sumur.anim{transform:none;opacity:1}}
 </style>
 </head>
@@ -192,7 +192,7 @@ pre{white-space:pre-wrap;font:12.5px/1.5 var(--f-teks);color:var(--tinta2);backg
 var SUMBER=/github\.io$/.test(location.hostname)?'data.json':'https://raw.githubusercontent.com/richimohammad1030-dot/crypto-signal/main/docs/data.json';
 var URUT=['xau','fx','crypto','intraday'];
 var SINGKAT={xau:'XAU',fx:'FX',crypto:'Swing',intraday:'Intraday'};
-var PENDEK={T1:'Tanpa tahun minus',T2:'Adaptif terhadap edge',T3:'Profit factor > 1,1',T4:'Win rate ≥ 40%',T5:'Tumbuh ≥ 10%/thn',T6:'Drawdown ≤ 20%',T7:'Kalah beruntun ≤ 10',T8:'Frekuensi minimum',T9:'Lolos data baru'};
+var PENDEK={T1:'Tanpa tahun minus',T2:'Adaptif terhadap edge',T3:'Profit factor > 1,1',T4:'Win rate ≥ 40%',T5:'Tumbuh ≥ 10%/thn',T6:'Drawdown ≤ 20%',T7:'Kalah beruntun ≤ 10',T8:'Frekuensi minimum',T9:'Lolos data baru',T10:'Skill SNR bisa dipakai'};
 var IK={cek:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>',
  seru:'<svg viewBox="0 0 16 16" fill="currentColor"><rect x="7" y="3" width="2" height="7" rx="1"/><circle cx="8" cy="12.5" r="1.2"/></svg>',
  jam:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5.5"/><path d="M8 5v3.2l2 1.3" stroke-linecap="round"/></svg>',
@@ -234,19 +234,19 @@ function gambar(){
 }
 
 function gambarKisi(){var k=$('kisi');k.textContent='';k.appendChild(el('div'));
-  for(var i=1;i<=9;i++){var c=el('div','kol','T'+i);c.title=PENDEK['T'+i];k.appendChild(c)}
+  for(var i=1;i<=10;i++){var c=el('div','kol','T'+i);c.title=PENDEK['T'+i];k.appendChild(c)}
   var urutan=0;
   URUT.forEach(function(b){var v=D.bot[b];if(!v)return;var n=el('div','nama');var sw=el('i');sw.style.background=warna(b);n.appendChild(sw);n.appendChild(document.createTextNode(SINGKAT[b]||b));k.appendChild(n);
-    for(var i=1;i<=9;i++){(function(t){var lj=v.lolos_juara[t],lt=v.lolos_terbaik[t];var w=el('button','sumur'+(lt?' isi':'')+(lt&&!lj?' baru':''));
+    for(var i=1;i<=10;i++){(function(t){var lj=v.lolos_juara[t],lt=v.lolos_terbaik[t];var w=el('button','sumur'+(lt?' isi':'')+(lt&&!lj?' baru':''));
       w.style.setProperty('--w',warna(b));w.innerHTML=IK.cek;var teks=namaBot(b)+', '+t+' '+PENDEK[t]+': '+(lt?(lj?'lolos di juara live':'lolos lewat penantang, belum live'):'belum lolos');
       w.setAttribute('aria-label',teks);tip(w,teks);w.onclick=function(){infoSumur(b,t)};
       if(pertama){w.classList.add('anim');(function(n){setTimeout(function(){w.classList.add('muncul')},150+n*26)})(urutan++)}
       k.appendChild(w)})('T'+i)}});
 }
-function nilaiT(s,t){if(!s)return null;switch(t){case 'T1':return s.minus?s.minus.length+' thn':null;case 'T3':return 'PF '+f(s.pf,2);case 'T4':return 'WR '+f(s.wr*100,0)+'%';case 'T5':return f(s.persen,1)+'%/thn';case 'T6':return 'DD '+f(s.dd,1)+'%';case 'T7':return s.beruntun+'×';case 'T8':return f(s.mgg,1)+'/mgg';default:return null}}
-function infoSumur(b,t){var v=D.bot[b],m=v.massal||{},j=(m.juara||{}).semua,p=((m.penantang||[])[0]||{}).semua;var x=$('info');x.textContent='';
+function nilaiT(s,t){if(!s)return null;switch(t){case 'T1':return s.minus?s.minus.length+' thn':null;case 'T3':return 'PF '+f(s.pf,2);case 'T4':return 'WR '+f(s.wr*100,0)+'%';case 'T5':return f(s.persen,1)+'%/thn';case 'T6':return 'DD '+f(s.dd,1)+'%';case 'T7':return s.beruntun+'×';case 'T8':return f(s.mgg,1)+'/mgg';case 'T10':return null;default:return null}}
+function infoSumur(b,t){var lt0=D.bot[b].lolos_terbaik[t],v=D.bot[b],m=v.massal||{},j=(m.juara||{}).semua,p=((m.penantang||[])[0]||{}).semua;var x=$('info');x.textContent='';
   x.appendChild(el('b',null,namaBot(b)+', '+t+' '+PENDEK[t]));
-  var nj=nilaiT(j,t),np=nilaiT(p,t);x.appendChild(el('div',null,nj?('Juara live: '+nj+(np?'. Penantang terbaik: '+np:'')+'.'):(t==='T2'?'Monitor edge belum dipasang di bot live.':'Dinilai saat uji walk-forward dan data baru.')))}
+  var nj=nilaiT(j,t),np=nilaiT(p,t);x.appendChild(el('div',null,nj?('Juara live: '+nj+(np?'. Penantang terbaik: '+np:'')+'.'):(t==='T2'?(lt0?'Monitor edge sudah dipasang di bot live.':'Monitor edge belum dipasang di bot live.'):t==='T10'?('Skill SNR '+(((v.status||{}).skill||{}).tahap>=3?'sudah lulus tahap 2.':'sedang di tahap '+(((v.status||{}).skill||{}).tahap)+', target lulus tahap 2 sebelum 31 Des.')):'Dinilai saat uji walk-forward dan data baru.')))}
 
 function gambarKeputusan(){var c=$('keputusan');c.textContent='';var urut={menunggu:0,akan_datang:1,disetujui:2,selesai:3};
   var L=blockerSemua().sort(function(a,b){return (urut[a.status]||9)-(urut[b.status]||9)});
@@ -264,7 +264,7 @@ function gambarRencana(){var o=$('rencana');o.textContent='';var sekarang=Date.n
     var ul=el('ul');it.forEach(function(i){var x=el('li',i.status);x.appendChild(el('span','st'));x.appendChild(document.createTextNode(i.teks));x.appendChild(el('span','bot-tag',i.bot==='semua'?'semua bot':namaBot(i.bot)));ul.appendChild(x)});li.appendChild(ul);o.appendChild(li)})}
 
 function gambarPilih(){var p=$('pilih');p.textContent='';URUT.forEach(function(b){var v=D.bot[b];if(!v)return;var n=0;for(var k in v.lolos_terbaik)if(v.lolos_terbaik[k])n++;
-  var t=el('button');t.setAttribute('aria-pressed',b===aktif);var i=el('i');i.style.background=warna(b);t.appendChild(i);t.appendChild(document.createTextNode(namaBot(b)+' '+n+'/9'));
+  var t=el('button');t.setAttribute('aria-pressed',b===aktif);var i=el('i');i.style.background=warna(b);t.appendChild(i);t.appendChild(document.createTextNode(namaBot(b)+' '+n+'/10'));
   t.onclick=function(){aktif=b;try{localStorage.setItem('botAktif',b)}catch(e){}gambarPilih();gambarBot()};p.appendChild(t)})}
 
 function grafikTahun(wadah,thn,judul){var ks=Object.keys(thn||{});if(!ks.length)return;wadah.appendChild(el('h3',null,judul));var box=el('div','grafik');wadah.appendChild(box);
@@ -280,7 +280,7 @@ function grafikTahun(wadah,thn,judul){var ks=Object.keys(thn||{});if(!ks.length)
 
 function gambarBot(){var b=aktif,v=D.bot[b],st=v.status||{},m=v.massal||{},j=(m.juara||{}).semua||null,pt=(m.penantang||[])[0],p=pt?pt.semua:null,c=$('isiBot');c.textContent='';
   c.style.setProperty('--warna-bot',warna(b));var n=0;for(var k in v.lolos_terbaik)if(v.lolos_terbaik[k])n++;
-  var kp=el('div','bot-kepala');kp.appendChild(el('h2',null,namaBot(b)+', risiko '+String(st.risiko).replace('.',',')+'% per trade'));var a=el('div','angka');a.appendChild(document.createTextNode(n));a.appendChild(el('small',null,' / 9 target'));kp.appendChild(a);c.appendChild(kp);
+  var kp=el('div','bot-kepala');kp.appendChild(el('h2',null,namaBot(b)+', risiko '+String(st.risiko).replace('.',',')+'% per trade'));var a=el('div','angka');a.appendChild(document.createTextNode(n));a.appendChild(el('small',null,' / 10 target'));kp.appendChild(a);c.appendChild(kp);
   c.appendChild(el('p','fokus','Fokus sekarang: '+(st.fokus||'–')));
   var me=el('div','meter');me.appendChild(el('span',null,'Keyakinan selesai 31 Des'));var rl=el('div','rel');var ri=el('i');rl.appendChild(ri);me.appendChild(rl);me.appendChild(el('b',null,(st.keyakinan!=null?st.keyakinan:'–')+'%'));c.appendChild(me);setTimeout(function(){ri.style.width=(st.keyakinan||0)+'%'},30);
   var kol=el('div','kolom-bot');c.appendChild(kol);var kiri=el('div'),kanan=el('div');kol.appendChild(kiri);kol.appendChild(kanan);

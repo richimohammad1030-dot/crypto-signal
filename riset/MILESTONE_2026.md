@@ -15,8 +15,9 @@ dengan menambah satu baris di `riset/<bot>/RAPOR.md` (file di folder bot ikut te
 | T7 | Kalah beruntun | ≤ 10 trade berturut-turut — berlaku juga untuk crypto (keputusan pemilik 24 Nov) |
 | T8 | Frekuensi | XAU ≥ 3 trade/mgg · FX ≥ 3/mgg · crypto & intraday sesuai aturan bot |
 | T9 | Lolos data baru | Hasil OOS & Setra tidak jauh di bawah backtest (P_rasio, ATURAN_BERSAMA) |
+| T10 | Skill SNR bisa dipakai | SNR lulus tahap 2 (BISA MEMAKAI, gerbang biasa P ≥ 0,90) di tiap bot paling lambat 31 Des 2026 → tahap 3 (live) di 2027 (pemilik, 26 Nov) |
 
-"Mencapai milestone" pada 31 Des = tiap bot punya versi (juara atau penantang) yang lolos T1-T9 di backtest + walk-forward
+"Mencapai milestone" pada 31 Des = tiap bot punya versi (juara atau penantang) yang lolos T1-T10 di backtest + walk-forward
 dan sudah berjalan di bayangan. Pemasangan live tetap lewat persetujuan pemilik (uji maju 6 minggu boleh dipersingkat oleh
 pemilik setelah membaca bukti).
 
@@ -43,7 +44,7 @@ T2 (monitor edge) belum ada di bot mana pun. T8/T9 dicek per kandidat.
 | 24-30 Nov | Mesin saringan massal (GitHub Actions malam, tanpa token) XAU dulu, lalu crypto & intraday; bank ide; rapor otomatis | Run malam pertama XAU; ≥ 200 varian/malam |
 | 1-7 Des | Saringan massal 4 bot jalan tiap malam; SNR target 4 Des; FX SNR tahap 0-1 | Tiap bot ≥ 1 penantang di bayangan |
 | 8-14 Des | Serang celah: XAU tahun minus/DD/beruntun, FX tahun minus/DD, crypto beruntun; desain monitor edge (T2) | Kandidat XAU & FX yang lolos T1 di backtest |
-| 15-21 Des | Uji penuh + walk-forward kandidat; SNR FX 20 Des | Tiap bot punya versi lolos T1-T9 (backtest + WF) |
+| 15-21 Des | Uji penuh + walk-forward kandidat; SNR FX 20 Des | Tiap bot punya versi lolos T1-T10 (backtest + WF) |
 | 22-31 Des | Usulan lengkap ke pemilik (bukti + rapor) | Milestone: semua bot lolos di backtest+WF dan di bayangan |
 
 ## Rapor mingguan

@@ -102,3 +102,13 @@ FX 1 sesi/minggu (Minggu) → boleh beberapa tahap per sesi; batas 3 sesi per ta
 | Crypto swing | `riset/crypto/KURIKULUM.md` | skill 1 SNR (lihat file) |
 | Intraday | `riset/intraday/PROSEDUR.md` bagian SKILL | skill 1 SNR: tahap 1 PAHAM lulus untuk jenis PERIODE (11 Nov) |
 | FX major | `riset/fx/SKILL.md` | skill 1 SNR, tahap 0+1 mulai sesi Minggu 29 Nov 2026 |
+
+## SNR = MILESTONE T10 (pemilik, 26 Nov 2026) — mengalahkan poin 4 & 6 PROGRAM KILAT untuk skill SNR
+- Kriteria berhasil: SNR lulus **tahap 2 BISA MEMAKAI di keempat bot (XAU, FX, crypto swing, intraday) paling lambat 31 Des 2026**;
+  tahap 3 (bayangan ≥ 4 minggu → live) dikerjakan awal 2027.
+- SNR **tidak ditutup** sebelum 31 Des. Gagal 3 sesi = wajib DEFINISI/CARA PAKAI BARU (bukan berhenti): SL/TP di level, filter
+  arah, prioritas slot, konfluensi dengan skill lain, level timeframe lain, jarak ke level sebagai bobot risiko, dst. Tiap
+  definisi baru ditulis sebagai keluarga di `riset/<bot>/massal/keluarga_usulan.py` agar ratusan variannya diuji malam itu.
+- Gerbang tahap 2 TIDAK dilonggarkan (P ≥ 0,90 walk-forward + aturan anti-optimis ATURAN_BERSAMA G). Kalau sampai 31 Des tetap
+  gagal di satu bot, laporkan jujur cara pakai terbaik + P-nya; jangan memaksakan lolos.
+- Skill 2 (struktur pasar) boleh mulai paralel hanya bila tidak mengurangi sesi SNR.
