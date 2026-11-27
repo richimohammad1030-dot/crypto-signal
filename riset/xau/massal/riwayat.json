@@ -49,5 +49,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-27",
+  "n_varian": 248,
+  "n_penantang": 43,
+  "terbaik": {
+   "nama": "X010 SUS0.0 MR/KOMBO er20>q0.8 w0.0 K6 er20>q0.8 w0.5 + monitorPF strat",
+   "minus": 4,
+   "pf": 1.2316805104457118,
+   "rasio": 0.5906910938313115
+  }
  }
 ]
