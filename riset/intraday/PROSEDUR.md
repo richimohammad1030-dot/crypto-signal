@@ -104,6 +104,13 @@ terakhir saat struktur NAIK (atau swing low saat TURUN) = lanjutan; CHoCH = clos
 pivot lain yang bukan pivot terakhir), kedua arah, 2020-22 DAN 2023-26, P ≥ 0,90 bootstrap blok bulanan. Lulus → tahap 2: filter
 order B/A (lewati B-long setelah CHoCH turun, dsb.).
 
+**28 Nov 2026 (review bulanan, `eksperimen/sesi_2026-11-28.py`):** (1) KOREKSI: KURIKULUM T10 (26 Nov) melarang SNR ditutup sebelum 31 Des →
+SNR dibuka lagi (status belajar, paralel). Cara pakai baru I-43 (bobot risiko 0,5 order B dekat level PERIODE) WF P_rasio 0,33 (pasca-hoc 0,93);
+dataran x × w × modul dipetakan keluarga massal IM008. (2) STRUKTUR tahap 1 putaran 1/3 BELUM LULUS: pembanding = candle non-peristiwa dengan
+struktur, arah candle, dan desil |C-O|/ATR sama; BOS/CHoCH H1 n=3 tidak beda konsisten di 2020-22 dan 2023-26 (BOS-naik 2020-22 malah kurang
+lanjut). Tahap 2 filter S-B WF P_rasio 0,17. **Putaran 2 (Rabu 2 Des): struktur D1 (dari H1) dan H4, fraktal n=5, dan BOS dengan close ≥ 0,5 ATR
+di atas level** (bukan sekadar lewat); keluarga IM007 (struktur sebagai bobot) dibaca dari massal.
+
 ## PROGRAM UTAMA (pemilik, 6 Nov 2026): OPTIMASI — untung lebih besar tanpa merusak "semua tahun positif"
 **UPDATE 11 Nov 2026:** vonis data 2018-2019 (belum pernah dilihat) → 2019 minus → arah sekarang NAIKKAN EDGE PER TRADE (lihat
 ARAH UTAMA di atas). Jalur 1-5 di bawah tetap menjadi daftar ide, tetapi ukuran suksesnya R/trade & variansi tahunan.

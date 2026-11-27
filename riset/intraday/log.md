@@ -318,3 +318,24 @@ masih November = review bulanan).
   pernah aktif. → T2 bot-365 = pengaman netral, usulan pasang ke pemilik (perubahan bot, persetujuan). Konfirmasi 2018-19 belum.
 - Keluarga massal baru IM006 (monitor per modul 5×3×3 = 45 varian) dititipkan di `riset/intraday/massal_usulan.py` (sesi tidak boleh
   menulis `riset/massal/`). Total ide bernomor diuji: 29 (+ 10 varian hari ini). Juara v3 & bot tidak diubah.
+
+## 2026-11-28 · REVIEW BULANAN (ATURAN_BERSAMA E/F/G/H, sesi Sabtu)
+Data diunduh ulang s.d. 28 Nov 2026 ±04:00 WIB (koin bot + 177 koin PIT, 227 koin dimuat) + data konfirmasi 2018 (150 koin). Laporan:
+`riset/laporan/intraday/riset-2026-11-28.md`; keluaran mentah `eksperimen/hasil_2026-11-28.log`. Mode: review bulanan (Rabu 2 Des = bulan baru).
+- **Kinerja live (H)** dari `riset/harian/intraday.md` (27 Nov 07:49 WIB, < 36 jam, semua OK): W48 3 trade +1,94R, W47 2 trade +0,02R, sejak v3
+  18 trade +5,86R (ekspektasi +1,6R ± 3,2R) — semua B-short (rezim BTC turun; A & B-long 0 trade). 0 SL 7 hari. Tidak ada pemicu aksi.
+- **DATA live ≠ replay (I-45)**: satu-satunya trade hanya-replay (ATOM B-short 26 Nov +0,65R) dijelaskan: jendela funding 72 jam live [t-72j, t]
+  (73 nilai HL) vs replay (t-72j, t] (72 nilai); ATOM +7,6e-7 vs -1,2e-7. Usulan teknis ke pemilik (blocker B5).
+- **Review bulanan**: juara PIT 2.982 trade +0,088R/tr DD 15,8R; per tahun +38,0/+92,6/+35,6/+24,9/+25,3/+9,4/+37,6; A +0,124 · B-long +0,080 ·
+  B-short +0,061R/tr; keluar TP 1.438 / SL 824 / WAKTU 720. 6 bulan terakhir +0,106R/tr (2024+ +0,064) → tidak PERINGATAN (Okt -2,4R, Nov +5,9R).
+  Live v3 vs backtest: 20/20 trade B identik. Gabungan swing+intraday DD 23,6% (< 30%). Bias koin selamat: daftar tetap +0,097 vs PIT +0,088R/tr.
+- **Konfirmasi T2 di 2018-Feb 2020** (`eksperimen/konfirmasi_t2_2018_2026-11-28.py`): monitor live aktif akhir 2019-2020 (terlambat). Standar:
+  2019 -5,6 → -7,9R, 2020 47,4 → 44,1R, DD 2018-26 18,0 → 20,1R (lebih buruk). Stres: 2019 -17,2 → -12,5R, DD 33,7 → 23,1R, tetapi 2024 12,8 → 4,5R.
+  Kesimpulan: monitor = ASURANSI untuk skenario eksekusi buruk, bukan penambah edge; tetap terpasang (sudah disetujui), I-46 (pemulihan cepat) antri.
+- **Skill 2 STRUKTUR tahap 1 (I-41) putaran 1/3: belum lulus**; tahap 2 filter (S-B/S-AB/C24) WF P_rasio 0,17 → gagal. 
+- **Skill 1 SNR dibuka lagi** (KURIKULUM T10 26 Nov: tidak ditutup sebelum 31 Des; penutupan 25 Nov dikoreksi). Cara pakai baru I-43 (bobot
+  risiko 0,5 dekat level PERIODE): WF P_rasio 0,33; pasca-hoc W-0.25 0,93 (tidak dipakai keputusan).
+- **Edge baru I-44 lead-lag BTC → altcoin**: -0,13..-0,15R/trade → gagal.
+- **Saringan massal** (terbaru.md 27 Nov): 0 varian baru, 0 penantang. Keluarga baru di `massal/keluarga_usulan.py`: IM007 struktur bobot (45),
+  IM008 SNR bobot (64) — diuji malam ini. Penyebab SL backtest terbesar (B-long) → mitigasi_sl `diuji`.
+- Tidak ada kandidat baru → bayangan.py tidak diubah. Total ide bernomor diuji: 32 (+ 9 varian hari ini). Juara v3 & bot tidak diubah.

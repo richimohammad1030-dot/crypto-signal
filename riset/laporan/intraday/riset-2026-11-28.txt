@@ -1,0 +1,50 @@
+<b>REVIEW BULANAN INTRADAY</b>
+Sabtu 28 Nov 2026
+────────────────────
+<b>📊 KINERJA</b>
+────────────────────
+<pre>W48: 3 trade +1,94R (exp +0,3)
+W47: 2 trade +0,02R
+Sejak v3: 18 tr +5,86R
+  (exp +1,6R, rentang -1,6..+4,8)
+Semua B-short (BTC turun)
+7 hari: 0 SL · tidak ada aksi
+Live = replay 20/20 trade B</pre>
+1 trade hanya-replay (ATOM 26 Nov) terjelaskan: jendela funding 72 jam live 73 nilai vs replay 72 nilai, funding ATOM ~0 berganti tanda. Usulan B5.
+<b>Review bulanan</b>
+────────────────────
+<pre>Juara PIT: +0,088R/tr DD 15,8R
+6 bln: +0,106R/tr (2024+ 0,064)
+  -&gt; tidak PERINGATAN
+Gabungan swing+intraday DD 23,6%
+  (&lt; 30%, aman)
+Konfirmasi T2 2018-Feb 2020:
+ standar 2019 -5,6 -&gt; -7,9R
+ stres   2019 -17,2 -&gt; -12,5R
+ stres DD 2018-26 33,7 -&gt; 23,1R</pre>
+Monitor T2 = asuransi (terlambat pulih, sedikit rugi di biaya normal, menolong di eksekusi buruk). Tetap terpasang; versi pemulihan cepat (I-46) antri.
+<b>Skill</b>
+────────────────────
+<pre>STRUKTUR tahap 1 (1/3): belum
+ BOS/CHoCH H1 tidak beda
+ konsisten dari pembanding
+ filter tahap 2: P_rasio 0,17
+SNR dibuka lagi (T10, koreksi)
+ bobot 0,5 dekat level: P 0,33
+ (pasca-hoc 0,93, tdk dipakai)</pre>
+<b>Riset</b>
+────────────────────
+<pre>Edge baru lead-lag BTC-&gt;alt:
+ -0,13R/trade -&gt; GAGAL
+Massal 27 Nov: 0 penantang
+Keluarga baru malam ini:
+ IM007 struktur bobot (45)
+ IM008 SNR bobot (64)
+Kandidat baru: tidak ada</pre>
+<b>Milestone (v3 + T2)</b>
+────────────────────
+<pre>T1-T9: lolos
+T10 SNR tahap 2: belum (31 Des)</pre>
+<b>Usulan</b>
+────────────────────
+B5: samakan jendela funding 72 jam bot live dengan replay (perbaikan teknis; usul ubah fetch_funding_avg mulai t-72j+1 detik, pengaruh kecil juga ke bot swing). Jawab "pasang" / "tidak". Tidak ada perubahan strategi.

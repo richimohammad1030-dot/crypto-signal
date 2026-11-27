@@ -3,14 +3,14 @@
  "risiko": 1.0,
  "t2": true,
  "t9": true,
- "keyakinan": 95,
- "fokus": "Semua target lolos di backtest; konfirmasi 2018-19 (review 28 Nov) dan jaga live = replay",
+ "keyakinan": 90,
+ "fokus": "Juara v3 + monitor T2 live; konfirmasi 2018-19: T2 = asuransi (biaya standar -5R, stres DD 33,7 -> 23,1R). Skill: STRUKTUR tahap 1 putaran 2 + SNR cara pakai baru (T10)",
  "skill": {
-  "nama": "Struktur pasar (skill 2)",
+  "nama": "Struktur pasar (skill 2) + SNR (T10, paralel)",
   "tahap": 1,
-  "putaran": "0/3",
-  "status": "SNR DITUTUP 25 Nov (📕 dipelajari: level = zona whipsaw; kandidat I-35/I-36 tetap di bayangan). Struktur pasar: definisi tahap 0 selesai.",
-  "berikutnya": "Sabtu 28 Nov: tahap 1 PAHAM BOS/CHoCH H1 (I-41) + review bulanan",
+  "putaran": "1/3",
+  "status": "STRUKTUR tahap 1 putaran 1 BELUM LULUS (BOS/CHoCH H1 tidak beda konsisten dari pembanding di 2020-22 dan 2023-26); tahap 2 filter WF P_rasio 0,17. SNR dibuka lagi (T10: tidak ditutup sebelum 31 Des): bobot risiko dekat level WF P_rasio 0,33 (pasca-hoc 0,93).",
+  "berikutnya": "Rabu 2 Des: STRUKTUR putaran 2 (struktur D1/H4 atau fraktal n=5) + baca hasil massal IM007/IM008",
   "batas": "2026-12-31"
  },
  "item": [
@@ -27,12 +27,17 @@
   {
    "minggu": "2026-11-30",
    "teks": "Konfirmasi monitor T2 di data 2018-2019 + review bulanan",
-   "status": "belum"
+   "status": "selesai"
   },
   {
    "minggu": "2026-12-08",
    "teks": "Monitor edge dipasang (persetujuan pemilik)",
    "status": "selesai"
+  },
+  {
+   "minggu": "2026-11-30",
+   "teks": "Skill STRUKTUR tahap 1 PAHAM (putaran 2/3) + SNR cara pakai baru dari massal IM008",
+   "status": "jalan"
   }
  ],
  "blocker": [
@@ -43,11 +48,44 @@
    "detail": "Disetujui pemilik 25 Nov, terpasang di intraday_bot.py: risiko 50% bila PF trade tutup 365 hari < 1,0 (min 20 trade). Sekarang normal (PF 2,40).",
    "sejak": "2026-11-25",
    "status": "selesai"
+  },
+  {
+   "id": "B5",
+   "bot": "intraday",
+   "judul": "Samakan jendela funding 72 jam live vs replay (I-45)",
+   "detail": "Live (signal_bot.fetch_funding_avg) memakai [t-72j, t] = 73 nilai HL, replay (backtest_intraday.funding_avg72) (t-72j, t] = 72 nilai. Bila funding ~0 tandanya bisa beda: ATOM B-short 26 Nov ada di replay (+0,65R), tidak di live. Perbaikan teknis kecil; pemilik memilih sisi mana yang diubah (fetch_funding_avg dipakai juga bot swing). Jawab 'pasang' / 'tidak'.",
+   "sejak": "2026-11-28",
+   "status": "menunggu"
   }
  ],
- "sesi_terakhir": "2026-11-25",
+ "sesi_terakhir": "2026-11-28",
  "_catatan": "Status intraday untuk dashboard. Diperbarui sesi riset intraday (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
- "mitigasi_sl": [],
+ "mitigasi_sl": [
+  {
+   "penyebab": "SL B-long (kategori SL terbesar backtest: 553 dari 824 SL juara PIT, 33% trade B-long kena SL)",
+   "jumlah": 553,
+   "analisis": "Per struktur H1 saat order: B-long searah SL 30,8% R/tr +0,115 · acak 34,9% +0,048 · lawan 33,7% +0,069. Filter struktur akan membuang 2 pemenang per 1 SL (S-B: 122 SL dicegah, 232 pemenang hilang, R terbuang +22).",
+   "mitigasi": "I-41 filter struktur (S-B/S-AB/C24) dan I-43 bobot risiko dekat level PERIODE; keluarga massal IM007 (struktur sebagai bobot, termasuk mode N = tidak searah) + IM008",
+   "uji": "WF replay penuh PIT 2022-26: S-B P_rasio 0,17 (stres 0,18); W-0.25 P_rasio 0,33 (pasca-hoc 0,93)",
+   "status": "diuji"
+  },
+  {
+   "penyebab": "SL live 7 hari (harian 27 Nov)",
+   "jumlah": 0,
+   "analisis": "0 SL dari 4 trade tutup 7 hari; tidak ada kategori berulang (>= 3).",
+   "mitigasi": "-",
+   "uji": "-",
+   "status": "dianalisis"
+  },
+  {
+   "penyebab": "DATA: trade hanya-replay ATOM B-short 26 Nov",
+   "jumlah": 1,
+   "analisis": "Bukan SL, tetapi live != replay: jendela funding 72 jam beda satu nilai (I-45), funding ATOM ~0 berganti tanda.",
+   "mitigasi": "Usulan samakan jendela (blocker B5)",
+   "uji": "dihitung ulang dari data HL: replay +7,6e-7 vs live -1,2e-7",
+   "status": "dianalisis"
+  }
+ ],
  "kurikulum": [
   {
    "no": 1,
@@ -58,18 +96,18 @@
    "t1": "2026-11-11",
    "t2": null,
    "t3": null,
-   "catatan": "SNR DITUTUP 25 Nov (📕 dipelajari: level = zona whipsaw; kandidat I-35/I-36 tetap di bayangan). Struktur pasar: definisi tahap 0 selesai."
+   "catatan": "T10 (26 Nov): SNR TIDAK ditutup sebelum 31 Des. Tahap 2 cara pakai baru 28 Nov: bobot risiko 0,5 order B dekat level PERIODE (I-43) WF P_rasio 0,33, pasca-hoc 0,93; I-35/I-36 di bayangan; massal IM008."
   },
   {
    "no": 2,
    "kode": "STRUKTUR",
-   "status": "belum",
+   "status": "belajar",
    "tahap": 0,
-   "mulai": null,
+   "mulai": "2026-11-25",
    "t1": null,
    "t2": null,
    "t3": null,
-   "catatan": ""
+   "catatan": "Tahap 0 definisi 25 Nov. Tahap 1 putaran 1/3 (28 Nov) belum lulus: BOS/CHoCH H1 n=3 tidak beda konsisten dari pembanding. Tahap 2 filter dicoba: P_rasio 0,17. Target t1 = 29 Nov (lewat) -> putaran 2 Rabu 2 Des."
   },
   {
    "no": 3,

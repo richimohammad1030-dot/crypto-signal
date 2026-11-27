@@ -1,0 +1,123 @@
+koin dimuat 227
+struktur H1 selesai
+
+######## SKILL 2 STRUKTUR · TAHAP 1 PAHAM (excess vs pembanding sel sama; P = peluang excess > 0, bootstrap blok bulanan)
+  BOS-naik     2020-22 n  28831 | hit mentah 0.455 | excess (rata, P>0): r4 -0.0475 P 0.030 · r12 -0.0597 P 0.181 · r24 -0.0892 P 0.211 · hit -0.0215 P 0.014
+  BOS-naik     2023-26 n  53358 | hit mentah 0.475 | excess (rata, P>0): r4 +0.0097 P 0.661 · r12 +0.0049 P 0.522 · r24 -0.0244 P 0.410 · hit -0.0008 P 0.447
+  BOS-turun    2020-22 n  26667 | hit mentah 0.475 | excess (rata, P>0): r4 -0.0175 P 0.314 · r12 -0.0359 P 0.314 · r24 -0.0821 P 0.270 · hit +0.0014 P 0.545
+  BOS-turun    2023-26 n  58910 | hit mentah 0.498 | excess (rata, P>0): r4 -0.0265 P 0.168 · r12 -0.0090 P 0.429 · r24 -0.0455 P 0.334 · hit -0.0017 P 0.388
+  CHoCH-naik   2020-22 n  23543 | hit mentah 0.483 | excess (rata, P>0): r4 -0.0219 P 0.204 · r12 -0.0875 P 0.085 · r24 -0.1679 P 0.103 · hit -0.0158 P 0.032
+  CHoCH-naik   2023-26 n  48271 | hit mentah 0.480 | excess (rata, P>0): r4 -0.0094 P 0.348 · r12 -0.0281 P 0.318 · r24 -0.1008 P 0.186 · hit -0.0074 P 0.161
+  CHoCH-turun  2020-22 n  26250 | hit mentah 0.491 | excess (rata, P>0): r4 +0.0330 P 0.870 · r12 +0.0433 P 0.723 · r24 -0.0454 P 0.337 · hit +0.0114 P 0.921
+  CHoCH-turun  2023-26 n  48734 | hit mentah 0.494 | excess (rata, P>0): r4 -0.0254 P 0.186 · r12 +0.0279 P 0.685 · r24 -0.0326 P 0.361 · hit -0.0020 P 0.391
+  VONIS BOS: r4 tidak · r12 tidak · r24 tidak · hit tidak
+  VONIS CHoCH: r4 tidak · r12 tidak · r24 tidak · hit tidak
+order A 1716 · B 43024
+  S-B selesai
+  S-AB selesai
+  C24-B selesai
+  C24-AB selesai
+  LL-1.5 selesai (3543 trade)
+  LL-2.0 selesai (1697 trade)
+  LL-2.0-long selesai (1093 trade)
+
+######## DAMPAK FILTER STRUKTUR pada trade juara (pasca-trade, indikatif; keputusan dari replay penuh)
+  S-B     trade terbuang 356 (R +22.0) · SL dicegah 122 dari 824 · pemenang hilang 232 · R/tr terbuang +0.062
+  S-AB    trade terbuang 421 (R +30.9) · SL dicegah 129 dari 824 · pemenang hilang 271 · R/tr terbuang +0.073
+  C24-B   trade terbuang 412 (R +22.3) · SL dicegah 142 dari 824 · pemenang hilang 265 · R/tr terbuang +0.054
+  C24-AB  trade terbuang 490 (R +39.8) · SL dicegah 149 dari 824 · pemenang hilang 318 · R/tr terbuang +0.081
+
+######## SARINGAN Mar 2020 - Des 2021 (sistem lengkap; modul L = juara + L slot sendiri)
+  off          n 1213 R/tr +0.1077 R +130.6 DD 14.4 rasio 5.0 minus 0 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 56.6, 0.102), 'B-short': (147, 9.3, 0.063)}
+  S-B          n 1177 R/tr +0.1161 R +136.6 DD 8.2 rasio 9.19 minus 0 grup {'A': (506, 61.5, 0.122), 'B-long': (538, 64.3, 0.119), 'B-short': (133, 10.8, 0.081)}
+  S-AB         n 1148 R/tr +0.1157 R +132.8 DD 8.2 rasio 8.93 minus 0 grup {'A': (475, 59.7, 0.126), 'B-long': (540, 62.2, 0.115), 'B-short': (133, 10.8, 0.081)}
+  C24-B        n 1182 R/tr +0.1067 R +126.2 DD 14.1 rasio 4.92 minus 0 grup {'A': (516, 69.2, 0.134), 'B-long': (534, 47.7, 0.089), 'B-short': (132, 9.3, 0.07)}
+  C24-AB       n 1142 R/tr +0.0966 R +110.4 DD 14.1 rasio 4.3 minus 0 grup {'A': (473, 56.5, 0.12), 'B-long': (537, 44.5, 0.083), 'B-short': (132, 9.3, 0.07)}
+  W-0.25       n 1213 R/tr +0.1066 R +129.3 DD 13.1 rasio 5.42 minus 0 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 57.6, 0.104), 'B-short': (147, 7.1, 0.048)} | trade diperkecil (semua periode) 221
+  W-0.5        n 1213 R/tr +0.1014 R +123.0 DD 12.1 rasio 5.59 minus 0 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 54.8, 0.099), 'B-short': (147, 3.6, 0.024)} | trade diperkecil (semua periode) 454
+  LL-1.5       n 2019 R/tr +0.0119 R +24.0 DD 47.2 rasio 0.28 minus 1 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 56.6, 0.102), 'B-short': (147, 9.3, 0.063), 'L': (806, -106.6, -0.132)} | modul L sendiri n 806 win 44.8 R/tr -0.1323 R -106.6 DD 109.6
+  LL-2.0       n 1613 R/tr +0.0663 R +106.9 DD 18.8 rasio 3.12 minus 0 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 56.6, 0.102), 'B-short': (147, 9.3, 0.063), 'L': (400, -23.7, -0.059)} | modul L sendiri n 400 win 48.5 R/tr -0.0592 R -23.7 DD 32.5
+  LL-2.0-long  n 1517 R/tr +0.0790 R +119.8 DD 18.4 rasio 3.57 minus 0 grup {'A': (511, 64.7, 0.127), 'B-long': (555, 56.6, 0.102), 'B-short': (147, 9.3, 0.063), 'L': (304, -10.8, -0.035)} | modul L sendiri n 304 win 50.3 R/tr -0.0355 R -10.8 DD 25.1
+  urutan saringan: S-B (9.19) > S-AB (8.93) > W-0.5 (5.59) > W-0.25 (5.42) > C24-B (4.92) > C24-AB (4.3) > LL-2.0-long (3.57) > LL-2.0 (3.12) > LL-1.5 (0.28) · juara rasio 5.0
+
+######## STRUKTUR (I-41) walk-forward
+  pilih<=2021: S-B (0 minus, +68.3R/thn, rasio 9.21) · S-AB (0 minus, +66.4R/thn, rasio 8.95) · off (0 minus, +65.3R/thn, rasio 5.01) · C24-B (0 minus, +63.0R/thn, rasio 4.92) · C24-AB (0 minus, +55.2R/thn, rasio 4.31) -> PILIH S-B
+  pilih<=2023: off (0 minus, +47.8R/thn, rasio 3.5) · S-B (0 minus, +46.9R/thn, rasio 4.35) · S-AB (0 minus, +45.4R/thn, rasio 4.08) · C24-B (0 minus, +40.9R/thn, rasio 3.05) · C24-AB (0 minus, +36.6R/thn, rasio 2.73) -> PILIH off
+  pilih<=2025: off (0 minus, +37.6R/thn, rasio 2.47) · C24-B (0 minus, +35.1R/thn, rasio 2.11) · S-B (0 minus, +34.7R/thn, rasio 1.9) · S-AB (0 minus, +33.2R/thn, rasio 1.8) · C24-AB (0 minus, +32.6R/thn, rasio 1.98) -> PILIH off
+  2022  S-B           285  +35.9 +0.126 | juara  295  +35.6 +0.121
+  2023  S-B           334  +15.1 +0.045 | juara  344  +24.9 +0.072
+  2024  off           495  +25.3 +0.051 | juara  495  +25.3 +0.051
+  2025  off           328   +9.4 +0.029 | juara  328   +9.4 +0.029
+  2026  off           307  +37.6 +0.122 | juara  307  +37.6 +0.122
+  GABUNGAN UJI 2022-2026: penantang n 1749 R +123.3 R/tr +0.0705 PF 1.21 DD 16.8 tanpa2% 81.2 | juara n 1769 R +132.8 R/tr +0.0751 PF 1.23 DD 15.8 tanpa2% 90.0
+  signifikansi (2022-skrg): {'hari': 1791, 'bulan': 59, 'juara': {'R_thn': 27.09, 'DD': 15.84, 'rasio': 8.39}, 'penantang': {'R_thn': 25.14, 'DD': 16.79, 'rasio': 7.34}, 'P_R_lebih_baik': 0.179, 'P_rasio_lebih_baik': 0.169, 'selisih_R_thn_90': [-5.72, 1.49]}
+  STRES -0,03R/trade: P_rasio 0.18 · penantang {'R_thn': 14.44, 'DD': 25.43, 'rasio': 2.78} · juara {'R_thn': 16.26, 'DD': 21.97, 'rasio': 3.63}
+  semua varian keluarga, seluruh periode (pembanding, tetap):
+    off          n 2982 R/tr +0.0883 PF 1.28 DD 15.8 kalah-beruntun 9 th {2020: 38.0, 2021: 92.6, 2022: 35.6, 2023: 24.9, 2024: 25.3, 2025: 9.4, 2026: 37.6} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061)}
+    S-B          n 2879 R/tr +0.0852 PF 1.27 DD 19.0 kalah-beruntun 9 th {2020: 46.4, 2021: 90.3, 2022: 35.9, 2023: 15.1, 2024: 13.8, 2025: 6.5, 2026: 37.3} grup {'A': (797, 94.1, 0.118), 'B-long': (1605, 123.2, 0.077), 'B-short': (477, 28.0, 0.059)} | pasca-hoc 2022+ P_rasio 0.041 DD 18.96 vs 15.84
+    S-AB         n 2833 R/tr +0.0835 PF 1.26 DD 19.2 kalah-beruntun 9 th {2020: 49.3, 2021: 83.5, 2022: 34.4, 2023: 14.6, 2024: 11.4, 2025: 6.1, 2026: 37.1} grup {'A': (748, 88.4, 0.118), 'B-long': (1608, 120.1, 0.075), 'B-short': (477, 28.0, 0.059)} | pasca-hoc 2022+ P_rasio 0.022 DD 19.19 vs 15.84
+    C24-B        n 2881 R/tr +0.0863 PF 1.28 DD 17.3 kalah-beruntun 10 th {2020: 34.4, 2021: 91.7, 2022: 24.7, 2023: 12.8, 2024: 32.5, 2025: 14.7, 2026: 37.8} grup {'A': (807, 102.3, 0.127), 'B-long': (1600, 126.1, 0.079), 'B-short': (474, 20.3, 0.043)} | pasca-hoc 2022+ P_rasio 0.518 DD 17.28 vs 15.84
+    C24-AB       n 2814 R/tr +0.0828 PF 1.26 DD 17.2 kalah-beruntun 10 th {2020: 31.7, 2021: 78.7, 2022: 22.8, 2023: 13.4, 2024: 33.6, 2025: 15.7, 2026: 37.1} grup {'A': (736, 87.3, 0.119), 'B-long': (1604, 125.3, 0.078), 'B-short': (474, 20.3, 0.043)} | pasca-hoc 2022+ P_rasio 0.552 DD 17.16 vs 15.84
+
+######## SNR-BOBOT (I-43) walk-forward
+  pilih<=2021: off (0 minus, +65.3R/thn, rasio 5.01) · W-0.25 (0 minus, +64.7R/thn, rasio 5.42) · W-0.5 (0 minus, +61.5R/thn, rasio 5.6) -> PILIH off
+  pilih<=2023: off (0 minus, +47.8R/thn, rasio 3.5) · W-0.25 (0 minus, +47.5R/thn, rasio 3.8) · W-0.5 (0 minus, +45.2R/thn, rasio 3.93) -> PILIH off
+  pilih<=2025: W-0.25 (0 minus, +38.5R/thn, rasio 2.61) · off (0 minus, +37.6R/thn, rasio 2.47) · W-0.5 (0 minus, +37.4R/thn, rasio 2.62) -> PILIH W-0.25
+  2022  off           295  +35.6 +0.121 | juara  295  +35.6 +0.121
+  2023  off           344  +24.9 +0.072 | juara  344  +24.9 +0.072
+  2024  off           495  +25.3 +0.051 | juara  495  +25.3 +0.051
+  2025  off           328   +9.4 +0.029 | juara  328   +9.4 +0.029
+  2026  W-0.25        307  +36.5 +0.119 | juara  307  +37.6 +0.122
+  GABUNGAN UJI 2022-2026: penantang n 1769 R +131.8 R/tr +0.0745 PF 1.23 DD 15.8 tanpa2% 88.9 | juara n 1769 R +132.8 R/tr +0.0751 PF 1.23 DD 15.8 tanpa2% 90.0
+  signifikansi (2022-skrg): {'hari': 1791, 'bulan': 59, 'juara': {'R_thn': 27.09, 'DD': 15.84, 'rasio': 8.39}, 'penantang': {'R_thn': 26.87, 'DD': 15.84, 'rasio': 8.32}, 'P_R_lebih_baik': 0.301, 'P_rasio_lebih_baik': 0.333, 'selisih_R_thn_90': [-0.89, 0.45]}
+  STRES -0,03R/trade: P_rasio 0.321 · penantang {'R_thn': 16.05, 'DD': 21.97, 'rasio': 3.58} · juara {'R_thn': 16.26, 'DD': 21.97, 'rasio': 3.63}
+  semua varian keluarga, seluruh periode (pembanding, tetap):
+    off          n 2982 R/tr +0.0883 PF 1.28 DD 15.8 kalah-beruntun 9 th {2020: 38.0, 2021: 92.6, 2022: 35.6, 2023: 24.9, 2024: 25.3, 2025: 9.4, 2026: 37.6} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061)}
+    W-0.25       n 2982 R/tr +0.0897 PF 1.3 DD 15.3 kalah-beruntun 9 th {2020: 41.2, 2021: 88.1, 2022: 34.7, 2023: 26.0, 2024: 26.5, 2025: 14.3, 2026: 36.5} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 139.1, 0.083), 'B-short': (510, 30.1, 0.059)} | pasca-hoc 2022+ P_rasio 0.927 DD 15.31 vs 15.84
+    W-0.5        n 2982 R/tr +0.0874 PF 1.31 DD 14.8 kalah-beruntun 9 th {2020: 40.4, 2021: 82.6, 2022: 34.1, 2023: 23.6, 2024: 29.0, 2025: 14.5, 2026: 36.5} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 133.5, 0.08), 'B-short': (510, 29.1, 0.057)} | pasca-hoc 2022+ P_rasio 0.885 DD 14.82 vs 15.84
+
+######## LEAD-LAG (I-44) walk-forward
+  pilih<=2021: off (0 minus, +65.3R/thn, rasio 5.01) · LL-2.0-long (0 minus, +59.9R/thn, rasio 3.57) · LL-2.0 (0 minus, +53.5R/thn, rasio 3.13) · LL-1.5 (1 minus, +11.9R/thn, rasio 0.28) -> PILIH off
+  pilih<=2023: off (0 minus, +47.8R/thn, rasio 3.5) · LL-2.0-long (1 minus, +34.5R/thn, rasio 0.83) · LL-2.0 (1 minus, +23.9R/thn, rasio 0.41) · LL-1.5 (2 minus, -15.7R/thn, rasio -0.13) -> PILIH off
+  pilih<=2025: off (0 minus, +37.6R/thn, rasio 2.47) · LL-2.0-long (3 minus, +19.0R/thn, rasio 0.26) · LL-2.0 (3 minus, +8.7R/thn, rasio 0.09) · LL-1.5 (4 minus, -30.8R/thn, rasio -0.12) -> PILIH off
+  2022  off           295  +35.6 +0.121 | juara  295  +35.6 +0.121
+  2023  off           344  +24.9 +0.072 | juara  344  +24.9 +0.072
+  2024  off           495  +25.3 +0.051 | juara  495  +25.3 +0.051
+  2025  off           328   +9.4 +0.029 | juara  328   +9.4 +0.029
+  2026  off           307  +37.6 +0.122 | juara  307  +37.6 +0.122
+  GABUNGAN UJI 2022-2026: penantang n 1769 R +132.8 R/tr +0.0751 PF 1.23 DD 15.8 tanpa2% 90.0 | juara n 1769 R +132.8 R/tr +0.0751 PF 1.23 DD 15.8 tanpa2% 90.0
+  signifikansi (2022-skrg): {'hari': 1791, 'bulan': 59, 'juara': {'R_thn': 27.09, 'DD': 15.84, 'rasio': 8.39}, 'penantang': {'R_thn': 27.09, 'DD': 15.84, 'rasio': 8.39}, 'P_R_lebih_baik': 0.5, 'P_rasio_lebih_baik': 0.5, 'selisih_R_thn_90': [0.0, 0.0]}
+  STRES -0,03R/trade: P_rasio 0.5 · penantang {'R_thn': 16.26, 'DD': 21.97, 'rasio': 3.63} · juara {'R_thn': 16.26, 'DD': 21.97, 'rasio': 3.63}
+  semua varian keluarga, seluruh periode (pembanding, tetap):
+    off          n 2982 R/tr +0.0883 PF 1.28 DD 15.8 kalah-beruntun 9 th {2020: 38.0, 2021: 92.6, 2022: 35.6, 2023: 24.9, 2024: 25.3, 2025: 9.4, 2026: 37.6} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061)}
+    LL-1.5       n 6525 R/tr -0.0419 PF 0.9 DD 343.2 kalah-beruntun 17 th {2020: -39.5, 2021: 63.4, 2022: 34.0, 2023: -120.5, 2024: -72.2, 2025: -49.8, 2026: -89.1} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061), 'L': (3543, -537.1, -0.152)} | pasca-hoc 2022+ P_rasio 0.0 DD 343.18 vs 15.84 | L sendiri n 3543 win 46.5 R/tr -0.1516 DD 538.8 th {2020: -77.5, 2021: -29.2, 2022: -1.6, 2023: -145.5, 2024: -97.5, 2025: -59.2, 2026: -126.6}
+    LL-2.0       n 4679 R/tr +0.0094 PF 1.02 DD 116.4 kalah-beruntun 13 th {2020: 15.2, 2021: 91.7, 2022: 25.4, 2023: -36.8, 2024: -27.4, 2025: -15.9, 2026: -8.3} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061), 'L': (1697, -219.4, -0.129)} | pasca-hoc 2022+ P_rasio 0.0 DD 116.42 vs 15.84 | L sendiri n 1697 win 47.7 R/tr -0.1293 DD 219.4 th {2020: -22.8, 2021: -0.8, 2022: -10.2, 2023: -61.7, 2024: -52.7, 2025: -25.3, 2026: -45.8}
+    LL-2.0-long  n 4075 R/tr +0.0295 PF 1.08 DD 73.9 kalah-beruntun 10 th {2020: 21.8, 2021: 98.1, 2022: 40.4, 2023: -22.2, 2024: -15.6, 2025: -8.7, 2026: 6.3} grup {'A': (795, 98.2, 0.124), 'B-long': (1677, 134.1, 0.08), 'B-short': (510, 31.1, 0.061), 'L': (1093, -143.4, -0.131)} | pasca-hoc 2022+ P_rasio 0.0 DD 73.88 vs 15.84 | L sendiri n 1093 win 47.6 R/tr -0.1312 DD 152.3 th {2020: -16.2, 2021: 5.5, 2022: 4.7, 2023: -47.1, 2024: -40.9, 2025: -18.1, 2026: -31.3}
+
+######## PENYEBAB SL BACKTEST JUARA (PIT, semua periode): porsi SL per modul × struktur H1 saat order
+  A        struktur acak    n  296 SL   37 (12.5%) R/tr +0.094
+  A        struktur lawan   n   65 SL    7 (10.8%) R/tr +0.138
+  A        struktur searah  n  434 SL   64 (14.7%) R/tr +0.142
+  B-long   struktur acak    n  691 SL  241 (34.9%) R/tr +0.048
+  B-long   struktur lawan   n  276 SL   93 (33.7%) R/tr +0.069
+  B-long   struktur searah  n  710 SL  219 (30.8%) R/tr +0.115
+  B-short  struktur acak    n  206 SL   66 (32.0%) R/tr +0.072
+  B-short  struktur lawan   n   80 SL   29 (36.2%) R/tr +0.035
+  B-short  struktur searah  n  224 SL   68 (30.4%) R/tr +0.060
+  cara keluar juara: {'TP': 1438, 'SL': 824, 'WAKTU': 720}
+SELESAI
+
+######## KONFIRMASI T2 (eksperimen/konfirmasi_t2_2018_2026-11-28.py, data18 = Binance spot 2018-01..2026-11, PIT, juara v3 apa adanya)
+STANDAR per tahun (juara vs +monitor, n, trade diperkecil): 2018: +12.8 vs +12.8 (n 147, kecil 0) · 2019: -5.6 vs -7.9 (n 327, kecil 67) · 2020: +47.4 vs +44.1 (n 536, kecil 223) · 2021: +97.3 vs +97.3 (n 758, kecil 0) · 2022: +32.4 vs +32.4 (n 284, kecil 0) · 2023: +27.4 vs +27.4 (n 329, kecil 0) · 2024: +29.7 vs +29.7 (n 484, kecil 0) · 2025: +17.9 vs +17.9 (n 316, kecil 0) · 2026: +36.7 vs +36.7 (n 307, kecil 0)
+   Mar2018-Feb2020: juara R +12.7 PF 1.07 DD 17.9 | +monitor R +7.7 PF 1.05 DD 16.9 | trade diperkecil 168/575
+   2018-2026: juara R +295.9 DD 18.0 | +monitor R +290.4 DD 20.1 | diperkecil 290
+STRES   per tahun (juara vs +monitor, n, trade diperkecil): 2018: +10.5 vs +10.5 (n 146, kecil 0) · 2019: -17.2 vs -12.5 (n 323, kecil 121) · 2020: +36.5 vs +36.1 (n 526, kecil 321) · 2021: +73.5 vs +73.5 (n 749, kecil 0) · 2022: +15.6 vs +15.6 (n 277, kecil 0) · 2023: +11.3 vs +11.3 (n 323, kecil 0) · 2024: +12.8 vs +4.5 (n 477, kecil 139) · 2025: +3.8 vs +3.9 (n 307, kecil 5) · 2026: +25.4 vs +25.4 (n 299, kecil 0)
+   Mar2018-Feb2020: juara R -3.7 PF 0.98 DD 28.7 | +monitor R -0.5 PF 1.00 DD 20.7 | trade diperkecil 222/570
+   2018-2026: juara R +172.3 DD 33.7 | +monitor R +168.4 DD 23.1 | diperkecil 586
+
+######## REVIEW BULANAN (review_bulanan.py trades PIT; risiko_gabungan.py)
+6 bln terakhir (mulai 2026-05-27) n 180 win 67,2% R/tr +0,106 (2024-skrg +0,064) -> tidak ada PERINGATAN
+per bulan: 05 +0,3 · 06 +3,8 · 07 +0,4 · 08 +2,2 · 09 +9,0 · 10 -2,4 · 11 +5,9
+Live v3 vs backtest daftar bot: 20/20 trade B identik (R & alasan & waktu keluar); hanya-replay ATOM 26 Nov (I-45 jendela funding)
+Gabungan swing+intraday 1%/1% 2020-26: DD 23,6% (< 30%, tidak PERINGATAN), korelasi harian -0,11, risiko terbuka maks 13%, 0 trade berlawanan arah
+Bias koin selamat: PIT 2.982 trade +0,088R/tr DD 15,8R vs daftar tetap 2.706 trade +0,097R/tr DD 13,3R
