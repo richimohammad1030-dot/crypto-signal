@@ -25,6 +25,8 @@ MENU = {
     "Juara lama (OCO)": m.potong(m.replay(D, A=A)),
     "KANDIDAT X010 rezim (27 Nov)": __import__("kandidat_x010").trades(D, A, F),
     "KANDIDAT X010 + OCO adaptif (27 Nov)": __import__("kandidat_x010").trades_oco(D, A, F),
+    "KANDIDAT #93v2 tanpa OCO (P 0,93)": __import__("kandidat_x010").trades_v2(D, A, F, oco=False),
+    "KANDIDAT #93v2 + OCO adaptif": __import__("kandidat_x010").trades_v2(D, A, F, oco=True),
     "PENANTANG": mm.baseline(D, A, F, sig=sig30, mr=mm.trades_mr(D, A, sig30, sl=2.5, tp=2), k6=mm.trades_k6(D, A, F, sl=1.25, tp=None)),
 }
 print(f"Sejak {m.wib(mulai):%d %b %Y} (biaya 0,40 USD/trade):")

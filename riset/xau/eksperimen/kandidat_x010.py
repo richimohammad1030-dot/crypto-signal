@@ -30,7 +30,7 @@ def trades(D, A, F, base=None):
     return [dict(x, w=x["w"] * k_mon.get(k, 0.0)) for k, x in enumerate(w1) if k_mon.get(k, 0.0) > 0]
 
 
-def trades_oco(D, A, F, ambang=1.2, hari=365, w_oco=1.0, n_min=8, base=None):
+def trades_oco(D, A, F, ambang=1.2, hari=365, w_oco=1.0, n_min=8, base=None, base_final=None):
     """KANDIDAT X010 + OCO ADAPTIF (27 Nov 2026, cara pikir pemilik: edge sekarang -> OCO; bila OCO gagal, kembali).
     OCO 2 sisi (juara lama, m.replay) = strategi ke-5 di bayangan. Hari d: bila PF bersih trade OCO yang SUDAH TUTUP dalam
     `hari` terakhir >= ambang (min n_min trade) -> hari itu memakai OCO (risiko w_oco), selain itu trade X010.
@@ -38,7 +38,7 @@ def trades_oco(D, A, F, ambang=1.2, hari=365, w_oco=1.0, n_min=8, base=None):
     import bisect
     import numpy as np
     import audit_mesin as m
-    X = trades(D, A, F, base=base); T = D[0]
+    X = base_final if base_final is not None else trades(D, A, F, base=base); T = D[0]
     oco = [dict(x, strat="OCO") for x in m.potong(m.replay(D, A=A))]
     day = lambda x: int(T[x["ip"]] // 86400) if x.get("ip") is not None else int(x["t0"] // 86400)
     BIAYA = 0.40
@@ -57,3 +57,22 @@ def trades_oco(D, A, F, ambang=1.2, hari=365, w_oco=1.0, n_min=8, base=None):
         if d in Od and aktif(d): out.append(dict(Od[d], w=w_oco))
         elif d in Xd: out.append(Xd[d])
     return out
+
+
+def trades_v2(D, A, F, oco=True, ambang=1.2):
+    """#93v2 (27 Nov 2026, optimasi P): KOMBO SL 2,0 ATR (live 1,5) · MR 0,5× bila ER20 > q60 WF (KOMBO TIDAK dikecilkan) ·
+    K6 0,5× bila ER20 > q80 · SUSULAN penuh · monitor PF 365h per strategi < 1,0 -> 0,5× · (opsional) OCO adaptif PF 365h >= 1,2.
+    2005-26 @0,5%: tanpa OCO +13,2 R/thn DD 28R P 0,93 (Setra 0,84); + OCO +14,0 R/thn DD 28R P 0,87 (Setra 0,51);
+    WF pemilihan dari 240 varian P 0,73-0,75. Sejak 2 Nov: +2,6R / +9,8R (live -0,1R)."""
+    import inti, keluarga_usulan as K
+    K._FX.clear()
+    import xau as XB
+    Mx = XB.Mesin(D, A, F)
+    raw = [x for x in Mx.trades(2.0, 3.0, None, 1.5) if x["w"] > 0]
+    at = [(("MR",), "er20", "atas", 0.6, 0.5), (("K6",), "er20", "atas", 0.8, 0.5)]
+    w1 = K._wf_xau(raw, K._fitur_xau(_M(D)), at)
+    ii = [dict(t0=x["t0"], t1=x["t1"], r=(x["R"] - 0.40 / x["r0"]) * x["w"], w=x["w"], strat=x["strat"], _i=k) for k, x in enumerate(w1)]
+    km = {y["_i"]: y["w"] / max(ii[y["_i"]]["w"], 1e-12) for y in inti.monitor_pf(ii, 365, 1.0, 0.5, 20, "strat")}
+    w2 = [dict(x, w=x["w"] * km.get(k, 0.0)) for k, x in enumerate(w1) if km.get(k, 0.0) > 0]
+    if not oco: return w2
+    return trades_oco(D, A, F, ambang=ambang, base_final=w2)
