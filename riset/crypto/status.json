@@ -4,7 +4,7 @@
  "t2": false,
  "t9": null,
  "keyakinan": 40,
- "fokus": "T7 kalah beruntun: kandidat #91 (TP 67% di +0,4R) runtun 9 & 7/7 target di WF, tetapi R/thn -42% → keputusan pemilik; bayangan K1 sejak 27 Nov",
+ "fokus": "T7 kalah beruntun ≤ 10 TANPA mengorbankan untung (pemilik 27 Nov: pilih jalan lain, bukan TP cepat #91). Arah struktural yang belum diuji: batas posisi searah bersamaan / per klaster korelasi, jeda per koin setelah SL, batas rugi harian portofolio, filter rezim BTC untuk sisi berlawanan, diversifikasi waktu entry (entry bertahap), ukuran risiko turun saat runtun berjalan (bukan martingale).",
  "skill": {
   "nama": "SNR",
   "tahap": 2,
@@ -28,6 +28,11 @@
    "minggu": "2026-12-31",
    "teks": "SNR lulus tahap 2 (T10)",
    "status": "jalan"
+  },
+  {
+   "minggu": "2026-11-24",
+   "teks": "T7 crypto: jalan lain selain TP cepat (#91 ditolak pemilik)",
+   "status": "jalan"
   }
  ],
  "blocker": [
@@ -43,9 +48,9 @@
    "id": "B2",
    "bot": "crypto",
    "judul": "Trade-off T7 vs untung (kandidat #91)",
-   "detail": "TP 67% di +0,4R: WF 2020-26 runtun 9, WR 62%, DD 13,8%, 7/7 target, tetapi +38,7%/thn vs juara +66,2%/thn (P_rasio 0,64, gerbang live 0,90 tidak lolos). Pilih: (a) terima T7 dengan untung lebih kecil → lanjut bayangan 4-6 minggu lalu usulan, (b) T7 dilonggarkan untuk crypto, (c) cari jalan lain (tidak ada di 180+ varian sejauh ini).",
+   "detail": "Pemilik 27 Nov memilih (c): cari jalan lain. #91 TIDAK diusulkan ke live (untung turun 66%→39%/thn, P_rasio 0,64); boleh tetap dipantau di bayangan sebagai pembanding saja. T7 ≤ 10 tetap berlaku.",
    "sejak": "2026-11-27",
-   "status": "menunggu"
+   "status": "selesai"
   }
  ],
  "sesi_terakhir": "2026-11-27",
