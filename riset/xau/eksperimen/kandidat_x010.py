@@ -28,3 +28,32 @@ def trades(D, A, F, base=None):
           for k, x in enumerate(w1)]
     k_mon = {y["_i"]: y["w"] / max(ii[y["_i"]]["w"], 1e-12) for y in inti.monitor_pf(ii, 365, 1.0, 0.5, 20, "strat")}
     return [dict(x, w=x["w"] * k_mon.get(k, 0.0)) for k, x in enumerate(w1) if k_mon.get(k, 0.0) > 0]
+
+
+def trades_oco(D, A, F, ambang=1.2, hari=365, w_oco=1.0, n_min=8, base=None):
+    """KANDIDAT X010 + OCO ADAPTIF (27 Nov 2026, cara pikir pemilik: edge sekarang -> OCO; bila OCO gagal, kembali).
+    OCO 2 sisi (juara lama, m.replay) = strategi ke-5 di bayangan. Hari d: bila PF bersih trade OCO yang SUDAH TUTUP dalam
+    `hari` terakhir >= ambang (min n_min trade) -> hari itu memakai OCO (risiko w_oco), selain itu trade X010.
+    2005-2026 @0,5%: +13,4 R/thn, DD 28R (juara 52R), 5/22 minus, P_rasio 0,83; sejak 2 Nov 2026 +9,8R (juara -0,1R)."""
+    import bisect
+    import numpy as np
+    import audit_mesin as m
+    X = trades(D, A, F, base=base); T = D[0]
+    oco = [dict(x, strat="OCO") for x in m.potong(m.replay(D, A=A))]
+    day = lambda x: int(T[x["ip"]] // 86400) if x.get("ip") is not None else int(x["t0"] // 86400)
+    BIAYA = 0.40
+    cl = sorted(oco, key=lambda x: x["t1"]); t1 = [x["t1"] for x in cl]
+    pos = np.cumsum([max(x["R"] - BIAYA / x["r0"], 0) for x in cl]); neg = np.cumsum([max(-(x["R"] - BIAYA / x["r0"]), 0) for x in cl])
+    def aktif(d):
+        j = bisect.bisect_left(t1, d * 86400); i = bisect.bisect_left(t1, d * 86400 - hari * 86400)
+        if j - i < n_min: return False
+        p = pos[j - 1] - (pos[i - 1] if i else 0); q = neg[j - 1] - (neg[i - 1] if i else 0)
+        return q > 0 and p / q >= ambang
+    Xd, Od = {}, {}
+    for x in X: Xd.setdefault(day(x), x)
+    for x in oco: Od.setdefault(day(x), x)
+    out = []
+    for d in sorted(set(Xd) | set(Od)):
+        if d in Od and aktif(d): out.append(dict(Od[d], w=w_oco))
+        elif d in Xd: out.append(Xd[d])
+    return out

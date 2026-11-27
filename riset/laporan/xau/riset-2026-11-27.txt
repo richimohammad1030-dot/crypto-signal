@@ -5,3 +5,5 @@ Terbaik X010: DD 52R → 27,6R, tahun minus 7 → 6, P_rasio 0,86 (< 0,90) → k
 📕 Celah tahun minus XAU belum tertutup.
 🔁 Cek keluhan OCO: OCO lama 22 thn −13,1R/thn, DD 518R, 16/22 tahun minus → tidak dikembalikan. Ganti mesin per rezim/adaptif: semua gagal (P ≤ 0,26).
 🧪 Kandidat X010 masuk bayangan harian: sejak 2 Nov +1,47R vs live −0,08R. Usulan pasang menunggu persetujuan pemilik.
+✅ USULAN (ide #93) X010 + OCO adaptif: OCO aktif otomatis bila PF 365 hari ≥ 1,2, selain itu X010. 22 thn +13,4R/thn (live +13,8), DD 28R (52R), P 0,83; sejak 2 Nov +9,8R vs live −0,1R. Menunggu persetujuan pemilik.
+📜 Aturan bersama H: audit kinerja mingguan + aksi wajib sebelum milestone.

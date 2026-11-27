@@ -670,3 +670,4 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - OCO lama 22 thn −13,1 R/thn, DD 518R → TIDAK dikembalikan. Rezim-switch ke OCO (64 varian) & adaptif (16) semua P ≤ 0,26 (ide #91 gagal).
 - Rezim X010 (ide #92) = kandidat: DD 52R→28R, P 0,88, bayangan +1,47R sejak 2 Nov. Masuk MENU bayangan. Usulan ke pemilik: pasang @0,5-0,7% (persetujuan; gerbang P 0,90 belum).
 - Bank massal X009/X010 (248 varian) di keluarga_usulan.py.
+- Lanjutan (arahan pemilik: adaptif per strategi, OCO = strategi ke-5): grid 240 lapisan adaptif (matikan strategi PF bergulir < ambang, aktifkan OCO bila PF ≥ ambang) → DD 52→32-41R, minus 6→4-5, tetapi frek 2,4/mg bila strategi dimatikan; WF P 0,35. Gabungan X010 + OCO adaptif 365h ≥ 1,2 (ide #93): +13,4 R/thn, DD 28R, P 0,83, sejak 2 Nov +9,8R → USULAN ke pemilik. Aturan bersama H ditambahkan (audit kinerja mingguan wajib beraksi).

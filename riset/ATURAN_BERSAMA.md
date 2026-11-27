@@ -148,3 +148,18 @@ b) Kategori berulang (≥ 3 kali dalam 7 hari, atau kategori SL terbesar di back
 c) Catat di `riset/<bot>/status.json` → `mitigasi_sl`: [{"penyebab","jumlah","analisis","mitigasi","uji","status"}] dengan status
    `dianalisis` / `diuji` / `lolos` (masuk bayangan) / `ditolak` (alasan) / `dipasang`. Dashboard menampilkannya.
 d) Mitigasi yang lolos mengikuti gerbang biasa; yang ditolak tetap dicatat agar tidak diuji ulang tanpa definisi baru.
+
+## H. KINERJA LIVE DULU, LALU MILESTONE (pemilik, 27 Nov 2026) — berlaku SEMUA bot, mengalahkan aturan lama yang bertentangan
+Latar: MR XAU gagal ±2 minggu (−4,9R/12 trade sejak 2 Nov, celah #90 berulang) tetapi sesi hanya melapor tanpa aksi.
+1. **Audit kinerja mingguan WAJIB di awal setiap sesi riset** (sebelum milestone), bagian tetap ringkasan Telegram "📊 KINERJA":
+   a) R minggu ini vs minggu lalu vs ekspektasi backtest (R/trade × jumlah trade, rentang ±2 sd);
+   b) per strategi/bot-komponen: trade, win, R, dan sejak live; strategi penyumbang rugi terbesar + penyebab (sebab_sl);
+   c) live vs bayangan (MENU): versi mana yang unggul di periode live, dan apakah selisihnya konsisten.
+2. **Wajib aksi, bukan hanya laporan.** Bila satu strategi rugi ≥ 2 minggu berturut-turut ATAU kategori SL sama ≥ 3 kali:
+   pada sesi yang sama audit (cek data/replay, rezim, apakah di luar rentang backtest), lalu uji ≥ 1 aksi: kecilkan/matikan
+   strategi itu, ganti dengan strategi lain dari MENU, atau aktifkan lapisan adaptif. Hasil + keputusan dicatat di log & ide.
+3. **Adaptif terhadap edge (T2) dihitung di level STRATEGI**, termasuk strategi lama yang dipensiunkan (mis. OCO XAU): strategi
+   pensiun tetap dihitung di bayangan; boleh aktif kembali otomatis bila PF bergulirnya kuat, dan mati lagi bila gagal. Menilai
+   strategi hanya dari 22 tahun penuh TIDAK cukup — rezim sekarang ikut dinilai (Setra/periode live), dengan pengaman DD.
+4. Usulan perubahan live tetap lewat persetujuan pemilik, tetapi usulan WAJIB dikirim begitu aksi lolos uji (tidak menunggu
+   milestone). Milestone tetap dikerjakan setelah bagian ini.
