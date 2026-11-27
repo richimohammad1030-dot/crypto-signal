@@ -1,8 +1,8 @@
 {
- "last_ts": 1795784400,
+ "last_ts": 1795791600,
  "pend": null,
  "pos": null,
- "recap_week": "2026-11-16T00:00:00+07:00",
+ "recap_week": "2026-11-23T00:00:00+07:00",
  "hist": [
   [
    "XAU",
@@ -625,7 +625,7 @@
   "pos": null
  },
  "hari": {
-  "t07": 1795734000,
+  "t07": null,
   "aktif": "dasar",
   "telat": false
  }
