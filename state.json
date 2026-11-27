@@ -796,7 +796,7 @@
    }
   }
  },
- "last_ts": 1795791600,
+ "last_ts": 1795798800,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -804,58 +804,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-11-16T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-27",
-  "new": [
-   "ATOMUSDT",
-   "APTUSDT",
-   "ZECUSDT",
-   "TAOUSDT",
-   "AAVEUSDT",
-   "WLFIUSDT",
-   "LINKUSDT",
-   "ALGOUSDT",
-   "ETCUSDT"
-  ],
-  "upd": {
-   "LINKUSDT": [
-    10.965,
-    10.234536645358055
-   ]
-  },
-  "cancel": [
-   [
-    "RENDERUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ETHUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "BNBUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "HYPEUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ENAUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "BTCUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "TAOUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "WLFIUSDT",
-    "funding rate tidak positif (filter SELL)"
-   ]
-  ]
+  "date": "2026-11-28",
+  "new": [],
+  "upd": {},
+  "cancel": []
  },
  "hist": [
   [
