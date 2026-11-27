@@ -3,8 +3,8 @@
  "risiko": 0.5,
  "t2": false,
  "t9": null,
- "keyakinan": 25,
- "fokus": "Tahun minus & DD: monitor edge (T2) gagal WF; SNR tahap 2 putaran 3 (30 Nov) lalu skill 2",
+ "keyakinan": 40,
+ "fokus": "LIVE v2 sejak 30 Nov (#93v2 + OCO adaptif). Target pemilik: v2 lolos T1-T10 per 31 Des. Celah: tahun minus (6), runtun 15, T5 via risiko ±0,7% (B2), Setra P, SNR.",
  "skill": {
   "nama": "SNR",
   "tahap": 2,
@@ -33,6 +33,31 @@
    "minggu": "2026-11-24",
    "teks": "Keluarga rezim X009/X010 (WF): X010 DD 52R→27R, tahun minus IS 6→4, P 0,86 → kandidat",
    "status": "jalan"
+  },
+  {
+   "minggu": "2026-11-30",
+   "teks": "Pantau v2 live harian: replay IDENTIK, OCO aktif/tidak, bobot per trade; audit kinerja mingguan (aturan H)",
+   "status": "jalan"
+  },
+  {
+   "minggu": "2026-12-01",
+   "teks": "T7 runtun 15 → ≤ 10 di atas v2 (jeda beruntun, bobot setelah k kalah)",
+   "status": "belum"
+  },
+  {
+   "minggu": "2026-12-08",
+   "teks": "T1 tahun minus v2 (2005/06/13/14/18/21) → keluarga ide khusus di atas v2",
+   "status": "belum"
+  },
+  {
+   "minggu": "2026-12-08",
+   "teks": "T5: risiko 0,5% → ±0,7% bila DD v2 ≤ 20% & WF lolos (B2, sudah disetujui bersyarat)",
+   "status": "belum"
+  },
+  {
+   "minggu": "2026-12-15",
+   "teks": "T9 Setra & T2 WF ≥ 0,90 untuk v2; SNR tahap 2 di atas v2 (T10)",
+   "status": "belum"
   }
  ],
  "blocker": [
