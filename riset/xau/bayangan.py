@@ -11,8 +11,11 @@ D = m.sambung(m.muat(DUKA), m.muat(SETRA))          # Dukascopy hanya untuk pema
 A = np.array(m.atr(list(D[2]), list(D[3]), list(D[4]), 14)); F = m.fitur(D, A)
 mulai = kesehatan.LIVE_START["xau"]
 sig30 = mm.sinyal_mr(D, mr_buy=38.49, mr_sell=74.72)   # kuantil 30%/70% 2015-2021 (multi_setel.py)
+import mesin_v2 as V2
+_tab = {int(k): v for k, v in json.load(open(os.path.join(REPO, "gold_v2.json")))["tabel"].items()}
 MENU = {
-    "BASELINE (live)": mm.baseline(D, A, F),
+    "LIVE v2 (sejak 30 Nov 2026)": V2.trades(D, A, F, tabel=_tab),
+    "Mesin dasar (KOMBO SL 2,0, tanpa lapisan v2)": mm.baseline(D, A, F),
     "Tanpa susulan": mm.baseline(D, A, F, sus=False),
     "Tanpa kombinasi (hibrida 6 Nov)": mm.baseline(D, A, F, sig=mm.sinyal_hibrida(D)),
     "Tanpa hibrida (#40 saja)": mm.baseline(D, A, F, sig=mm.sinyal_mr(D)),

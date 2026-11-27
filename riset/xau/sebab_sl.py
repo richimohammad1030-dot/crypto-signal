@@ -17,7 +17,7 @@ from signal_bot import http_json, NEWS_URL
 wib = lambda t: (dt.datetime.fromtimestamp(t, dt.timezone.utc) + dt.timedelta(hours=7)).strftime("%a %d %b %H:%M")
 hist = json.load(open(os.path.join(REPO, "gold_state.json"))).get("hist", [])
 batas = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=HARI)).timestamp()
-sl = [h for h in hist if h[2] >= batas and h[6] <= -0.9]
+sl = [h for h in hist if h[2] >= batas and h[6] / (h[8] if len(h) > 8 and h[8] else 1.0) <= -0.9]   # v2: h[6] = R x bobot, h[8] = bobot
 semua = [h for h in hist if h[2] >= batas]
 print(f"Trade {HARI} hari terakhir: {len(semua)} · SL: {len(sl)} · total {sum(h[6] for h in semua):+.2f}R")
 if not sl: sys.exit(0)

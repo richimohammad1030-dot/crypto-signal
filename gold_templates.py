@@ -73,6 +73,16 @@ def make_notifier(ev):
     return notify
 
 
+def _risiko(risk_pct, p, per_order=False):
+    """v2: risiko saran = risiko dasar x bobot (MR/K6 saat tren efisien, atau strategi yang sedang lemah -> 0,5x)."""
+    w = p.get("w", 1.0) if p else 1.0
+    rp = round(risk_pct * w, 3)
+    teks = f"⚖️ Risiko saran {rp:g}% modal" + (" per order" if per_order else "")
+    if w < 1:
+        teks += f" (½ dari normal {risk_pct:g}%: strategi ini sedang lemah / pasar sedang trending)"
+    return teks
+
+
 def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
     if not ev["order"] and not ev["expire"] and not ev.get("late"):
         return None
@@ -110,7 +120,7 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
         L += [BAR,
               f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
               "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
-              f"⚖️ Risiko saran {risk_pct}% modal"]
+              _risiko(risk_pct, p)]
     elif ev["order"] and ev["order"]["pend"].get("mode") == "KOMBO":
         p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"
         L.append(f"🌅 <b>ORDER HARI INI · {arah} SEKARANG</b> (kombinasi Alligator + MACD + RSI)")
@@ -127,7 +137,7 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
         L += [BAR,
               f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
               "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
-              f"⚖️ Risiko saran {risk_pct}% modal"]
+              _risiko(risk_pct, p)]
     elif ev["order"] and ev["order"]["pend"].get("mode") == "SUS":
         p = ev["order"]["pend"]; d = p["d"]; arah = "BUY" if d == 1 else "SELL"; jam = _jam(p["t"] + 3600)
         L.append(f"🔁 <b>SINYAL SUSULAN · {arah} SEKARANG</b> (mean reversion)")
@@ -144,7 +154,7 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
               "ℹ️ Order utama hari ini sudah dibatalkan; ini satu-satunya sinyal pengganti hari ini.",
               f"👉 Masuk <b>{arah}</b> di harga pasar, pasang SL & TP <b>{fmt(p['dist'])} USD</b> dari harga entry Anda",
               "⏰ Ditutup paling lambat <b>23:00 WIB</b>",
-              f"⚖️ Risiko saran {risk_pct}% modal"]
+              _risiko(risk_pct, p)]
     elif ev["order"] and ev["order"]["pend"].get("main"):
         p = ev["order"]["pend"]; d = p["main"]
         o = p["buy"] if d == 1 else p["sell"]
@@ -170,11 +180,11 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
               f"🚫 Harga menyentuh <b>{fmt(batal)}</b> sebelum {arah} terisi → <b>batalkan</b> order (bot bisa mengirim sinyal susulan)",
               "🔔 Saran: pasang price alert di batas batal",
               "🎯 TP = 4R · ⏰ berlaku s.d. <b>23:00 WIB</b>",
-              f"⚖️ Risiko saran {risk_pct}% modal"]
+              _risiko(risk_pct, p)]
     elif ev["order"]:
         p = ev["order"]["pend"]
         b, s = p["buy"], p["sell"]
-        L.append("🌅 <b>ORDER HARI INI</b> (OCO)")
+        L.append("🌅 <b>ORDER HARI INI · OCO 2 SISI</b> (edge breakout sedang aktif)")
         L.append(_pre([
             f"Range 04:00–07:00 : {fmt(p['lo'])} – {fmt(p['hi'])}",
             "",
@@ -196,8 +206,9 @@ def signal_bubble(ev, t, risk_pct, live_px=None, now=None):
         L += warn
         L += [BAR,
               "🔗 Satu terisi → <b>batalkan</b> order lainnya",
+              "ℹ️ Mode OCO dipakai otomatis selama kinerja OCO 1 tahun terakhir kuat (PF ≥ 1,2); bila melemah bot kembali ke strategi biasa.",
               "🎯 TP = 4R · ⏰ berlaku s.d. <b>23:00 WIB</b>",
-              f"⚖️ Risiko saran {risk_pct}% modal per order"]
+              _risiko(risk_pct, p, True)]
     if ev["expire"]:
         if ev["order"]:
             L.append(SUB)

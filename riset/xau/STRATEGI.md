@@ -1,4 +1,19 @@
-# Strategi XAU · juara MULTI-STRATEGI HIBRIDA (dipasang 2 Nov 2026; + susulan, MR SELL ≥ 85, hibrida tren harian sejak 6 Nov 2026)
+# Strategi XAU · v2 = #93v2 + OCO ADAPTIF (dipasang pemilik 27 Nov 2026, berlaku sinyal Senin 30 Nov 2026)
+
+**v2 (ide #93/#94, persetujuan pemilik 27 Nov 2026 — "opsi 1")** — acuan `riset/xau/eksperimen/mesin_v2.py`, bot `gold_bot.GoldV2`
+(replay IDENTIK Setra 484/484 & Dukascopy 2015-26 2.858/2.858). Di atas mesin dasar di bawah:
+1. KOMBO SL **2,0 × ATR** (sebelumnya 1,5).
+2. Bobot rezim: **MR 0,5×** bila ER20 (efisiensi tren 20 hari, close harian) > ambang tahun itu (kuantil 60% WF); **K6 0,5×** bila
+   ER20 > kuantil 80%. KOMBO & SUS tidak dikecilkan rezim. Ambang per tahun di `gold_v2.json` (tabel; diperbarui riset tiap Januari).
+3. Monitor edge per strategi: **0,5×** bila PF bersih strategi itu 365 hari < 1,0 (min 20 trade, dari trade bayangan).
+4. **OCO adaptif**: hari memakai OCO 2 sisi (risiko penuh) bila PF bersih OCO bayangan 365 hari ≥ **1,2** (min 8 trade); mesin dasar
+   tetap disimulasikan di bayangan. Bila OCO melemah, bot otomatis kembali ke mesin dasar (adaptif terhadap edge, T2).
+Pesan sinyal menampilkan risiko × bobot (mis. 0,25% bila 0,5×). hist: R × bobot di kolom 6, bobot di kolom 8.
+Ekspektasi 2005-2026 @0,5%: +14,1 R/thn (lama +13,8), DD 28R (lama 52R), PF 1,22, WR 46%, 3,6/mg, 6/22 tahun minus, P_rasio 0,90;
+Setra Feb 2025+ P 0,59. Sejak 2 Nov 2026: +9,8R (lama −0,1R). Selisih lama riset vs bot: 2 trade libur tahun baru 2012/2013 (data bolong).
+**Target pemilik:** versi ini wajib dioptimasi sampai memenuhi milestone T1-T10 paling lambat 31 Des 2026.
+
+## Mesin dasar (sebelum v2) · juara MULTI-STRATEGI HIBRIDA (dipasang 2 Nov 2026; + susulan, MR SELL ≥ 85, hibrida tren harian sejak 6 Nov 2026)
 
 Status: **LIVE mulai sinyal Senin 2 Nov 2026 07:00 WIB** (`gold_bot.py`, workflow `gold.yml`). Risiko **0,5% per trade** (pilihan pemilik).
 Perubahan hanya lewat riset + persetujuan pemilik; mesin bot wajib lolos `riset/replay_xau.py` (identik dengan

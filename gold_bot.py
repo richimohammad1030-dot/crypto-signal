@@ -26,7 +26,7 @@ C) SUSULAN (ide #37, live mulai 6 Nov 2026), hanya pada hari K6 dilewati (batas 
    Hari kombinasi: MR & K6 tidak dipasang.
 Bot hanya membaca data publik & mengirim pesan; tidak punya akses ke akun broker.
 """
-import json, os, sys, time, urllib.request, datetime as dt
+import bisect, json, os, sys, time, urllib.request, datetime as dt
 from zoneinfo import ZoneInfo
 NY = ZoneInfo("America/New_York")      # jam pasar emas: buka Minggu 18:00 ET, tutup Jumat 17:00 ET, istirahat harian 17:00-18:00 ET
 
@@ -36,7 +36,7 @@ CRYPTO_STATE = os.path.join(HERE, "state.json")       # tempat id channel XAU di
 RANGE_N, SL_ATR, RR, ATR_N = 3, 1.5, 4.0, 14
 TREND_EMA = 200        # EMA close H1 penentu arah order utama (K6)
 MR_N, MR_BUY, MR_SELL, MR_SL_ATR = 2, 43.76, 85.0, 3.0   # MR_SELL 71,22 -> 85 sejak 6 Nov 2026 (ide #40): RSI 71-85 -> K6
-KOMBO_RSI_BUY, KOMBO_RSI_SELL, KOMBO_SL_ATR = 30.0, 70.0, 1.5   # ide #58 kombinasi Alligator + MACD + RSI(2) (prioritas utama)
+KOMBO_RSI_BUY, KOMBO_RSI_SELL, KOMBO_SL_ATR = 30.0, 70.0, 2.0   # ide #58; SL 1,5 -> 2,0 ATR sejak 30 Nov 2026 (v2, ide #94)
 TREND_D1_N, MR_SELL_TURUN, MR_BUY_TURUN = 100, 70.0, 15.0   # hibrida ide #42b (cermin Connors saat tren harian turun)
 C07_SEED = os.path.join(HERE, "gold_c07_seed.json")          # riwayat close 07:00 WIB Setra (bibit SMA 100 hari)
 GANTI_S = 48 * 3600   # saat Setra macet: 48 jam terakhir Setra diganti Dukascopy (ujung data macet bisa berisi candle buruk, ide #47)
@@ -46,6 +46,12 @@ SUS_BUY, SUS_SELL, SUS_SL_ATR, SUS_TP_R = 25.41, 77.10, 3.0, 1.0   # susulan: ku
 SUS_JAM_UTC = (1, 3, 5, 7, 9, 11, 13)   # jam BUKA candle H1 (UTC) yang close 09:00, 11:00, ..., 21:00 WIB
 SUS_LATE_S = 3600      # keputusan susulan TERLAMBAT bila diproses >= 1 jam setelah candle keputusan close
 PLACE_HOUR_UTC = 23     # jam BUKA candle H1 (UTC) yang close 07:00 WIB
+# ---- v2 (#93v2 + OCO adaptif, dipasang pemilik 27 Nov 2026; acuan riset/xau/eksperimen/mesin_v2.py) ----
+V2_FILE = os.path.join(HERE, "gold_v2.json")   # tabel ambang ER20 per tahun + bibit trade bayangan (dibuat riset)
+V2_BIAYA = 0.40
+V2_W_REZ = 0.5                                  # MR / K6 0,5x bila ER20 > ambang tahun itu (rezim tren efisien)
+V2_MON = (365, 1.0, 0.5, 20)                   # monitor per strategi: hari, ambang PF, bobot, min trade
+V2_OCO = (365, 1.2, 8)                          # OCO aktif bila PF bayangan OCO 365 hari >= 1,2 (min 8 trade)
 CLOSE_HOUR_UTC = 15     # jam BUKA candle H1 (UTC) yang close 23:00 WIB
 SYM = "XAUUSD"
 LINE = "━━━━━━━━━━━━━━━━━━"
@@ -182,16 +188,21 @@ def fetch_dukascopy(after_ts):
 class GoldEngine:
     """Urutan per candle sama persis dengan backtest:
        1) order terisi?  2) posisi kena SL/TP?  3) jam tutup 23:00  4) jam pasang 07:00"""
-    def __init__(self, state, notify, now=None):
+    def __init__(self, state, notify, now=None, jenis="dasar", bobot=None):
         self.s, self.notify = state, notify
         self.trades = []
         self.now = now          # waktu nyata (live); None = replay/backtest (tidak ada aturan terlambat)
+        self.jenis = jenis      # "dasar" (KOMBO/MR/K6/SUS) | "oco" (OCO 2 sisi lama, v2)
+        self.bobot = bobot or (lambda strat, t07: (1.0, 1.0))
 
-    def record(self, d, e, ex, r0, t0, t1, why, strat="K6"):
+    def record(self, d, e, ex, r0, t0, t1, why, strat="K6", w=1.0, w_rez=1.0):
         R = (ex - e) * d / r0 if r0 else 0.0
         self.trades.append((t0, t1, d, e, ex, r0, strat))
-        self.s.setdefault("hist", []).append(["XAU", d, t0, t1, e, ex, round(R, 3), strat])
-        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why, r0=r0, strat=strat)
+        if self.s.get("v2"):     # sub-state v2: trade BAYANGAN (dipakai monitor PF / aktivasi OCO)
+            self.s.setdefault("sh", []).append([int(t0), int(t1), strat, R, r0, w_rez])
+        else:
+            self.s.setdefault("hist", []).append(["XAU", d, t0, t1, e, ex, round(R, 3), strat])
+        self.notify("exit", d=d, entry=e, exit=ex, R=R, t0=t0, t=t1, why=why, r0=r0, strat=strat, w=w)
 
     def step(self, i, T, O, H, L, C, A):
         s = self.s
@@ -202,11 +213,12 @@ class GoldEngine:
             d, st = pend["d"], pend["mode"]; fill = O[i]; slp = fill - d * pend["dist"]
             tpp = fill + d * SUS_TP_R * pend["dist"] if st == "SUS" else None
             s["pend"] = None
-            s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": pend["dist"], "t0": t, "strat": st}
-            self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat=st)
+            w, wr = pend.get("w", 1.0), pend.get("w_rez", 1.0)
+            s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": pend["dist"], "t0": t, "strat": st, "w": w, "w_rez": wr}
+            self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat=st, w=w)
             if (d == 1 and L[i] <= slp) or (d == -1 and H[i] >= slp):
                 s["pos"] = None
-                self.record(d, fill, slp, pend["dist"], t, t, "kena SL di candle yang sama", st)
+                self.record(d, fill, slp, pend["dist"], t, t, "kena SL di candle yang sama", st, w, wr)
         # 1b) order stop K6 terisi? (BUY STOP dicek lebih dulu)
         elif pos is None and pend:
             b, sl_ = pend["buy"], pend["sell"]
@@ -224,19 +236,21 @@ class GoldEngine:
             if hit:
                 d, fill, slp, tpp = hit
                 r0 = abs(fill - slp)
+                st, w, wr = pend.get("strat", "K6"), pend.get("w", 1.0), pend.get("w_rez", 1.0)
                 s["pend"] = None
-                s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": r0, "t0": t}
-                self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat="K6")
+                s["pos"] = {"d": d, "e": fill, "sl": slp, "tp": tpp, "r0": r0, "t0": t, "strat": st, "w": w, "w_rez": wr}
+                self.notify("fill", d=d, entry=fill, sl=slp, tp=tpp, t=t, strat=st, w=w)
                 if (d == 1 and L[i] <= slp) or (d == -1 and H[i] >= slp):
                     s["pos"] = None
-                    self.record(d, fill, slp, r0, t, t, "kena SL di candle yang sama")
+                    self.record(d, fill, slp, r0, t, t, "kena SL di candle yang sama", st, w, wr)
         # 2) kelola posisi (SL dicek lebih dulu dari TP)
         elif pos is not None and pos["t0"] < t:
             d, st = pos["d"], pos.get("strat", "K6")
+            w, wr = pos.get("w", 1.0), pos.get("w_rez", 1.0)
             if (d == 1 and L[i] <= pos["sl"]) or (d == -1 and H[i] >= pos["sl"]):
-                s["pos"] = None; self.record(d, pos["e"], pos["sl"], pos["r0"], pos["t0"], t, "kena SL", st)
+                s["pos"] = None; self.record(d, pos["e"], pos["sl"], pos["r0"], pos["t0"], t, "kena SL", st, w, wr)
             elif pos.get("tp") is not None and ((d == 1 and H[i] >= pos["tp"]) or (d == -1 and L[i] <= pos["tp"])):
-                s["pos"] = None; self.record(d, pos["e"], pos["tp"], pos["r0"], pos["t0"], t, "kena TP", st)
+                s["pos"] = None; self.record(d, pos["e"], pos["tp"], pos["r0"], pos["t0"], t, "kena TP", st, w, wr)
         # 3) jam tutup 23:00 WIB
         if hr == CLOSE_HOUR_UTC:
             s.pop("sus_wait", None)
@@ -245,12 +259,21 @@ class GoldEngine:
                 self.notify("expire")
             if s.get("pos"):
                 p = s["pos"]; s["pos"] = None
-                self.record(p["d"], p["e"], C[i], p["r0"], p["t0"], t, "ditutup jam 23:00", p.get("strat", "K6"))
+                self.record(p["d"], p["e"], C[i], p["r0"], p["t0"], t, "ditutup jam 23:00", p.get("strat", "K6"), p.get("w", 1.0), p.get("w_rez", 1.0))
         # 4) jam pasang 07:00 WIB
         if hr == PLACE_HOUR_UTC and s.get("pos") is None and self.now is not None and self.now - (t + 3600) >= LATE_S:
             # live: data candle 07:00 baru tersedia >= 10:00 WIB -> sinyal hari ini tidak dikirim & tidak dicatat
             self.notify("late", t=t)
+        elif hr == PLACE_HOUR_UTC and s.get("pos") is None and self.jenis == "oco":
+            s["t07"] = t
+            hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
+            if abs(hi - (hi - SL_ATR * a)) > 0.5:     # OCO 2 sisi (juara lama = audit_mesin.replay): tanpa sisi utama
+                s["pend"] = {"buy": [hi, hi - SL_ATR * a, hi + RR * SL_ATR * a],
+                             "sell": [lo, lo + SL_ATR * a, lo - RR * SL_ATR * a],
+                             "t": t, "hi": hi, "lo": lo, "strat": "OCO", "w": 1.0, "w_rez": 1.0, "rsi": round(self.R2[i], 1)}
+                self.notify("order", pend=s["pend"], t=t, price=C[i])
         elif hr == PLACE_HOUR_UTC and s.get("pos") is None:
+            s["t07"] = t
             hi, lo, a = max(H[i - RANGE_N + 1:i + 1]), min(L[i - RANGE_N + 1:i + 1]), A[i]
             r2 = self.R2[i]
             ma = self.MA.get(t)
@@ -259,21 +282,26 @@ class GoldEngine:
             kd = self.kombo(i)
             if kd:                                     # 0) KOMBINASI Alligator + MACD + RSI(2) sepakat (ide #58), prioritas utama
                 if KOMBO_SL_ATR * a > 0.5:
+                    w, wr = self.bobot("KOMBO", t)
                     s["pend"] = {"mode": "KOMBO", "d": kd, "dist": KOMBO_SL_ATR * a, "t": t, "rsi": round(r2, 1),
-                                 "px": C[i], "a": a, "macd": round(self.MH[i], 3), "tren": 1 if C[i] > self.E[i] else -1}
+                                 "px": C[i], "a": a, "macd": round(self.MH[i], 3), "tren": 1 if C[i] > self.E[i] else -1,
+                                 "w": w, "w_rez": wr}
                     self.notify("order", pend=s["pend"], t=t, price=C[i])
             elif r2 <= b_ or r2 >= s_:                   # A) mean reversion diprioritaskan; K6 tidak dipasang hari ini
                 if MR_SL_ATR * a > 0.5:
                     d = 1 if r2 <= b_ else -1
+                    w, wr = self.bobot("MR", t)
                     s["pend"] = {"mode": "MR", "d": d, "dist": MR_SL_ATR * a, "t": t, "rsi": round(r2, 1),
                                  "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1,
-                                 "d1": -1 if turun else 1, "ma": round(ma, 2) if ma is not None else None}
+                                 "d1": -1 if turun else 1, "ma": round(ma, 2) if ma is not None else None, "w": w, "w_rez": wr}
                     self.notify("order", pend=s["pend"], t=t, price=C[i])
             elif abs(hi - (hi - SL_ATR * a)) > 0.5:    # B) K6; sama dengan backtest: abaikan order dengan SL < 0,5 USD
                 tren = 1 if C[i] > self.E[i] else -1
+                w, wr = self.bobot("K6", t)
                 s["pend"] = {"buy": [hi, hi - SL_ATR * a, hi + RR * SL_ATR * a],
                              "sell": [lo, lo + SL_ATR * a, lo - RR * SL_ATR * a],
-                             "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2), "rsi": round(r2, 1)}
+                             "t": t, "hi": hi, "lo": lo, "main": tren, "ema": round(self.E[i], 2), "rsi": round(r2, 1),
+                             "strat": "K6", "w": w, "w_rez": wr}
                 self.notify("order", pend=s["pend"], t=t, price=C[i])
         # 5) susulan: satu kali keputusan di jam keputusan pertama setelah batas batal K6 tersentuh
         if s.get("sus_wait") and hr in SUS_JAM_UTC and s.get("pos") is None and s.get("pend") is None:
@@ -284,8 +312,9 @@ class GoldEngine:
                     self.notify("late", t=t, strat="SUS")
                 else:
                     d = 1 if r2 <= SUS_BUY else -1
+                    w, wr = self.bobot("SUS", s.get("t07", t))
                     s["pend"] = {"mode": "SUS", "d": d, "dist": SUS_SL_ATR * a, "t": t, "rsi": round(r2, 1),
-                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1}
+                                 "px": C[i], "a": a, "tren": 1 if C[i] > self.E[i] else -1, "w": w, "w_rez": wr}
                     self.notify("order", pend=s["pend"], t=t, price=C[i])
 
     def kombo(self, i):
@@ -300,6 +329,15 @@ class GoldEngine:
         return alg if alg != 0 and alg == mac == rs else 0
 
     def run(self, rows, since):
+        T, O, H, L, C, A = self.siapkan(rows)
+        start = 250 if self.s.get("replay") else 50
+        for i in range(start, len(rows)):
+            if T[i] > since:
+                self.step(i, T, O, H, L, C, A)
+                self.s["last_ts"] = T[i]
+        return C[-1] if C else None
+
+    def siapkan(self, rows):
         T = [r[0] for r in rows]; O = [r[1] for r in rows]; H = [r[2] for r in rows]; L = [r[3] for r in rows]; C = [r[4] for r in rows]
         A = atr(H, L, C, ATR_N)
         self.E = ema(C, TREND_EMA)
@@ -320,11 +358,113 @@ class GoldEngine:
             self.MA[ts_[k]] = sum(vals[k - TREND_D1_N + 1:k + 1]) / TREND_D1_N
         if not self.s.get("replay"):
             self.s["c07"] = {str(k): c07[k] for k in ts_[-150:]}
+        return T, O, H, L, C, A
+
+
+class GoldV2:
+    """v2 (#93v2 + OCO adaptif, 27 Nov 2026; acuan riset/xau/eksperimen/mesin_v2.py). Dua mesin berjalan BERSAMAAN tiap candle:
+    mesin dasar (KOMBO/MR/K6/SUS) dan mesin OCO 2 sisi. Keduanya selalu disimulasikan (trade bayangan -> monitor PF & aktivasi
+    OCO); hanya mesin AKTIF hari itu yang diteruskan ke Telegram & dicatat di hist. Aktif dipilih di candle 07:00:
+    OCO bila PF bersih trade bayangan OCO yang tutup dalam 365 hari >= 1,2 (min 8), selain itu dasar.
+    Bobot risiko trade dasar = w_rez (MR/K6 0,5x bila ER20 > ambang tahun itu) x w_mon (0,5x bila PF 365 hari strategi < 1,0)."""
+    def __init__(self, state, notify, now=None):
+        self.s, self.real, self.now = state, notify, now
+        cfg = json.load(open(V2_FILE)) if os.path.exists(V2_FILE) else {}
+        self.tabel = {int(k): v for k, v in (cfg.get("tabel") or {}).items()}
+        rep = bool(state.get("replay"))
+        if "v2_dasar" not in state:                       # migrasi dari mesin lama: lanjutkan order/posisi hari berjalan
+            sd = {k: state[k] for k in ("pend", "pos", "sus_wait", "c07") if state.get(k) is not None}
+            if sd.get("pos") is not None:
+                sd["pos"].setdefault("strat", "K6")
+            state["v2_dasar"] = dict(sd, v2=True, sh=[]); state["v2_oco"] = {"v2": True, "sh": [], "migrasi": True}
+        self.sd, self.so = state["v2_dasar"], state["v2_oco"]
+        if rep: self.sd["replay"] = self.so["replay"] = True
+        self.bib_d = [] if rep else (cfg.get("seed_dasar") or [])
+        self.bib_o = [] if rep else (cfg.get("seed_oco") or [])
+        self.ed = GoldEngine(self.sd, self._wrap("dasar"), None, "dasar", self.bobot)
+        self.eo = GoldEngine(self.so, self._wrap("oco"), None, "oco")
+
+    # ---- statistik bergulir dari trade bayangan ----
+    @staticmethod
+    def _pf(rs):
+        p = sum(r for r in rs if r > 0); q = -sum(r for r in rs if r < 0)
+        return p / q if q > 0 else float("inf")
+
+    def _jendela(self, sh, t, hari, strat=None):
+        lo = t - hari * 86400
+        return [(x[3] - V2_BIAYA / x[4]) * (x[5] if strat else 1.0) for x in sh
+                if lo <= x[1] < t and (strat is None or x[2] == strat) and x[4]]
+
+    def oco_aktif(self, t07):
+        hari, amb, nmin = V2_OCO
+        rs = self._jendela(self.bib_o + self.so.get("sh", []), t07 + 3600, hari)
+        return len(rs) >= nmin and self._pf(rs) >= amb
+
+    def er20(self, t07):
+        X = int(t07 // 86400); k = bisect.bisect_right(self.hari, X)
+        if k < 21: return None
+        dc = [self.tutup[d] for d in self.hari[k - 21:k]]
+        s_ = sum(abs(dc[j + 1] - dc[j]) for j in range(20))
+        return abs(dc[-1] - dc[0]) / s_ if s_ > 0 else 0.0
+
+    def bobot(self, strat, t07):
+        t_sig = t07 + 3600; w_rez = 1.0
+        thr = self.tabel.get((dt.datetime.fromtimestamp(t_sig, dt.timezone.utc) + dt.timedelta(hours=7)).year) or [None, None]
+        er = self.er20(t07)
+        if er is not None:
+            if strat == "MR" and thr[0] is not None and er > thr[0]: w_rez = V2_W_REZ
+            if strat == "K6" and thr[1] is not None and er > thr[1]: w_rez = V2_W_REZ
+        hari, amb, w_m, nmin = V2_MON
+        rs = self._jendela(self.bib_d + self.sd.get("sh", []), t_sig, hari, strat)
+        w_mon = w_m if (len(rs) >= nmin and self._pf(rs) < amb) else 1.0
+        return w_rez * w_mon, w_rez
+
+    # ---- penerusan ke Telegram: hanya mesin aktif hari itu ----
+    def _wrap(self, jenis):
+        def f(kind, **k):
+            h = self.s.get("hari") or {"aktif": "dasar", "telat": False}
+            if h.get("aktif") != jenis or h.get("telat"):
+                return
+            if kind == "order" and k["pend"].get("mode") == "SUS" and self.now is not None and self.now - (k["t"] + 3600) >= SUS_LATE_S:
+                h["telat"] = True; self.real("late", t=k["t"], strat="SUS"); return
+            if kind == "exit":
+                w = k.get("w", 1.0)
+                self.s.setdefault("hist", []).append(["XAU", k["d"], k["t0"], k["t"], k["entry"], k["exit"], round(k["R"] * w, 3),
+                                                      k.get("strat", "K6"), w])
+            self.real(kind, **k)
+        return f
+
+    def run(self, rows, since):
+        T, O, H, L, C, A = self.ed.siapkan(rows)
+        self.eo.R2 = self.ed.R2; self.eo.E = self.ed.E
+        self.tutup = {}
+        for r in rows: self.tutup[int(r[0] // 86400)] = r[4]
+        self.hari = sorted(self.tutup)
+        mulai_o = since
+        if self.so.pop("migrasi", False):                 # mesin OCO baru: simulasikan hari berjalan sejak candle 07:00 terakhir
+            j07 = [t for t in T if (t // 3600) % 24 == PLACE_HOUR_UTC and t <= since]
+            mulai_o = j07[-1] - 1 if j07 else since
+            if j07: self.s["hari"] = {"t07": j07[-1], "aktif": "dasar", "telat": False}
         start = 250 if self.s.get("replay") else 50
         for i in range(start, len(rows)):
-            if T[i] > since:
-                self.step(i, T, O, H, L, C, A)
-                self.s["last_ts"] = T[i]
+            t = T[i]
+            if t <= min(since, mulai_o): continue
+            if t > since and (t // 3600) % 24 == PLACE_HOUR_UTC:
+                telat = self.now is not None and self.now - (t + 3600) >= LATE_S
+                self.s["hari"] = {"t07": t, "aktif": "oco" if self.oco_aktif(t) else "dasar", "telat": telat}
+                if telat: self.real("late", t=t)
+            if t > since: self.ed.step(i, T, O, H, L, C, A)
+            self.eo.step(i, T, O, H, L, C, A)
+            if t > since:
+                self.s["last_ts"] = t
+                if (t // 3600) % 24 == CLOSE_HOUR_UTC:      # hari tanpa candle 07:00 (libur) -> mesin dasar (sama dengan riset)
+                    self.s["hari"] = {"t07": None, "aktif": "dasar", "telat": False}
+        h = self.s.get("hari") or {}
+        akt = self.so if h.get("aktif") == "oco" else self.sd
+        self.s["pend"] = None if h.get("telat") else akt.get("pend")
+        self.s["pos"] = None if h.get("telat") else akt.get("pos")
+        for sub in (self.sd, self.so):                      # simpan 450 hari trade bayangan terakhir
+            if sub.get("sh"): sub["sh"] = [x for x in sub["sh"] if x[1] >= (T[-1] - 450 * 86400)]
         return C[-1] if C else None
 
 
@@ -412,7 +552,7 @@ def main():
                                      hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
             else:
                 a = abs(p["buy"][0] - p["buy"][1]) / SL_ATR
-                state["feat"] = dict(strat="K6", range=round(p["hi"] - p["lo"], 3), atr=round(a, 3),
+                state["feat"] = dict(strat=p.get("strat", "K6"), range=round(p["hi"] - p["lo"], 3), atr=round(a, 3),
                                      range_atr=round((p["hi"] - p["lo"]) / a, 3) if a else None, rsi=p.get("rsi"),
                                      hari=dt.datetime.fromtimestamp(p["t"], commands.WIB).strftime("%a"))
         if kind == "exit":    # Lapis 1: catat trade selesai ke jurnal
@@ -425,7 +565,7 @@ def main():
             except Exception as e:
                 print("Jurnal gagal ditulis:", e)
         base_notify(kind, **k)
-    eng = GoldEngine(state, notify, now=time.time())
+    eng = GoldV2(state, notify, now=time.time())
     px = eng.run(rows, since)
     t_last = rows[-1][0] + 3600
     # Maksimal 2 bubble: (1) SINYAL order/pembatalan, (2) UPDATE terisi/ditutup/posisi berjalan
