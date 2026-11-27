@@ -1,5 +1,7 @@
 # Prosedur riset · XAU
 
+> **27 Nov 2026 (ATURAN_BERSAMA H, pemilik): MULAI SESI dengan audit kinerja live mingguan (R minggu ini vs lalu vs ekspektasi, per strategi, penyumbang rugi terbesar, live vs bayangan) dan WAJIB AKSI bila strategi rugi ≥ 2 minggu / SL sama ≥ 3 kali (kecilkan/matikan/ganti/adaptif, diuji di sesi itu, usulan langsung ke pemilik). Strategi pensiun (mis. OCO XAU) tetap dihitung bayangan dan boleh aktif lagi bila PF bergulirnya kuat. Baru setelah itu milestone.**
+
 > **26 Nov 2026 (KURIKULUM_SKILL: 10 skill + percepatan):** skill lulus tahap 2 → sesi itu juga mulai skill berikutnya di `riset/kurikulum.json`, tanpa menunggu batas. Perbarui `status.json` → `kurikulum` (status, tahap, tanggal mulai/t1/t2/t3) tiap sesi.
 
 > **26 Nov 2026 (ATURAN_BERSAMA G):** semua uji wajib anti-optimis (urutan candle terburuk, biaya + STRES, fill realistis, tanpa lihat masa depan, validasi timeframe kecil). Penyebab SL wajib dianalisis → hipotesis mitigasi → keluarga di `riset/xau/massal/keluarga_usulan.py` (otomatis diuji malam itu) → catat di `status.json` `mitigasi_sl`.
