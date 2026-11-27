@@ -15,3 +15,8 @@
   (OOS/Setra/M5). Data terkunci Setra sudah dipakai untuk ide 13, 14, 15.
 - BALAS setelah SL: 3 definisi baru tanpa edge → tidak diusulkan. Tidak ada kandidat baru; MENU tetap. Total ide ±1.410.
 
+
+## 27 Nov 2026 — sesi dorong bersama pemilik
+- SNR tahap 0+1 LULUS (dimajukan). Tahap 2 putaran 1: bobot SUPDEM 0,5× kandidat (P 0,80-0,84).
+- Edge baru: SUSULAN dilewati/0,5× bila range 5 hari > kuantil 80% WF (P 0,92; + SNR 0,95). OOS terkontaminasi (fitur dipilih setelah melihat 2023). Stres +0,05R: PF OOS juara 1,05.
+- Bank massal: keluarga_usulan.py F008-F011 (146 varian, 91 penantang; teratas masih 2023 minus & runtun 13).

@@ -49,5 +49,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-27",
+  "n_varian": 146,
+  "n_penantang": 91,
+  "terbaik": {
+   "nama": "F010 SNR w0.5 bulat1.5 + rng5>q0.8 SUS w0.5 + monitorPF pair",
+   "minus": 1,
+   "pf": 1.3727641273205071,
+   "rasio": 0.8160439141519854
+  }
  }
 ]

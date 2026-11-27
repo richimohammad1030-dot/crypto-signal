@@ -3,21 +3,21 @@
  "risiko": 0.75,
  "t2": false,
  "t9": null,
- "keyakinan": 55,
- "fokus": "Tahun minus OOS 2023-26, DD 23% → ≤ 20%",
+ "keyakinan": 62,
+ "fokus": "Tahun minus 2023 & runtun: kandidat rezim rng5 SUSULAN (WF, P 0,92-0,95) + bobot SNR → bayangan",
  "skill": {
   "nama": "SNR",
-  "tahap": 0,
-  "putaran": "0/3",
-  "status": "Baru masuk kurikulum 23 Nov.",
-  "berikutnya": "Minggu 29 Nov: tahap 0 + 1",
+  "tahap": 2,
+  "putaran": "1/3",
+  "status": "Tahap 1 PAHAM LULUS 27 Nov (SUPDEM/SWING/konfluensi>=3 pantul, bulat100 tembus, 7/7 pair). Tahap 2 putaran 1: bobot SUPDEM di jalur TP 0,5x = kandidat (P 0,80-0,84).",
+  "berikutnya": "Minggu 29 Nov: tahap 2 putaran 2 = SNR pada level PWH/PWL (konfluensi level minggu lalu + zona)",
   "batas": "2026-12-31"
  },
  "item": [
   {
    "minggu": "2026-11-24",
    "teks": "SNR tahap 0-1 (Minggu 29 Nov)",
-   "status": "belum"
+   "status": "selesai"
   },
   {
    "minggu": "2026-12-08",
@@ -31,7 +31,7 @@
   }
  ],
  "blocker": [],
- "sesi_terakhir": null,
+ "sesi_terakhir": "2026-11-27",
  "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
  "mitigasi_sl": [],
  "kurikulum": [
@@ -39,12 +39,12 @@
    "no": 1,
    "kode": "SNR",
    "status": "belajar",
-   "tahap": 0,
-   "mulai": "2026-11-29",
-   "t1": null,
+   "tahap": 2,
+   "mulai": "2026-11-27",
+   "t1": "2026-11-27",
    "t2": null,
    "t3": null,
-   "catatan": "Dijadwalkan mulai Minggu 29 Nov"
+   "catatan": "Tahap 1 lulus 27 Nov; tahap 2 putaran 1/3 kandidat"
   },
   {
    "no": 2,

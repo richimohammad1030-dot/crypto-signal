@@ -88,5 +88,95 @@
    2023
   ],
   "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.5 + rng5>q0.8 SUS w0.5 + monitorPF pair": {
+  "sejak": "2026-11-27",
+  "is_": 1.3261833602858406,
+  "oos": 0.6829028702113353,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.5 + rng5>q0.8 SUS w0.0": {
+  "sejak": "2026-11-27",
+  "is_": 1.1145998267509762,
+  "oos": 0.7128038201420878,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.5 + rng5>q0.8 SUS w0.5": {
+  "sejak": "2026-11-27",
+  "is_": 1.0737719765129674,
+  "oos": 0.5840057406383867,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F009 SNR SUPDEM jalur w0.25 bulat1.5": {
+  "sejak": "2026-11-27",
+  "is_": 1.073645701355753,
+  "oos": 0.4332743998563145,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.25 + rng5>q0.8 SUS w0.0": {
+  "sejak": "2026-11-27",
+  "is_": 1.0451865417718773,
+  "oos": 0.7380131454829014,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F009 SNR SUPDEM jalur w0.25 bulat1.25": {
+  "sejak": "2026-11-27",
+  "is_": 1.042063299278496,
+  "oos": 0.42840926090810716,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.5 + rng5>q0.9 SUS w0.0": {
+  "sejak": "2026-11-27",
+  "is_": 1.0402591368125655,
+  "oos": 0.5995647245125819,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.5 + rng5>q0.9 SUS w0.5": {
+  "sejak": "2026-11-27",
+  "is_": 1.0375301332579387,
+  "oos": 0.5210256826218176,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F009 SNR SUPDEM jalur w0.5 bulat1.5": {
+  "sejak": "2026-11-27",
+  "is_": 1.0349299032512862,
+  "oos": 0.43219957023540084,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F010 SNR w0.5 bulat1.25 + rng5>q0.8 SUS w0.5": {
+  "sejak": "2026-11-27",
+  "is_": 1.0055300784387362,
+  "oos": 0.5834342784689694,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
  }
 }
