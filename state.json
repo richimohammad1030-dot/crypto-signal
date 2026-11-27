@@ -4,28 +4,24 @@
    "pend": [
     -1,
     55130.0,
-    58346.246149479804
+    58616.494638569675
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 5.834,
-    "ext": 2.118,
-    "trend": 2.495,
-    "dist": 13.549,
-    "mom20": 20.129,
+    "slpct": 6.324,
+    "ext": 0.006,
+    "trend": 2.157,
+    "dist": 14.412,
+    "mom20": 19.083,
     "rank": 0,
     "btc": 1,
     "skor": 4,
-    "fund": 1.8088164383561647e-06
+    "fund": 1.537723287671233e-06
    }
   },
   "ETH": {
-   "pend": [
-    -1,
-    1538.0,
-    1640.5215444789105
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -41,11 +37,7 @@
    }
   },
   "BNB": {
-   "pend": [
-    -1,
-    503.75,
-    530.2151370928401
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -109,19 +101,23 @@
    }
   },
   "ZEC": {
-   "pend": null,
+   "pend": [
+    -1,
+    662.62,
+    807.7846448399305
+   ],
    "pos": null,
-   "conv": "LOW",
+   "conv": "MEDIUM",
    "feat": {
-    "slpct": 15.316,
-    "ext": 7.659,
-    "trend": 3.555,
-    "dist": 3.1,
-    "mom20": 45.45,
+    "slpct": 21.908,
+    "ext": 1.824,
+    "trend": 2.26,
+    "dist": 5.203,
+    "mom20": 43.043,
     "rank": 7,
     "btc": 1,
-    "skor": -1,
-    "fund": 8.220267123287673e-06
+    "skor": 1,
+    "fund": 9.871417808219179e-06
    }
   },
   "DOGE": {
@@ -300,19 +296,23 @@
    }
   },
   "TAO": {
-   "pend": null,
+   "pend": [
+    -1,
+    165.4,
+    180.4024001967407
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 9.383,
-    "ext": 0.688,
-    "trend": 1.696,
-    "dist": 6.576,
-    "mom20": 18.513,
+    "slpct": 9.07,
+    "ext": 0.293,
+    "trend": 1.616,
+    "dist": 11.198,
+    "mom20": 16.971,
     "rank": 20,
-    "btc": 0,
-    "skor": 0,
-    "fund": 1.25e-05
+    "btc": 1,
+    "skor": 1,
+    "fund": 4.761235616438356e-06
    }
   },
   "SHIB": {
@@ -332,11 +332,7 @@
    }
   },
   "ENA": {
-   "pend": [
-    -1,
-    0.0897,
-    0.10008723036902653
-   ],
+   "pend": null,
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
@@ -367,19 +363,23 @@
    }
   },
   "AAVE": {
-   "pend": null,
+   "pend": [
+    -1,
+    89.75,
+    98.6680329332605
+   ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 8.619,
-    "ext": 0.305,
-    "trend": 0.64,
-    "dist": 12.961,
-    "mom20": 10.202,
+    "slpct": 9.937,
+    "ext": 2.085,
+    "trend": 2.712,
+    "dist": 5.992,
+    "mom20": 25.669,
     "rank": 23,
     "btc": 1,
     "skor": 1,
-    "fund": 1.0236198630136986e-05
+    "fund": 7.023972602739758e-08
    }
   },
   "ONDO": {
@@ -399,11 +399,7 @@
    }
   },
   "HYPE": {
-   "pend": [
-    -1,
-    55.8,
-    62.62271415281059
-   ],
+   "pend": null,
    "pos": null,
    "conv": "HIGH",
    "feat": {
@@ -454,20 +450,20 @@
    "pend": [
     -1,
     0.4672,
-    0.5016539820070619
+    0.5009799713687968
    ],
    "pos": null,
    "conv": "HIGH",
    "feat": {
-    "slpct": 7.375,
-    "ext": 2.454,
-    "trend": 3.175,
-    "dist": 7.662,
-    "mom20": 26.85,
+    "slpct": 7.23,
+    "ext": 0.237,
+    "trend": 3.028,
+    "dist": 10.041,
+    "mom20": 25.147,
     "rank": 27,
     "btc": 1,
     "skor": 2,
-    "fund": 9.505687671232876e-06
+    "fund": 9.622534246575343e-06
    }
   },
   "DOT": {
@@ -503,19 +499,23 @@
    }
   },
   "WLFI": {
-   "pend": null,
+   "pend": [
+    -1,
+    0.0399,
+    0.04269401305550883
+   ],
    "pos": null,
-   "conv": "LOW",
+   "conv": "HIGH",
    "feat": {
-    "slpct": 17.706,
-    "ext": 3.478,
-    "trend": 0.93,
-    "dist": 1.493,
-    "mom20": 18.007,
+    "slpct": 7.003,
+    "ext": 3.377,
+    "trend": 2.517,
+    "dist": 5.727,
+    "mom20": 9.503,
     "rank": 30,
-    "btc": 0,
-    "skor": -1,
-    "fund": 4.711245205479452e-06
+    "btc": 1,
+    "skor": 2,
+    "fund": 5.141178082191783e-07
    }
   },
   "SKY": {
@@ -541,20 +541,20 @@
    "pend": [
     -1,
     1.864,
-    2.060193618391425
+    2.0679004043856075
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 10.525,
-    "ext": 1.763,
-    "trend": 2.033,
-    "dist": 6.483,
-    "mom20": 16.852,
+    "slpct": 10.939,
+    "ext": 0.335,
+    "trend": 1.832,
+    "dist": 7.572,
+    "mom20": 15.14,
     "rank": 33,
     "btc": 1,
     "skor": 1,
-    "fund": 1.3229726027397264e-06
+    "fund": 2.1404273972602746e-06
    }
   },
   "ARB": {
@@ -664,20 +664,20 @@
    "pend": [
     -1,
     1.127,
-    1.2330046124139464
+    1.2453949847759977
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 9.406,
-    "ext": 2.089,
-    "trend": 1.019,
-    "dist": 6.868,
-    "mom20": 12.185,
+    "slpct": 10.505,
+    "ext": 0.601,
+    "trend": 0.893,
+    "dist": 7.365,
+    "mom20": 10.564,
     "rank": 42,
     "btc": 1,
     "skor": 1,
-    "fund": 5.992860273972603e-06
+    "fund": 6.135724657534247e-06
    }
   },
   "FIL": {
@@ -751,43 +751,43 @@
    "pend": [
     -1,
     0.3355,
-    0.37051866290300967
+    0.3697218667006679
    ],
    "pos": null,
    "conv": "MEDIUM",
    "feat": {
-    "slpct": 10.438,
-    "ext": 2.528,
-    "trend": 3.695,
-    "dist": 11.125,
-    "mom20": 36.496,
+    "slpct": 10.2,
+    "ext": 1.395,
+    "trend": 3.557,
+    "dist": 12.507,
+    "mom20": 35.188,
     "rank": 48,
     "btc": 1,
     "skor": 1,
-    "fund": 1.3600438356164384e-06
+    "fund": 3.0487712328767123e-06
    }
   },
   "NIGHT": {
    "pend": [
     1,
     0.05216,
-    0.04610800581495048
+    0.04623133366516037
    ],
    "pos": null,
    "conv": "LOW",
    "feat": {
-    "slpct": 11.603,
-    "ext": 1.992,
-    "trend": 1.027,
-    "dist": 4.865,
-    "mom20": 24.852,
+    "slpct": 11.366,
+    "ext": 2.274,
+    "trend": 1.061,
+    "dist": 4.628,
+    "mom20": 24.789,
     "rank": 49,
     "btc": -1,
     "skor": -1
    }
   }
  },
- "last_ts": 1795741200,
+ "last_ts": 1795748400,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -798,12 +798,32 @@
   "date": "2026-11-27",
   "new": [
    "ATOMUSDT",
-   "APTUSDT"
+   "APTUSDT",
+   "ZECUSDT",
+   "TAOUSDT",
+   "AAVEUSDT",
+   "WLFIUSDT"
   ],
   "upd": {},
   "cancel": [
    [
     "RENDERUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "ETHUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "BNBUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "HYPEUSDT",
+    "trend sudah tidak searah (EMA)"
+   ],
+   [
+    "ENAUSDT",
     "trend sudah tidak searah (EMA)"
    ]
   ]
