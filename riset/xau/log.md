@@ -664,3 +664,9 @@ tutup 23:00; maks 1 posisi/hari. 450 hari susulan. Seleksi 2015-2021 (skor tetan
 - Bank massal: keluarga X008 TOM (60 varian, 7 lolos inti.penantang lokal) di riset/xau/massal/keluarga_usulan.py — sesi XAU
   tidak berwenang menulis riset/massal/xau.py → perlu disalin pemilik/chat project agar jalan di saringan malam.
 - Total ide XAU diuji: 63 (+8 saringan, +1 WF monitor). Saringan massal: 1.363 varian (25 Nov).
+
+## 27 Nov 2026 — sesi dorong bersama pemilik (keluhan: live buruk sejak OCO diganti)
+- Data Setra s.d. 27 Nov 02:00 UTC. Live sejak 2 Nov −0,1R/16 trade (ekspektasi ±+1R, sd ±4R → masih dalam derau). Kerugian dari MR (−4,9R/12), K6 +4,6R.
+- OCO lama 22 thn −13,1 R/thn, DD 518R → TIDAK dikembalikan. Rezim-switch ke OCO (64 varian) & adaptif (16) semua P ≤ 0,26 (ide #91 gagal).
+- Rezim X010 (ide #92) = kandidat: DD 52R→28R, P 0,88, bayangan +1,47R sejak 2 Nov. Masuk MENU bayangan. Usulan ke pemilik: pasang @0,5-0,7% (persetujuan; gerbang P 0,90 belum).
+- Bank massal X009/X010 (248 varian) di keluarga_usulan.py.
