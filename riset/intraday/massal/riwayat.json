@@ -49,5 +49,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-28",
+  "n_varian": 109,
+  "n_penantang": 0,
+  "terbaik": {
+   "nama": "IM007 struktur S AB w0.25",
+   "minus": 0,
+   "pf": 1.339507847828761,
+   "rasio": 2.290858028547565
+  }
  }
 ]
