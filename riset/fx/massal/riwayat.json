@@ -66,5 +66,16 @@
   "n_varian": 0,
   "n_penantang": 0,
   "terbaik": null
+ },
+ {
+  "tanggal": "2026-11-29",
+  "n_varian": 188,
+  "n_penantang": 18,
+  "terbaik": {
+   "nama": "F012 SNR jarak SUPDEM <1.5R w0.25 bersih1.5",
+   "minus": 1,
+   "pf": 1.2894985147273328,
+   "rasio": 0.4628513700555553
+  }
  }
 ]

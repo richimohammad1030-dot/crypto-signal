@@ -3,14 +3,14 @@
  "risiko": 0.75,
  "t2": false,
  "t9": null,
- "keyakinan": 62,
- "fokus": "Tahun minus 2023 & runtun: kandidat rezim rng5 SUSULAN (WF, P 0,92-0,95) + bobot SNR → bayangan",
+ "keyakinan": 45,
+ "fokus": "DATA LIVE: feed Setra FX tertinggal 12-20 jam (blocker). Riset: kandidat SUSULAN s/d 22:00 WIB (mitigasi SL), SNR tahap 2 definisi baru",
  "skill": {
   "nama": "SNR",
   "tahap": 2,
-  "putaran": "1/3",
-  "status": "Tahap 1 PAHAM LULUS 27 Nov (SUPDEM/SWING/konfluensi>=3 pantul, bulat100 tembus, 7/7 pair). Tahap 2 putaran 1: bobot SUPDEM di jalur TP 0,5x = kandidat (P 0,80-0,84).",
-  "berikutnya": "Minggu 29 Nov: tahap 2 putaran 2 = SNR pada level PWH/PWL (konfluensi level minggu lalu + zona)",
+  "putaran": "sesi 2/3 (putaran 2+3 gagal)",
+  "status": "Tahap 1 LULUS 27 Nov. Tahap 2: put.1 bobot zona di jalur TP P 0,80-0,84 (27 Nov); put.2 konfluensi zona di level PWH/PWL: IS bagus, OOS lebih buruk (P_rasio OOS 0,17) GAGAL; put.3 jarak zona sebagai bobot risiko (F012): P_rasio penuh 0,88, OOS 0,64, WF 0,57, M5 rasio sama, SL & pemenang dipotong sama rata (78%/74%) = hanya menurunkan risiko, GAGAL.",
+  "berikutnya": "Sesi 6 Des (sesi 3/3 tahap 2): definisi baru wajib — SL/TP di level pada data M5, level H4/D1 swing sebagai TP LANJUT, atau konfluensi SNR + struktur (BOS) — sebagai keluarga keluarga_usulan.py",
   "batas": "2026-12-31"
  },
  "item": [
@@ -18,6 +18,11 @@
    "minggu": "2026-11-24",
    "teks": "SNR tahap 0-1 (Minggu 29 Nov)",
    "status": "selesai"
+  },
+  {
+   "minggu": "2026-11-30",
+   "teks": "Perbaiki sumber data live FX (Setra tertinggal 12-20 jam) — keputusan pemilik",
+   "status": "jalan"
   },
   {
    "minggu": "2026-12-08",
@@ -30,10 +35,52 @@
    "status": "belum"
   }
  ],
- "blocker": [],
- "sesi_terakhir": "2026-11-27",
+ "blocker": [
+  {
+   "id": "fx-setra-lag",
+   "bot": "fx",
+   "judul": "Feed Setra FX tertinggal 12-20 jam dari harga nyata",
+   "detail": "Harga candle Setra FX berstempel jam t = harga Dukascopy jam t-12..20 jam (korelasi return H1 0,99-1,00; per pair: EURUSD/USDCHF/NZDUSD 15j, USDCAD 15→17j, GBPUSD 12→20j sejak Okt, USDJPY/AUDUSD 18j). Jangkar independen kurs acuan ECB EURUSD 2026: Dukascopy selisih median 2,8 pip, Setra 16,0 pip di jam sama dan 3,2 pip bila digeser +15 jam. Senin Setra hanya 5-12 candle. Akibat: sinyal/level/ATR/pelacakan TP-SL bot live FX memakai harga basi; replay BEDA; trade live -3,32R NZDUSD tidak nyata; validasi 'Setra 2025-26 lolos' (T9) batal. XAU Setra juga cocok dengan Dukascopy hanya pada lag 18 jam (cek oleh sesi XAU). Usulan: ganti sumber data fx_bot.py (mis. harga MT5/Exness atau Dukascopy/feed real-time lain) lalu replay ulang; sampai itu sinyal FX dianggap tidak andal.",
+   "sejak": "2026-11-29",
+   "status": "menunggu"
+  }
+ ],
+ "sesi_terakhir": "2026-11-29",
  "_catatan": "Status fx untuk dashboard. Diperbarui sesi riset fx (file ini ikut tersalin ke main). Blocker: menunggu/akan_datang/selesai.",
- "mitigasi_sl": [],
+ "mitigasi_sl": [
+  {
+   "penyebab": "Breakout palsu (SL <= 2 jam, MFE < 0,3R)",
+   "jumlah": "252/749 SL backtest (194 SUSULAN, isi median 19 WIB)",
+   "analisis": "SUSULAN isi 19-23 WIB R/trade +0,07 vs 16-19 WIB +0,22",
+   "mitigasi": "F014 order SUSULAN kadaluarsa 22:00 WIB",
+   "uji": "P_rasio penuh 0,95 · OOS 0,65 · M5 0,75/0,80, arah konsisten; tetangga 21:00 GAGAL (P 0,58/0,25) → waspada kebetulan",
+   "status": "lolos"
+  },
+  {
+   "penyebab": "Sempat untung >= 0,5R lalu berbalik",
+   "jumlah": "238/749 (222 SUSULAN; SUSULAN tanpa BE)",
+   "analisis": "MFE median SL 0,84R vs pemenang 1,73R",
+   "mitigasi": "F013 SL SUSULAN ke entry di +0,3..1,5R",
+   "uji": "H1 OOS naik (P 0,63-0,69) tetapi penuh P 0,39-0,46, M5 0,21-0,53, runtun 19-21",
+   "status": "ditolak"
+  },
+  {
+   "penyebab": "Berbalik perlahan",
+   "jumlah": "225/749",
+   "analisis": "tersebar, isi median 15 WIB; tidak ada pola tunggal",
+   "mitigasi": "-",
+   "uji": "-",
+   "status": "dianalisis"
+  },
+  {
+   "penyebab": "Live 7 hari: 1 SL (NZDUSD UTAMA -3,32R, sempat +0,79R)",
+   "jumlah": "1",
+   "analisis": "R < -1 tidak mungkin pada stop SL; artefak feed Setra yang tertinggal/direvisi",
+   "mitigasi": "blocker fx-setra-lag",
+   "uji": "replay BEDA",
+   "status": "dianalisis"
+  }
+ ],
  "kurikulum": [
   {
    "no": 1,
@@ -44,7 +91,7 @@
    "t1": "2026-11-27",
    "t2": null,
    "t3": null,
-   "catatan": "Tahap 1 lulus 27 Nov; tahap 2 putaran 1/3 kandidat"
+   "catatan": "T1 lulus 27 Nov; tahap 2 sesi 2/3: put.2 konfluensi di level & put.3 jarak zona gagal (29 Nov)"
   },
   {
    "no": 2,

@@ -178,5 +178,93 @@
    2023
   ],
   "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM+SWING <1.5R w0.5 bersih1.0": {
+  "sejak": "2026-11-29",
+  "is_": 0.9165072063212621,
+  "oos": 0.485440625871162,
+  "minus": [],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.5R w0.5 bersih1.25": {
+  "sejak": "2026-11-29",
+  "is_": 0.8270077335517598,
+  "oos": 0.3425436771938406,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM+SWING <1.5R w0.75 bersih1.0": {
+  "sejak": "2026-11-29",
+  "is_": 0.7282895903405635,
+  "oos": 0.4605658958805261,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.5R w0.5 bersih1.0": {
+  "sejak": "2026-11-29",
+  "is_": 0.7210246162351766,
+  "oos": 0.33864478643544377,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM+SWING <1.5R w0.75 bersih1.25": {
+  "sejak": "2026-11-29",
+  "is_": 0.7173324321512373,
+  "oos": 0.45150512945804694,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.5R w0.5 bersih1.5": {
+  "sejak": "2026-11-29",
+  "is_": 0.8899217140712682,
+  "oos": 0.34481501506083395,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.5R w0.75 bersih1.5": {
+  "sejak": "2026-11-29",
+  "is_": 0.8189280384589083,
+  "oos": 0.37539301025406036,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <0.75R w0.75 bersih1.5": {
+  "sejak": "2026-11-29",
+  "is_": 0.8089027993237529,
+  "oos": 0.3663400960973235,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.0R w0.75 bersih1.5": {
+  "sejak": "2026-11-29",
+  "is_": 0.7989863496100366,
+  "oos": 0.3677182348924125,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
+ },
+ "F012 SNR jarak SUPDEM <1.5R w0.75 bersih1.25": {
+  "sejak": "2026-11-29",
+  "is_": 0.7464042341860658,
+  "oos": 0.37722640595617374,
+  "minus": [
+   2023
+  ],
+  "status": "penantang"
  }
 }

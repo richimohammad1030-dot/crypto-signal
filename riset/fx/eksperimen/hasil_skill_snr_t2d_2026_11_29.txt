@@ -1,0 +1,35 @@
+== H1 Dukascopy 2015-2026 ==
+JUARA                                        IS PF 1.32 R +165 DD 23.1 th- [2018] | OOS PF 1.17 R +54 DD 27.3 th- [2023] | stres OOS PF 1.05
+F012 teratas (SUPDEM+SWING <1,5R w0,5)       IS PF 1.41 R +129 DD 10.8 th- [] | OOS PF 1.18 R +38 DD 20.6 th- [] | stres OOS PF 1.01
+signifikansi penuh: P_rasio 0.883 · P_R 0.019 · R/thn 19.13→14.59 · DD 36.12→19.63
+signifikansi OOS  : P_rasio 0.635 · P_R 0.158 · R/thn 14.02→9.78 · DD 31.58→19.63
+
+Tetangga (zona < d R, w):
+  SUPDEM+SWING <1.0R w0.25                   IS PF 1.32 R +109 DD 13.7 th- [2015, 2018, 2019] | OOS PF 1.21 R +48 DD 18.4 th- [] | stres OOS PF 1.05
+  SUPDEM+SWING <1.0R w0.5                    IS PF 1.32 R +128 DD 14.2 th- [2018] | OOS PF 1.19 R +50 DD 20.9 th- [] | stres OOS PF 1.05
+  SUPDEM+SWING <1.0R w0.75                   IS PF 1.32 R +146 DD 17.6 th- [2018] | OOS PF 1.18 R +52 DD 24.0 th- [2023] | stres OOS PF 1.05
+  SUPDEM+SWING <1.5R w0.25                   IS PF 1.51 R +111 DD 7.5 th- [2019] | OOS PF 1.19 R +30 DD 18.1 th- [] | stres OOS PF 0.96
+  SUPDEM+SWING <1.5R w0.5                    IS PF 1.41 R +129 DD 10.8 th- [] | OOS PF 1.18 R +38 DD 20.6 th- [] | stres OOS PF 1.01
+  SUPDEM+SWING <1.5R w0.75                   IS PF 1.35 R +147 DD 16.9 th- [] | OOS PF 1.17 R +46 DD 23.9 th- [2023] | stres OOS PF 1.03
+  SUPDEM+SWING <2.0R w0.25                   IS PF 1.42 R +76 DD 7.0 th- [2018, 2019] | OOS PF 1.26 R +31 DD 11.7 th- [] | stres OOS PF 0.96
+  SUPDEM+SWING <2.0R w0.5                    IS PF 1.36 R +105 DD 12.4 th- [2018, 2019] | OOS PF 1.21 R +39 DD 16.9 th- [] | stres OOS PF 1.01
+  SUPDEM+SWING <2.0R w0.75                   IS PF 1.33 R +135 DD 17.8 th- [2018] | OOS PF 1.19 R +47 DD 22.1 th- [2023] | stres OOS PF 1.04
+
+Walk-forward (pilih varian terbaik dari tahun sebelumnya, 54 varian):
+  pilihan per tahun: {2017: 'SUPDEM<1.5R w0.5 b1.25', 2018: 'SUPDEM+SWING<1.5R w0.25 b1.5', 2019: 'SUPDEM+SWING<1.5R w0.25 b1.5', 2020: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2021: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2022: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2023: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2024: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2025: 'SUPDEM+SWING<1.5R w0.25 b1.0', 2026: 'SUPDEM+SWING<1.5R w0.25 b1.0'}
+WF F012                                      IS PF 1.39 R +126 DD 13.8 th- [2019] | OOS PF 1.19 R +30 DD 13.5 th- [] | stres OOS PF 0.96
+  signifikansi WF 2017+: P_rasio 0.634 · P_R 0.040 · R/thn 17.52→11.13 · DD 36.12→14.76
+  signifikansi WF OOS  : P_rasio 0.571 · P_R 0.158 · R/thn 14.02→7.66 · DD 31.58→14.54
+  R per tahun juara vs WF: {2015: (np.float64(22.5), np.float64(22.5)), 2016: (np.float64(30.6), np.float64(30.6)), 2017: (np.float64(29.4), np.float64(29.9)), 2018: (np.float64(-1.0), np.float64(8.7)), 2019: (np.float64(2.8), np.float64(-3.2)), 2020: (np.float64(25.6), np.float64(13.8)), 2021: (np.float64(11.5), np.float64(5.4)), 2022: (np.float64(50.3), np.float64(25.6)), 2023: (np.float64(-7.7), np.float64(3.9)), 2024: (np.float64(8.8), np.float64(1.7)), 2025: (np.float64(20.7), np.float64(3.2)), 2026: (np.float64(32.4), np.float64(20.9))}
+
+Penyebab SL juara yang dikenai bobot 0,5 (mitigasi vs pemenang ikut terpotong):
+  SL: 553/713 dikurangi
+  menang: 572/768 dikurangi
+
+== Validasi M5 (Dukascopy M5 2020-2026) ==
+  pair M5: ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD']
+  JUARA H1 (pair sama, 2020+)    n723 PF 1.33 R +93 DD 16.0 rasio 0.84 th- [2025]
+  F012 H1                        n723 PF 1.36 R +66 DD 9.7 rasio 0.99 th- [2025]
+  JUARA M5                       n711 PF 1.30 R +82 DD 16.2 rasio 0.74 th- [2025]
+  F012 M5                        n711 PF 1.32 R +56 DD 11.1 rasio 0.74 th- [2025]
+waktu 30 dtk

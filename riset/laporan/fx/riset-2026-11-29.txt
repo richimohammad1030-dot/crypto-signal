@@ -1,0 +1,25 @@
+🔬 RISET FX · Minggu 29 Nov (riset + review bulanan Nov)
+
+🚨 DATA LIVE TIDAK ANDAL (butuh keputusan pemilik)
+Feed Setra FX tertinggal 12-20 jam dari harga nyata: EURUSD/USDCHF/NZDUSD 15 j · USDCAD 15→17 j · GBPUSD 12→20 j · USDJPY/AUDUSD 18 j (korelasi 0,99-1,00 pada lag).
+Jangkar ECB EURUSD 2026: Dukascopy 2,8 pip · Setra jam sama 16 pip · Setra +15 jam 3,2 pip. Senin Setra hanya 5-12 candle.
+Akibat: level/ATR/TP-SL bot FX dari harga basi; replay BEDA (4 live vs 9 replay); NZDUSD −3,32R artefak; validasi Setra (T9) batal.
+XAU Setra juga lag 18 jam → perlu dicek sesi XAU.
+Usulan: ganti sumber harga fx_bot (MT5/Exness atau feed real-time yang lulus uji ECB), lalu replay ulang sejak 20 Nov.
+
+📊 KINERJA (feed lag → indikatif saja)
+Minggu ini 4 trade −0,01R (UTAMA −1,40 · SUSULAN +0,69 · LANJUT +0,69) · minggu lalu 0 · ekspektasi ±+0,35R (dalam rentang).
+
+🎓 SKILL SNR
+📕 SKILL SNR: BELUM LULUS tahap 2 (sesi 2/3). Put.2 konfluensi zona di level minggu lalu: IS bagus, OOS lebih buruk (P_rasio OOS 0,17). Put.3 jarak zona sebagai bobot risiko: P 0,88 penuh / 0,64 OOS / 0,57 WF; SL dan pemenang dipotong sama rata → hanya menurunkan risiko. Sesi 6 Des: definisi baru (SL/TP di level di M5, SNR + struktur).
+
+🛡 MITIGASI SL (749 SL backtest)
+Breakout palsu ≤2 jam 34% (194 SUSULAN, isi ±19 WIB) · sempat untung lalu balik 32% (222 SUSULAN) · perlahan 30%.
+✅ Kandidat: order SUSULAN kadaluarsa 22:00 WIB (tutup tetap 23:00): IS 0 thn minus, PF 1,38/1,18, stres 1,07, P_rasio 0,95 penuh / 0,65 OOS, M5 0,75/0,80 → MENU bayangan. ⚠️ tetangga 21:00 gagal.
+❌ BE SUSULAN (+0,3..1,5R) ditolak (M5 P 0,21-0,53, runtun 19).
+
+💡 Edge baru: nilai relatif pairs AUD/NZD · EUR/GBP · EUR/CHF [lit Gatev dkk 2006] 112 varian → OOS PF ≤ 1,0, disaring.
+🏦 Massal: +F012-F015, 188 varian, 18 penantang (dinilai: 1 kandidat). BALAS dengan edge: belum ada.
+
+🎯 Milestone (kandidat F014): T1 ❌ 2023 −7,2R · T2 ❌ · T3 ✅ · T4 ✅ · T5 ✅ · T6 ❌ 22,7% · T7 ❌ 13 · T8 ✅ 3,4 · T9 ❌ · T10 ❌
+Total ide ±2.100. Keyakinan 45 (turun: data live). Blocker menunggu: fx-setra-lag.

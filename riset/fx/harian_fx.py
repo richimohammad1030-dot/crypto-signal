@@ -20,7 +20,24 @@ MENU = {   # bayangan: nama -> (UK, SK, pakai_susulan, pakai_lanjut, balas)
     "Tanpa pecah (UTAMA s/d 23:00, tanpa susulan)": (dict(F.UK, exp=16), F.SK, False, True, None),
     "Dengan Senin": (dict(F.UK, dow="none"), F.SK, True, True, None),
     "LIVE + BALAS (balik, SL/TP 0,15/0,3 ATR)": (F.UK, F.SK, True, True, dict(dir="balik", entry="market", atr="d1", sl=0.15, tp=0.3)),
+    # kandidat 29 Nov 2026 (mitigasi SL F014): order SUSULAN kadaluarsa 22:00 WIB (tutup posisi tetap 23:00)
+    "SUSULAN s/d 22:00 WIB (kandidat 29 Nov)": (F.UK, dict(F.SK, off_wib=22), True, True, None),
 }
+_sus_asli = F.P7.sus_gen          # kunci off_wib (hanya MENU) -> t_off order SUSULAN; tanpa kunci = mesin live persis
+
+
+def _sus_off(kw, filled, exp):
+    g = _sus_asli({k: v for k, v in kw.items() if k != "off_wib"}, filled, exp)
+    if "off_wib" not in kw: return g
+    def g2(P):
+        out = g(P)
+        for d, lst in out.items():
+            for o in lst: o["t_off"] = d * 86400 + (kw["off_wib"] - 7) * 3600
+        return out
+    return g2
+
+
+F.P7.sus_gen = _sus_off
 
 st = json.load(open(os.path.join(REPO, "fx_state.json"))) if os.path.exists(os.path.join(REPO, "fx_state.json")) else {}
 hist = st.get("hist", []); start = st.get("live_start", int(time.time()))

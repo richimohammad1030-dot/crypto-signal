@@ -1,0 +1,14 @@
+Juara Dukascopy 2015-2026: 2094 trade · SL penuh 749 · menang 851
+- Breakout palsu (<=2 jam, MFE<0,3R): 252 (34%) per bot {'N3': 48, 'SUS': 194, 'B3': 10} · jam isi median 19 WIB
+- Sempat untung >=0,5R lalu berbalik: 238 (32%) per bot {'N3': 8, 'SUS': 222, 'B3': 8} · jam isi median 19 WIB
+- Berbalik perlahan: 225 (30%) per bot {'N3': 89, 'SUS': 122, 'B3': 14} · jam isi median 15 WIB
+- SL lalu TP tercapai: 34 (5%) per bot {'N3': 22, 'SUS': 8, 'B3': 4} · jam isi median 10 WIB
+
+Per jam isi (WIB) UTAMA+SUSULAN: SL vs menang
+  07-10: SL 103 · menang 69 · semua 321 trade R/trade +0.037
+  10-13: SL 35 · menang 36 · semua 150 trade R/trade +0.159
+  13-16: SL 119 · menang 108 · semua 293 trade R/trade +0.144
+  16-19: SL 132 · menang 146 · semua 297 trade R/trade +0.217
+  19-23: SL 324 · menang 409 · semua 905 trade R/trade +0.072
+
+Sempat untung >=0,5R lalu berbalik: MFE median 0.84 · menang MFE median 1.73
