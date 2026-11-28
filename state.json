@@ -809,7 +809,7 @@
    }
   }
  },
- "last_ts": 1795878000,
+ "last_ts": 1795885200,
  "tg_offset": 608781126,
  "channel_id": -1004447663067,
  "channel_title": "Coin Call",
@@ -817,32 +817,10 @@
  "gold_channel_title": "Market Call XAU",
  "recap_week": "2026-11-16T00:00:00+07:00",
  "day_log": {
-  "date": "2026-11-28",
-  "new": [
-   "JSTUSDT",
-   "POLUSDT",
-   "JUPUSDT"
-  ],
-  "upd": {
-   "LINKUSDT": [
-    10.947,
-    10.00615712536629
-   ]
-  },
-  "cancel": [
-   [
-    "ICPUSDT",
-    "funding rate tidak positif (filter SELL)"
-   ],
-   [
-    "ETCUSDT",
-    "trend sudah tidak searah (EMA)"
-   ],
-   [
-    "ALGOUSDT",
-    "trend sudah tidak searah (EMA)"
-   ]
-  ]
+  "date": "2026-11-29",
+  "new": [],
+  "upd": {},
+  "cancel": []
  },
  "hist": [
   [
